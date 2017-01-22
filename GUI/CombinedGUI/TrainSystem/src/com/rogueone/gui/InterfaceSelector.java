@@ -87,6 +87,11 @@ public class InterfaceSelector extends javax.swing.JPanel {
         add(jButton2, gridBagConstraints);
 
         jButton3.setText("Track Model");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -185,6 +190,14 @@ public class InterfaceSelector extends javax.swing.JPanel {
         main.getContentPane().add(commandTrackControlGUI, BorderLayout.CENTER);
         main.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        main.getContentPane().removeAll();
+        TrackModelGUI trackModelGUI = new TrackModelGUI();
+        main.getContentPane().add(trackModelGUI, BorderLayout.CENTER);
+        main.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

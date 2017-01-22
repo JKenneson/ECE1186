@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="leftTrackButtonGroup">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="rightTrackButtonGroup">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="position1TrainButtonGroup">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="position2TrainButtonGroup">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="position3TrainButtonGroup">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="position4TrainButtonGroup">
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -11,6 +25,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-93,0,0,3,109"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
@@ -36,7 +51,7 @@
                   </Border>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[800, 400]"/>
+                  <Dimension value="[800, 475]"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -58,7 +73,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="12" max="32767" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="433" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -67,6 +82,11 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel1">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/rogueone/module/gui/images/Wayside_img.png"/>
+                    </Property>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -320,6 +340,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton1">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="rightTrackButtonGroup"/>
+                    </Property>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Right Track Straight"/>
                   </Properties>
@@ -334,6 +357,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton2">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="rightTrackButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Right Track Wayside"/>
                   </Properties>
                   <Constraints>
@@ -344,6 +370,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton3">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="leftTrackButtonGroup"/>
+                    </Property>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Left Track Straight"/>
                   </Properties>
@@ -355,6 +384,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton4">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="leftTrackButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Left Track Wayside"/>
                   </Properties>
                   <Constraints>
@@ -440,6 +472,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton5">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="position1TrainButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Occupied"/>
                   </Properties>
                   <Events>
@@ -453,6 +488,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton6">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="position1TrainButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Unoccupied"/>
                   </Properties>
                   <Events>
@@ -466,6 +504,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton7">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="position2TrainButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Occupied"/>
                   </Properties>
                   <Constraints>
@@ -476,6 +517,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton8">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="position2TrainButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Unoccupied"/>
                   </Properties>
                   <Constraints>
@@ -486,6 +530,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton9">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="position3TrainButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Occupied"/>
                   </Properties>
                   <Constraints>
@@ -496,6 +543,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton10">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="position3TrainButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Unoccupied"/>
                   </Properties>
                   <Constraints>
@@ -506,6 +556,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton11">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="position4TrainButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Occupied"/>
                   </Properties>
                   <Constraints>
@@ -516,6 +569,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton12">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="position4TrainButtonGroup"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Unoccupied"/>
                   </Properties>
                   <Constraints>

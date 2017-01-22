@@ -92,23 +92,17 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(1200, 651));
 
         MapPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Map"));
+        MapPanel2.setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout MapPanel2Layout = new javax.swing.GroupLayout(MapPanel2);
-        MapPanel2.setLayout(MapPanel2Layout);
-        MapPanel2Layout.setHorizontalGroup(
-            MapPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MapPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(MapImage2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        MapPanel2Layout.setVerticalGroup(
-            MapPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MapPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(MapImage2)
-                .addContainerGap(501, Short.MAX_VALUE))
-        );
+        MapImage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MapImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/module/gui/images/layout_small.jpg"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.ipady = -8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        MapPanel2.add(MapImage2, gridBagConstraints);
 
         BrowserPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Browser"));
 
@@ -506,6 +500,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         AdditionalInfoPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        EmergencyStopButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/module/gui/images/stop_sign.png"))); // NOI18N
         EmergencyStopButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EmergencyStopButton2ActionPerformed(evt);
@@ -588,7 +583,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BrowserPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(InformationPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(338, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,13 +592,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(BrowserPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(InformationPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(MapPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AdditionalInfoPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(AdditionalInfoPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
