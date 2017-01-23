@@ -1,6 +1,6 @@
-/GUI/CTC_UI/nbproject/private/
-/GUI/TrainController/nbproject/private/
-/GUI/CTC_UI/build/
-/GUI/CTC_UI/dist/
-/GUI/MboGUI/nbproject/private/
-/GUI/MboGUI/build/
+nbproject/
+private/
+build/
+
+*.xml
+*.properties
