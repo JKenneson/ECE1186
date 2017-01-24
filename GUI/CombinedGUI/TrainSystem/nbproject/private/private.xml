@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Train">
-            <file>file:/Users/kylemonto/Documents/Pitt/Senior/COE%201186/TrainSystem/src/com/rogueone/trainsystem/TrainSystem.java</file>
-            <file>file:/Users/kylemonto/Documents/Pitt/Senior/COE%201186/TrainSystem/src/com/rogueone/gui/InterfaceSelector.java</file>
+            <file>file:/Users/kylemonto/Documents/Pitt/Senior/COE%201186/ECE1186/GUI/CombinedGUI/TrainSystem/src/com/rogueone/module/gui/TrackModelGUI.java</file>
+            <file>file:/Users/kylemonto/Documents/Pitt/Senior/COE%201186/ECE1186/GUI/CombinedGUI/TrainSystem/src/com/rogueone/module/gui/TrackControllerGUI.java</file>
+            <file>file:/Users/kylemonto/Documents/Pitt/Senior/COE%201186/ECE1186/GUI/CombinedGUI/TrainSystem/src/com/rogueone/gui/MainFrame.java</file>
+            <file>file:/Users/kylemonto/Documents/Pitt/Senior/COE%201186/ECE1186/GUI/CombinedGUI/TrainSystem/src/com/rogueone/trainsystem/TrainSystem.java</file>
         </group>
     </open-files>
 </project-private>
