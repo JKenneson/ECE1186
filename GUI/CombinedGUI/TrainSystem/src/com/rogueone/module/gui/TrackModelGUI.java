@@ -6,6 +6,8 @@
 
 package com.rogueone.module.gui;
 
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author kylemonto
@@ -26,6 +28,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -459,8 +462,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -496,8 +499,15 @@ public class TrackModelGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MapSelectGUI mapSelectGUI = new MapSelectGUI();
-        mapSelectGUI.setVisible(true);
+        JFileChooser jFileChooser1 = new JFileChooser();
+       int returnVal = jFileChooser1.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+           System.out.println("Data file parsing not yet supported.");
+        } else if (returnVal == JFileChooser.CANCEL_OPTION){
+            System.out.println("File access cancelled by user.");
+        }
+        jFileChooser1.setVisible(true);
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -510,6 +520,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
