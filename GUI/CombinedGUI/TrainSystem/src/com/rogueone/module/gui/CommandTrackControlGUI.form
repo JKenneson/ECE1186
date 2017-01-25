@@ -617,6 +617,7 @@
                                                       <Component id="jLabel78" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       <Component id="jLabel77" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       <Component id="jLabel76" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel88" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -625,9 +626,10 @@
                                               <Component id="jLabel85" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel84" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel83" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel89" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                                  <Component id="jLabel81" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel80" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel81" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel80" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -716,14 +718,19 @@
                                       <Component id="jLabel83" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel79" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel80" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel79" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel80" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel82" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel81" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel88" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel89" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -891,6 +898,19 @@
                       <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="CLOSED"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel88">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Status"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel89">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="ff" id="green" palette="1" red="0" type="palette"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="ACTIVE"/>
                   </Properties>
                 </Component>
               </SubComponents>

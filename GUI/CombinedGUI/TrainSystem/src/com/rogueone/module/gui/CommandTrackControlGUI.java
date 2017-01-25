@@ -79,6 +79,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel83 = new javax.swing.JLabel();
         jLabel84 = new javax.swing.JLabel();
         jLabel85 = new javax.swing.JLabel();
+        jLabel88 = new javax.swing.JLabel();
+        jLabel89 = new javax.swing.JLabel();
         AdditionalInfoPanel2 = new javax.swing.JPanel();
         EmergencyStopButton2 = new javax.swing.JToggleButton();
         jLabel86 = new javax.swing.JLabel();
@@ -389,6 +391,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel85.setForeground(java.awt.Color.red);
         jLabel85.setText("CLOSED");
 
+        jLabel88.setText("Status");
+
+        jLabel89.setForeground(java.awt.Color.green);
+        jLabel89.setText("ACTIVE");
+
         javax.swing.GroupLayout InformationPanel2Layout = new javax.swing.GroupLayout(InformationPanel2);
         InformationPanel2.setLayout(InformationPanel2Layout);
         InformationPanel2Layout.setHorizontalGroup(
@@ -428,12 +435,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                                             .addComponent(jLabel79)
                                             .addComponent(jLabel78)
                                             .addComponent(jLabel77)
-                                            .addComponent(jLabel76))))
+                                            .addComponent(jLabel76)
+                                            .addComponent(jLabel88))))
                                 .addGap(18, 18, 18)
                                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel85)
                                     .addComponent(jLabel84)
                                     .addComponent(jLabel83)
+                                    .addComponent(jLabel89)
                                     .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel81)
                                         .addComponent(jLabel80))))))
@@ -502,13 +511,17 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                             .addComponent(jLabel78)
                             .addComponent(jLabel83))
                         .addGap(18, 18, 18)
-                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel79, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel79)
                             .addComponent(jLabel80))
                         .addGap(18, 18, 18)
                         .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel82)
                             .addComponent(jLabel81))
+                        .addGap(18, 18, 18)
+                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel88)
+                            .addComponent(jLabel89))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -647,7 +660,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel20ComponentShown
 
     private void EmergencyStopButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyStopButton2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_EmergencyStopButton2ActionPerformed
 
     private void SelectOperationMode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectOperationMode2ActionPerformed
@@ -706,6 +718,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel20;
