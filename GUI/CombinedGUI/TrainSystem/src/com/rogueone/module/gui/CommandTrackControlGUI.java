@@ -126,18 +126,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                { new Integer(3125), "A:7",  new Boolean(true)},
+                { new Integer(254), "D:2",  new Boolean(true)},
+                { new Integer(1190), "G:3",  new Boolean(true)},
+                { new Integer(52), "G:9", null},
+                { new Integer(2955), "M:1",  new Boolean(true)},
+                { new Integer(842), "M:10",  new Boolean(true)},
+                { new Integer(7922), "Q:3",  new Boolean(true)},
+                { new Integer(103), "S:7",  new Boolean(true)},
+                { new Integer(8311), "T:2",  new Boolean(true)},
+                { new Integer(91), "V:9",  new Boolean(true)},
+                { new Integer(1294), "X:7", null},
+                { new Integer(399), "Z:2",  new Boolean(true)}
             },
             new String [] {
                 "Train", "Position", "Status"
@@ -146,9 +146,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane9.setViewportView(jTable7);
@@ -207,17 +214,21 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {"A",  new Integer(1),  new Boolean(true)},
+                {"A",  new Integer(2),  new Boolean(false)},
+                {"A",  new Integer(3),  new Boolean(true)},
+                {"B",  new Integer(1),  new Boolean(true)},
+                {"B",  new Integer(2),  new Boolean(true)},
+                {"B",  new Integer(3),  new Boolean(false)},
+                {"B",  new Integer(4),  new Boolean(true)},
+                {"B",  new Integer(5),  new Boolean(true)},
+                {"C",  new Integer(1),  new Boolean(true)},
+                {"C",  new Integer(2),  new Boolean(true)},
+                {"C",  new Integer(3),  new Boolean(true)},
+                {"C",  new Integer(4),  new Boolean(true)},
+                {"D",  new Integer(1),  new Boolean(true)},
+                {"D",  new Integer(2),  new Boolean(true)},
+                {"D",  new Integer(3),  new Boolean(true)}
             },
             new String [] {
                 "Section", "Block", "Status"
@@ -274,8 +285,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jTable8.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.select"));
         jTable8.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Green", "A",  new Integer(12), "Power"},
-                {"Green", "A",  new Integer(11), "Power"},
+                {"Green", "A",  new Integer(2), "Power"},
+                {"Green", "B",  new Integer(3), "Power"},
                 {"Red", "F",  new Integer(2), "Broken Rail"},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -345,7 +356,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         TrainBlockLabel2.setText("8");
 
-        TrainSpeedLabel2.setText("23.53 kph");
+        TrainSpeedLabel2.setText("23.53 km/hr");
 
         TrainPitchLabel2.setText("4.1 deg");
 
