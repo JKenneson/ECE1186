@@ -204,10 +204,68 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="3" rowCount="12">
-                                <Column editable="true" title="Train" type="java.lang.Integer"/>
-                                <Column editable="true" title="Position" type="java.lang.String"/>
-                                <Column editable="true" title="Status" type="java.lang.Boolean"/>
+                                <Column editable="false" title="Train" type="java.lang.Integer">
+                                  <Data value="3125"/>
+                                  <Data value="254"/>
+                                  <Data value="1190"/>
+                                  <Data value="52"/>
+                                  <Data value="2955"/>
+                                  <Data value="842"/>
+                                  <Data value="7922"/>
+                                  <Data value="103"/>
+                                  <Data value="8311"/>
+                                  <Data value="91"/>
+                                  <Data value="1294"/>
+                                  <Data value="399"/>
+                                </Column>
+                                <Column editable="false" title="Position" type="java.lang.String">
+                                  <Data value="A:7"/>
+                                  <Data value="D:2"/>
+                                  <Data value="G:3"/>
+                                  <Data value="G:9"/>
+                                  <Data value="M:1"/>
+                                  <Data value="M:10"/>
+                                  <Data value="Q:3"/>
+                                  <Data value="S:7"/>
+                                  <Data value="T:2"/>
+                                  <Data value="V:9"/>
+                                  <Data value="X:7"/>
+                                  <Data value="Z:2"/>
+                                </Column>
+                                <Column editable="false" title="Status" type="java.lang.Boolean">
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="null"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="null"/>
+                                  <Data value="true"/>
+                                </Column>
                               </Table>
+                            </Property>
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                              <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                              </TableColumnModel>
                             </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -314,11 +372,78 @@
                         <Component class="javax.swing.JTable" name="jTable5">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="3" rowCount="11">
-                                <Column editable="true" title="Section" type="java.lang.String"/>
-                                <Column editable="true" title="Block" type="java.lang.Integer"/>
-                                <Column editable="true" title="Status" type="java.lang.Boolean"/>
+                              <Table columnCount="3" rowCount="15">
+                                <Column editable="true" title="Section" type="java.lang.String">
+                                  <Data value="A"/>
+                                  <Data value="A"/>
+                                  <Data value="A"/>
+                                  <Data value="B"/>
+                                  <Data value="B"/>
+                                  <Data value="B"/>
+                                  <Data value="B"/>
+                                  <Data value="B"/>
+                                  <Data value="C"/>
+                                  <Data value="C"/>
+                                  <Data value="C"/>
+                                  <Data value="C"/>
+                                  <Data value="D"/>
+                                  <Data value="D"/>
+                                  <Data value="D"/>
+                                </Column>
+                                <Column editable="true" title="Block" type="java.lang.Integer">
+                                  <Data value="1"/>
+                                  <Data value="2"/>
+                                  <Data value="3"/>
+                                  <Data value="1"/>
+                                  <Data value="2"/>
+                                  <Data value="3"/>
+                                  <Data value="4"/>
+                                  <Data value="5"/>
+                                  <Data value="1"/>
+                                  <Data value="2"/>
+                                  <Data value="3"/>
+                                  <Data value="4"/>
+                                  <Data value="1"/>
+                                  <Data value="2"/>
+                                  <Data value="3"/>
+                                </Column>
+                                <Column editable="true" title="Status" type="java.lang.Boolean">
+                                  <Data value="true"/>
+                                  <Data value="false"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="false"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                  <Data value="true"/>
+                                </Column>
                               </Table>
+                            </Property>
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                              <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                              </TableColumnModel>
                             </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -383,7 +508,7 @@
                                 </Column>
                                 <Column editable="true" title="Section" type="java.lang.String">
                                   <Data value="A"/>
-                                  <Data value="A"/>
+                                  <Data value="B"/>
                                   <Data value="F"/>
                                   <Data value="null"/>
                                   <Data value="null"/>
@@ -391,8 +516,8 @@
                                   <Data value="null"/>
                                 </Column>
                                 <Column editable="true" title="Block" type="java.lang.Integer">
-                                  <Data value="12"/>
-                                  <Data value="11"/>
+                                  <Data value="2"/>
+                                  <Data value="3"/>
                                   <Data value="2"/>
                                   <Data value="null"/>
                                   <Data value="null"/>
@@ -409,6 +534,30 @@
                                   <Data value="null"/>
                                 </Column>
                               </Table>
+                            </Property>
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                              <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                              </TableColumnModel>
                             </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -662,7 +811,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainSpeedLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="23.53 kph"/>
+                    <Property name="text" type="java.lang.String" value="23.53 km/hr"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainPitchLabel2">
