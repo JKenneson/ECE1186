@@ -126,7 +126,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(3125), "A:7",  new Boolean(true)},
                 { new Integer(254), "D:2",  new Boolean(true)},
                 { new Integer(1190), "G:3",  new Boolean(true)},
                 { new Integer(52), "G:9", null},
@@ -348,19 +347,19 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jLabel75.setText("Max Capacity");
 
-        TrainNameLabel2.setText("Train 1");
+        TrainNameLabel2.setText("Train #254");
 
         TrainLineLabel2.setText("Green");
 
-        TrainSectionLabel2.setText("K");
+        TrainSectionLabel2.setText("D");
 
-        TrainBlockLabel2.setText("8");
+        TrainBlockLabel2.setText("2");
 
         TrainSpeedLabel2.setText("23.53 km/hr");
 
         TrainPitchLabel2.setText("4.1 deg");
 
-        TrainAuthorityLabel2.setText("1.2 km");
+        TrainAuthorityLabel2.setText("1134 m");
 
         TrainCurrerntCapacityLabel2.setText("12");
 

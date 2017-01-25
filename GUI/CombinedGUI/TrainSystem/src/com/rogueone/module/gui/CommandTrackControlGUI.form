@@ -203,9 +203,8 @@
                         <Component class="javax.swing.JTable" name="jTable7">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="3" rowCount="12">
+                              <Table columnCount="3" rowCount="11">
                                 <Column editable="false" title="Train" type="java.lang.Integer">
-                                  <Data value="3125"/>
                                   <Data value="254"/>
                                   <Data value="1190"/>
                                   <Data value="52"/>
@@ -219,7 +218,6 @@
                                   <Data value="399"/>
                                 </Column>
                                 <Column editable="false" title="Position" type="java.lang.String">
-                                  <Data value="A:7"/>
                                   <Data value="D:2"/>
                                   <Data value="G:3"/>
                                   <Data value="G:9"/>
@@ -233,7 +231,6 @@
                                   <Data value="Z:2"/>
                                 </Column>
                                 <Column editable="false" title="Status" type="java.lang.Boolean">
-                                  <Data value="true"/>
                                   <Data value="true"/>
                                   <Data value="true"/>
                                   <Data value="null"/>
@@ -791,7 +788,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainNameLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Train 1"/>
+                    <Property name="text" type="java.lang.String" value="Train #254"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainLineLabel2">
@@ -801,12 +798,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainSectionLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="K"/>
+                    <Property name="text" type="java.lang.String" value="D"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainBlockLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="8"/>
+                    <Property name="text" type="java.lang.String" value="2"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainSpeedLabel2">
@@ -821,7 +818,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainAuthorityLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="1.2 km"/>
+                    <Property name="text" type="java.lang.String" value="1134 m"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainCurrerntCapacityLabel2">
