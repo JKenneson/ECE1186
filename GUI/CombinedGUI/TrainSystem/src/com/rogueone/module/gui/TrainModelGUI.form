@@ -229,7 +229,7 @@
                                   <Component id="jSpinner2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="16" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -283,7 +283,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Speed, Cars, and Passengers"/>
+                        <TitledBorder title="Speed, Power, Cars, and Passengers"/>
                       </Border>
                     </Property>
                   </Properties>
@@ -291,30 +291,35 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel41" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="27" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jSpinner4" min="-2" pref="67" max="-2" attributes="0"/>
+                                      <Component id="jSpinner1" min="-2" pref="67" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jSpinner1" min="-2" pref="67" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jSpinner3" min="-2" pref="67" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jSpinner5" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jSpinner4" alignment="0" pref="67" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jSpinner3" min="-2" pref="67" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -337,13 +342,19 @@
                                   <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel41" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jSpinner4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinner5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -358,7 +369,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel38">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Passengers Embarking:"/>
+                        <Property name="text" type="java.lang.String" value="Power:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JSpinner" name="jSpinner3">
@@ -377,12 +388,24 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel48">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="people"/>
+                        <Property name="text" type="java.lang.String" value="W"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel49">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="cars"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel28">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Passengers Embarking:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinner5">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel30">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="people"/>
                       </Properties>
                     </Component>
                   </SubComponents>
