@@ -302,7 +302,9 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         StatusAC.setBorder(javax.swing.BorderFactory.createTitledBorder("Engine"));
 
         StatusACImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StatusACImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\Tyler\\Downloads\\SQUARE_98.png")); // NOI18N
         StatusACImage.setText("jLabel1");
+        StatusACImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("jLabel10");
@@ -315,7 +317,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(StatusACLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(StatusACImage, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
+                    .addComponent(StatusACImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         StatusACLayout.setVerticalGroup(
@@ -331,7 +333,9 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         StatusHeat.setBorder(javax.swing.BorderFactory.createTitledBorder("Power"));
 
         StatusHeatImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StatusHeatImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\Tyler\\Downloads\\CIRC_98.png")); // NOI18N
         StatusHeatImage.setText("jLabel1");
+        StatusHeatImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("jLabel10");
@@ -363,7 +367,9 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         StatusLights.setPreferredSize(new java.awt.Dimension(140, 190));
 
         StatusLightsImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StatusLightsImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\Tyler\\Downloads\\CIRC_98.png")); // NOI18N
         StatusLightsImage.setText("jLabel1");
+        StatusLightsImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("jLabel10");
@@ -395,7 +401,9 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         StatusLights1.setPreferredSize(new java.awt.Dimension(140, 190));
 
         StatusLightsImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StatusLightsImage1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Tyler\\Downloads\\CIRC_98.png")); // NOI18N
         StatusLightsImage1.setText("jLabel1");
+        StatusLightsImage1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("jLabel10");
