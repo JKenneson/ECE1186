@@ -858,6 +858,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel81">
                   <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="ff" id="green" palette="1" red="0" type="palette"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="ON"/>
                   </Properties>
                 </Component>
@@ -868,16 +871,25 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel83">
                   <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="ff" id="green" palette="1" red="0" type="palette"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="ON"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel84">
                   <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="CLOSED"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel85">
                   <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="CLOSED"/>
                   </Properties>
                 </Component>
@@ -924,10 +936,10 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel86" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel87" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -940,7 +952,10 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="ChangeOperationModeButton2" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="EmergencyStopButton2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="EmergencyStopButton2" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -992,7 +1007,6 @@
                 <Component class="javax.swing.JButton" name="ChangeParametersButton2">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="CHANGE "/>
-                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeParametersButton2ActionPerformed"/>

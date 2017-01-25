@@ -375,14 +375,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jLabel80.setText("71º");
 
+        jLabel81.setForeground(java.awt.Color.green);
         jLabel81.setText("ON");
 
         jLabel82.setText("A/C");
 
+        jLabel83.setForeground(java.awt.Color.green);
         jLabel83.setText("ON");
 
+        jLabel84.setForeground(java.awt.Color.red);
         jLabel84.setText("CLOSED");
 
+        jLabel85.setForeground(java.awt.Color.red);
         jLabel85.setText("CLOSED");
 
         javax.swing.GroupLayout InformationPanel2Layout = new javax.swing.GroupLayout(InformationPanel2);
@@ -531,7 +535,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel87.setText("Change Suggested Parameters");
 
         ChangeParametersButton2.setText("CHANGE ");
-        ChangeParametersButton2.setEnabled(false);
         ChangeParametersButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeParametersButton2ActionPerformed(evt);
@@ -564,9 +567,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         AdditionalInfoPanel2Layout.setVerticalGroup(
             AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel86)
                             .addComponent(jLabel87))
@@ -576,7 +579,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                             .addComponent(ChangeParametersButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ChangeOperationModeButton2))
-                    .addComponent(EmergencyStopButton2))
+                    .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(EmergencyStopButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -646,11 +651,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_EmergencyStopButton2ActionPerformed
 
     private void SelectOperationMode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectOperationMode2ActionPerformed
-        // TODO add your handling code here:
+        ChangeParametersButton2.setEnabled(false);       // TODO add your handling code here:
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
     private void ChangeParametersButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton2ActionPerformed
-        // TODO add your handling code here:
+                // TODO add your handling code here:
     }//GEN-LAST:event_ChangeParametersButton2ActionPerformed
 
 
