@@ -48,7 +48,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Please enter the desired parameters for the selected train.");
 
@@ -220,7 +220,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        System.exit(0);        // TODO add your handling code here:
+        this.dispose();         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
