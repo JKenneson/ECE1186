@@ -664,7 +664,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_EmergencyStopButton2ActionPerformed
 
     private void SelectOperationMode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectOperationMode2ActionPerformed
-        ChangeParametersButton2.setEnabled(false);       // TODO add your handling code here:
+        int manualMode = 0;
+        if (SelectOperationMode2.getSelectedIndex() == manualMode) {
+            ChangeParametersButton2.setEnabled(true);
+        }       // TODO add your handling code here:
+        else {
+            ChangeParametersButton2.setEnabled(false);
+        }
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
     private void ChangeParametersButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton2ActionPerformed
