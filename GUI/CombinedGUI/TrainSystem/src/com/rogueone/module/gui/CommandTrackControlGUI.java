@@ -458,7 +458,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                             .addGroup(InformationPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(TrainNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 60, Short.MAX_VALUE))
                             .addGroup(InformationPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,6 +539,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         AdditionalInfoPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Component Disable"));
 
         TrainShutdownButton.setText("Train Shutdown");
+        TrainShutdownButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TrainShutdownButtonActionPerformed(evt);
+            }
+        });
 
         TrackShutdownButton.setText("Track Shutdown");
         TrackShutdownButton.addActionListener(new java.awt.event.ActionListener() {
@@ -688,14 +693,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeOperationModeButton2))
+                    .addComponent(ChangeOperationModeButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ChangeOperationModeButton2)
@@ -834,16 +839,25 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_RushHourFieldActionPerformed
 
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
+        ChangeParametersGUI params = new ChangeParametersGUI();
+        params.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
 
     private void TrackShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackShutdownButtonActionPerformed
-        // TODO add your handling code here:
+        TrackShutdownGUI trackShutdown = new TrackShutdownGUI();
+        trackShutdown.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_TrackShutdownButtonActionPerformed
 
     private void ChangeOperationModeButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeOperationModeButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ChangeOperationModeButton2ActionPerformed
+
+    private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
+        TrainShutdownGUI trainShutdown = new TrainShutdownGUI();
+        trainShutdown.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_TrainShutdownButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
