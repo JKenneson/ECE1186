@@ -73,28 +73,28 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel75 = new javax.swing.JLabel();
         TrainSpeedLabel2 = new javax.swing.JLabel();
         TrainAuthorityLabel2 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        TrainNameField = new javax.swing.JTextField();
+        CurrentLineField = new javax.swing.JTextField();
+        CurrentBlockField = new javax.swing.JTextField();
+        CurrentSectionField = new javax.swing.JTextField();
+        AuthorityField = new javax.swing.JTextField();
+        SpeedField = new javax.swing.JTextField();
+        MaxCapacityField = new javax.swing.JTextField();
+        CurrentCapacityField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         AdditionalInfoPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        TrainShutdownButton = new javax.swing.JButton();
+        TrackShutdownButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        DispatchButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        TimeField = new javax.swing.JTextField();
+        RushHourField = new javax.swing.JTextField();
+        ThroughputField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         SelectOperationMode2 = new javax.swing.JComboBox<>();
@@ -387,54 +387,54 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         TrainAuthorityLabel2.setText(" m");
 
-        jTextField4.setText("254");
+        TrainNameField.setText("254");
 
-        jTextField5.setText("Green");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        CurrentLineField.setText("Green");
+        CurrentLineField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                CurrentLineFieldActionPerformed(evt);
             }
         });
 
-        jTextField6.setText("4");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        CurrentBlockField.setText("4");
+        CurrentBlockField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                CurrentBlockFieldActionPerformed(evt);
             }
         });
 
-        jTextField7.setText("B");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        CurrentSectionField.setText("B");
+        CurrentSectionField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                CurrentSectionFieldActionPerformed(evt);
             }
         });
 
-        jTextField8.setText("1542");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        AuthorityField.setText("1542");
+        AuthorityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                AuthorityFieldActionPerformed(evt);
             }
         });
 
-        jTextField9.setText("23.2");
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        SpeedField.setText("23.2");
+        SpeedField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                SpeedFieldActionPerformed(evt);
             }
         });
 
-        jTextField10.setText("125");
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        MaxCapacityField.setText("125");
+        MaxCapacityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                MaxCapacityFieldActionPerformed(evt);
             }
         });
 
-        jTextField11.setText("50");
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        CurrentCapacityField.setText("50");
+        CurrentCapacityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                CurrentCapacityFieldActionPerformed(evt);
             }
         });
 
@@ -459,13 +459,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                         .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(InformationPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TrainNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(InformationPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(MaxCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CurrentCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -480,13 +480,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                                     .addComponent(jLabel70))
                                 .addGap(18, 18, 18)
                                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField8)
-                                    .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField6)
+                                    .addComponent(AuthorityField)
+                                    .addComponent(SpeedField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(CurrentBlockField)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationPanel2Layout.createSequentialGroup()
                                         .addGap(0, 1, Short.MAX_VALUE)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(CurrentSectionField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CurrentLineField, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TrainSpeedLabel2)
@@ -502,50 +502,50 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel67)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TrainNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel68)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CurrentLineField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel69)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CurrentSectionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel70)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CurrentBlockField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel71)
                     .addComponent(TrainSpeedLabel2)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel72)
                     .addComponent(TrainAuthorityLabel2)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AuthorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CurrentCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel74)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel75)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MaxCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
         AdditionalInfoPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Component Disable"));
 
-        jButton2.setText("Train Shutdown");
+        TrainShutdownButton.setText("Train Shutdown");
 
-        jButton3.setText("Track Shutdown");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        TrackShutdownButton.setText("Track Shutdown");
+        TrackShutdownButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                TrackShutdownButtonActionPerformed(evt);
             }
         });
 
@@ -556,23 +556,23 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(TrainShutdownButton)
+                    .addComponent(TrackShutdownButton))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
         AdditionalInfoPanel2Layout.setVerticalGroup(
             AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(TrainShutdownButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(TrackShutdownButton)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dispatch Control"));
 
-        jButton1.setText("Dispatch New Train");
+        DispatchButton.setText("Dispatch New Train");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -580,14 +580,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(DispatchButton)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(DispatchButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -599,24 +599,24 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jLabel4.setText("Throughput");
 
-        jTextField1.setText("12:31");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TimeField.setText("12:31");
+        TimeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TimeFieldActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("YES");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        RushHourField.setText("YES");
+        RushHourField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                RushHourFieldActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("1203");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        ThroughputField.setText("1203");
+        ThroughputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                ThroughputFieldActionPerformed(evt);
             }
         });
 
@@ -635,11 +635,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ThroughputField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addComponent(jLabel1))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RushHourField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -648,15 +648,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RushHourField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ThroughputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -671,6 +671,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         });
 
         ChangeOperationModeButton2.setText("Change");
+        ChangeOperationModeButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeOperationModeButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -754,7 +759,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TrainLineSelect2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainLineSelect2ActionPerformed
-        // TODO add your handling code here:
+        if (TrainLineSelect2.getSelectedIndex() == 0) {
+            CurrentLineField.setText("Green");
+        }
+        else {
+            CurrentLineField.setText("Red");
+        }
+            // TODO add your handling code here:
     }//GEN-LAST:event_TrainLineSelect2ActionPerformed
 
     private void jPanel19ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel19ComponentShown
@@ -770,80 +781,94 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel20ComponentShown
 
     private void SelectOperationMode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectOperationMode2ActionPerformed
-        int manualMode = 0;
-        if (SelectOperationMode2.getSelectedIndex() == manualMode) {
-            ChangeParametersButton2.setEnabled(true);
+        if (SelectOperationMode2.getSelectedIndex() == 0) {
+            ChangeParametersButton3.setEnabled(true);
         }       // TODO add your handling code here:
         else {
-            ChangeParametersButton2.setEnabled(false);
+            ChangeParametersButton3.setEnabled(false);
         }
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void ThroughputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_ThroughputFieldActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TimeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimeFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TimeFieldActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void CurrentLineFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentLineFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_CurrentLineFieldActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void CurrentBlockFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentBlockFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_CurrentBlockFieldActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void CurrentSectionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentSectionFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_CurrentSectionFieldActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void AuthorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuthorityFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_AuthorityFieldActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void SpeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpeedFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_SpeedFieldActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void MaxCapacityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaxCapacityFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_MaxCapacityFieldActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void CurrentCapacityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentCapacityFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_CurrentCapacityFieldActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void RushHourFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RushHourFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_RushHourFieldActionPerformed
 
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void TrackShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackShutdownButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_TrackShutdownButtonActionPerformed
+
+    private void ChangeOperationModeButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeOperationModeButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChangeOperationModeButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AdditionalInfoPanel2;
+    private javax.swing.JTextField AuthorityField;
     private javax.swing.JTabbedPane BrowserPanel2;
     private javax.swing.JButton ChangeOperationModeButton2;
     private javax.swing.JButton ChangeParametersButton3;
+    private javax.swing.JTextField CurrentBlockField;
+    private javax.swing.JTextField CurrentCapacityField;
+    private javax.swing.JTextField CurrentLineField;
+    private javax.swing.JTextField CurrentSectionField;
+    private javax.swing.JButton DispatchButton;
     private javax.swing.JLabel InformationHeader2;
     private javax.swing.JPanel InformationPanel2;
     private javax.swing.JLabel MapImage2;
     private javax.swing.JPanel MapPanel2;
+    private javax.swing.JTextField MaxCapacityField;
+    private javax.swing.JTextField RushHourField;
     private javax.swing.JComboBox<String> SelectOperationMode2;
+    private javax.swing.JTextField SpeedField;
+    private javax.swing.JTextField ThroughputField;
+    private javax.swing.JTextField TimeField;
+    private javax.swing.JButton TrackShutdownButton;
     private javax.swing.JLabel TrainAuthorityLabel2;
     private javax.swing.JComboBox<String> TrainLineSelect2;
+    private javax.swing.JTextField TrainNameField;
+    private javax.swing.JButton TrainShutdownButton;
     private javax.swing.JLabel TrainSpeedLabel2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -879,16 +904,5 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }
