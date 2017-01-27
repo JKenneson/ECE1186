@@ -56,6 +56,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
+        ChangeParametersButton2 = new javax.swing.JButton();
+        jLabel87 = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable8 = new javax.swing.JTable();
@@ -86,8 +88,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel86 = new javax.swing.JLabel();
         SelectOperationMode2 = new javax.swing.JComboBox<>();
         ChangeOperationModeButton2 = new javax.swing.JButton();
-        jLabel87 = new javax.swing.JLabel();
-        ChangeParametersButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -256,23 +256,38 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         });
         jScrollPane6.setViewportView(jTable5);
 
+        ChangeParametersButton2.setText("CHANGE ");
+        ChangeParametersButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeParametersButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel87.setText("Set Parameters");
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)))
+                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                            .addComponent(jLabel87)))
+                    .addGroup(jPanel20Layout.createSequentialGroup()
+                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ChangeParametersButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel66)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,7 +299,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                         .addComponent(jLabel65)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 134, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel87)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChangeParametersButton2)
+                        .addGap(0, 71, Short.MAX_VALUE))
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addComponent(jLabel66)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -533,15 +552,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         ChangeOperationModeButton2.setText("Change");
 
-        jLabel87.setText("Change Suggested Parameters");
-
-        ChangeParametersButton2.setText("CHANGE ");
-        ChangeParametersButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChangeParametersButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout AdditionalInfoPanel2Layout = new javax.swing.GroupLayout(AdditionalInfoPanel2);
         AdditionalInfoPanel2.setLayout(AdditionalInfoPanel2Layout);
         AdditionalInfoPanel2Layout.setHorizontalGroup(
@@ -554,14 +564,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                     .addComponent(jLabel86)
                     .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChangeOperationModeButton2))
-                .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel87))
-                    .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ChangeParametersButton2)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AdditionalInfoPanel2Layout.setVerticalGroup(
             AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -569,13 +572,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
-                        .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel86)
-                            .addComponent(jLabel87))
+                        .addComponent(jLabel86)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ChangeParametersButton2))
+                        .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ChangeOperationModeButton2))
                     .addComponent(EmergencyStopButton2))
@@ -598,8 +597,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("System Information"));
@@ -690,7 +690,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(BrowserPanel2))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(320, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -710,7 +710,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                         .addComponent(MapPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AdditionalInfoPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);

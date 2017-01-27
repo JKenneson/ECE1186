@@ -53,7 +53,7 @@
                           </Group>
                           <Component id="BrowserPanel2" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="276" max="32767" attributes="0"/>
+                      <EmptySpace pref="320" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -66,7 +66,7 @@
                               <Component id="BrowserPanel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jPanel3" max="32767" attributes="0"/>
@@ -80,7 +80,7 @@
                               <Component id="AdditionalInfoPanel2" min="-2" pref="122" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="7" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -306,10 +306,19 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jComboBox4" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel65" pref="114" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel65" alignment="0" pref="113" max="32767" attributes="0"/>
+                                          <Component id="jLabel87" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jComboBox4" min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="ChangeParametersButton2" min="-2" pref="98" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -319,7 +328,7 @@
                                   <Component id="jLabel66" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane6" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="17" max="32767" attributes="0"/>
+                              <EmptySpace pref="18" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -333,7 +342,11 @@
                                       <Component id="jLabel65" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jComboBox4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="134" max="32767" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel87" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="ChangeParametersButton2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="71" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel66" min="-2" max="-2" attributes="0"/>
@@ -465,6 +478,19 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="ChangeParametersButton2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="CHANGE "/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeParametersButton2ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel87">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Set Parameters"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel21">
@@ -867,17 +893,7 @@
                               <Component id="SelectOperationMode2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="ChangeOperationModeButton2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                  <Component id="jLabel87" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ChangeParametersButton2" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -887,15 +903,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel86" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel87" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jLabel86" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="SelectOperationMode2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ChangeParametersButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="SelectOperationMode2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="ChangeOperationModeButton2" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -943,19 +953,6 @@
                     <Property name="text" type="java.lang.String" value="Change"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel87">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Change Suggested Parameters"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="ChangeParametersButton2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="CHANGE "/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeParametersButton2ActionPerformed"/>
-                  </Events>
-                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel2">
@@ -980,8 +977,9 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
