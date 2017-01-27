@@ -67,9 +67,9 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("km/hr");
+        jLabel6.setText("mph");
 
-        jLabel7.setText("km/hr");
+        jLabel7.setText("mph");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,9 +114,9 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
 
         jTextField3.setText("1245");
 
-        jLabel8.setText("m");
+        jLabel8.setText("ft");
 
-        jLabel9.setText("m");
+        jLabel9.setText("ft");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

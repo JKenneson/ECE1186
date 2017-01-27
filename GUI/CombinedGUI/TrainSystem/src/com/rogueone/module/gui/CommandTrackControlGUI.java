@@ -381,9 +381,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jLabel75.setText("Max Capacity");
 
-        TrainSpeedLabel2.setText("km/hr");
+        TrainSpeedLabel2.setText("mph");
 
-        TrainAuthorityLabel2.setText(" m");
+        TrainAuthorityLabel2.setText("ft");
 
         TrainNameField.setText("254");
 

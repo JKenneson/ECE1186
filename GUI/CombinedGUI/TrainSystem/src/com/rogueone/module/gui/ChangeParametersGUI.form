@@ -144,12 +144,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="km/hr"/>
+            <Property name="text" type="java.lang.String" value="mph"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="km/hr"/>
+            <Property name="text" type="java.lang.String" value="mph"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -223,12 +223,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="m"/>
+            <Property name="text" type="java.lang.String" value="ft"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="m"/>
+            <Property name="text" type="java.lang.String" value="ft"/>
           </Properties>
         </Component>
       </SubComponents>
