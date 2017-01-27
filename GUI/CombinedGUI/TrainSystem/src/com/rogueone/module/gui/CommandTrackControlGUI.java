@@ -7,7 +7,7 @@ package com.rogueone.module.gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.*;
-import java.util.Date;
+import java.util.*;
 import javax.swing.*;
 
 
@@ -22,10 +22,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      */
     public CommandTrackControlGUI() {
         initComponents();
-//        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-//        Date date = new Date();
-//        String time = timeFormat.format(date);
-//        jTextField1.setText(time);
+
     }
 
     /**
@@ -96,6 +93,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         RushHourField = new javax.swing.JTextField();
         ThroughputField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         SelectOperationMode2 = new javax.swing.JComboBox<>();
         ChangeOperationModeButton2 = new javax.swing.JButton();
@@ -556,18 +554,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TrainShutdownButton)
-                    .addComponent(TrackShutdownButton))
-                .addContainerGap(98, Short.MAX_VALUE))
+                    .addComponent(TrackShutdownButton, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addComponent(TrainShutdownButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         AdditionalInfoPanel2Layout.setVerticalGroup(
             AdditionalInfoPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdditionalInfoPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(TrainShutdownButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TrackShutdownButton)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dispatch Control"));
@@ -622,6 +620,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jLabel1.setText("p/hr");
 
+        jLabel7.setText("PM");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -638,7 +638,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                         .addComponent(ThroughputField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addComponent(jLabel1))
-                    .addComponent(TimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(TimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7))
                     .addComponent(RushHourField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -648,7 +651,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(TimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -794,7 +798,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_ThroughputFieldActionPerformed
 
     private void TimeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimeFieldActionPerformed
-        // TODO add your handling code here:
+             // TODO add your handling code here:
     }//GEN-LAST:event_TimeFieldActionPerformed
 
     private void CurrentLineFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentLineFieldActionPerformed
@@ -883,6 +887,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
