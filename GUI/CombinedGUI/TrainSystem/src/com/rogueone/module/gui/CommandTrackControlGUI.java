@@ -45,7 +45,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         TrainLineSelect2 = new javax.swing.JComboBox<>();
         jLabel64 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+        TrainTable = new javax.swing.JTable();
         ChangeParametersButton3 = new javax.swing.JButton();
         jLabel88 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
@@ -135,7 +135,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jLabel64.setText("Trains");
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        TrainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(254), "D:2",  new Boolean(true)},
                 { new Integer(1190), "G:3",  new Boolean(true)},
@@ -168,7 +168,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane9.setViewportView(jTable7);
+        jScrollPane9.setViewportView(TrainTable);
 
         ChangeParametersButton3.setText("CHANGE ");
         ChangeParametersButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -386,6 +386,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         TrainAuthorityLabel2.setText("ft");
 
         TrainNameField.setText("254");
+        TrainNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TrainNameFieldActionPerformed(evt);
+            }
+        });
 
         CurrentLineField.setText("Green");
         CurrentLineField.addActionListener(new java.awt.event.ActionListener() {
@@ -576,6 +581,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dispatch Control"));
 
         DispatchButton.setText("Dispatch New Train");
+        DispatchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DispatchButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -859,6 +869,20 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 // TODO add your handling code here:
     }//GEN-LAST:event_TrainShutdownButtonActionPerformed
 
+    private void TrainNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainNameFieldActionPerformed
+        
+    }//GEN-LAST:event_TrainNameFieldActionPerformed
+
+    private void DispatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchButtonActionPerformed
+        DispatchTrainGUI trainDispatch = new DispatchTrainGUI();
+        trainDispatch.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_DispatchButtonActionPerformed
+
+    private void UpdateInformation(java.awt.event.ActionEvent evt){
+        int selectedRowIndex = TrainTable.getSelectedRow();
+        String TrainID = TrainTable.getModel().getValueAt(selectedRowIndex, 0).toString(); 
+        TrainNameField.setText(TrainID);// TODO add your handling code here:
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AdditionalInfoPanel2;
@@ -887,6 +911,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JTextField TrainNameField;
     private javax.swing.JButton TrainShutdownButton;
     private javax.swing.JLabel TrainSpeedLabel2;
+    private javax.swing.JTable TrainTable;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -921,7 +946,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     // End of variables declaration//GEN-END:variables
 }

@@ -242,7 +242,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable7">
+                        <Component class="javax.swing.JTable" name="TrainTable">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="3" rowCount="11">
@@ -817,6 +817,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="254"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TrainNameFieldActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="CurrentLineField">
                   <Properties>
@@ -973,6 +976,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Dispatch New Train"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DispatchButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
