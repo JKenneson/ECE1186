@@ -802,9 +802,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private void SelectOperationMode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectOperationMode2ActionPerformed
         if (SelectOperationMode2.getSelectedIndex() == 0) {
             ChangeParametersButton3.setEnabled(true);
+            DispatchButton.setEnabled(true);
+            TrainShutdownButton.setEnabled(true);
+            TrackShutdownButton.setEnabled(true);
         }       // TODO add your handling code here:
         else {
             ChangeParametersButton3.setEnabled(false);
+            DispatchButton.setEnabled(false);
+            TrainShutdownButton.setEnabled(false);
+            TrackShutdownButton.setEnabled(false);
         }
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 

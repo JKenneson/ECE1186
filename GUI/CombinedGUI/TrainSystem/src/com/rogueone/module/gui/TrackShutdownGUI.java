@@ -43,7 +43,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
 
         jLabel2.setText("Line");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green", "Red" }));
 
         jLabel3.setText("Block");
 
@@ -119,7 +119,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();       // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
