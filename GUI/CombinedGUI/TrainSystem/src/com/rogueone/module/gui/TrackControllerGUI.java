@@ -49,6 +49,9 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         jTextField8 = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        jTextField10 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
@@ -141,8 +144,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel5.add(jLabel18, gridBagConstraints);
 
         jTextField5.setText("GREEN/RED");
@@ -163,7 +165,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel5.add(jLabel19, gridBagConstraints);
 
         jTextField6.setText("1/(None Selected)");
@@ -175,7 +177,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel5.add(jTextField6, gridBagConstraints);
 
@@ -183,7 +185,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel5.add(jLabel20, gridBagConstraints);
 
         jTextField7.setText("#/(None Selected)");
@@ -203,7 +205,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel5.add(jLabel21, gridBagConstraints);
 
         jTextField8.setText("#/(None Selected)");
@@ -223,7 +225,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         jPanel5.add(jLabel22, gridBagConstraints);
 
         jTextField9.setText("#/(None Selected)");
@@ -234,6 +236,26 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel5.add(jTextField9, gridBagConstraints);
 
+        jButton4.setText("Choose File");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        jPanel5.add(jButton4, gridBagConstraints);
+
+        jLabel26.setText("PLC Program:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        jPanel5.add(jLabel26, gridBagConstraints);
+
+        jTextField10.setText("plc");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jTextField10, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -241,18 +263,18 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel7.add(jPanel5, gridBagConstraints);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Selections"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Component Summary"));
         jPanel4.setPreferredSize(new java.awt.Dimension(500, 600));
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green", "Red" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green 1", "Green 2", "Red 1", "Red 2" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel4.add(jComboBox1, gridBagConstraints);
 
-        jLabel14.setText("Select Line:");
+        jLabel14.setText("Current Track Controller:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -281,14 +303,14 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         jPanel4.add(jScrollPane4, gridBagConstraints);
 
-        jLabel15.setText("Current Trains - Red/Green");
+        jLabel15.setText("Current Trains - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         jPanel4.add(jLabel15, gridBagConstraints);
 
-        jLabel16.setText("Switches - Red/Green");
+        jLabel16.setText("Switches - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -303,7 +325,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Switch Number", "State - Connection"
+                "Switch ID", "State - Connection"
             }
         ));
         jScrollPane5.setViewportView(jTable2);
@@ -318,7 +340,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         jPanel4.add(jScrollPane5, gridBagConstraints);
 
-        jLabel17.setText("Crossing - Red/Green");
+        jLabel17.setText("Crossing - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -348,7 +370,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         jPanel4.add(jScrollPane6, gridBagConstraints);
 
-        jLabel23.setText("Rails - Red/Green");
+        jLabel23.setText("Block - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -380,7 +402,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         jPanel4.add(jScrollPane7, gridBagConstraints);
 
-        jLabel25.setText("Track Signals - Red/Green");
+        jLabel25.setText("Track Signals - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
@@ -807,7 +829,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed/Authority"));
         jPanel15.setLayout(new java.awt.GridBagLayout());
 
-        jLabel10.setText("Suggested Speed:");
+        jLabel10.setText("Suggested Speed(mph):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -837,14 +859,14 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel15.add(jTextField2, gridBagConstraints);
 
-        jLabel11.setText("Suggested Authority: ");
+        jLabel11.setText("Suggested Authority(ft): ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel15.add(jLabel11, gridBagConstraints);
 
-        jLabel12.setText("Vital Speed: ");
+        jLabel12.setText("Commanded Speed(mph): ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -865,7 +887,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel15.add(jTextField3, gridBagConstraints);
 
-        jLabel13.setText("Vital Authority:");
+        jLabel13.setText("Commanded Authority(ft):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -953,7 +975,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Simulate", jPanel6);
 
-        jPanel1.add(jTabbedPane1, java.awt.BorderLayout.NORTH);
+        jPanel1.add(jTabbedPane1, java.awt.BorderLayout.PAGE_START);
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -1022,6 +1044,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox7;
@@ -1045,6 +1068,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1101,6 +1125,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
