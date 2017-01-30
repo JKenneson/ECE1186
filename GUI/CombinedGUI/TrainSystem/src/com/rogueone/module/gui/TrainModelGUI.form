@@ -221,17 +221,17 @@
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jToggleButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jToggleButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jSpinner2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -302,11 +302,11 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jSpinner1" min="-2" pref="67" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -334,7 +334,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel43">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="km/hr"/>
+                    <Property name="text" type="java.lang.String" value="mph"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -432,11 +432,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jSpinner6" min="-2" pref="67" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jSpinner6" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel58" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -464,7 +464,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel58">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="km/hr"/>
+                    <Property name="text" type="java.lang.String" value="mph"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -484,11 +484,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                           <Component id="jSpinner3" min="-2" pref="67" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -638,10 +638,10 @@
                                   <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel35" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel40" alignment="0" max="32767" attributes="0"/>
+                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel35" alignment="1" min="-2" pref="52" max="-2" attributes="0"/>
+                                  <Component id="jLabel40" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -821,7 +821,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel26">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Train Mass:"/>
+                <Property name="text" type="java.lang.String" value="Train Weight:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel27">
@@ -886,22 +886,22 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel45">
               <Properties>
-                <Property name="text" type="java.lang.String" value="km/hr"/>
+                <Property name="text" type="java.lang.String" value="mph"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel46">
               <Properties>
-                <Property name="text" type="java.lang.String" value="km/hr"/>
+                <Property name="text" type="java.lang.String" value="mph"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel50">
               <Properties>
-                <Property name="text" type="java.lang.String" value="km/hr"/>
+                <Property name="text" type="java.lang.String" value="mph"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel51">
               <Properties>
-                <Property name="text" type="java.lang.String" value="m"/>
+                <Property name="text" type="java.lang.String" value="ft"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel52">
@@ -921,12 +921,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel55">
               <Properties>
-                <Property name="text" type="java.lang.String" value="kg"/>
+                <Property name="text" type="java.lang.String" value="lbs"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel56">
               <Properties>
-                <Property name="text" type="java.lang.String" value="m"/>
+                <Property name="text" type="java.lang.String" value="ft"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel57">
