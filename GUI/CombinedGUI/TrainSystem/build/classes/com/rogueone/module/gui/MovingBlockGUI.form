@@ -184,14 +184,14 @@
                               <Data value="GLENBURY"/>
                             </Column>
                             <Column editable="true" title="Time of Arrival" type="java.lang.Object">
-                              <Data value="4:15"/>
-                              <Data value="4:12"/>
-                              <Data value="4:16"/>
-                              <Data value="4:20"/>
-                              <Data value="4:12"/>
-                              <Data value="4:21"/>
-                              <Data value="N/A"/>
-                              <Data value="4:17"/>
+                              <Data value="4:15 PM"/>
+                              <Data value="4:12 PM"/>
+                              <Data value="4:16 PM"/>
+                              <Data value="4:20 PM"/>
+                              <Data value="4:12 PM"/>
+                              <Data value="4:21 PM"/>
+                              <Data value="N/A "/>
+                              <Data value="4:17 PM"/>
                             </Column>
                             <Column editable="true" title="Authority" type="java.lang.Object">
                               <Data value="1340"/>
@@ -348,80 +348,80 @@
                             </Column>
                             <Column editable="true" title="Mon" type="java.lang.Object">
                               <Data value="-"/>
-                              <Data value="12 - 8:30"/>
+                              <Data value="12pm - 8:30pm"/>
                               <Data value="-"/>
-                              <Data value="2 - 10:30"/>
-                              <Data value="6 - 4:30"/>
-                              <Data value="2 - 10:30"/>
-                              <Data value="12 - 8:30"/>
-                              <Data value="7 - 5:30"/>
-                              <Data value="10 - 6:30"/>
+                              <Data value="2pm - 10:30pm"/>
+                              <Data value="6am - 2:30pm"/>
+                              <Data value="2pm - 10:30pm"/>
+                              <Data value="12pm - 8:30pm"/>
+                              <Data value="7am - 5:30pm"/>
+                              <Data value="10am - 6:30pm"/>
                             </Column>
                             <Column editable="true" title="Tues" type="java.lang.Object">
                               <Data value="-"/>
                               <Data value="-"/>
-                              <Data value="8 - 4:30"/>
-                              <Data value="2 - 10:30"/>
-                              <Data value="6 - 4:30"/>
-                              <Data value="10 - 6:30"/>
-                              <Data value="12 - 8:30"/>
-                              <Data value="7 - 5:30"/>
+                              <Data value="8am - 4:30pm"/>
+                              <Data value="2pm - 10:30pm"/>
+                              <Data value="6am - 2:30pm"/>
+                              <Data value="10am - 6:30pm"/>
+                              <Data value="12pm - 8:30pm"/>
+                              <Data value="7am - 5:30pm"/>
                               <Data value="-"/>
                             </Column>
                             <Column editable="true" title="Wed" type="java.lang.Object">
-                              <Data value="9 - 5:30"/>
-                              <Data value="12 - 8:30"/>
+                              <Data value="9 am - 5:30 pm"/>
+                              <Data value="12pm - 8:30pm"/>
                               <Data value="-"/>
-                              <Data value="2 - 10:30"/>
-                              <Data value="6 - 4:30"/>
-                              <Data value="2 - 10:30"/>
-                              <Data value="12 - 8:30"/>
-                              <Data value="7 - 5:30"/>
-                              <Data value="10 - 6:30"/>
+                              <Data value="2pm - 10:30pm"/>
+                              <Data value="6am - 2:30pm"/>
+                              <Data value="2pm - 10:30pm"/>
+                              <Data value="-"/>
+                              <Data value="7am - 5:30pm"/>
+                              <Data value="10am - 6:30pm"/>
                             </Column>
                             <Column editable="true" title="Thurs" type="java.lang.Object">
-                              <Data value="2 - 10:30"/>
-                              <Data value="12 - 8:30"/>
-                              <Data value="8 - 4:30"/>
+                              <Data value="2pm - 10:30pm"/>
+                              <Data value="12pm - 8:30pm"/>
+                              <Data value="8am - 4:30pm"/>
                               <Data value="-"/>
-                              <Data value="6 - 4:30"/>
+                              <Data value="6am - 2:30pm"/>
                               <Data value="-"/>
-                              <Data value="12 - 8:30"/>
-                              <Data value="7 - 5:30"/>
-                              <Data value="2 - 10:30"/>
+                              <Data value="12pm - 8:30pm"/>
+                              <Data value="7am - 5:30pm"/>
+                              <Data value="2pm - 10:30pm"/>
                             </Column>
                             <Column editable="true" title="Fri" type="java.lang.Object">
-                              <Data value="2 - 10:30"/>
+                              <Data value="2pm - 10:30pm"/>
                               <Data value="-"/>
-                              <Data value="8 - 4:30"/>
-                              <Data value="2 - 10:30"/>
+                              <Data value="8am - 4:30pm"/>
+                              <Data value="2pm - 10:30pm"/>
                               <Data value="-"/>
                               <Data value="-"/>
-                              <Data value="12 - 8:30"/>
-                              <Data value="7 - 5:30"/>
-                              <Data value="10 - 6:30"/>
+                              <Data value="12pm - 8:30pm"/>
+                              <Data value="7am - 5:30pm"/>
+                              <Data value="10am - 6:30pm"/>
                             </Column>
                             <Column editable="true" title="Sat" type="java.lang.Object">
-                              <Data value="9 - 5:30"/>
-                              <Data value="12 - 8:30"/>
-                              <Data value="8 - 4:30"/>
+                              <Data value="9am - 5:30pm"/>
+                              <Data value="12pm - 8:30pm"/>
+                              <Data value="8am - 4:30pm"/>
                               <Data value="-"/>
-                              <Data value="6 - 4:30"/>
-                              <Data value="10 - 6:30"/>
-                              <Data value="12 - 8:30"/>
+                              <Data value="6am - 2:30pm"/>
+                              <Data value="10am - 6:30pm"/>
+                              <Data value="12pm - 8:30pm"/>
                               <Data value="-"/>
                               <Data value="-"/>
                             </Column>
                             <Column editable="true" title="Sun" type="java.lang.Object">
-                              <Data value=" 8 - 4:30"/>
-                              <Data value="12 - 8:30"/>
-                              <Data value="2 - 10:30"/>
-                              <Data value="8 - 4:30"/>
-                              <Data value="6 - 4:30"/>
-                              <Data value="2 - 10:30"/>
+                              <Data value=" 8am - 4:30pm"/>
+                              <Data value="12pm - 8:30pm"/>
+                              <Data value="2pm - 10:30pm"/>
+                              <Data value="8am - 4:30pm"/>
+                              <Data value="6am - 2:30pm"/>
+                              <Data value="2pm - 10:30pm"/>
                               <Data value="-"/>
                               <Data value="-"/>
-                              <Data value="10 - 6:30"/>
+                              <Data value="10am - 6:30pm"/>
                             </Column>
                           </Table>
                         </Property>
