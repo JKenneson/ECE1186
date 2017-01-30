@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -58,17 +58,331 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="10" rowCount="25">
-                    <Column editable="true" title="Train ID" type="java.lang.Object"/>
-                    <Column editable="true" title="Driver" type="java.lang.Object"/>
-                    <Column editable="true" title="SHADYSIDE" type="java.lang.Object"/>
-                    <Column editable="true" title="HERRON AVE" type="java.lang.Object"/>
-                    <Column editable="true" title="SWISSVILLE" type="java.lang.Object"/>
-                    <Column editable="true" title="PENN STATION" type="java.lang.Object"/>
-                    <Column editable="true" title="STEEL PLAZA" type="java.lang.Object"/>
-                    <Column editable="true" title="FIRST AVE" type="java.lang.Object"/>
-                    <Column editable="true" title="STATION SQUARE" type="java.lang.Object"/>
-                    <Column editable="true" title="SOUTH HILLS" type="java.lang.Object"/>
+                    <Column editable="true" title="Train ID" type="java.lang.Object">
+                      <Data value="0010"/>
+                      <Data value="0134"/>
+                      <Data value="0135"/>
+                      <Data value="0420"/>
+                      <Data value="0367"/>
+                      <Data value="0876"/>
+                      <Data value="0667"/>
+                      <Data value="1002"/>
+                      <Data value="0999"/>
+                      <Data value="1139"/>
+                      <Data value="1134"/>
+                      <Data value="1242"/>
+                      <Data value="1255"/>
+                      <Data value="1300"/>
+                      <Data value="1290"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="Driver" type="java.lang.Object">
+                      <Data value="Bill"/>
+                      <Data value="Matt"/>
+                      <Data value="Jean"/>
+                      <Data value="Mike"/>
+                      <Data value="Kelly"/>
+                      <Data value="Niko"/>
+                      <Data value="Walter"/>
+                      <Data value="Peter"/>
+                      <Data value="Carlos"/>
+                      <Data value="Tyler"/>
+                      <Data value="Chris"/>
+                      <Data value="John"/>
+                      <Data value="Nick"/>
+                      <Data value="Clark"/>
+                      <Data value="David"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="SHADYSIDE" type="java.lang.Object">
+                      <Data value="3:50 PM"/>
+                      <Data value="4:15 PM"/>
+                      <Data value="4:50 PM"/>
+                      <Data value="5:50 PM"/>
+                      <Data value="6:15 PM"/>
+                      <Data value="6:50 PM"/>
+                      <Data value="7:15 PM"/>
+                      <Data value="7:50 PM"/>
+                      <Data value="8:15 PM"/>
+                      <Data value="8:50 PM"/>
+                      <Data value="9:15 PM"/>
+                      <Data value="9:50 PM"/>
+                      <Data value="10:15 PM"/>
+                      <Data value="10:50 PM"/>
+                      <Data value="11:15 PM"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="HERRON AVE" type="java.lang.Object">
+                      <Data value="3:57 PM"/>
+                      <Data value="4:23 PM"/>
+                      <Data value="4:57 PM"/>
+                      <Data value="5:57 PM"/>
+                      <Data value="6:23 PM"/>
+                      <Data value="6:57 PM"/>
+                      <Data value="7:23 PM"/>
+                      <Data value="7:57 PM"/>
+                      <Data value="8:23 PM"/>
+                      <Data value="8:57 PM"/>
+                      <Data value="9:23 PM"/>
+                      <Data value="9:57 PM"/>
+                      <Data value="10:23 PM"/>
+                      <Data value="10:57 PM"/>
+                      <Data value="11:23 PM"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="SWISSVILLE" type="java.lang.Object">
+                      <Data value="4:02 PM"/>
+                      <Data value="4:27 PM"/>
+                      <Data value="5:02 PM"/>
+                      <Data value="6:02 PM"/>
+                      <Data value="6:27 PM"/>
+                      <Data value="7:02 PM"/>
+                      <Data value="7:27 PM"/>
+                      <Data value="8:02 PM"/>
+                      <Data value="8:27 PM"/>
+                      <Data value="9:02 PM"/>
+                      <Data value="9:27 PM"/>
+                      <Data value="10:02 PM"/>
+                      <Data value="10:27 PM"/>
+                      <Data value="11:02 PM"/>
+                      <Data value="11:27 PM"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="PENN STATION" type="java.lang.Object">
+                      <Data value="4:12 PM"/>
+                      <Data value="4:37 PM"/>
+                      <Data value="5:12 PM"/>
+                      <Data value="6:12 PM"/>
+                      <Data value="6:37 PM"/>
+                      <Data value="7:12 PM"/>
+                      <Data value="7:37 PM"/>
+                      <Data value="8:12 PM"/>
+                      <Data value="8:37 PM"/>
+                      <Data value="9:12 PM"/>
+                      <Data value="9:37 PM"/>
+                      <Data value="10:12 PM"/>
+                      <Data value="10:37 PM"/>
+                      <Data value="11:12 PM"/>
+                      <Data value="11:37 PM"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="STEEL PLAZA" type="java.lang.Object">
+                      <Data value="4:22 PM"/>
+                      <Data value="4:47 PM"/>
+                      <Data value="5:22 PM"/>
+                      <Data value="6:22 PM"/>
+                      <Data value="6:47 PM"/>
+                      <Data value="7:22 PM"/>
+                      <Data value="7:47 PM"/>
+                      <Data value="8:22 PM"/>
+                      <Data value="8:47 PM"/>
+                      <Data value="9:22 PM"/>
+                      <Data value="9:47 PM"/>
+                      <Data value="10:22 PM"/>
+                      <Data value="10:47 PM"/>
+                      <Data value="11:12 PM"/>
+                      <Data value="11:47 PM"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="FIRST AVE" type="java.lang.Object">
+                      <Data value="4:29 PM"/>
+                      <Data value="4:53 PM"/>
+                      <Data value="5:29 PM"/>
+                      <Data value="6:29 PM"/>
+                      <Data value="6:53 PM"/>
+                      <Data value="7:29 PM"/>
+                      <Data value="7:53 PM"/>
+                      <Data value="8:29 PM"/>
+                      <Data value="8:53 PM"/>
+                      <Data value="9:29 PM"/>
+                      <Data value="9:53 PM"/>
+                      <Data value="10:29 PM"/>
+                      <Data value="10:53 PM"/>
+                      <Data value="11:29 PM"/>
+                      <Data value="11:53 PM"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="STATION SQUARE" type="java.lang.Object">
+                      <Data value="4:35 PM"/>
+                      <Data value="4:59 PM"/>
+                      <Data value="5:35 PM"/>
+                      <Data value="6:35 PM"/>
+                      <Data value="6:59 PM"/>
+                      <Data value="7:35 PM"/>
+                      <Data value="7:59 PM"/>
+                      <Data value="8:35 PM"/>
+                      <Data value="8:59 PM"/>
+                      <Data value="9:35 PM"/>
+                      <Data value="9:59 PM"/>
+                      <Data value="10:35 PM"/>
+                      <Data value="10:59 PM"/>
+                      <Data value="11:35 PM"/>
+                      <Data value="11:59 PM"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
+                    <Column editable="true" title="SOUTH HILLS" type="java.lang.Object">
+                      <Data value="4:40 PM"/>
+                      <Data value="5:05 PM"/>
+                      <Data value="5:40 PM"/>
+                      <Data value="6:40 PM"/>
+                      <Data value="7:05 PM"/>
+                      <Data value="7:40 PM"/>
+                      <Data value="8:05 PM"/>
+                      <Data value="8:40 PM"/>
+                      <Data value="9:05 PM"/>
+                      <Data value="9:40 PM"/>
+                      <Data value="10:05 PM"/>
+                      <Data value="10:40 PM"/>
+                      <Data value="11:05 PM"/>
+                      <Data value="11:40 PM"/>
+                      <Data value="12:05 AM"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>

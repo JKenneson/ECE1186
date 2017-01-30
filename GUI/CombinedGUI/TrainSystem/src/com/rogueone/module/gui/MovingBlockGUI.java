@@ -88,14 +88,14 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0010", "Red Line", "B", "6", "SHADYSIDE", "4:15", "1340", "30mph", "35 mph", "12"},
-                {"3452", "Red Line", "H", "24", "PENN STATION", "4:12", "1400", "68 mph", "70 mph", "32"},
-                {"4209", "Green Line", "F", "21", "WHITED", "4:16", "1235", "66mph", "70 mph", "20"},
-                {"1112", "Green Line", "P", "91", "CASTLE SHANNON", "4:20", "1305", "55 mph", "55 mph", "3"},
-                {"3453", "Red Line", "G", "21", "SWISSVILLE", "4:12", "1850", "55 mph", "55mph", "40"},
-                {"1215", "Red Line", "A", "1", "SHADYSIDE", "4:21", "2120", "40 mph", "40 mph", "32"},
-                {"2222", "Red Line", "U", "77", "N/A", "N/A", "1720", "10 mph", "35 mph", "0"},
-                {"0934", "Green Line", "K", "63", "GLENBURY", "4:17", "1230", "70 mph", "70 mph", "42"}
+                {"0010", "Red Line", "B", "6", "SHADYSIDE", "4:15 PM", "1340", "30mph", "35 mph", "12"},
+                {"3452", "Red Line", "H", "24", "PENN STATION", "4:12 PM", "1400", "68 mph", "70 mph", "32"},
+                {"4209", "Green Line", "F", "21", "WHITED", "4:16 PM", "1235", "66mph", "70 mph", "20"},
+                {"1112", "Green Line", "P", "91", "CASTLE SHANNON", "4:20 PM", "1305", "55 mph", "55 mph", "3"},
+                {"3453", "Red Line", "G", "21", "SWISSVILLE", "4:12 PM", "1850", "55 mph", "55mph", "40"},
+                {"1215", "Red Line", "A", "1", "SHADYSIDE", "4:21 PM", "2120", "40 mph", "40 mph", "32"},
+                {"2222", "Red Line", "U", "77", "N/A", "N/A ", "1720", "10 mph", "35 mph", "0"},
+                {"0934", "Green Line", "K", "63", "GLENBURY", "4:17 PM", "1230", "70 mph", "70 mph", "42"}
             },
             new String [] {
                 "Train ID", "Line", "Track Section", "Block", "Next Station", "Time of Arrival", "Authority", "Current Speed", "Suggested ", "Passengers"
@@ -121,15 +121,15 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Andy Jones", "-", "-", "9 - 5:30", "2 - 10:30", "2 - 10:30", "9 - 5:30", " 8 - 4:30"},
-                {"William Smith", "12 - 8:30", "-", "12 - 8:30", "12 - 8:30", "-", "12 - 8:30", "12 - 8:30"},
-                {"Colin Rich", "-", "8 - 4:30", "-", "8 - 4:30", "8 - 4:30", "8 - 4:30", "2 - 10:30"},
-                {"Daniel Todd", "2 - 10:30", "2 - 10:30", "2 - 10:30", "-", "2 - 10:30", "-", "8 - 4:30"},
-                {"Eli White", "6 - 4:30", "6 - 4:30", "6 - 4:30", "6 - 4:30", "-", "6 - 4:30", "6 - 4:30"},
-                {"Francis Finch", "2 - 10:30", "10 - 6:30", "2 - 10:30", "-", "-", "10 - 6:30", "2 - 10:30"},
-                {"Gary Johnson", "12 - 8:30", "12 - 8:30", "12 - 8:30", "12 - 8:30", "12 - 8:30", "12 - 8:30", "-"},
-                {"Harold Brown", "7 - 5:30", "7 - 5:30", "7 - 5:30", "7 - 5:30", "7 - 5:30", "-", "-"},
-                {"Ian Davis", "10 - 6:30", "-", "10 - 6:30", "2 - 10:30", "10 - 6:30", "-", "10 - 6:30"}
+                {"Andy Jones", "-", "-", "9 am - 5:30 pm", "2pm - 10:30pm", "2pm - 10:30pm", "9am - 5:30pm", " 8am - 4:30pm"},
+                {"William Smith", "12pm - 8:30pm", "-", "12pm - 8:30pm", "12pm - 8:30pm", "-", "12pm - 8:30pm", "12pm - 8:30pm"},
+                {"Colin Rich", "-", "8am - 4:30pm", "-", "8am - 4:30pm", "8am - 4:30pm", "8am - 4:30pm", "2pm - 10:30pm"},
+                {"Daniel Todd", "2pm - 10:30pm", "2pm - 10:30pm", "2pm - 10:30pm", "-", "2pm - 10:30pm", "-", "8am - 4:30pm"},
+                {"Eli White", "6am - 2:30pm", "6am - 2:30pm", "6am - 2:30pm", "6am - 2:30pm", "-", "6am - 2:30pm", "6am - 2:30pm"},
+                {"Francis Finch", "2pm - 10:30pm", "10am - 6:30pm", "2pm - 10:30pm", "-", "-", "10am - 6:30pm", "2pm - 10:30pm"},
+                {"Gary Johnson", "12pm - 8:30pm", "12pm - 8:30pm", "-", "12pm - 8:30pm", "12pm - 8:30pm", "12pm - 8:30pm", "-"},
+                {"Harold Brown", "7am - 5:30pm", "7am - 5:30pm", "7am - 5:30pm", "7am - 5:30pm", "7am - 5:30pm", "-", "-"},
+                {"Ian Davis", "10am - 6:30pm", "-", "10am - 6:30pm", "2pm - 10:30pm", "10am - 6:30pm", "-", "10am - 6:30pm"}
             },
             new String [] {
                 "Name", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"
