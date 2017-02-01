@@ -18,12 +18,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="ServiceBrake" alignment="0" max="32767" attributes="0"/>
-                  <Component id="TrainSelectorDropDown" alignment="0" max="32767" attributes="0"/>
                   <Component id="TrainInformation" alignment="0" max="32767" attributes="0"/>
                   <Component id="EmergencyBrake" alignment="1" max="32767" attributes="0"/>
                   <Component id="jPanel5" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="TrainSelectorDropDown" min="-2" pref="75" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="SetSpeed3" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -35,7 +39,7 @@
                   <Component id="Clock" min="-2" max="-2" attributes="0"/>
                   <Component id="TrainControlsPanel" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,7 +54,10 @@
                       <Component id="Status" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="TrainSelectorDropDown" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="TrainSelectorDropDown" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="SetSpeed3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="TrainInformation" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1194,5 +1201,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="SetSpeed3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Show"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetSpeed3ActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
