@@ -54,6 +54,9 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         SpeedInput2 = new javax.swing.JSpinner();
         jLabel16 = new javax.swing.JLabel();
         SetSpeed2 = new javax.swing.JButton();
+        ControlsAC1 = new javax.swing.JPanel();
+        ACOn1 = new javax.swing.JRadioButton();
+        ACOff1 = new javax.swing.JRadioButton();
         Status = new javax.swing.JPanel();
         StatusHeat = new javax.swing.JPanel();
         StatusHeatImage = new javax.swing.JLabel();
@@ -246,6 +249,29 @@ public class TrainControllerGUI extends javax.swing.JPanel {
             }
         });
 
+        ControlsAC1.setBorder(javax.swing.BorderFactory.createTitledBorder("Heat"));
+
+        ACOn1.setText("On");
+
+        ACOff1.setText("Off");
+
+        javax.swing.GroupLayout ControlsAC1Layout = new javax.swing.GroupLayout(ControlsAC1);
+        ControlsAC1.setLayout(ControlsAC1Layout);
+        ControlsAC1Layout.setHorizontalGroup(
+            ControlsAC1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ControlsAC1Layout.createSequentialGroup()
+                .addComponent(ACOn1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ACOff1)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        ControlsAC1Layout.setVerticalGroup(
+            ControlsAC1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ControlsAC1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(ACOn1)
+                .addComponent(ACOff1))
+        );
+
         javax.swing.GroupLayout TrainControlsPanelLayout = new javax.swing.GroupLayout(TrainControlsPanel);
         TrainControlsPanel.setLayout(TrainControlsPanelLayout);
         TrainControlsPanelLayout.setHorizontalGroup(
@@ -282,6 +308,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
             .addComponent(ControlsLeftDoor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(ControlsRightDoor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(ControlsSystemMode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ControlsAC1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         TrainControlsPanelLayout.setVerticalGroup(
             TrainControlsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,6 +335,8 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ControlsAC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(ControlsAC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ControlsLights, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -786,7 +815,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                         .addComponent(Clock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(TrainControlsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -809,10 +838,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton ACOff;
+    private javax.swing.JRadioButton ACOff1;
     private javax.swing.JRadioButton ACOn;
+    private javax.swing.JRadioButton ACOn1;
     private javax.swing.JPanel Clock;
     private javax.swing.JTextArea ClockDisplay;
     private javax.swing.JPanel ControlsAC;
+    private javax.swing.JPanel ControlsAC1;
     private javax.swing.JPanel ControlsLeftDoor;
     private javax.swing.JPanel ControlsLights;
     private javax.swing.JPanel ControlsRightDoor;
