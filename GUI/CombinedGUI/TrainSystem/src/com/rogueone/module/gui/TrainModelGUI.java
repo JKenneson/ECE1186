@@ -7,7 +7,7 @@ package com.rogueone.module.gui;
 
 /**
  *
- * @author kylemonto
+ * @author Jonathan Kenneson
  */
 public class TrainModelGUI extends javax.swing.JPanel {
 
@@ -27,975 +27,975 @@ public class TrainModelGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jLabel2 = new javax.swing.JLabel();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jLabel3 = new javax.swing.JLabel();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jLabel4 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
-        jLabel47 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
-        jSpinner7 = new javax.swing.JSpinner();
-        jLabel67 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
-        jSpinner4 = new javax.swing.JSpinner();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jSpinner5 = new javax.swing.JSpinner();
-        jLabel30 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel42 = new javax.swing.JLabel();
-        jSpinner6 = new javax.swing.JSpinner();
-        jLabel58 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jSpinner3 = new javax.swing.JSpinner();
-        jLabel48 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel59 = new javax.swing.JLabel();
-        jLabel60 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        jLabel63 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel64 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel57 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel65 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
-        jLabel56 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
+        mainTrainModelPanel = new javax.swing.JPanel();
+        powerCommandPanel = new javax.swing.JPanel();
+        brakeInputPanel = new javax.swing.JPanel();
+        serviceBrakeCheckbox = new javax.swing.JCheckBox();
+        emergencyBrakeCheckbox = new javax.swing.JCheckBox();
+        operationsInputPanel = new javax.swing.JPanel();
+        leftDoorInputLabel = new javax.swing.JLabel();
+        leftDoorToggleButton = new javax.swing.JToggleButton();
+        rightDoorInputLabel = new javax.swing.JLabel();
+        rightDoorToggleButton = new javax.swing.JToggleButton();
+        lightsInputLabel = new javax.swing.JLabel();
+        lightsToggleButton = new javax.swing.JToggleButton();
+        tempInputLabel = new javax.swing.JLabel();
+        tempInputSpinner = new javax.swing.JSpinner();
+        tempInputDegreesLabel = new javax.swing.JLabel();
+        ctcInputPanel = new javax.swing.JPanel();
+        ctcSetPointInputLabel = new javax.swing.JLabel();
+        ctcSetPointSpinner = new javax.swing.JSpinner();
+        ctcSetPointInputLabelUnits = new javax.swing.JLabel();
+        ctcAuthorityInputLabel = new javax.swing.JLabel();
+        ctcAuthoritySpinner = new javax.swing.JSpinner();
+        ctcAuthorityInputLabelUnits = new javax.swing.JLabel();
+        passengersInputPanel = new javax.swing.JPanel();
+        numCarsInputLabel = new javax.swing.JLabel();
+        numCarsInputSpinner = new javax.swing.JSpinner();
+        numCarsInputLabelUnits = new javax.swing.JLabel();
+        passengersInputLabel = new javax.swing.JLabel();
+        passengersInputSpinner = new javax.swing.JSpinner();
+        passengersInputLabelUnits = new javax.swing.JLabel();
+        driverInputPanel = new javax.swing.JPanel();
+        driverSetPointInputLabel = new javax.swing.JLabel();
+        driverSetPointSpinner = new javax.swing.JSpinner();
+        driverSetPointInputLabelUnits = new javax.swing.JLabel();
+        driverPowerInputLabel = new javax.swing.JLabel();
+        driverPowerSpinner = new javax.swing.JSpinner();
+        driverPowerInputLabelUnits = new javax.swing.JLabel();
+        sendPowerCommandButton = new javax.swing.JButton();
+        trainModelOutputPanel = new javax.swing.JPanel();
+        trainOperationsOutputPanel = new javax.swing.JPanel();
+        leftDoorOutputLabel = new javax.swing.JLabel();
+        leftDoorState = new javax.swing.JLabel();
+        rightDoorOutputLabel = new javax.swing.JLabel();
+        rightDoorState = new javax.swing.JLabel();
+        lightsOutputLabel = new javax.swing.JLabel();
+        lightsState = new javax.swing.JLabel();
+        tempOutputLabel = new javax.swing.JLabel();
+        tempState = new javax.swing.JLabel();
+        tempOutputLabelUnits = new javax.swing.JLabel();
+        brakesOutputLabel = new javax.swing.JLabel();
+        brakesState = new javax.swing.JLabel();
+        speedOutputPanel = new javax.swing.JPanel();
+        currSpeedOutputLabel = new javax.swing.JLabel();
+        currSpeedState = new javax.swing.JLabel();
+        currSpeedOutputLabelUnits = new javax.swing.JLabel();
+        speedLimitOutputLabel = new javax.swing.JLabel();
+        speedLimitState = new javax.swing.JLabel();
+        speedLimitOutputLabelUnits = new javax.swing.JLabel();
+        driverSetSpeedLabel = new javax.swing.JLabel();
+        driverSetPointState = new javax.swing.JLabel();
+        driverSetPointOutputLabelUnits = new javax.swing.JLabel();
+        ctcSetPointOutputLabel = new javax.swing.JLabel();
+        ctcSetPointState = new javax.swing.JLabel();
+        ctcSetPointOutputLabelUnits = new javax.swing.JLabel();
+        authorityOutputLabel = new javax.swing.JLabel();
+        authorityState = new javax.swing.JLabel();
+        authorityOutputLabelUnits = new javax.swing.JLabel();
+        passengersOutputPanel = new javax.swing.JPanel();
+        nextStationOutputLabel = new javax.swing.JLabel();
+        nextStationState = new javax.swing.JLabel();
+        passOnBoardLabel = new javax.swing.JLabel();
+        passOnBoardState = new javax.swing.JLabel();
+        passOnBoardLabelUnits = new javax.swing.JLabel();
+        passDisembarkLabel = new javax.swing.JLabel();
+        passDisembarkState = new javax.swing.JLabel();
+        passDisembarkLabelUnits = new javax.swing.JLabel();
+        maxCapacityLabel = new javax.swing.JLabel();
+        maxCapacityState = new javax.swing.JLabel();
+        maxCapacityLabelUnits = new javax.swing.JLabel();
+        physicalTrainOutputPanel = new javax.swing.JPanel();
+        trainWeightLabel = new javax.swing.JLabel();
+        trainWeightState = new javax.swing.JLabel();
+        trainWeightLabelUnits = new javax.swing.JLabel();
+        trainLengthLabel = new javax.swing.JLabel();
+        trainLengthState = new javax.swing.JLabel();
+        trainLengthLabelUnits = new javax.swing.JLabel();
+        numCarsLabel = new javax.swing.JLabel();
+        numCarsState = new javax.swing.JLabel();
+        numCarsLabelUnits = new javax.swing.JLabel();
+        trackAntennaLabel = new javax.swing.JLabel();
+        trackAntennaState = new javax.swing.JLabel();
+        mboAntennaLabel = new javax.swing.JLabel();
+        mboAntennaState = new javax.swing.JLabel();
+        failureInputPanel = new javax.swing.JPanel();
+        powerFailureCheckbox = new javax.swing.JCheckBox();
+        brakeFailureCheckbox = new javax.swing.JCheckBox();
+        antennaFailureCheckbox = new javax.swing.JCheckBox();
+        sendFailureButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1070, 720));
         setLayout(new java.awt.GridBagLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Power Command"));
+        powerCommandPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Power Command"));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Brakes"));
+        brakeInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Brakes"));
 
-        jCheckBox1.setText("Activate Service Brakes");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        serviceBrakeCheckbox.setText("Activate Service Brakes");
+        serviceBrakeCheckbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                serviceBrakeCheckboxActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setText("Activate Emergency Brakes");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        emergencyBrakeCheckbox.setText("Activate Emergency Brakes");
+        emergencyBrakeCheckbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                emergencyBrakeCheckboxActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout brakeInputPanelLayout = new javax.swing.GroupLayout(brakeInputPanel);
+        brakeInputPanel.setLayout(brakeInputPanelLayout);
+        brakeInputPanelLayout.setHorizontalGroup(
+            brakeInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(brakeInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox2))
+                .addGroup(brakeInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(serviceBrakeCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emergencyBrakeCheckbox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        brakeInputPanelLayout.setVerticalGroup(
+            brakeInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(brakeInputPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jCheckBox1)
+                .addComponent(serviceBrakeCheckbox)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox2)
+                .addComponent(emergencyBrakeCheckbox)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Operations"));
+        operationsInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Operations"));
 
-        jLabel1.setText("Left Door:");
+        leftDoorInputLabel.setText("Left Door:");
 
-        jToggleButton1.setText("Open/Close");
+        leftDoorToggleButton.setText("Open/Close");
 
-        jLabel2.setText("Right Door:");
+        rightDoorInputLabel.setText("Right Door:");
 
-        jToggleButton2.setText("Open/Close");
+        rightDoorToggleButton.setText("Open/Close");
 
-        jLabel3.setText("Lights:");
+        lightsInputLabel.setText("Lights:");
 
-        jToggleButton3.setText("On/Off");
+        lightsToggleButton.setText("On/Off");
 
-        jLabel4.setText("Temp:");
+        tempInputLabel.setText("Temp:");
 
-        jLabel47.setText("degrees");
+        tempInputDegreesLabel.setText("degrees");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout operationsInputPanelLayout = new javax.swing.GroupLayout(operationsInputPanel);
+        operationsInputPanel.setLayout(operationsInputPanelLayout);
+        operationsInputPanelLayout.setHorizontalGroup(
+            operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(operationsInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(operationsInputPanelLayout.createSequentialGroup()
+                        .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rightDoorInputLabel)
+                            .addComponent(lightsInputLabel)
+                            .addComponent(tempInputLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(operationsInputPanelLayout.createSequentialGroup()
+                                .addComponent(tempInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4)
-                                .addComponent(jLabel47))
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jToggleButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jToggleButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                                .addComponent(tempInputDegreesLabel))
+                            .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(rightDoorToggleButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lightsToggleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(operationsInputPanelLayout.createSequentialGroup()
+                        .addComponent(leftDoorInputLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(leftDoorToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        operationsInputPanelLayout.setVerticalGroup(
+            operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(operationsInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jToggleButton1))
+                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(leftDoorInputLabel)
+                    .addComponent(leftDoorToggleButton))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jToggleButton2))
+                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rightDoorInputLabel)
+                    .addComponent(rightDoorToggleButton))
                 .addGap(27, 27, 27)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton3)
-                    .addComponent(jLabel3))
+                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lightsToggleButton)
+                    .addComponent(lightsInputLabel))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel47))
+                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tempInputLabel)
+                    .addComponent(tempInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tempInputDegreesLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("CTC Speed and Authority"));
+        ctcInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("CTC Speed and Authority"));
 
-        jLabel5.setText("Set Point Speed:");
+        ctcSetPointInputLabel.setText("Set Point Speed:");
 
-        jLabel43.setText("mph");
+        ctcSetPointInputLabelUnits.setText("mph");
 
-        jLabel66.setText("Authority:");
+        ctcAuthorityInputLabel.setText("Authority:");
 
-        jLabel67.setText("ft");
+        ctcAuthorityInputLabelUnits.setText("ft");
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout ctcInputPanelLayout = new javax.swing.GroupLayout(ctcInputPanel);
+        ctcInputPanel.setLayout(ctcInputPanelLayout);
+        ctcInputPanelLayout.setHorizontalGroup(
+            ctcInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ctcInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel66))
+                .addGroup(ctcInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ctcSetPointInputLabel)
+                    .addComponent(ctcAuthorityInputLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                    .addComponent(jSpinner7))
+                .addGroup(ctcInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ctcSetPointSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                    .addComponent(ctcAuthoritySpinner))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel43)
-                    .addComponent(jLabel67))
+                .addGroup(ctcInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ctcSetPointInputLabelUnits)
+                    .addComponent(ctcAuthorityInputLabelUnits))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        ctcInputPanelLayout.setVerticalGroup(
+            ctcInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ctcInputPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel43))
+                .addGroup(ctcInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ctcSetPointInputLabel)
+                    .addComponent(ctcSetPointSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ctcSetPointInputLabelUnits))
                 .addGap(21, 21, 21)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel66)
-                    .addComponent(jSpinner7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel67))
+                .addGroup(ctcInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ctcAuthorityInputLabel)
+                    .addComponent(ctcAuthoritySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ctcAuthorityInputLabelUnits))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Cars and Passengers"));
+        passengersInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Cars and Passengers"));
 
-        jLabel41.setText("Number of Cars:");
+        numCarsInputLabel.setText("Number of Cars:");
 
-        jLabel49.setText("cars");
+        numCarsInputLabelUnits.setText("cars");
 
-        jLabel28.setText("Passengers Embarking:");
+        passengersInputLabel.setText("Passengers Embarking:");
 
-        jLabel30.setText("people");
+        passengersInputLabelUnits.setText("people");
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout passengersInputPanelLayout = new javax.swing.GroupLayout(passengersInputPanel);
+        passengersInputPanel.setLayout(passengersInputPanelLayout);
+        passengersInputPanelLayout.setHorizontalGroup(
+            passengersInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passengersInputPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel28)
-                    .addComponent(jLabel41))
+                .addGroup(passengersInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passengersInputLabel)
+                    .addComponent(numCarsInputLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSpinner5, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                    .addComponent(jSpinner4))
+                .addGroup(passengersInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(passengersInputSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                    .addComponent(numCarsInputSpinner))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel49)
-                    .addComponent(jLabel30)))
+                .addGroup(passengersInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(numCarsInputLabelUnits)
+                    .addComponent(passengersInputLabelUnits)))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        passengersInputPanelLayout.setVerticalGroup(
+            passengersInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passengersInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel41)
-                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel49))
+                .addGroup(passengersInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numCarsInputLabel)
+                    .addComponent(numCarsInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numCarsInputLabelUnits))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28)
-                    .addComponent(jSpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30))
+                .addGroup(passengersInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passengersInputLabel)
+                    .addComponent(passengersInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passengersInputLabelUnits))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Driver Speed and Power"));
+        driverInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Driver Speed and Power"));
 
-        jLabel42.setText("Set Point Speed:");
+        driverSetPointInputLabel.setText("Set Point Speed:");
 
-        jLabel58.setText("mph");
+        driverSetPointInputLabelUnits.setText("mph");
 
-        jLabel38.setText("Power:");
+        driverPowerInputLabel.setText("Power:");
 
-        jLabel48.setText("W");
+        driverPowerInputLabelUnits.setText("W");
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout driverInputPanelLayout = new javax.swing.GroupLayout(driverInputPanel);
+        driverInputPanel.setLayout(driverInputPanelLayout);
+        driverInputPanelLayout.setHorizontalGroup(
+            driverInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(driverInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel42)
-                    .addComponent(jLabel38))
+                .addGroup(driverInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(driverSetPointInputLabel)
+                    .addComponent(driverPowerInputLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSpinner6)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(driverInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(driverSetPointSpinner)
+                    .addComponent(driverPowerSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
+                .addGroup(driverInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(driverInputPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel48)
+                        .addComponent(driverPowerInputLabelUnits)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverInputPanelLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel58)
+                        .addComponent(driverSetPointInputLabelUnits)
                         .addGap(18, 18, 18))))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        driverInputPanelLayout.setVerticalGroup(
+            driverInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(driverInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel42)
-                    .addComponent(jSpinner6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel58))
+                .addGroup(driverInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(driverSetPointInputLabel)
+                    .addComponent(driverSetPointSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(driverSetPointInputLabelUnits))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel48))
+                .addGroup(driverInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(driverPowerInputLabel)
+                    .addComponent(driverPowerSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(driverPowerInputLabelUnits))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Send New Command");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        sendPowerCommandButton.setText("Send New Command");
+        sendPowerCommandButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                sendPowerCommandButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout powerCommandPanelLayout = new javax.swing.GroupLayout(powerCommandPanel);
+        powerCommandPanel.setLayout(powerCommandPanelLayout);
+        powerCommandPanelLayout.setHorizontalGroup(
+            powerCommandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(powerCommandPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(powerCommandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(brakeInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passengersInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(operationsInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(powerCommandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ctcInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(driverInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 12, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, powerCommandPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(sendPowerCommandButton)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        powerCommandPanelLayout.setVerticalGroup(
+            powerCommandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(powerCommandPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(powerCommandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(powerCommandPanelLayout.createSequentialGroup()
+                        .addComponent(ctcInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(driverInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(operationsInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, powerCommandPanelLayout.createSequentialGroup()
+                        .addComponent(brakeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(passengersInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(sendPowerCommandButton)
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Train Model Output"));
+        trainModelOutputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Train Model Output"));
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Train Operations"));
+        trainOperationsOutputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Train Operations"));
 
-        jLabel6.setText("Left Door State:");
+        leftDoorOutputLabel.setText("Left Door State:");
 
-        jLabel7.setText("Closed");
+        leftDoorState.setText("Closed");
 
-        jLabel8.setText("Right Door State:");
+        rightDoorOutputLabel.setText("Right Door State:");
 
-        jLabel9.setText("Closed");
+        rightDoorState.setText("Closed");
 
-        jLabel10.setText("Lights:");
+        lightsOutputLabel.setText("Lights:");
 
-        jLabel12.setText("Temperature:");
+        lightsState.setText("Off");
 
-        jLabel11.setText("Off");
+        tempOutputLabel.setText("Temperature:");
 
-        jLabel13.setText("72");
+        tempState.setText("72");
 
-        jLabel59.setText("Brakes Activated:");
+        tempOutputLabelUnits.setText("degrees");
 
-        jLabel60.setText("Emergency");
+        brakesOutputLabel.setText("Brakes Activated:");
 
-        jLabel44.setText("degrees");
+        brakesState.setText("Emergency");
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        javax.swing.GroupLayout trainOperationsOutputPanelLayout = new javax.swing.GroupLayout(trainOperationsOutputPanel);
+        trainOperationsOutputPanel.setLayout(trainOperationsOutputPanelLayout);
+        trainOperationsOutputPanelLayout.setHorizontalGroup(
+            trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel6))
+                .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
+                        .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rightDoorOutputLabel)
+                            .addComponent(lightsOutputLabel)
+                            .addComponent(leftDoorOutputLabel))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel11Layout.createSequentialGroup()
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rightDoorState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, trainOperationsOutputPanelLayout.createSequentialGroup()
+                                .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(leftDoorState, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lightsState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel59)
-                            .addComponent(jLabel12))
+                    .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
+                        .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(brakesOutputLabel)
+                            .addComponent(tempOutputLabel))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
+                                .addComponent(tempState, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tempOutputLabelUnits, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel60)
+                            .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
+                                .addComponent(brakesState)
                                 .addGap(0, 0, Short.MAX_VALUE))))))
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        trainOperationsOutputPanelLayout.setVerticalGroup(
+            trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(leftDoorOutputLabel)
+                    .addComponent(leftDoorState))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rightDoorOutputLabel)
+                    .addComponent(rightDoorState))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lightsOutputLabel)
+                    .addComponent(lightsState))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel44))
+                .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tempOutputLabel)
+                    .addComponent(tempState)
+                    .addComponent(tempOutputLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel59)
-                    .addComponent(jLabel60))
+                .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(brakesOutputLabel)
+                    .addComponent(brakesState))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed and Authority"));
+        speedOutputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed and Authority"));
 
-        jLabel14.setText("Current Speed:");
+        currSpeedOutputLabel.setText("Current Speed:");
 
-        jLabel16.setText("55");
+        currSpeedState.setText("55");
 
-        jLabel45.setText("mph");
+        currSpeedOutputLabelUnits.setText("mph");
 
-        jLabel15.setText("Speed Limit");
+        speedLimitOutputLabel.setText("Speed Limit");
 
-        jLabel17.setText("55");
+        speedLimitState.setText("55");
 
-        jLabel46.setText("mph");
+        speedLimitOutputLabelUnits.setText("mph");
 
-        jLabel18.setText("Driver Set Point:");
+        driverSetSpeedLabel.setText("Driver Set Point:");
 
-        jLabel19.setText("55");
+        driverSetPointState.setText("55");
 
-        jLabel50.setText("mph");
+        driverSetPointOutputLabelUnits.setText("mph");
 
-        jLabel61.setText("CTC Set Point:");
+        ctcSetPointOutputLabel.setText("CTC Set Point:");
 
-        jLabel62.setText("55");
+        ctcSetPointState.setText("55");
 
-        jLabel63.setText("mph");
+        ctcSetPointOutputLabelUnits.setText("mph");
 
-        jLabel29.setText("Authority:");
+        authorityOutputLabel.setText("Authority:");
 
-        jLabel31.setText("5000");
+        authorityState.setText("5000");
 
-        jLabel51.setText("ft");
+        authorityOutputLabelUnits.setText("ft");
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        javax.swing.GroupLayout speedOutputPanelLayout = new javax.swing.GroupLayout(speedOutputPanel);
+        speedOutputPanel.setLayout(speedOutputPanelLayout);
+        speedOutputPanelLayout.setHorizontalGroup(
+            speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(speedOutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
+                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(speedOutputPanelLayout.createSequentialGroup()
+                        .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(currSpeedOutputLabel)
+                            .addComponent(speedLimitOutputLabel))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                        .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(currSpeedState, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                            .addComponent(speedLimitState, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                         .addGap(64, 64, 64))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel61)
-                            .addComponent(jLabel29))
+                    .addGroup(speedOutputPanelLayout.createSequentialGroup()
+                        .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(driverSetSpeedLabel)
+                            .addComponent(ctcSetPointOutputLabel)
+                            .addComponent(authorityOutputLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(speedOutputPanelLayout.createSequentialGroup()
+                                .addComponent(authorityState, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel51)
+                                .addComponent(authorityOutputLabelUnits)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                                    .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(speedOutputPanelLayout.createSequentialGroup()
+                                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(driverSetPointState, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                                    .addComponent(ctcSetPointState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel50)
-                                    .addComponent(jLabel63)
-                                    .addComponent(jLabel46)
-                                    .addComponent(jLabel45))
+                                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(driverSetPointOutputLabelUnits)
+                                    .addComponent(ctcSetPointOutputLabelUnits)
+                                    .addComponent(speedLimitOutputLabelUnits)
+                                    .addComponent(currSpeedOutputLabelUnits))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        speedOutputPanelLayout.setVerticalGroup(
+            speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(speedOutputPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel45))
+                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(currSpeedOutputLabel)
+                    .addComponent(currSpeedState)
+                    .addComponent(currSpeedOutputLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel46))
+                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(speedLimitOutputLabel)
+                    .addComponent(speedLimitState)
+                    .addComponent(speedLimitOutputLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel50))
+                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(driverSetSpeedLabel)
+                    .addComponent(driverSetPointState)
+                    .addComponent(driverSetPointOutputLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel61)
-                    .addComponent(jLabel62)
-                    .addComponent(jLabel63))
+                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ctcSetPointOutputLabel)
+                    .addComponent(ctcSetPointState)
+                    .addComponent(ctcSetPointOutputLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel31)
-                    .addComponent(jLabel51))
+                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(authorityOutputLabel)
+                    .addComponent(authorityState)
+                    .addComponent(authorityOutputLabelUnits))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Station and Passengers"));
+        passengersOutputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Station and Passengers"));
 
-        jLabel20.setText("Approaching Station:");
+        nextStationOutputLabel.setText("Approaching Station:");
 
-        jLabel25.setText("North Shore");
+        nextStationState.setText("North Shore");
 
-        jLabel21.setText("Passengers on Board:");
+        passOnBoardLabel.setText("Passengers on Board:");
 
-        jLabel24.setText("30");
+        passOnBoardState.setText("30");
 
-        jLabel52.setText("people");
+        passOnBoardLabelUnits.setText("people");
 
-        jLabel22.setText("Passengers Disembarking:");
+        passDisembarkLabel.setText("Passengers Disembarking:");
 
-        jLabel23.setText("4");
+        passDisembarkState.setText("4");
 
-        jLabel53.setText("people");
+        passDisembarkLabelUnits.setText("people");
 
-        jLabel36.setText("Max Capacity:");
+        maxCapacityLabel.setText("Max Capacity:");
 
-        jLabel37.setText("50");
+        maxCapacityState.setText("50");
 
-        jLabel54.setText("people");
+        maxCapacityLabelUnits.setText("people");
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        javax.swing.GroupLayout passengersOutputPanelLayout = new javax.swing.GroupLayout(passengersOutputPanel);
+        passengersOutputPanel.setLayout(passengersOutputPanelLayout);
+        passengersOutputPanelLayout.setHorizontalGroup(
+            passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passengersOutputPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel13Layout.createSequentialGroup()
-                                .addComponent(jLabel21)
+                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(passengersOutputPanelLayout.createSequentialGroup()
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, passengersOutputPanelLayout.createSequentialGroup()
+                                .addComponent(passOnBoardLabel)
                                 .addGap(37, 37, 37)
-                                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel13Layout.createSequentialGroup()
-                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel36))
+                                .addComponent(passOnBoardState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, passengersOutputPanelLayout.createSequentialGroup()
+                                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(passDisembarkLabel)
+                                    .addComponent(maxCapacityLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))))
+                                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(passDisembarkState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(maxCapacityState, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel53)
-                            .addComponent(jLabel52)
-                            .addComponent(jLabel54)))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passDisembarkLabelUnits)
+                            .addComponent(passOnBoardLabelUnits)
+                            .addComponent(maxCapacityLabelUnits)))
+                    .addGroup(passengersOutputPanelLayout.createSequentialGroup()
+                        .addComponent(nextStationOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nextStationState, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        passengersOutputPanelLayout.setVerticalGroup(
+            passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passengersOutputPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel25))
+                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nextStationOutputLabel)
+                    .addComponent(nextStationState))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel52))
+                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passOnBoardLabel)
+                    .addComponent(passOnBoardState)
+                    .addComponent(passOnBoardLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel53))
+                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passDisembarkLabel)
+                    .addComponent(passDisembarkState)
+                    .addComponent(passDisembarkLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(jLabel37)
-                    .addComponent(jLabel54))
+                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maxCapacityLabel)
+                    .addComponent(maxCapacityState)
+                    .addComponent(maxCapacityLabelUnits))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Physical Characteristics"));
+        physicalTrainOutputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Physical Characteristics"));
 
-        jLabel26.setText("Train Weight:");
+        trainWeightLabel.setText("Train Weight:");
 
-        jLabel33.setText("5000");
+        trainWeightState.setText("5000");
 
-        jLabel27.setText("Train Length:");
+        trainWeightLabelUnits.setText("lbs");
 
-        jLabel32.setText("Number of Cars:");
+        trainLengthLabel.setText("Train Length:");
 
-        jLabel64.setText("Track Antenna:");
+        trainLengthState.setText("5000");
 
-        jLabel39.setText("MBO Antenna:");
+        trainLengthLabelUnits.setText("ft");
 
-        jLabel35.setText("5");
+        numCarsLabel.setText("Number of Cars:");
 
-        jLabel57.setText("cars");
+        numCarsState.setText("5");
 
-        jLabel40.setText("Activated");
+        numCarsLabelUnits.setText("cars");
 
-        jLabel65.setText("Activated");
+        trackAntennaLabel.setText("Track Antenna:");
 
-        jLabel34.setText("5000");
+        trackAntennaState.setText("Activated");
 
-        jLabel55.setText("lbs");
+        mboAntennaLabel.setText("MBO Antenna:");
 
-        jLabel56.setText("ft");
+        mboAntennaState.setText("Activated");
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
+        javax.swing.GroupLayout physicalTrainOutputPanelLayout = new javax.swing.GroupLayout(physicalTrainOutputPanel);
+        physicalTrainOutputPanel.setLayout(physicalTrainOutputPanelLayout);
+        physicalTrainOutputPanelLayout.setHorizontalGroup(
+            physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(physicalTrainOutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel39)
-                            .addComponent(jLabel64))
+                .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(physicalTrainOutputPanelLayout.createSequentialGroup()
+                        .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numCarsLabel)
+                            .addComponent(mboAntennaLabel)
+                            .addComponent(trackAntennaLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel65)
-                            .addComponent(jLabel40)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                                    .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(trackAntennaState)
+                            .addComponent(mboAntennaState)
+                            .addGroup(physicalTrainOutputPanelLayout.createSequentialGroup()
+                                .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(numCarsState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(trainLengthState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                    .addComponent(trainWeightState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel57)
-                                    .addComponent(jLabel55)
-                                    .addComponent(jLabel56))))
+                                .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numCarsLabelUnits)
+                                    .addComponent(trainWeightLabelUnits)
+                                    .addComponent(trainLengthLabelUnits))))
                         .addGap(0, 12, Short.MAX_VALUE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel26)
-                            .addComponent(jLabel27))
+                    .addGroup(physicalTrainOutputPanelLayout.createSequentialGroup()
+                        .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(trainWeightLabel)
+                            .addComponent(trainLengthLabel))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
+        physicalTrainOutputPanelLayout.setVerticalGroup(
+            physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(physicalTrainOutputPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel33)
-                    .addComponent(jLabel55))
+                .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(trainWeightLabel)
+                    .addComponent(trainWeightState)
+                    .addComponent(trainWeightLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel56))
+                .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(trainLengthLabel)
+                    .addComponent(trainLengthState)
+                    .addComponent(trainLengthLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabel57))
+                .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numCarsLabel)
+                    .addComponent(numCarsState)
+                    .addComponent(numCarsLabelUnits))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel64)
-                    .addComponent(jLabel65))
+                .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(trackAntennaLabel)
+                    .addComponent(trackAntennaState))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel39)
-                    .addComponent(jLabel40))
+                .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mboAntennaLabel)
+                    .addComponent(mboAntennaState))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout trainModelOutputPanelLayout = new javax.swing.GroupLayout(trainModelOutputPanel);
+        trainModelOutputPanel.setLayout(trainModelOutputPanelLayout);
+        trainModelOutputPanelLayout.setHorizontalGroup(
+            trainModelOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trainModelOutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(trainOperationsOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(speedOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(passengersOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(physicalTrainOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        trainModelOutputPanelLayout.setVerticalGroup(
+            trainModelOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trainModelOutputPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(trainModelOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(physicalTrainOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(speedOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(trainOperationsOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passengersOutputPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 35, Short.MAX_VALUE))
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Failure Simulation"));
+        failureInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Failure Simulation"));
 
-        jCheckBox3.setText("Power Failure");
+        powerFailureCheckbox.setText("Power Failure");
 
-        jCheckBox4.setText("Brake Failure");
+        brakeFailureCheckbox.setText("Brake Failure");
 
-        jCheckBox5.setText("Antenna Failure");
+        antennaFailureCheckbox.setText("Antenna Failure");
 
-        jButton2.setText("Send New Failure");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        sendFailureButton.setText("Send New Failure");
+        sendFailureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                sendFailureButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout failureInputPanelLayout = new javax.swing.GroupLayout(failureInputPanel);
+        failureInputPanel.setLayout(failureInputPanelLayout);
+        failureInputPanelLayout.setHorizontalGroup(
+            failureInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(failureInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5))
+                .addGroup(failureInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(powerFailureCheckbox)
+                    .addComponent(brakeFailureCheckbox)
+                    .addComponent(antennaFailureCheckbox))
                 .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, failureInputPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(sendFailureButton)
                 .addContainerGap())
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        failureInputPanelLayout.setVerticalGroup(
+            failureInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(failureInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCheckBox3)
+                .addComponent(powerFailureCheckbox)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox4)
+                .addComponent(brakeFailureCheckbox)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox5)
+                .addComponent(antennaFailureCheckbox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(sendFailureButton)
                 .addGap(4, 4, 4))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout mainTrainModelPanelLayout = new javax.swing.GroupLayout(mainTrainModelPanel);
+        mainTrainModelPanel.setLayout(mainTrainModelPanelLayout);
+        mainTrainModelPanelLayout.setHorizontalGroup(
+            mainTrainModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainTrainModelPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainTrainModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainTrainModelPanelLayout.createSequentialGroup()
+                        .addComponent(powerCommandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(failureInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trainModelOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        mainTrainModelPanelLayout.setVerticalGroup(
+            mainTrainModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainTrainModelPanelLayout.createSequentialGroup()
+                .addGroup(mainTrainModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(powerCommandPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(failureInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(trainModelOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new java.awt.GridBagConstraints());
+        add(mainTrainModelPanel, new java.awt.GridBagConstraints());
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void emergencyBrakeCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emergencyBrakeCheckboxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_emergencyBrakeCheckboxActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void serviceBrakeCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceBrakeCheckboxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_serviceBrakeCheckboxActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void sendPowerCommandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendPowerCommandButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_sendPowerCommandButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void sendFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendFailureButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_sendFailureButtonActionPerformed
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
-    private javax.swing.JSpinner jSpinner5;
-    private javax.swing.JSpinner jSpinner6;
-    private javax.swing.JSpinner jSpinner7;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
+    public javax.swing.JCheckBox antennaFailureCheckbox;
+    private javax.swing.JLabel authorityOutputLabel;
+    private javax.swing.JLabel authorityOutputLabelUnits;
+    public javax.swing.JLabel authorityState;
+    public javax.swing.JCheckBox brakeFailureCheckbox;
+    private javax.swing.JPanel brakeInputPanel;
+    private javax.swing.JLabel brakesOutputLabel;
+    public javax.swing.JLabel brakesState;
+    private javax.swing.JLabel ctcAuthorityInputLabel;
+    private javax.swing.JLabel ctcAuthorityInputLabelUnits;
+    public javax.swing.JSpinner ctcAuthoritySpinner;
+    private javax.swing.JPanel ctcInputPanel;
+    private javax.swing.JLabel ctcSetPointInputLabel;
+    private javax.swing.JLabel ctcSetPointInputLabelUnits;
+    private javax.swing.JLabel ctcSetPointOutputLabel;
+    private javax.swing.JLabel ctcSetPointOutputLabelUnits;
+    public javax.swing.JSpinner ctcSetPointSpinner;
+    public javax.swing.JLabel ctcSetPointState;
+    private javax.swing.JLabel currSpeedOutputLabel;
+    private javax.swing.JLabel currSpeedOutputLabelUnits;
+    public javax.swing.JLabel currSpeedState;
+    private javax.swing.JPanel driverInputPanel;
+    private javax.swing.JLabel driverPowerInputLabel;
+    private javax.swing.JLabel driverPowerInputLabelUnits;
+    public javax.swing.JSpinner driverPowerSpinner;
+    private javax.swing.JLabel driverSetPointInputLabel;
+    private javax.swing.JLabel driverSetPointInputLabelUnits;
+    private javax.swing.JLabel driverSetPointOutputLabelUnits;
+    public javax.swing.JSpinner driverSetPointSpinner;
+    public javax.swing.JLabel driverSetPointState;
+    private javax.swing.JLabel driverSetSpeedLabel;
+    public javax.swing.JCheckBox emergencyBrakeCheckbox;
+    private javax.swing.JPanel failureInputPanel;
+    private javax.swing.JLabel leftDoorInputLabel;
+    private javax.swing.JLabel leftDoorOutputLabel;
+    public javax.swing.JLabel leftDoorState;
+    public javax.swing.JToggleButton leftDoorToggleButton;
+    private javax.swing.JLabel lightsInputLabel;
+    private javax.swing.JLabel lightsOutputLabel;
+    public javax.swing.JLabel lightsState;
+    public javax.swing.JToggleButton lightsToggleButton;
+    public javax.swing.JPanel mainTrainModelPanel;
+    private javax.swing.JLabel maxCapacityLabel;
+    private javax.swing.JLabel maxCapacityLabelUnits;
+    public javax.swing.JLabel maxCapacityState;
+    private javax.swing.JLabel mboAntennaLabel;
+    public javax.swing.JLabel mboAntennaState;
+    private javax.swing.JLabel nextStationOutputLabel;
+    public javax.swing.JLabel nextStationState;
+    private javax.swing.JLabel numCarsInputLabel;
+    private javax.swing.JLabel numCarsInputLabelUnits;
+    public javax.swing.JSpinner numCarsInputSpinner;
+    private javax.swing.JLabel numCarsLabel;
+    private javax.swing.JLabel numCarsLabelUnits;
+    public javax.swing.JLabel numCarsState;
+    private javax.swing.JPanel operationsInputPanel;
+    private javax.swing.JLabel passDisembarkLabel;
+    private javax.swing.JLabel passDisembarkLabelUnits;
+    public javax.swing.JLabel passDisembarkState;
+    private javax.swing.JLabel passOnBoardLabel;
+    private javax.swing.JLabel passOnBoardLabelUnits;
+    public javax.swing.JLabel passOnBoardState;
+    private javax.swing.JLabel passengersInputLabel;
+    private javax.swing.JLabel passengersInputLabelUnits;
+    private javax.swing.JPanel passengersInputPanel;
+    public javax.swing.JSpinner passengersInputSpinner;
+    private javax.swing.JPanel passengersOutputPanel;
+    private javax.swing.JPanel physicalTrainOutputPanel;
+    private javax.swing.JPanel powerCommandPanel;
+    public javax.swing.JCheckBox powerFailureCheckbox;
+    private javax.swing.JLabel rightDoorInputLabel;
+    private javax.swing.JLabel rightDoorOutputLabel;
+    public javax.swing.JLabel rightDoorState;
+    public javax.swing.JToggleButton rightDoorToggleButton;
+    public javax.swing.JButton sendFailureButton;
+    public javax.swing.JButton sendPowerCommandButton;
+    public javax.swing.JCheckBox serviceBrakeCheckbox;
+    private javax.swing.JLabel speedLimitOutputLabel;
+    private javax.swing.JLabel speedLimitOutputLabelUnits;
+    public javax.swing.JLabel speedLimitState;
+    private javax.swing.JPanel speedOutputPanel;
+    private javax.swing.JLabel tempInputDegreesLabel;
+    private javax.swing.JLabel tempInputLabel;
+    public javax.swing.JSpinner tempInputSpinner;
+    public javax.swing.JLabel tempOutputLabel;
+    private javax.swing.JLabel tempOutputLabelUnits;
+    public javax.swing.JLabel tempState;
+    private javax.swing.JLabel trackAntennaLabel;
+    public javax.swing.JLabel trackAntennaState;
+    private javax.swing.JLabel trainLengthLabel;
+    private javax.swing.JLabel trainLengthLabelUnits;
+    public javax.swing.JLabel trainLengthState;
+    private javax.swing.JPanel trainModelOutputPanel;
+    private javax.swing.JPanel trainOperationsOutputPanel;
+    private javax.swing.JLabel trainWeightLabel;
+    private javax.swing.JLabel trainWeightLabelUnits;
+    public javax.swing.JLabel trainWeightState;
     // End of variables declaration//GEN-END:variables
 }
