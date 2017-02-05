@@ -5,17 +5,27 @@
  */
 package com.rogueone.module.gui;
 
+import com.rogueone.module.TrainModel;  //Import to call functions in Train Model
+
 /**
  *
  * @author Jonathan Kenneson
  */
 public class TrainModelGUI extends javax.swing.JPanel {
 
+    //This is to call the main Train Model class's methods while using the GUI
+    TrainModel trainModel;
+    
     /**
      * Creates new form TrainModelGUI
      */
     public TrainModelGUI() {
         initComponents();
+    }
+    
+    //Constructor that connects the TrainModel.java class with this GUI
+    public TrainModelGUI(TrainModel trainModel) {
+        this.trainModel = trainModel;
     }
 
     /**
@@ -172,6 +182,11 @@ public class TrainModelGUI extends javax.swing.JPanel {
         leftDoorInputLabel.setText("Left Door:");
 
         leftDoorToggleButton.setText("Open/Close");
+        leftDoorToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leftDoorToggleButtonActionPerformed(evt);
+            }
+        });
 
         rightDoorInputLabel.setText("Right Door:");
 
@@ -892,12 +907,16 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
     private void sendPowerCommandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendPowerCommandButtonActionPerformed
         // TODO add your handling code here:
+        trainModel.printMe();
     }//GEN-LAST:event_sendPowerCommandButtonActionPerformed
 
     private void sendFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendFailureButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sendFailureButtonActionPerformed
 
+    private void leftDoorToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDoorToggleButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_leftDoorToggleButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JCheckBox antennaFailureCheckbox;
