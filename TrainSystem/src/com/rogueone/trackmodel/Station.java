@@ -75,6 +75,8 @@ public class Station {
         return waitingPassengers;
         //No support for negative passengers YET
     }
-    
+    public String toString() {
+        return name;
+    }
     
 }

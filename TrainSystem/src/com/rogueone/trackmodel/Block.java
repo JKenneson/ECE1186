@@ -20,6 +20,7 @@ public class Block {
     private boolean isStaticSwitchBlock;
     private int length;
     private double grade;
+    private int speedLimit;
     private double elevation;
     private double cumulativeElevation;
     private boolean isHead;
@@ -31,7 +32,7 @@ public class Block {
     
     public Block(String newLine, String newSection, int newBlockID, 
             int newSwitchID, boolean newIsStaticSwitchBlock, 
-            String newStationName, int newLength, double newGrade, 
+            String newStationName, int newLength, double newGrade, int newSpeedLimit,
             double newElevation, double newCumulativeElevation, 
             boolean newIsHead, boolean newIsTail, boolean newContainsCrossing, 
             boolean newIsUnderground) {
@@ -44,6 +45,7 @@ public class Block {
         isStaticSwitchBlock = newIsStaticSwitchBlock;
         length = newLength;
         grade = newGrade;
+        speedLimit = newSpeedLimit;
         elevation = newElevation;
         cumulativeElevation = newCumulativeElevation;
         isHead = newIsHead;
@@ -120,5 +122,40 @@ public class Block {
     public Station getStation() {
         return station;
     }
-    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Line: ");
+        sb.append(line);
+        sb.append(", Section: ");
+        sb.append(section);
+        sb.append(", Block: ");
+        sb.append(blockID);
+        sb.append(", Port A: ");
+        sb.append(portA);
+        sb.append(", Port B: ");
+        sb.append(portB);
+        sb.append(", Switch: ");
+        sb.append(switchID);
+        sb.append(", Static Switch Block: ");
+        sb.append(isStaticSwitchBlock);
+        sb.append(", Length: ");
+        sb.append(length);
+        sb.append(", Grade: ");
+        sb.append(grade);
+        sb.append(", Elevation: ");
+        sb.append(elevation);
+        sb.append(", Cumulative: ");
+        sb.append(cumulativeElevation);
+        sb.append(", Head: ");
+        sb.append(isHead);
+        sb.append(", Tail: ");
+        sb.append(isTail);
+        sb.append(", Crossing: ");
+        sb.append(containsCrossing);
+        sb.append(", Underground: ");
+        sb.append(isUnderground);
+        sb.append(", Station: ");
+        sb.append(station);
+        return sb.toString();
+    }
 }

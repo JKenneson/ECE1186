@@ -8,9 +8,11 @@ package com.rogueone.trackmodel;
 import com.rogueone.trackmodel.gui.TrackModelGUI;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.*;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,6 +21,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Dan Bednarczyk
  */
 public class TrackModel {
+    
+    ArrayList<Block> blocks = new ArrayList<Block>();
+    
     public static void main(String[] args) throws InterruptedException {
         TrackModelGUI trackModelGUI = new TrackModelGUI();
         
@@ -29,13 +34,7 @@ public class TrackModel {
         frame.setVisible(true);
     }
     
-    public static void parseDataFile(File file) throws IOException, InvalidFormatException {
-        XSSFWorkbook testWorkbook = new XSSFWorkbook(file);
-        XSSFSheet sheetBlocks = testWorkbook.getSheetAt(0);
-        
-        Row rowHeader = sheetBlocks.getRow(0);
-        Cell cells[] = new Cell[rowHeader.getLastCellNum()];
-        
+    public void parseDataFile(File file) throws IOException, InvalidFormatException {
         //Expected column order in data file:
         //0     line
         //1     section
@@ -55,14 +54,60 @@ public class TrackModel {
         //15    cumulativeElevation
         //16    isStaticSwitchBlock
         
+        XSSFWorkbook testWorkbook = new XSSFWorkbook(file);
+        XSSFSheet sheetBlocks = testWorkbook.getSheetAt(0);
+        
+        Row rowHeader = sheetBlocks.getRow(0);
+        Cell cells[] = new Cell[rowHeader.getLastCellNum()];  
+        
         //Iterate over all rows in the first column
         for (int i = 1; i <= sheetBlocks.getLastRowNum(); i++) {
             Row rowTemp = sheetBlocks.getRow(i);
-            for (int j = 0; j < cells.length; j++) {
-                cells[j] = rowTemp.getCell(j);
-                System.out.print(rowHeader.getCell(j) + ": " + rowTemp.getCell(j) + " ");
+            String tempLine = rowTemp.getCell(0).getStringCellValue();
+            String tempSection = rowTemp.getCell(1).getStringCellValue();
+            boolean tempIsHead = false;
+            if(rowTemp.getCell(2) != null) {
+                tempIsHead = true;
             }
-            System.out.println();
+            boolean tempIsTail = false;
+            if(rowTemp.getCell(3) != null) {
+                tempIsTail = true;
+            }
+            int tempBlockID = (int) rowTemp.getCell(4).getNumericCellValue();
+            int tempSwitchID = (int) rowTemp.getCell(7).getNumericCellValue();
+            int tempLength = (int) rowTemp.getCell(8).getNumericCellValue();
+            double tempGrade = rowTemp.getCell(9).getNumericCellValue();
+            int tempSpeedLimit = (int) rowTemp.getCell(10).getNumericCellValue();  
+            boolean tempContainsCrossing = false;
+            if(rowTemp.getCell(11) != null) {
+                tempContainsCrossing = true;
+            }
+            boolean tempIsUnderground = false;
+            if(rowTemp.getCell(12) != null) {
+                tempIsUnderground = true;
+            }
+            String tempStationName = rowTemp.getCell(13).getStringCellValue();
+            double tempElevation = rowTemp.getCell(14).getNumericCellValue();
+            double tempCumulativeElevation = rowTemp.getCell(15).getNumericCellValue(); 
+            boolean tempIsStaticSwitchBlock = false;
+            if(rowTemp.getCell(16) != null) {
+                tempIsStaticSwitchBlock = true;
+            }
+            Block newBlock = new Block(tempLine, tempSection, tempBlockID, 
+                    tempSwitchID, tempIsStaticSwitchBlock, tempStationName, 
+                    tempLength, tempGrade, tempSpeedLimit, tempElevation, 
+                    tempCumulativeElevation, tempIsHead, tempIsTail, 
+                    tempContainsCrossing, tempIsUnderground);
+            blocks.add(newBlock);
+        }
+        
+        printBlocks();
+        
+    }
+    
+    public void printBlocks() {
+        for(Block b : blocks) {
+            System.out.println(b);
         }
     }
 }

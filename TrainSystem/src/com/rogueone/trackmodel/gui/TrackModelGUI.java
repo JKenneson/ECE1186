@@ -552,7 +552,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = trackDataFileChooser.getSelectedFile();
             try {
-                TrackModel.parseDataFile(trackDataFile);
+                TrackModel printTest = new TrackModel();
+                printTest.parseDataFile(trackDataFile);
             }
             catch (IOException ex) {
                 System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());

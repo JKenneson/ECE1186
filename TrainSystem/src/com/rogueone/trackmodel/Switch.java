@@ -17,7 +17,7 @@ public class Switch extends Block {
     
     public Switch(int newCentralSwitchID) {
         //intialize block-specific fields, most are not used by switch 
-        super(null, null, -1, -1, false, null, -1, -1, -1, -1, false, false, false, false);
+        super(null, null, -1, -1, false, null, -1, -1, -1, -1, -1, false, false, false, false);
         //initialize switch-specific fields
         centralSwitchID = newCentralSwitchID;
         portA = null;   //static port
@@ -67,6 +67,18 @@ public class Switch extends Block {
         else {
             return null;
         }
+    }
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Switch: ");
+        sb.append(centralSwitchID);
+        sb.append(", Port A: ");
+        sb.append(portA);
+        sb.append(", Port B: ");
+        sb.append(portB);
+        sb.append(", Port C: ");
+        sb.append(centralSwitchID);
+        return sb.toString();
     }
     
 }
