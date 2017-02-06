@@ -6,7 +6,13 @@
 
 package com.rogueone.trackmodel.gui;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import trackmodel.TrackModel;
 
 /**
  *
@@ -541,15 +547,23 @@ public class TrackModelGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_trackConfigurationLoadButtonMouseClicked
 
     private void trackConfigurationLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackConfigurationLoadButtonActionPerformed
-        JFileChooser jFileChooser1 = new JFileChooser();
-       int returnVal = jFileChooser1.showOpenDialog(this);
+        JFileChooser trackDataFileChooser = new JFileChooser();
+        int returnVal = trackDataFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-           System.out.println("Data file parsing not yet supported.");
+            File trackDataFile = trackDataFileChooser.getSelectedFile();
+            try {
+                TrackModel.parseDataFile(trackDataFile);
+            }
+            catch (IOException ex) {
+                System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
+            }
+            catch (InvalidFormatException ex) {
+                System.out.println("Please select a .xlsx file.");
+            }
         } else if (returnVal == JFileChooser.CANCEL_OPTION){
-            System.out.println("File access cancelled by user.");
+           System.out.println("File access cancelled by user.");
         }
-        jFileChooser1.setVisible(true);
-       
+        trackDataFileChooser.setVisible(true);
     }//GEN-LAST:event_trackConfigurationLoadButtonActionPerformed
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
