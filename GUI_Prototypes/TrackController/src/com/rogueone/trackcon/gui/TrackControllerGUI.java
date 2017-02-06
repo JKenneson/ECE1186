@@ -28,6 +28,13 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        leftTrackButtonGroup = new javax.swing.ButtonGroup();
+        rightTrackButtonGroup = new javax.swing.ButtonGroup();
+        position1TrainButtonGroup = new javax.swing.ButtonGroup();
+        position2TrainButtonGroup = new javax.swing.ButtonGroup();
+        position3TrainButtonGroup = new javax.swing.ButtonGroup();
+        position4TrainButtonGroup = new javax.swing.ButtonGroup();
+        crossingButtonGroup = new javax.swing.ButtonGroup();
         trackControllerScrollPane = new javax.swing.JScrollPane();
         trackControllerPanel = new javax.swing.JPanel();
         trackControllerTabbedPane = new javax.swing.JTabbedPane();
@@ -500,7 +507,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         imagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Image"));
         imagePanel.setPreferredSize(new java.awt.Dimension(400, 315));
 
-        imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img.png")));
+        imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/trackcon/gui/images/Wayside_img.png"))); // NOI18N
         imageLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
@@ -534,6 +541,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 1"));
         position1Panel.setLayout(new java.awt.GridBagLayout());
 
+        position1TrainButtonGroup.add(occupiedPosition1RadioButton);
         occupiedPosition1RadioButton.setText("Occupied");
         occupiedPosition1RadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -554,6 +562,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         position1Panel.add(trainPosition1Label, gridBagConstraints);
 
+        position1TrainButtonGroup.add(unoccupiedPosition1RadioButton);
         unoccupiedPosition1RadioButton.setSelected(true);
         unoccupiedPosition1RadioButton.setText("Unoccupied");
         unoccupiedPosition1RadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -594,6 +603,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position2Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 2"));
         position2Panel.setLayout(new java.awt.GridBagLayout());
 
+        position2TrainButtonGroup.add(occupiedPosition2RadioButton);
         occupiedPosition2RadioButton.setSelected(true);
         occupiedPosition2RadioButton.setText("Occupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -602,6 +612,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         position2Panel.add(occupiedPosition2RadioButton, gridBagConstraints);
 
+        position2TrainButtonGroup.add(unoccupiedPosition2RadioButton);
         unoccupiedPosition2RadioButton.setText("Unoccupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -644,6 +655,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position3Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 3"));
         position3Panel.setLayout(new java.awt.GridBagLayout());
 
+        position3TrainButtonGroup.add(unoccupiedPosition3RadioButton);
         unoccupiedPosition3RadioButton.setText("Unoccupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -651,6 +663,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         position3Panel.add(unoccupiedPosition3RadioButton, gridBagConstraints);
 
+        position3TrainButtonGroup.add(occupiedPosition3RadioButton);
         occupiedPosition3RadioButton.setText("Occupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -693,6 +706,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position4Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 4"));
         position4Panel.setLayout(new java.awt.GridBagLayout());
 
+        position4TrainButtonGroup.add(occupiedPosition4RadioButton);
         occupiedPosition4RadioButton.setText("Occupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -708,6 +722,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         position4Panel.add(trainPosition4Label, gridBagConstraints);
 
+        position4TrainButtonGroup.add(unoccupiedPosition4RadioButton);
         unoccupiedPosition4RadioButton.setText("Unoccupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -747,12 +762,14 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         switch1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch - F-D:C-A"));
         switch1Panel.setLayout(new java.awt.GridBagLayout());
 
+        leftTrackButtonGroup.add(switch1AlternateRadioButton);
         switch1AlternateRadioButton.setText("Track Wayside");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         switch1Panel.add(switch1AlternateRadioButton, gridBagConstraints);
 
+        leftTrackButtonGroup.add(switch1DefaultRadioButton);
         switch1DefaultRadioButton.setSelected(true);
         switch1DefaultRadioButton.setText("Track Straight");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -770,6 +787,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         switch2Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch - N/A"));
         switch2Panel.setLayout(new java.awt.GridBagLayout());
 
+        rightTrackButtonGroup.add(switch2DefaultRadioButton);
         switch2DefaultRadioButton.setSelected(true);
         switch2DefaultRadioButton.setText("Track Straight");
         switch2DefaultRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -783,6 +801,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         switch2Panel.add(switch2DefaultRadioButton, gridBagConstraints);
 
+        rightTrackButtonGroup.add(switch2AlternateRadioButton);
         switch2AlternateRadioButton.setText("Track Wayside");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -807,6 +826,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         crossingPanel.add(crossingStatusLabel, gridBagConstraints);
 
+        crossingButtonGroup.add(crossingActiveRadioButton);
         crossingActiveRadioButton.setText("Active");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -814,6 +834,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         crossingPanel.add(crossingActiveRadioButton, gridBagConstraints);
 
+        crossingButtonGroup.add(crossingInactiveRadioButton);
         crossingInactiveRadioButton.setText("Inactive");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -1039,11 +1060,11 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         if (switch2DefaultRadioButton.isSelected() && switch1DefaultRadioButton.isSelected()) {
-            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img01.png"))); // NOI18N
+            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/trackcon/gui/images/Wayside_img01.png"))); // NOI18N
         } else if (switch2AlternateRadioButton.isSelected() && switch1AlternateRadioButton.isSelected()) {
-            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img02.png"))); // NOI18N
+            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/trackcon/gui/images/Wayside_img02.png"))); // NOI18N
         } else {
-            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img.png"))); // NOI18N
+            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/trackcon/gui/images/Wayside_img.png"))); // NOI18N
         }
     }//GEN-LAST:event_refreshButtonActionPerformed
 
@@ -1061,6 +1082,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JTextField commandedSpeedTextField;
     private javax.swing.JPanel componentSummaryPanel;
     private javax.swing.JRadioButton crossingActiveRadioButton;
+    private javax.swing.ButtonGroup crossingButtonGroup;
     private javax.swing.JRadioButton crossingInactiveRadioButton;
     private javax.swing.JLabel crossingNumberLabel;
     private javax.swing.JTextField crossingNumberTextField;
@@ -1086,6 +1108,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JLabel imageLabel;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JPanel inputsPanel;
+    private javax.swing.ButtonGroup leftTrackButtonGroup;
     private javax.swing.JLabel lineLabel;
     private javax.swing.JTextField lineTextField;
     private javax.swing.JRadioButton occupiedPosition1RadioButton;
@@ -1098,11 +1121,16 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JTextField plcProgramTextField;
     private javax.swing.JPanel plcSysNotifPanel;
     private javax.swing.JPanel position1Panel;
+    private javax.swing.ButtonGroup position1TrainButtonGroup;
     private javax.swing.JPanel position2Panel;
+    private javax.swing.ButtonGroup position2TrainButtonGroup;
     private javax.swing.JPanel position3Panel;
+    private javax.swing.ButtonGroup position3TrainButtonGroup;
     private javax.swing.JPanel position4Panel;
+    private javax.swing.ButtonGroup position4TrainButtonGroup;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton resetButton;
+    private javax.swing.ButtonGroup rightTrackButtonGroup;
     private javax.swing.JPanel selectionPanel;
     private javax.swing.JButton simulateButton;
     private javax.swing.JPanel simulatePanel;
