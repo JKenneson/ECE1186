@@ -10,7 +10,8 @@ package com.rogueone.ctc.gui;
  * @author Robert
  */
 public class DispatchTrainGUI extends javax.swing.JFrame {
-
+    
+    String dispatchLine, dispatchSpeed, dispatchAuthority;
     /**
      * Creates new form DispatchTrainGUI
      */
@@ -198,6 +199,20 @@ public class DispatchTrainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DispatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchButtonActionPerformed
+         
+        dispatchLine = (String)DispatchLineBox.getSelectedItem();
+        dispatchSpeed = DispatchSpeedField.getText();
+        dispatchAuthority = DispatchAuthorityField.getText();
+        //check time to see number of cars
+        //String currentTime = CommandTrackControlGUI.TimeField.getText();
+        //if ( currentTime ...)
+        //attatch extra cars based on time and redo weight
+
+        //newTrain(dispatchLine, dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchCurbWeight);
+        
+
+        //get fields
+        //globally dispatch
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButtonActionPerformed
 
