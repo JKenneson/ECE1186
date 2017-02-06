@@ -34,127 +34,127 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position2TrainButtonGroup = new javax.swing.ButtonGroup();
         position3TrainButtonGroup = new javax.swing.ButtonGroup();
         position4TrainButtonGroup = new javax.swing.ButtonGroup();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel22 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel17 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jLabel23 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jLabel25 = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jComboBox8 = new javax.swing.JComboBox<>();
-        jPanel10 = new javax.swing.JPanel();
-        jRadioButton10 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jPanel11 = new javax.swing.JPanel();
-        jRadioButton11 = new javax.swing.JRadioButton();
-        jLabel5 = new javax.swing.JLabel();
-        jRadioButton12 = new javax.swing.JRadioButton();
-        jComboBox9 = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jPanel13 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
-        jRadioButton13 = new javax.swing.JRadioButton();
-        jRadioButton14 = new javax.swing.JRadioButton();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jPanel16 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel17 = new javax.swing.JPanel();
+        crossingButtonGroup = new javax.swing.ButtonGroup();
+        trackControllerScrollPane = new javax.swing.JScrollPane();
+        trackControllerPanel = new javax.swing.JPanel();
+        trackControllerTabbedPane = new javax.swing.JTabbedPane();
+        summaryPanel = new javax.swing.JPanel();
+        selectionPanel = new javax.swing.JPanel();
+        lineLabel = new javax.swing.JLabel();
+        lineTextField = new javax.swing.JTextField();
+        trainNumberLabel = new javax.swing.JLabel();
+        trackNumberTextField = new javax.swing.JTextField();
+        switchNumberLabel = new javax.swing.JLabel();
+        switchNumberTextField = new javax.swing.JTextField();
+        crossingNumberLabel = new javax.swing.JLabel();
+        crossingNumberTextField = new javax.swing.JTextField();
+        blockNumberLabel = new javax.swing.JLabel();
+        blockNumberTextField = new javax.swing.JTextField();
+        chooseFileButton = new javax.swing.JButton();
+        plcProgramLabel = new javax.swing.JLabel();
+        plcProgramTextField = new javax.swing.JTextField();
+        trackSignalNumberTextField = new javax.swing.JTextField();
+        trackSignalNumberLabel = new javax.swing.JLabel();
+        componentSummaryPanel = new javax.swing.JPanel();
+        currentTrackControllerComboBox = new javax.swing.JComboBox<>();
+        currentTrackControllerLabel = new javax.swing.JLabel();
+        currentTrainsScrollPane = new javax.swing.JScrollPane();
+        currentTrainsTable = new javax.swing.JTable();
+        currentTrainLabel = new javax.swing.JLabel();
+        currentSwitchesLabel = new javax.swing.JLabel();
+        currentSwitchScrollPane = new javax.swing.JScrollPane();
+        currentSwitchTable = new javax.swing.JTable();
+        currentCrossingsLabel = new javax.swing.JLabel();
+        currentCrossingsScrollPane = new javax.swing.JScrollPane();
+        currentCrossingScrollPane = new javax.swing.JTable();
+        currentBlockLabel = new javax.swing.JLabel();
+        currentBlockScrollPane = new javax.swing.JScrollPane();
+        currentBlockTable = new javax.swing.JTable();
+        currentTrackSignalLabel = new javax.swing.JLabel();
+        currentTrackSignalsScrollPane = new javax.swing.JScrollPane();
+        currentTrackSignalsTable = new javax.swing.JTable();
+        simulatePanel = new javax.swing.JPanel();
+        plcSysNotifPanel = new javax.swing.JPanel();
+        plcProgramInputScrollPane = new javax.swing.JScrollPane();
+        plcProgramInputTextArea = new javax.swing.JTextArea();
+        systemOutputScrollPane = new javax.swing.JScrollPane();
+        systemOutputTextArea = new javax.swing.JTextArea();
+        imagePanel = new javax.swing.JPanel();
+        imageLabel = new javax.swing.JLabel();
+        inputsPanel = new javax.swing.JPanel();
+        position1Panel = new javax.swing.JPanel();
+        occupiedPosition1RadioButton = new javax.swing.JRadioButton();
+        trainPosition1Label = new javax.swing.JLabel();
+        unoccupiedPosition1RadioButton = new javax.swing.JRadioButton();
+        trackStatusPosition1ComboBox = new javax.swing.JComboBox<>();
+        trackPosition1Label = new javax.swing.JLabel();
+        position2Panel = new javax.swing.JPanel();
+        occupiedPosition2RadioButton = new javax.swing.JRadioButton();
+        unoccupiedPosition2RadioButton = new javax.swing.JRadioButton();
+        trainPosition2Label = new javax.swing.JLabel();
+        trackPosition2Label = new javax.swing.JLabel();
+        trackStatusPosition2ComboBox = new javax.swing.JComboBox<>();
+        position3Panel = new javax.swing.JPanel();
+        unoccupiedPosition3RadioButton = new javax.swing.JRadioButton();
+        occupiedPosition3RadioButton = new javax.swing.JRadioButton();
+        trainPosition3Label = new javax.swing.JLabel();
+        trackPosition3Label = new javax.swing.JLabel();
+        trackStatusPosition3ComboBox = new javax.swing.JComboBox<>();
+        position4Panel = new javax.swing.JPanel();
+        occupiedPosition4RadioButton = new javax.swing.JRadioButton();
+        trainPosition4Label = new javax.swing.JLabel();
+        unoccupiedPosition4RadioButton = new javax.swing.JRadioButton();
+        trackStatusPosition4ComboBox = new javax.swing.JComboBox<>();
+        trackPosition4Label = new javax.swing.JLabel();
+        switch1Panel = new javax.swing.JPanel();
+        switch1AlternateRadioButton = new javax.swing.JRadioButton();
+        switch1DefaultRadioButton = new javax.swing.JRadioButton();
+        switch2Panel = new javax.swing.JPanel();
+        switch2DefaultRadioButton = new javax.swing.JRadioButton();
+        switch2AlternateRadioButton = new javax.swing.JRadioButton();
+        crossingPanel = new javax.swing.JPanel();
+        crossingStatusLabel = new javax.swing.JLabel();
+        crossingActiveRadioButton = new javax.swing.JRadioButton();
+        crossingInactiveRadioButton = new javax.swing.JRadioButton();
+        speedAuthorityPanel = new javax.swing.JPanel();
+        suggestSpeedLabel = new javax.swing.JLabel();
+        suggestSpeedTextField = new javax.swing.JTextField();
+        suggestAuthorityTextField = new javax.swing.JTextField();
+        suggestAuthorityLabel = new javax.swing.JLabel();
+        commandedSpeedLabel = new javax.swing.JLabel();
+        commandedSpeedTextField = new javax.swing.JTextField();
+        commandedAuthorityLabel = new javax.swing.JLabel();
+        commandedAuthorityTextField = new javax.swing.JTextField();
+        blockIDLabel = new javax.swing.JLabel();
+        blockIDTextField = new javax.swing.JTextField();
+        actionsPanel = new javax.swing.JPanel();
+        refreshButton = new javax.swing.JButton();
+        simulateButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
 
         setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 700));
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        trackControllerPanel.setPreferredSize(new java.awt.Dimension(1000, 700));
+        trackControllerPanel.setLayout(new java.awt.BorderLayout());
 
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(866, 670));
+        trackControllerTabbedPane.setPreferredSize(new java.awt.Dimension(866, 670));
 
-        jPanel7.setLayout(new java.awt.GridBagLayout());
+        summaryPanel.setLayout(new java.awt.GridBagLayout());
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Selections"));
-        jPanel5.setLayout(new java.awt.GridBagLayout());
+        selectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Selections"));
+        selectionPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel18.setText("Line: ");
+        lineLabel.setText("Line: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel5.add(jLabel18, gridBagConstraints);
+        selectionPanel.add(lineLabel, gridBagConstraints);
 
-        jTextField5.setText("GREEN/RED");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        lineTextField.setText("GREEN/RED");
+        lineTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                lineTextFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -163,19 +163,19 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel5.add(jTextField5, gridBagConstraints);
+        selectionPanel.add(lineTextField, gridBagConstraints);
 
-        jLabel19.setText("Train Number:");
+        trainNumberLabel.setText("Train Number:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel5.add(jLabel19, gridBagConstraints);
+        selectionPanel.add(trainNumberLabel, gridBagConstraints);
 
-        jTextField6.setText("1/(None Selected)");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        trackNumberTextField.setText("1/(None Selected)");
+        trackNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                trackNumberTextFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -183,19 +183,19 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel5.add(jTextField6, gridBagConstraints);
+        selectionPanel.add(trackNumberTextField, gridBagConstraints);
 
-        jLabel20.setText("Switch Number: ");
+        switchNumberLabel.setText("Switch Number: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel5.add(jLabel20, gridBagConstraints);
+        selectionPanel.add(switchNumberLabel, gridBagConstraints);
 
-        jTextField7.setText("#/(None Selected)");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        switchNumberTextField.setText("#/(None Selected)");
+        switchNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                switchNumberTextFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -203,19 +203,19 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel5.add(jTextField7, gridBagConstraints);
+        selectionPanel.add(switchNumberTextField, gridBagConstraints);
 
-        jLabel21.setText("Crossing Number: ");
+        crossingNumberLabel.setText("Crossing Number: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel5.add(jLabel21, gridBagConstraints);
+        selectionPanel.add(crossingNumberLabel, gridBagConstraints);
 
-        jTextField8.setText("#/(None Selected)");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        crossingNumberTextField.setText("#/(None Selected)");
+        crossingNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                crossingNumberTextFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -223,87 +223,87 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel5.add(jTextField8, gridBagConstraints);
+        selectionPanel.add(crossingNumberTextField, gridBagConstraints);
 
-        jLabel22.setText("Block Number: ");
+        blockNumberLabel.setText("Block Number: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel5.add(jLabel22, gridBagConstraints);
+        selectionPanel.add(blockNumberLabel, gridBagConstraints);
 
-        jTextField9.setText("#/(None Selected)");
+        blockNumberTextField.setText("#/(None Selected)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel5.add(jTextField9, gridBagConstraints);
+        selectionPanel.add(blockNumberTextField, gridBagConstraints);
 
-        jButton4.setText("Choose File");
+        chooseFileButton.setText("Choose File");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
-        jPanel5.add(jButton4, gridBagConstraints);
+        selectionPanel.add(chooseFileButton, gridBagConstraints);
 
-        jLabel26.setText("PLC Program:");
+        plcProgramLabel.setText("PLC Program:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel5.add(jLabel26, gridBagConstraints);
+        selectionPanel.add(plcProgramLabel, gridBagConstraints);
 
-        jTextField10.setText("plc");
+        plcProgramTextField.setText("plc");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jTextField10, gridBagConstraints);
+        selectionPanel.add(plcProgramTextField, gridBagConstraints);
 
-        jTextField12.setText("#/(None Selected)");
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        trackSignalNumberTextField.setText("#/(None Selected)");
+        trackSignalNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                trackSignalNumberTextFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel5.add(jTextField12, gridBagConstraints);
+        selectionPanel.add(trackSignalNumberTextField, gridBagConstraints);
 
-        jLabel28.setText("Track Signal Number");
+        trackSignalNumberLabel.setText("Track Signal Number");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        jPanel5.add(jLabel28, gridBagConstraints);
+        selectionPanel.add(trackSignalNumberLabel, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel7.add(jPanel5, gridBagConstraints);
+        summaryPanel.add(selectionPanel, gridBagConstraints);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Component Summary"));
-        jPanel4.setPreferredSize(new java.awt.Dimension(500, 600));
-        jPanel4.setLayout(new java.awt.GridBagLayout());
+        componentSummaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Component Summary"));
+        componentSummaryPanel.setPreferredSize(new java.awt.Dimension(500, 600));
+        componentSummaryPanel.setLayout(new java.awt.GridBagLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green 1", "Green 2", "Red 1", "Red 2" }));
+        currentTrackControllerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green 1", "Green 2", "Red 1", "Red 2" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel4.add(jComboBox1, gridBagConstraints);
+        componentSummaryPanel.add(currentTrackControllerComboBox, gridBagConstraints);
 
-        jLabel14.setText("Current Track Controller:");
+        currentTrackControllerLabel.setText("Current Track Controller:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel4.add(jLabel14, gridBagConstraints);
+        componentSummaryPanel.add(currentTrackControllerLabel, gridBagConstraints);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        currentTrainsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", "A-C", "15", "1500"},
                 {null, null, null, null},
@@ -313,7 +313,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
                 "Train Number", "Current Block", "Current Speed", "Authority"
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        currentTrainsScrollPane.setViewportView(currentTrainsTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -323,23 +323,23 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel4.add(jScrollPane4, gridBagConstraints);
+        componentSummaryPanel.add(currentTrainsScrollPane, gridBagConstraints);
 
-        jLabel15.setText("Current Trains - Red/Green - 1/2");
+        currentTrainLabel.setText("Current Trains - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        jPanel4.add(jLabel15, gridBagConstraints);
+        componentSummaryPanel.add(currentTrainLabel, gridBagConstraints);
 
-        jLabel16.setText("Switches - Red/Green - 1/2");
+        currentSwitchesLabel.setText("Switches - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
-        jPanel4.add(jLabel16, gridBagConstraints);
+        componentSummaryPanel.add(currentSwitchesLabel, gridBagConstraints);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        currentSwitchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", "F-D:C-A"},
                 {null, null},
@@ -350,7 +350,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
                 "Switch ID", "State - Connection"
             }
         ));
-        jScrollPane5.setViewportView(jTable2);
+        currentSwitchScrollPane.setViewportView(currentSwitchTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -360,16 +360,16 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel4.add(jScrollPane5, gridBagConstraints);
+        componentSummaryPanel.add(currentSwitchScrollPane, gridBagConstraints);
 
-        jLabel17.setText("Crossing - Red/Green - 1/2");
+        currentCrossingsLabel.setText("Crossing - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
-        jPanel4.add(jLabel17, gridBagConstraints);
+        componentSummaryPanel.add(currentCrossingsLabel, gridBagConstraints);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        currentCrossingScrollPane.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"E:19", "Inactive"},
                 {null, null},
@@ -380,7 +380,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
                 "Crossing ID", "Crossing State"
             }
         ));
-        jScrollPane6.setViewportView(jTable3);
+        currentCrossingsScrollPane.setViewportView(currentCrossingScrollPane);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -390,16 +390,16 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel4.add(jScrollPane6, gridBagConstraints);
+        componentSummaryPanel.add(currentCrossingsScrollPane, gridBagConstraints);
 
-        jLabel23.setText("Block - Red/Green - 1/2");
+        currentBlockLabel.setText("Block - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
-        jPanel4.add(jLabel23, gridBagConstraints);
+        componentSummaryPanel.add(currentBlockLabel, gridBagConstraints);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        currentBlockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"W:142", "Active"},
                 {"W:143", "Broken Rail"},
@@ -411,7 +411,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
                 "Block Number", "Block Status"
             }
         ));
-        jScrollPane7.setViewportView(jTable4);
+        currentBlockScrollPane.setViewportView(currentBlockTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -421,16 +421,16 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel4.add(jScrollPane7, gridBagConstraints);
+        componentSummaryPanel.add(currentBlockScrollPane, gridBagConstraints);
 
-        jLabel25.setText("Track Signals - Red/Green - 1/2");
+        currentTrackSignalLabel.setText("Track Signals - Red/Green - 1/2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 2;
-        jPanel4.add(jLabel25, gridBagConstraints);
+        componentSummaryPanel.add(currentTrackSignalLabel, gridBagConstraints);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        currentTrackSignalsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"D", "Green"},
                 {"A", "Red"},
@@ -442,7 +442,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
                 "Track Signal ID", "Status"
             }
         ));
-        jScrollPane8.setViewportView(jTable5);
+        currentTrackSignalsScrollPane.setViewportView(currentTrackSignalsTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -451,26 +451,26 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel4.add(jScrollPane8, gridBagConstraints);
+        componentSummaryPanel.add(currentTrackSignalsScrollPane, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel7.add(jPanel4, gridBagConstraints);
+        summaryPanel.add(componentSummaryPanel, gridBagConstraints);
 
-        jTabbedPane1.addTab("Summary", jPanel7);
+        trackControllerTabbedPane.addTab("Summary", summaryPanel);
 
-        jPanel6.setLayout(new java.awt.GridBagLayout());
+        simulatePanel.setLayout(new java.awt.GridBagLayout());
 
-        jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("PLC and System Notifications"));
-        jPanel18.setLayout(new java.awt.GridBagLayout());
+        plcSysNotifPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PLC and System Notifications"));
+        plcSysNotifPanel.setLayout(new java.awt.GridBagLayout());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("PLC Program Input\n");
-        jScrollPane2.setViewportView(jTextArea1);
+        plcProgramInputTextArea.setColumns(20);
+        plcProgramInputTextArea.setRows(5);
+        plcProgramInputTextArea.setText("PLC Program Input\n");
+        plcProgramInputScrollPane.setViewportView(plcProgramInputTextArea);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -480,12 +480,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel18.add(jScrollPane2, gridBagConstraints);
+        plcSysNotifPanel.add(plcProgramInputScrollPane, gridBagConstraints);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("System Output\n\n");
-        jScrollPane3.setViewportView(jTextArea2);
+        systemOutputTextArea.setColumns(20);
+        systemOutputTextArea.setRows(5);
+        systemOutputTextArea.setText("System Output\n\n");
+        systemOutputScrollPane.setViewportView(systemOutputTextArea);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -495,35 +495,35 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        jPanel18.add(jScrollPane3, gridBagConstraints);
+        plcSysNotifPanel.add(systemOutputScrollPane, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel6.add(jPanel18, gridBagConstraints);
+        simulatePanel.add(plcSysNotifPanel, gridBagConstraints);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Image"));
-        jPanel2.setPreferredSize(new java.awt.Dimension(400, 315));
+        imagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Image"));
+        imagePanel.setPreferredSize(new java.awt.Dimension(400, 315));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img.png")));
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img.png"))); // NOI18N
+        imageLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
+        imagePanel.setLayout(imagePanelLayout);
+        imagePanelLayout.setHorizontalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(imagePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        imagePanelLayout.setVerticalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(imagePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -532,208 +532,206 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel6.add(jPanel2, gridBagConstraints);
+        simulatePanel.add(imagePanel, gridBagConstraints);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Inputs"));
-        jPanel3.setPreferredSize(new java.awt.Dimension(800, 400));
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        inputsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Inputs"));
+        inputsPanel.setPreferredSize(new java.awt.Dimension(800, 400));
+        inputsPanel.setLayout(new java.awt.GridBagLayout());
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 1"));
-        jPanel8.setLayout(new java.awt.GridBagLayout());
+        position1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 1"));
+        position1Panel.setLayout(new java.awt.GridBagLayout());
 
-        position1TrainButtonGroup.add(jRadioButton5);
-        jRadioButton5.setText("Occupied");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        position1TrainButtonGroup.add(occupiedPosition1RadioButton);
+        occupiedPosition1RadioButton.setText("Occupied");
+        occupiedPosition1RadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                occupiedPosition1RadioButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel8.add(jRadioButton5, gridBagConstraints);
+        position1Panel.add(occupiedPosition1RadioButton, gridBagConstraints);
 
-        jLabel2.setText("Train - N/A");
+        trainPosition1Label.setText("Train - N/A");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel8.add(jLabel2, gridBagConstraints);
+        position1Panel.add(trainPosition1Label, gridBagConstraints);
 
-        position1TrainButtonGroup.add(jRadioButton6);
-        jRadioButton6.setSelected(true);
-        jRadioButton6.setText("Unoccupied");
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        position1TrainButtonGroup.add(unoccupiedPosition1RadioButton);
+        unoccupiedPosition1RadioButton.setText("Unoccupied");
+        unoccupiedPosition1RadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                unoccupiedPosition1RadioButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel8.add(jRadioButton6, gridBagConstraints);
+        position1Panel.add(unoccupiedPosition1RadioButton, gridBagConstraints);
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
+        trackStatusPosition1ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel8.add(jComboBox7, gridBagConstraints);
+        position1Panel.add(trackStatusPosition1ComboBox, gridBagConstraints);
 
-        jLabel6.setText("Track - F-D");
+        trackPosition1Label.setText("Track - F-D");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        jPanel8.add(jLabel6, gridBagConstraints);
+        position1Panel.add(trackPosition1Label, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel8, gridBagConstraints);
+        inputsPanel.add(position1Panel, gridBagConstraints);
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 2"));
-        jPanel9.setLayout(new java.awt.GridBagLayout());
+        position2Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 2"));
+        position2Panel.setLayout(new java.awt.GridBagLayout());
 
-        position2TrainButtonGroup.add(jRadioButton7);
-        jRadioButton7.setSelected(true);
-        jRadioButton7.setText("Occupied");
+        position2TrainButtonGroup.add(occupiedPosition2RadioButton);
+        occupiedPosition2RadioButton.setText("Occupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel9.add(jRadioButton7, gridBagConstraints);
+        position2Panel.add(occupiedPosition2RadioButton, gridBagConstraints);
 
-        position2TrainButtonGroup.add(jRadioButton8);
-        jRadioButton8.setText("Unoccupied");
+        position2TrainButtonGroup.add(unoccupiedPosition2RadioButton);
+        unoccupiedPosition2RadioButton.setText("Unoccupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel9.add(jRadioButton8, gridBagConstraints);
+        position2Panel.add(unoccupiedPosition2RadioButton, gridBagConstraints);
 
-        jLabel3.setText("Train - 1");
+        trainPosition2Label.setText("Train - 1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel9.add(jLabel3, gridBagConstraints);
+        position2Panel.add(trainPosition2Label, gridBagConstraints);
 
-        jLabel7.setText("Track - C-A");
+        trackPosition2Label.setText("Track - C-A");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        jPanel9.add(jLabel7, gridBagConstraints);
+        position2Panel.add(trackPosition2Label, gridBagConstraints);
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
+        trackStatusPosition2ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel9.add(jComboBox8, gridBagConstraints);
+        position2Panel.add(trackStatusPosition2ComboBox, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel9, gridBagConstraints);
+        inputsPanel.add(position2Panel, gridBagConstraints);
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 3"));
-        jPanel10.setLayout(new java.awt.GridBagLayout());
+        position3Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 3"));
+        position3Panel.setLayout(new java.awt.GridBagLayout());
 
-        position3TrainButtonGroup.add(jRadioButton10);
-        jRadioButton10.setText("Unoccupied");
+        position3TrainButtonGroup.add(unoccupiedPosition3RadioButton);
+        unoccupiedPosition3RadioButton.setText("Unoccupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel10.add(jRadioButton10, gridBagConstraints);
+        position3Panel.add(unoccupiedPosition3RadioButton, gridBagConstraints);
 
-        position3TrainButtonGroup.add(jRadioButton9);
-        jRadioButton9.setText("Occupied");
+        position3TrainButtonGroup.add(occupiedPosition3RadioButton);
+        occupiedPosition3RadioButton.setText("Occupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel10.add(jRadioButton9, gridBagConstraints);
+        position3Panel.add(occupiedPosition3RadioButton, gridBagConstraints);
 
-        jLabel4.setText("Position 3");
+        trainPosition3Label.setText("Position 3");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel10.add(jLabel4, gridBagConstraints);
+        position3Panel.add(trainPosition3Label, gridBagConstraints);
 
-        jLabel8.setText("Track 3");
+        trackPosition3Label.setText("Track 3");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        jPanel10.add(jLabel8, gridBagConstraints);
+        position3Panel.add(trackPosition3Label, gridBagConstraints);
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
+        trackStatusPosition3ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel10.add(jComboBox5, gridBagConstraints);
+        position3Panel.add(trackStatusPosition3ComboBox, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel10, gridBagConstraints);
+        inputsPanel.add(position3Panel, gridBagConstraints);
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 4"));
-        jPanel11.setLayout(new java.awt.GridBagLayout());
+        position4Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 4"));
+        position4Panel.setLayout(new java.awt.GridBagLayout());
 
-        position4TrainButtonGroup.add(jRadioButton11);
-        jRadioButton11.setText("Occupied");
+        position4TrainButtonGroup.add(occupiedPosition4RadioButton);
+        occupiedPosition4RadioButton.setText("Occupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel11.add(jRadioButton11, gridBagConstraints);
+        position4Panel.add(occupiedPosition4RadioButton, gridBagConstraints);
 
-        jLabel5.setText("Position 4");
+        trainPosition4Label.setText("Position 4");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel11.add(jLabel5, gridBagConstraints);
+        position4Panel.add(trainPosition4Label, gridBagConstraints);
 
-        position4TrainButtonGroup.add(jRadioButton12);
-        jRadioButton12.setText("Unoccupied");
+        position4TrainButtonGroup.add(unoccupiedPosition4RadioButton);
+        unoccupiedPosition4RadioButton.setText("Unoccupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel11.add(jRadioButton12, gridBagConstraints);
+        position4Panel.add(unoccupiedPosition4RadioButton, gridBagConstraints);
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
-        jComboBox9.addActionListener(new java.awt.event.ActionListener() {
+        trackStatusPosition4ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
+        trackStatusPosition4ComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox9ActionPerformed(evt);
+                trackStatusPosition4ComboBoxActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -742,125 +740,125 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel11.add(jComboBox9, gridBagConstraints);
+        position4Panel.add(trackStatusPosition4ComboBox, gridBagConstraints);
 
-        jLabel9.setText("Track 4");
+        trackPosition4Label.setText("Track 4");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        jPanel11.add(jLabel9, gridBagConstraints);
+        position4Panel.add(trackPosition4Label, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel11, gridBagConstraints);
+        inputsPanel.add(position4Panel, gridBagConstraints);
 
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch - F-D:C-A"));
-        jPanel12.setLayout(new java.awt.GridBagLayout());
+        switch1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch - F-D:C-A"));
+        switch1Panel.setLayout(new java.awt.GridBagLayout());
 
-        leftTrackButtonGroup.add(jRadioButton4);
-        jRadioButton4.setText("Track Wayside");
+        leftTrackButtonGroup.add(switch1AlternateRadioButton);
+        switch1AlternateRadioButton.setText("Track Wayside");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        jPanel12.add(jRadioButton4, gridBagConstraints);
+        switch1Panel.add(switch1AlternateRadioButton, gridBagConstraints);
 
-        leftTrackButtonGroup.add(jRadioButton3);
-        jRadioButton3.setSelected(true);
-        jRadioButton3.setText("Track Straight");
+        leftTrackButtonGroup.add(switch1DefaultRadioButton);
+        switch1DefaultRadioButton.setText("Track Straight");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        jPanel12.add(jRadioButton3, gridBagConstraints);
+        switch1Panel.add(switch1DefaultRadioButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel12, gridBagConstraints);
+        inputsPanel.add(switch1Panel, gridBagConstraints);
 
-        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch - N/A"));
-        jPanel13.setLayout(new java.awt.GridBagLayout());
+        switch2Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch - N/A"));
+        switch2Panel.setLayout(new java.awt.GridBagLayout());
 
-        rightTrackButtonGroup.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Track Straight");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rightTrackButtonGroup.add(switch2DefaultRadioButton);
+        switch2DefaultRadioButton.setText("Track Straight");
+        switch2DefaultRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                switch2DefaultRadioButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        jPanel13.add(jRadioButton1, gridBagConstraints);
+        switch2Panel.add(switch2DefaultRadioButton, gridBagConstraints);
 
-        rightTrackButtonGroup.add(jRadioButton2);
-        jRadioButton2.setText("Track Wayside");
+        rightTrackButtonGroup.add(switch2AlternateRadioButton);
+        switch2AlternateRadioButton.setText("Track Wayside");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel13.add(jRadioButton2, gridBagConstraints);
+        switch2Panel.add(switch2AlternateRadioButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel13, gridBagConstraints);
+        inputsPanel.add(switch2Panel, gridBagConstraints);
 
-        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Crossing - E:19"));
-        jPanel14.setLayout(new java.awt.GridBagLayout());
+        crossingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Crossing - E:19"));
+        crossingPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel24.setText("Crossing Status:");
+        crossingStatusLabel.setText("Crossing Status:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
-        jPanel14.add(jLabel24, gridBagConstraints);
+        crossingPanel.add(crossingStatusLabel, gridBagConstraints);
 
-        jRadioButton13.setText("Active");
+        crossingButtonGroup.add(crossingActiveRadioButton);
+        crossingActiveRadioButton.setText("Active");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel14.add(jRadioButton13, gridBagConstraints);
+        crossingPanel.add(crossingActiveRadioButton, gridBagConstraints);
 
-        jRadioButton14.setText("Inactive");
+        crossingButtonGroup.add(crossingInactiveRadioButton);
+        crossingInactiveRadioButton.setText("Inactive");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel14.add(jRadioButton14, gridBagConstraints);
+        crossingPanel.add(crossingInactiveRadioButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel14, gridBagConstraints);
+        inputsPanel.add(crossingPanel, gridBagConstraints);
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed/Authority"));
-        jPanel15.setLayout(new java.awt.GridBagLayout());
+        speedAuthorityPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed/Authority"));
+        speedAuthorityPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel10.setText("Suggested Speed(mph):");
+        suggestSpeedLabel.setText("Suggested Speed(mph):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel15.add(jLabel10, gridBagConstraints);
+        speedAuthorityPanel.add(suggestSpeedLabel, gridBagConstraints);
 
-        jTextField1.setText("15");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        suggestSpeedTextField.setText("15");
+        suggestSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                suggestSpeedTextFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -869,35 +867,35 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel15.add(jTextField1, gridBagConstraints);
+        speedAuthorityPanel.add(suggestSpeedTextField, gridBagConstraints);
 
-        jTextField2.setText("2000");
+        suggestAuthorityTextField.setText("2000");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel15.add(jTextField2, gridBagConstraints);
+        speedAuthorityPanel.add(suggestAuthorityTextField, gridBagConstraints);
 
-        jLabel11.setText("Suggested Authority(ft): ");
+        suggestAuthorityLabel.setText("Suggested Authority(ft): ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel15.add(jLabel11, gridBagConstraints);
+        speedAuthorityPanel.add(suggestAuthorityLabel, gridBagConstraints);
 
-        jLabel12.setText("Commanded Speed(mph): ");
+        commandedSpeedLabel.setText("Commanded Speed(mph): ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel15.add(jLabel12, gridBagConstraints);
+        speedAuthorityPanel.add(commandedSpeedLabel, gridBagConstraints);
 
-        jTextField3.setText("12.5");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        commandedSpeedTextField.setText("12.5");
+        commandedSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                commandedSpeedTextFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -906,38 +904,38 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel15.add(jTextField3, gridBagConstraints);
+        speedAuthorityPanel.add(commandedSpeedTextField, gridBagConstraints);
 
-        jLabel13.setText("Commanded Authority(ft):");
+        commandedAuthorityLabel.setText("Commanded Authority(ft):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel15.add(jLabel13, gridBagConstraints);
+        speedAuthorityPanel.add(commandedAuthorityLabel, gridBagConstraints);
 
-        jTextField4.setText("1879");
+        commandedAuthorityTextField.setText("1879");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel15.add(jTextField4, gridBagConstraints);
+        speedAuthorityPanel.add(commandedAuthorityTextField, gridBagConstraints);
 
-        jLabel27.setText("Block ID: ");
+        blockIDLabel.setText("Block ID: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel15.add(jLabel27, gridBagConstraints);
+        speedAuthorityPanel.add(blockIDLabel, gridBagConstraints);
 
-        jTextField11.setText("C12");
+        blockIDTextField.setText("C12");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel15.add(jTextField11, gridBagConstraints);
+        speedAuthorityPanel.add(blockIDTextField, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -945,15 +943,15 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel15, gridBagConstraints);
+        inputsPanel.add(speedAuthorityPanel, gridBagConstraints);
 
-        jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
-        jPanel16.setLayout(new java.awt.GridBagLayout());
+        actionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
+        actionsPanel.setLayout(new java.awt.GridBagLayout());
 
-        jButton3.setText("Refresh");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                refreshButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -961,43 +959,30 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel16.add(jButton3, gridBagConstraints);
+        actionsPanel.add(refreshButton, gridBagConstraints);
 
-        jButton1.setText("Simulate");
+        simulateButton.setText("Simulate");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel16.add(jButton1, gridBagConstraints);
+        actionsPanel.add(simulateButton, gridBagConstraints);
 
-        jButton2.setText("Reset");
+        resetButton.setText("Reset");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel16.add(jButton2, gridBagConstraints);
+        actionsPanel.add(resetButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        jPanel3.add(jPanel16, gridBagConstraints);
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanel17, new java.awt.GridBagConstraints());
+        inputsPanel.add(actionsPanel, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1007,13 +992,13 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel6.add(jPanel3, gridBagConstraints);
+        simulatePanel.add(inputsPanel, gridBagConstraints);
 
-        jTabbedPane1.addTab("Simulate", jPanel6);
+        trackControllerTabbedPane.addTab("Simulate", simulatePanel);
 
-        jPanel1.add(jTabbedPane1, java.awt.BorderLayout.PAGE_START);
+        trackControllerPanel.add(trackControllerTabbedPane, java.awt.BorderLayout.PAGE_START);
 
-        jScrollPane1.setViewportView(jPanel1);
+        trackControllerScrollPane.setViewportView(trackControllerPanel);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1022,167 +1007,167 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        add(jScrollPane1, gridBagConstraints);
+        add(trackControllerScrollPane, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void lineTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_lineTextFieldActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void trackNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackNumberTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_trackNumberTextFieldActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jRadioButton1.isSelected() && jRadioButton3.isSelected()) {
-            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img01.png"))); // NOI18N
-        } else if (jRadioButton2.isSelected() && jRadioButton4.isSelected()) {
-            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img02.png"))); // NOI18N
+    private void switchNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_switchNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_switchNumberTextFieldActionPerformed
+
+    private void crossingNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crossingNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crossingNumberTextFieldActionPerformed
+
+    private void trackSignalNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackSignalNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trackSignalNumberTextFieldActionPerformed
+
+    private void occupiedPosition1RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_occupiedPosition1RadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_occupiedPosition1RadioButtonActionPerformed
+
+    private void unoccupiedPosition1RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoccupiedPosition1RadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_unoccupiedPosition1RadioButtonActionPerformed
+
+    private void trackStatusPosition4ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackStatusPosition4ComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trackStatusPosition4ComboBoxActionPerformed
+
+    private void switch2DefaultRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_switch2DefaultRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_switch2DefaultRadioButtonActionPerformed
+
+    private void suggestSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggestSpeedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_suggestSpeedTextFieldActionPerformed
+
+    private void commandedSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commandedSpeedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_commandedSpeedTextFieldActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        if (switch2DefaultRadioButton.isSelected() && switch1DefaultRadioButton.isSelected()) {
+            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img01.png"))); // NOI18N
+        } else if (switch2AlternateRadioButton.isSelected() && switch1AlternateRadioButton.isSelected()) {
+            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img02.png"))); // NOI18N
         } else {
-            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img.png"))); // NOI18N
+            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img.png"))); // NOI18N
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
-
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox9ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox7;
-    private javax.swing.JComboBox<String> jComboBox8;
-    private javax.swing.JComboBox<String> jComboBox9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JPanel actionsPanel;
+    private javax.swing.JLabel blockIDLabel;
+    private javax.swing.JTextField blockIDTextField;
+    private javax.swing.JLabel blockNumberLabel;
+    private javax.swing.JTextField blockNumberTextField;
+    private javax.swing.JButton chooseFileButton;
+    private javax.swing.JLabel commandedAuthorityLabel;
+    private javax.swing.JTextField commandedAuthorityTextField;
+    private javax.swing.JLabel commandedSpeedLabel;
+    private javax.swing.JTextField commandedSpeedTextField;
+    private javax.swing.JPanel componentSummaryPanel;
+    private javax.swing.JRadioButton crossingActiveRadioButton;
+    private javax.swing.ButtonGroup crossingButtonGroup;
+    private javax.swing.JRadioButton crossingInactiveRadioButton;
+    private javax.swing.JLabel crossingNumberLabel;
+    private javax.swing.JTextField crossingNumberTextField;
+    private javax.swing.JPanel crossingPanel;
+    private javax.swing.JLabel crossingStatusLabel;
+    private javax.swing.JLabel currentBlockLabel;
+    private javax.swing.JScrollPane currentBlockScrollPane;
+    private javax.swing.JTable currentBlockTable;
+    private javax.swing.JTable currentCrossingScrollPane;
+    private javax.swing.JLabel currentCrossingsLabel;
+    private javax.swing.JScrollPane currentCrossingsScrollPane;
+    private javax.swing.JScrollPane currentSwitchScrollPane;
+    private javax.swing.JTable currentSwitchTable;
+    private javax.swing.JLabel currentSwitchesLabel;
+    private javax.swing.JComboBox<String> currentTrackControllerComboBox;
+    private javax.swing.JLabel currentTrackControllerLabel;
+    private javax.swing.JLabel currentTrackSignalLabel;
+    private javax.swing.JScrollPane currentTrackSignalsScrollPane;
+    private javax.swing.JTable currentTrackSignalsTable;
+    private javax.swing.JLabel currentTrainLabel;
+    private javax.swing.JScrollPane currentTrainsScrollPane;
+    private javax.swing.JTable currentTrainsTable;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel imagePanel;
+    private javax.swing.JPanel inputsPanel;
     private javax.swing.ButtonGroup leftTrackButtonGroup;
+    private javax.swing.JLabel lineLabel;
+    private javax.swing.JTextField lineTextField;
+    private javax.swing.JRadioButton occupiedPosition1RadioButton;
+    private javax.swing.JRadioButton occupiedPosition2RadioButton;
+    private javax.swing.JRadioButton occupiedPosition3RadioButton;
+    private javax.swing.JRadioButton occupiedPosition4RadioButton;
+    private javax.swing.JScrollPane plcProgramInputScrollPane;
+    private javax.swing.JTextArea plcProgramInputTextArea;
+    private javax.swing.JLabel plcProgramLabel;
+    private javax.swing.JTextField plcProgramTextField;
+    private javax.swing.JPanel plcSysNotifPanel;
+    private javax.swing.JPanel position1Panel;
     private javax.swing.ButtonGroup position1TrainButtonGroup;
+    private javax.swing.JPanel position2Panel;
     private javax.swing.ButtonGroup position2TrainButtonGroup;
+    private javax.swing.JPanel position3Panel;
     private javax.swing.ButtonGroup position3TrainButtonGroup;
+    private javax.swing.JPanel position4Panel;
     private javax.swing.ButtonGroup position4TrainButtonGroup;
+    private javax.swing.JButton refreshButton;
+    private javax.swing.JButton resetButton;
     private javax.swing.ButtonGroup rightTrackButtonGroup;
+    private javax.swing.JPanel selectionPanel;
+    private javax.swing.JButton simulateButton;
+    private javax.swing.JPanel simulatePanel;
+    private javax.swing.JPanel speedAuthorityPanel;
+    private javax.swing.JLabel suggestAuthorityLabel;
+    private javax.swing.JTextField suggestAuthorityTextField;
+    private javax.swing.JLabel suggestSpeedLabel;
+    private javax.swing.JTextField suggestSpeedTextField;
+    private javax.swing.JPanel summaryPanel;
+    private javax.swing.JRadioButton switch1AlternateRadioButton;
+    private javax.swing.JRadioButton switch1DefaultRadioButton;
+    private javax.swing.JPanel switch1Panel;
+    private javax.swing.JRadioButton switch2AlternateRadioButton;
+    private javax.swing.JRadioButton switch2DefaultRadioButton;
+    private javax.swing.JPanel switch2Panel;
+    private javax.swing.JLabel switchNumberLabel;
+    private javax.swing.JTextField switchNumberTextField;
+    private javax.swing.JScrollPane systemOutputScrollPane;
+    private javax.swing.JTextArea systemOutputTextArea;
+    private javax.swing.JPanel trackControllerPanel;
+    private javax.swing.JScrollPane trackControllerScrollPane;
+    private javax.swing.JTabbedPane trackControllerTabbedPane;
+    private javax.swing.JTextField trackNumberTextField;
+    private javax.swing.JLabel trackPosition1Label;
+    private javax.swing.JLabel trackPosition2Label;
+    private javax.swing.JLabel trackPosition3Label;
+    private javax.swing.JLabel trackPosition4Label;
+    private javax.swing.JLabel trackSignalNumberLabel;
+    private javax.swing.JTextField trackSignalNumberTextField;
+    private javax.swing.JComboBox<String> trackStatusPosition1ComboBox;
+    private javax.swing.JComboBox<String> trackStatusPosition2ComboBox;
+    private javax.swing.JComboBox<String> trackStatusPosition3ComboBox;
+    private javax.swing.JComboBox<String> trackStatusPosition4ComboBox;
+    private javax.swing.JLabel trainNumberLabel;
+    private javax.swing.JLabel trainPosition1Label;
+    private javax.swing.JLabel trainPosition2Label;
+    private javax.swing.JLabel trainPosition3Label;
+    private javax.swing.JLabel trainPosition4Label;
+    private javax.swing.JRadioButton unoccupiedPosition1RadioButton;
+    private javax.swing.JRadioButton unoccupiedPosition2RadioButton;
+    private javax.swing.JRadioButton unoccupiedPosition3RadioButton;
+    private javax.swing.JRadioButton unoccupiedPosition4RadioButton;
     // End of variables declaration//GEN-END:variables
 }
