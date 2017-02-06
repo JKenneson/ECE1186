@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trackmodel;
+package com.rogueone.trackmodel;
 
 import com.rogueone.trackmodel.gui.TrackModelGUI;
 import java.io.File;
@@ -35,6 +35,25 @@ public class TrackModel {
         
         Row rowHeader = sheetBlocks.getRow(0);
         Cell cells[] = new Cell[rowHeader.getLastCellNum()];
+        
+        //Expected column order in data file:
+        //0     line
+        //1     section
+        //2     isHead
+        //3     isTail
+        //4     blockID
+        //5     portA
+        //6     portB
+        //7     switchID
+        //8     length
+        //9     grade
+        //10    speedLimit
+        //11    containsCrossing
+        //12    isUnderground
+        //13    stationName
+        //14    elevation
+        //15    cumulativeElevation
+        //16    isStaticSwitchBlock
         
         //Iterate over all rows in the first column
         for (int i = 1; i <= sheetBlocks.getLastRowNum(); i++) {

@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import trackmodel.TrackModel;
+import com.rogueone.trackmodel.TrackModel;
 
 /**
  *
