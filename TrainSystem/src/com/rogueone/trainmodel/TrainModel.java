@@ -101,7 +101,31 @@ public class TrainModel {
         frame.pack();
         frame.setVisible(true);     //Make sure to set it visible
         
-        return  trainModelGUI;  //Return the GUI
+        //Initialize the GUI
+        trainModelObject.InitializeInputPanel(trainModelGUI);
+        
+        return  trainModelGUI;  //Return the GUI object
+    }
+    
+    
+    /**
+     * Initialize some properties and variables in the train model window's input panel
+     * 
+     * @author Jonathan Kenneson
+     * @param gui A TrainModelGUI object that will get initialized with values for the input panel
+     */
+    public void InitializeInputPanel(TrainModelGUI gui) {
+        //All spinner values initialized just once
+        gui.tempInputSpinner.setValue(this.temperature);
+        
+        gui.ctcSetPointSpinner.setValue(this.ctcSetPoint);
+        gui.ctcAuthoritySpinner.setValue(this.authority);
+        
+        gui.driverSetPointSpinner.setValue(this.driverSetPoint);
+        gui.driverPowerSpinner.setValue(this.powerReceived);
+        
+        gui.passengersInputSpinner.setValue(this.passengersEmbarking);
+        gui.numCarsInputSpinner.setValue(this.numCars);
     }
     
     
@@ -132,7 +156,6 @@ public class TrainModel {
             gui.lightsState.setText("Off");
         }
         gui.tempState.setText(Integer.toString(this.temperature));
-        gui.tempInputSpinner.setValue(this.temperature);
         if(this.emergencyBrakeActivated) {      //Default to always print emergency brake if both emergency and service are activated
             gui.brakesState.setText("Emergency");
         }
@@ -147,25 +170,20 @@ public class TrainModel {
         gui.currSpeedState.setText(Integer.toString(this.currSpeed));
         gui.speedLimitState.setText(Integer.toString(this.speedLimit));
         gui.driverSetPointState.setText(Integer.toString(this.driverSetPoint));
-        gui.driverSetPointSpinner.setValue(this.driverSetPoint);
         gui.ctcSetPointState.setText(Integer.toString(this.ctcSetPoint));
-        gui.ctcSetPointSpinner.setValue(this.ctcSetPoint);
         gui.authorityState.setText(Integer.toString(this.authority));
-        gui.ctcAuthoritySpinner.setValue(this.authority);
-        gui.driverPowerSpinner.setValue(this.powerReceived);
         
         //Station and Passengers
         gui.nextStationState.setText(this.approachingStation);
         gui.passOnBoardState.setText(Integer.toString(this.passengersOnBaord));
         gui.passDisembarkState.setText(Integer.toString(this.passengersDisembarking));
-        gui.passengersInputSpinner.setValue(this.passengersEmbarking);
         gui.maxCapacityState.setText(Integer.toString(this.passengerMaxCapacity));
         
         //Physical Characteristics
         gui.trainWeightState.setText(Integer.toString(this.trainWeight));
         gui.trainLengthState.setText(Integer.toString(this.trainLength));
         gui.numCarsState.setText(Integer.toString(this.numCars));
-        gui.numCarsInputSpinner.setValue(this.numCars);
+        
         if(this.trackAntennaActivated) {
             gui.trackAntennaState.setText("Activated");
         }
@@ -180,7 +198,6 @@ public class TrainModel {
         }
     }
 
-    
     
     
     /**
@@ -207,7 +224,18 @@ public class TrainModel {
         
     }
     
-        /**
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
      * Following are all getters and setters for the TrainModel class
      * 
      * @author Jonathan Kenneson
