@@ -5,6 +5,7 @@
  */
 package com.rogueone.trackmodel;
 
+import com.rogueone.global.Global;
 import com.rogueone.trackmodel.gui.TrackModelGUI;
 import java.io.File;
 import java.io.IOException;
@@ -65,51 +66,45 @@ public class TrackModel {
         //Iterate over all rows in the first column
         for (int i = 1; i <= sheetBlocks.getLastRowNum(); i++) {
             Row rowTemp = sheetBlocks.getRow(i);
-            String tempLine = rowTemp.getCell(0).getStringCellValue();
-            String tempSection = rowTemp.getCell(1).getStringCellValue();
-            boolean tempIsHead = false;
-            if(rowTemp.getCell(2) != null) {
-                tempIsHead = true;
-            }
-            boolean tempIsTail = false;
-            if(rowTemp.getCell(3) != null) {
-                tempIsTail = true;
-            }
+            //Parse Enums
+            Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
+            Global.Section tempSection = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
+            //Parse ints
             int tempBlockID = (int) rowTemp.getCell(4).getNumericCellValue();
             int tempSwitchID = (int) rowTemp.getCell(7).getNumericCellValue();
-            int tempLength = (int) rowTemp.getCell(8).getNumericCellValue();
+            int tempStationID = (int) rowTemp.getCell(13).getNumericCellValue();
+            //Parse doubles
             double tempGrade = rowTemp.getCell(9).getNumericCellValue();
-            int tempSpeedLimit = (int) rowTemp.getCell(10).getNumericCellValue();  
-            boolean tempContainsCrossing = false;
-            if(rowTemp.getCell(11) != null) {
-                tempContainsCrossing = true;
-            }
-            boolean tempIsUnderground = false;
-            if(rowTemp.getCell(12) != null) {
-                tempIsUnderground = true;
-            }
-            String tempStationName = rowTemp.getCell(13).getStringCellValue();
+            double tempLength = rowTemp.getCell(8).getNumericCellValue();
+            double tempSpeedLimit = rowTemp.getCell(10).getNumericCellValue();
             double tempElevation = rowTemp.getCell(14).getNumericCellValue();
             double tempCumulativeElevation = rowTemp.getCell(15).getNumericCellValue(); 
-            boolean tempIsStaticSwitchBlock = false;
-            if(rowTemp.getCell(16) != null) {
-                tempIsStaticSwitchBlock = true;
-            }
-            Block newBlock = new Block(tempLine, tempSection, tempBlockID, 
-                    tempSwitchID, tempIsStaticSwitchBlock, tempStationName, 
-                    tempLength, tempGrade, tempSpeedLimit, tempElevation, 
-                    tempCumulativeElevation, tempIsHead, tempIsTail, 
-                    tempContainsCrossing, tempIsUnderground);
-            blocks.add(newBlock);
+            //Parse booleans
+            boolean tempIsHead = rowTemp.getCell(2) != null && rowTemp.getCell(2).getStringCellValue().equals("Y");
+            boolean tempIsTail = rowTemp.getCell(3) != null && rowTemp.getCell(3).getStringCellValue().equals("Y");
+            boolean tempContainsCrossing = rowTemp.getCell(11) != null && rowTemp.getCell(11).getStringCellValue().equals("Y");
+            boolean tempIsUnderground = rowTemp.getCell(12) != null && rowTemp.getCell(12).getStringCellValue().equals("Y");
+            boolean tempIsStaticSwitchBlock = rowTemp.getCell(16) != null && rowTemp.getCell(16).getStringCellValue().equals("Y");
             
-            //Check for existing line
-            if(lines.indexOf(newBlock.getLine()) == -1) {
-                //Line does not exist, add it
-                lines.add(newBlock.getLine());
-            }
-            //Check for existing section
+            //Formatting is weird, but easier to develop (for now)
+            Block newBlock = new Block(
+                    tempLine, 
+                    tempSection, 
+                    tempBlockID, 
+                    tempSwitchID, 
+                    tempIsStaticSwitchBlock, 
+                    tempStationID,
+                    tempLength,
+                    tempGrade,
+                    tempSpeedLimit,
+                    tempElevation,
+                    tempCumulativeElevation, 
+                    tempIsHead, 
+                    tempIsTail, 
+                    tempContainsCrossing, 
+                    tempIsUnderground );
+            blocks.add(newBlock);
         }
-        
         
         printBlocks();
     }
