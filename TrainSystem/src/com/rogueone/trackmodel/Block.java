@@ -5,34 +5,43 @@
  */
 package com.rogueone.trackmodel;
 
+import com.rogueone.global.Global;
+import com.rogueone.global.Global.PieceType;
+
 /**
  *
  * @author Dan
  */
-public class Block {
+public class Block implements TrackPiece {
     
-    private String line;
-    private String section;
+    private Global.Line line;
+    private Global.Section section;
+    protected TrackPiece portA;
+    protected TrackPiece portB;
     private int blockID;
-    protected Block portA;
-    protected Block portB;
     private int switchID;
-    private boolean isStaticSwitchBlock;
-    private int length;
+    private int stationID;
+    private double length;
     private double grade;
-    private int speedLimit;
     private double elevation;
     private double cumulativeElevation;
+    private double speedLimit;
+    private boolean isStaticSwitchBlock;
     private boolean isHead;
     private boolean isTail;
     private boolean containsCrossing;
-    private boolean isUnderground;
     private boolean isCrossingDown;
-    private Station station;
+    private boolean isUnderground;
+    private boolean failureBrokenRail;
+    private boolean failurePowerOutage;
+    private boolean failureTrackCircuit;
+    private boolean occupied;
+    private String beaconMessage;
     
-    public Block(String newLine, String newSection, int newBlockID, 
+    // Constructor
+    public Block(Global.Line newLine, Global.Section newSection, int newBlockID, 
             int newSwitchID, boolean newIsStaticSwitchBlock, 
-            String newStationName, int newLength, double newGrade, int newSpeedLimit,
+            int newStationID, double newLength, double newGrade, double newSpeedLimit,
             double newElevation, double newCumulativeElevation, 
             boolean newIsHead, boolean newIsTail, boolean newContainsCrossing, 
             boolean newIsUnderground) {
@@ -43,6 +52,7 @@ public class Block {
         portB = null;
         switchID = newSwitchID;
         isStaticSwitchBlock = newIsStaticSwitchBlock;
+        stationID = newStationID;
         length = newLength;
         grade = newGrade;
         speedLimit = newSpeedLimit;
@@ -51,36 +61,59 @@ public class Block {
         isHead = newIsHead;
         isTail = newIsTail;
         containsCrossing = newContainsCrossing;
-        isUnderground = newIsUnderground;
         isCrossingDown = false;
-        
-        if (newStationName != null) {
-            station = new Station(newStationName, true);
-        }
-        else {
-            station = null;
-        }
+        isUnderground = newIsUnderground;
+        failureBrokenRail = false;
+        failurePowerOutage = false;
+        failureTrackCircuit = false;
+        occupied = false;
+        beaconMessage = null;
     }
     
-    public Block getPortA() {
+    // TrackPiece interface methods
+    public TrackPiece getNext(TrackPiece previous) {
+        if (previous.getType() == portA.getType() && previous.getID() == portA.getID())
+            return portB;
+        else if (previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+            return portA;
+        }
+        else {
+            return null;
+        }
+    } 
+    public Global.PieceType getType() {
+        return PieceType.BLOCK;
+    }
+    public int getID() {
+        return blockID;
+    }
+    
+    // Getters & Setters
+    public Global.Line getLine() {
+        return line;
+    }
+    public Global.Section getSections() {
+        return section;
+    }
+    public TrackPiece getPortA() {
         return portA;
     }
-    public void setPortA(Block newPortA) {
+    public void setPortA(TrackPiece newPortA) {
         portA = newPortA;
     }
-    public Block getPortB() {
+    public TrackPiece getPortB() {
         return portB;
     }
-    public void setPortB(Block newPortB) {
+    public void setPortB(TrackPiece newPortB) {
         portB = newPortB;
     }
     public int getSwitchID() {
         return switchID;
     }
-    public boolean isStaticSwitchBlock() {
-        return isStaticSwitchBlock;
+    public int getStationID() {
+        return stationID;
     }
-    public int getLength() {
+    public double getLength() {
         return length;
     }
     public void setLength(int newLength) {
@@ -104,6 +137,15 @@ public class Block {
     public void setCumulativeElevation(double newCumulativeElevation) {
         cumulativeElevation = newCumulativeElevation;
     }
+    public double getSpeedLimit() {
+        return speedLimit;
+    }
+    public void setSpeedLimit(double newSpeedLimit) {
+        speedLimit = newSpeedLimit;
+    }
+    public boolean isStaticSwitchBlock() {
+        return isStaticSwitchBlock;
+    }
     public boolean isHead() {
         return isHead;
     }
@@ -119,9 +161,38 @@ public class Block {
     public boolean isCrossingDown() {
         return isCrossingDown;
     }
-    public Station getStation() {
-        return station;
+    public void setFailureBrokenRail(boolean fail) {
+        failureBrokenRail = fail;
     }
+    public boolean getFailureBrokenRail() {
+        return failureBrokenRail;
+    }
+    public void setFailurePowerOutage(boolean fail) {
+        failurePowerOutage = fail;
+    }
+    public boolean getFailurePowerOutage() {
+        return failurePowerOutage;
+    }
+    public void setFailureTrackCircuit(boolean fail) {
+        failureTrackCircuit = fail;
+    }
+    public boolean getFailureTrackCircuit() {
+        return failureTrackCircuit;
+    }
+    public boolean isOccupied() {
+        return occupied;
+    }
+    public void setOccupied(boolean newOccupied) {
+        occupied = newOccupied;
+    }
+    public String getBeaconMessage() {
+        return beaconMessage;
+    }
+    public void setBeaconMessage(String newBeaconMessage) {
+        beaconMessage = newBeaconMessage;
+    }
+    
+    //Overridden methods
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Line: ");
@@ -130,10 +201,14 @@ public class Block {
         sb.append(section);
         sb.append(", Block: ");
         sb.append(blockID);
-        sb.append(", Port A: ");
-        sb.append(portA);
-        sb.append(", Port B: ");
-        sb.append(portB);
+        if(portA != null) {
+           sb.append(", Port A: ");
+           sb.append(portA.getID()); 
+        }
+        if(portB != null) {
+           sb.append(", Port B: ");
+           sb.append(portB.getID());
+        }
         sb.append(", Switch: ");
         sb.append(switchID);
         sb.append(", Static Switch Block: ");
@@ -155,7 +230,11 @@ public class Block {
         sb.append(", Underground: ");
         sb.append(isUnderground);
         sb.append(", Station: ");
-        sb.append(station);
+        sb.append(stationID);
+        sb.append(", Speed Limit: ");
+        sb.append(speedLimit);
+        sb.append(", Beacon: ");
+        sb.append(beaconMessage);
         return sb.toString();
     }
 }
