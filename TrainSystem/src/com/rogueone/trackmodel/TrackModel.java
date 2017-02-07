@@ -23,9 +23,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class TrackModel {
     
-    ArrayList<String> lines = new ArrayList<String>();
-    ArrayList<String> sections = new ArrayList<String>();
     ArrayList<Block> blocks = new ArrayList<Block>();
+    ArrayList<Station> stations = new ArrayList<Station>();
+    ArrayList<Switch> switches = new ArrayList<Switch>();
     
     public static void main(String[] args) throws InterruptedException {
         TrackModelGUI trackModelGUI = new TrackModelGUI();
@@ -52,20 +52,33 @@ public class TrackModel {
         //10    speedLimit
         //11    containsCrossing
         //12    isUnderground
-        //13    stationName
+        //13    stationID
         //14    elevation
         //15    cumulativeElevation
         //16    isStaticSwitchBlock
         
         XSSFWorkbook testWorkbook = new XSSFWorkbook(file);
-        XSSFSheet sheetBlocks = testWorkbook.getSheetAt(0);
+  
+        parseBlocks(testWorkbook.getSheetAt(0));
+        parseStations(testWorkbook.getSheetAt(1));
+        parseSwitches(testWorkbook.getSheetAt(2));
         
-        Row rowHeader = sheetBlocks.getRow(0);
+        System.out.println("BLOCKS:");
+        printBlocks();
+        System.out.println("STATIONS:");
+        printStations();
+        System.out.println("SWITCHES:");
+        printSwitches();
+       
+    }
+    
+    public void parseBlocks(XSSFSheet sheet) {
+        Row rowHeader = sheet.getRow(0);
         Cell cells[] = new Cell[rowHeader.getLastCellNum()];  
         
         //Iterate over all rows in the first column
-        for (int i = 1; i <= sheetBlocks.getLastRowNum(); i++) {
-            Row rowTemp = sheetBlocks.getRow(i);
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row rowTemp = sheet.getRow(i);
             //Parse Enums
             Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
             Global.Section tempSection = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
@@ -105,13 +118,64 @@ public class TrackModel {
                     tempIsUnderground );
             blocks.add(newBlock);
         }
+    }
+    
+    public void parseStations(XSSFSheet sheet) {
+        Row rowHeader = sheet.getRow(0);
+        Cell cells[] = new Cell[rowHeader.getLastCellNum()];  
+ 
+        //Iterate over all rows in the first column
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row rowTemp = sheet.getRow(i);
+            
+            int tempStationID = (int) rowTemp.getCell(0).getNumericCellValue();
+            String tempStationName = rowTemp.getCell(1).getStringCellValue();
+            Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
+            int tempBlockA = (int) rowTemp.getCell(3).getNumericCellValue();
+            Global.Section tempBlockASection = Global.Section.valueOf(rowTemp.getCell(4).getStringCellValue());
+            int tempBlockB = -1;
+            Global.Section tempBlockBSection = Global.Section.ZZ;
+            if (rowTemp.getCell(5) != null && rowTemp.getCell(6) != null) {
+               tempBlockB = (int) rowTemp.getCell(5).getNumericCellValue();
+               tempBlockBSection = Global.Section.valueOf(rowTemp.getCell(6).getStringCellValue()); 
+            } 
+            boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
+            boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
+            
+            //Formatting is weird, but easier to develop (for now)
+            Station newStation = new Station(
+                tempStationID,
+                tempStationName,
+                tempLine,
+                tempBlockA,
+                tempBlockASection,
+                tempBlockB,
+                tempBlockBSection,
+                tempRightSide,
+                tempLeftSide );
+            stations.add(newStation);
+        }
+    }
+    
+    public void parseSwitches(XSSFSheet sheet) {
         
-        printBlocks();
     }
     
     public void printBlocks() {
         for(Block b : blocks) {
             System.out.println(b);
+        }
+    }
+    
+    public void printStations() {
+        for(Station s : stations) {
+            System.out.println(s);
+        }
+    }
+    
+    public void printSwitches() {
+        for(Switch s : switches) {
+            System.out.println(s);
         }
     }
 }

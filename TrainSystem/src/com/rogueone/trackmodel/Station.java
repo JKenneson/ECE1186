@@ -5,29 +5,99 @@
  */
 package com.rogueone.trackmodel;
 
+import com.rogueone.global.Global;
+
 /**
  *
  * @author Dan
  */
 public class Station {
     
-    private String name;
+    private int stationID;
+    private String stationName;
+    private Global.Line line;
+    private int blockA;
+    private Global.Section blockASection;
+    private int blockB;
+    private Global.Section blockBSection;
     private boolean rightSide;
-    private int temperature;
-    private boolean heaterOn;
-    private int waitingPassengers;
+    private boolean leftSide;
+    private int waitingPassengers = 0;
+    private int temperature = -1;
+    private boolean heaterOn = false;
     
-    public Station(String tempName, boolean tempRightSide) {
-        name = tempName;
-        rightSide = tempRightSide;
+    //Contructor
+    public Station(int newStationID, String newStationName, Global.Line newLine, int newBlockA, Global.Section newBlockASection, 
+            int newBlockB, Global.Section newBlockBSection, boolean newRightSide, boolean newLeftSide) {
+        stationID = newStationID;
+        stationName = newStationName;
+        line = newLine;
+        blockA = newBlockA;
+        blockASection = newBlockASection;
+        blockB = newBlockB;
+        blockBSection = newBlockBSection;
+        rightSide = newRightSide;
+        leftSide = newLeftSide;
         //Mock passenger and temperature data for now, until the random simulators are finished.
         waitingPassengers = 0;
         temperature = -1;
         heaterOn = false;
     }
-    
-    //NOTE: I don't think we'll need all these methods, but they're here for now for early prototyping purposes.
- 
+    //Getters and Setters
+    public int getStationID() {
+        return stationID;
+    }
+    public void setStationID(int stationID) {
+        this.stationID = stationID;
+    }
+    public String getStationName() {
+        return stationName;
+    }
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+    public Global.Line getLine() {
+        return line;
+    }
+    public void setLine(Global.Line line) {
+        this.line = line;
+    }
+    public int getBlockA() {
+        return blockA;
+    }
+    public void setBlockA(int blockA) {
+        this.blockA = blockA;
+    }
+    public Global.Section getBlockASection() {
+        return blockASection;
+    }
+    public void setBlockASection(Global.Section blockASection) {
+        this.blockASection = blockASection;
+    }
+    public int getBlockB() {
+        return blockB;
+    }
+    public void setBlockB(int blockB) {
+        this.blockB = blockB;
+    }
+    public Global.Section getBlockBSection() {
+        return blockBSection;
+    }
+    public void setBlockBSection(Global.Section blockBSection) {
+        this.blockBSection = blockBSection;
+    }
+    public boolean isRightSide() {
+        return rightSide;
+    }
+    public void setRightSide(boolean rightSide) {
+        this.rightSide = rightSide;
+    }
+    public boolean isLeftSide() {
+        return leftSide;
+    }
+    public void setLeftSide(boolean leftSide) {
+        this.leftSide = leftSide;
+    }
     public void setHeater(boolean on)
     {
         if (on) {
@@ -37,46 +107,44 @@ public class Station {
             heaterOn = false;
         }    
     }
-    
     public boolean isHeaterOn() {
         return heaterOn;
     }
-    
     public void setTemperature(int newTemperature) {
         temperature = newTemperature;
     }
-    
     public int getTemperature() {
         return temperature;
     }
-    
-    public void setRightSide(boolean isOnRightSide) {
-        rightSide = isOnRightSide;
-    }
-    
-    public boolean isOnRightSide() {
-        return rightSide;
-    }
-    
-    public void setName(String newName) {
-        name = newName;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
     public void queuePassengers(int newPassengers) {
         waitingPassengers =+ newPassengers;
     }
-    
     public int boardPassengers(int boardingPassengers) {
         waitingPassengers =- boardingPassengers;
         return waitingPassengers;
         //No support for negative passengers YET
     }
     public String toString() {
-        return name;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ");
+        sb.append(stationName);
+        sb.append(", ID: ");
+        sb.append(stationID);
+        sb.append(", line: ");
+        sb.append(line);
+        sb.append(", Block A: ");
+        sb.append(blockA);
+        sb.append(", Block A Section: ");
+        sb.append(blockASection);
+        sb.append(", Block B: ");
+        sb.append(blockB);
+        sb.append(", Block B Section: ");
+        sb.append(blockBSection);
+        sb.append(", Right Side: ");
+        sb.append(rightSide);
+        sb.append(", Left Side: ");
+        sb.append(leftSide);
+        return sb.toString();
     }
     
 }

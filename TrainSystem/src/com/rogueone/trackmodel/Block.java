@@ -164,11 +164,20 @@ public class Block implements TrackPiece {
     public void setFailureBrokenRail(boolean fail) {
         failureBrokenRail = fail;
     }
+    public boolean getFailureBrokenRail() {
+        return failureBrokenRail;
+    }
     public void setFailurePowerOutage(boolean fail) {
         failurePowerOutage = fail;
     }
+    public boolean getFailurePowerOutage() {
+        return failurePowerOutage;
+    }
     public void setFailureTrackCircuit(boolean fail) {
         failureTrackCircuit = fail;
+    }
+    public boolean getFailureTrackCircuit() {
+        return failureTrackCircuit;
     }
     public boolean isOccupied() {
         return occupied;
