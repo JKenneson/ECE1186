@@ -15,47 +15,55 @@ import com.rogueone.global.Global.PieceType;
 public class Switch implements TrackPiece {
     
     private int centralSwitchID;
+    private Global.Line line;
     private TrackPiece portA;
     private TrackPiece portB;
     private TrackPiece portC;
     private boolean activated;
     
-    public Switch(int newCentralSwitchID) {
+    //Constructor
+    public Switch(int newCentralSwitchID, Global.Line newLine, TrackPiece newPortA, TrackPiece newPortB, TrackPiece newPortC) {
         centralSwitchID = newCentralSwitchID;
-        portA = null;   //static port
-        portB = null;   //default dependent port
-        portC = null;   //alternate dependent port
+        line = newLine;
+        portA = newPortA;   //static port
+        portB = newPortB;   //default dependent port
+        portC = newPortC;   //alternate dependent port
         activated = false;
     }
     
+    //Getters & Setters
     public void setPortA(TrackPiece port){
         portA = port;
     }
-    
+    public TrackPiece getPortA() {
+        return portA;
+    }
     public void setPortB(TrackPiece port){
         portB = port;
     }
-    
+    public TrackPiece getPortB() {
+        return portB;
+    }
     public void setPortC(TrackPiece port){
         portC = port;
     }
-    
+    public TrackPiece getPortC() {
+        return portC;
+    }
     public void toggleSwitch() {
         activated = !activated;
     }
-    
     public void setSwitch(boolean activate) {
         activated = activate;
     }
     
+    //TrackPiece interface methods
     public int getID() {
         return centralSwitchID;
     }
-    
     public Global.PieceType getType() {
         return PieceType.SWITCH;
     }
-    
     public TrackPiece getNext(TrackPiece previous) {
         //entering from dependent block B, exiting the static port
         if (previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
@@ -78,17 +86,20 @@ public class Switch implements TrackPiece {
             return null;
         }
     }
+    
+    //Overridden methods
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Switch: ");
         sb.append(centralSwitchID);
+        sb.append(", Line: ");
+        sb.append(line);
         sb.append(", Port A: ");
-        sb.append(portA);
+        sb.append(portA.getID());
         sb.append(", Port B: ");
-        sb.append(portB);
+        sb.append(portB.getID());
         sb.append(", Port C: ");
         sb.append(centralSwitchID);
         return sb.toString();
-    }
-    
+    }  
 }

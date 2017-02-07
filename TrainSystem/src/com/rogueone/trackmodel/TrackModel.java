@@ -131,14 +131,31 @@ public class TrackModel {
             int tempStationID = (int) rowTemp.getCell(0).getNumericCellValue();
             String tempStationName = rowTemp.getCell(1).getStringCellValue();
             Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
-            int tempBlockA = (int) rowTemp.getCell(3).getNumericCellValue();
-            Global.Section tempBlockASection = Global.Section.valueOf(rowTemp.getCell(4).getStringCellValue());
-            int tempBlockB = -1;
+            int a = (int) rowTemp.getCell(3).getNumericCellValue();
+            int b = -1;
+            if (rowTemp.getCell(5) != null) {
+                a = (int) rowTemp.getCell(5).getNumericCellValue();
+            }
+            //Find ports
+            TrackPiece tempPortA = null;
+            TrackPiece tempPortB= null;
+            for(Block block : blocks) {
+                if(block.getLine() == tempLine && block.getID() == a) {
+                    tempPortA = block;
+                }
+                if(block.getLine() == tempLine && block.getID() == b) {
+                    tempPortB = block;
+                }
+            }
+            //Find sections
+            Global.Section tempBlockASection = Global.Section.ZZ;
             Global.Section tempBlockBSection = Global.Section.ZZ;
-            if (rowTemp.getCell(5) != null && rowTemp.getCell(6) != null) {
-               tempBlockB = (int) rowTemp.getCell(5).getNumericCellValue();
+            if (tempPortA != null) {
+               tempBlockASection = Global.Section.valueOf(rowTemp.getCell(4).getStringCellValue());
+            }
+            if (tempPortB != null) {
                tempBlockBSection = Global.Section.valueOf(rowTemp.getCell(6).getStringCellValue()); 
-            } 
+            }
             boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
             boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
             
@@ -147,9 +164,9 @@ public class TrackModel {
                 tempStationID,
                 tempStationName,
                 tempLine,
-                tempBlockA,
+                tempPortA,
                 tempBlockASection,
-                tempBlockB,
+                tempPortB,
                 tempBlockBSection,
                 tempRightSide,
                 tempLeftSide );
@@ -158,6 +175,43 @@ public class TrackModel {
     }
     
     public void parseSwitches(XSSFSheet sheet) {
+        Row rowHeader = sheet.getRow(0);
+        Cell cells[] = new Cell[rowHeader.getLastCellNum()];  
+ 
+        //Iterate over all rows in the first column
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row rowTemp = sheet.getRow(i);
+            
+            int tempSwitchID = (int) rowTemp.getCell(0).getNumericCellValue();
+            Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(1).getStringCellValue());
+            int a = (int) rowTemp.getCell(2).getNumericCellValue();
+            int b = (int) rowTemp.getCell(3).getNumericCellValue();       
+            int c = (int) rowTemp.getCell(4).getNumericCellValue();
+            TrackPiece tempPortA = null;
+            TrackPiece tempPortB= null;
+            TrackPiece tempPortC= null;
+            for(Block block : blocks) {
+                if(block.getLine() == tempLine && block.getID() == a) {
+                    tempPortA = block;
+                }
+                if(block.getLine() == tempLine && block.getID() == b) {
+                    tempPortB = block;
+                }
+                if(block.getLine() == tempLine && block.getID() == c) {
+                    tempPortC = block;
+                }
+            }
+            
+            Switch newSwitch = new Switch(
+                tempSwitchID,
+                tempLine,
+                tempPortA,
+                tempPortB,
+                tempPortC );
+            
+            switches.add(newSwitch);
+        }
+        
         
     }
     

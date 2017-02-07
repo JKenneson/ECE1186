@@ -16,9 +16,9 @@ public class Station {
     private int stationID;
     private String stationName;
     private Global.Line line;
-    private int blockA;
+    private TrackPiece blockA;
     private Global.Section blockASection;
-    private int blockB;
+    private TrackPiece blockB;
     private Global.Section blockBSection;
     private boolean rightSide;
     private boolean leftSide;
@@ -27,8 +27,8 @@ public class Station {
     private boolean heaterOn = false;
     
     //Contructor
-    public Station(int newStationID, String newStationName, Global.Line newLine, int newBlockA, Global.Section newBlockASection, 
-            int newBlockB, Global.Section newBlockBSection, boolean newRightSide, boolean newLeftSide) {
+    public Station(int newStationID, String newStationName, Global.Line newLine, TrackPiece newBlockA, Global.Section newBlockASection, 
+            TrackPiece newBlockB, Global.Section newBlockBSection, boolean newRightSide, boolean newLeftSide) {
         stationID = newStationID;
         stationName = newStationName;
         line = newLine;
@@ -62,10 +62,10 @@ public class Station {
     public void setLine(Global.Line line) {
         this.line = line;
     }
-    public int getBlockA() {
+    public TrackPiece getBlockA() {
         return blockA;
     }
-    public void setBlockA(int blockA) {
+    public void setBlockA(TrackPiece blockA) {
         this.blockA = blockA;
     }
     public Global.Section getBlockASection() {
@@ -74,10 +74,10 @@ public class Station {
     public void setBlockASection(Global.Section blockASection) {
         this.blockASection = blockASection;
     }
-    public int getBlockB() {
+    public TrackPiece getBlockB() {
         return blockB;
     }
-    public void setBlockB(int blockB) {
+    public void setBlockB(TrackPiece blockB) {
         this.blockB = blockB;
     }
     public Global.Section getBlockBSection() {
