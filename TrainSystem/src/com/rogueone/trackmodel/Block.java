@@ -85,7 +85,7 @@ public class Block implements TrackPiece {
         }
     }
     
-    public PieceType getType() {
+    public Global.PieceType getType() {
         return PieceType.BLOCK;
     }
     

@@ -52,7 +52,7 @@ public class Switch implements TrackPiece {
         return centralSwitchID;
     }
     
-    public PieceType getType() {
+    public Global.PieceType getType() {
         return PieceType.SWITCH;
     }
     
