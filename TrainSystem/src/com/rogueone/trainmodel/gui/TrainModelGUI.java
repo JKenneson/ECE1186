@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The train model GUI class interacts with the TrainModel.java class file, and is able to display important information,
+ *     communicate about button events, and allow the user to perform testing of the module
+ *
+ * @author Jonathan Kenneson
+ * @creation date 2/3/17
+ * @modification date 2/6/17
  */
 package com.rogueone.trainmodel.gui;
 
