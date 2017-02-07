@@ -5,20 +5,22 @@
  */
 package com.rogueone.trackmodel;
 
+import com.rogueone.global.Global;
+import com.rogueone.global.Global.PieceType;
+
 /**
  *
  * @author Dan
  */
-public class Switch extends Block {
+public class Switch implements TrackPiece {
     
     private int centralSwitchID;
-    private Block portC;
+    private TrackPiece portA;
+    private TrackPiece portB;
+    private TrackPiece portC;
     private boolean activated;
     
     public Switch(int newCentralSwitchID) {
-        //intialize block-specific fields, most are not used by switch 
-        super(null, null, -1, -1, false, null, -1, -1, -1, -1, -1, false, false, false, false);
-        //initialize switch-specific fields
         centralSwitchID = newCentralSwitchID;
         portA = null;   //static port
         portB = null;   //default dependent port
@@ -26,15 +28,15 @@ public class Switch extends Block {
         activated = false;
     }
     
-    public void setPortA(Block port){
+    public void setPortA(TrackPiece port){
         portA = port;
     }
     
-    public void setPortB(Block port){
+    public void setPortB(TrackPiece port){
         portB = port;
     }
     
-    public void setPortC(Block port){
+    public void setPortC(TrackPiece port){
         portC = port;
     }
     
@@ -50,17 +52,25 @@ public class Switch extends Block {
         return centralSwitchID;
     }
     
-    public Block getNextBlock(Block previousBlock) {
-        //entering from a dependent block, exiting the static port
-        if (previousBlock.equals(portB) || previousBlock.equals(portC)) {
+    public PieceType getType() {
+        return PieceType.SWITCH;
+    }
+    
+    public TrackPiece getNext(TrackPiece previous) {
+        //entering from dependent block B, exiting the static port
+        if (previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+            return portA;
+        }
+        //entering from dependent block C, exiting the static port
+        else if (previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
             return portA;
         }
         //entering from the static port, exiting the default dependent port
-        else if (previousBlock.equals(portA) && !activated) {
+        else if (previous.getType() == portA.getType() && previous.getID() == portA.getID() && !activated) {
             return portB;
         }
         //entering from the static port, exiting the alternate dependent port
-        else if (previousBlock.equals(portA) && !activated) {
+        else if (previous.getType() == portA.getType() && previous.getID() == portA.getID() && activated) {
             return portC;
         }
         //invalid block

@@ -5,17 +5,20 @@
  */
 package com.rogueone.trackmodel;
 
+import com.rogueone.global.Global;
+import com.rogueone.global.Global.PieceType;
+
 /**
  *
  * @author Dan
  */
-public class Block {
+public class Block implements TrackPiece {
     
     private String line;
     private String section;
     private int blockID;
-    protected Block portA;
-    protected Block portB;
+    protected TrackPiece portA;
+    protected TrackPiece portB;
     private int switchID;
     private boolean isStaticSwitchBlock;
     private int length;
@@ -29,6 +32,12 @@ public class Block {
     private boolean isUnderground;
     private boolean isCrossingDown;
     private Station station;
+    private boolean failureBrokenRail;
+    private boolean failurePowerOutage;
+    private boolean failureTrackCircuit;
+    //occupied
+    //beacon
+    //beacon message
     
     public Block(String newLine, String newSection, int newBlockID, 
             int newSwitchID, boolean newIsStaticSwitchBlock, 
@@ -53,6 +62,9 @@ public class Block {
         containsCrossing = newContainsCrossing;
         isUnderground = newIsUnderground;
         isCrossingDown = false;
+        failureBrokenRail = false;
+        failurePowerOutage = false;
+        failureTrackCircuit = false;
         
         if (newStationName != null) {
             station = new Station(newStationName, true);
@@ -62,16 +74,50 @@ public class Block {
         }
     }
     
-    public Block getPortA() {
+    public TrackPiece getNext(TrackPiece previous) {
+        if (previous.getType() == portA.getType() && previous.getID() == portA.getID())
+            return portB;
+        else if (previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+            return portA;
+        }
+        else {
+            return null;
+        }
+    }
+    
+    public PieceType getType() {
+        return PieceType.BLOCK;
+    }
+    
+    public int getID() {
+        return blockID;
+    }
+    
+    public void setFailureBrokenRail(boolean fail) {
+        failureBrokenRail = fail;
+    }
+    public void setFailurePowerOutage(boolean fail) {
+        failurePowerOutage = fail;
+    }
+    public void setFailureTrackCircuit(boolean fail) {
+        failureTrackCircuit = fail;
+    }
+    public String getLine() {
+        return line;
+    }
+    public String getSections() {
+        return section;
+    }
+    public TrackPiece getPortA() {
         return portA;
     }
-    public void setPortA(Block newPortA) {
+    public void setPortA(TrackPiece newPortA) {
         portA = newPortA;
     }
-    public Block getPortB() {
+    public TrackPiece getPortB() {
         return portB;
     }
-    public void setPortB(Block newPortB) {
+    public void setPortB(TrackPiece newPortB) {
         portB = newPortB;
     }
     public int getSwitchID() {

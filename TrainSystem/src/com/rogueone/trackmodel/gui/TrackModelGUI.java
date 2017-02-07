@@ -90,7 +90,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
         trackLayoutPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Track Layout"));
 
-        trackLayoutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/layout_small.jpg")));
+        trackLayoutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/layout_small.jpg"))); // NOI18N
 
         javax.swing.GroupLayout trackLayoutPanelLayout = new javax.swing.GroupLayout(trackLayoutPanel);
         trackLayoutPanel.setLayout(trackLayoutPanelLayout);
@@ -346,7 +346,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         componentSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Component"));
 
         componentSelectionComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        componentSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Light 1", "Light 2", "Wayside 1", "Station 3" }));
+        componentSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "n/a" }));
 
         javax.swing.GroupLayout componentSelectionPanelLayout = new javax.swing.GroupLayout(componentSelectionPanel);
         componentSelectionPanel.setLayout(componentSelectionPanelLayout);
@@ -475,10 +475,10 @@ public class TrackModelGUI extends javax.swing.JPanel {
         componentDetailsTable.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         componentDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"890", "Light", "Green", "Inbound", "Operational"}
+                {"n/a"}
             },
             new String [] {
-                "ID", "Type", "Value", "Direction", "Status"
+                "n/a"
             }
         ));
         componentDetailsTable.setRowHeight(40);
@@ -559,7 +559,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
             }
             catch (InvalidFormatException ex) {
-                System.out.println("Please select a .xlsx file.");
+                System.out.println("Please select an .xlsx file.");
             }
         } else if (returnVal == JFileChooser.CANCEL_OPTION){
            System.out.println("File access cancelled by user.");

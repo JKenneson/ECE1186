@@ -22,6 +22,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class TrackModel {
     
+    ArrayList<String> lines = new ArrayList<String>();
+    ArrayList<String> sections = new ArrayList<String>();
     ArrayList<Block> blocks = new ArrayList<Block>();
     
     public static void main(String[] args) throws InterruptedException {
@@ -99,10 +101,17 @@ public class TrackModel {
                     tempCumulativeElevation, tempIsHead, tempIsTail, 
                     tempContainsCrossing, tempIsUnderground);
             blocks.add(newBlock);
+            
+            //Check for existing line
+            if(lines.indexOf(newBlock.getLine()) == -1) {
+                //Line does not exist, add it
+                lines.add(newBlock.getLine());
+            }
+            //Check for existing section
         }
         
-        printBlocks();
         
+        printBlocks();
     }
     
     public void printBlocks() {
