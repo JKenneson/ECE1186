@@ -28,6 +28,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
     
     //Constructor that connects the TrainModel.java class with this GUI
     public TrainModelGUI(TrainModel trainModel) {
+        initComponents();
         this.trainModel = trainModel;
     }
 

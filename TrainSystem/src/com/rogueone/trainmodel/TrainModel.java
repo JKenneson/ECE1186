@@ -90,9 +90,9 @@ public class TrainModel {
      * @author Jonathan Kenneson
      * @return TrainModelGUI a GUI object for this TrainModel
      */
-    public TrainModelGUI CreateGUIObject() {
+    public TrainModelGUI CreateGUIObject(TrainModel trainModelObject) {
         //Create a GUI object
-        TrainModelGUI trainModelGUI = new TrainModelGUI();
+        TrainModelGUI trainModelGUI = new TrainModelGUI(trainModelObject);
         
         //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
         JFrame frame = new JFrame();
@@ -103,6 +103,7 @@ public class TrainModel {
         
         return  trainModelGUI;  //Return the GUI
     }
+    
     
     /**
      * Update all properties and variables in the train model window
@@ -191,15 +192,15 @@ public class TrainModel {
      */
     public static void main(String[] args) {
         //Create a new TrainModel object with a set point speed of 40, authority of 500, and 1 car
-        TrainModel trainModelTest = new TrainModel(40, 500, 1);
+        TrainModel trainModelTest1 = new TrainModel(40, 500, 1);
         //Instantiate a GUI for this train
-        TrainModelGUI trainModelGUITest = trainModelTest.CreateGUIObject();
+        TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);
         
 
         //Constantly update the GUI
         while(true){
-            trainModelTest.UpdateGUI(trainModelGUITest);
-            if(trainModelGUITest.isDisplayable() == false) {
+            trainModelTest1.UpdateGUI(trainModelGUITest1);
+            if(trainModelGUITest1.isDisplayable() == false) {
                 break;
             }
         }
