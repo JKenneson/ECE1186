@@ -908,9 +908,20 @@ public class TrainModelGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_serviceBrakeCheckboxActionPerformed
 
+    /**
+     * The Power Command button will update all information in the train model class when pushed
+     * 
+     * @author Jonathan Kenneson 
+     */
     private void sendPowerCommandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendPowerCommandButtonActionPerformed
-        // TODO add your handling code here:
-        trainModel.printMe();
+        //Brakes
+        if(this.serviceBrakeCheckbox.isSelected()) {
+            trainModel.setServiceBrakeActivated(true);
+        }
+        else {
+            trainModel.setServiceBrakeActivated(false);
+        }
+        
     }//GEN-LAST:event_sendPowerCommandButtonActionPerformed
 
     private void sendFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendFailureButtonActionPerformed

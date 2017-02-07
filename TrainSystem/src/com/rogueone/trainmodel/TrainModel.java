@@ -105,19 +105,43 @@ public class TrainModel {
     }
     
     /**
-     * Set some initial properties to variables in the train model window
+     * Update all properties and variables in the train model window
      * 
      * @author Jonathan Kenneson
-     * @param gui A TrainModelGUI object that will get updated with initial values
+     * @param gui A TrainModelGUI object that will get updated with values from the class
      */
-    public void InitializeGUI(TrainModelGUI gui) {
+    public void UpdateGUI(TrainModelGUI gui) {
         //Train Operations
-        gui.leftDoorState.setText("Closed");
-        gui.rightDoorState.setText("Closed");
-        gui.lightsState.setText("Off");
+        if(this.leftDoorOpen) {
+            gui.leftDoorState.setText("Open");
+        }
+        else {
+            gui.leftDoorState.setText("Closed");
+        }
+        if(this.rightDoorOpen) {
+            gui.rightDoorState.setText("Open");
+        }
+        else {
+            gui.rightDoorState.setText("Closed");
+        }
+        if(this.lightsOn) {
+            gui.lightsState.setText("On");
+        }
+        else {
+            gui.lightsState.setText("Off");
+        }
         gui.tempState.setText(Integer.toString(this.temperature));
         gui.tempInputSpinner.setValue(this.temperature);
-        gui.brakesState.setText("None");
+        if(this.emergencyBrakeActivated) {      //Default to always print emergency brake if both emergency and service are activated
+            gui.brakesState.setText("Emergency");
+        }
+        else if(this.serviceBrakeActivated) {
+            gui.brakesState.setText("Service");
+        }
+        else {
+            gui.brakesState.setText("None");
+        }        
+        
         //Speed and Authority
         gui.currSpeedState.setText(Integer.toString(this.currSpeed));
         gui.speedLimitState.setText(Integer.toString(this.speedLimit));
@@ -128,24 +152,34 @@ public class TrainModel {
         gui.authorityState.setText(Integer.toString(this.authority));
         gui.ctcAuthoritySpinner.setValue(this.authority);
         gui.driverPowerSpinner.setValue(this.powerReceived);
+        
         //Station and Passengers
         gui.nextStationState.setText(this.approachingStation);
         gui.passOnBoardState.setText(Integer.toString(this.passengersOnBaord));
         gui.passDisembarkState.setText(Integer.toString(this.passengersDisembarking));
         gui.passengersInputSpinner.setValue(this.passengersEmbarking);
         gui.maxCapacityState.setText(Integer.toString(this.passengerMaxCapacity));
+        
         //Physical Characteristics
         gui.trainWeightState.setText(Integer.toString(this.trainWeight));
         gui.trainLengthState.setText(Integer.toString(this.trainLength));
         gui.numCarsState.setText(Integer.toString(this.numCars));
         gui.numCarsInputSpinner.setValue(this.numCars);
-        gui.trackAntennaState.setText("");
-        gui.mboAntennaState.setText("");
+        if(this.trackAntennaActivated) {
+            gui.trackAntennaState.setText("Activated");
+        }
+        else {
+            gui.trackAntennaState.setText("Failed");
+        }
+        if(this.mboAntennaActivated) {
+            gui.mboAntennaState.setText("Activated");
+        }
+        else {
+            gui.mboAntennaState.setText("Failed");
+        }
     }
 
-    public static void printMe() {
-        System.out.println("Print Me!");
-    }
+    
     
     
     /**
@@ -160,9 +194,198 @@ public class TrainModel {
         TrainModel trainModelTest = new TrainModel(40, 500, 1);
         //Instantiate a GUI for this train
         TrainModelGUI trainModelGUITest = trainModelTest.CreateGUIObject();
-        //Initialize the GUI with defualt values after it is first created
-        trainModelTest.InitializeGUI(trainModelGUITest);
         
+
+        //Constantly update the GUI
+        while(true){
+            trainModelTest.UpdateGUI(trainModelGUITest);
+            if(trainModelGUITest.isDisplayable() == false) {
+                break;
+            }
+        }
+        
+    }
+    
+        /**
+     * Following are all getters and setters for the TrainModel class
+     * 
+     * @author Jonathan Kenneson
+     */
+
+    public boolean isLeftDoorOpen() {
+        return leftDoorOpen;
+    }
+
+    public void setLeftDoorOpen(boolean leftDoorOpen) {
+        this.leftDoorOpen = leftDoorOpen;
+    }
+
+    public boolean isRightDoorOpen() {
+        return rightDoorOpen;
+    }
+
+    public void setRightDoorOpen(boolean rightDoorOpen) {
+        this.rightDoorOpen = rightDoorOpen;
+    }
+
+    public boolean isLightsOn() {
+        return lightsOn;
+    }
+
+    public void setLightsOn(boolean lightsOn) {
+        this.lightsOn = lightsOn;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
+    public boolean isServiceBrakeActivated() {
+        return serviceBrakeActivated;
+    }
+
+    public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
+        this.serviceBrakeActivated = serviceBrakeActivated;
+    }
+
+    public boolean isEmergencyBrakeActivated() {
+        return emergencyBrakeActivated;
+    }
+
+    public void setEmergencyBrakeActivated(boolean emergencyBrakeActivated) {
+        this.emergencyBrakeActivated = emergencyBrakeActivated;
+    }
+
+    public int getCurrSpeed() {
+        return currSpeed;
+    }
+
+    public void setCurrSpeed(int currSpeed) {
+        this.currSpeed = currSpeed;
+    }
+
+    public int getSpeedLimit() {
+        return speedLimit;
+    }
+
+    public void setSpeedLimit(int speedLimit) {
+        this.speedLimit = speedLimit;
+    }
+
+    public int getDriverSetPoint() {
+        return driverSetPoint;
+    }
+
+    public void setDriverSetPoint(int driverSetPoint) {
+        this.driverSetPoint = driverSetPoint;
+    }
+
+    public int getCtcSetPoint() {
+        return ctcSetPoint;
+    }
+
+    public void setCtcSetPoint(int ctcSetPoint) {
+        this.ctcSetPoint = ctcSetPoint;
+    }
+
+    public int getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(int authority) {
+        this.authority = authority;
+    }
+
+    public double getPowerReceived() {
+        return powerReceived;
+    }
+
+    public void setPowerReceived(double powerReceived) {
+        this.powerReceived = powerReceived;
+    }
+
+    public String getApproachingStation() {
+        return approachingStation;
+    }
+
+    public void setApproachingStation(String approachingStation) {
+        this.approachingStation = approachingStation;
+    }
+
+    public int getPassengersOnBaord() {
+        return passengersOnBaord;
+    }
+
+    public void setPassengersOnBaord(int passengersOnBaord) {
+        this.passengersOnBaord = passengersOnBaord;
+    }
+
+    public int getPassengersDisembarking() {
+        return passengersDisembarking;
+    }
+
+    public void setPassengersDisembarking(int passengersDisembarking) {
+        this.passengersDisembarking = passengersDisembarking;
+    }
+
+    public int getPassengersEmbarking() {
+        return passengersEmbarking;
+    }
+
+    public void setPassengersEmbarking(int passengersEmbarking) {
+        this.passengersEmbarking = passengersEmbarking;
+    }
+
+    public int getPassengerMaxCapacity() {
+        return passengerMaxCapacity;
+    }
+
+    public void setPassengerMaxCapacity(int passengerMaxCapacity) {
+        this.passengerMaxCapacity = passengerMaxCapacity;
+    }
+
+    public int getTrainWeight() {
+        return trainWeight;
+    }
+
+    public void setTrainWeight(int trainWeight) {
+        this.trainWeight = trainWeight;
+    }
+
+    public int getTrainLength() {
+        return trainLength;
+    }
+
+    public void setTrainLength(int trainLength) {
+        this.trainLength = trainLength;
+    }
+
+    public int getNumCars() {
+        return numCars;
+    }
+
+    public void setNumCars(int numCars) {
+        this.numCars = numCars;
+    }
+
+    public boolean isTrackAntennaActivated() {
+        return trackAntennaActivated;
+    }
+
+    public void setTrackAntennaActivated(boolean trackAntennaActivated) {
+        this.trackAntennaActivated = trackAntennaActivated;
+    }
+
+    public boolean isMboAntennaActivated() {
+        return mboAntennaActivated;
+    }
+
+    public void setMboAntennaActivated(boolean mboAntennaActivated) {
+        this.mboAntennaActivated = mboAntennaActivated;
     }
     
 }
