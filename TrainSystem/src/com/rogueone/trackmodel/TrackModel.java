@@ -30,8 +30,17 @@ public class TrackModel {
     ArrayList<Switch> switches = new ArrayList<Switch>();
     
     public static void main(String[] args) throws InterruptedException {
-        TrackModelGUI trackModelGUI = new TrackModelGUI();
+        TrackModelGUI trackModelGUI = new TrackModelGUI(new TrackModel());
         
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(trackModelGUI);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    
+    public void inititalizeGUI() {
+        TrackModelGUI trackModelGUI = new TrackModelGUI(this);
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(trackModelGUI);

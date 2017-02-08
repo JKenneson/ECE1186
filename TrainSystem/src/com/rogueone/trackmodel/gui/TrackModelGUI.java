@@ -19,10 +19,17 @@ import com.rogueone.trackmodel.TrackModel;
  * @author kylemonto
  */
 public class TrackModelGUI extends javax.swing.JPanel {
+    
+    TrackModel trackModel;
 
     /** Creates new form TrackModelGUI */
     public TrackModelGUI() {
         initComponents();
+    }
+    
+    public TrackModelGUI(TrackModel tm) {
+        initComponents();
+        trackModel = new TrackModel();
     }
 
     /** This method is called from within the constructor to
@@ -552,8 +559,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = trackDataFileChooser.getSelectedFile();
             try {
-                TrackModel printTest = new TrackModel();
-                printTest.parseDataFile(trackDataFile);
+                trackModel.parseDataFile(trackDataFile);
             }
             catch (IOException ex) {
                 System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
