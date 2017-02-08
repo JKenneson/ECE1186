@@ -16,7 +16,9 @@ import javax.swing.*;
  * @author kylemonto
  */
 public class CommandTrackControlGUI extends javax.swing.JPanel {
-
+    
+    int trainID;
+    
     /**
      * Creates new form CommandTrackControlGUI
      */
@@ -168,9 +170,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TrainTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TrainTableMouseClicked(evt);
+            }
+        });
         jScrollPane9.setViewportView(TrainTable);
 
         ChangeParametersButton3.setText("CHANGE ");
+        ChangeParametersButton3.setEnabled(false);
         ChangeParametersButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeParametersButton3ActionPerformed(evt);
@@ -857,7 +865,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_RushHourFieldActionPerformed
 
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
-        ChangeParametersGUI params = new ChangeParametersGUI();
+        //get trainID from selected row first column
+        ChangeParametersGUI params = new ChangeParametersGUI(trainID);
         params.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
@@ -885,6 +894,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         DispatchTrainGUI trainDispatch = new DispatchTrainGUI();
         trainDispatch.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButtonActionPerformed
+
+    private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
+        JTable table = (JTable)evt.getSource();
+        int row = table.getSelectedRow();
+        int column = table.getSelectedColumn();
+        trainID = (int)table.getValueAt(row, column);
+        //global to program
+        ChangeParametersButton3.setEnabled(true);
+        
+        
+                // TODO add your handling code here:
+    }//GEN-LAST:event_TrainTableMouseClicked
 
     private void UpdateInformation(java.awt.event.ActionEvent evt){
         int selectedRowIndex = TrainTable.getSelectedRow();

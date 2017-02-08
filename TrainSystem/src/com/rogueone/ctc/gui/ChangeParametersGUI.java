@@ -14,9 +14,12 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form ChangeParametersGUI
+     * @param trainID
      */
-    public ChangeParametersGUI() {
+    public ChangeParametersGUI(int trainID) {
         initComponents();
+        String trainIDString = Integer.toString(trainID);
+        TempTrain.setText(trainIDString);
     }
 
     /**
@@ -47,10 +50,11 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         SetAuthorityButton = new javax.swing.JButton();
         ResetParametersButton = new javax.swing.JButton();
         ParametersCloseButton = new javax.swing.JButton();
+        TempTrain = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Please enter the desired parameters for the selected train.");
+        jLabel1.setText("Please enter the desired parameters for train");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed"));
 
@@ -159,6 +163,11 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         });
 
         SetAuthorityButton.setText("Set Authority");
+        SetAuthorityButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SetAuthorityButtonActionPerformed(evt);
+            }
+        });
 
         ResetParametersButton.setText("Reset Parameters");
         ResetParametersButton.addActionListener(new java.awt.event.ActionListener() {
@@ -174,6 +183,8 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
             }
         });
 
+        TempTrain.setText("null");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,7 +194,10 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TempTrain, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(SetSpeedButton)
@@ -199,7 +213,9 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(TempTrain))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -210,7 +226,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
                     .addComponent(SetAuthorityButton)
                     .addComponent(ResetParametersButton)
                     .addComponent(ParametersCloseButton))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,6 +237,11 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CurrentSpeedFieldActionPerformed
 
     private void SetSpeedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetSpeedButtonActionPerformed
+        String trainSpeedString = SetSpeedField.getText();
+        double trainSpeed = Double.parseDouble(trainSpeedString);
+        
+        //get train ID
+        //pass to CTC.java to change
         // TODO add your handling code here:
     }//GEN-LAST:event_SetSpeedButtonActionPerformed
 
@@ -233,6 +254,15 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         SetAuthorityField.setText("0");
                 // TODO add your handling code here:
     }//GEN-LAST:event_ResetParametersButtonActionPerformed
+
+    private void SetAuthorityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetAuthorityButtonActionPerformed
+        String trainAuthorityString = SetAuthorityField.getText();
+        double trainAuthority = Double.parseDouble(trainAuthorityString);
+        
+        //get train ID
+        //pass to CTC.java to change (ID , A, S)
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SetAuthorityButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,7 +294,8 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChangeParametersGUI().setVisible(true);
+                int tempID = 0;
+                new ChangeParametersGUI(tempID).setVisible(true);
             }
         });
     }
@@ -278,6 +309,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
     private javax.swing.JTextField SetAuthorityField;
     private javax.swing.JButton SetSpeedButton;
     private javax.swing.JTextField SetSpeedField;
+    private javax.swing.JLabel TempTrain;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
