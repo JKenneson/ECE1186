@@ -71,18 +71,18 @@ public class TrackModelGUI extends javax.swing.JPanel {
         blockSelectionPanel = new javax.swing.JPanel();
         blockSelectionComboBox = new javax.swing.JComboBox<>();
         trackDetailsDetailsPanel = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        blockPanel = new javax.swing.JPanel();
+        blockScrollPane = new javax.swing.JScrollPane();
+        blockTable = new javax.swing.JTable();
+        switchPanel = new javax.swing.JPanel();
+        switchScrollPane = new javax.swing.JScrollPane();
+        switchTable = new javax.swing.JTable();
+        stationPanel = new javax.swing.JPanel();
+        stationScrolPane = new javax.swing.JScrollPane();
+        stationTable = new javax.swing.JTable();
+        failuresPanel = new javax.swing.JPanel();
+        failuresScrollPane = new javax.swing.JScrollPane();
+        failuresTable = new javax.swing.JTable();
 
         setMaximumSize(new java.awt.Dimension(1070, 720));
         setMinimumSize(new java.awt.Dimension(1070, 720));
@@ -304,7 +304,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
         sectionSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Section"));
 
         sectionSelectionComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        sectionSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A" }));
 
         javax.swing.GroupLayout sectionSelectionPanelLayout = new javax.swing.GroupLayout(sectionSelectionPanel);
         sectionSelectionPanel.setLayout(sectionSelectionPanelLayout);
@@ -328,7 +327,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
         blockSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Block"));
 
         blockSelectionComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        blockSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
 
         javax.swing.GroupLayout blockSelectionPanelLayout = new javax.swing.GroupLayout(blockSelectionPanel);
         blockSelectionPanel.setLayout(blockSelectionPanelLayout);
@@ -353,53 +351,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackDetailsDetailsPanel.setPreferredSize(new java.awt.Dimension(800, 828));
         trackDetailsDetailsPanel.setLayout(new java.awt.GridLayout(4, 1));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch"));
+        blockPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Block"));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null}
-            },
-            new String [] {
-                "Section", "Num Blocks"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable4.setRowHeight(30);
-        jScrollPane4.setViewportView(jTable4);
-        if (jTable4.getColumnModel().getColumnCount() > 0) {
-            jTable4.getColumnModel().getColumn(0).setResizable(false);
-            jTable4.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        trackDetailsDetailsPanel.add(jPanel3);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Block"));
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        blockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
@@ -422,44 +376,97 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable3.setRowHeight(30);
-        jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-            jTable3.getColumnModel().getColumn(1).setResizable(false);
-            jTable3.getColumnModel().getColumn(2).setResizable(false);
-            jTable3.getColumnModel().getColumn(3).setResizable(false);
-            jTable3.getColumnModel().getColumn(4).setResizable(false);
-            jTable3.getColumnModel().getColumn(5).setResizable(false);
-            jTable3.getColumnModel().getColumn(6).setResizable(false);
-            jTable3.getColumnModel().getColumn(7).setResizable(false);
-            jTable3.getColumnModel().getColumn(8).setResizable(false);
-            jTable3.getColumnModel().getColumn(10).setResizable(false);
-            jTable3.getColumnModel().getColumn(11).setResizable(false);
+        blockTable.setRowHeight(30);
+        blockScrollPane.setViewportView(blockTable);
+        if (blockTable.getColumnModel().getColumnCount() > 0) {
+            blockTable.getColumnModel().getColumn(0).setResizable(false);
+            blockTable.getColumnModel().getColumn(1).setResizable(false);
+            blockTable.getColumnModel().getColumn(2).setResizable(false);
+            blockTable.getColumnModel().getColumn(3).setResizable(false);
+            blockTable.getColumnModel().getColumn(4).setResizable(false);
+            blockTable.getColumnModel().getColumn(5).setResizable(false);
+            blockTable.getColumnModel().getColumn(6).setResizable(false);
+            blockTable.getColumnModel().getColumn(7).setResizable(false);
+            blockTable.getColumnModel().getColumn(8).setResizable(false);
+            blockTable.getColumnModel().getColumn(10).setResizable(false);
+            blockTable.getColumnModel().getColumn(11).setResizable(false);
         }
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout blockPanelLayout = new javax.swing.GroupLayout(blockPanel);
+        blockPanel.setLayout(blockPanelLayout);
+        blockPanelLayout.setHorizontalGroup(
+            blockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(blockPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                .addComponent(blockScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        blockPanelLayout.setVerticalGroup(
+            blockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(blockPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(blockScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        trackDetailsDetailsPanel.add(jPanel4);
+        trackDetailsDetailsPanel.add(blockPanel);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Station"));
+        switchPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch"));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        switchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Port A", "Port B", "Port C"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        switchTable.setRowHeight(30);
+        switchScrollPane.setViewportView(switchTable);
+        if (switchTable.getColumnModel().getColumnCount() > 0) {
+            switchTable.getColumnModel().getColumn(0).setResizable(false);
+            switchTable.getColumnModel().getColumn(1).setResizable(false);
+            switchTable.getColumnModel().getColumn(2).setResizable(false);
+            switchTable.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        javax.swing.GroupLayout switchPanelLayout = new javax.swing.GroupLayout(switchPanel);
+        switchPanel.setLayout(switchPanelLayout);
+        switchPanelLayout.setHorizontalGroup(
+            switchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(switchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(switchScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        switchPanelLayout.setVerticalGroup(
+            switchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(switchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(switchScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        trackDetailsDetailsPanel.add(switchPanel);
+
+        stationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Station"));
+
+        stationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
             },
@@ -482,39 +489,39 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable5.setRowHeight(30);
-        jScrollPane5.setViewportView(jTable5);
-        if (jTable5.getColumnModel().getColumnCount() > 0) {
-            jTable5.getColumnModel().getColumn(0).setResizable(false);
-            jTable5.getColumnModel().getColumn(1).setResizable(false);
-            jTable5.getColumnModel().getColumn(2).setResizable(false);
-            jTable5.getColumnModel().getColumn(3).setResizable(false);
-            jTable5.getColumnModel().getColumn(4).setResizable(false);
-            jTable5.getColumnModel().getColumn(5).setResizable(false);
+        stationTable.setRowHeight(30);
+        stationScrolPane.setViewportView(stationTable);
+        if (stationTable.getColumnModel().getColumnCount() > 0) {
+            stationTable.getColumnModel().getColumn(0).setResizable(false);
+            stationTable.getColumnModel().getColumn(1).setResizable(false);
+            stationTable.getColumnModel().getColumn(2).setResizable(false);
+            stationTable.getColumnModel().getColumn(3).setResizable(false);
+            stationTable.getColumnModel().getColumn(4).setResizable(false);
+            stationTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout stationPanelLayout = new javax.swing.GroupLayout(stationPanel);
+        stationPanel.setLayout(stationPanelLayout);
+        stationPanelLayout.setHorizontalGroup(
+            stationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                .addComponent(stationScrolPane, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        stationPanelLayout.setVerticalGroup(
+            stationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(stationScrolPane, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        trackDetailsDetailsPanel.add(jPanel5);
+        trackDetailsDetailsPanel.add(stationPanel);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Failures"));
+        failuresPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Failures"));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        failuresTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
             },
@@ -537,37 +544,37 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setRequestFocusEnabled(false);
-        jTable2.setRowHeight(30);
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
+        failuresTable.setRequestFocusEnabled(false);
+        failuresTable.setRowHeight(30);
+        failuresScrollPane.setViewportView(failuresTable);
+        if (failuresTable.getColumnModel().getColumnCount() > 0) {
+            failuresTable.getColumnModel().getColumn(0).setResizable(false);
+            failuresTable.getColumnModel().getColumn(1).setResizable(false);
+            failuresTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout failuresPanelLayout = new javax.swing.GroupLayout(failuresPanel);
+        failuresPanel.setLayout(failuresPanelLayout);
+        failuresPanelLayout.setHorizontalGroup(
+            failuresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 974, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(failuresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(failuresPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                    .addComponent(failuresScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
                     .addContainerGap()))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        failuresPanelLayout.setVerticalGroup(
+            failuresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 82, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(failuresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, failuresPanelLayout.createSequentialGroup()
                     .addContainerGap(18, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(failuresScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
 
-        trackDetailsDetailsPanel.add(jPanel1);
+        trackDetailsDetailsPanel.add(failuresPanel);
 
         javax.swing.GroupLayout trackDetailsPanelLayout = new javax.swing.GroupLayout(trackDetailsPanel);
         trackDetailsPanel.setLayout(trackDetailsPanelLayout);
@@ -657,31 +664,31 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel blockPanel;
+    private javax.swing.JScrollPane blockScrollPane;
     private javax.swing.JComboBox<String> blockSelectionComboBox;
     private javax.swing.JPanel blockSelectionPanel;
+    private javax.swing.JTable blockTable;
     private javax.swing.JButton brokenRailFailureButton;
+    private javax.swing.JPanel failuresPanel;
+    private javax.swing.JScrollPane failuresScrollPane;
+    private javax.swing.JTable failuresTable;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JPanel lineSectionPanel;
     private javax.swing.JComboBox<String> lineSelectionComboBox;
     private javax.swing.JButton powerOutageFailureButton;
     private javax.swing.JComboBox<String> sectionSelectionComboBox;
     private javax.swing.JPanel sectionSelectionPanel;
+    private javax.swing.JPanel stationPanel;
+    private javax.swing.JScrollPane stationScrolPane;
+    private javax.swing.JTable stationTable;
+    private javax.swing.JPanel switchPanel;
+    private javax.swing.JScrollPane switchScrollPane;
+    private javax.swing.JTable switchTable;
     private javax.swing.JButton trackCircuitFailureButton;
     private javax.swing.JButton trackConfigurationLoadButton;
     private javax.swing.JPanel trackConfigurationPanel;
