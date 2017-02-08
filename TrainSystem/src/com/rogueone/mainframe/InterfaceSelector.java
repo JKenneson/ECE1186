@@ -9,6 +9,7 @@ package com.rogueone.mainframe;
 import com.rogueone.ctc.gui.CommandTrackControlGUI;
 import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.trackcon.gui.TrackControllerGUI;
+import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trackmodel.gui.TrackModelGUI;
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.gui.TrainModelGUI;
@@ -239,7 +240,7 @@ public class InterfaceSelector extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         main.getContentPane().removeAll();
-        TrackModelGUI trackModelGUI = new TrackModelGUI();
+        TrackModelGUI trackModelGUI = new TrackModelGUI(new TrackModel());
         main.getContentPane().add(trackModelGUI, BorderLayout.CENTER);
         main.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed

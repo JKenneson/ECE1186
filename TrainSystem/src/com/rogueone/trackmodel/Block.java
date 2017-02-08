@@ -225,12 +225,12 @@ public class Block implements TrackPiece {
            sb.append(", Port A: ");
            sb.append(portA.getID()); 
         }
+        if(portA != null && portA.getType() == Global.PieceType.YARD) {
+            sb.append(" (Yard)");
+        }
         if(portB != null) {
            sb.append(", Port B: ");
            sb.append(portB.getID());
-        }
-        if(portB != null && portB.getType() == Global.PieceType.YARD) {
-            sb.append(" (Yard)");
         }
         if(portB != null && portB.getType() == Global.PieceType.SWITCH) {
             sb.append(" (");

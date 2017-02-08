@@ -28,6 +28,7 @@ public class TrackModel {
     ArrayList<Block> blocks = new ArrayList<Block>();
     ArrayList<Station> stations = new ArrayList<Station>();
     ArrayList<Switch> switches = new ArrayList<Switch>();
+    Yard yard = new Yard();
     
     public static void main(String[] args) throws InterruptedException {
         TrackModelGUI trackModelGUI = new TrackModelGUI(new TrackModel());
@@ -38,16 +39,7 @@ public class TrackModel {
         frame.pack();
         frame.setVisible(true);
     }
-    
-    public void inititalizeGUI() {
-        TrackModelGUI trackModelGUI = new TrackModelGUI(this);
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(trackModelGUI);
-        frame.pack();
-        frame.setVisible(true);
-    }
-    
+      
     public void parseDataFile(File file) throws IOException, InvalidFormatException {
         //Expected column order in data file for blocks:
         //0     line
@@ -93,7 +85,12 @@ public class TrackModel {
     private void connectBlocks() {
         for (Block b : blocks) {
             if(b.getPortA() == null) {
-                b.setPortA(getBlock(b.getLine(),b.getPortAID()));
+                if(b.getPortAID() == 0) {
+                    b.setPortA(yard);
+                }
+                else {
+                    b.setPortA(getBlock(b.getLine(),b.getPortAID()));
+                }     
             }
             if(b.getPortB() == null) {
                 b.setPortB(getBlock(b.getLine(),b.getPortBID()));
