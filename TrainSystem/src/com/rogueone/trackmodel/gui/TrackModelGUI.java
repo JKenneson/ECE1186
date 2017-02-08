@@ -6,8 +6,11 @@
 
 package com.rogueone.trackmodel.gui;
 
+import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.Line;
 import com.rogueone.trackmodel.Section;
+import com.rogueone.trackmodel.Station;
+import com.rogueone.trackmodel.Switch;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
@@ -15,6 +18,8 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import com.rogueone.trackmodel.TrackModel;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.ComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -645,19 +650,23 @@ public class TrackModelGUI extends javax.swing.JPanel {
         }
         trackDataFileChooser.setVisible(true);
     }//GEN-LAST:event_trackConfigurationLoadButtonActionPerformed
-
+    
+    @SuppressWarnings("unchecked")
     private void updateLineComboBox() {
         lineSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(trackModel.getLines().toArray()));
     }
     
+    @SuppressWarnings("unchecked")
     private void updateSectionComboBox() {
         sectionSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(((Line)(lineSelectionComboBox.getSelectedItem())).getSections().toArray()));
     }
     
+    @SuppressWarnings("unchecked")
     private void updateBlockComboBox() {
         blockSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(((Section)(sectionSelectionComboBox.getSelectedItem())).getBlocks().toArray()));
     }
     
+    @SuppressWarnings("unchecked")
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentHidden
@@ -708,49 +717,92 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
     class LineChangeListener implements ItemListener{
         
-        TrackModelGUI trackModel;
+        TrackModelGUI trackModelGUI;
         
         public LineChangeListener(TrackModelGUI tm) {
-            trackModel = tm;
+            trackModelGUI = tm;
         }
 
         @Override
         public void itemStateChanged(ItemEvent event) {
            if (event.getStateChange() == ItemEvent.SELECTED) {
-              trackModel.updateSectionComboBox();
+              trackModelGUI.updateSectionComboBox();
            }
         }       
     }
     
     class SectionChangeListener implements ItemListener{
         
-        TrackModelGUI trackModel;
+        TrackModelGUI trackModelGUI;
         
         public SectionChangeListener(TrackModelGUI tm) {
-            trackModel = tm;
+            trackModelGUI = tm;
         }
         
         @Override
         public void itemStateChanged(ItemEvent event) {
            if (event.getStateChange() == ItemEvent.SELECTED) {
-              trackModel.updateBlockComboBox();
+              trackModelGUI.updateBlockComboBox();
            }
         }       
     }
     
     class BlockChangeListener implements ItemListener{
         
-        TrackModelGUI trackModel;
+        TrackModelGUI trackModelGUI;
         
         public BlockChangeListener(TrackModelGUI tm) {
-            trackModel = tm;
+            trackModelGUI = tm;
         }
 
         @Override
         public void itemStateChanged(ItemEvent event) {
-           if (event.getStateChange() == ItemEvent.SELECTED) {
-              
-           }
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                Block b = (Block) trackModelGUI.blockSelectionComboBox.getSelectedItem();
+                
+                String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Beacon", "Occupied" };
+                String blockRowData[] = { b.getID() + "", b.getPortA().getID() + "", b.getPortB().getID() + "", b.getLength() + "", b.getGrade() + "", b.getSpeedLimit() + "", b.getElevation() + "", b.getCumulativeElevation() + "", b.isUnderground() + "", b.containsCrossing() + "", b.getBeaconMessage() + "", b.isOccupied() + "" };
+                DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
+                blockModel.addRow(blockRowData);
+                trackModelGUI.blockTable.setModel(blockModel);
+                
+                String failureColumnNames[] = { "Broken Rail", "Power Outage", "Track Circuit Down" };
+                String failureRowData[] = { b.getFailureBrokenRail() + "", b.getFailurePowerOutage() + "", b.getFailureTrackCircuit() + "" };
+                DefaultTableModel failureModel = new DefaultTableModel(failureColumnNames, 0);
+                failureModel.addRow(failureRowData);
+                trackModelGUI.failuresTable.setModel(failureModel);
+                
+                if (b.getSwitchID() != -1 && b.getPortB() != null) {
+                    Switch switchBlock = (Switch) b.getPortB();
+                    
+                    String switchColumnNames[] = { "ID", "Static Block", "Default Dependent Block", "Alternate Dependent Block" };
+                    String switchRowData[] = { switchBlock.getID() + "", switchBlock.getPortA().getID() + "", switchBlock.getPortB().getID() + "", switchBlock.getPortC().getID() + "" };
+                    DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
+                    switchModel.addRow(switchRowData);
+                    trackModelGUI.switchTable.setModel(switchModel);
+                }
+                else {
+                    String switchColumnNames[] = { "No switches to display" };
+                    DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
+                    trackModelGUI.switchTable.setModel(switchModel);
+                }
+                
+                if (b.getStation() != null) {
+                    Station station = (Station) b.getStation();
+                    
+                    String stationColumnNames[] = { "ID", "Name", "Block A", "Block B", "Right", "Left" };
+                    String stationRowData[] = { station.getStationID() + "", station.getStationName(), station.getBlockA().getID() + "", station.getBlockA().getID() + "", station.isRightSide() + "", station.isLeftSide() + "" };
+                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
+                    stationModel.addRow(stationRowData);
+                    trackModelGUI.stationTable.setModel(stationModel);
+                }
+                else {
+                    String stationColumnNames[] = { "No stations to display" };
+                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
+                    trackModelGUI.stationTable.setModel(stationModel);
+                }
+          
+            }
         }       
     }
 
