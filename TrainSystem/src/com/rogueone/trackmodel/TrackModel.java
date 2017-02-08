@@ -40,7 +40,7 @@ public class TrackModel {
     }
     
     public void parseDataFile(File file) throws IOException, InvalidFormatException {
-        //Expected column order in data file:
+        //Expected column order in data file for blocks:
         //0     line
         //1     section
         //2     isHead
@@ -66,6 +66,7 @@ public class TrackModel {
         parseBlocks(testWorkbook.getSheetAt(2));
         parseStations(testWorkbook.getSheetAt(3));
         parseSwitches(testWorkbook.getSheetAt(4));
+        connectBlocks();
         
         System.out.println("LINES:");
         printLines();
@@ -80,7 +81,36 @@ public class TrackModel {
        
     }
     
-    public void parseLines(XSSFSheet sheet) {
+    private void connectBlocks() {
+        for (Block b : blocks) {
+            if(b.getPortA() == null) {
+                b.setPortA(getBlock(b.getLine(),b.getPortAID()));
+            }
+            if(b.getPortB() == null) {
+                b.setPortB(getBlock(b.getLine(),b.getPortBID()));
+            }
+        }
+    }
+    
+    public Block getBlock(Global.Line line, Global.Section section, int block) {
+        for (Line l : lines) {
+            if (l.getLine() == line) {
+                return l.getBlock(section, block);
+            }
+        }
+        return null;
+    }
+    
+    public Block getBlock(Global.Line line, int block) {
+        for (Line l : lines) {
+            if (l.getLine() == line) {
+                return l.getBlock(block);
+            }
+        }
+        return null;
+    }
+    
+    private void parseLines(XSSFSheet sheet) {
 
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);      
@@ -90,7 +120,7 @@ public class TrackModel {
         }
     }
     
-    public void parseSections(XSSFSheet sheet) {
+    private void parseSections(XSSFSheet sheet) {
         
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);      
@@ -101,7 +131,7 @@ public class TrackModel {
         }
     }
     
-    public void parseBlocks(XSSFSheet sheet) {
+    private void parseBlocks(XSSFSheet sheet) {
   
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);
@@ -110,6 +140,8 @@ public class TrackModel {
             Global.Section tempSection = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
             //Parse ints
             int tempBlockID = (int) rowTemp.getCell(4).getNumericCellValue();
+            int tempPortAID = (int) rowTemp.getCell(5).getNumericCellValue();
+            int tempPortBID = (int) rowTemp.getCell(6).getNumericCellValue();
             int tempSwitchID = (int) rowTemp.getCell(7).getNumericCellValue();
             int tempStationID = (int) rowTemp.getCell(13).getNumericCellValue();
             //Parse doubles
@@ -129,7 +161,9 @@ public class TrackModel {
             Block newBlock = new Block(
                 tempLine, 
                 tempSection, 
-                tempBlockID, 
+                tempBlockID,
+                tempPortAID,
+                tempPortBID,
                 tempSwitchID, 
                 tempIsStaticSwitchBlock, 
                 tempStationID,
@@ -146,7 +180,7 @@ public class TrackModel {
         }
     }
     
-    public void parseStations(XSSFSheet sheet) {
+    private void parseStations(XSSFSheet sheet) {
    
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);
@@ -172,7 +206,7 @@ public class TrackModel {
         }
     }
     
-    public void parseSwitches(XSSFSheet sheet) {
+    private void parseSwitches(XSSFSheet sheet) {
  
         //Iterate over all rows in the first column
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
@@ -192,12 +226,14 @@ public class TrackModel {
         }     
     }
     
-    public void addLine(Line l) {
+    private void addLine(Line l) {
         lines.add(l);
     }
     
-    public void addSection(Section s) {
+    private void addSection(Section s) {
+        //Add reference to top-level array
         sections.add(s);
+        //Add reference to Line objects
         for(Line l : lines) {
             if(s.getLine() == l.getLine()) {
                 l.addSection(s);
@@ -205,8 +241,10 @@ public class TrackModel {
         }
     }
     
-    public void addBlock(Block b) {
+    private void addBlock(Block b) {
+        //Add reference to top-level array
         blocks.add(b);
+        //Add reference to Section objects
         for(Line l : lines) {
             if(b.getLine() == l.getLine()) {
                 for(Section s : l.getSections()) {
@@ -218,7 +256,8 @@ public class TrackModel {
         }
     }
     
-    public void addStation(Station st) {
+    private void addStation(Station st) {
+        //Add reference to top-level array
         stations.add(st);
         for(Block b : blocks) {
             if(b.getLine() == st.getLine() && b.getStationID() == st.getStationID()) {
@@ -246,7 +285,8 @@ public class TrackModel {
         }
     }
     
-    public void addSwitch(Switch sw) {
+    private void addSwitch(Switch sw) {
+        //Add reference to top-level array
         switches.add(sw);
         for(Block b : blocks) {
             if(b.getSwitchID() == sw.getID()) {

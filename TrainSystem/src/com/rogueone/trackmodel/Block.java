@@ -18,6 +18,8 @@ public class Block implements TrackPiece {
     private Global.Section section;
     protected TrackPiece portA;
     protected TrackPiece portB;
+    protected int portAID;
+    protected int portBID;
     private int blockID;
     private int switchID;
     private int stationID;
@@ -41,7 +43,7 @@ public class Block implements TrackPiece {
     
     // Constructor
     public Block(Global.Line newLine, Global.Section newSection, int newBlockID, 
-            int newSwitchID, boolean newIsStaticSwitchBlock, 
+            int newPortAID, int newPortBID, int newSwitchID, boolean newIsStaticSwitchBlock, 
             int newStationID, double newLength, double newGrade, double newSpeedLimit,
             double newElevation, double newCumulativeElevation, 
             boolean newIsHead, boolean newIsTail, boolean newContainsCrossing, 
@@ -50,7 +52,9 @@ public class Block implements TrackPiece {
         section = newSection;
         blockID = newBlockID;
         portA = null;
+        portAID = newPortAID;
         portB = null;
+        portBID = newPortBID;
         switchID = newSwitchID;
         isStaticSwitchBlock = newIsStaticSwitchBlock;
         stationID = newStationID;
@@ -102,12 +106,20 @@ public class Block implements TrackPiece {
     }
     public void setPortA(TrackPiece newPortA) {
         portA = newPortA;
+        //portAID = newPortA.getID();
     }
     public TrackPiece getPortB() {
         return portB;
     }
     public void setPortB(TrackPiece newPortB) {
         portB = newPortB;
+        //portBID = newPortB.getID();
+    }
+    public int getPortAID() {
+        return portAID;
+    }
+    public int getPortBID() {
+        return portBID;
     }
     public int getSwitchID() {
         return switchID;
@@ -217,7 +229,10 @@ public class Block implements TrackPiece {
            sb.append(", Port B: ");
            sb.append(portB.getID());
         }
-        if (switchID != -1) {
+        if(portB != null && portB.getType() == Global.PieceType.YARD) {
+            sb.append(" (Yard)");
+        }
+        if(portB != null && portB.getType() == Global.PieceType.SWITCH) {
             sb.append(" (");
             if (isStaticSwitchBlock) {
                 sb.append("Static ");

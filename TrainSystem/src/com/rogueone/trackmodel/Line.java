@@ -33,4 +33,23 @@ public class Line {
         sections.add(s);
     }
     
+    public Block getBlock(int block) {
+        for (Section s : sections) {
+            for(Block b : s.getBlocks()) {
+                if(b.getID() == block) {
+                    return b;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public Block getBlock(Global.Section section, int block) {
+        for (Section s : sections) {
+            if (s.getSection() == section) {
+                return s.getBlock(block);
+            }
+        }
+        return null;
+    }
 }

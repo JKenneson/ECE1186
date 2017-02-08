@@ -38,4 +38,13 @@ public class Section {
         blocks.add(b);
     }
     
+    public Block getBlock(int block) {
+        for (Block b : blocks) {
+            if (b.getID() == block) {
+                return b;
+            }
+        }
+        return null;
+    }
+    
 }
