@@ -47,4 +47,8 @@ public class Section {
         return null;
     }
     
+    public String toString() {
+        return section.toString();
+    }
+    
 }

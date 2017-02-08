@@ -214,6 +214,10 @@ public class Block implements TrackPiece {
     
     //Overridden methods
     public String toString() {
+        return "" + this.getID();
+    }
+    
+    public String toStringDetail() {
         StringBuilder sb = new StringBuilder();
         sb.append("Line: ");
         sb.append(line);

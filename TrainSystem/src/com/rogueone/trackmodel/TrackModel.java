@@ -116,6 +116,26 @@ public class TrackModel {
         return null;
     }
     
+    public ArrayList<Line> getLines() {
+        return lines;
+    }
+    
+    public ArrayList<Section> getSections() {
+        return sections;
+    }
+    
+    public ArrayList<Block> getBlocks() {
+        return blocks;
+    }
+    
+    public ArrayList<Station> getStations() {
+        return stations;
+    }
+    
+    public ArrayList<Switch> getSwitches() {
+        return switches;
+    }
+    
     private void parseLines(XSSFSheet sheet) {
 
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {

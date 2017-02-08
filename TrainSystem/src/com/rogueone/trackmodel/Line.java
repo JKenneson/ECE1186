@@ -52,4 +52,8 @@ public class Line {
         }
         return null;
     }
+    
+    public String toString() {
+        return line.toString();
+    }
 }

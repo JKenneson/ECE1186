@@ -6,6 +6,8 @@
 
 package com.rogueone.trackmodel.gui;
 
+import com.rogueone.trackmodel.Line;
+import com.rogueone.trackmodel.Section;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -13,6 +15,9 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import com.rogueone.trackmodel.TrackModel;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -63,7 +68,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackDetailsPanel = new javax.swing.JPanel();
         trackDetailsSelectionPanel = new javax.swing.JPanel();
         lineSectionPanel = new javax.swing.JPanel();
-        lineSectionComboBox = new javax.swing.JComboBox<>();
+        lineSelectionComboBox = new javax.swing.JComboBox<>();
         sectionSelectionPanel = new javax.swing.JPanel();
         sectionSelectionComboBox = new javax.swing.JComboBox<>();
         blockSelectionPanel = new javax.swing.JPanel();
@@ -278,8 +283,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
         lineSectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Line"));
 
-        lineSectionComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lineSectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green", "Red" }));
+        lineSelectionComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout lineSectionPanelLayout = new javax.swing.GroupLayout(lineSectionPanel);
         lineSectionPanel.setLayout(lineSectionPanelLayout);
@@ -287,14 +291,14 @@ public class TrackModelGUI extends javax.swing.JPanel {
             lineSectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lineSectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lineSectionComboBox, 0, 306, Short.MAX_VALUE)
+                .addComponent(lineSelectionComboBox, 0, 306, Short.MAX_VALUE)
                 .addContainerGap())
         );
         lineSectionPanelLayout.setVerticalGroup(
             lineSectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lineSectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lineSectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lineSelectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -618,6 +622,12 @@ public class TrackModelGUI extends javax.swing.JPanel {
             File trackDataFile = trackDataFileChooser.getSelectedFile();
             try {
                 trackModel.parseDataFile(trackDataFile);
+                updateLineComboBox();
+                updateSectionComboBox();
+                updateBlockComboBox();
+                lineSelectionComboBox.addItemListener(new LineChangeListener(this));
+                sectionSelectionComboBox.addItemListener(new SectionChangeListener(this));
+                blockSelectionComboBox.addItemListener(new BlockChangeListener(this));
             }
             catch (IOException ex) {
                 System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
@@ -631,6 +641,18 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackDataFileChooser.setVisible(true);
     }//GEN-LAST:event_trackConfigurationLoadButtonActionPerformed
 
+    private void updateLineComboBox() {
+        lineSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(trackModel.getLines().toArray()));
+    }
+    
+    private void updateSectionComboBox() {
+        sectionSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(((Line)(lineSelectionComboBox.getSelectedItem())).getSections().toArray()));
+    }
+    
+    private void updateBlockComboBox() {
+        blockSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(((Section)(sectionSelectionComboBox.getSelectedItem())).getBlocks().toArray()));
+    }
+    
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentHidden
@@ -657,8 +679,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JComboBox<String> lineSectionComboBox;
     private javax.swing.JPanel lineSectionPanel;
+    private javax.swing.JComboBox<String> lineSelectionComboBox;
     private javax.swing.JButton powerOutageFailureButton;
     private javax.swing.JComboBox<String> sectionSelectionComboBox;
     private javax.swing.JPanel sectionSelectionPanel;
@@ -678,5 +700,50 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane trainPositionsScrollPane;
     private javax.swing.JTable trainPositionsTable;
     // End of variables declaration//GEN-END:variables
+
+    class LineChangeListener implements ItemListener{
+        
+        TrackModelGUI trackModel;
+        
+        public LineChangeListener(TrackModelGUI tm) {
+            trackModel = tm;
+        }
+
+        public void itemStateChanged(ItemEvent event) {
+           if (event.getStateChange() == ItemEvent.SELECTED) {
+              trackModel.updateSectionComboBox();
+           }
+        }       
+    }
+    
+    class SectionChangeListener implements ItemListener{
+        
+        TrackModelGUI trackModel;
+        
+        public SectionChangeListener(TrackModelGUI tm) {
+            trackModel = tm;
+        }
+
+        public void itemStateChanged(ItemEvent event) {
+           if (event.getStateChange() == ItemEvent.SELECTED) {
+              trackModel.updateBlockComboBox();
+           }
+        }       
+    }
+    
+    class BlockChangeListener implements ItemListener{
+        
+        TrackModelGUI trackModel;
+        
+        public BlockChangeListener(TrackModelGUI tm) {
+            trackModel = tm;
+        }
+
+        public void itemStateChanged(ItemEvent event) {
+           if (event.getStateChange() == ItemEvent.SELECTED) {
+              
+           }
+        }       
+    }
 
 }
