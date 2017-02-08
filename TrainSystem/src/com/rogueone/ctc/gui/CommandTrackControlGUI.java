@@ -24,6 +24,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      */
     public CommandTrackControlGUI() {
         initComponents();
+        InitializeGUIObject();
 
     }
 
@@ -895,16 +896,39 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_DispatchButtonActionPerformed
 
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
-        JTable table = (JTable)evt.getSource();
-        int row = table.getSelectedRow();
-        int column = table.getSelectedColumn();
-        trainID = (int)table.getValueAt(row, column);
-        //global to program
-        if (SelectOperationMode2.getSelectedIndex() == 1){
-            ChangeParametersButton3.setEnabled(false);
+        if ( evt.getClickCount() == 1){
+            JTable table = (JTable)evt.getSource();
+            int row = table.getSelectedRow();
+            trainID = (int)table.getValueAt(row, 0);
+            //global to program
+            
+            //parse position field
+            
+            String position = (String)table.getValueAt(row, 1);
+            String[] parts = position.split(":");
+            String partSection = parts[0]; 
+            String partBlock = parts[1];
+            
+            CurrentLineField.setText(Integer.toString(TrainLineSelect2.getSelectedIndex()));
+            CurrentSectionField.setText(partSection);
+            CurrentBlockField.setText(partBlock);
+            TrainNameField.setText(Integer.toString(trainID));
+            
+            if (SelectOperationMode2.getSelectedIndex() == 1){
+                ChangeParametersButton3.setEnabled(false);
+            }
+            else { 
+                ChangeParametersButton3.setEnabled(true);
+            }
         }
-        else { 
-            ChangeParametersButton3.setEnabled(true);
+        
+        if ( evt.getClickCount() == 2){
+            //double mouse click calls Train Model CreateGUIObject to dispalay IDed train model
+            JTable table = (JTable)evt.getSource();
+            int row = table.getSelectedRow();
+            trainID = (int)table.getValueAt(row, 0);
+            
+            //TrainHandler.CreateGUIObject(trainID);
         }
         
         
@@ -912,10 +936,27 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 // TODO add your handling code here:
     }//GEN-LAST:event_TrainTableMouseClicked
 
-    private void UpdateInformation(java.awt.event.ActionEvent evt){
+    private void UpdateTableInformation(java.awt.event.ActionEvent evt){
         int selectedRowIndex = TrainTable.getSelectedRow();
         String TrainID = TrainTable.getModel().getValueAt(selectedRowIndex, 0).toString(); 
         TrainNameField.setText(TrainID);// TODO add your handling code here:
+    }
+    
+    /**
+     *
+     */
+    public void InitializeGUIObject(){
+        TrainNameField.setText("");
+        CurrentLineField.setText("");
+        CurrentBlockField.setText("0");
+        CurrentSectionField.setText("");
+        SpeedField.setText("0.00");
+        AuthorityField.setText("0.00");
+        CurrentCapacityField.setText("");
+        MaxCapacityField.setText("");
+        ThroughputField.setText("");
+     
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
