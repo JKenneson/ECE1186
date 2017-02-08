@@ -132,14 +132,18 @@ public class Station {
         sb.append(stationID);
         sb.append(", line: ");
         sb.append(line);
-        sb.append(", Block A: ");
-        sb.append(blockA);
-        sb.append(", Block A Section: ");
-        sb.append(blockASection);
-        sb.append(", Block B: ");
-        sb.append(blockB);
-        sb.append(", Block B Section: ");
-        sb.append(blockBSection);
+        if(blockA != null) {
+            sb.append(", Block A: ");
+            sb.append(blockA.getID());
+            sb.append(", Block A Section: ");
+            sb.append(blockASection);
+        }
+        if(blockB != null) {
+            sb.append(", Block B: ");
+            sb.append(blockB.getID());
+            sb.append(", Block B Section: ");
+            sb.append(blockBSection);
+        }
         sb.append(", Right Side: ");
         sb.append(rightSide);
         sb.append(", Left Side: ");

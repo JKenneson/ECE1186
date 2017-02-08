@@ -37,6 +37,7 @@ public class Block implements TrackPiece {
     private boolean failureTrackCircuit;
     private boolean occupied;
     private String beaconMessage;
+    private Station station;
     
     // Constructor
     public Block(Global.Line newLine, Global.Section newSection, int newBlockID, 
@@ -68,6 +69,7 @@ public class Block implements TrackPiece {
         failureTrackCircuit = false;
         occupied = false;
         beaconMessage = null;
+        station = null;
     }
     
     // TrackPiece interface methods
@@ -92,7 +94,7 @@ public class Block implements TrackPiece {
     public Global.Line getLine() {
         return line;
     }
-    public Global.Section getSections() {
+    public Global.Section getSection() {
         return section;
     }
     public TrackPiece getPortA() {
@@ -191,6 +193,12 @@ public class Block implements TrackPiece {
     public void setBeaconMessage(String newBeaconMessage) {
         beaconMessage = newBeaconMessage;
     }
+    public Station getStation() {
+        return station;
+    }
+    public void setStation(Station newStation) {
+        station = newStation;
+    }
     
     //Overridden methods
     public String toString() {
@@ -209,10 +217,19 @@ public class Block implements TrackPiece {
            sb.append(", Port B: ");
            sb.append(portB.getID());
         }
-        sb.append(", Switch: ");
-        sb.append(switchID);
-        sb.append(", Static Switch Block: ");
-        sb.append(isStaticSwitchBlock);
+        if (switchID != -1) {
+            sb.append(" (");
+            if (isStaticSwitchBlock) {
+                sb.append("Static ");
+            }
+            sb.append("Switch: ");
+            sb.append(((Switch)portB).getPortA().getID());
+            sb.append("-");
+            sb.append(((Switch)portB).getPortB().getID());
+            sb.append("-");
+            sb.append(((Switch)portB).getPortC().getID());
+            sb.append(")");
+        }
         sb.append(", Length: ");
         sb.append(length);
         sb.append(", Grade: ");
@@ -229,8 +246,12 @@ public class Block implements TrackPiece {
         sb.append(containsCrossing);
         sb.append(", Underground: ");
         sb.append(isUnderground);
-        sb.append(", Station: ");
-        sb.append(stationID);
+        if (station != null) {
+            sb.append(", Station ");
+            sb.append(stationID);
+            sb.append(": ");
+            sb.append(station.getStationName());
+        }
         sb.append(", Speed Limit: ");
         sb.append(speedLimit);
         sb.append(", Beacon: ");

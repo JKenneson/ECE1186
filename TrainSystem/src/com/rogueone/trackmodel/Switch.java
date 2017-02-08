@@ -99,7 +99,7 @@ public class Switch implements TrackPiece {
         sb.append(", Port B: ");
         sb.append(portB.getID());
         sb.append(", Port C: ");
-        sb.append(centralSwitchID);
+        sb.append(portC.getID());
         return sb.toString();
     }  
 }
