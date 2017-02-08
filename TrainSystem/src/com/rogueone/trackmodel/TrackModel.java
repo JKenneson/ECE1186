@@ -345,25 +345,25 @@ public class TrackModel {
     
     public void printSections() {
         for(Section s : sections) {
-            System.out.println(s.getSection() + " (" + s.getLine() + ")");
+            System.out.println(s.toStringDetail());
         }
     }
     
     public void printBlocks() {
         for(Block b : blocks) {
-            System.out.println(b);
+            System.out.println(b.toStringDetail());
         }
     }
     
     public void printStations() {
         for(Station s : stations) {
-            System.out.println(s);
+            System.out.println(s.toStringDetail());
         }
     }
     
     public void printSwitches() {
         for(Switch s : switches) {
-            System.out.println(s);
+            System.out.println(s.toStringDetail());
         }
     }
 }

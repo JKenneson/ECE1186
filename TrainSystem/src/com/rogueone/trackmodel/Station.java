@@ -125,6 +125,9 @@ public class Station {
         //No support for negative passengers YET
     }
     public String toString() {
+        return stationName + " (" + stationID + ")";
+    }
+    public String toStringDetail() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ");
         sb.append(stationName);

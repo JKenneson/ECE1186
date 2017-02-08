@@ -89,6 +89,10 @@ public class Switch implements TrackPiece {
     
     //Overridden methods
     public String toString() {
+        return "" + centralSwitchID;
+    }
+    
+    public String toStringDetail() {
         StringBuilder sb = new StringBuilder();
         sb.append("Switch: ");
         sb.append(centralSwitchID);

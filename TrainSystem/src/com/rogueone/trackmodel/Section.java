@@ -51,4 +51,8 @@ public class Section {
         return section.toString();
     }
     
+    public String toStringDetail() {
+        return section.toString() + " (" + line.toString() + ")";
+    }
+    
 }
