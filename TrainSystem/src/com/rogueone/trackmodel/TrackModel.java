@@ -221,13 +221,13 @@ public class TrackModel {
     public void addStation(Station st) {
         stations.add(st);
         for(Block b : blocks) {
-            if(b.getStationID() == st.getStationID()) {
+            if(b.getLine() == st.getLine() && b.getStationID() == st.getStationID()) {
                 //Assign station to block
                 if(b.getStation() == null) {
                     b.setStation(st);
                 }
                 else {
-                    System.out.println("Block already has station");
+                    System.out.println("Block " + b.getID() + " can't own station " + st.getStationID() + " because it already owns station " + b.getStation().getStationID());
                 }
                 //Assign block to station
                 if(st.getBlockA() == null) {
