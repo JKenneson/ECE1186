@@ -68,21 +68,19 @@ public class TrackModelGUI extends javax.swing.JPanel {
         sectionSelectionComboBox = new javax.swing.JComboBox<>();
         blockSelectionPanel = new javax.swing.JPanel();
         blockSelectionComboBox = new javax.swing.JComboBox<>();
-        componentSelectionPanel = new javax.swing.JPanel();
-        componentSelectionComboBox = new javax.swing.JComboBox<>();
         trackDetailsDetailsPanel = new javax.swing.JPanel();
-        lineDetailsPanel = new javax.swing.JPanel();
-        lineDetailsScrollPane = new javax.swing.JScrollPane();
-        lineDetailsTable = new javax.swing.JTable();
-        sectionDetailsPanel = new javax.swing.JPanel();
-        sectionDetailsScrollPane = new javax.swing.JScrollPane();
-        sectionDetailsTable = new javax.swing.JTable();
-        blockDtailsPanel = new javax.swing.JPanel();
-        blockDetailsScrollPane = new javax.swing.JScrollPane();
-        blockDetailsTable = new javax.swing.JTable();
-        componentDetailsPanel = new javax.swing.JPanel();
-        componentDetailsScrollPane = new javax.swing.JScrollPane();
-        componentDetailsTable = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setMaximumSize(new java.awt.Dimension(1070, 720));
         setMinimumSize(new java.awt.Dimension(1070, 720));
@@ -250,7 +248,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     .addComponent(trackPositionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         trackOverviewPanelLayout.setVerticalGroup(
             trackOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +264,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         .addComponent(trackConfigurationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         trackModelTabbedPane.addTab("Track Overview", trackOverviewPanel);
@@ -276,7 +274,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackDetailsPanel.setPreferredSize(new java.awt.Dimension(1060, 710));
 
         trackDetailsSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selection", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
-        trackDetailsSelectionPanel.setLayout(new java.awt.GridLayout(1, 4));
+        trackDetailsSelectionPanel.setLayout(new java.awt.GridLayout(1, 3));
 
         lineSectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Line"));
 
@@ -289,7 +287,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             lineSectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lineSectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lineSectionComboBox, 0, 219, Short.MAX_VALUE)
+                .addComponent(lineSectionComboBox, 0, 306, Short.MAX_VALUE)
                 .addContainerGap())
         );
         lineSectionPanelLayout.setVerticalGroup(
@@ -305,7 +303,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         sectionSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Section"));
 
         sectionSelectionComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        sectionSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S1", "S2", "S3" }));
+        sectionSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A" }));
 
         javax.swing.GroupLayout sectionSelectionPanelLayout = new javax.swing.GroupLayout(sectionSelectionPanel);
         sectionSelectionPanel.setLayout(sectionSelectionPanelLayout);
@@ -313,7 +311,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             sectionSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sectionSelectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sectionSelectionComboBox, 0, 219, Short.MAX_VALUE)
+                .addComponent(sectionSelectionComboBox, 0, 306, Short.MAX_VALUE)
                 .addContainerGap())
         );
         sectionSelectionPanelLayout.setVerticalGroup(
@@ -329,7 +327,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         blockSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Block"));
 
         blockSelectionComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        blockSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "B1", "B2", "B3", "B4", "B5" }));
+        blockSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
 
         javax.swing.GroupLayout blockSelectionPanelLayout = new javax.swing.GroupLayout(blockSelectionPanel);
         blockSelectionPanel.setLayout(blockSelectionPanelLayout);
@@ -337,7 +335,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             blockSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(blockSelectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(blockSelectionComboBox, 0, 219, Short.MAX_VALUE)
+                .addComponent(blockSelectionComboBox, 0, 306, Short.MAX_VALUE)
                 .addContainerGap())
         );
         blockSelectionPanelLayout.setVerticalGroup(
@@ -350,165 +348,225 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
         trackDetailsSelectionPanel.add(blockSelectionPanel);
 
-        componentSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Component"));
-
-        componentSelectionComboBox.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        componentSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "n/a" }));
-
-        javax.swing.GroupLayout componentSelectionPanelLayout = new javax.swing.GroupLayout(componentSelectionPanel);
-        componentSelectionPanel.setLayout(componentSelectionPanelLayout);
-        componentSelectionPanelLayout.setHorizontalGroup(
-            componentSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(componentSelectionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(componentSelectionComboBox, 0, 219, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        componentSelectionPanelLayout.setVerticalGroup(
-            componentSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(componentSelectionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(componentSelectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        trackDetailsSelectionPanel.add(componentSelectionPanel);
-
         trackDetailsDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
+        trackDetailsDetailsPanel.setPreferredSize(new java.awt.Dimension(800, 828));
         trackDetailsDetailsPanel.setLayout(new java.awt.GridLayout(4, 1));
 
-        lineDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Line"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch"));
 
-        lineDetailsTable.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        lineDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"2", "Red", "27", "93"}
+                {null, null}
             },
             new String [] {
-                "ID", "Line", "Num Sections", "Num Blocks"
+                "Section", "Num Blocks"
             }
-        ));
-        lineDetailsTable.setFocusable(false);
-        lineDetailsTable.setRowHeight(40);
-        lineDetailsScrollPane.setViewportView(lineDetailsTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
 
-        javax.swing.GroupLayout lineDetailsPanelLayout = new javax.swing.GroupLayout(lineDetailsPanel);
-        lineDetailsPanel.setLayout(lineDetailsPanelLayout);
-        lineDetailsPanelLayout.setHorizontalGroup(
-            lineDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lineDetailsPanelLayout.createSequentialGroup()
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable4.setRowHeight(30);
+        jScrollPane4.setViewportView(jTable4);
+        if (jTable4.getColumnModel().getColumnCount() > 0) {
+            jTable4.getColumnModel().getColumn(0).setResizable(false);
+            jTable4.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lineDetailsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        lineDetailsPanelLayout.setVerticalGroup(
-            lineDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lineDetailsPanelLayout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lineDetailsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        trackDetailsDetailsPanel.add(lineDetailsPanel);
+        trackDetailsDetailsPanel.add(jPanel3);
 
-        sectionDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Section"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Block"));
 
-        sectionDetailsTable.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        sectionDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"654", "5", "182", "20"}
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Section", "Length", "Num Blocks"
+                "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum Elevation", "Underground", "Crossing", "Beacon", "Occupied"
             }
-        ));
-        sectionDetailsTable.setRowHeight(40);
-        sectionDetailsScrollPane.setViewportView(sectionDetailsTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
 
-        javax.swing.GroupLayout sectionDetailsPanelLayout = new javax.swing.GroupLayout(sectionDetailsPanel);
-        sectionDetailsPanel.setLayout(sectionDetailsPanelLayout);
-        sectionDetailsPanelLayout.setHorizontalGroup(
-            sectionDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sectionDetailsPanelLayout.createSequentialGroup()
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable3.setRowHeight(30);
+        jScrollPane3.setViewportView(jTable3);
+        if (jTable3.getColumnModel().getColumnCount() > 0) {
+            jTable3.getColumnModel().getColumn(0).setResizable(false);
+            jTable3.getColumnModel().getColumn(1).setResizable(false);
+            jTable3.getColumnModel().getColumn(2).setResizable(false);
+            jTable3.getColumnModel().getColumn(3).setResizable(false);
+            jTable3.getColumnModel().getColumn(4).setResizable(false);
+            jTable3.getColumnModel().getColumn(5).setResizable(false);
+            jTable3.getColumnModel().getColumn(6).setResizable(false);
+            jTable3.getColumnModel().getColumn(7).setResizable(false);
+            jTable3.getColumnModel().getColumn(8).setResizable(false);
+            jTable3.getColumnModel().getColumn(10).setResizable(false);
+            jTable3.getColumnModel().getColumn(11).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sectionDetailsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        sectionDetailsPanelLayout.setVerticalGroup(
-            sectionDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sectionDetailsPanelLayout.createSequentialGroup()
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sectionDetailsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        trackDetailsDetailsPanel.add(sectionDetailsPanel);
+        trackDetailsDetailsPanel.add(jPanel4);
 
-        blockDtailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Block"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Station"));
 
-        blockDetailsTable.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        blockDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"123", "122", "124", "N", "Y", "50", "10", "30", "20"}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Previous", "Next", "Forward", "Backward", "Size", "Grade", "Elevation", "Speed Limit"
+                "ID", "Name", "Block A", "Block B", "Right", "Left"
             }
-        ));
-        blockDetailsTable.setRowHeight(40);
-        blockDetailsScrollPane.setViewportView(blockDetailsTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        javax.swing.GroupLayout blockDtailsPanelLayout = new javax.swing.GroupLayout(blockDtailsPanel);
-        blockDtailsPanel.setLayout(blockDtailsPanelLayout);
-        blockDtailsPanelLayout.setHorizontalGroup(
-            blockDtailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(blockDtailsPanelLayout.createSequentialGroup()
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable5.setRowHeight(30);
+        jScrollPane5.setViewportView(jTable5);
+        if (jTable5.getColumnModel().getColumnCount() > 0) {
+            jTable5.getColumnModel().getColumn(0).setResizable(false);
+            jTable5.getColumnModel().getColumn(1).setResizable(false);
+            jTable5.getColumnModel().getColumn(2).setResizable(false);
+            jTable5.getColumnModel().getColumn(3).setResizable(false);
+            jTable5.getColumnModel().getColumn(4).setResizable(false);
+            jTable5.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(blockDetailsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        blockDtailsPanelLayout.setVerticalGroup(
-            blockDtailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(blockDtailsPanelLayout.createSequentialGroup()
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(blockDetailsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        trackDetailsDetailsPanel.add(blockDtailsPanel);
+        trackDetailsDetailsPanel.add(jPanel5);
 
-        componentDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Component"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Failures"));
 
-        componentDetailsTable.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        componentDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"n/a"}
+                {null, null, null}
             },
             new String [] {
-                "n/a"
+                "Broken Rail", "Power Outage", "Track Circuit Broken"
             }
-        ));
-        componentDetailsTable.setRowHeight(40);
-        componentDetailsScrollPane.setViewportView(componentDetailsTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
-        javax.swing.GroupLayout componentDetailsPanelLayout = new javax.swing.GroupLayout(componentDetailsPanel);
-        componentDetailsPanel.setLayout(componentDetailsPanelLayout);
-        componentDetailsPanelLayout.setHorizontalGroup(
-            componentDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(componentDetailsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(componentDetailsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
-                .addContainerGap())
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setRequestFocusEnabled(false);
+        jTable2.setRowHeight(30);
+        jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 974, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
-        componentDetailsPanelLayout.setVerticalGroup(
-            componentDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(componentDetailsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(componentDetailsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                .addContainerGap())
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 82, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(18, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
-        trackDetailsDetailsPanel.add(componentDetailsPanel);
+        trackDetailsDetailsPanel.add(jPanel1);
 
         javax.swing.GroupLayout trackDetailsPanelLayout = new javax.swing.GroupLayout(trackDetailsPanel);
         trackDetailsPanel.setLayout(trackDetailsPanelLayout);
@@ -519,7 +577,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 .addGroup(trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(trackDetailsSelectionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(trackDetailsDetailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         trackDetailsPanelLayout.setVerticalGroup(
             trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,8 +585,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(trackDetailsSelectionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(trackDetailsDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addComponent(trackDetailsDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         trackModelTabbedPane.addTab("Track Details", trackDetailsPanel);
@@ -579,31 +637,29 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane blockDetailsScrollPane;
-    private javax.swing.JTable blockDetailsTable;
-    private javax.swing.JPanel blockDtailsPanel;
     private javax.swing.JComboBox<String> blockSelectionComboBox;
     private javax.swing.JPanel blockSelectionPanel;
     private javax.swing.JButton brokenRailFailureButton;
-    private javax.swing.JPanel componentDetailsPanel;
-    private javax.swing.JScrollPane componentDetailsScrollPane;
-    private javax.swing.JTable componentDetailsTable;
-    private javax.swing.JComboBox<String> componentSelectionComboBox;
-    private javax.swing.JPanel componentSelectionPanel;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel lineDetailsPanel;
-    private javax.swing.JScrollPane lineDetailsScrollPane;
-    private javax.swing.JTable lineDetailsTable;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     private javax.swing.JComboBox<String> lineSectionComboBox;
     private javax.swing.JPanel lineSectionPanel;
     private javax.swing.JButton powerOutageFailureButton;
-    private javax.swing.JPanel sectionDetailsPanel;
-    private javax.swing.JScrollPane sectionDetailsScrollPane;
-    private javax.swing.JTable sectionDetailsTable;
     private javax.swing.JComboBox<String> sectionSelectionComboBox;
     private javax.swing.JPanel sectionSelectionPanel;
     private javax.swing.JButton trackCircuitFailureButton;
