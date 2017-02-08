@@ -40,7 +40,6 @@ public class TrainModel {
     private int passengersAtStation;
     private int passengersOnBaord;
     private int passengersDisembarking;
-    private int passengersEmbarking;
     private int passengerMaxCapacity;
     //Physical Characteristics
     private int trainWeight;
@@ -78,7 +77,6 @@ public class TrainModel {
         this.passengersAtStation = 0;
         this.passengersOnBaord = 0;
         this.passengersDisembarking = 0;
-        this.passengersEmbarking = 0;
         this.passengerMaxCapacity = 0;                                                                          //TODO: Set initial max capacity based off of number of cars
         //Physical Characteristics
         this.trainWeight = 0;                                                                                   //TODO: Set train weight and length based off numCars
@@ -129,7 +127,7 @@ public class TrainModel {
         gui.driverSetPointSpinner.setValue(this.driverSetPoint);
         gui.driverPowerSpinner.setValue(this.powerReceived);
         
-        gui.passengersInputSpinner.setValue(this.passengersEmbarking);
+        gui.passengersInputSpinner.setValue(this.passengersAtStation);
         gui.numCarsInputSpinner.setValue(this.numCars);
     }
     
@@ -177,6 +175,7 @@ public class TrainModel {
         gui.driverSetPointState.setText(Integer.toString(this.driverSetPoint));
         gui.ctcSetPointState.setText(Integer.toString(this.ctcSetPoint));
         gui.authorityState.setText(Integer.toString(this.authority));
+        gui.powerState.setText(Double.toString(this.powerReceived));
         gui.gradeState.setText(Double.toString(this.grade));
         
         //Station and Passengers
@@ -368,12 +367,12 @@ public class TrainModel {
         this.passengersDisembarking = passengersDisembarking;
     }
 
-    public int getPassengersEmbarking() {
-        return passengersEmbarking;
+    public int getPassengersAtStation() {
+        return passengersAtStation;
     }
 
-    public void setPassengersEmbarking(int passengersEmbarking) {
-        this.passengersEmbarking = passengersEmbarking;
+    public void setPassengersAtStation(int passengersAtStation) {
+        this.passengersAtStation = passengersAtStation;
     }
 
     public int getPassengerMaxCapacity() {
