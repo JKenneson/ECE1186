@@ -178,7 +178,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jScrollPane9.setViewportView(TrainTable);
 
         ChangeParametersButton3.setText("CHANGE ");
-        ChangeParametersButton3.setEnabled(false);
         ChangeParametersButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeParametersButton3ActionPerformed(evt);
@@ -901,7 +900,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         int column = table.getSelectedColumn();
         trainID = (int)table.getValueAt(row, column);
         //global to program
-        ChangeParametersButton3.setEnabled(true);
+        if (SelectOperationMode2.getSelectedIndex() == 1){
+            ChangeParametersButton3.setEnabled(false);
+        }
+        else { 
+            ChangeParametersButton3.setEnabled(true);
+        }
+        
         
         
                 // TODO add your handling code here:
