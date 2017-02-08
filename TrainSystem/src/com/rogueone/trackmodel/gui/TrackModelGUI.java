@@ -10,14 +10,11 @@ import com.rogueone.trackmodel.Line;
 import com.rogueone.trackmodel.Section;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import com.rogueone.trackmodel.TrackModel;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -616,7 +613,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_trackConfigurationLoadButtonMouseClicked
 
     private void trackConfigurationLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackConfigurationLoadButtonActionPerformed
-        JFileChooser trackDataFileChooser = new JFileChooser();
+
+        trackDataFileChooser = new JFileChooser();
         int returnVal = trackDataFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = trackDataFileChooser.getSelectedFile();
@@ -709,6 +707,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             trackModel = tm;
         }
 
+        @Override
         public void itemStateChanged(ItemEvent event) {
            if (event.getStateChange() == ItemEvent.SELECTED) {
               trackModel.updateSectionComboBox();
@@ -723,7 +722,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
         public SectionChangeListener(TrackModelGUI tm) {
             trackModel = tm;
         }
-
+        
+        @Override
         public void itemStateChanged(ItemEvent event) {
            if (event.getStateChange() == ItemEvent.SELECTED) {
               trackModel.updateBlockComboBox();
@@ -739,6 +739,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             trackModel = tm;
         }
 
+        @Override
         public void itemStateChanged(ItemEvent event) {
            if (event.getStateChange() == ItemEvent.SELECTED) {
               
