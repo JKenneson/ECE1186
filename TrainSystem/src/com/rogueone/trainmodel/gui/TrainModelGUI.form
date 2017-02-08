@@ -199,19 +199,18 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="rightDoorInputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lightsInputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tempInputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="temperatureInputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="tempInputSpinner" min="-2" pref="49" max="-2" attributes="0"/>
+                                          <Component id="temperatureInputSpinner" min="-2" pref="49" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                          <Component id="tempInputDegreesLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="temperatureInputDegreesLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                          <Component id="rightDoorToggleButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lightsToggleButton" alignment="1" min="-2" pref="99" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="rightDoorToggleButton" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lightsToggleButton" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -244,9 +243,9 @@
                           </Group>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tempInputLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tempInputSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tempInputDegreesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="temperatureInputLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="temperatureInputSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="temperatureInputDegreesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -261,7 +260,7 @@
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="leftDoorToggleButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Open/Close"/>
+                    <Property name="text" type="java.lang.String" value="Close"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="leftDoorToggleButtonActionPerformed"/>
@@ -277,8 +276,11 @@
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="rightDoorToggleButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Open/Close"/>
+                    <Property name="text" type="java.lang.String" value="Close"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rightDoorToggleButtonActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -290,23 +292,26 @@
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="lightsToggleButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="On/Off"/>
+                    <Property name="text" type="java.lang.String" value="Off"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lightsToggleButtonActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="tempInputLabel">
+                <Component class="javax.swing.JLabel" name="temperatureInputLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Temp:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JSpinner" name="tempInputSpinner">
+                <Component class="javax.swing.JSpinner" name="temperatureInputSpinner">
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="tempInputDegreesLabel">
+                <Component class="javax.swing.JLabel" name="temperatureInputDegreesLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="degrees"/>
                   </Properties>
@@ -664,14 +669,14 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="brakesOutputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tempOutputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="temperatureOutputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="tempState" min="-2" pref="20" max="-2" attributes="0"/>
+                                          <Component id="temperatureState" min="-2" pref="20" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tempOutputLabelUnits" min="-2" pref="58" max="-2" attributes="0"/>
+                                          <Component id="temperatureOutputLabelUnits" min="-2" pref="58" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
@@ -704,9 +709,9 @@
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tempOutputLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tempState" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tempOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="temperatureOutputLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="temperatureState" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="temperatureOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -758,7 +763,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="tempOutputLabel">
+                <Component class="javax.swing.JLabel" name="temperatureOutputLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Temperature:"/>
                   </Properties>
@@ -766,7 +771,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="tempState">
+                <Component class="javax.swing.JLabel" name="temperatureState">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="72"/>
                   </Properties>
@@ -774,7 +779,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="tempOutputLabelUnits">
+                <Component class="javax.swing.JLabel" name="temperatureOutputLabelUnits">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="degrees"/>
                   </Properties>
@@ -826,15 +831,10 @@
                                       <Component id="driverSetSpeedLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="ctcSetPointOutputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="authorityOutputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="authorityState" min="-2" pref="38" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="authorityOutputLabelUnits" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="driverSetPointState" pref="29" max="32767" attributes="0"/>
@@ -848,6 +848,18 @@
                                               <Component id="currSpeedOutputLabelUnits" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="authorityState" alignment="0" pref="38" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="authorityOutputLabelUnits" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -864,29 +876,35 @@
                               <Component id="currSpeedState" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="currSpeedOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="speedLimitOutputLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="speedLimitState" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="speedLimitOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="driverSetSpeedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="driverSetPointState" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="driverSetPointOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="ctcSetPointOutputLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ctcSetPointState" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ctcSetPointOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="authorityOutputLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="authorityState" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="authorityOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -984,6 +1002,21 @@
                     <Property name="text" type="java.lang.String" value="ft"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JLabel" name="jLabel4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Track Grade:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="1.5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="%"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="passengersOutputPanel">
@@ -1002,35 +1035,38 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="passOnBoardLabel" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                          <Component id="passOnBoardState" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="passDisembarkLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="maxCapacityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="passDisembarkState" max="32767" attributes="0"/>
-                                              <Component id="maxCapacityState" pref="41" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="passDisembarkLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="maxCapacityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passOnBoardLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="passOnBoardState" pref="42" max="32767" attributes="0"/>
+                                      <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="passDisembarkState" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="maxCapacityState" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="passDisembarkLabelUnits" min="-2" max="-2" attributes="0"/>
-                                      <Component id="passOnBoardLabelUnits" min="-2" max="-2" attributes="0"/>
                                       <Component id="maxCapacityLabelUnits" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passOnBoardLabelUnits" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="nextStationOutputLabel" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="nextStationState" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="nextStationOutputLabel" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="nextStationState" min="-2" pref="107" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1046,10 +1082,20 @@
                               <Component id="nextStationState" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="passOnBoardLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="passOnBoardState" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="passOnBoardLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="passOnBoardLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passOnBoardState" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passOnBoardLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -1136,6 +1182,21 @@
                     <Property name="text" type="java.lang.String" value="people"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JLabel" name="jLabel1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Passengers at Station:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="25"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="people"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="physicalTrainOutputPanel">
@@ -1165,9 +1226,9 @@
                                       <Component id="mboAntennaState" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="numCarsState" max="32767" attributes="0"/>
                                               <Component id="trainLengthState" alignment="0" pref="50" max="32767" attributes="0"/>
                                               <Component id="trainWeightState" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="numCarsState" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -1221,7 +1282,7 @@
                               <Component id="mboAntennaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="mboAntennaState" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

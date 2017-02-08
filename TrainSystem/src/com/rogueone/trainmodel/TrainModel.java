@@ -4,8 +4,8 @@
  * All necessary calculations for force, mass, acceleration, velocity, and distance traveled will be calculated here
  *
  * @author Jonathan Kenneson
- * @creation date 2/3/17
- * @modification date 2/6/17
+ * @Creation 2/3/17
+ * @Modification 2/6/17
  */
 package com.rogueone.trainmodel;
 
@@ -51,9 +51,9 @@ public class TrainModel {
      * Initializer for the TrainModel class, sets all variables to a default state
      * 
      * @author Jonathan Kenneson
-     * @param setPointSpeed the desired speed set by the CTC
-     * @param authority the desired authority set by the CTC
-     * @param numCars how many cars are to be created (1 or 2)
+     * @param setPointSpeed The desired speed set by the CTC
+     * @param authority The desired authority set by the CTC
+     * @param numCars How many cars are to be created (1 or 2)
      */
     public TrainModel(int setPointSpeed, int authority, int numCars) {
         //Train Operations
@@ -88,7 +88,8 @@ public class TrainModel {
      * This function will create, display, and return a GUI object for the Train Model class that can be interacted with
      * 
      * @author Jonathan Kenneson
-     * @return TrainModelGUI a GUI object for this TrainModel
+     * @param trainModelObject The TrainModel to create the GUI off of
+     * @return TrainModelGUI A GUI object for this TrainModel
      */
     public TrainModelGUI CreateGUIObject(TrainModel trainModelObject) {
         //Create a GUI object
@@ -116,7 +117,7 @@ public class TrainModel {
      */
     public void InitializeInputPanel(TrainModelGUI gui) {
         //All spinner values initialized just once
-        gui.tempInputSpinner.setValue(this.temperature);
+        gui.temperatureInputSpinner.setValue(this.temperature);
         
         gui.ctcSetPointSpinner.setValue(this.ctcSetPoint);
         gui.ctcAuthoritySpinner.setValue(this.authority);
@@ -155,7 +156,7 @@ public class TrainModel {
         else {
             gui.lightsState.setText("Off");
         }
-        gui.tempState.setText(Integer.toString(this.temperature));
+        gui.temperatureState.setText(Integer.toString(this.temperature));
         if(this.emergencyBrakeActivated) {      //Default to always print emergency brake if both emergency and service are activated
             gui.brakesState.setText("Emergency");
         }

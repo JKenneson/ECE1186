@@ -26,7 +26,11 @@ public class TrainModelGUI extends javax.swing.JPanel {
         initComponents();
     }
     
-    //Constructor that connects the TrainModel.java class with this GUI
+    /**
+     * Constructor that takes in a TrainModel object to reference back to
+     * 
+     * @param trainModel The TrainModel object that use wish to have this GUI connected to
+     */
     public TrainModelGUI(TrainModel trainModel) {
         initComponents();
         this.trainModel = trainModel;
@@ -53,9 +57,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
         rightDoorToggleButton = new javax.swing.JToggleButton();
         lightsInputLabel = new javax.swing.JLabel();
         lightsToggleButton = new javax.swing.JToggleButton();
-        tempInputLabel = new javax.swing.JLabel();
-        tempInputSpinner = new javax.swing.JSpinner();
-        tempInputDegreesLabel = new javax.swing.JLabel();
+        temperatureInputLabel = new javax.swing.JLabel();
+        temperatureInputSpinner = new javax.swing.JSpinner();
+        temperatureInputDegreesLabel = new javax.swing.JLabel();
         ctcInputPanel = new javax.swing.JPanel();
         ctcSetPointInputLabel = new javax.swing.JLabel();
         ctcSetPointSpinner = new javax.swing.JSpinner();
@@ -86,9 +90,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
         rightDoorState = new javax.swing.JLabel();
         lightsOutputLabel = new javax.swing.JLabel();
         lightsState = new javax.swing.JLabel();
-        tempOutputLabel = new javax.swing.JLabel();
-        tempState = new javax.swing.JLabel();
-        tempOutputLabelUnits = new javax.swing.JLabel();
+        temperatureOutputLabel = new javax.swing.JLabel();
+        temperatureState = new javax.swing.JLabel();
+        temperatureOutputLabelUnits = new javax.swing.JLabel();
         brakesOutputLabel = new javax.swing.JLabel();
         brakesState = new javax.swing.JLabel();
         speedOutputPanel = new javax.swing.JPanel();
@@ -107,6 +111,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
         authorityOutputLabel = new javax.swing.JLabel();
         authorityState = new javax.swing.JLabel();
         authorityOutputLabelUnits = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         passengersOutputPanel = new javax.swing.JPanel();
         nextStationOutputLabel = new javax.swing.JLabel();
         nextStationState = new javax.swing.JLabel();
@@ -119,6 +126,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
         maxCapacityLabel = new javax.swing.JLabel();
         maxCapacityState = new javax.swing.JLabel();
         maxCapacityLabelUnits = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         physicalTrainOutputPanel = new javax.swing.JPanel();
         trainWeightLabel = new javax.swing.JLabel();
         trainWeightState = new javax.swing.JLabel();
@@ -185,7 +195,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         leftDoorInputLabel.setText("Left Door:");
 
-        leftDoorToggleButton.setText("Open/Close");
+        leftDoorToggleButton.setText("Close");
         leftDoorToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leftDoorToggleButtonActionPerformed(evt);
@@ -194,15 +204,25 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         rightDoorInputLabel.setText("Right Door:");
 
-        rightDoorToggleButton.setText("Open/Close");
+        rightDoorToggleButton.setText("Close");
+        rightDoorToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rightDoorToggleButtonActionPerformed(evt);
+            }
+        });
 
         lightsInputLabel.setText("Lights:");
 
-        lightsToggleButton.setText("On/Off");
+        lightsToggleButton.setText("Off");
+        lightsToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lightsToggleButtonActionPerformed(evt);
+            }
+        });
 
-        tempInputLabel.setText("Temp:");
+        temperatureInputLabel.setText("Temp:");
 
-        tempInputDegreesLabel.setText("degrees");
+        temperatureInputDegreesLabel.setText("degrees");
 
         javax.swing.GroupLayout operationsInputPanelLayout = new javax.swing.GroupLayout(operationsInputPanel);
         operationsInputPanel.setLayout(operationsInputPanelLayout);
@@ -215,16 +235,16 @@ public class TrainModelGUI extends javax.swing.JPanel {
                         .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rightDoorInputLabel)
                             .addComponent(lightsInputLabel)
-                            .addComponent(tempInputLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                            .addComponent(temperatureInputLabel))
+                        .addGap(25, 25, 25)
                         .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(operationsInputPanelLayout.createSequentialGroup()
-                                .addComponent(tempInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(temperatureInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4)
-                                .addComponent(tempInputDegreesLabel))
-                            .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(rightDoorToggleButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lightsToggleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(temperatureInputDegreesLabel)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(rightDoorToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lightsToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(operationsInputPanelLayout.createSequentialGroup()
                         .addComponent(leftDoorInputLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -248,9 +268,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
                     .addComponent(lightsInputLabel))
                 .addGap(30, 30, 30)
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tempInputLabel)
-                    .addComponent(tempInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tempInputDegreesLabel))
+                    .addComponent(temperatureInputLabel)
+                    .addComponent(temperatureInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(temperatureInputDegreesLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -455,11 +475,11 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         lightsState.setText("Off");
 
-        tempOutputLabel.setText("Temperature:");
+        temperatureOutputLabel.setText("Temperature:");
 
-        tempState.setText("72");
+        temperatureState.setText("72");
 
-        tempOutputLabelUnits.setText("degrees");
+        temperatureOutputLabelUnits.setText("degrees");
 
         brakesOutputLabel.setText("Brakes Activated:");
 
@@ -489,13 +509,13 @@ public class TrainModelGUI extends javax.swing.JPanel {
                     .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
                         .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(brakesOutputLabel)
-                            .addComponent(tempOutputLabel))
+                            .addComponent(temperatureOutputLabel))
                         .addGap(18, 18, 18)
                         .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
-                                .addComponent(tempState, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(temperatureState, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tempOutputLabelUnits, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(temperatureOutputLabelUnits, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(trainOperationsOutputPanelLayout.createSequentialGroup()
                                 .addComponent(brakesState)
@@ -518,9 +538,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
                     .addComponent(lightsState))
                 .addGap(24, 24, 24)
                 .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tempOutputLabel)
-                    .addComponent(tempState)
-                    .addComponent(tempOutputLabelUnits))
+                    .addComponent(temperatureOutputLabel)
+                    .addComponent(temperatureState)
+                    .addComponent(temperatureOutputLabelUnits))
                 .addGap(24, 24, 24)
                 .addGroup(trainOperationsOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(brakesOutputLabel)
@@ -560,6 +580,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         authorityOutputLabelUnits.setText("ft");
 
+        jLabel4.setText("Track Grade:");
+
+        jLabel5.setText("1.5");
+
+        jLabel6.setText("%");
+
         javax.swing.GroupLayout speedOutputPanelLayout = new javax.swing.GroupLayout(speedOutputPanel);
         speedOutputPanel.setLayout(speedOutputPanelLayout);
         speedOutputPanelLayout.setHorizontalGroup(
@@ -580,14 +606,10 @@ public class TrainModelGUI extends javax.swing.JPanel {
                         .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(driverSetSpeedLabel)
                             .addComponent(ctcSetPointOutputLabel)
-                            .addComponent(authorityOutputLabel))
+                            .addComponent(authorityOutputLabel)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(speedOutputPanelLayout.createSequentialGroup()
-                                .addComponent(authorityState, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(authorityOutputLabelUnits)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(speedOutputPanelLayout.createSequentialGroup()
                                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(driverSetPointState, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
@@ -598,7 +620,16 @@ public class TrainModelGUI extends javax.swing.JPanel {
                                     .addComponent(ctcSetPointOutputLabelUnits)
                                     .addComponent(speedLimitOutputLabelUnits)
                                     .addComponent(currSpeedOutputLabelUnits))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(speedOutputPanelLayout.createSequentialGroup()
+                                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(authorityState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(authorityOutputLabelUnits)
+                                    .addComponent(jLabel6))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         speedOutputPanelLayout.setVerticalGroup(
             speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,26 +639,31 @@ public class TrainModelGUI extends javax.swing.JPanel {
                     .addComponent(currSpeedOutputLabel)
                     .addComponent(currSpeedState)
                     .addComponent(currSpeedOutputLabelUnits))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(speedLimitOutputLabel)
                     .addComponent(speedLimitState)
                     .addComponent(speedLimitOutputLabelUnits))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(driverSetSpeedLabel)
                     .addComponent(driverSetPointState)
                     .addComponent(driverSetPointOutputLabelUnits))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ctcSetPointOutputLabel)
                     .addComponent(ctcSetPointState)
                     .addComponent(ctcSetPointOutputLabelUnits))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(authorityOutputLabel)
                     .addComponent(authorityState)
                     .addComponent(authorityOutputLabelUnits))
+                .addGap(18, 18, 18)
+                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -655,6 +691,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         maxCapacityLabelUnits.setText("people");
 
+        jLabel1.setText("Passengers at Station:");
+
+        jLabel2.setText("25");
+
+        jLabel3.setText("people");
+
         javax.swing.GroupLayout passengersOutputPanelLayout = new javax.swing.GroupLayout(passengersOutputPanel);
         passengersOutputPanel.setLayout(passengersOutputPanelLayout);
         passengersOutputPanelLayout.setHorizontalGroup(
@@ -663,28 +705,31 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(passengersOutputPanelLayout.createSequentialGroup()
-                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, passengersOutputPanelLayout.createSequentialGroup()
-                                .addComponent(passOnBoardLabel)
-                                .addGap(37, 37, 37)
-                                .addComponent(passOnBoardState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, passengersOutputPanelLayout.createSequentialGroup()
-                                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(passDisembarkLabel)
-                                    .addComponent(maxCapacityLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(passDisembarkState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(maxCapacityState, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))))
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passDisembarkLabel)
+                            .addComponent(maxCapacityLabel)
+                            .addComponent(passOnBoardLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(passOnBoardState, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(passDisembarkState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(maxCapacityState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(passDisembarkLabelUnits)
-                            .addComponent(passOnBoardLabelUnits)
-                            .addComponent(maxCapacityLabelUnits)))
+                            .addComponent(maxCapacityLabelUnits)
+                            .addComponent(passOnBoardLabelUnits)))
                     .addGroup(passengersOutputPanelLayout.createSequentialGroup()
-                        .addComponent(nextStationOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(nextStationState, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nextStationOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(33, 33, 33)
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(passengersOutputPanelLayout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel3))
+                            .addComponent(nextStationState, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         passengersOutputPanelLayout.setVerticalGroup(
@@ -695,10 +740,17 @@ public class TrainModelGUI extends javax.swing.JPanel {
                     .addComponent(nextStationOutputLabel)
                     .addComponent(nextStationState))
                 .addGap(24, 24, 24)
-                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passOnBoardLabel)
-                    .addComponent(passOnBoardState)
-                    .addComponent(passOnBoardLabelUnits))
+                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3))
+                    .addGroup(passengersOutputPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(24, 24, 24)
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(passOnBoardLabel)
+                            .addComponent(passOnBoardState)
+                            .addComponent(passOnBoardLabelUnits))))
                 .addGap(24, 24, 24)
                 .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passDisembarkLabel)
@@ -758,9 +810,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
                             .addComponent(mboAntennaState)
                             .addGroup(physicalTrainOutputPanelLayout.createSequentialGroup()
                                 .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(numCarsState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(trainLengthState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                                    .addComponent(trainWeightState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(trainWeightState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(numCarsState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(numCarsLabelUnits)
@@ -799,7 +851,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addGroup(physicalTrainOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mboAntennaLabel)
                     .addComponent(mboAntennaState))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout trainModelOutputPanelLayout = new javax.swing.GroupLayout(trainModelOutputPanel);
@@ -922,6 +974,17 @@ public class TrainModelGUI extends javax.swing.JPanel {
         else {
             trainModel.setServiceBrakeActivated(false);
         }
+        if(this.emergencyBrakeCheckbox.isSelected()) {
+            trainModel.setEmergencyBrakeActivated(true);
+        }
+        else {
+            trainModel.setEmergencyBrakeActivated(false);
+        }
+        
+        //Cars and Passengers
+        trainModel.setNumCars(Integer.valueOf(this.numCarsInputSpinner.getValue().toString()));
+        trainModel.setPassengersEmbarking(Integer.valueOf(this.passengersInputSpinner.getValue().toString()));
+        
         
     }//GEN-LAST:event_sendPowerCommandButtonActionPerformed
 
@@ -930,8 +993,34 @@ public class TrainModelGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_sendFailureButtonActionPerformed
 
     private void leftDoorToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDoorToggleButtonActionPerformed
-        // TODO add your handling code here:
+        //Change door text between "Open" and "Close"
+        if(this.leftDoorToggleButton.getText().equalsIgnoreCase("Open")) {
+            this.leftDoorToggleButton.setText("Close");
+        }
+        else {
+            this.leftDoorToggleButton.setText("Open");
+        }
     }//GEN-LAST:event_leftDoorToggleButtonActionPerformed
+
+    private void rightDoorToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightDoorToggleButtonActionPerformed
+        //Change door text between "Open" and "Close"
+        if(this.rightDoorToggleButton.getText().equalsIgnoreCase("Open")) {
+            this.rightDoorToggleButton.setText("Close");
+        }
+        else {
+            this.rightDoorToggleButton.setText("Open");
+        }
+    }//GEN-LAST:event_rightDoorToggleButtonActionPerformed
+
+    private void lightsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lightsToggleButtonActionPerformed
+        //Change lights text between "On" and "Off"
+        if(this.lightsToggleButton.getText().equalsIgnoreCase("On")) {
+            this.lightsToggleButton.setText("Off");
+        }
+        else {
+            this.lightsToggleButton.setText("On");
+        }
+    }//GEN-LAST:event_lightsToggleButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JCheckBox antennaFailureCheckbox;
@@ -967,6 +1056,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
     private javax.swing.JLabel driverSetSpeedLabel;
     public javax.swing.JCheckBox emergencyBrakeCheckbox;
     private javax.swing.JPanel failureInputPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel leftDoorInputLabel;
     private javax.swing.JLabel leftDoorOutputLabel;
     public javax.swing.JLabel leftDoorState;
@@ -1015,12 +1110,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
     private javax.swing.JLabel speedLimitOutputLabelUnits;
     public javax.swing.JLabel speedLimitState;
     private javax.swing.JPanel speedOutputPanel;
-    private javax.swing.JLabel tempInputDegreesLabel;
-    private javax.swing.JLabel tempInputLabel;
-    public javax.swing.JSpinner tempInputSpinner;
-    public javax.swing.JLabel tempOutputLabel;
-    private javax.swing.JLabel tempOutputLabelUnits;
-    public javax.swing.JLabel tempState;
+    private javax.swing.JLabel temperatureInputDegreesLabel;
+    private javax.swing.JLabel temperatureInputLabel;
+    public javax.swing.JSpinner temperatureInputSpinner;
+    public javax.swing.JLabel temperatureOutputLabel;
+    private javax.swing.JLabel temperatureOutputLabelUnits;
+    public javax.swing.JLabel temperatureState;
     private javax.swing.JLabel trackAntennaLabel;
     public javax.swing.JLabel trackAntennaState;
     private javax.swing.JLabel trainLengthLabel;
