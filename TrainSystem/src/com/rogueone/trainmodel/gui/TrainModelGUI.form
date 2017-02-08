@@ -831,7 +831,7 @@
                                       <Component id="driverSetSpeedLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="ctcSetPointOutputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="authorityOutputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="gradeOutputLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -851,13 +851,13 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="gradeState" alignment="0" max="32767" attributes="0"/>
                                               <Component id="authorityState" alignment="0" pref="38" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="authorityOutputLabelUnits" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                              <Component id="gradeOutputLabelUnits" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
@@ -902,9 +902,9 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="gradeOutputLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="gradeState" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="gradeOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1002,17 +1002,20 @@
                     <Property name="text" type="java.lang.String" value="ft"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel4">
+                <Component class="javax.swing.JLabel" name="gradeOutputLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Track Grade:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel5">
+                <Component class="javax.swing.JLabel" name="gradeState">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="1.5"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel6">
+                <Component class="javax.swing.JLabel" name="gradeOutputLabelUnits">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="%"/>
                   </Properties>
@@ -1043,7 +1046,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="passOnBoardState" pref="42" max="32767" attributes="0"/>
-                                      <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="passAtStationState" alignment="0" max="32767" attributes="0"/>
                                       <Component id="passDisembarkState" alignment="0" max="32767" attributes="0"/>
                                       <Component id="maxCapacityState" alignment="0" max="32767" attributes="0"/>
                                   </Group>
@@ -1057,13 +1060,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="nextStationOutputLabel" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passAtStationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="passAtStationLabelUnits" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="nextStationState" min="-2" pref="107" max="-2" attributes="0"/>
                                   </Group>
@@ -1084,11 +1087,11 @@
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="passAtStationState" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="passAtStationLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="passAtStationLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="passOnBoardLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1127,6 +1130,24 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="passAtStationLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Passengers at Station:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="passAtStationState">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="25"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="passAtStationLabelUnits">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="people"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="passOnBoardLabel">
                   <Properties>
@@ -1178,21 +1199,6 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="maxCapacityLabelUnits">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="people"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Passengers at Station:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="25"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="people"/>
                   </Properties>

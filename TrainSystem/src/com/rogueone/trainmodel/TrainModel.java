@@ -34,8 +34,10 @@ public class TrainModel {
     private int ctcSetPoint;
     private int authority;
     private double powerReceived;
+    private double grade;
     //Station and Passengers
     private String approachingStation;
+    private int passengersAtStation;
     private int passengersOnBaord;
     private int passengersDisembarking;
     private int passengersEmbarking;
@@ -70,8 +72,10 @@ public class TrainModel {
         this.ctcSetPoint = setPointSpeed;
         this.authority = authority;
         this.powerReceived = 0;
+        this.grade = 0;
         //Station and Passengers
         this.approachingStation = "";
+        this.passengersAtStation = 0;
         this.passengersOnBaord = 0;
         this.passengersDisembarking = 0;
         this.passengersEmbarking = 0;
@@ -173,9 +177,11 @@ public class TrainModel {
         gui.driverSetPointState.setText(Integer.toString(this.driverSetPoint));
         gui.ctcSetPointState.setText(Integer.toString(this.ctcSetPoint));
         gui.authorityState.setText(Integer.toString(this.authority));
+        gui.gradeState.setText(Double.toString(this.grade));
         
         //Station and Passengers
         gui.nextStationState.setText(this.approachingStation);
+        gui.passAtStationState.setText(Integer.toString(this.passengersAtStation));
         gui.passOnBoardState.setText(Integer.toString(this.passengersOnBaord));
         gui.passDisembarkState.setText(Integer.toString(this.passengersDisembarking));
         gui.maxCapacityState.setText(Integer.toString(this.passengerMaxCapacity));

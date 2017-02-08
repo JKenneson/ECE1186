@@ -111,12 +111,15 @@ public class TrainModelGUI extends javax.swing.JPanel {
         authorityOutputLabel = new javax.swing.JLabel();
         authorityState = new javax.swing.JLabel();
         authorityOutputLabelUnits = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        gradeOutputLabel = new javax.swing.JLabel();
+        gradeState = new javax.swing.JLabel();
+        gradeOutputLabelUnits = new javax.swing.JLabel();
         passengersOutputPanel = new javax.swing.JPanel();
         nextStationOutputLabel = new javax.swing.JLabel();
         nextStationState = new javax.swing.JLabel();
+        passAtStationLabel = new javax.swing.JLabel();
+        passAtStationState = new javax.swing.JLabel();
+        passAtStationLabelUnits = new javax.swing.JLabel();
         passOnBoardLabel = new javax.swing.JLabel();
         passOnBoardState = new javax.swing.JLabel();
         passOnBoardLabelUnits = new javax.swing.JLabel();
@@ -126,9 +129,6 @@ public class TrainModelGUI extends javax.swing.JPanel {
         maxCapacityLabel = new javax.swing.JLabel();
         maxCapacityState = new javax.swing.JLabel();
         maxCapacityLabelUnits = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         physicalTrainOutputPanel = new javax.swing.JPanel();
         trainWeightLabel = new javax.swing.JLabel();
         trainWeightState = new javax.swing.JLabel();
@@ -580,11 +580,11 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         authorityOutputLabelUnits.setText("ft");
 
-        jLabel4.setText("Track Grade:");
+        gradeOutputLabel.setText("Track Grade:");
 
-        jLabel5.setText("1.5");
+        gradeState.setText("1.5");
 
-        jLabel6.setText("%");
+        gradeOutputLabelUnits.setText("%");
 
         javax.swing.GroupLayout speedOutputPanelLayout = new javax.swing.GroupLayout(speedOutputPanel);
         speedOutputPanel.setLayout(speedOutputPanelLayout);
@@ -607,7 +607,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
                             .addComponent(driverSetSpeedLabel)
                             .addComponent(ctcSetPointOutputLabel)
                             .addComponent(authorityOutputLabel)
-                            .addComponent(jLabel4))
+                            .addComponent(gradeOutputLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(speedOutputPanelLayout.createSequentialGroup()
@@ -623,12 +623,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(speedOutputPanelLayout.createSequentialGroup()
                                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(gradeState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(authorityState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(authorityOutputLabelUnits)
-                                    .addComponent(jLabel6))
+                                    .addComponent(gradeOutputLabelUnits))
                                 .addGap(0, 0, Short.MAX_VALUE))))))
         );
         speedOutputPanelLayout.setVerticalGroup(
@@ -661,9 +661,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
                     .addComponent(authorityOutputLabelUnits))
                 .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(gradeOutputLabel)
+                    .addComponent(gradeState)
+                    .addComponent(gradeOutputLabelUnits))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -672,6 +672,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
         nextStationOutputLabel.setText("Approaching Station:");
 
         nextStationState.setText("North Shore");
+
+        passAtStationLabel.setText("Passengers at Station:");
+
+        passAtStationState.setText("25");
+
+        passAtStationLabelUnits.setText("people");
 
         passOnBoardLabel.setText("Passengers on Board:");
 
@@ -691,12 +697,6 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         maxCapacityLabelUnits.setText("people");
 
-        jLabel1.setText("Passengers at Station:");
-
-        jLabel2.setText("25");
-
-        jLabel3.setText("people");
-
         javax.swing.GroupLayout passengersOutputPanelLayout = new javax.swing.GroupLayout(passengersOutputPanel);
         passengersOutputPanel.setLayout(passengersOutputPanelLayout);
         passengersOutputPanelLayout.setHorizontalGroup(
@@ -712,7 +712,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(passOnBoardState, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(passAtStationState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(passDisembarkState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(maxCapacityState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -723,12 +723,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
                     .addGroup(passengersOutputPanelLayout.createSequentialGroup()
                         .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nextStationOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(passAtStationLabel))
                         .addGap(33, 33, 33)
                         .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(passengersOutputPanelLayout.createSequentialGroup()
                                 .addGap(49, 49, 49)
-                                .addComponent(jLabel3))
+                                .addComponent(passAtStationLabelUnits))
                             .addComponent(nextStationState, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -742,10 +742,10 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3))
+                        .addComponent(passAtStationState)
+                        .addComponent(passAtStationLabelUnits))
                     .addGroup(passengersOutputPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(passAtStationLabel)
                         .addGap(24, 24, 24)
                         .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(passOnBoardLabel)
@@ -1056,12 +1056,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
     private javax.swing.JLabel driverSetSpeedLabel;
     public javax.swing.JCheckBox emergencyBrakeCheckbox;
     private javax.swing.JPanel failureInputPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel gradeOutputLabel;
+    private javax.swing.JLabel gradeOutputLabelUnits;
+    public javax.swing.JLabel gradeState;
     private javax.swing.JLabel leftDoorInputLabel;
     private javax.swing.JLabel leftDoorOutputLabel;
     public javax.swing.JLabel leftDoorState;
@@ -1085,6 +1082,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
     private javax.swing.JLabel numCarsLabelUnits;
     public javax.swing.JLabel numCarsState;
     private javax.swing.JPanel operationsInputPanel;
+    private javax.swing.JLabel passAtStationLabel;
+    private javax.swing.JLabel passAtStationLabelUnits;
+    public javax.swing.JLabel passAtStationState;
     private javax.swing.JLabel passDisembarkLabel;
     private javax.swing.JLabel passDisembarkLabelUnits;
     public javax.swing.JLabel passDisembarkState;
