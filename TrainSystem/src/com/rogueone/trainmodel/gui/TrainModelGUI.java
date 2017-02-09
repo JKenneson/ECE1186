@@ -8,7 +8,8 @@
  */
 package com.rogueone.trainmodel.gui;
 
-import com.rogueone.trainmodel.TrainModel;  //Import to call functions in Train Model
+import com.rogueone.trainmodel.TrainModel;              //Import to call functions in Train Model
+import com.rogueone.trainmodel.entities.TrainFailures;  //Used for the Train's failures
 
 /**
  *
@@ -1095,7 +1096,15 @@ public class TrainModelGUI extends javax.swing.JPanel {
     private void sendFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendFailureButtonActionPerformed
         // This button will utimately send the failure to TrainController.java to determine appropriate action
         //Call the TrainModel to handle it now
-        
+        if(this.powerFailureCheckbox.isSelected()) {
+            trainModel.handleFailure(TrainFailures.Power);
+        }
+        if(this.brakeFailureCheckbox.isSelected()) {
+            trainModel.handleFailure(TrainFailures.Brake);
+        }
+        if(this.antennaFailureCheckbox.isSelected()) {
+            trainModel.handleFailure(TrainFailures.Antenna);
+        }
     }//GEN-LAST:event_sendFailureButtonActionPerformed
 
     private void leftDoorToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDoorToggleButtonActionPerformed

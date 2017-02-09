@@ -10,6 +10,7 @@
 package com.rogueone.trainmodel;
 
 import com.rogueone.trainmodel.gui.TrainModelGUI;
+import com.rogueone.trainmodel.entities.TrainFailures;
 import javax.swing.*;
 
 /**
@@ -204,7 +205,18 @@ public class TrainModel {
         }
     }
 
-    
+    /**
+     * This method is called from the TrainModelGUI when a failure is activated and sent through
+     * the "Send New Failure" button. For now, the response will be to activate the emergency brake. 
+     * Later, the TrainModel will alert the TrainController to handle these
+     * 
+     * @author Jonathan Kenneson
+     * @param failure One of 3 TrainFailures as found in TrainFailures.java
+     */
+    public void handleFailure(TrainFailures failure) {
+        
+    }
+            
     
     /**
      * Main function tests the functionality of the Train Model class independent from the other modules
@@ -220,8 +232,9 @@ public class TrainModel {
         TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);
         
 
-        //Constantly update the GUI
+        //Constantly update velocity then the GUI
         while(true){
+            
             trainModelTest1.UpdateGUI(trainModelGUITest1);
             if(trainModelGUITest1.isDisplayable() == false) {
                 break;
