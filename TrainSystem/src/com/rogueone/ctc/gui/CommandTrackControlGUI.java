@@ -101,7 +101,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         SelectOperationMode2 = new javax.swing.JComboBox<>();
-        ChangeOperationModeButton2 = new javax.swing.JButton();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -715,32 +714,21 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
 
-        ChangeOperationModeButton2.setText("Change");
-        ChangeOperationModeButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChangeOperationModeButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ChangeOperationModeButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(SelectOperationMode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ChangeOperationModeButton2)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -896,10 +884,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         trackShutdown.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_TrackShutdownButtonActionPerformed
 
-    private void ChangeOperationModeButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeOperationModeButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ChangeOperationModeButton2ActionPerformed
-
     private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
         TrainShutdownGUI trainShutdown = new TrainShutdownGUI();
         trainShutdown.setVisible(true);
@@ -996,7 +980,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JPanel AdditionalInfoPanel2;
     private javax.swing.JTextField AuthorityField;
     private javax.swing.JTabbedPane BrowserPanel2;
-    private javax.swing.JButton ChangeOperationModeButton2;
     private javax.swing.JButton ChangeParametersButton3;
     private javax.swing.JTextField CurrentBlockField;
     private javax.swing.JTextField CurrentCapacityField;
