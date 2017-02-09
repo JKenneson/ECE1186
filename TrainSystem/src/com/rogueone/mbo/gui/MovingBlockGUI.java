@@ -37,7 +37,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         PersonnelSchedulePanel = new javax.swing.JPanel();
         PersonnelSchedule = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        pScheduleTable = new javax.swing.JTable();
         TestInputsPanel = new javax.swing.JPanel();
         MboOkButton1 = new javax.swing.JButton();
         MboSuggestedSpeedLabel = new javax.swing.JLabel();
@@ -119,7 +119,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
         PersonnelSchedulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Personnel Schedule"));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        pScheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Andy Jones", "-", "-", "9 am - 5:30 pm", "2pm - 10:30pm", "2pm - 10:30pm", "9am - 5:30pm", " 8am - 4:30pm"},
                 {"William Smith", "12pm - 8:30pm", "-", "12pm - 8:30pm", "12pm - 8:30pm", "-", "12pm - 8:30pm", "12pm - 8:30pm"},
@@ -135,7 +135,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
                 "Name", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"
             }
         ));
-        PersonnelSchedule.setViewportView(jTable2);
+        PersonnelSchedule.setViewportView(pScheduleTable);
 
         javax.swing.GroupLayout PersonnelSchedulePanelLayout = new javax.swing.GroupLayout(PersonnelSchedulePanel);
         PersonnelSchedulePanel.setLayout(PersonnelSchedulePanelLayout);
@@ -597,7 +597,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ControlModeLabel;
+    public javax.swing.JLabel ControlModeLabel;
     private javax.swing.JLabel CurrentModeLabel;
     private javax.swing.JLabel CurrentSpeedLabel;
     private javax.swing.JLabel CurrentSpeedValue;
@@ -647,6 +647,6 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    public javax.swing.JTable pScheduleTable;
     // End of variables declaration//GEN-END:variables
 }
