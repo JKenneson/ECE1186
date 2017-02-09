@@ -25,7 +25,7 @@ public class TrainModel {
     private boolean powerFailure;
     private boolean brakeFailure;
     private boolean antennaFailure;
-    private boolean emergencyBrakeOverride;     //This guy is activated whenever a failure occurs and overrides any brake activated
+    private boolean emergencyBrakeOverride;     //This is activated whenever a failure occurs and overrides any brake activated
     //Train Operations
     private boolean leftDoorOpen;
     private boolean rightDoorOpen;
@@ -229,13 +229,14 @@ public class TrainModel {
     public void causeFailure(TrainFailures failure) {
         //Switch on the failure passed in
         switch(failure) {
-            //A power failure will stop the train and prevent the doors, lights, and temp setting from working.  Activate emergency brake
+            //A power failure will prevent the doors, lights, and temp setting from working.  Activate emergency brake
             case Power:
                 
                 break;
             //A brake failure will prevent the service brake from being activated. Activate the emergency brake
             case Brake:
-                
+                this.brakeFailure = true;
+                this.emergencyBrakeOverride = true;
                 break;
             //Deactivate the track and mbo antenna.  Activate emergency brake
             case Antenna:
@@ -263,15 +264,18 @@ public class TrainModel {
                 break;
             //Undo the brake failure
             case Brake:
-                
+                this.brakeFailure = false;
                 break;
             //Undo the antenna failure
             case Antenna:
                 this.antennaFailure = false;
                 this.trackAntennaActivated = true;
                 this.mboAntennaActivated = true;
-                this.emergencyBrakeOverride = false;
                 break;
+        }
+        //If there are no failures, de-activate the emergencyBrakeOverride
+        if(!this.powerFailure && !this.brakeFailure && !this.antennaFailure) {
+            this.emergencyBrakeOverride = false;
         }
     }
     
@@ -330,6 +334,7 @@ public class TrainModel {
      * Following are all getters and setters for the TrainModel class
      * 
      * @author Jonathan Kenneson
+     * @return 
      */
 
     public double getGrade() {
