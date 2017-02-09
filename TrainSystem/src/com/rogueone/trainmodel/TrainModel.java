@@ -231,7 +231,8 @@ public class TrainModel {
         switch(failure) {
             //A power failure will prevent the doors, lights, and temp setting from working.  Activate emergency brake
             case Power:
-                
+                this.powerFailure = true;               //In any setter methods below, the value will not be updated if there is a power failure
+                this.emergencyBrakeOverride = true;
                 break;
             //A brake failure will prevent the service brake from being activated. Activate the emergency brake
             case Brake:
@@ -260,7 +261,7 @@ public class TrainModel {
         switch(failure) {
             //Undo the power failure
             case Power:
-                
+                this.powerFailure = false;
                 break;
             //Undo the brake failure
             case Brake:
@@ -350,7 +351,10 @@ public class TrainModel {
     }
 
     public void setLeftDoorOpen(boolean leftDoorOpen) {
-        this.leftDoorOpen = leftDoorOpen;
+        //Check to make sure there is no power failure
+        if(!this.powerFailure) {
+            this.leftDoorOpen = leftDoorOpen;
+        }
     }
 
     public boolean isRightDoorOpen() {
@@ -358,7 +362,10 @@ public class TrainModel {
     }
 
     public void setRightDoorOpen(boolean rightDoorOpen) {
-        this.rightDoorOpen = rightDoorOpen;
+        //Check to make sure there is no power failure
+        if(!this.powerFailure) {
+            this.rightDoorOpen = rightDoorOpen;
+        }
     }
 
     public boolean isLightsOn() {
@@ -366,7 +373,10 @@ public class TrainModel {
     }
 
     public void setLightsOn(boolean lightsOn) {
-        this.lightsOn = lightsOn;
+        //Check to make sure there is no power failure
+        if(!this.powerFailure) {
+            this.lightsOn = lightsOn;
+        }
     }
 
     public int getTemperature() {
@@ -374,7 +384,10 @@ public class TrainModel {
     }
 
     public void setTemperature(int temperature) {
-        this.temperature = temperature;
+        //Check to make sure there is no power failure
+        if(!this.powerFailure) {
+            this.temperature = temperature;
+        }
     }
 
     public boolean isServiceBrakeActivated() {
