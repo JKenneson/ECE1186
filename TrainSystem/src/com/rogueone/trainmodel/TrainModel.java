@@ -25,6 +25,7 @@ public class TrainModel {
     private boolean powerFailure;
     private boolean brakeFailure;
     private boolean antennaFailure;
+    private boolean emergencyBrakeOverride;     //This guy is activated whenever a failure occurs and overrides any brake activated
     //Train Operations
     private boolean leftDoorOpen;
     private boolean rightDoorOpen;
@@ -66,6 +67,7 @@ public class TrainModel {
         this.powerFailure = false;
         this.brakeFailure = false;
         this.antennaFailure = false;
+        this.emergencyBrakeOverride = false;
         //Train Operations
         this.leftDoorOpen = false;
         this.rightDoorOpen = false;
@@ -168,7 +170,10 @@ public class TrainModel {
             gui.lightsState.setText("Off");
         }
         gui.temperatureState.setText(Integer.toString(this.temperature));
-        if(this.emergencyBrakeActivated) {      //Default to always print emergency brake if both emergency and service are activated
+        if(this.emergencyBrakeOverride) {           //Check first if the override has been enabled -> a failure has occured
+            gui.brakesState.setText("Emergency");
+        }
+        else if(this.emergencyBrakeActivated) {      //Default to always print emergency brake if both emergency and service are activated
             gui.brakesState.setText("Emergency");
         }
         else if(this.serviceBrakeActivated) {
@@ -234,7 +239,10 @@ public class TrainModel {
                 break;
             //Deactivate the track and mbo antenna.  Activate emergency brake
             case Antenna:
-                
+                this.antennaFailure = true;
+                this.trackAntennaActivated = false;
+                this.mboAntennaActivated = false;
+                this.emergencyBrakeOverride = true;
                 break;
         }
     }
@@ -249,19 +257,36 @@ public class TrainModel {
     public void fixFailure(TrainFailures failure) {
         //Switch on the failure passed in
         switch(failure) {
-            //A power failure will stop the train and prevent the doors, lights, and temp setting from working.  Activate emergency brake
+            //Undo the power failure
             case Power:
                 
                 break;
-            //A brake failure will prevent the service brake from being activated. Activate the emergency brake
+            //Undo the brake failure
             case Brake:
                 
                 break;
-            //Deactivate the track and mbo antenna.  Activate emergency brake
+            //Undo the antenna failure
             case Antenna:
-                
+                this.antennaFailure = false;
+                this.trackAntennaActivated = true;
+                this.mboAntennaActivated = true;
+                this.emergencyBrakeOverride = false;
                 break;
         }
+    }
+    
+    
+    /**
+     * This method should be called every clock cycle and will update all important characteristics of the TrainModel, such as:
+     * 1)   Its velocity based on the power sent in from the TrainController
+     * 2)   Failure handling in activating the emergency brake
+     * 
+     * @author Jonathan Kenneson
+     */
+    public void updateTrain() {
+        //Velocity control will be another method call within updateTrain
+        
+        //Failure handling will check the emergencyBrakeOverride signal and set the brakes accordingly
     }
             
     
