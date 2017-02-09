@@ -46,6 +46,8 @@ public class MainFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 

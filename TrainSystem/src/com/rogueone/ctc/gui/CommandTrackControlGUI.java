@@ -83,6 +83,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         CurrentCapacityField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel76 = new javax.swing.JLabel();
+        StatusField = new javax.swing.JTextField();
         AdditionalInfoPanel2 = new javax.swing.JPanel();
         TrainShutdownButton = new javax.swing.JButton();
         TrackShutdownButton = new javax.swing.JButton();
@@ -451,6 +453,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jLabel6.setText("people");
 
+        jLabel76.setText("Status");
+
+        StatusField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StatusFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout InformationPanel2Layout = new javax.swing.GroupLayout(InformationPanel2);
         InformationPanel2.setLayout(InformationPanel2Layout);
         InformationPanel2Layout.setHorizontalGroup(
@@ -472,13 +482,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                                 .addGap(0, 60, Short.MAX_VALUE))
                             .addGroup(InformationPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(MaxCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CurrentCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
+                                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(StatusField)
+                                    .addGroup(InformationPanel2Layout.createSequentialGroup()
+                                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(MaxCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CurrentCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6))))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(InformationPanel2Layout.createSequentialGroup()
                         .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,7 +514,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                                     .addComponent(TrainSpeedLabel2)
                                     .addComponent(TrainAuthorityLabel2)))
                             .addComponent(InformationHeader2))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(InformationPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel76)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         InformationPanel2Layout.setVerticalGroup(
             InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,7 +560,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                     .addComponent(jLabel75)
                     .addComponent(MaxCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel76)
+                    .addComponent(StatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         AdditionalInfoPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Component Disable"));
@@ -908,6 +928,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             String[] parts = position.split(":");
             String partSection = parts[0]; 
             String partBlock = parts[1];
+            Object booleanStatus = table.getValueAt(row, 2);
+            if (booleanStatus == null){
+                StatusField.setText("Disabled");
+            }
+            else {
+                StatusField.setText("Operational");
+            }
+            
             
             CurrentLineField.setText(Integer.toString(TrainLineSelect2.getSelectedIndex()));
             CurrentSectionField.setText(partSection);
@@ -936,6 +964,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 // TODO add your handling code here:
     }//GEN-LAST:event_TrainTableMouseClicked
 
+    private void StatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StatusFieldActionPerformed
+
     private void UpdateTableInformation(java.awt.event.ActionEvent evt){
         int selectedRowIndex = TrainTable.getSelectedRow();
         String TrainID = TrainTable.getModel().getValueAt(selectedRowIndex, 0).toString(); 
@@ -955,6 +987,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         CurrentCapacityField.setText("");
         MaxCapacityField.setText("");
         ThroughputField.setText("");
+        StatusField.setText("");
      
         
     }
@@ -979,6 +1012,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JTextField RushHourField;
     private javax.swing.JComboBox<String> SelectOperationMode2;
     private javax.swing.JTextField SpeedField;
+    private javax.swing.JTextField StatusField;
     private javax.swing.JPanel SystemInformationPanel;
     private javax.swing.JTextField ThroughputField;
     private javax.swing.JTextField TimeField;
@@ -1009,6 +1043,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel88;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel19;
