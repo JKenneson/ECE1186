@@ -247,6 +247,14 @@ public class TrainModel {
      * @author Jonathan Kenneson
      */
 
+    public double getGrade() {
+        return this.grade;
+    }
+    
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+    
     public boolean isLeftDoorOpen() {
         return leftDoorOpen;
     }

@@ -60,6 +60,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
         temperatureInputLabel = new javax.swing.JLabel();
         temperatureInputSpinner = new javax.swing.JSpinner();
         temperatureInputDegreesLabel = new javax.swing.JLabel();
+        blockGradeLabel = new javax.swing.JLabel();
+        gradeInputSpinner = new javax.swing.JSpinner();
+        blockGradeLabelUnits = new javax.swing.JLabel();
+        speedLimitLabel = new javax.swing.JLabel();
+        speedLimitSpinner = new javax.swing.JSpinner();
+        speedLimitLabelUnits = new javax.swing.JLabel();
         ctcInputPanel = new javax.swing.JPanel();
         ctcSetPointInputLabel = new javax.swing.JLabel();
         ctcSetPointSpinner = new javax.swing.JSpinner();
@@ -229,6 +235,18 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         temperatureInputDegreesLabel.setText("degrees");
 
+        blockGradeLabel.setText("Block Grade:");
+
+        gradeInputSpinner.setModel(new javax.swing.SpinnerNumberModel(0.5d, null, null, 0.5d));
+
+        blockGradeLabelUnits.setText("%");
+
+        speedLimitLabel.setText("Speed Limit:");
+
+        speedLimitSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        speedLimitLabelUnits.setText("mph");
+
         javax.swing.GroupLayout operationsInputPanelLayout = new javax.swing.GroupLayout(operationsInputPanel);
         operationsInputPanel.setLayout(operationsInputPanelLayout);
         operationsInputPanelLayout.setHorizontalGroup(
@@ -237,23 +255,35 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(operationsInputPanelLayout.createSequentialGroup()
+                        .addComponent(leftDoorInputLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(leftDoorToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(operationsInputPanelLayout.createSequentialGroup()
                         .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rightDoorInputLabel)
                             .addComponent(lightsInputLabel)
-                            .addComponent(temperatureInputLabel))
-                        .addGap(25, 25, 25)
+                            .addComponent(temperatureInputLabel)
+                            .addComponent(blockGradeLabel)
+                            .addComponent(speedLimitLabel))
+                        .addGap(22, 22, 22)
                         .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(operationsInputPanelLayout.createSequentialGroup()
-                                .addComponent(temperatureInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
-                                .addComponent(temperatureInputDegreesLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(rightDoorToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lightsToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(operationsInputPanelLayout.createSequentialGroup()
-                        .addComponent(leftDoorInputLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(leftDoorToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lightsToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(operationsInputPanelLayout.createSequentialGroup()
+                                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(speedLimitSpinner, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(gradeInputSpinner, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(temperatureInputSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(operationsInputPanelLayout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(temperatureInputDegreesLabel))
+                                    .addGroup(operationsInputPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(speedLimitLabelUnits)
+                                            .addComponent(blockGradeLabelUnits))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         operationsInputPanelLayout.setVerticalGroup(
@@ -263,20 +293,29 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(leftDoorInputLabel)
                     .addComponent(leftDoorToggleButton))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rightDoorInputLabel)
                     .addComponent(rightDoorToggleButton))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lightsToggleButton)
                     .addComponent(lightsInputLabel))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(temperatureInputLabel)
                     .addComponent(temperatureInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(temperatureInputDegreesLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(blockGradeLabel)
+                    .addComponent(gradeInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(blockGradeLabelUnits))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(speedLimitLabel)
+                    .addComponent(speedLimitSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(speedLimitLabelUnits)))
         );
 
         ctcInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("CTC Speed and Authority"));
@@ -386,7 +425,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         driverPowerInputLabel.setText("Power:");
 
-        driverPowerSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        driverPowerSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
 
         driverPowerInputLabelUnits.setText("W");
 
@@ -461,19 +500,19 @@ public class TrainModelGUI extends javax.swing.JPanel {
             powerCommandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(powerCommandPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(powerCommandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(powerCommandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(powerCommandPanelLayout.createSequentialGroup()
                         .addComponent(ctcInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(driverInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(operationsInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(driverInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, powerCommandPanelLayout.createSequentialGroup()
                         .addComponent(brakeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(passengersInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(passengersInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(operationsInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sendPowerCommandButton)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
 
         trainModelOutputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Train Model Output"));
@@ -664,37 +703,37 @@ public class TrainModelGUI extends javax.swing.JPanel {
         speedOutputPanelLayout.setVerticalGroup(
             speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(speedOutputPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(16, 16, 16)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(currSpeedOutputLabel)
                     .addComponent(currSpeedState)
                     .addComponent(currSpeedOutputLabelUnits))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(speedLimitOutputLabel)
                     .addComponent(speedLimitState)
                     .addComponent(speedLimitOutputLabelUnits))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(driverSetSpeedLabel)
                     .addComponent(driverSetPointState)
                     .addComponent(driverSetPointOutputLabelUnits))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ctcSetPointOutputLabel)
                     .addComponent(ctcSetPointState)
                     .addComponent(ctcSetPointOutputLabelUnits))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(authorityOutputLabel)
                     .addComponent(authorityState)
                     .addComponent(authorityOutputLabelUnits))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(powerOutputLabel)
                     .addComponent(powerState)
                     .addComponent(powerOutputLabelUnits))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gradeOutputLabel)
                     .addComponent(gradeState)
@@ -907,7 +946,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
         trainModelOutputPanelLayout.setVerticalGroup(
             trainModelOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(trainModelOutputPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
                 .addGroup(trainModelOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(speedOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(trainOperationsOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -981,7 +1020,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addGroup(mainTrainModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(powerCommandPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(failureInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(33, 33, 33)
+                .addGap(21, 21, 21)
                 .addComponent(trainModelOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1040,6 +1079,8 @@ public class TrainModelGUI extends javax.swing.JPanel {
             trainModel.setLightsOn(false);
         }
         trainModel.setTemperature(Integer.valueOf(this.temperatureInputSpinner.getValue().toString()));
+        trainModel.setGrade(Double.valueOf(this.gradeInputSpinner.getValue().toString()));
+        trainModel.setSpeedLimit(Integer.valueOf(this.speedLimitSpinner.getValue().toString()));
         
         //CTC SetPointSpeed and Authority
         trainModel.setCtcSetPoint(Integer.valueOf(this.ctcSetPointSpinner.getValue().toString()));
@@ -1047,7 +1088,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
         
         //Driver SetPointSpeed and Power
         trainModel.setDriverSetPoint(Integer.valueOf(this.driverSetPointSpinner.getValue().toString()));
-        trainModel.setPowerReceived(Integer.valueOf(this.driverPowerSpinner.getValue().toString()));
+        trainModel.setPowerReceived(Double.valueOf(this.driverPowerSpinner.getValue().toString()));
         
     }//GEN-LAST:event_sendPowerCommandButtonActionPerformed
 
@@ -1092,6 +1133,8 @@ public class TrainModelGUI extends javax.swing.JPanel {
     private javax.swing.JLabel authorityOutputLabel;
     private javax.swing.JLabel authorityOutputLabelUnits;
     public javax.swing.JLabel authorityState;
+    private javax.swing.JLabel blockGradeLabel;
+    private javax.swing.JLabel blockGradeLabelUnits;
     public javax.swing.JCheckBox brakeFailureCheckbox;
     private javax.swing.JPanel brakeInputPanel;
     private javax.swing.JLabel brakesOutputLabel;
@@ -1121,6 +1164,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
     private javax.swing.JLabel driverSetSpeedLabel;
     public javax.swing.JCheckBox emergencyBrakeCheckbox;
     private javax.swing.JPanel failureInputPanel;
+    public javax.swing.JSpinner gradeInputSpinner;
     private javax.swing.JLabel gradeOutputLabel;
     private javax.swing.JLabel gradeOutputLabelUnits;
     public javax.swing.JLabel gradeState;
@@ -1174,8 +1218,11 @@ public class TrainModelGUI extends javax.swing.JPanel {
     public javax.swing.JButton sendFailureButton;
     public javax.swing.JButton sendPowerCommandButton;
     public javax.swing.JCheckBox serviceBrakeCheckbox;
+    private javax.swing.JLabel speedLimitLabel;
+    private javax.swing.JLabel speedLimitLabelUnits;
     private javax.swing.JLabel speedLimitOutputLabel;
     private javax.swing.JLabel speedLimitOutputLabelUnits;
+    public javax.swing.JSpinner speedLimitSpinner;
     public javax.swing.JLabel speedLimitState;
     private javax.swing.JPanel speedOutputPanel;
     private javax.swing.JLabel temperatureInputDegreesLabel;
