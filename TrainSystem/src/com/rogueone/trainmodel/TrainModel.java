@@ -21,6 +21,10 @@ import javax.swing.*;
 public class TrainModel {
     
     //Variable declaration for the class
+    //Failures
+    private boolean powerFailure;
+    private boolean brakeFailure;
+    private boolean antennaFailure;
     //Train Operations
     private boolean leftDoorOpen;
     private boolean rightDoorOpen;
@@ -58,6 +62,10 @@ public class TrainModel {
      * @param numCars How many cars are to be created (1 or 2)
      */
     public TrainModel(int setPointSpeed, int authority, int numCars) {
+        //Failures
+        this.powerFailure = false;
+        this.brakeFailure = false;
+        this.antennaFailure = false;
         //Train Operations
         this.leftDoorOpen = false;
         this.rightDoorOpen = false;
@@ -213,8 +221,47 @@ public class TrainModel {
      * @author Jonathan Kenneson
      * @param failure One of 3 TrainFailures as found in TrainFailures.java
      */
-    public void handleFailure(TrainFailures failure) {
-        
+    public void causeFailure(TrainFailures failure) {
+        //Switch on the failure passed in
+        switch(failure) {
+            //A power failure will stop the train and prevent the doors, lights, and temp setting from working.  Activate emergency brake
+            case Power:
+                
+                break;
+            //A brake failure will prevent the service brake from being activated. Activate the emergency brake
+            case Brake:
+                
+                break;
+            //Deactivate the track and mbo antenna.  Activate emergency brake
+            case Antenna:
+                
+                break;
+        }
+    }
+    
+    /**
+     * This method is called from the TrainModelGUI when a failure is de-activated, or "fixed"
+     * Should undo everything that the causeFailure() function did
+     * 
+     * @author Jonathan Kenneson
+     * @param failure One of 3 TrainFailures as found in TrainFailures.java
+     */
+    public void fixFailure(TrainFailures failure) {
+        //Switch on the failure passed in
+        switch(failure) {
+            //A power failure will stop the train and prevent the doors, lights, and temp setting from working.  Activate emergency brake
+            case Power:
+                
+                break;
+            //A brake failure will prevent the service brake from being activated. Activate the emergency brake
+            case Brake:
+                
+                break;
+            //Deactivate the track and mbo antenna.  Activate emergency brake
+            case Antenna:
+                
+                break;
+        }
     }
             
     

@@ -1094,16 +1094,27 @@ public class TrainModelGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_sendPowerCommandButtonActionPerformed
 
     private void sendFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendFailureButtonActionPerformed
-        // This button will utimately send the failure to TrainController.java to determine appropriate action
-        //Call the TrainModel to handle it now
+        // This button will utimately send the failure to TrainController.java to determine appropriate action, call TrainModel.java to handle that
+        //Check for power failure
         if(this.powerFailureCheckbox.isSelected()) {
-            trainModel.handleFailure(TrainFailures.Power);
+            trainModel.causeFailure(TrainFailures.Power);
         }
+        else {
+            trainModel.fixFailure(TrainFailures.Power);
+        }
+        //Then brake failure
         if(this.brakeFailureCheckbox.isSelected()) {
-            trainModel.handleFailure(TrainFailures.Brake);
+            trainModel.causeFailure(TrainFailures.Brake);
         }
+        else {
+            trainModel.fixFailure(TrainFailures.Brake);
+        }
+        //Lastly, antenna failure
         if(this.antennaFailureCheckbox.isSelected()) {
-            trainModel.handleFailure(TrainFailures.Antenna);
+            trainModel.causeFailure(TrainFailures.Antenna);
+        }
+        else {
+            trainModel.fixFailure(TrainFailures.Antenna);
         }
     }//GEN-LAST:event_sendFailureButtonActionPerformed
 
