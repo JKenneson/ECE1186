@@ -194,7 +194,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        operationsInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Operations"));
+        operationsInputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Train and Track Operations"));
 
         leftDoorInputLabel.setText("Left Door:");
 
@@ -224,6 +224,8 @@ public class TrainModelGUI extends javax.swing.JPanel {
         });
 
         temperatureInputLabel.setText("Temp:");
+
+        temperatureInputSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         temperatureInputDegreesLabel.setText("degrees");
 
@@ -261,15 +263,15 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(leftDoorInputLabel)
                     .addComponent(leftDoorToggleButton))
-                .addGap(30, 30, 30)
+                .addGap(21, 21, 21)
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rightDoorInputLabel)
                     .addComponent(rightDoorToggleButton))
-                .addGap(27, 27, 27)
+                .addGap(21, 21, 21)
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lightsToggleButton)
                     .addComponent(lightsInputLabel))
-                .addGap(30, 30, 30)
+                .addGap(21, 21, 21)
                 .addGroup(operationsInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(temperatureInputLabel)
                     .addComponent(temperatureInputSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,9 +283,13 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         ctcSetPointInputLabel.setText("Set Point Speed:");
 
+        ctcSetPointSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         ctcSetPointInputLabelUnits.setText("mph");
 
         ctcAuthorityInputLabel.setText("Authority:");
+
+        ctcAuthoritySpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         ctcAuthorityInputLabelUnits.setText("ft");
 
@@ -326,9 +332,13 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         numCarsInputLabel.setText("Number of Cars:");
 
+        numCarsInputSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
+
         numCarsInputLabelUnits.setText("cars");
 
         passengersInputLabel.setText("Passengers Embarking:");
+
+        passengersInputSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         passengersInputLabelUnits.setText("people");
 
@@ -370,9 +380,13 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         driverSetPointInputLabel.setText("Set Point Speed:");
 
+        driverSetPointSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         driverSetPointInputLabelUnits.setText("mph");
 
         driverPowerInputLabel.setText("Power:");
+
+        driverPowerSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         driverPowerInputLabelUnits.setText("W");
 
@@ -801,7 +815,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         numCarsLabel.setText("Number of Cars:");
 
-        numCarsState.setText("5");
+        numCarsState.setText("2");
 
         numCarsLabelUnits.setText("cars");
 
@@ -1038,7 +1052,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_sendPowerCommandButtonActionPerformed
 
     private void sendFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendFailureButtonActionPerformed
-        // TODO add your handling code here:
+        // This button will utimately send the failure to TrainController.java to determine appropriate action
+        //Call the TrainModel to handle it now
+        
     }//GEN-LAST:event_sendFailureButtonActionPerformed
 
     private void leftDoorToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDoorToggleButtonActionPerformed
