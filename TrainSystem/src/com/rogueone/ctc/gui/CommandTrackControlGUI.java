@@ -60,7 +60,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         BlockTable = new javax.swing.JTable();
         jPanel21 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        FailureTable = new javax.swing.JTable();
         InformationPanel2 = new javax.swing.JPanel();
         jLabel67 = new javax.swing.JLabel();
         jLabel68 = new javax.swing.JLabel();
@@ -341,8 +341,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         BrowserPanel2.addTab("Blocks", jPanel20);
 
-        jTable8.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.select"));
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        FailureTable.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.select"));
+        FailureTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Green", "A",  new Integer(2), "Power"},
                 {"Green", "B",  new Integer(3), "Power"},
@@ -364,7 +364,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane10.setViewportView(jTable8);
+        FailureTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FailureTableMouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(FailureTable);
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -923,6 +928,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
         
+        InformationHeader2.setText("Selected Train Information");
+
         jLabel67.setText("Train Name");
         jLabel68.setText("Current Line");
         jLabel69.setText("Current Section");
@@ -1024,6 +1031,33 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 // TODO add your handling code here:
     }//GEN-LAST:event_BlockTableMouseClicked
 
+    private void FailureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FailureTableMouseClicked
+        InformationHeader2.setText("Selected Failure Information");
+        
+        if (evt.getClickCount() == 1){
+            JTable failureTable = (JTable)evt.getSource();
+            int row = failureTable.getSelectedRow();
+            String failureLine = (String)failureTable.getValueAt(row, 0);
+            String failureSection = (String)failureTable.getValueAt(row, 1);
+            int failureBlock = (int)failureTable.getValueAt(row, 2);
+            String failureType = (String)failureTable.getValueAt(row, 3);
+            
+            TrainNameField.setText(failureType);
+            CurrentLineField.setText(failureLine);
+            CurrentSectionField.setText(failureSection);
+            CurrentBlockField.setText(Integer.toString(failureBlock));
+            
+        }
+        
+        if (evt.getClickCount() == 2){
+            
+        }
+            
+        
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_FailureTableMouseClicked
+
     private void UpdateTableInformation(java.awt.event.ActionEvent evt){
         int selectedRowIndex = TrainTable.getSelectedRow();
         String TrainID = TrainTable.getModel().getValueAt(selectedRowIndex, 0).toString(); 
@@ -1060,6 +1094,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JTextField CurrentSectionField;
     private javax.swing.JButton DispatchButton;
     private javax.swing.JPanel DispatchControlPanel;
+    private javax.swing.JTable FailureTable;
     private javax.swing.JLabel InformationHeader2;
     private javax.swing.JPanel InformationPanel2;
     private javax.swing.JLabel MapImage2;
@@ -1111,6 +1146,5 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable8;
     // End of variables declaration//GEN-END:variables
 }
