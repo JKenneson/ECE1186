@@ -11,6 +11,8 @@ package com.rogueone.trainmodel;
 
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainmodel.entities.TrainFailures;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.*;
 
 /**
@@ -20,7 +22,18 @@ import javax.swing.*;
  */
 public class TrainModel {
     
+    NumberFormat format = NumberFormat.getInstance(Locale.US);
+    
+    public final int STARTING_FORCE = 100;      //Can't divide by zero, so we have a starting force if our current speed is 0
+    public final double CAR_LENGTH = 105.64;    //1 car's train length (in feet)
+    public final double CAR_WEIGHT = 81800;     //1 car's train weight (in lbs)
+    public final int CAR_CAPACITY = 222;     //1 car's passenger max capacity 
+    public final double PASS_WEIGHT = 165.35;   //1 passenger's weight (in lbs)
+    
     //Variable declaration for the class
+    //Nanotime trackers for calculating velocity and distance
+    private long startTime;
+    private long elapsedTime;
     //Failures
     private boolean powerFailure;
     private boolean brakeFailure;
@@ -41,6 +54,8 @@ public class TrainModel {
     private int authority;
     private double powerReceived;
     private double grade;
+    private double force;
+    private double acceleration;
     //Station and Passengers
     private String approachingStation;
     private int passengersAtStation;
@@ -48,8 +63,8 @@ public class TrainModel {
     private int passengersDisembarking;
     private int passengerMaxCapacity;
     //Physical Characteristics
-    private int trainWeight;
-    private int trainLength;
+    private double trainWeight;
+    private double trainLength;
     private int numCars;
     private boolean trackAntennaActivated;
     private boolean mboAntennaActivated;
@@ -63,6 +78,9 @@ public class TrainModel {
      * @param numCars How many cars are to be created (1 or 2)
      */
     public TrainModel(int setPointSpeed, int authority, int numCars) {
+        //Nanotime trackers
+        this.startTime = System.nanoTime();    
+        this.elapsedTime = System.nanoTime() - startTime;
         //Failures
         this.powerFailure = false;
         this.brakeFailure = false;
@@ -83,6 +101,8 @@ public class TrainModel {
         this.authority = authority;
         this.powerReceived = 0;
         this.grade = 0;
+        this.force = 0;
+        this.acceleration = 0;
         //Station and Passengers
         this.approachingStation = "";
         this.passengersAtStation = 0;
@@ -200,8 +220,8 @@ public class TrainModel {
         gui.maxCapacityState.setText(Integer.toString(this.passengerMaxCapacity));
         
         //Physical Characteristics
-        gui.trainWeightState.setText(Integer.toString(this.trainWeight));
-        gui.trainLengthState.setText(Integer.toString(this.trainLength));
+        gui.trainWeightState.setText(format.format(this.trainWeight));
+        gui.trainLengthState.setText(format.format(this.trainLength));
         gui.numCarsState.setText(Integer.toString(this.numCars));
         
         if(this.trackAntennaActivated) {
@@ -283,15 +303,51 @@ public class TrainModel {
     
     /**
      * This method should be called every clock cycle and will update all important characteristics of the TrainModel, such as:
-     * 1)   Its velocity based on the power sent in from the TrainController
-     * 2)   Failure handling in activating the emergency brake
+     * 1)   Length, weight, pass max capacity based on number of cars and passengers in train     
+     * 2)   Its velocity based on the power sent in from the TrainController
      * 
      * @author Jonathan Kenneson
      */
     public void updateTrain() {
-        //Velocity control will be another method call within updateTrain
+        //1)   Length, weight, pass max capacity based on number of cars and passengers in train     
+        //Hacky, but easy to calculate this way: rest weight and length each cycle and re-calculate based on new values
+        this.trainWeight = 0;
+        this.trainLength = 0;
+        //First, update the train length and weight based on number of cars
+        this.trainLength = CAR_LENGTH * this.numCars;
+        this.trainWeight = CAR_WEIGHT * this.numCars;
+        //Then, add in based on how many passengers there are
+        this.trainWeight += PASS_WEIGHT * this.passengersOnBaord;
+        this.passengerMaxCapacity = CAR_CAPACITY * this.numCars;    //Passenger max capacity
         
-        //Failure handling will check the emergencyBrakeOverride signal and set the brakes accordingly
+        
+        //2)   Its velocity based on the power sent in from the TrainController
+        //First, ask the TrainController for a new power
+        
+        //TODO: Send velocity to TrainController, get back a power
+        //this.powerReceived = TrainController.calculatePower(this.currSpeed);
+        this.powerReceived = 100;   //Just starting with 100 power
+        
+        //P=F*v  -> Calculate a force by deviding that power by the velocity
+        if(this.currSpeed == 0) {    //Can't devide by zero
+            this.force = STARTING_FORCE;   //Arbitrary if we are at zero speed
+        }
+        else {
+            this.force = this.powerReceived / (double)this.currSpeed;
+        }
+        
+        //F=m*a  -> Calculate the acceleration by dividing the force by the mass
+        this.acceleration = this.force / this.trainWeight;
+        
+        
+        
+        this.elapsedTime = System.nanoTime() - startTime;
+        
+        
+        
+        //Reset the start time for the next run of the loop
+        this.startTime = System.nanoTime();
+        
     }
             
     
@@ -302,11 +358,7 @@ public class TrainModel {
      * @author Jonathan Kenneson
      * @param args 
      */
-    public static void main(String[] args) {
-        //Testing the timer
-        
-        
-        
+    public static void main(String[] args) {        
         //Create a new TrainModel object with a set point speed of 40, authority of 500, and 1 car
         TrainModel trainModelTest1 = new TrainModel(40, 500, 1);
         //Instantiate a GUI for this train
@@ -315,7 +367,7 @@ public class TrainModel {
 
         //Constantly update velocity then the GUI
         while(true){
-            
+            trainModelTest1.updateTrain();
             trainModelTest1.UpdateGUI(trainModelGUITest1);
             if(trainModelGUITest1.isDisplayable() == false) {
                 break;
@@ -498,7 +550,7 @@ public class TrainModel {
         this.passengerMaxCapacity = passengerMaxCapacity;
     }
 
-    public int getTrainWeight() {
+    public double getTrainWeight() {
         return trainWeight;
     }
 
@@ -506,7 +558,7 @@ public class TrainModel {
         this.trainWeight = trainWeight;
     }
 
-    public int getTrainLength() {
+    public double getTrainLength() {
         return trainLength;
     }
 
