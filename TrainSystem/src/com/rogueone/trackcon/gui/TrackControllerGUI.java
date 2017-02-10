@@ -5,17 +5,30 @@
  */
 package com.rogueone.trackcon.gui;
 
+import com.rogueone.trackcon.TrackController;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 /**
  *
  * @author kylemonto
  */
 public class TrackControllerGUI extends javax.swing.JPanel {
+    
+    TrackController trackController;
 
     /**
      * Creates new form TrackControllerGUI
      */
     public TrackControllerGUI() {
         initComponents();
+    }
+
+    public TrackControllerGUI(TrackController trackController) {
+        initComponents();
+        this.trackController = trackController;
     }
 
     /**
@@ -241,6 +254,11 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         selectionPanel.add(blockNumberTextField, gridBagConstraints);
 
         chooseFileButton.setText("Choose File");
+        chooseFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseFileButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
@@ -563,6 +581,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position1Panel.add(trainPosition1Label, gridBagConstraints);
 
         position1TrainButtonGroup.add(unoccupiedPosition1RadioButton);
+        unoccupiedPosition1RadioButton.setSelected(true);
         unoccupiedPosition1RadioButton.setText("Unoccupied");
         unoccupiedPosition1RadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -603,6 +622,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position2Panel.setLayout(new java.awt.GridBagLayout());
 
         position2TrainButtonGroup.add(occupiedPosition2RadioButton);
+        occupiedPosition2RadioButton.setSelected(true);
         occupiedPosition2RadioButton.setText("Occupied");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -768,6 +788,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         switch1Panel.add(switch1AlternateRadioButton, gridBagConstraints);
 
         leftTrackButtonGroup.add(switch1DefaultRadioButton);
+        switch1DefaultRadioButton.setSelected(true);
         switch1DefaultRadioButton.setText("Track Straight");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -785,6 +806,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         switch2Panel.setLayout(new java.awt.GridBagLayout());
 
         rightTrackButtonGroup.add(switch2DefaultRadioButton);
+        switch2DefaultRadioButton.setSelected(true);
         switch2DefaultRadioButton.setText("Track Straight");
         switch2DefaultRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1063,6 +1085,17 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img.png"))); // NOI18N
         }
     }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void chooseFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileButtonActionPerformed
+        JFileChooser plcFileChooser = new JFileChooser();
+        int returnVal = plcFileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File trackDataFile = plcFileChooser.getSelectedFile();
+            trackController.loadPLC(trackDataFile);
+        } else if (returnVal == JFileChooser.CANCEL_OPTION){
+           System.out.println("File access cancelled by user.");
+        }
+    }//GEN-LAST:event_chooseFileButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

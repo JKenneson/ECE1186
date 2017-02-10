@@ -23,4 +23,24 @@ public class Global {
         A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, ZZ, YY, INVALID
     }
     
+    public enum SwitchState {
+        DEFAULT, ALTERNATE
+    }
+    
+    public enum LightState {
+        GO, STOP
+    }
+    
+    public enum TrackGroupsGreen {
+        ABC, DEF, GHI, J, KLM, N, OPQ, RSTUVWXYZ, ZZ, YY
+    }
+    
+    public enum Presence {
+        OCCUPIED, UNOCCUPIED
+    }
+    
+    public enum LogicGroups {
+        GREEN_0, GREEN_1_2, GREEN_3, GREEN_4_5
+    }
+    
 }
