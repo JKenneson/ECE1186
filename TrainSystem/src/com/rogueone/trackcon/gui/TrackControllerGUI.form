@@ -27,7 +27,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-102,0,0,3,-78"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-102,0,0,3,-70"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
@@ -103,7 +103,7 @@
                         </Component>
                         <Component class="javax.swing.JTextField" name="lineTextField">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="GREEN/RED"/>
+                            <Property name="text" type="java.lang.String" value="N/A"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lineTextFieldActionPerformed"/>
@@ -228,7 +228,7 @@
                         </Component>
                         <Component class="javax.swing.JTextField" name="plcProgramTextField">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="plc"/>
+                            <Property name="text" type="java.lang.String" value="No file selected"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -291,6 +291,9 @@
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="currentTrackControllerComboBoxActionPerformed"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
@@ -475,24 +478,44 @@
                             <Component class="javax.swing.JTable" name="currentBlockTable">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="2" rowCount="5">
-                                    <Column editable="true" title="Block Number" type="java.lang.Object">
-                                      <Data value="W:142"/>
-                                      <Data value="W:143"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                    </Column>
-                                    <Column editable="true" title="Block Status" type="java.lang.Object">
-                                      <Data value="Active"/>
-                                      <Data value="Broken Rail"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                      <Data value="null"/>
-                                    </Column>
+                                  <Table columnCount="4" rowCount="0">
+                                    <Column editable="false" title="Section" type="java.lang.String"/>
+                                    <Column editable="false" title="BlockID" type="java.lang.Integer"/>
+                                    <Column editable="false" title="Occupied" type="java.lang.Boolean"/>
+                                    <Column editable="false" title="Status" type="java.lang.String"/>
                                   </Table>
                                 </Property>
+                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                  <TableColumnModel selectionModel="0">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
+                                  </TableColumnModel>
+                                </Property>
+                                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                </Property>
                               </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>

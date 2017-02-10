@@ -16,16 +16,25 @@ import com.rogueone.trackcon.entities.Switch;
 import com.rogueone.trackcon.entities.TrackConnection;
 import com.rogueone.trackcon.entities.UserSwitchState;
 import com.rogueone.trackcon.gui.TrackControllerGUI;
+import com.rogueone.trackmodel.Block;
+import com.rogueone.trackmodel.TrackModel;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -42,12 +51,32 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class TrackController {
 
+
     private HashMap<Global.LogicGroups, LogicTrackGroup> logicGroupsGreenArray;
-    HashMap<Integer, Switch> switchGreenArray;
+    private HashMap<Integer, Switch> switchGreenArray;
+    
+    private TrackModel trackModelTest1;
+    
+    
+    
+    public TrackController(){
+        
+        this.trackModelTest1 = new TrackModel();
+        try {
+            trackModelTest1.parseDataFile(new File("src/com/rogueone/assets/TrackData.xlsx"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (InvalidFormatException ex) {
+            ex.printStackTrace();
+        }
+        
+        
+    }
 
     public static void main(String[] args) {
+        
         TrackController trackControllerTest1 = new TrackController();
-
+        
         TrackControllerGUI trackControllerGUITest1 = trackControllerTest1.createGUIObject(trackControllerTest1);
 
         while (true) {
@@ -57,14 +86,23 @@ public class TrackController {
                 break;
             }
         }
+        
     }
 
+    /**
+     * Function to import the data from an excel document that contains track
+     * state information, such as switch, lights, crossings, connections, etc.
+     *
+     * @param plcFile - excel document that contains information regarding track
+     * states
+     */
     public void loadPLC(File plcFile) {
         //Testing in reads, if the file is there
-        XSSFWorkbook testWorkbook;
+        XSSFWorkbook plcWorkbook;
         try {
-            testWorkbook = new XSSFWorkbook(plcFile);
-            XSSFSheet sheet = testWorkbook.getSheetAt(0);
+            plcWorkbook = new XSSFWorkbook(plcFile);
+            //import the plc data sheet from the excel document
+            XSSFSheet sheet = plcWorkbook.getSheetAt(0);
             switchGreenArray = new HashMap<Integer, Switch>();
             for (int i = 1; i <= 6; i++) {
                 Row tempRow = sheet.getRow(i);
@@ -80,11 +118,13 @@ public class TrackController {
             }
             System.out.println("SwitchArray: " + switchGreenArray.toString());
 
+            //initialize the green logical groups array and import the logical
+            //groups from the remaining sheets from the excel document
             logicGroupsGreenArray = new HashMap<Global.LogicGroups, LogicTrackGroup>();
 
             for (int s = 1; s < 5; s++) {
-                sheet = testWorkbook.getSheetAt(s);
-                
+                sheet = plcWorkbook.getSheetAt(s);
+
                 int numRows = 0;
                 Global.TrackGroupsGreen trackGroup1 = null;
                 Global.TrackGroupsGreen trackGroup2 = null;
@@ -92,7 +132,7 @@ public class TrackController {
 
                 LogicTrackGroup logicTrackGroup = new LogicTrackGroup();
                 Row trackGroupRow = sheet.getRow(1);
-                
+
                 if (s == 3 || s == 4) {
                     String[] switchIDs = trackGroupRow.getCell(0).getStringCellValue().split(",");
                     for (String ID : switchIDs) {
@@ -105,14 +145,19 @@ public class TrackController {
                     numRows = 5;
                 }
 
+                StateSet currentState = new StateSet();
                 trackGroup1 = Global.TrackGroupsGreen.valueOf(trackGroupRow.getCell(3).getStringCellValue());
-                logicTrackGroup.addGroup(trackGroup1, Global.Presence.UNOCCUPIED);
+                State current1 = new State(trackGroup1, Global.Presence.UNOCCUPIED);
+                currentState.addState(current1);
                 trackGroup2 = Global.TrackGroupsGreen.valueOf(trackGroupRow.getCell(4).getStringCellValue());
-                logicTrackGroup.addGroup(trackGroup2, Global.Presence.UNOCCUPIED);
+                State current2 = new State(trackGroup2, Global.Presence.UNOCCUPIED);
+                currentState.addState(current2);
                 if (s == 3 || s == 4) {
                     trackGroup3 = Global.TrackGroupsGreen.valueOf(trackGroupRow.getCell(5).getStringCellValue());
-                    logicTrackGroup.addGroup(trackGroup3, Global.Presence.UNOCCUPIED);
+                    State current3 = new State(trackGroup3, Global.Presence.UNOCCUPIED);
+                    currentState.addState(current3);
                 }
+                logicTrackGroup.setCurrentTrackState(currentState);
                 for (int i = 2; i <= numRows; i++) {
                     Row tempRow = sheet.getRow(i);
                     StateSet set1 = new StateSet();
@@ -129,12 +174,32 @@ public class TrackController {
                         logicTrackGroup.addTrackState(set1, userSwitchState);
                     } else {
                         userSwitchState.addUserSwitchState(new AbstractMap.SimpleEntry<Integer, Global.SwitchState>((int) trackGroupRow.getCell(5).getNumericCellValue(), Global.SwitchState.valueOf(tempRow.getCell(5).getStringCellValue())));
+                        logicTrackGroup.addTrackState(set1, userSwitchState);
                     }
-
                 }
-                
-                
+
                 logicGroupsGreenArray.put(Global.LogicGroups.valueOf(sheet.getSheetName()), logicTrackGroup);
+            }
+
+            LogicTrackGroup ltg = logicGroupsGreenArray.get(Global.LogicGroups.GREEN_0);
+            StateSet currentState = ltg.getCurrentTrackState();
+
+            System.out.println("Set = " + currentState.toString());
+
+            HashMap<StateSet, UserSwitchState> mappings = ltg.getStateMapping();
+
+            System.out.println("Mappings = " + mappings);
+                    
+            for (Map.Entry<StateSet, UserSwitchState> entry : mappings.entrySet()) {
+                StateSet key = entry.getKey();
+                UserSwitchState value = entry.getValue();
+                if(key.equals(currentState)){
+                    System.out.println("Mapping contains current State");
+                    //return UserSwitchState
+                } else {
+                    System.out.println("Mapping does not contain current State");
+                }
+                // do stuff
             }
 
         } catch (FileNotFoundException ex) {
@@ -163,6 +228,28 @@ public class TrackController {
         try {
             TimeUnit.SECONDS.sleep(5);
             System.out.println("5 Seconds Passed");
+            
+            ArrayList<Block> blocks = this.trackModelTest1.getBlocks();
+            for(int i = 0; i < blocks.size(); i++){
+                if(blocks.get(i).getLine() != Global.Line.GREEN){
+                    blocks.remove(i);
+                }
+            }
+            
+                
+            String blockColumnNames[] = { "Section", "BlockID", "Occupied", "Status"};
+            DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
+            for(int i = 0; i < blocks.size(); i++){
+                String status = "Active";
+                if(blocks.get(i).getFailureBrokenRail() || blocks.get(i).getFailureBrokenRail() || blocks.get(i).getFailureBrokenRail()){
+                    status = "Inactive";
+                }
+                String blockRowData[] = { blocks.get(i).getSection() + "", blocks.get(i).getID() + "", blocks.get(i).isOccupied() + "",  status + ""};
+                blockModel.addRow(blockRowData);
+            }
+            
+            trackControllerGUITest1.currentBlockTable.setModel(blockModel);
+            
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }

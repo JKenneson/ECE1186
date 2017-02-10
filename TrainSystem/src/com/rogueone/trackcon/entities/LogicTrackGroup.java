@@ -10,6 +10,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -19,12 +20,11 @@ import java.util.Set;
 public class LogicTrackGroup {
     
     private ArrayList<Switch> switches;
-    private HashMap<Global.TrackGroupsGreen, Global.Presence> groups;
+    private StateSet currentTrackState;
     private HashMap<StateSet, UserSwitchState> stateMapping;
     
     public LogicTrackGroup(){
         this.switches = new ArrayList<Switch>();
-        this.groups = new HashMap<Global.TrackGroupsGreen, Global.Presence>();
         this.stateMapping = new HashMap<StateSet, UserSwitchState>();
     }
 
@@ -35,10 +35,15 @@ public class LogicTrackGroup {
     public void addSwitches(Switch switches) {
         this.switches.add(switches);
     }
-    
-    public void addGroup(Global.TrackGroupsGreen group, Global.Presence presence){
-        groups.put(group, presence);
+
+    public void setCurrentTrackState(StateSet currentTrackState) {
+        this.currentTrackState = currentTrackState;
     }
+
+    public StateSet getCurrentTrackState() {
+        return currentTrackState;
+    }
+    
 
     public void addTrackState(StateSet stateSet, UserSwitchState switchState){
         stateMapping.put(stateSet, switchState);
@@ -48,14 +53,9 @@ public class LogicTrackGroup {
         return stateMapping.get(stateSet);
     }
     
-    /**
-     *
-     * @return
-     */
-    public StateSet getState(){
-        StateSet set = (StateSet) groups.entrySet();
-        System.out.println("Print " + groups.entrySet());
-        return set;
+    public HashMap<StateSet, UserSwitchState> getStateMapping(){
+        return stateMapping;
     }
+    
     
 }

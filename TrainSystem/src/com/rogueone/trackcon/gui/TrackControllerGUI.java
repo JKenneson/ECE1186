@@ -164,7 +164,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         selectionPanel.add(lineLabel, gridBagConstraints);
 
-        lineTextField.setText("GREEN/RED");
+        lineTextField.setText("N/A");
         lineTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lineTextFieldActionPerformed(evt);
@@ -271,7 +271,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         selectionPanel.add(plcProgramLabel, gridBagConstraints);
 
-        plcProgramTextField.setText("plc");
+        plcProgramTextField.setText("No file selected");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -308,6 +308,11 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         componentSummaryPanel.setLayout(new java.awt.GridBagLayout());
 
         currentTrackControllerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green 1", "Green 2", "Red 1", "Red 2" }));
+        currentTrackControllerComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentTrackControllerComboBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -419,17 +424,34 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
         currentBlockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"W:142", "Active"},
-                {"W:143", "Broken Rail"},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Block Number", "Block Status"
+                "Section", "BlockID", "Occupied", "Status"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         currentBlockScrollPane.setViewportView(currentBlockTable);
+        if (currentBlockTable.getColumnModel().getColumnCount() > 0) {
+            currentBlockTable.getColumnModel().getColumn(0).setResizable(false);
+            currentBlockTable.getColumnModel().getColumn(1).setResizable(false);
+            currentBlockTable.getColumnModel().getColumn(2).setResizable(false);
+            currentBlockTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1092,10 +1114,17 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = plcFileChooser.getSelectedFile();
             trackController.loadPLC(trackDataFile);
+            plcProgramTextField.setText(trackDataFile.getName());
         } else if (returnVal == JFileChooser.CANCEL_OPTION){
            System.out.println("File access cancelled by user.");
+           plcProgramTextField.setText("No file selected");
         }
     }//GEN-LAST:event_chooseFileButtonActionPerformed
+
+    private void currentTrackControllerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentTrackControllerComboBoxActionPerformed
+        // TODO add your handling code here:
+        lineTextField.setText((String)currentTrackControllerComboBox.getSelectedItem());
+    }//GEN-LAST:event_currentTrackControllerComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1119,7 +1148,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JLabel crossingStatusLabel;
     private javax.swing.JLabel currentBlockLabel;
     private javax.swing.JScrollPane currentBlockScrollPane;
-    private javax.swing.JTable currentBlockTable;
+    public javax.swing.JTable currentBlockTable;
     private javax.swing.JTable currentCrossingScrollPane;
     private javax.swing.JLabel currentCrossingsLabel;
     private javax.swing.JScrollPane currentCrossingsScrollPane;

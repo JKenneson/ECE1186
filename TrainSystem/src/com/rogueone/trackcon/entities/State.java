@@ -7,37 +7,46 @@ package com.rogueone.trackcon.entities;
 
 import com.rogueone.global.Global;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  *
  * @author kylemonto
  */
-public class State<K, V> implements Map.Entry<K, V> {
+public class State {
     
-    private final K key;
-    private V value;
+    private Global.TrackGroupsGreen group;
+    private Global.Presence presence;
     
-    public State(K key, V value) {
-        this.key = key;
-        this.value = value;
+    public State(Global.TrackGroupsGreen group, Global.Presence presence) {
+        this.group = group;
+        this.presence = presence;
+    }
+
+    public Global.TrackGroupsGreen getGroup() {
+        return group;
+    }
+
+    public void setGroup(Global.TrackGroupsGreen group) {
+        this.group = group;
+    }
+
+    public Global.Presence getPresence() {
+        return presence;
+    }
+
+    public void setPresence(Global.Presence presence) {
+        this.presence = presence;
     }
 
     @Override
-    public K getKey() {
-        return key;
+    public boolean equals(Object o){
+        if(this.group == ((State) o).getGroup() && this.presence == ((State) o).getPresence() ){
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    @Override
-    public V getValue() {
-        return value;
-    }
-
-    @Override
-    public V setValue(V value) {
-        V old = this.value;
-        this.value = value;
-        return old;
-    }
-    
     
 }
