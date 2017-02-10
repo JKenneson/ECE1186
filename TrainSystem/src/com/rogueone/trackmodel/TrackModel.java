@@ -297,11 +297,11 @@ public class TrackModel {
                 //Assign block to station
                 if(st.getBlockA() == null) {
                     st.setBlockA(b);
-                    st.setBlockASection(b.getSection());
+                    st.setSectionA(b.getSection());
                 }
                 else if(st.getBlockB() == null) {
                     st.setBlockB(b);
-                    st.setBlockBSection(b.getSection());
+                    st.setSectionB(b.getSection());
                 }
                 else {
                     System.out.println("Station already has two blocks.");
