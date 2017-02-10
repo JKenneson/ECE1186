@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 /**
  *
  * @author kylemonto
+ * @autho Jonathan Kenneson
  */
 public class TrainSystem {
 
@@ -18,7 +19,7 @@ public class TrainSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //Create a new MainFrame and an interface selector
         MainFrame mf = new MainFrame();
         mf.setLayout(new BorderLayout());
         

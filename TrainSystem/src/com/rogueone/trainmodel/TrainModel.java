@@ -303,6 +303,10 @@ public class TrainModel {
      * @param args 
      */
     public static void main(String[] args) {
+        //Testing the timer
+        
+        
+        
         //Create a new TrainModel object with a set point speed of 40, authority of 500, and 1 car
         TrainModel trainModelTest1 = new TrainModel(40, 500, 1);
         //Instantiate a GUI for this train
