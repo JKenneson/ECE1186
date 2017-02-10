@@ -98,7 +98,7 @@ public class TrackModel {
     
     public Block getBlock(Line line, Section section, int block) {
         for (Line l : lines) {
-            if (l.getLine() == line.getLine()) {
+            if (l.getLineID() == line.getLineID()) {
                 return l.getBlock(section, block);
             }
         }
@@ -107,7 +107,7 @@ public class TrackModel {
     
     public Block getBlock(Line line, int block) {
         for (Line l : lines) {
-            if (l.getLine() == line.getLine()) {
+            if (l.getLineID() == line.getLineID()) {
                 return l.getBlock(block);
             }
         }
@@ -342,7 +342,7 @@ public class TrackModel {
     
     public Line getLineByID(Global.Line line) {
         for (Line l : lines) {
-            if (l.getLine() == line) {
+            if (l.getLineID() == line) {
                 return l;
             }
         }
@@ -351,9 +351,9 @@ public class TrackModel {
     
     public Section getSectionByLineIDAndSectionID(Global.Line line, Global.Section section) {
         for (Line l : lines) {
-            if (l.getLine() == line) {
+            if (l.getLineID() == line) {
                 for (Section s : sections) {
-                    if (s.getSection() == section) {
+                    if (s.getSectionID() == section) {
                         return s;
                     }
                 }
@@ -364,12 +364,12 @@ public class TrackModel {
     
     //Overload
     public Section getSectionByLineIDAndSectionID(Line line, Global.Section section) {
-        return getSectionByLineIDAndSectionID(line.getLine(), section);
+        return getSectionByLineIDAndSectionID(line.getLineID(), section);
     }
     
     public void printLines() {
         for(Line l : lines) {
-            System.out.println(l.getLine());
+            System.out.println(l.getLineID());
         }
     }
     

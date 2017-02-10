@@ -13,17 +13,17 @@ import java.util.ArrayList;
  * @author Dan
  */
 public class Section {
-    Global.Section section;
+    Global.Section sectionID;
     Line line;
     ArrayList<Block> blocks = new ArrayList<Block>();
     
     public Section (Global.Section newSection, Line newLine) {
-        section = newSection;
+        sectionID = newSection;
         line = newLine;
     }
     
-    public Global.Section getSection() {
-        return section;
+    public Global.Section getSectionID() {
+        return sectionID;
     }
     
     public Line getLine() {
@@ -48,11 +48,11 @@ public class Section {
     }
     
     public String toString() {
-        return section.toString();
+        return sectionID.toString();
     }
     
     public String toStringDetail() {
-        return section.toString() + " (" + line.toString() + ")";
+        return sectionID.toString() + " (" + line.toString() + ")";
     }
     
 }

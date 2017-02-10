@@ -14,15 +14,15 @@ import java.util.ArrayList;
  */
 public class Line {
     
-    Global.Line line;
+    Global.Line lineID;
     ArrayList<Section> sections = new ArrayList<Section>();
     
     public Line (Global.Line newLine) {
-        line = newLine;
+        lineID = newLine;
     }
     
-    public Global.Line getLine() {
-        return line;
+    public Global.Line getLineID() {
+        return lineID;
     }
     
     public ArrayList<Section> getSections() {
@@ -46,7 +46,7 @@ public class Line {
     
     public Block getBlock(Section section, int block) {
         for (Section s : sections) {
-            if (s.getSection() == section.getSection()) {
+            if (s.getSectionID() == section.getSectionID()) {
                 return s.getBlock(block);
             }
         }
@@ -54,6 +54,6 @@ public class Line {
     }
     
     public String toString() {
-        return line.toString();
+        return lineID.toString();
     }
 }
