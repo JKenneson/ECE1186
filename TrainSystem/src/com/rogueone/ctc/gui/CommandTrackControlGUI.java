@@ -198,7 +198,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                                .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                                 .addGap(31, 31, 31))
                             .addGroup(jPanel19Layout.createSequentialGroup()
                                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +212,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel64)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,7 +279,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -309,7 +309,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                    .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addComponent(TrainLineBlockSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -319,7 +319,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel66)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,11 +346,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             new Object [][] {
                 {"Green", "A",  new Integer(2), "Power"},
                 {"Green", "B",  new Integer(3), "Power"},
-                {"Red", "F",  new Integer(2), "Broken Rail"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"Red", "F",  new Integer(2), "Broken Rail"}
             },
             new String [] {
                 "Track", "Section", "Block", "Type"
@@ -359,9 +355,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         FailureTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -370,6 +373,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         jScrollPane10.setViewportView(FailureTable);
+        if (FailureTable.getColumnModel().getColumnCount() > 0) {
+            FailureTable.getColumnModel().getColumn(0).setResizable(false);
+            FailureTable.getColumnModel().getColumn(1).setResizable(false);
+            FailureTable.getColumnModel().getColumn(2).setResizable(false);
+            FailureTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -377,7 +386,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel21Layout.setVerticalGroup(
@@ -390,36 +399,122 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         BrowserPanel2.addTab("Failures", jPanel21);
 
         InformationPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Information"));
+        InformationPanel2.setLayout(new java.awt.GridBagLayout());
 
         jLabel67.setText("Train Name");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 12, 0, 0);
+        InformationPanel2.add(jLabel67, gridBagConstraints);
 
         jLabel68.setText("Current Line");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 12, 0, 0);
+        InformationPanel2.add(jLabel68, gridBagConstraints);
 
         jLabel69.setText("Current Section");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 12, 0, 0);
+        InformationPanel2.add(jLabel69, gridBagConstraints);
 
         jLabel70.setText("Current Block");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 12, 0, 0);
+        InformationPanel2.add(jLabel70, gridBagConstraints);
 
         jLabel71.setText("Speed");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 12, 0, 0);
+        InformationPanel2.add(jLabel71, gridBagConstraints);
 
         jLabel72.setText("Authority");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 12, 0, 0);
+        InformationPanel2.add(jLabel72, gridBagConstraints);
 
         jLabel74.setText("Current Capacity");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 12, 0, 0);
+        InformationPanel2.add(jLabel74, gridBagConstraints);
 
         InformationHeader2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         InformationHeader2.setText("Selected Train Information");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(24, 12, 0, 0);
+        InformationPanel2.add(InformationHeader2, gridBagConstraints);
 
         jLabel75.setText("Max Capacity");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 12, 0, 0);
+        InformationPanel2.add(jLabel75, gridBagConstraints);
 
         TrainSpeedLabel2.setText("mph");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 18;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 6, 0, 0);
+        InformationPanel2.add(TrainSpeedLabel2, gridBagConstraints);
 
         TrainAuthorityLabel2.setText("ft");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 18;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 6, 0, 0);
+        InformationPanel2.add(TrainAuthorityLabel2, gridBagConstraints);
 
         TrainNameField.setText("254");
+        TrainNameField.setMinimumSize(new java.awt.Dimension(10, 30));
         TrainNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TrainNameFieldActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 0, 0);
+        InformationPanel2.add(TrainNameField, gridBagConstraints);
 
         CurrentLineField.setText("Green");
         CurrentLineField.addActionListener(new java.awt.event.ActionListener() {
@@ -427,6 +522,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 CurrentLineFieldActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
+        InformationPanel2.add(CurrentLineField, gridBagConstraints);
 
         CurrentBlockField.setText("4");
         CurrentBlockField.addActionListener(new java.awt.event.ActionListener() {
@@ -434,6 +538,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 CurrentBlockFieldActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 10, 0, 0);
+        InformationPanel2.add(CurrentBlockField, gridBagConstraints);
 
         CurrentSectionField.setText("B");
         CurrentSectionField.addActionListener(new java.awt.event.ActionListener() {
@@ -441,6 +554,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 CurrentSectionFieldActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 53;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 11, 0, 0);
+        InformationPanel2.add(CurrentSectionField, gridBagConstraints);
 
         AuthorityField.setText("1542");
         AuthorityField.addActionListener(new java.awt.event.ActionListener() {
@@ -448,6 +569,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 AuthorityFieldActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 10, 0, 0);
+        InformationPanel2.add(AuthorityField, gridBagConstraints);
 
         SpeedField.setText("23.2");
         SpeedField.addActionListener(new java.awt.event.ActionListener() {
@@ -455,6 +585,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 SpeedFieldActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
+        InformationPanel2.add(SpeedField, gridBagConstraints);
 
         MaxCapacityField.setText("125");
         MaxCapacityField.addActionListener(new java.awt.event.ActionListener() {
@@ -462,6 +601,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 MaxCapacityFieldActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 0);
+        InformationPanel2.add(MaxCapacityField, gridBagConstraints);
 
         CurrentCapacityField.setText("50");
         CurrentCapacityField.addActionListener(new java.awt.event.ActionListener() {
@@ -469,124 +616,57 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 CurrentCapacityFieldActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 52;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 0);
+        InformationPanel2.add(CurrentCapacityField, gridBagConstraints);
 
         jLabel5.setText("people");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 18;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 6, 0, 18);
+        InformationPanel2.add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("people");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 18;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 6, 0, 18);
+        InformationPanel2.add(jLabel6, gridBagConstraints);
 
         jLabel76.setText("Status");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 12, 0, 0);
+        InformationPanel2.add(jLabel76, gridBagConstraints);
 
         StatusField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StatusFieldActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout InformationPanel2Layout = new javax.swing.GroupLayout(InformationPanel2);
-        InformationPanel2.setLayout(InformationPanel2Layout);
-        InformationPanel2Layout.setHorizontalGroup(
-            InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InformationPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(InformationPanel2Layout.createSequentialGroup()
-                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel67)
-                            .addComponent(jLabel71)
-                            .addComponent(jLabel72)
-                            .addComponent(jLabel74)
-                            .addComponent(jLabel75))
-                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(InformationPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(TrainNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 60, Short.MAX_VALUE))
-                            .addGroup(InformationPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(StatusField)
-                                    .addGroup(InformationPanel2Layout.createSequentialGroup()
-                                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(MaxCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CurrentCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel6))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(InformationPanel2Layout.createSequentialGroup()
-                        .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(InformationPanel2Layout.createSequentialGroup()
-                                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel68)
-                                    .addComponent(jLabel69)
-                                    .addComponent(jLabel70))
-                                .addGap(18, 18, 18)
-                                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(AuthorityField)
-                                    .addComponent(SpeedField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(CurrentBlockField)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationPanel2Layout.createSequentialGroup()
-                                        .addGap(0, 1, Short.MAX_VALUE)
-                                        .addComponent(CurrentSectionField, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(CurrentLineField, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TrainSpeedLabel2)
-                                    .addComponent(TrainAuthorityLabel2)))
-                            .addComponent(InformationHeader2))
-                        .addContainerGap())
-                    .addGroup(InformationPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel76)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        InformationPanel2Layout.setVerticalGroup(
-            InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InformationPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(InformationHeader2)
-                .addGap(15, 15, 15)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel67)
-                    .addComponent(TrainNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel68)
-                    .addComponent(CurrentLineField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel69)
-                    .addComponent(CurrentSectionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel70)
-                    .addComponent(CurrentBlockField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel71)
-                    .addComponent(TrainSpeedLabel2)
-                    .addComponent(SpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel72)
-                    .addComponent(TrainAuthorityLabel2)
-                    .addComponent(AuthorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CurrentCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel74)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel75)
-                    .addComponent(MaxCapacityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(InformationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel76)
-                    .addComponent(StatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 12, 19, 18);
+        InformationPanel2.add(StatusField, gridBagConstraints);
 
         AdditionalInfoPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Component Disable"));
 
@@ -777,7 +857,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                             .addComponent(DispatchControlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(SystemInformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(BrowserPanel2))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -799,7 +879,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(AdditionalInfoPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -831,12 +911,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel19ComponentShown
 
     private void TrainLineBlockSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainLineBlockSelectActionPerformed
-        if (TrainLineBlockSelect.getSelectedIndex() == 0) {
-            CurrentLineField.setText("Green");
-        }
-        else {
-            CurrentLineField.setText("Red");
-        }        // TODO add your handling code here:
+                // TODO add your handling code here:
     }//GEN-LAST:event_TrainLineBlockSelectActionPerformed
 
     private void jPanel20ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel20ComponentShown
@@ -938,6 +1013,26 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel72.setText("Authority");
         jLabel74.setText("Current Capacity");
         jLabel75.setText("Max Capacity");
+        jLabel76.setText("Status");
+
+        
+        TrainSpeedLabel2.setText("mph");
+        TrainAuthorityLabel2.setText("feet");
+        jLabel5.setText("people");
+        jLabel6.setText("people");
+        
+        SpeedField.setVisible(true);
+        AuthorityField.setVisible(true);
+        CurrentCapacityField.setVisible(true);
+        MaxCapacityField.setVisible(true);
+        StatusField.setVisible(true);
+        
+        if (TrainLineBlockSelect.getSelectedIndex() == 0) {
+            CurrentLineField.setText("Green");
+        }
+        else {
+            CurrentLineField.setText("Red");
+        }
         
         
         if ( evt.getClickCount() == 1){
@@ -1002,6 +1097,30 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel72.setText("Station");
         jLabel74.setText("Crossing");
         jLabel75.setText("Underground");
+        jLabel76.setText("Status");
+        
+        TrainSpeedLabel2.setText("mph");
+        TrainAuthorityLabel2.setText("feet");
+        jLabel5.setText("");
+        jLabel6.setText("");
+        
+        TrainSpeedLabel2.setText("");
+        TrainAuthorityLabel2.setText("");
+        jLabel5.setText("");
+        jLabel6.setText("");
+        
+        SpeedField.setVisible(true);
+        AuthorityField.setVisible(true);
+        CurrentCapacityField.setVisible(true);
+        MaxCapacityField.setVisible(true);
+        StatusField.setVisible(true);
+        
+        if (TrainLineBlockSelect.getSelectedIndex() == 0) {
+            CurrentLineField.setText("Green");
+        }
+        else {
+            CurrentLineField.setText("Red");
+        }
 
         
         if (evt.getClickCount() == 1){
@@ -1034,6 +1153,27 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private void FailureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FailureTableMouseClicked
         InformationHeader2.setText("Selected Failure Information");
         
+        jLabel67.setText("Failure Type");
+        jLabel68.setText("Failure Line");
+        jLabel69.setText("Failure Block");
+        jLabel70.setText("Failure Section");
+        jLabel71.setText("");
+        jLabel72.setText("");
+        jLabel74.setText("");
+        jLabel75.setText("");
+        jLabel76.setText("");
+        TrainSpeedLabel2.setText("");
+        TrainAuthorityLabel2.setText("");
+        jLabel5.setText("");
+        jLabel6.setText("");
+        
+        
+        SpeedField.setVisible(false);
+        AuthorityField.setVisible(false);
+        CurrentCapacityField.setVisible(false);
+        MaxCapacityField.setVisible(false);
+        StatusField.setVisible(false);
+        
         if (evt.getClickCount() == 1){
             JTable failureTable = (JTable)evt.getSource();
             int row = failureTable.getSelectedRow();
@@ -1058,11 +1198,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 // TODO add your handling code here:
     }//GEN-LAST:event_FailureTableMouseClicked
 
-    private void UpdateTableInformation(java.awt.event.ActionEvent evt){
-        int selectedRowIndex = TrainTable.getSelectedRow();
-        String TrainID = TrainTable.getModel().getValueAt(selectedRowIndex, 0).toString(); 
-        TrainNameField.setText(TrainID);// TODO add your handling code here:
-    }
+//    private void UpdateTableInformation(java.awt.event.ActionEvent evt){
+//        int selectedRowIndex = TrainTable.getSelectedRow();
+//        String TrainID = TrainTable.getModel().getValueAt(selectedRowIndex, 0).toString(); 
+//        TrainNameField.setText(TrainID);// TODO add your handling code here:
+//    }
     
     /**
      *

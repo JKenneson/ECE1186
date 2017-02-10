@@ -138,6 +138,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         
         jLabel5.setText("Track Segment " + lineName + ":" + blockName + ":" + segmentName + " Disabled");
         
+        
         //get fields
         //send disable signal
 // TODO add your handling code here:
