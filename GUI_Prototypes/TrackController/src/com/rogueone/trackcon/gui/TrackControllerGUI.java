@@ -5,17 +5,30 @@
  */
 package com.rogueone.trackcon.gui;
 
+import com.rogueone.trackcon.TrackController;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 /**
  *
  * @author kylemonto
  */
 public class TrackControllerGUI extends javax.swing.JPanel {
+    
+    TrackController trackController;
 
     /**
      * Creates new form TrackControllerGUI
      */
     public TrackControllerGUI() {
         initComponents();
+    }
+
+    public TrackControllerGUI(TrackController trackController) {
+        initComponents();
+        this.trackController = trackController;
     }
 
     /**
@@ -241,6 +254,11 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         selectionPanel.add(blockNumberTextField, gridBagConstraints);
 
         chooseFileButton.setText("Choose File");
+        chooseFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseFileButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
@@ -1067,6 +1085,17 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/trackcon/gui/images/Wayside_img.png"))); // NOI18N
         }
     }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void chooseFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileButtonActionPerformed
+        JFileChooser plcFileChooser = new JFileChooser();
+        int returnVal = plcFileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File trackDataFile = plcFileChooser.getSelectedFile();
+            trackController.loadPLC(trackDataFile);
+        } else if (returnVal == JFileChooser.CANCEL_OPTION){
+           System.out.println("File access cancelled by user.");
+        }
+    }//GEN-LAST:event_chooseFileButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
