@@ -51,6 +51,7 @@ public class TrainController {
     private String line;
     private String section;
     private String block;
+    private int maxPower;
     private int passengers;
     private int temperature;
     
@@ -103,6 +104,7 @@ public class TrainController {
         this.line = line;
         this.section = section;
         this.block = block;
+        this.maxPower = getMaxPower();
         this.passengers = updatePassengers();
         this.temperature = updateTemp();
 
@@ -112,18 +114,87 @@ public class TrainController {
         this.serviceBrakeStatus = false;
     }    
     
+    public TrainControllerGUI CreateGUIObject(TrainController trainControllerObject){
+        //Create GUI object
+        TrainControllerGUI trainControllerGUI = new TrainControllerGUI(trainControllerObject);
+    
+        //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(trainControllerGUI);
+        frame.pack();
+        frame.setVisible(true);     //Make sure to set it visible
+        
+        //Initialize the GUI
+        trainControllerObject.InitializeInputPanel(trainControllerGUI);
+        
+        return  trainControllerGUI;  //Return the GUI object
+        
+    }
+    
+    /**
+     * 
+     * @return 
+     */
     private int getSpeedLimit(){ //should pull speed limit information from
         return 0;                //loaded track xlx after calculating location.
     }
     
+    /**
+     * 
+     * @return 
+     */
     private double calculatePower(){ //should pull speed limit information from
         return 0.0;                //loaded track xlx after calculating location.
     }
     
+    /**
+     * 
+     * @return 
+     */
     private int updatePassengers(){ //should pull passenger information from train model
         return 0; 
     }    
+    
+    /**
+     * 
+     * @return 
+     */
     private int updateTemp(){ //should pull temp information from train model
         return 0; 
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    private int getMaxPower() { //should pull temp information from train model
+        return 0;
+    }
+    
+    /**
+     * 
+     * @param gui 
+     */
+    private void InitializeInputPanel(TrainControllerGUI gui) {
+        
+        gui.TrainInfoText.append("Train ID: " + this.trainID + "\nLine: " + 
+        this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
+        "\nPassengers: " + this.passengers + "\nTemp: " + this.temperature);
+        gui.TrainInfoText.setEditable(false);
+        
+        gui.ActualSpeedLabel.setText(String.valueOf(this.currSpeed));
+        gui.SpeedLimitLabel.setText(String.valueOf(this.speedLimit));
+        gui.AuthorityLabel.setText(String.valueOf(this.authority));
+        gui.PowerUsedLabel.setText(String.valueOf(this.powerCommand));
+        gui.MaxPowerLabel.setText(String.valueOf(this.maxPower));
+        gui.NotificationsDisplay.append(this.announcement);
+        gui.NotificationsDisplay.setEditable(false);
+        gui.KiInput.setValue(this.kI);
+        gui.KpInput.setValue(this.kP);
+        
+        
+        
+    }
+        
 }

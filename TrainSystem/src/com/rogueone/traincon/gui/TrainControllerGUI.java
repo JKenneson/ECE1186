@@ -5,6 +5,8 @@
  */
 package com.rogueone.traincon.gui;
 
+import com.rogueone.traincon.TrainController;
+
 /**
  *
  * @author kylemonto
@@ -18,6 +20,10 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         initComponents();
     }
 
+    public TrainControllerGUI(TrainController trainControllerObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,6 +33,12 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ACGroup = new javax.swing.ButtonGroup();
+        LightsGroup = new javax.swing.ButtonGroup();
+        RightDoorGroup = new javax.swing.ButtonGroup();
+        LeftDoorGroup = new javax.swing.ButtonGroup();
+        HeatGroup = new javax.swing.ButtonGroup();
+        ModeGroup = new javax.swing.ButtonGroup();
         TrainControlsPanel = new javax.swing.JPanel();
         ControlsAC = new javax.swing.JPanel();
         ACOn = new javax.swing.JRadioButton();
@@ -107,8 +119,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         ControlsAC.setBorder(javax.swing.BorderFactory.createTitledBorder("A/C"));
 
+        ACGroup.add(ACOn);
         ACOn.setText("On");
 
+        ACGroup.add(ACOff);
+        ACOff.setSelected(true);
         ACOff.setText("Off");
 
         javax.swing.GroupLayout ControlsACLayout = new javax.swing.GroupLayout(ControlsAC);
@@ -130,8 +145,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         ControlsLights.setBorder(javax.swing.BorderFactory.createTitledBorder("Lights"));
 
+        LightsGroup.add(LightsOn);
         LightsOn.setText("On");
 
+        LightsGroup.add(LightsOff);
+        LightsOff.setSelected(true);
         LightsOff.setText("Off");
 
         javax.swing.GroupLayout ControlsLightsLayout = new javax.swing.GroupLayout(ControlsLights);
@@ -153,8 +171,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         ControlsLeftDoor.setBorder(javax.swing.BorderFactory.createTitledBorder("Left Door"));
 
+        LeftDoorGroup.add(LeftDoorOpened);
         LeftDoorOpened.setText("Opened");
 
+        LeftDoorGroup.add(LeftDoorClosed);
+        LeftDoorClosed.setSelected(true);
         LeftDoorClosed.setText("Closed");
 
         javax.swing.GroupLayout ControlsLeftDoorLayout = new javax.swing.GroupLayout(ControlsLeftDoor);
@@ -176,8 +197,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         ControlsRightDoor.setBorder(javax.swing.BorderFactory.createTitledBorder("Right Door"));
 
+        RightDoorGroup.add(ControlsRightDoorClosed);
+        ControlsRightDoorClosed.setSelected(true);
         ControlsRightDoorClosed.setText("Closed");
 
+        RightDoorGroup.add(ControlsRightDoorOpened);
         ControlsRightDoorOpened.setText("Opened");
 
         javax.swing.GroupLayout ControlsRightDoorLayout = new javax.swing.GroupLayout(ControlsRightDoor);
@@ -201,8 +225,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         ControlsSystemMode.setBorder(javax.swing.BorderFactory.createTitledBorder("System Mode"));
 
+        ModeGroup.add(ManualModeSelect);
         ManualModeSelect.setText("Manual");
 
+        ModeGroup.add(AutoModeSelect);
+        AutoModeSelect.setSelected(true);
         AutoModeSelect.setText("Automatic");
 
         javax.swing.GroupLayout ControlsSystemModeLayout = new javax.swing.GroupLayout(ControlsSystemMode);
@@ -251,8 +278,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         ControlsHeat.setBorder(javax.swing.BorderFactory.createTitledBorder("Heat"));
 
+        HeatGroup.add(HeatOn);
         HeatOn.setText("On");
 
+        HeatGroup.add(HeatOff);
+        HeatOff.setSelected(true);
         HeatOff.setText("Off");
 
         javax.swing.GroupLayout ControlsHeatLayout = new javax.swing.GroupLayout(ControlsHeat);
@@ -348,11 +378,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         StatusHeat.setBorder(javax.swing.BorderFactory.createTitledBorder("Power"));
 
         StatusHeatImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        StatusHeatImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/SQUARE_98.png")));
+        StatusHeatImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png"))); // NOI18N
         StatusHeatImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         PowerStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PowerStatusLabel.setText("FAILURE");
+        PowerStatusLabel.setText("ACTIVE");
 
         javax.swing.GroupLayout StatusHeatLayout = new javax.swing.GroupLayout(StatusHeat);
         StatusHeat.setLayout(StatusHeatLayout);
@@ -361,27 +391,27 @@ public class TrainControllerGUI extends javax.swing.JPanel {
             .addGroup(StatusHeatLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(StatusHeatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PowerStatusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(StatusHeatLayout.createSequentialGroup()
                         .addComponent(StatusHeatImage, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(PowerStatusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         StatusHeatLayout.setVerticalGroup(
             StatusHeatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StatusHeatLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(StatusHeatImage, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PowerStatusLabel)
-                .addGap(18, 18, 18))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         StatusLights.setBorder(javax.swing.BorderFactory.createTitledBorder("Antenna"));
         StatusLights.setPreferredSize(new java.awt.Dimension(140, 190));
 
         StatusLightsImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        StatusLightsImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png")));
+        StatusLightsImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png"))); // NOI18N
         StatusLightsImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         AntennaStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -414,7 +444,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         StatusLights1.setPreferredSize(new java.awt.Dimension(140, 190));
 
         StatusLightsImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        StatusLightsImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png")));
+        StatusLightsImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png"))); // NOI18N
         StatusLightsImage1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         BrakeStatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -659,7 +689,6 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         NotificationsDisplay.setColumns(20);
         NotificationsDisplay.setRows(5);
-        NotificationsDisplay.setText("Updates, Failures, etc.");
         RealTimeNotificationsText.setViewportView(NotificationsDisplay);
 
         javax.swing.GroupLayout RealTimeNotificationsLayout = new javax.swing.GroupLayout(RealTimeNotifications);
@@ -836,78 +865,84 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton ACOff;
-    private javax.swing.JRadioButton ACOn;
-    private javax.swing.JLabel ActualSpeedLabel;
+    public javax.swing.ButtonGroup ACGroup;
+    public javax.swing.JRadioButton ACOff;
+    public javax.swing.JRadioButton ACOn;
+    public javax.swing.JLabel ActualSpeedLabel;
     private javax.swing.JPanel ActualSpeedPanel;
     private javax.swing.JLabel ActualSpeedUnitsLabel;
-    private javax.swing.JTextField AnnouncementText;
-    private javax.swing.JCheckBox AntennaFailureCheck;
-    private javax.swing.JLabel AntennaStatusLabel;
-    private javax.swing.JLabel AuthorityLabel;
+    public javax.swing.JTextField AnnouncementText;
+    public javax.swing.JCheckBox AntennaFailureCheck;
+    public javax.swing.JLabel AntennaStatusLabel;
+    public javax.swing.JLabel AuthorityLabel;
     private javax.swing.JPanel AuthorityPanel;
     private javax.swing.JLabel AuthorityUnitsLabel;
-    private javax.swing.JRadioButton AutoModeSelect;
-    private javax.swing.JLabel BrakeStatusLabel;
+    public javax.swing.JRadioButton AutoModeSelect;
+    public javax.swing.JLabel BrakeStatusLabel;
     private javax.swing.JPanel Clock;
     private javax.swing.JScrollPane ClockScrollPane;
-    private javax.swing.JTextArea ClockText;
+    public javax.swing.JTextArea ClockText;
     private javax.swing.JLabel ControlMPHLabel;
     private javax.swing.JPanel ControlsAC;
     private javax.swing.JPanel ControlsHeat;
     private javax.swing.JPanel ControlsLeftDoor;
     private javax.swing.JPanel ControlsLights;
     private javax.swing.JPanel ControlsRightDoor;
-    private javax.swing.JRadioButton ControlsRightDoorClosed;
-    private javax.swing.JRadioButton ControlsRightDoorOpened;
+    public javax.swing.JRadioButton ControlsRightDoorClosed;
+    public javax.swing.JRadioButton ControlsRightDoorOpened;
     private javax.swing.JPanel ControlsSystemMode;
-    private javax.swing.JToggleButton EmergencyBrakeToggleButton;
+    public javax.swing.JToggleButton EmergencyBrakeToggleButton;
     private javax.swing.JPanel FailureSimulationPanel;
-    private javax.swing.JRadioButton HeatOff;
-    private javax.swing.JRadioButton HeatOn;
-    private javax.swing.JSpinner KiInput;
+    private javax.swing.ButtonGroup HeatGroup;
+    public javax.swing.JRadioButton HeatOff;
+    public javax.swing.JRadioButton HeatOn;
+    public javax.swing.JSpinner KiInput;
     private javax.swing.JLabel KiLabel;
-    private javax.swing.JSpinner KpInput;
+    public javax.swing.JSpinner KpInput;
     private javax.swing.JLabel KpLabel;
-    private javax.swing.JRadioButton LeftDoorClosed;
-    private javax.swing.JRadioButton LeftDoorOpened;
-    private javax.swing.JRadioButton LightsOff;
-    private javax.swing.JRadioButton LightsOn;
-    private javax.swing.JRadioButton ManualModeSelect;
-    private javax.swing.JLabel MaxPowerLabel;
+    public javax.swing.JRadioButton LeftDoorClosed;
+    public javax.swing.ButtonGroup LeftDoorGroup;
+    public javax.swing.JRadioButton LeftDoorOpened;
+    public javax.swing.ButtonGroup LightsGroup;
+    public javax.swing.JRadioButton LightsOff;
+    public javax.swing.JRadioButton LightsOn;
+    public javax.swing.JRadioButton ManualModeSelect;
+    public javax.swing.JLabel MaxPowerLabel;
     private javax.swing.JPanel MaxPowerPanel;
     private javax.swing.JLabel MaxPowerUnitsLabel;
-    private javax.swing.JTextArea NotificationsDisplay;
-    private javax.swing.JCheckBox PowerFailureCheck;
-    private javax.swing.JLabel PowerStatusLabel;
+    private javax.swing.ButtonGroup ModeGroup;
+    public javax.swing.JTextArea NotificationsDisplay;
+    public javax.swing.JCheckBox PowerFailureCheck;
+    public javax.swing.JLabel PowerStatusLabel;
     private javax.swing.JLabel PowerUnitsLabel;
-    private javax.swing.JLabel PowerUsedLabel;
+    public javax.swing.JLabel PowerUsedLabel;
     private javax.swing.JPanel PowerUsedPanel;
     private javax.swing.JPanel RealTimeHUD;
     private javax.swing.JPanel RealTimeNotifications;
     private javax.swing.JScrollPane RealTimeNotificationsText;
     private javax.swing.JPanel RealTimePower;
     private javax.swing.JPanel RealTimeSpeedAndAuthority;
+    public javax.swing.ButtonGroup RightDoorGroup;
     private javax.swing.JButton SendAnnouncement;
-    private javax.swing.JCheckBox ServiceBrakeFailureCheck;
-    private javax.swing.JToggleButton ServiceBrakeToggleButton;
+    public javax.swing.JCheckBox ServiceBrakeFailureCheck;
+    public javax.swing.JToggleButton ServiceBrakeToggleButton;
     private javax.swing.JButton SetKi;
     private javax.swing.JButton SetKp;
     private javax.swing.JButton SetSpeed;
-    private javax.swing.JSpinner SpeedInput;
-    private javax.swing.JLabel SpeedLimitLabel;
+    public javax.swing.JSpinner SpeedInput;
+    public javax.swing.JLabel SpeedLimitLabel;
     private javax.swing.JPanel SpeedLimitPanel;
     private javax.swing.JLabel SpeedLimitUnitsLabel;
     private javax.swing.JPanel Status;
     private javax.swing.JPanel StatusHeat;
-    private javax.swing.JLabel StatusHeatImage;
+    public javax.swing.JLabel StatusHeatImage;
     private javax.swing.JPanel StatusLights;
     private javax.swing.JPanel StatusLights1;
-    private javax.swing.JLabel StatusLightsImage;
-    private javax.swing.JLabel StatusLightsImage1;
+    public javax.swing.JLabel StatusLightsImage;
+    public javax.swing.JLabel StatusLightsImage1;
     private javax.swing.JPanel TrainControlsPanel;
     private javax.swing.JScrollPane TrainInfoScrollPane;
-    private javax.swing.JTextArea TrainInfoText;
+    public javax.swing.JTextArea TrainInfoText;
     private javax.swing.JPanel TrainInformation;
     private javax.swing.JButton TrainSelectorButton;
     private javax.swing.JComboBox<String> TrainSelectorDropDown;
