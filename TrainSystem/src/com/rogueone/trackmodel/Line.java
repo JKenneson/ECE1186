@@ -46,7 +46,10 @@ public class Line {
     
     public Block getBlock(Section section, int block) {
         for (Section s : sections) {
-            if (s.getSectionID() == section.getSectionID()) {
+            if (s.getLine().getLineID() == Global.Line.RED && section.getLine().getLineID() == Global.Line.RED) {
+                System.out.println(";=");
+            }
+            if (s.equals(section)) {
                 return s.getBlock(block);
             }
         }
@@ -55,5 +58,9 @@ public class Line {
     
     public String toString() {
         return lineID.toString();
+    }
+    
+    public boolean equals(Line otherLine) {
+        return this.lineID == otherLine.getLineID();
     }
 }

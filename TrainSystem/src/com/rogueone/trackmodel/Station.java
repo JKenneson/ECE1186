@@ -100,12 +100,7 @@ public class Station {
     }
     public void setHeater(boolean on)
     {
-        if (on) {
-            heaterOn = true;
-        }    
-        else {
-            heaterOn = false;
-        }    
+        heaterOn = on;  
     }
     public boolean isHeaterOn() {
         return heaterOn;
@@ -123,6 +118,9 @@ public class Station {
         waitingPassengers =- boardingPassengers;
         return waitingPassengers;
         //No support for negative passengers YET
+    }
+    public boolean equals(Station otherStation) {
+        return this.line.equals(otherStation.getLine()) && this.stationID == otherStation.getID();
     }
     public String toString() {
         return stationName + " (" + stationID + ")";

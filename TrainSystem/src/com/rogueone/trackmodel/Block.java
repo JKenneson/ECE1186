@@ -213,6 +213,10 @@ public class Block implements TrackPiece {
     }
     
     //Overridden methods
+    public boolean equals(Block otherBlock) {
+        return this.line.equals(otherBlock.getLine()) && this.section.equals(otherBlock.getSection())&& this.blockID == otherBlock.getID();
+    }
+    
     public String toString() {
         return "" + this.getID();
     }

@@ -32,6 +32,9 @@ public class Switch implements TrackPiece {
     }
     
     //Getters & Setters
+    public Line getLine() {
+        return line;
+    }
     public void setPortA(TrackPiece port){
         portA = port;
     }
@@ -88,6 +91,10 @@ public class Switch implements TrackPiece {
     }
     
     //Overridden methods
+    public boolean equals(Switch otherSwitch) {
+        return this.line.equals(otherSwitch.getLine()) && this.centralSwitchID == otherSwitch.getID();
+    }
+    
     public String toString() {
         return "" + centralSwitchID;
     }

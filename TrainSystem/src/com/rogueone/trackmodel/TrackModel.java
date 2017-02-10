@@ -87,18 +87,18 @@ public class TrackModel {
                     b.setPortA(yard);
                 }
                 else {
-                    b.setPortA(getBlock(b.getLine(),b.getPortAID()));
+                    b.setPortA(getBlock(b.getLine(),b.getSection(),b.getPortAID()));
                 }     
             }
             if(b.getPortB() == null) {
-                b.setPortB(getBlock(b.getLine(),b.getPortBID()));
+                b.setPortB(getBlock(b.getLine(),b.getSection(),b.getPortBID()));
             }
         }
     }
     
     public Block getBlock(Line line, Section section, int block) {
         for (Line l : lines) {
-            if (l.getLineID() == line.getLineID()) {
+            if (l.equals(line)) {
                 return l.getBlock(section, block);
             }
         }
@@ -107,7 +107,7 @@ public class TrackModel {
     
     public Block getBlock(Line line, int block) {
         for (Line l : lines) {
-            if (l.getLineID() == line.getLineID()) {
+            if (l.equals(line)) {
                 return l.getBlock(block);
             }
         }
@@ -264,7 +264,7 @@ public class TrackModel {
         sections.add(s);
         //Add reference to Line objects
         for(Line l : lines) {
-            if(s.getLine() == l) {
+            if(s.getLine().equals(l)) {
                 l.addSection(s);
             }
         }
@@ -275,9 +275,9 @@ public class TrackModel {
         blocks.add(b);
         //Add reference to Section objects
         for(Line l : lines) {
-            if(b.getLine() == l) {
+            if(b.getLine().equals(l)) {
                 for(Section s : l.getSections()) {
-                    if(b.getSection() == s) {
+                    if(b.getSection().equals(s)) {
                         s.addBlock(b);
                     }
                 }
@@ -308,8 +308,7 @@ public class TrackModel {
                 }
                 else {
                     System.out.println("Station already has two blocks.");
-                }
-                
+                }    
             }
         }
     }

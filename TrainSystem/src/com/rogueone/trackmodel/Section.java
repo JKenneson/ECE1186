@@ -55,4 +55,8 @@ public class Section {
         return sectionID.toString() + " (" + line.toString() + ")";
     }
     
+    public boolean equals(Section otherSection) {
+        return this.line.equals(otherSection.getLine()) && this.sectionID == otherSection.getSectionID();
+    }
+    //NOTE: This cannot be overloaded with a Global.Section argument becuase lineID is needed to be certain of equality
 }
