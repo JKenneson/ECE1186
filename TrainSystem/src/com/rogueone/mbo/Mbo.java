@@ -81,8 +81,92 @@ public class Mbo{
      * @throws IOException
      * @throws InvalidFormatException 
      */
-    public static void readTrainSchedule(MovingBlockGUI gui) throws IOException, InvalidFormatException{
+    public static void readRedSchedule(TrainScheduleGUI gui) throws IOException, InvalidFormatException{
+        File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(file);
+        XSSFSheet redSchedule = workbook.getSheetAt(1);
+        int numTrains = redSchedule.getLastRowNum();
+        String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
+         Object[] columnNames = new Object[11];
         
+        Object[][] data = new Object[numTrains][11];
+        int i,j;
+        String oldInfo = "";
+        String info = "";
+        for(i = 1; i < numTrains; i++){
+            Row currRow = redSchedule.getRow(i);
+            
+            for(j = 0; j < 11; j++){
+                if(currRow.getCell(j) != null){
+                    info = currRow.getCell(j).toString();
+                    if(i==0){
+                        columnNames[j] = info;
+                    }
+                        if(j==2){
+                            oldInfo = info;
+                            info = convertTime(info);
+                        }
+                    
+                }
+                else{
+                    oldInfo = incrementTime(oldInfo, redIncrements[j-3]);
+                    info = convertTime(oldInfo);
+                }
+                data[i][j] = info;
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        gui.redTable.setModel(model);
+    }
+    
+    public static String convertTime(String time){
+        String[] times = time.split("\\.");
+        String AMPM = "am";
+        int hours=0, minutes=0, seconds=0;
+        hours=Integer.parseInt(times[0]);
+        minutes=Integer.parseInt(times[1]);
+        seconds=Integer.parseInt(times[2]);
+        
+        time = hours+":"+minutes+AMPM;
+        if(seconds>60)
+        {
+            seconds=seconds-60;
+            minutes++;
+        }
+        if(minutes > 60)
+        {
+            minutes=minutes-60;
+            hours++;
+        }
+        if(hours>12)
+        {
+            hours=hours-12;
+            AMPM="pm";
+        }
+        if(minutes<10)
+        {
+            time = hours+":0"+minutes+AMPM;
+        }
+        System.out.println(time);
+        return time;
+    }
+    
+    public static String incrementTime(String time, String increment){
+        String[] times = time.split("\\.");
+        String[] increments = increment.split("\\.");
+        String AMPM = "am";
+        int hours=0, minutes=0, seconds=0, tens = 0, decimal = 0;
+        hours=Integer.parseInt(times[0]);
+        minutes=Integer.parseInt(times[1]);
+        seconds=Integer.parseInt(times[2]);
+        tens = Integer.parseInt(increments[0]);
+        decimal = Integer.parseInt(increments[1]);
+        
+        minutes = minutes+tens;
+        seconds = seconds+(60*(decimal/10));
+        time = hours+"."+minutes+"."+seconds;
+        
+        return time;
     }
     
     /**

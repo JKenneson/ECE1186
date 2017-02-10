@@ -29,13 +29,13 @@ public class TrainScheduleGUI extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        redTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        redTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"0010", "Bill", "3:50 PM", "3:57 PM", "4:02 PM", "4:12 PM", "4:22 PM", "4:29 PM", "4:35 PM", "4:40 PM"},
                 {"0134", "Matt", "4:15 PM", "4:23 PM", "4:27 PM", "4:37 PM", "4:47 PM", "4:53 PM", "4:59 PM", "5:05 PM"},
@@ -67,7 +67,7 @@ public class TrainScheduleGUI extends javax.swing.JFrame {
                 "Train ID", "Driver", "SHADYSIDE", "HERRON AVE", "SWISSVILLE", "PENN STATION", "STEEL PLAZA", "FIRST AVE", "STATION SQUARE", "SOUTH HILLS"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(redTable);
 
         jTabbedPane1.addTab("Red Line", jScrollPane2);
 
@@ -162,7 +162,7 @@ public class TrainScheduleGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    public javax.swing.JTable redTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,24 @@
  * and open the template in the editor.
  */
 package com.rogueone.mbo.gui;
-
+import com.rogueone.mbo.*;
+import java.io.File;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import org.apache.poi.ss.usermodel.Row;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.IOException;
+import com.rogueone.mbo.gui.MovingBlockGUI;
+import com.rogueone.mbo.gui.TrainScheduleGUI;
+import com.rogueone.global.Global;
+import javax.swing.*;
+import javax.swing.table.*;
 /**
  *
  * @author kylemonto
@@ -592,6 +609,13 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
          TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
+         Mbo mbo = new Mbo();
+         try{
+         mbo.readRedSchedule(trainSchedule);
+         }
+         catch(IOException | InvalidFormatException e){
+             
+         }
         trainSchedule.setVisible(true);
     }//GEN-LAST:event_DetailedScheduleButtonActionPerformed
 
