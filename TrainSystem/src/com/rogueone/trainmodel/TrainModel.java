@@ -11,6 +11,7 @@ package com.rogueone.trainmodel;
 
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainmodel.entities.TrainFailures;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 import javax.swing.*;
@@ -22,7 +23,8 @@ import javax.swing.*;
  */
 public class TrainModel {
     
-    NumberFormat format = NumberFormat.getInstance(Locale.US);
+    NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
+    DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     
     public final int STARTING_FORCE = 100;      //Can't divide by zero, so we have a starting force if our current speed is 0
     public final double CAR_LENGTH = 105.64;    //1 car's train length (in feet)
@@ -47,7 +49,8 @@ public class TrainModel {
     private boolean serviceBrakeActivated;
     private boolean emergencyBrakeActivated;
     //Speed and Authority
-    private int currSpeed;
+    private double currSpeed;       //Vf
+    private double lastSpeed;       //Vi
     private int speedLimit;
     private int driverSetPoint;
     private int ctcSetPoint;
@@ -95,6 +98,7 @@ public class TrainModel {
         this.emergencyBrakeActivated = false;
         //Speed and Authority
         this.currSpeed = 0;
+        this.lastSpeed = 0;
         this.speedLimit = 0;
         this.driverSetPoint = 0;
         this.ctcSetPoint = setPointSpeed;
@@ -204,12 +208,12 @@ public class TrainModel {
         }        
         
         //Speed and Authority
-        gui.currSpeedState.setText(Integer.toString(this.currSpeed));
+        gui.currSpeedState.setText(decimalFormatter.format(this.currSpeed));
         gui.speedLimitState.setText(Integer.toString(this.speedLimit));
         gui.driverSetPointState.setText(Integer.toString(this.driverSetPoint));
         gui.ctcSetPointState.setText(Integer.toString(this.ctcSetPoint));
         gui.authorityState.setText(Integer.toString(this.authority));
-        gui.powerState.setText(Double.toString(this.powerReceived));
+        gui.powerState.setText(commaFormatter.format(this.powerReceived));
         gui.gradeState.setText(Double.toString(this.grade));
         
         //Station and Passengers
@@ -220,8 +224,8 @@ public class TrainModel {
         gui.maxCapacityState.setText(Integer.toString(this.passengerMaxCapacity));
         
         //Physical Characteristics
-        gui.trainWeightState.setText(format.format(this.trainWeight));
-        gui.trainLengthState.setText(format.format(this.trainLength));
+        gui.trainWeightState.setText(commaFormatter.format(this.trainWeight));
+        gui.trainLengthState.setText(commaFormatter.format(this.trainLength));
         gui.numCarsState.setText(Integer.toString(this.numCars));
         
         if(this.trackAntennaActivated) {
@@ -326,7 +330,7 @@ public class TrainModel {
         
         //TODO: Send velocity to TrainController, get back a power
         //this.powerReceived = TrainController.calculatePower(this.currSpeed);
-        this.powerReceived = 100;   //Just starting with 100 power
+        //For now, power comes from GUI
         
         //P=F*v  -> Calculate a force by deviding that power by the velocity
         if(this.currSpeed == 0) {    //Can't devide by zero
@@ -339,9 +343,12 @@ public class TrainModel {
         //F=m*a  -> Calculate the acceleration by dividing the force by the mass
         this.acceleration = this.force / this.trainWeight;
         
+        System.out.println(this.acceleration);
         
-        
-        this.elapsedTime = System.nanoTime() - startTime;
+        //vf = vi + a*t  -> Final velocity (speed) equals initial velocity + acceleration * time
+        this.elapsedTime = System.nanoTime() - startTime;   //Get elapsed time since last calculation
+        this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);
+        this.lastSpeed = this.currSpeed;    //Assign the last speed to the current speed for the next cycle
         
         
         
@@ -358,7 +365,7 @@ public class TrainModel {
      * @author Jonathan Kenneson
      * @param args 
      */
-    public static void main(String[] args) {        
+    public static void main(String[] args) throws InterruptedException {        
         //Create a new TrainModel object with a set point speed of 40, authority of 500, and 1 car
         TrainModel trainModelTest1 = new TrainModel(40, 500, 1);
         //Instantiate a GUI for this train
@@ -372,6 +379,7 @@ public class TrainModel {
             if(trainModelGUITest1.isDisplayable() == false) {
                 break;
             }
+            Thread.sleep(1000);
         }
         
     }
@@ -462,7 +470,7 @@ public class TrainModel {
         this.emergencyBrakeActivated = emergencyBrakeActivated;
     }
 
-    public int getCurrSpeed() {
+    public double getCurrSpeed() {
         return currSpeed;
     }
 
