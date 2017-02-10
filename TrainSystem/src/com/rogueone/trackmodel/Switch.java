@@ -15,14 +15,14 @@ import com.rogueone.global.Global.PieceType;
 public class Switch implements TrackPiece {
     
     private int centralSwitchID;
-    private Global.Line line;
+    private Line line;
     private TrackPiece portA;
     private TrackPiece portB;
     private TrackPiece portC;
     private boolean activated;
     
     //Constructor
-    public Switch(int newCentralSwitchID, Global.Line newLine, TrackPiece newPortA, TrackPiece newPortB, TrackPiece newPortC) {
+    public Switch(int newCentralSwitchID, Line newLine, TrackPiece newPortA, TrackPiece newPortB, TrackPiece newPortC) {
         centralSwitchID = newCentralSwitchID;
         line = newLine;
         portA = newPortA;   //static port

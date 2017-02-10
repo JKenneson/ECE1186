@@ -14,8 +14,8 @@ import com.rogueone.global.Global.PieceType;
  */
 public class Block implements TrackPiece {
     
-    private Global.Line line;
-    private Global.Section section;
+    private Line line;
+    private Section section;
     protected TrackPiece portA;
     protected TrackPiece portB;
     protected int portAID;
@@ -42,7 +42,7 @@ public class Block implements TrackPiece {
     private Station station;
     
     // Constructor
-    public Block(Global.Line newLine, Global.Section newSection, int newBlockID, 
+    public Block(Line newLine, Section newSection, int newBlockID, 
             int newPortAID, int newPortBID, int newSwitchID, boolean newIsStaticSwitchBlock, 
             int newStationID, double newLength, double newGrade, double newSpeedLimit,
             double newElevation, double newCumulativeElevation, 
@@ -95,10 +95,10 @@ public class Block implements TrackPiece {
     }
     
     // Getters & Setters
-    public Global.Line getLine() {
+    public Line getLine() {
         return line;
     }
-    public Global.Section getSection() {
+    public Section getSection() {
         return section;
     }
     public TrackPiece getPortA() {

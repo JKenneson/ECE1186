@@ -44,9 +44,9 @@ public class Line {
         return null;
     }
     
-    public Block getBlock(Global.Section section, int block) {
+    public Block getBlock(Section section, int block) {
         for (Section s : sections) {
-            if (s.getSection() == section) {
+            if (s.getSection() == section.getSection()) {
                 return s.getBlock(block);
             }
         }

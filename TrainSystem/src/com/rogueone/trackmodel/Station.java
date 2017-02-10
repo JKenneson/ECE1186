@@ -15,11 +15,11 @@ public class Station {
     
     private int stationID;
     private String stationName;
-    private Global.Line line;
+    private Line line;
     private TrackPiece blockA;
-    private Global.Section sectionA;
+    private Section sectionA;
     private TrackPiece blockB;
-    private Global.Section sectionB;
+    private Section sectionB;
     private boolean rightSide;
     private boolean leftSide;
     private int waitingPassengers = 0;
@@ -27,8 +27,8 @@ public class Station {
     private boolean heaterOn = false;
     
     //Contructor
-    public Station(int newStationID, String newStationName, Global.Line newLine, TrackPiece newBlockA, Global.Section newSectionA, 
-            TrackPiece newBlockB, Global.Section newSectionB, boolean newRightSide, boolean newLeftSide) {
+    public Station(int newStationID, String newStationName, Line newLine, TrackPiece newBlockA, Section newSectionA, 
+            TrackPiece newBlockB, Section newSectionB, boolean newRightSide, boolean newLeftSide) {
         stationID = newStationID;
         stationName = newStationName;
         line = newLine;
@@ -44,10 +44,10 @@ public class Station {
         heaterOn = false;
     }
     //Getters and Setters
-    public int getStationID() {
+    public int getID() {
         return stationID;
     }
-    public void setStationID(int stationID) {
+    public void setID(int stationID) {
         this.stationID = stationID;
     }
     public String getStationName() {
@@ -56,10 +56,10 @@ public class Station {
     public void setStationName(String stationName) {
         this.stationName = stationName;
     }
-    public Global.Line getLine() {
+    public Line getLine() {
         return line;
     }
-    public void setLine(Global.Line line) {
+    public void setLine(Line line) {
         this.line = line;
     }
     public TrackPiece getBlockA() {
@@ -68,10 +68,10 @@ public class Station {
     public void setBlockA(TrackPiece blockA) {
         this.blockA = blockA;
     }
-    public Global.Section getSectionA() {
+    public Section getSectionA() {
         return sectionA;
     }
-    public void setSectionA(Global.Section newSectionA) {
+    public void setSectionA(Section newSectionA) {
         this.sectionA = newSectionA;
     }
     public TrackPiece getBlockB() {
@@ -80,10 +80,10 @@ public class Station {
     public void setBlockB(TrackPiece blockB) {
         this.blockB = blockB;
     }
-    public Global.Section getSectionB() {
+    public Section getSectionB() {
         return sectionB;
     }
-    public void setSectionB(Global.Section newSectionB) {
+    public void setSectionB(Section newSectionB) {
         this.sectionB = newSectionB;
     }
     public boolean isRightSide() {

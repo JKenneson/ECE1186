@@ -12,8 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -98,18 +96,18 @@ public class TrackModel {
         }
     }
     
-    public Block getBlock(Global.Line line, Global.Section section, int block) {
+    public Block getBlock(Line line, Section section, int block) {
         for (Line l : lines) {
-            if (l.getLine() == line) {
+            if (l.getLine() == line.getLine()) {
                 return l.getBlock(section, block);
             }
         }
         return null;
     }
     
-    public Block getBlock(Global.Line line, int block) {
+    public Block getBlock(Line line, int block) {
         for (Line l : lines) {
-            if (l.getLine() == line) {
+            if (l.getLine() == line.getLine()) {
                 return l.getBlock(block);
             }
         }
@@ -150,9 +148,14 @@ public class TrackModel {
         
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);      
-            Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
+            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
             Global.Section tempSection = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
-            Section newSection = new Section(tempSection, tempLine);        
+            Section newSection = null;
+            for (Line l : lines) {
+                if (l.getLine() == tempLineID) {
+                    newSection = new Section(tempSection, l);
+                }
+            }
             addSection(newSection);
         }
     }
@@ -162,8 +165,8 @@ public class TrackModel {
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);
             //Parse Enums
-            Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
-            Global.Section tempSection = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
+            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
+            Global.Section tempSectionID = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
             //Parse ints
             int tempBlockID = (int) rowTemp.getCell(4).getNumericCellValue();
             int tempPortAID = (int) rowTemp.getCell(5).getNumericCellValue();
@@ -182,6 +185,17 @@ public class TrackModel {
             boolean tempContainsCrossing = rowTemp.getCell(11) != null && rowTemp.getCell(11).getStringCellValue().equals("Y");
             boolean tempIsUnderground = rowTemp.getCell(12) != null && rowTemp.getCell(12).getStringCellValue().equals("Y");
             boolean tempIsStaticSwitchBlock = rowTemp.getCell(16) != null && rowTemp.getCell(16).getStringCellValue().equals("Y");
+            //Associate lineID and sectionID with objects
+            Line tempLine = null;
+            Section tempSection = null;
+            for (Line l : lines) {
+                for(Section s : l.getSections()) {
+                    if (l.getLine() == tempLineID && s.getSection() == tempSectionID) {
+                        tempLine = l;
+                        tempSection = s;
+                    }
+                }   
+            }
             
             //Formatting is weird, but easier to develop (for now)
             Block newBlock = new Block(
@@ -213,19 +227,26 @@ public class TrackModel {
             
             int tempStationID = (int) rowTemp.getCell(0).getNumericCellValue();
             String tempStationName = rowTemp.getCell(1).getStringCellValue();
-            Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
+            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
             boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
             boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
+            
+            Line tempLine = null;
+            for (Line l : lines) {
+                if (l.getLine() == tempLineID) {
+                    tempLine = l;
+                }
+            }
             
             //Formatting is weird, but easier to develop (for now)
             Station newStation = new Station(
                 tempStationID,
                 tempStationName,
                 tempLine,
-                null,                   //Block A
-                Global.Section.INVALID, //Section A
-                null,                   //Block B
-                Global.Section.INVALID, //Section B
+                null,   //Block A
+                null,   //Section A
+                null,   //Block B
+                null,   //Section B
                 tempRightSide,
                 tempLeftSide );
             addStation(newStation);
@@ -239,7 +260,14 @@ public class TrackModel {
             Row rowTemp = sheet.getRow(i);
             
             int tempSwitchID = (int) rowTemp.getCell(0).getNumericCellValue();
-            Global.Line tempLine = Global.Line.valueOf(rowTemp.getCell(1).getStringCellValue());
+            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(1).getStringCellValue());
+            
+            Line tempLine = null;
+            for (Line l : lines) {
+                if (l.getLine() == tempLineID) {
+                    tempLine = l;
+                }
+            }
             
             Switch newSwitch = new Switch(
                 tempSwitchID,
@@ -261,7 +289,7 @@ public class TrackModel {
         sections.add(s);
         //Add reference to Line objects
         for(Line l : lines) {
-            if(s.getLine() == l.getLine()) {
+            if(s.getLine() == l) {
                 l.addSection(s);
             }
         }
@@ -272,9 +300,9 @@ public class TrackModel {
         blocks.add(b);
         //Add reference to Section objects
         for(Line l : lines) {
-            if(b.getLine() == l.getLine()) {
+            if(b.getLine() == l) {
                 for(Section s : l.getSections()) {
-                    if(b.getSection() == s.getSection()) {
+                    if(b.getSection() == s) {
                         s.addBlock(b);
                     }
                 }
@@ -286,13 +314,13 @@ public class TrackModel {
         //Add reference to top-level array
         stations.add(st);
         for(Block b : blocks) {
-            if(b.getLine() == st.getLine() && b.getStationID() == st.getStationID()) {
+            if(b.getLine() == st.getLine() && b.getID() == st.getID()) {
                 //Assign station to block
                 if(b.getStation() == null) {
                     b.setStation(st);
                 }
                 else {
-                    System.out.println("Block " + b.getID() + " can't own station " + st.getStationID() + " because it already owns station " + b.getStation().getStationID());
+                    System.out.println("Block " + b.getID() + " can't own station " + st.getID() + " because it already owns station " + b.getStation().getID());
                 }
                 //Assign block to station
                 if(st.getBlockA() == null) {

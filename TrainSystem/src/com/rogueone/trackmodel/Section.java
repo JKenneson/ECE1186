@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 public class Section {
     Global.Section section;
-    Global.Line line;
+    Line line;
     ArrayList<Block> blocks = new ArrayList<Block>();
     
-    public Section (Global.Section newSection, Global.Line newLine) {
+    public Section (Global.Section newSection, Line newLine) {
         section = newSection;
         line = newLine;
     }
@@ -26,7 +26,7 @@ public class Section {
         return section;
     }
     
-    public Global.Line getLine() {
+    public Line getLine() {
         return line;
     }
     
