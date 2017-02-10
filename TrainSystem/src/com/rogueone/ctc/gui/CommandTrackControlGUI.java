@@ -53,11 +53,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel88 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jLabel65 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        TrainLineBlockSelect = new javax.swing.JComboBox<>();
         jLabel66 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        BlockTable = new javax.swing.JTable();
         jPanel21 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable8 = new javax.swing.JTable();
@@ -244,16 +244,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jLabel65.setText("Train Line");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green", "Red" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        TrainLineBlockSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green", "Red" }));
+        TrainLineBlockSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                TrainLineBlockSelectActionPerformed(evt);
             }
         });
 
         jLabel66.setText("Blocks");
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        BlockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"A",  new Integer(1),  new Boolean(true)},
                 {"A",  new Integer(2),  new Boolean(false)},
@@ -278,12 +278,29 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane6.setViewportView(jTable5);
+        BlockTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BlockTableMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(BlockTable);
+        if (BlockTable.getColumnModel().getColumnCount() > 0) {
+            BlockTable.getColumnModel().getColumn(0).setResizable(false);
+            BlockTable.getColumnModel().getColumn(1).setResizable(false);
+            BlockTable.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -294,7 +311,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                     .addGroup(jPanel20Layout.createSequentialGroup()
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TrainLineBlockSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,7 +330,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addComponent(jLabel65)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TrainLineBlockSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 134, Short.MAX_VALUE))
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addComponent(jLabel66)
@@ -808,9 +825,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel19ComponentShown
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    private void TrainLineBlockSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainLineBlockSelectActionPerformed
+        if (TrainLineBlockSelect.getSelectedIndex() == 0) {
+            CurrentLineField.setText("Green");
+        }
+        else {
+            CurrentLineField.setText("Red");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_TrainLineBlockSelectActionPerformed
 
     private void jPanel20ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel20ComponentShown
         // TODO add your handling code here:
@@ -900,6 +922,17 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_DispatchButtonActionPerformed
 
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
+        
+        jLabel67.setText("Train Name");
+        jLabel68.setText("Current Line");
+        jLabel69.setText("Current Section");
+        jLabel70.setText("Current Blcok");
+        jLabel71.setText("Speed");
+        jLabel72.setText("Authority");
+        jLabel74.setText("Current Capacity");
+        jLabel75.setText("Max Capacity");
+        
+        
         if ( evt.getClickCount() == 1){
             JTable table = (JTable)evt.getSource();
             int row = table.getSelectedRow();
@@ -920,8 +953,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 StatusField.setText("Operational");
             }
             
-            
-            CurrentLineField.setText(Integer.toString(TrainLineSelect2.getSelectedIndex()));
             CurrentSectionField.setText(partSection);
             CurrentBlockField.setText(partBlock);
             TrainNameField.setText(Integer.toString(trainID));
@@ -952,6 +983,47 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_StatusFieldActionPerformed
 
+    private void BlockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BlockTableMouseClicked
+        //set up screen for Block Info
+        
+        InformationHeader2.setText("Selected Block Information");
+        jLabel67.setText("Block Section");
+        jLabel68.setText("Block Line");
+        jLabel69.setText("Block Number");
+        jLabel70.setText("Block Length");
+        jLabel71.setText("Block Speed");
+        jLabel72.setText("Station");
+        jLabel74.setText("Crossing");
+        jLabel75.setText("Underground");
+
+        
+        if (evt.getClickCount() == 1){
+            JTable blockTable = (JTable)evt.getSource();
+            int row = blockTable.getSelectedRow();
+            String blockSection = (String)blockTable.getValueAt(row, 0);
+            int blockNumber = (int)blockTable.getValueAt(row, 1);
+            
+            TrainNameField.setText(blockSection);
+            CurrentSectionField.setText(Integer.toString(blockNumber));
+            
+            Object booleanBlockStatus = blockTable.getValueAt(row, 2);
+            if (booleanBlockStatus == null){
+                StatusField.setText("Disabled");
+            }
+            else {
+                StatusField.setText("Operational");
+            }
+            
+        }
+        
+        if (evt.getClickCount() == 2){
+        }
+
+
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_BlockTableMouseClicked
+
     private void UpdateTableInformation(java.awt.event.ActionEvent evt){
         int selectedRowIndex = TrainTable.getSelectedRow();
         String TrainID = TrainTable.getModel().getValueAt(selectedRowIndex, 0).toString(); 
@@ -979,6 +1051,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AdditionalInfoPanel2;
     private javax.swing.JTextField AuthorityField;
+    private javax.swing.JTable BlockTable;
     private javax.swing.JTabbedPane BrowserPanel2;
     private javax.swing.JButton ChangeParametersButton3;
     private javax.swing.JTextField CurrentBlockField;
@@ -1001,12 +1074,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JTextField TimeField;
     private javax.swing.JButton TrackShutdownButton;
     private javax.swing.JLabel TrainAuthorityLabel2;
+    private javax.swing.JComboBox<String> TrainLineBlockSelect;
     private javax.swing.JComboBox<String> TrainLineSelect2;
     private javax.swing.JTextField TrainNameField;
     private javax.swing.JButton TrainShutdownButton;
     private javax.swing.JLabel TrainSpeedLabel2;
     private javax.swing.JTable TrainTable;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1038,7 +1111,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable8;
     // End of variables declaration//GEN-END:variables
 }
