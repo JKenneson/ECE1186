@@ -67,15 +67,15 @@ public class TrackModel {
         parseSwitches(testWorkbook.getSheetAt(4));
         connectBlocks();
         
-        System.out.println("LINES:");
+        System.out.println("\nLINES:");
         printLines();
-        System.out.println("SECTIONS:");
+        System.out.println("\nSECTIONS:");
         printSections();
-        System.out.println("BLOCKS:");
+        System.out.println("\nBLOCKS:");
         printBlocks();
-        System.out.println("STATIONS:");
+        System.out.println("\nSTATIONS:");
         printStations();
-        System.out.println("SWITCHES:");
+        System.out.println("\nSWITCHES:");
         printSwitches();
        
     }
@@ -149,14 +149,8 @@ public class TrackModel {
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);      
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
-            Global.Section tempSection = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
-            Section newSection = null;
-            for (Line l : lines) {
-                if (l.getLine() == tempLineID) {
-                    newSection = new Section(tempSection, l);
-                }
-            }
-            addSection(newSection);
+            Global.Section tempSectionID = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
+            addSection(new Section(tempSectionID,getLineByID(tempLineID)));
         }
     }
     
@@ -186,16 +180,8 @@ public class TrackModel {
             boolean tempIsUnderground = rowTemp.getCell(12) != null && rowTemp.getCell(12).getStringCellValue().equals("Y");
             boolean tempIsStaticSwitchBlock = rowTemp.getCell(16) != null && rowTemp.getCell(16).getStringCellValue().equals("Y");
             //Associate lineID and sectionID with objects
-            Line tempLine = null;
-            Section tempSection = null;
-            for (Line l : lines) {
-                for(Section s : l.getSections()) {
-                    if (l.getLine() == tempLineID && s.getSection() == tempSectionID) {
-                        tempLine = l;
-                        tempSection = s;
-                    }
-                }   
-            }
+            Line tempLine = getLineByID(tempLineID);
+            Section tempSection = getSectionByLineIDAndSectionID(tempLineID, tempSectionID);
             
             //Formatting is weird, but easier to develop (for now)
             Block newBlock = new Block(
@@ -230,23 +216,18 @@ public class TrackModel {
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
             boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
             boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
-            
-            Line tempLine = null;
-            for (Line l : lines) {
-                if (l.getLine() == tempLineID) {
-                    tempLine = l;
-                }
-            }
+            //Associate lineID with object
+            Line tempLine = getLineByID(tempLineID);
             
             //Formatting is weird, but easier to develop (for now)
             Station newStation = new Station(
                 tempStationID,
                 tempStationName,
                 tempLine,
-                null,   //Block A
-                null,   //Section A
-                null,   //Block B
-                null,   //Section B
+                null,   //Block A TBD
+                null,   //Section A TBD
+                null,   //Block B TBD
+                null,   //Section B TBD
                 tempRightSide,
                 tempLeftSide );
             addStation(newStation);
@@ -258,23 +239,17 @@ public class TrackModel {
         //Iterate over all rows in the first column
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);
-            
             int tempSwitchID = (int) rowTemp.getCell(0).getNumericCellValue();
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(1).getStringCellValue());
-            
-            Line tempLine = null;
-            for (Line l : lines) {
-                if (l.getLine() == tempLineID) {
-                    tempLine = l;
-                }
-            }
+            //Associate lineID with object
+            Line tempLine = getLineByID(tempLineID);
             
             Switch newSwitch = new Switch(
                 tempSwitchID,
                 tempLine,
-                null,   //Port A
-                null,   //Port B
-                null ); //Port C
+                null,   //Port A TBD
+                null,   //Port B TBD
+                null ); //Port C TBD
             
             addSwitch(newSwitch);
         }     
@@ -363,6 +338,33 @@ public class TrackModel {
                 }
             }
         }
+    }
+    
+    public Line getLineByID(Global.Line line) {
+        for (Line l : lines) {
+            if (l.getLine() == line) {
+                return l;
+            }
+        }
+        return null;
+    }
+    
+    public Section getSectionByLineIDAndSectionID(Global.Line line, Global.Section section) {
+        for (Line l : lines) {
+            if (l.getLine() == line) {
+                for (Section s : sections) {
+                    if (s.getSection() == section) {
+                        return s;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    //Overload
+    public Section getSectionByLineIDAndSectionID(Line line, Global.Section section) {
+        return getSectionByLineIDAndSectionID(line.getLine(), section);
     }
     
     public void printLines() {
