@@ -19,14 +19,14 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="ServiceBrake" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ServiceBrakeToggleButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="TrainInformation" alignment="0" max="32767" attributes="0"/>
-                  <Component id="EmergencyBrake" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jPanel5" max="32767" attributes="0"/>
+                  <Component id="EmergencyBrakeToggleButton" alignment="1" max="32767" attributes="0"/>
+                  <Component id="FailureSimulationPanel" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="TrainSelectorDropDown" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="SetSpeed3" max="32767" attributes="0"/>
+                      <Component id="TrainSelectorButton" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -56,16 +56,16 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="TrainSelectorDropDown" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="SetSpeed3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TrainSelectorButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="TrainInformation" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ServiceBrake" min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="ServiceBrakeToggleButton" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="EmergencyBrake" min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="EmergencyBrakeToggleButton" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel5" max="32767" attributes="0"/>
+                      <Component id="FailureSimulationPanel" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="Clock" min="-2" max="-2" attributes="0"/>
@@ -96,34 +96,34 @@
               <Component id="ControlsLeftDoor" alignment="0" max="32767" attributes="0"/>
               <Component id="ControlsRightDoor" alignment="0" max="32767" attributes="0"/>
               <Component id="ControlsSystemMode" max="32767" attributes="0"/>
-              <Component id="ControlsAC1" alignment="0" max="32767" attributes="0"/>
-              <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+              <Component id="ControlsHeat" alignment="0" max="32767" attributes="0"/>
+              <Component id="SendAnnouncement" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="AnnouncementText" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="SpeedInput2" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="KiInput" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                  <Component id="KiLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="SpeedInput1" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="KpInput" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                  <Component id="KpLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="SpeedInput" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ControlMPHLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="SetSpeed1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="SetKp" alignment="0" max="32767" attributes="0"/>
                               <Component id="SetSpeed" alignment="0" max="32767" attributes="0"/>
-                              <Component id="SetSpeed2" max="32767" attributes="0"/>
+                              <Component id="SetKi" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -139,28 +139,28 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="SpeedInput" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="SetSpeed" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ControlMPHLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="SpeedInput1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="SetSpeed1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="KpInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SetKp" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="KpLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="SpeedInput2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="SetSpeed2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="KiInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SetKi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="KiLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" pref="59" max="-2" attributes="0"/>
+                  <Component id="AnnouncementText" min="-2" pref="59" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="SendAnnouncement" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="ControlsAC" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                  <Component id="ControlsAC1" min="-2" max="-2" attributes="0"/>
+                  <Component id="ControlsHeat" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="ControlsLights" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -361,9 +361,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="ManualModeSelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="AutoModeSelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -373,73 +373,73 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ManualModeSelect" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AutoModeSelect" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+            <Component class="javax.swing.JRadioButton" name="ManualModeSelect">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Manual"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+            <Component class="javax.swing.JRadioButton" name="AutoModeSelect">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Automatic"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="ControlMPHLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="mph"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="AnnouncementText">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Type Announcement Here..."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="SendAnnouncement">
           <Properties>
             <Property name="text" type="java.lang.String" value="Make Announcement"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="SpeedInput1">
+        <Component class="javax.swing.JSpinner" name="KpInput">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="KpLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Kp"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="SetSpeed1">
+        <Component class="javax.swing.JButton" name="SetKp">
           <Properties>
             <Property name="text" type="java.lang.String" value="Set Kp"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetSpeed1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetKpActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JSpinner" name="SpeedInput2">
+        <Component class="javax.swing.JSpinner" name="KiInput">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel16">
+        <Component class="javax.swing.JLabel" name="KiLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ki"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="SetSpeed2">
+        <Component class="javax.swing.JButton" name="SetKi">
           <Properties>
             <Property name="text" type="java.lang.String" value="Set Ki"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetSpeed2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetKiActionPerformed"/>
           </Events>
         </Component>
-        <Container class="javax.swing.JPanel" name="ControlsAC1">
+        <Container class="javax.swing.JPanel" name="ControlsHeat">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -452,9 +452,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="ACOn1" min="-2" max="-2" attributes="0"/>
+                      <Component id="HeatOn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ACOff1" min="-2" max="-2" attributes="0"/>
+                      <Component id="HeatOff" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -462,19 +462,19 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="ACOn1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ACOff1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="HeatOn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="HeatOff" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="ACOn1">
+            <Component class="javax.swing.JRadioButton" name="HeatOn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="On"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="ACOff1">
+            <Component class="javax.swing.JRadioButton" name="HeatOff">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Off"/>
               </Properties>
@@ -508,9 +508,9 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="StatusLights" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="StatusLights" alignment="0" pref="203" max="32767" attributes="0"/>
               <Component id="StatusHeat" alignment="0" max="32767" attributes="0"/>
-              <Component id="StatusLights1" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="StatusLights1" alignment="0" pref="203" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -534,7 +534,7 @@
                               <Component id="StatusHeatImage" min="-2" pref="98" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
+                          <Component id="PowerStatusLabel" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -546,7 +546,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="StatusHeatImage" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                      <Component id="PowerStatusLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -562,7 +562,7 @@
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel12">
+            <Component class="javax.swing.JLabel" name="PowerStatusLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="FAILURE"/>
@@ -590,9 +590,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="StatusLightsImage" min="-2" pref="98" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
+                          <Component id="AntennaStatusLabel" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -604,7 +604,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="StatusLightsImage" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                      <Component id="AntennaStatusLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -620,7 +620,7 @@
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel11">
+            <Component class="javax.swing.JLabel" name="AntennaStatusLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="ACTIVE"/>
@@ -648,9 +648,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="StatusLightsImage1" min="-2" pref="98" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jLabel13" alignment="0" max="32767" attributes="0"/>
+                          <Component id="BrakeStatusLabel" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -662,7 +662,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="StatusLightsImage1" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      <Component id="BrakeStatusLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -678,7 +678,7 @@
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel13">
+            <Component class="javax.swing.JLabel" name="BrakeStatusLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="ACTIVE"/>
@@ -688,7 +688,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JToggleButton" name="EmergencyBrake">
+    <Component class="javax.swing.JToggleButton" name="EmergencyBrakeToggleButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Emergency Brake"/>
       </Properties>
@@ -705,17 +705,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane7" alignment="0" pref="0" max="32767" attributes="0"/>
+              <Component id="TrainInfoScrollPane" alignment="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane7" alignment="0" pref="245" max="32767" attributes="0"/>
+              <Component id="TrainInfoScrollPane" alignment="0" pref="245" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane7">
+        <Container class="javax.swing.JScrollPane" name="TrainInfoScrollPane">
           <Properties>
             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -726,7 +726,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="InformationDisplay">
+            <Component class="javax.swing.JTextArea" name="TrainInfoText">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
@@ -806,24 +806,24 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="ActualSpeedPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SpeedLimitPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel4" max="32767" attributes="0"/>
+                      <Component id="AuthorityPanel" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="SpeedLimitPanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="AuthorityPanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ActualSpeedPanel" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel1">
+            <Container class="javax.swing.JPanel" name="ActualSpeedPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -836,22 +836,22 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel7" min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="ActualSpeedLabel" min="-2" pref="69" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" pref="63" max="-2" attributes="0"/>
+                          <Component id="ActualSpeedUnitsLabel" min="-2" pref="63" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel7" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                      <Component id="ActualSpeedLabel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="ActualSpeedUnitsLabel" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel3">
+                <Component class="javax.swing.JLabel" name="ActualSpeedUnitsLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="24" style="0"/>
@@ -859,7 +859,7 @@
                     <Property name="text" type="java.lang.String" value="mph"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel7">
+                <Component class="javax.swing.JLabel" name="ActualSpeedLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="36" style="0"/>
@@ -870,7 +870,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel3">
+            <Container class="javax.swing.JPanel" name="SpeedLimitPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -883,22 +883,22 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel6" min="-2" pref="61" max="-2" attributes="0"/>
+                          <Component id="SpeedLimitLabel" min="-2" pref="61" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" pref="63" max="-2" attributes="0"/>
+                          <Component id="SpeedLimitUnitsLabel" min="-2" pref="63" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel6" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                      <Component id="SpeedLimitLabel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="SpeedLimitUnitsLabel" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel5">
+                <Component class="javax.swing.JLabel" name="SpeedLimitUnitsLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="24" style="0"/>
@@ -906,7 +906,7 @@
                     <Property name="text" type="java.lang.String" value="mph"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel6">
+                <Component class="javax.swing.JLabel" name="SpeedLimitLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="36" style="0"/>
@@ -917,7 +917,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel4">
+            <Container class="javax.swing.JPanel" name="AuthorityPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -930,9 +930,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel4" min="-2" pref="108" max="-2" attributes="0"/>
+                          <Component id="AuthorityLabel" min="-2" pref="108" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="AuthorityUnitsLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -941,8 +941,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jLabel4" alignment="1" pref="96" max="32767" attributes="0"/>
-                              <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
+                              <Component id="AuthorityLabel" alignment="1" pref="96" max="32767" attributes="0"/>
+                              <Component id="AuthorityUnitsLabel" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -950,7 +950,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel2">
+                <Component class="javax.swing.JLabel" name="AuthorityUnitsLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="24" style="0"/>
@@ -958,7 +958,7 @@
                     <Property name="text" type="java.lang.String" value="feet"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel4">
+                <Component class="javax.swing.JLabel" name="AuthorityLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="36" style="0"/>
@@ -984,21 +984,21 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="PowerUsedPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel2" max="32767" attributes="0"/>
+                      <Component id="MaxPowerPanel" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel7" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="PowerUsedPanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="MaxPowerPanel" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel2">
+            <Container class="javax.swing.JPanel" name="MaxPowerPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1011,22 +1011,22 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel9" min="-2" pref="163" max="-2" attributes="0"/>
+                          <Component id="MaxPowerLabel" min="-2" pref="163" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" pref="63" max="-2" attributes="0"/>
+                          <Component id="MaxPowerUnitsLabel" min="-2" pref="63" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel9" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabel8" alignment="1" max="32767" attributes="0"/>
+                      <Component id="MaxPowerLabel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="MaxPowerUnitsLabel" alignment="1" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel8">
+                <Component class="javax.swing.JLabel" name="MaxPowerUnitsLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="24" style="0"/>
@@ -1034,7 +1034,7 @@
                     <Property name="text" type="java.lang.String" value="W"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel9">
+                <Component class="javax.swing.JLabel" name="MaxPowerLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="36" style="0"/>
@@ -1045,7 +1045,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel7">
+            <Container class="javax.swing.JPanel" name="PowerUsedPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1058,22 +1058,22 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel15" min="-2" pref="163" max="-2" attributes="0"/>
+                          <Component id="PowerUsedLabel" min="-2" pref="163" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel14" min="-2" pref="63" max="-2" attributes="0"/>
+                          <Component id="PowerUnitsLabel" min="-2" pref="63" max="-2" attributes="0"/>
                           <EmptySpace pref="30" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel15" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabel14" alignment="1" max="32767" attributes="0"/>
+                      <Component id="PowerUsedLabel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="PowerUnitsLabel" alignment="1" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel14">
+                <Component class="javax.swing.JLabel" name="PowerUnitsLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="24" style="0"/>
@@ -1081,7 +1081,7 @@
                     <Property name="text" type="java.lang.String" value="W"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel15">
+                <Component class="javax.swing.JLabel" name="PowerUsedLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="36" style="0"/>
@@ -1106,17 +1106,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane12" alignment="0" max="32767" attributes="0"/>
+                  <Component id="RealTimeNotificationsText" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane12" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="RealTimeNotificationsText" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane12">
+            <Container class="javax.swing.JScrollPane" name="RealTimeNotificationsText">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
@@ -1149,19 +1149,19 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jScrollPane8" min="-2" max="-2" attributes="0"/>
+                  <Component id="ClockScrollPane" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane8" alignment="0" pref="26" max="32767" attributes="0"/>
+              <Component id="ClockScrollPane" alignment="0" pref="26" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane8">
+        <Container class="javax.swing.JScrollPane" name="ClockScrollPane">
           <Properties>
             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
             <Property name="verticalScrollBarPolicy" type="int" value="21"/>
@@ -1172,7 +1172,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="ClockDisplay">
+            <Component class="javax.swing.JTextArea" name="ClockText">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
@@ -1183,15 +1183,15 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JToggleButton" name="ServiceBrake">
+    <Component class="javax.swing.JToggleButton" name="ServiceBrakeToggleButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Service Brake"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ServiceBrakeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ServiceBrakeToggleButtonActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JPanel" name="jPanel5">
+    <Container class="javax.swing.JPanel" name="FailureSimulationPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1206,9 +1206,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="ServiceBrakeFailureCheck" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="PowerFailureCheck" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="AntennaFailureCheck" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -1217,40 +1217,40 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
+                  <Component id="PowerFailureCheck" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
+                  <Component id="AntennaFailureCheck" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                  <Component id="ServiceBrakeFailureCheck" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="ServiceBrakeFailureCheck">
           <Properties>
             <Property name="text" type="java.lang.String" value="Service Brake"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+        <Component class="javax.swing.JCheckBox" name="PowerFailureCheck">
           <Properties>
             <Property name="text" type="java.lang.String" value="Power"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+        <Component class="javax.swing.JCheckBox" name="AntennaFailureCheck">
           <Properties>
             <Property name="text" type="java.lang.String" value="Antenna"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="SetSpeed3">
+    <Component class="javax.swing.JButton" name="TrainSelectorButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Show"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetSpeed3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TrainSelectorButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
