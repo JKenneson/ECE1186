@@ -31,8 +31,8 @@ public class Global {
         GO, STOP
     }
     
-    public enum TrackGroupsGreen {
-        ABC, DEF, GHI, J, KLM, N, OPQ, RSTUVWXYZ, ZZ, YY
+    public enum TrackGroups {
+        ABC, DEF, GHI, J, KLM, N, OPQ, RSTUVWXYZ, ZZ, YY, U, DE15, F16_J52, J53_N66
     }
     
     public enum Presence {
@@ -40,7 +40,7 @@ public class Global {
     }
     
     public enum LogicGroups {
-        GREEN_0, GREEN_1_2, GREEN_3, GREEN_4_5
+        GREEN_0, GREEN_1_2, GREEN_3, GREEN_4_5, RED_12, RED_6_11
     }
     
 }

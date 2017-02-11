@@ -6,6 +6,7 @@
 package com.rogueone.trackcon.entities;
 
 import com.rogueone.global.Global;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,19 +16,20 @@ public class SwitchState {
     
     private Global.SwitchState switchState;
     private TrackConnection defaultConnection;
-    private Light light1Default;
-    private Light light2Default;
+    private ArrayList<Light> lightsDefault;
+    private ArrayList<Light> lightsAlternate;
     private TrackConnection alternateConnection;
-    private Light light1Alternate;
-    private Light light2Alternate;
 
-    public SwitchState(TrackConnection trackConnectionDefault, Light light1Default, Light light2Default, TrackConnection trackConnectionAlternate, Light light1Alternate, Light light2Alternate) {
+    public SwitchState(TrackConnection trackConnectionDefault,  TrackConnection trackConnectionAlternate) {
         this.defaultConnection = trackConnectionDefault;
-        this.light1Default = light1Default;
-        this.light2Default = light2Default;
         this.alternateConnection = trackConnectionAlternate;
-        this.light1Alternate = light1Alternate;
-        this.light2Alternate = light2Alternate;
+    }
+
+    public SwitchState(TrackConnection trackConnectionDefault, ArrayList<Light> lightsDefault, TrackConnection trackConnectionAlternate, ArrayList<Light> lightsAlternate) {
+        this.defaultConnection = trackConnectionDefault;
+        this.lightsDefault = lightsDefault;
+        this.alternateConnection = trackConnectionAlternate;
+        this.lightsAlternate = lightsAlternate;
     }
 
     public Global.SwitchState getSwitchState() {
@@ -46,21 +48,6 @@ public class SwitchState {
         this.defaultConnection = defaultConnection;
     }
 
-    public Light getLight1Default() {
-        return light1Default;
-    }
-
-    public void setLight1Default(Light light1Default) {
-        this.light1Default = light1Default;
-    }
-
-    public Light getLight2Default() {
-        return light2Default;
-    }
-
-    public void setLight2Default(Light light2Default) {
-        this.light2Default = light2Default;
-    }
 
     public TrackConnection getAlternateConnection() {
         return alternateConnection;
@@ -70,21 +57,7 @@ public class SwitchState {
         this.alternateConnection = alternateConnection;
     }
 
-    public Light getLight1Alternate() {
-        return light1Alternate;
-    }
 
-    public void setLight1Alternate(Light light1Alternate) {
-        this.light1Alternate = light1Alternate;
-    }
-
-    public Light getLight2Alternate() {
-        return light2Alternate;
-    }
-
-    public void setLight2Alternate(Light light2Alternate) {
-        this.light2Alternate = light2Alternate;
-    }
     
     
 
