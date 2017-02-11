@@ -150,7 +150,7 @@ public class TrackModel {
             Row rowTemp = sheet.getRow(i);      
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
             Global.Section tempSectionID = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
-            addSection(new Section(tempSectionID,getLineByID(tempLineID)));
+            addSection(new Section(tempSectionID, getLineByID(tempLineID)));
         }
     }
     
@@ -210,10 +210,12 @@ public class TrackModel {
    
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);
-            
+            //Parse ints
             int tempStationID = (int) rowTemp.getCell(0).getNumericCellValue();
+            //Parse enums
             String tempStationName = rowTemp.getCell(1).getStringCellValue();
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
+            //Parse booleans
             boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
             boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
             //Associate lineID with object
