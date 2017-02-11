@@ -24,6 +24,7 @@ public class TrainController {
     NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
     DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     
+    
     public enum failureModes{
         POWER_FAILURE, ANTENNA_FAILURE, BRAKE_FAILURE
     }
@@ -41,20 +42,21 @@ public class TrainController {
     private boolean emergencyBrakeOverride;
     
     //Speed and Authority
-    private int currSpeed;
+    private double currSpeed;
     private int speedLimit;
     private int authority;
     //private int distanceTraveled; //Distance traveled since last auth command
     private int driverSetPoint;
     private int recommendedSetPoint;
     private double powerCommand;
-    private double kP;
-    private double kI;
-    private int eK;
-    private int eK_1;
-    private int uK;
-    private int uK_1;
-    
+    private int kP;
+    private int kI;
+    private double eK;
+    private double eK_1;
+    private double uK;
+    private double uK_1;
+    private long lastTime;    
+    private double totalError;
     
     //Announcements
     private String announcement;
@@ -101,7 +103,7 @@ public class TrainController {
         this.authority = authority;
         this.driverSetPoint = 0;
         this.recommendedSetPoint = setPointSpeed;
-        this.powerCommand = calculatePower();
+        this.powerCommand = calculatePower(0.0, .001);
         this.kP = 0;
         this.kI = 0;
         this.eK = 0;
@@ -154,47 +156,52 @@ public class TrainController {
         return 0;                //loaded track xlx after calculating location.
     }
     
-    /**
-     * 
-     * @return 
-     */
-    private double calculatePower(){ //should pull speed limit information from
-        return 0.0;                //loaded track xlx after calculating location.
-        
-//        /*
-//        /*working variables*/
-//        unsigned long lastTime;
-//        double Input, Output, Setpoint;
-//        double errSum, lastErr;
-//        double kp, ki, kd;
-//        void Compute()
-//        {
-//           /*How long since we last calculated*/
-//           unsigned long now = millis();
-//           double timeChange = (double)(now - lastTime);
-//
-//           /*Compute all the working error variables*/
-//           double error = Setpoint - Input;
-//           errSum += (error * timeChange);
-//           double dErr = (error - lastErr) / timeChange;
-//
-//           /*Compute PID Output*/
-//           Output = kp * error + ki * errSum + kd * dErr;
-//
-//           /*Remember some variables for next time*/
-//           lastErr = error;
-//           lastTime = now;
-//        }
-//
-//        void SetTunings(double Kp, double Ki, double Kd)
-//        {
-//           kp = Kp;
-//           ki = Ki;
-//           kd = Kd;
-//        }
-//        */
+    private double getSetPoint(){
+        if(this.manualMode){
+            return this.driverSetPoint;
+        }
+        else{
+            return this.recommendedSetPoint;
+        }
     }
     
+    /**
+     * 
+     * @param actualSpeed
+     * @param samplePeriod
+     * @return 
+     */
+    public double calculatePower(double actualSpeed, double samplePeriod){ //should pull speed limit information from
+                        //loaded track xlx after calculating location.
+        
+        this.eK = getSetPoint()-actualSpeed;   //Calc error difference
+        this.currSpeed = actualSpeed;           //Save actual speed
+        
+        this.uK = this.uK_1 + ((samplePeriod/2)*(this.eK+this.eK_1));
+        
+        this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
+        if(this.powerCommand > this.maxPower){
+            this.uK = this.uK_1;
+            this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
+        }
+        
+        this.eK_1 = this.eK;
+        this.uK_1 = this.uK;
+        
+        return this.powerCommand;
+    }
+    
+    public void setKP(int Kp){
+        this.kP = Kp;
+    }
+    
+    public void setKI(int Ki){
+        this.kI = Ki;
+    }
+
+    private double getSpeed(){//Ask for speed from train model
+        return 0.0;
+    }
     
     /**
      * 
@@ -271,7 +278,7 @@ public class TrainController {
         return 0;                        //Set values for different
     }                                       //Failure combos?
         
-    private void Update(TrainControllerGUI gui){
+    private void update(TrainControllerGUI gui){
     
         for(int i = 0; i < getNumberOfTrains(); i++){
             //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
@@ -457,6 +464,16 @@ public class TrainController {
         gui.ClockText.setText(getTime());
         
         //Will add more as we move forward.
+    }
+    
+    public void activateServiceBrake(){
+        //trainMode.setServiceBrakeActivated(true);
+        this.serviceBrakeActivated = true;
+    }
+    
+    public void activateEmergencyBrake(){
+        //trainMode.setEmergencyBrakeActivated(true);
+        this.emergencyBrakeActivated = true;
     }
     
     private int getRemainingAuthority(){
