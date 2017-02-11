@@ -16,10 +16,16 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import com.rogueone.trackmodel.TrackModel;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -53,9 +59,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackOverviewPanel = new javax.swing.JPanel();
         trackLayoutPanel = new javax.swing.JPanel();
         trackLayoutLabel = new javax.swing.JLabel();
-        trackPositionsPanel = new javax.swing.JPanel();
-        trainPositionsScrollPane = new javax.swing.JScrollPane();
-        trainPositionsTable = new javax.swing.JTable();
+        summaryPanel = new javax.swing.JPanel();
+        summaryScrollPane = new javax.swing.JScrollPane();
+        summaryTable = new javax.swing.JTable();
         trackConfigurationPanel = new javax.swing.JPanel();
         trackConfigurationLoadButton = new javax.swing.JButton();
         trackDetailsPanel = new javax.swing.JPanel();
@@ -112,9 +118,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 .addComponent(trackLayoutLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        trackPositionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Summary", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        summaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Summary", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        trainPositionsTable.setModel(new javax.swing.table.DefaultTableModel(
+        summaryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -140,23 +146,31 @@ public class TrackModelGUI extends javax.swing.JPanel {
             new String [] {
                 "Line", "Section", "Block", "Occupied", "Status"
             }
-        ));
-        trainPositionsScrollPane.setViewportView(trainPositionsTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        javax.swing.GroupLayout trackPositionsPanelLayout = new javax.swing.GroupLayout(trackPositionsPanel);
-        trackPositionsPanel.setLayout(trackPositionsPanelLayout);
-        trackPositionsPanelLayout.setHorizontalGroup(
-            trackPositionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(trackPositionsPanelLayout.createSequentialGroup()
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        summaryScrollPane.setViewportView(summaryTable);
+
+        javax.swing.GroupLayout summaryPanelLayout = new javax.swing.GroupLayout(summaryPanel);
+        summaryPanel.setLayout(summaryPanelLayout);
+        summaryPanelLayout.setHorizontalGroup(
+            summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(summaryPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(trainPositionsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                .addComponent(summaryScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        trackPositionsPanelLayout.setVerticalGroup(
-            trackPositionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trackPositionsPanelLayout.createSequentialGroup()
+        summaryPanelLayout.setVerticalGroup(
+            summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, summaryPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(trainPositionsScrollPane)
+                .addComponent(summaryScrollPane)
                 .addContainerGap())
         );
 
@@ -195,7 +209,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     .addComponent(trackLayoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(trackConfigurationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(trackPositionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(summaryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         trackOverviewPanelLayout.setVerticalGroup(
@@ -203,7 +217,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             .addGroup(trackOverviewPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(trackOverviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(trackPositionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(summaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(trackOverviewPanelLayout.createSequentialGroup()
                         .addComponent(trackLayoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -538,6 +552,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 updateLineComboBox();
                 updateSectionComboBox();
                 updateBlockComboBox();
+                updateSummaryPanel();
                 lineSelectionComboBox.addItemListener(new LineChangeListener(this));
                 sectionSelectionComboBox.addItemListener(new SectionChangeListener(this));
                 blockSelectionComboBox.addItemListener(new BlockChangeListener(this));
@@ -553,6 +568,36 @@ public class TrackModelGUI extends javax.swing.JPanel {
         }
         trackDataFileChooser.setVisible(true);
     }//GEN-LAST:event_trackConfigurationLoadButtonActionPerformed
+    
+    private void updateSummaryPanel() {
+        ArrayList<Block> blocks = trackModel.getBlocks();
+        String blockColumnNames[] = { "Line", "Section", "Block", "Occupied", "Rail Fail", "Circuit Fail", "Power Fail" };
+        DefaultTableModel summaryModel = new DefaultTableModel(blockColumnNames, 0);
+        for (Block b : blocks) {
+            String blockRowData[] = { b.getLine().getLineID() + "", b.getSection().getSectionID() + "", b.getID() + "", b.isOccupied() + "", b.getFailureBrokenRail() + "", b.getFailureTrackCircuit() + "", b.getFailurePowerOutage() + "" };
+            summaryModel.addRow(blockRowData);
+        }
+        summaryTable.setModel(summaryModel);
+        summaryTable.setDefaultRenderer(Object.class,
+            new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    if (value.toString().equalsIgnoreCase("GREEN") || value.toString().equalsIgnoreCase("TRUE")) 
+                    {
+                        renderer.setBackground(new Color(125, 236, 188));
+                    }
+                    else if (value.toString().equalsIgnoreCase("RED") || value.toString().equalsIgnoreCase("FALSE")) {
+                        renderer.setBackground(new Color(242, 149, 149));  
+                    }
+                    else {
+                        renderer.setBackground(Color.LIGHT_GRAY);      
+                    }
+                    
+                    return renderer;
+                }
+            });
+    }
     
     @SuppressWarnings("unchecked")
     private void updateLineComboBox() {
@@ -594,6 +639,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JPanel stationPanel;
     private javax.swing.JScrollPane stationScrolPane;
     private javax.swing.JTable stationTable;
+    private javax.swing.JPanel summaryPanel;
+    private javax.swing.JScrollPane summaryScrollPane;
+    private javax.swing.JTable summaryTable;
     private javax.swing.JPanel switchPanel;
     private javax.swing.JScrollPane switchScrollPane;
     private javax.swing.JTable switchTable;
@@ -609,9 +657,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JPanel trackLayoutPanel;
     private javax.swing.JTabbedPane trackModelTabbedPane;
     private javax.swing.JPanel trackOverviewPanel;
-    private javax.swing.JPanel trackPositionsPanel;
-    private javax.swing.JScrollPane trainPositionsScrollPane;
-    private javax.swing.JTable trainPositionsTable;
     // End of variables declaration//GEN-END:variables
 
     class LineChangeListener implements ItemListener{

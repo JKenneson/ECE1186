@@ -69,7 +69,7 @@
                           <Component id="trackConfigurationPanel" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="trackPositionsPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="summaryPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="63" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -79,7 +79,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="trackPositionsPanel" max="32767" attributes="0"/>
+                          <Component id="summaryPanel" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="trackLayoutPanel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -132,7 +132,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="trackPositionsPanel">
+            <Container class="javax.swing.JPanel" name="summaryPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -148,7 +148,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="trainPositionsScrollPane" pref="560" max="32767" attributes="0"/>
+                          <Component id="summaryScrollPane" pref="560" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -157,29 +157,29 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="trainPositionsScrollPane" max="32767" attributes="0"/>
+                          <Component id="summaryScrollPane" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="trainPositionsScrollPane">
+                <Container class="javax.swing.JScrollPane" name="summaryScrollPane">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="trainPositionsTable">
+                    <Component class="javax.swing.JTable" name="summaryTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="20">
-                            <Column editable="true" title="Line" type="java.lang.Object"/>
-                            <Column editable="true" title="Section" type="java.lang.Object"/>
-                            <Column editable="true" title="Block" type="java.lang.Object"/>
-                            <Column editable="true" title="Occupied" type="java.lang.Object"/>
-                            <Column editable="true" title="Status" type="java.lang.Object"/>
+                            <Column editable="true" title="Line" type="java.lang.String"/>
+                            <Column editable="true" title="Section" type="java.lang.String"/>
+                            <Column editable="true" title="Block" type="java.lang.String"/>
+                            <Column editable="true" title="Occupied" type="java.lang.String"/>
+                            <Column editable="true" title="Status" type="java.lang.String"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
