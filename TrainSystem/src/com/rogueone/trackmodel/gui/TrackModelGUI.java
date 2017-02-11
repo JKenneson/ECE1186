@@ -807,7 +807,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 Block b = (Block) trackModelGUI.blockSelectionComboBox.getSelectedItem();
                 
                 //Update Block Info
-                String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Beacon", "Occupied" };
+                String blockColumnNames[] = { "ID", "Port A", "Port B", "Length (ft)", "Grade (%)", "Speed Limit (mph)", "Elevation (ft)", "Cum. Elevation (ft)", "Underground", "Crossing", "Beacon", "Occupied" };
                 String blockRowData[] = { b.getID() + "", b.getPortA().getID() + "", b.getPortB().getID() + "", b.getLength() + "", b.getGrade() + "", b.getSpeedLimit() + "", b.getElevation() + "", b.getCumulativeElevation() + "", b.isUnderground() + "", b.containsCrossing() + "", b.getBeaconMessage() + "", b.isOccupied() + "" };
                 DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
                 blockModel.addRow(blockRowData);

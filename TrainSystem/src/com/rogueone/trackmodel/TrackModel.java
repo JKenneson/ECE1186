@@ -6,6 +6,7 @@
 package com.rogueone.trackmodel;
 
 import com.rogueone.global.Global;
+import com.rogueone.global.UnitConversion;
 import com.rogueone.trackmodel.gui.TrackModelGUI;
 import java.io.File;
 import java.io.IOException;
@@ -169,10 +170,10 @@ public class TrackModel {
             int tempStationID = (int) rowTemp.getCell(13).getNumericCellValue();
             //Parse doubles
             double tempGrade = rowTemp.getCell(9).getNumericCellValue();
-            double tempLength = rowTemp.getCell(8).getNumericCellValue();
-            double tempSpeedLimit = rowTemp.getCell(10).getNumericCellValue();
-            double tempElevation = rowTemp.getCell(14).getNumericCellValue();
-            double tempCumulativeElevation = rowTemp.getCell(15).getNumericCellValue(); 
+            double tempLength = UnitConversion.metersToFeet(rowTemp.getCell(8).getNumericCellValue());
+            double tempSpeedLimit = UnitConversion.metersToFeet(rowTemp.getCell(10).getNumericCellValue());
+            double tempElevation = UnitConversion.metersToFeet(rowTemp.getCell(14).getNumericCellValue());
+            double tempCumulativeElevation = UnitConversion.metersToFeet(rowTemp.getCell(15).getNumericCellValue()); 
             //Parse booleans
             boolean tempIsHead = rowTemp.getCell(2) != null && rowTemp.getCell(2).getStringCellValue().equals("Y");
             boolean tempIsTail = rowTemp.getCell(3) != null && rowTemp.getCell(3).getStringCellValue().equals("Y");
