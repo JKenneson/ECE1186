@@ -6,6 +6,10 @@
 package com.rogueone.traincon;
 
 import com.rogueone.traincon.gui.TrainControllerGUI;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.*;
 
 
@@ -17,6 +21,13 @@ import javax.swing.*;
  */
 public class TrainController {
     
+    NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
+    DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
+    
+    public enum failureModes{
+        POWER_FAILURE, ANTENNA_FAILURE, BRAKE_FAILURE
+    }
+    
     //Variable declaration for the class
     //Train Operations
     private boolean manualMode;
@@ -27,11 +38,13 @@ public class TrainController {
     private boolean headerOn;
     private boolean serviceBrakeActivated;
     private boolean emergencyBrakeActivated;
+    private boolean emergencyBrakeOverride;
     
     //Speed and Authority
     private int currSpeed;
     private int speedLimit;
     private int authority;
+    //private int distanceTraveled; //Distance traveled since last auth command
     private int driverSetPoint;
     private int recommendedSetPoint;
     private double powerCommand;
@@ -51,7 +64,7 @@ public class TrainController {
     private String line;
     private String section;
     private String block;
-    private int maxPower;
+    private double maxPower;
     private int passengers;
     private int temperature;
     
@@ -80,6 +93,7 @@ public class TrainController {
         this.headerOn = false;
         this.serviceBrakeActivated = false;
         this.emergencyBrakeActivated = false;
+        this.emergencyBrakeOverride = false;
 
         //Speed and Authority
         this.currSpeed = 0;
@@ -146,7 +160,41 @@ public class TrainController {
      */
     private double calculatePower(){ //should pull speed limit information from
         return 0.0;                //loaded track xlx after calculating location.
+        
+//        /*
+//        /*working variables*/
+//        unsigned long lastTime;
+//        double Input, Output, Setpoint;
+//        double errSum, lastErr;
+//        double kp, ki, kd;
+//        void Compute()
+//        {
+//           /*How long since we last calculated*/
+//           unsigned long now = millis();
+//           double timeChange = (double)(now - lastTime);
+//
+//           /*Compute all the working error variables*/
+//           double error = Setpoint - Input;
+//           errSum += (error * timeChange);
+//           double dErr = (error - lastErr) / timeChange;
+//
+//           /*Compute PID Output*/
+//           Output = kp * error + ki * errSum + kd * dErr;
+//
+//           /*Remember some variables for next time*/
+//           lastErr = error;
+//           lastTime = now;
+//        }
+//
+//        void SetTunings(double Kp, double Ki, double Kd)
+//        {
+//           kp = Kp;
+//           ki = Ki;
+//           kd = Kd;
+//        }
+//        */
     }
+    
     
     /**
      * 
@@ -172,6 +220,18 @@ public class TrainController {
         return 0;
     }
     
+    private String getTime(){
+        return "4:20:00 PM April 20, 420!"; //Get value from global time class
+    }
+    
+    private int getNumberOfTrains(){
+        return 0; //Get value from ?????
+    }
+    
+    private ArrayList getTrainArray(){
+        return null;
+    }
+    
     /**
      * 
      * @param gui 
@@ -184,7 +244,7 @@ public class TrainController {
         gui.TrainInfoText.setEditable(false);
         
         gui.ActualSpeedLabel.setText(String.valueOf(this.currSpeed));
-        gui.SpeedLimitLabel.setText(String.valueOf(this.speedLimit));
+        gui.SetSpeedLabel.setText(String.valueOf(this.speedLimit));
         gui.AuthorityLabel.setText(String.valueOf(this.authority));
         gui.PowerUsedLabel.setText(String.valueOf(this.powerCommand));
         gui.MaxPowerLabel.setText(String.valueOf(this.maxPower));
@@ -192,9 +252,218 @@ public class TrainController {
         gui.NotificationsDisplay.setEditable(false);
         gui.KiInput.setValue(this.kI);
         gui.KpInput.setValue(this.kP);
+        gui.ClockText.append(getTime());//Get value from global clock value (EST)
         
+        for(int i = 0; i < getNumberOfTrains(); i++){
+            //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
+            //snag train array and add them to the drop down list
+        }        
         
+        //Add more functionality in future
         
     }
+    
+    private boolean getFailure(){//get from train model
+        return false;
+    }
+    
+    private int getFailureType(){  //get from train model
+        return 0;                        //Set values for different
+    }                                       //Failure combos?
         
+    private void Update(TrainControllerGUI gui){
+    
+        for(int i = 0; i < getNumberOfTrains(); i++){
+            //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
+            //snag train array and add them to the drop down list
+        }
+        
+        if(this.leftDoorOpen) {
+            gui.LeftDoorOpened.setSelected(true);
+        }
+        else {
+            gui.LeftDoorClosed.setSelected(true);
+        }
+        if(this.rightDoorOpen) {
+            gui.RightDoorOpened.setSelected(true);
+        }
+        else {
+            gui.RightDoorClosed.setSelected(true);
+        }
+        if(this.lightsOn) {
+            gui.LightsOn.setSelected(true);
+        }
+        else {
+            gui.LightsOff.setSelected(true);
+        }
+        
+        gui.TrainInfoText.setText(null);
+        gui.TrainInfoText.append("Train ID: " + this.trainID + "\nLine: " + 
+        this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
+        "\nPassengers: " + this.passengers + "\nTemp: " + this.temperature);
+        
+        if(!this.emergencyBrakeOverride || !this.emergencyBrakeActivated){      //Default to always print emergency brake if both emergency and service are activated
+            gui.EmergencyBrakeToggleButton.setSelected(true);
+
+            switch(getFailureType()){
+                case 1://Power Failure
+                    //Update status panel
+                    gui.StatusPowerLabel.setText("FAILURE");
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaLabel.setText("ACTIVE");
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusBrakeLabel.setText("ACTIVE");
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    
+                    //Update simulation boxes
+                    gui.PowerFailureCheck.setSelected(true);
+                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.ServiceBrakeFailureCheck.setSelected(false);
+                    break;
+                    
+                case 2://Antenna Failure
+                    //Update status panel
+                    gui.StatusPowerLabel.setText("ACTIVE");
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusAntennaLabel.setText("FAILURE");
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusBrakeLabel.setText("ACTIVE");
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    
+                    //Update simulation boxes
+                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.ServiceBrakeFailureCheck.setSelected(false);
+                    break;
+                    
+                case 3://Brake Failure
+                    //Update status panel
+                    gui.StatusPowerLabel.setText("ACTIVE");
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusAntennaLabel.setText("ACTIVE");
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusBrakeLabel.setText("FAILURE");
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    
+                    //Update simulation boxes
+                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.ServiceBrakeFailureCheck.setSelected(true);
+                    break;
+                    
+                case 4://Power and Antenna Failure
+                    gui.StatusPowerLabel.setText("FAILURE");
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaLabel.setText("FAILURE");
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusBrakeLabel.setText("ACTIVE");
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    
+                    //Update simulation boxes
+                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.ServiceBrakeFailureCheck.setSelected(false);
+                    break;
+                    
+                case 5://Power and Brake Failure
+                    //Update status panel
+                    gui.StatusPowerLabel.setText("FAILURE");
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaLabel.setText("ACTIVE");
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusBrakeLabel.setText("FAILURE");
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    
+                    //Update simulation boxes
+                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.ServiceBrakeFailureCheck.setSelected(true);
+                    break;
+                    
+                case 6://Antenna and Brake Failure
+                    //Update status panel
+                    gui.StatusPowerLabel.setText("ACTIVE");
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusAntennaLabel.setText("FAILURE");
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusBrakeLabel.setText("FAILURE");
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    
+                    //Update simulation boxes
+                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.ServiceBrakeFailureCheck.setSelected(true);
+                    break;
+                    
+                case 7://Power, Antenna, and Brake Failure
+                    gui.StatusPowerLabel.setText("FAILURE");
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaLabel.setText("FAILURE");
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusBrakeLabel.setText("FAILURE");
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    
+                    //Update simulation boxes
+                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.ServiceBrakeFailureCheck.setSelected(true);
+                    break;
+                    
+                default:
+                    //Update status panel
+                    gui.StatusPowerLabel.setText("ACTIVE");
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaLabel.setText("ACTIVE");
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusBrakeLabel.setText("ACTIVE");
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    
+                    //Update simulation boxes
+                    gui.PowerFailureCheck.setSelected(false);
+                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.ServiceBrakeFailureCheck.setSelected(false);
+                    break;
+                    //must have been sent by passenger or driver
+                }
+            }
+
+        if(!this.serviceBrakeActivated) {
+            gui.ServiceBrakeToggleButton.setSelected(true);
+        }
+        else {
+            gui.ServiceBrakeToggleButton.setSelected(false);
+        }        
+        
+        //Speed and Authority
+        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.currSpeed));
+        gui.SetSpeedLabel.setText(Integer.toString(this.speedLimit));
+        
+        if(this.manualMode){
+            gui.ManualModeSelect.setSelected(true);
+            gui.AutoModeSelect.setSelected(false);
+            gui.SetSpeedLabel.setText(Integer.toString(this.driverSetPoint));
+        }
+        else{
+            gui.ManualModeSelect.setSelected(false);
+            gui.AutoModeSelect.setSelected(true);
+            gui.SetSpeedLabel.setText(Integer.toString(this.recommendedSetPoint));
+        }
+        
+        gui.AuthorityLabel.setText(Integer.toString(getRemainingAuthority()));
+        gui.SpeedLimitLabel.setText(Integer.toString(this.speedLimit));
+        gui.MaxPowerLabel.setText(decimalFormatter.format(this.maxPower));
+        gui.PowerUsedLabel.setText(decimalFormatter.format(this.powerCommand));
+        
+        gui.ClockText.setText(getTime());
+        
+        //Will add more as we move forward.
+    }
+    
+    private int getRemainingAuthority(){
+        return this.authority - this.getDistanceTraveled();
+    }
+    
+    private int getDistanceTraveled(){
+        return 0;//Calculate the distance traveled using speed and time
+    }        
 }
