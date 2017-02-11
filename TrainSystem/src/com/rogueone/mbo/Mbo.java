@@ -5,7 +5,7 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 2/9/17
+ * @modification date 2/11/17
  */
 package com.rogueone.mbo;
 import java.io.File;
@@ -31,6 +31,9 @@ import javax.swing.table.*;
  * @author Brian Stevenson
  */
 public class Mbo{
+    public static ArrayList<String> trains = new ArrayList<String>();
+    public static MovingBlockGUI mboGui = new MovingBlockGUI();
+    
     /**
      * Reads th excel file for the personnel schedule, then outputs it to the GUI
      * @param gui MBO GUI to be updated with personnel schedule information
@@ -56,7 +59,7 @@ public class Mbo{
                     String info = currRow.getCell(j).toString();
                     data[i][j] = info;
                 }
-                System.out.println(tableInfo);
+                //System.out.println(tableInfo);
             }
         }
         
@@ -147,7 +150,7 @@ public class Mbo{
         {
             time = hours+":0"+minutes+AMPM;
         }
-        System.out.println(time);
+        //System.out.println(time);
         return time;
     }
     
@@ -169,6 +172,71 @@ public class Mbo{
         return time;
     }
     
+    /**
+     * 
+     */
+    public static void displayCurrentTrains(){
+        String[] dummyDataRed = {"Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0"};
+        String[] dummyDataGreen = {"Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0"};
+        String[][] dummyData = {dummyDataRed, dummyDataGreen};
+        int length = trains.size();
+        Object[] trainArray = trains.toArray();
+        Object[][] data = new Object[6][9];
+        Object[] columnNames={"TRAIN ID", "TRAIN LINE", "TRACK SECTION", "BLOCK", "NEXT STATION", "TIME OF ARRIVAL", "AUTHORITY", "CURRENT SPEED", "SUGGESTED SPEED", "PASSENGERS"};
+        int i=0,j=0;
+        
+        
+        for(i=0;i<length;i++){
+            
+           mboGui.TrainDropdown.insertItemAt(trainArray[i].toString(), i);
+           
+           
+           for(j=0;j<9;j++){
+                if(j==0){
+                  data[i][0]= trainArray[i]; 
+                }
+                else{
+                    data[i][j]=dummyData[i][j-1];
+                }
+           }
+            //System.out.println(data[0][j]);
+        }
+       
+         //JPanel mboPanel = new JPanel();
+         //gui.MboPanel.
+         //gui.mboPanel.remove(mboPanel.trainTable);
+         //gui.remove(gui.TrainDropdown);
+           //gui.MboPanel.revalidate();
+            //gui.MboPanel.repaint();
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        //model.addRow(columnNames);
+        //gui.trainTable.revalidate();
+        mboGui.trainTable.setModel(model);
+        model.fireTableDataChanged();
+        model.fireTableDataChanged();
+        model.fireTableDataChanged();
+        mboGui.trainTable.repaint();
+       // model.fireTableChanged(null);
+            
+        
+    }
+    
+   public void deploy() throws IOException, InvalidFormatException{
+       File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(file);
+        XSSFSheet redSchedule = workbook.getSheetAt(1);
+        Row currRow = redSchedule.getRow(1);
+        String trainID = currRow.getCell(0).toString();
+        String[] IDs = trainID.split("\\.");
+        trains.add(IDs[0]);
+        System.out.println(trainID); 
+        displayCurrentTrains();
+        
+   }  
+   
+   public static void refresh(MovingBlockGUI gui){
+       
+   }
     /**
      * Function to generate a new employee schedule in excel
      * @param file excel file to be written to
@@ -204,12 +272,17 @@ public class Mbo{
     }
     
     public static void main(String[] args) throws IOException, InvalidFormatException{
-        MovingBlockGUI mboGui = new MovingBlockGUI();
+        //ArrayList<String> trains = new ArrayList<String>();
+        //MovingBlockGUI mboGui = new MovingBlockGUI();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(mboGui);
         frame.pack();
-        frame.setVisible(true);
+        //deploy(mboGui);
+        //deploy(mboGui);
+        displayCurrentTrains();
         readPersonnelSchedule(mboGui);
+        frame.setVisible(true);
+        
     }
 }

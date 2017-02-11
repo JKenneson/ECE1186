@@ -37,6 +37,9 @@
               <Dimension value="[1000, 650]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -90,7 +93,7 @@
                           <Component id="SchedulerInputsPanel" max="32767" attributes="0"/>
                           <Component id="TestInputsPanel" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="69" max="32767" attributes="0"/>
+                      <EmptySpace pref="94" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -129,7 +132,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable1">
+                    <Component class="javax.swing.JTable" name="trainTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="10" rowCount="8">
@@ -293,6 +296,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -497,31 +503,35 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="MboSuggestedSpeedLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="MboSuggestedSpeedField" min="-2" pref="57" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="MboUnitLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="MboSuggestedSpeedLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="MboSuggestedSpeedField" min="-2" pref="57" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="MboUnitLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="MboSuggestedAuthorityLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="MboSuggestedAuthorityField" min="-2" pref="57" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="MboUnitLabel2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="MboOkButton1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="MboAntennaFailureButton" min="-2" pref="257" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="MboSuggestedAuthorityLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="MboSuggestedAuthorityField" min="-2" pref="57" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="MboUnitLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="MboEbrakeButton" min="-2" pref="257" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="MboEbrakeButton" min="-2" pref="257" max="-2" attributes="0"/>
+                              <Component id="trainDeployButton" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                          <Component id="MboOkButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="MboAntennaFailureButton" min="-2" pref="257" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -529,20 +539,28 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="MboSuggestedSpeedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="MboSuggestedSpeedField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="MboUnitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="MboSuggestedSpeedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="MboSuggestedSpeedField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="MboUnitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="MboSuggestedAuthorityLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Component id="MboSuggestedAuthorityField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="MboUnitLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="MboOkButton1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="MboSuggestedAuthorityLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="MboSuggestedAuthorityField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="MboUnitLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="MboOkButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="trainDeployButton" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="MboEbrakeButton" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
@@ -594,6 +612,14 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="km"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="trainDeployButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Deploy Next Train"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trainDeployButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -696,7 +722,7 @@
                 <Component class="javax.swing.JComboBox" name="TrainDropdown">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;0010&quot;,&quot;0934&quot;,&quot;1112&quot;,&quot;1215&quot;,&quot;2222&quot;,&quot;3452&quot;,&quot;3453&quot;,&quot;4209&quot;, })" type="code"/>
+                      <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;&quot;,&quot;&quot; })" type="code"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -704,6 +730,7 @@
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="ControlModeLabel">
@@ -754,9 +781,9 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="SuggestedSpeedLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace pref="34" max="32767" attributes="0"/>
                                   <Component id="SuggestedSpeedValue" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="DifferenceValue" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="CurrentSpeedLabel" min="-2" max="-2" attributes="0"/>
@@ -778,7 +805,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="26" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -823,12 +850,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="CurrentSpeedLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Current train speed:"/>
+                    <Property name="text" type="java.lang.String" value="Fixed Block Speed:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="SuggestedSpeedLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Suggested train speed:"/>
+                    <Property name="text" type="java.lang.String" value="Moving Block Speed:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="SelectedTrainLabel">
