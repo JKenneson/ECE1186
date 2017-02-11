@@ -174,12 +174,8 @@
                     <Component class="javax.swing.JTable" name="summaryTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="20">
-                            <Column editable="true" title="Line" type="java.lang.String"/>
-                            <Column editable="true" title="Section" type="java.lang.String"/>
-                            <Column editable="true" title="Block" type="java.lang.String"/>
-                            <Column editable="true" title="Occupied" type="java.lang.String"/>
-                            <Column editable="true" title="Status" type="java.lang.String"/>
+                          <Table columnCount="1" rowCount="0">
+                            <Column editable="true" title="Please load a track data file" type="java.lang.String"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -189,28 +185,10 @@
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="focusable" type="boolean" value="false"/>
+                        <Property name="rowSelectionAllowed" type="boolean" value="false"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
@@ -287,7 +265,7 @@
                               <Component id="trackDetailsSelectionPanel" alignment="0" max="32767" attributes="0"/>
                               <Component id="trackDetailsDetailsPanel" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="trackFailureModesPanel1" min="-2" pref="1008" max="-2" attributes="0"/>
+                          <Component id="trackFailureModesPanel" min="-2" pref="1008" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="46" max="32767" attributes="0"/>
                   </Group>
@@ -301,7 +279,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="trackDetailsDetailsPanel" min="-2" pref="367" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="trackFailureModesPanel1" min="-2" pref="89" max="-2" attributes="0"/>
+                      <Component id="trackFailureModesPanel" min="-2" pref="89" max="-2" attributes="0"/>
                       <EmptySpace pref="131" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -329,7 +307,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" title="Line">
-                          <Border PropertyName="innerBorder" info="null"/>
                           <Font PropertyName="font" name="Dialog" size="14" style="1"/>
                         </TitledBorder>
                       </Border>
@@ -374,7 +351,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" title="Section">
-                          <Border PropertyName="innerBorder" info="null"/>
                           <Font PropertyName="font" name="Dialog" size="14" style="1"/>
                         </TitledBorder>
                       </Border>
@@ -422,7 +398,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Block">
-                          <Border PropertyName="innerBorder" info="null"/>
                           <Font PropertyName="font" name="Dialog" size="14" style="1"/>
                         </TitledBorder>
                       </Border>
@@ -491,7 +466,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" title="Block">
-                          <Border PropertyName="innerBorder" info="null"/>
                           <Font PropertyName="font" name="Dialog" size="14" style="1"/>
                         </TitledBorder>
                       </Border>
@@ -623,7 +597,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" title="Switch">
-                          <Border PropertyName="innerBorder" info="null"/>
                           <Font PropertyName="font" name="Dialog" size="14" style="1"/>
                         </TitledBorder>
                       </Border>
@@ -707,7 +680,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" title="Station">
-                          <Border PropertyName="innerBorder" info="null"/>
                           <Font PropertyName="font" name="Dialog" size="14" style="1"/>
                         </TitledBorder>
                       </Border>
@@ -800,7 +772,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="trackFailureModesPanel1">
+            <Container class="javax.swing.JPanel" name="trackFailureModesPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -818,41 +790,38 @@
                 <Property name="verticalGap" type="int" value="4"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="trackCircuitFailureButton1">
+                <Component class="javax.swing.JButton" name="brokenRailFailureButton">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="cc" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Dialog" size="18" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Track Circuit"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="brokenRailFailureButton1">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="cc" red="0" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="18" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Broken Rail"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="brokenRailFailureButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="brokenRailFailureButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="powerOutageFailureButton1">
+                <Component class="javax.swing.JButton" name="trackCircuitFailureButton">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="cc" red="0" type="rgb"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="18" style="1"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Track Circuit"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trackCircuitFailureButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="powerOutageFailureButton">
+                  <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="18" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Power  Outage"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="powerOutageFailureButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

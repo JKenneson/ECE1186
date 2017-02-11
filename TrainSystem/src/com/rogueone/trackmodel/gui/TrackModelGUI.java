@@ -33,7 +33,9 @@ import javax.swing.table.TableCellRenderer;
  */
 public class TrackModelGUI extends javax.swing.JPanel {
     
-    TrackModel trackModel;
+    private TrackModel trackModel;
+    private final Color GREEN = new Color(125, 236, 188);
+    private final Color RED = new Color(242, 149, 149);
 
     /** Creates new form TrackModelGUI */
     public TrackModelGUI() {
@@ -82,10 +84,10 @@ public class TrackModelGUI extends javax.swing.JPanel {
         stationPanel = new javax.swing.JPanel();
         stationScrolPane = new javax.swing.JScrollPane();
         stationTable = new javax.swing.JTable();
-        trackFailureModesPanel1 = new javax.swing.JPanel();
-        trackCircuitFailureButton1 = new javax.swing.JButton();
-        brokenRailFailureButton1 = new javax.swing.JButton();
-        powerOutageFailureButton1 = new javax.swing.JButton();
+        trackFailureModesPanel = new javax.swing.JPanel();
+        brokenRailFailureButton = new javax.swing.JButton();
+        trackCircuitFailureButton = new javax.swing.JButton();
+        powerOutageFailureButton = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1070, 720));
         setMinimumSize(new java.awt.Dimension(1070, 720));
@@ -122,39 +124,22 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
         summaryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Line", "Section", "Block", "Occupied", "Status"
+                "Please load a track data file"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+        summaryTable.setFocusable(false);
+        summaryTable.setRowSelectionAllowed(false);
         summaryScrollPane.setViewportView(summaryTable);
 
         javax.swing.GroupLayout summaryPanelLayout = new javax.swing.GroupLayout(summaryPanel);
@@ -475,28 +460,35 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
         trackDetailsDetailsPanel.add(stationPanel);
 
-        trackFailureModesPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Failures", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
-        trackFailureModesPanel1.setLayout(new java.awt.GridLayout(1, 3, 4, 4));
+        trackFailureModesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Failures", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
+        trackFailureModesPanel.setLayout(new java.awt.GridLayout(1, 3, 4, 4));
 
-        trackCircuitFailureButton1.setBackground(new java.awt.Color(0, 204, 51));
-        trackCircuitFailureButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        trackCircuitFailureButton1.setText("Track Circuit");
-        trackFailureModesPanel1.add(trackCircuitFailureButton1);
-
-        brokenRailFailureButton1.setBackground(new java.awt.Color(0, 204, 51));
-        brokenRailFailureButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        brokenRailFailureButton1.setText("Broken Rail");
-        brokenRailFailureButton1.addActionListener(new java.awt.event.ActionListener() {
+        brokenRailFailureButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        brokenRailFailureButton.setText("Broken Rail");
+        brokenRailFailureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                brokenRailFailureButton1ActionPerformed(evt);
+                brokenRailFailureButtonActionPerformed(evt);
             }
         });
-        trackFailureModesPanel1.add(brokenRailFailureButton1);
+        trackFailureModesPanel.add(brokenRailFailureButton);
 
-        powerOutageFailureButton1.setBackground(new java.awt.Color(0, 204, 51));
-        powerOutageFailureButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        powerOutageFailureButton1.setText("Power  Outage");
-        trackFailureModesPanel1.add(powerOutageFailureButton1);
+        trackCircuitFailureButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        trackCircuitFailureButton.setText("Track Circuit");
+        trackCircuitFailureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trackCircuitFailureButtonActionPerformed(evt);
+            }
+        });
+        trackFailureModesPanel.add(trackCircuitFailureButton);
+
+        powerOutageFailureButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        powerOutageFailureButton.setText("Power  Outage");
+        powerOutageFailureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                powerOutageFailureButtonActionPerformed(evt);
+            }
+        });
+        trackFailureModesPanel.add(powerOutageFailureButton);
 
         javax.swing.GroupLayout trackDetailsPanelLayout = new javax.swing.GroupLayout(trackDetailsPanel);
         trackDetailsPanel.setLayout(trackDetailsPanelLayout);
@@ -508,7 +500,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     .addGroup(trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(trackDetailsSelectionPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(trackDetailsDetailsPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(trackFailureModesPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1008, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1008, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         trackDetailsPanelLayout.setVerticalGroup(
@@ -519,7 +511,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(trackDetailsDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(trackFailureModesPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(131, Short.MAX_VALUE))
         );
 
@@ -578,25 +570,102 @@ public class TrackModelGUI extends javax.swing.JPanel {
             summaryModel.addRow(blockRowData);
         }
         summaryTable.setModel(summaryModel);
-        summaryTable.setDefaultRenderer(Object.class,
+        
+        /*
+        * NOTE: The following renderers should be put into their own classes and should be more efficient,
+        *           but they are functional and good enough for the prototype for now
+        */
+        
+        //LINE  
+        summaryTable.getColumnModel().getColumn(0).setCellRenderer(
             new DefaultTableCellRenderer() {
                 @Override
                 public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                     Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                    if (value.toString().equalsIgnoreCase("GREEN") || value.toString().equalsIgnoreCase("TRUE")) 
-                    {
-                        renderer.setBackground(new Color(125, 236, 188));
+
+                    if (value.toString().equalsIgnoreCase("GREEN")) {
+                        renderer.setBackground(GREEN);
+                        //table.getModel().setValueAt("Green", row, 0);
                     }
-                    else if (value.toString().equalsIgnoreCase("RED") || value.toString().equalsIgnoreCase("FALSE")) {
-                        renderer.setBackground(new Color(242, 149, 149));  
-                    }
-                    else {
-                        renderer.setBackground(Color.LIGHT_GRAY);      
-                    }
-                    
+                    else if (value.toString().equalsIgnoreCase("RED")) {
+                        renderer.setBackground(RED);
+                        //table.getModel().setValueAt("Red", row, 0);
+                    }                
                     return renderer;
                 }
             });
+        //OCCUPIED  
+        summaryTable.getColumnModel().getColumn(3).setCellRenderer(
+            new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    if (value.toString().equalsIgnoreCase("TRUE") || value.toString().equalsIgnoreCase("Y")) {
+                        renderer.setBackground(GREEN);
+                        //table.getModel().setValueAt("Y", row, 3);
+                    }
+                    else if (value.toString().equalsIgnoreCase("FALSE") || value.toString().equalsIgnoreCase("N")) {
+                        renderer.setBackground(Color.WHITE);
+                        //table.getModel().setValueAt("N", row, 3);
+                    }                
+                    return renderer;
+                }
+            });
+        //FAILURES  
+        summaryTable.getColumnModel().getColumn(4).setCellRenderer(
+            new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    if (value.toString().equalsIgnoreCase("FALSE") || value.toString().equalsIgnoreCase("OK")) {
+                        renderer.setBackground(GREEN);
+                        //table.getModel().setValueAt("OK", row, 4);
+                    }
+                    else if (value.toString().equalsIgnoreCase("TRUE") || value.toString().equalsIgnoreCase("Failure")) {
+                        renderer.setBackground(RED);
+                        //table.getModel().setValueAt("Failure", row, 4);
+                    }                
+                    return renderer;
+                }
+            });
+        summaryTable.getColumnModel().getColumn(5).setCellRenderer(
+            new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    if (value.toString().equalsIgnoreCase("FALSE") || value.toString().equalsIgnoreCase("OK")) {
+                        renderer.setBackground(GREEN);
+                        //table.getModel().setValueAt("OK", row, 5);
+                    }
+                    else if (value.toString().equalsIgnoreCase("TRUE") || value.toString().equalsIgnoreCase("Failure")) {
+                        renderer.setBackground(RED);
+                        //table.getModel().setValueAt("Failure", row, 5);
+                    }                
+                    return renderer;
+                }
+            });
+        summaryTable.getColumnModel().getColumn(6).setCellRenderer(
+            new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    if (value.toString().equalsIgnoreCase("FALSE") || value.toString().equalsIgnoreCase("OK")) {
+                        renderer.setBackground(GREEN);
+                        //table.getModel().setValueAt("OK", row, 6);
+                    }
+                    else if (value.toString().equalsIgnoreCase("TRUE") || value.toString().equalsIgnoreCase("Failure")) {
+                        renderer.setBackground(RED);
+                        //table.getModel().setValueAt("Failure", row, 6);
+                    }                
+                    return renderer;
+                }
+            });
+        
+        summaryTable.repaint();
     }
     
     @SuppressWarnings("unchecked")
@@ -619,10 +688,43 @@ public class TrackModelGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentHidden
 
-    private void brokenRailFailureButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brokenRailFailureButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_brokenRailFailureButton1ActionPerformed
+    private void brokenRailFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brokenRailFailureButtonActionPerformed
+        Block b = (Block) blockSelectionComboBox.getSelectedItem();
+        b.setFailureBrokenRail(!b.getFailureBrokenRail());
+        if (b.getFailureBrokenRail()) {
+            brokenRailFailureButton.setBackground(RED);
+        }
+        else {
+            brokenRailFailureButton.setBackground(GREEN);
+        }
+        updateSummaryPanel();
+    }//GEN-LAST:event_brokenRailFailureButtonActionPerformed
 
+    private void trackCircuitFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackCircuitFailureButtonActionPerformed
+        Block b = (Block) blockSelectionComboBox.getSelectedItem();
+        b.setFailureTrackCircuit(!b.getFailureTrackCircuit());
+        if (b.getFailureTrackCircuit()) {
+            trackCircuitFailureButton.setBackground(RED);
+        }
+        else {
+            trackCircuitFailureButton.setBackground(GREEN);
+        }
+        updateSummaryPanel();
+    }//GEN-LAST:event_trackCircuitFailureButtonActionPerformed
+
+    private void powerOutageFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powerOutageFailureButtonActionPerformed
+        Block b = (Block) blockSelectionComboBox.getSelectedItem();
+        b.setFailurePowerOutage(!b.getFailurePowerOutage());
+        if (b.getFailurePowerOutage()) {
+            powerOutageFailureButton.setBackground(RED);
+        }
+        else {
+            powerOutageFailureButton.setBackground(GREEN);
+        }
+        updateSummaryPanel();
+    }//GEN-LAST:event_powerOutageFailureButtonActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel blockPanel;
@@ -630,10 +732,10 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> blockSelectionComboBox;
     private javax.swing.JPanel blockSelectionPanel;
     private javax.swing.JTable blockTable;
-    private javax.swing.JButton brokenRailFailureButton1;
+    private javax.swing.JButton brokenRailFailureButton;
     private javax.swing.JPanel lineSectionPanel;
     private javax.swing.JComboBox<String> lineSelectionComboBox;
-    private javax.swing.JButton powerOutageFailureButton1;
+    private javax.swing.JButton powerOutageFailureButton;
     private javax.swing.JComboBox<String> sectionSelectionComboBox;
     private javax.swing.JPanel sectionSelectionPanel;
     private javax.swing.JPanel stationPanel;
@@ -645,14 +747,14 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JPanel switchPanel;
     private javax.swing.JScrollPane switchScrollPane;
     private javax.swing.JTable switchTable;
-    private javax.swing.JButton trackCircuitFailureButton1;
+    private javax.swing.JButton trackCircuitFailureButton;
     private javax.swing.JButton trackConfigurationLoadButton;
     private javax.swing.JPanel trackConfigurationPanel;
     private javax.swing.JFileChooser trackDataFileChooser;
     private javax.swing.JPanel trackDetailsDetailsPanel;
     private javax.swing.JPanel trackDetailsPanel;
     private javax.swing.JPanel trackDetailsSelectionPanel;
-    private javax.swing.JPanel trackFailureModesPanel1;
+    private javax.swing.JPanel trackFailureModesPanel;
     private javax.swing.JLabel trackLayoutLabel;
     private javax.swing.JPanel trackLayoutPanel;
     private javax.swing.JTabbedPane trackModelTabbedPane;
@@ -704,18 +806,14 @@ public class TrackModelGUI extends javax.swing.JPanel {
             if (event.getStateChange() == ItemEvent.SELECTED) {
                 Block b = (Block) trackModelGUI.blockSelectionComboBox.getSelectedItem();
                 
+                //Update Block Info
                 String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Beacon", "Occupied" };
                 String blockRowData[] = { b.getID() + "", b.getPortA().getID() + "", b.getPortB().getID() + "", b.getLength() + "", b.getGrade() + "", b.getSpeedLimit() + "", b.getElevation() + "", b.getCumulativeElevation() + "", b.isUnderground() + "", b.containsCrossing() + "", b.getBeaconMessage() + "", b.isOccupied() + "" };
                 DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
                 blockModel.addRow(blockRowData);
                 trackModelGUI.blockTable.setModel(blockModel);
-                /*
-                String failureColumnNames[] = { "Broken Rail", "Power Outage", "Track Circuit Down" };
-                String failureRowData[] = { b.getFailureBrokenRail() + "", b.getFailurePowerOutage() + "", b.getFailureTrackCircuit() + "" };
-                DefaultTableModel failureModel = new DefaultTableModel(failureColumnNames, 0);
-                failureModel.addRow(failureRowData);
-                trackModelGUI.failuresTable.setModel(failureModel);*/
                 
+                //Update Station Info
                 if (b.getSwitchID() != -1 && b.getPortB() != null) {
                     Switch switchBlock = (Switch) b.getPortB();
                     
@@ -731,6 +829,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     trackModelGUI.switchTable.setModel(switchModel);
                 }
                 
+                //Update Switch Info
                 if (b.getStation() != null) {
                     Station station = (Station) b.getStation();
                     
@@ -745,7 +844,27 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
                     trackModelGUI.stationTable.setModel(stationModel);
                 }
-          
+                
+                //Update Failure Info
+                if (b.getFailureTrackCircuit()) {
+                    trackCircuitFailureButton.setBackground(RED);
+                }
+                else {
+                    trackCircuitFailureButton.setBackground(GREEN);
+                }
+                if (b.getFailureBrokenRail()) {
+                    brokenRailFailureButton.setBackground(RED);
+                }
+                else {
+                    brokenRailFailureButton.setBackground(GREEN);
+                }
+                if (b.getFailureTrackCircuit()) {
+                    powerOutageFailureButton.setBackground(RED);
+                }
+                else {
+                    powerOutageFailureButton.setBackground(GREEN);
+                }
+                
             }
         }       
     }
