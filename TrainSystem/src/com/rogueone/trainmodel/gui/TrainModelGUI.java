@@ -428,7 +428,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         driverPowerSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
 
-        driverPowerInputLabelUnits.setText("W");
+        driverPowerInputLabelUnits.setText("kW");
 
         javax.swing.GroupLayout driverInputPanelLayout = new javax.swing.GroupLayout(driverInputPanel);
         driverInputPanel.setLayout(driverInputPanelLayout);
@@ -641,7 +641,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         powerState.setText("200");
 
-        powerOutputLabelUnits.setText("W");
+        powerOutputLabelUnits.setText("kW");
 
         gradeOutputLabel.setText("Track Grade:");
 

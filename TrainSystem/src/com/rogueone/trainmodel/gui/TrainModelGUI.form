@@ -676,7 +676,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="driverPowerInputLabelUnits">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="W"/>
+                    <Property name="text" type="java.lang.String" value="kW"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1136,7 +1136,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="powerOutputLabelUnits">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="W"/>
+                    <Property name="text" type="java.lang.String" value="kW"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="gradeOutputLabel">

@@ -26,11 +26,14 @@ public class TrainModel {
     NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
     DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     
-    public final int STARTING_FORCE = 100;      //Can't divide by zero, so we have a starting force if our current speed is 0
-    public final double CAR_LENGTH = 105.64;    //1 car's train length (in feet)
-    public final double CAR_WEIGHT = 81800;     //1 car's train weight (in lbs)
-    public final int CAR_CAPACITY = 222;     //1 car's passenger max capacity 
-    public final double PASS_WEIGHT = 165.35;   //1 passenger's weight (in lbs)
+    public final double MAX_ACCELERATION = 0.5;     //Max acceleration of 0.5 m/s^2
+    public final double SECONDS_IN_AN_HOUR = 3600;  //3600 seconds in an hour
+    public final double METERS_IN_A_MILE = 1609.34; //1609.34 meters in a mile
+    public final double KG_IN_A_POUND = 0.454;      //0.454 kg = 1 pound
+    public final double CAR_LENGTH = 105.64;        //1 car's train length (in feet)
+    public final double CAR_WEIGHT = 81800;         //1 car's train weight (in lbs)
+    public final int CAR_CAPACITY = 222;            //1 car's passenger max capacity 
+    public final double PASS_WEIGHT = 165.35;       //1 passenger's weight (in lbs)
     
     //Variable declaration for the class
     //Nanotime trackers for calculating velocity and distance
@@ -49,16 +52,17 @@ public class TrainModel {
     private boolean serviceBrakeActivated;
     private boolean emergencyBrakeActivated;
     //Speed and Authority
-    private double currSpeed;       //Vf
-    private double lastSpeed;       //Vi
+    private double currSpeed;       //Vf in m/s
+    private double currSpeedMPH;    //Vf in mph for printing to the screen
+    private double lastSpeed;       //Vi in m/s
     private int speedLimit;
     private int driverSetPoint;
     private int ctcSetPoint;
     private int authority;
-    private double powerReceived;
+    private double powerReceived;   //kW
     private double grade;
-    private double force;
-    private double acceleration;
+    private double force;           //N
+    private double acceleration;    //m/s^2
     //Station and Passengers
     private String approachingStation;
     private int passengersAtStation;
@@ -98,6 +102,7 @@ public class TrainModel {
         this.emergencyBrakeActivated = false;
         //Speed and Authority
         this.currSpeed = 0;
+        this.currSpeedMPH = 0;
         this.lastSpeed = 0;
         this.speedLimit = 0;
         this.driverSetPoint = 0;
@@ -145,7 +150,6 @@ public class TrainModel {
         return  trainModelGUI;  //Return the GUI object
     }
     
-    
     /**
      * Initialize some properties and variables in the train model window's input panel
      * 
@@ -165,7 +169,6 @@ public class TrainModel {
         gui.passengersInputSpinner.setValue(this.passengersAtStation);
         gui.numCarsInputSpinner.setValue(this.numCars);
     }
-    
     
     /**
      * Update all properties and variables in the train model window
@@ -208,7 +211,7 @@ public class TrainModel {
         }        
         
         //Speed and Authority
-        gui.currSpeedState.setText(decimalFormatter.format(this.currSpeed));
+        gui.currSpeedState.setText(decimalFormatter.format(this.currSpeedMPH));
         gui.speedLimitState.setText(Integer.toString(this.speedLimit));
         gui.driverSetPointState.setText(Integer.toString(this.driverSetPoint));
         gui.ctcSetPointState.setText(Integer.toString(this.ctcSetPoint));
@@ -304,7 +307,6 @@ public class TrainModel {
         }
     }
     
-    
     /**
      * This method should be called every clock cycle and will update all important characteristics of the TrainModel, such as:
      * 1)   Length, weight, pass max capacity based on number of cars and passengers in train     
@@ -334,27 +336,31 @@ public class TrainModel {
         
         //P=F*v  -> Calculate a force by deviding that power by the velocity
         if(this.currSpeed == 0) {    //Can't devide by zero
-            this.force = STARTING_FORCE;   //Arbitrary if we are at zero speed
+            this.force = (this.powerReceived * 1000) / 1;                    //Arbitrary so we don't divide by zero
         }
         else {
-            this.force = this.powerReceived / (double)this.currSpeed;
+            this.force = (this.powerReceived * 1000) / (double)this.currSpeed;
         }
         
         //F=m*a  -> Calculate the acceleration by dividing the force by the mass
-        this.acceleration = this.force / this.trainWeight;
-        
-        System.out.println(this.acceleration);
+        this.acceleration = this.force / (this.trainWeight * KG_IN_A_POUND);        //Convert lbs to kg
         
         //vf = vi + a*t  -> Final velocity (speed) equals initial velocity + acceleration * time
-        this.elapsedTime = System.nanoTime() - startTime;   //Get elapsed time since last calculation
-        this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);
-        this.lastSpeed = this.currSpeed;    //Assign the last speed to the current speed for the next cycle
-        
-        
+        this.elapsedTime = System.nanoTime() - startTime;                                               //Get elapsed time since last calculation
+        //Maximum acceleration of 0.5 m/s^2
+        if(this.acceleration > MAX_ACCELERATION * (this.elapsedTime/(double)1000000000)) {
+            this.acceleration = MAX_ACCELERATION * (this.elapsedTime/(double)1000000000);
+        }
+        System.out.println(this.acceleration);
+        //Calculate current speed in ft/s
+        this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);    //Find seconds by dividing elapsed time by a billion
+        this.lastSpeed = this.currSpeed;                                                                //Assign the last speed to the current speed for the next cycle
+                
+        //Current speed is in ft/s, convert to mph to print out
+        this.currSpeedMPH = this.currSpeed * SECONDS_IN_AN_HOUR / METERS_IN_A_MILE;
         
         //Reset the start time for the next run of the loop
         this.startTime = System.nanoTime();
-        
     }
             
     
