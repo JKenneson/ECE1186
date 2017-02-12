@@ -66,6 +66,7 @@ public class TrainModel {
     private int authority;
     private double powerReceived;   //kW
     private double grade;
+    private double angleOfSlope;
     private double force;           //N
     private double frictionForce;   //N -> (uk * m)
     private double acceleration;    //m/s^2
@@ -116,6 +117,7 @@ public class TrainModel {
         this.authority = authority;
         this.powerReceived = 0;
         this.grade = 0;
+        this.angleOfSlope = 0;
         this.force = 0;
         this.frictionForce = 0;
         this.acceleration = 0;
@@ -319,7 +321,8 @@ public class TrainModel {
      * 1)   Length, weight, pass max capacity based on number of cars and passengers in train     
      * 2)   Its velocity based on the power sent in from the TrainController
      * 3)   Adjust for friction.  Assuming the coefficient of kinetic friction between the train and track is 0.16 (steel on steel -> lubricated)
-     * 4)   If the brakes are activated, this takes precedent and the train slows down according the which brake is activated
+     * 4)   Take grade into account and sum the new forces
+     * 5)   If the brakes are activated, this takes precedent and the train slows down according the which brake is activated
      * 
      * @author Jonathan Kenneson
      */
@@ -353,6 +356,13 @@ public class TrainModel {
         
         //3)    Adjust for friction.  uk = 0.16   Friction = uk * FN = uk * m * g
         this.frictionForce = COEFFICIENT_OF_FRICTION * (this.trainWeight * KG_IN_A_POUND)/NUMBER_OF_WHEELS * GRAVITY;        //Convert lbs to kg
+        //4)   Take grade into account and sum the new forces.  (m*g*sin(theta)) + (Ff * cos(theta))
+        this.angleOfSlope = Math.toDegrees(Math.atan2(this.grade, 100));            //Taking the arctan(%slope/100) will give the angle of the track
+        this.frictionForce = (this.trainWeight * KG_IN_A_POUND/NUMBER_OF_WHEELS * GRAVITY * Math.sin(this.angleOfSlope)) + (this.frictionForce * Math.cos(this.angleOfSlope));
+        
+        System.out.println("Angle: " + angleOfSlope);
+        System.out.println("Ff: " + frictionForce);
+        
         //Sum the forces
         this.force = this.force - this.frictionForce;
         
@@ -366,7 +376,7 @@ public class TrainModel {
             this.acceleration = MAX_ACCELERATION * (this.elapsedTime/(double)1000000000);
         }
         
-        //4)   If the brakes are activated, this takes precedent and the train slows down according to which brake is activated
+        //5)   If the brakes are activated, this takes precedent and the train slows down according to which brake is activated
         if(this.emergencyBrakeActivated || this.emergencyBrakeOverride) {
             this.acceleration = EMERGENCY_BRAKE_DECEL * (this.elapsedTime/(double)1000000000);
         }
@@ -374,7 +384,7 @@ public class TrainModel {
             this.acceleration = SERVICE_BRAKE_DECEL * (this.elapsedTime/(double)1000000000);
         }
         
-        System.out.println(this.acceleration);
+        System.out.println("Accel: " + this.acceleration + "\n");
         //Calculate current speed in ft/s
         this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);    //Find seconds by dividing elapsed time by a billion
         //Check for negative speed (impossible)
