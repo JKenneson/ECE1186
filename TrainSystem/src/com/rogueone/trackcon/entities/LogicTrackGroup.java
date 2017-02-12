@@ -19,11 +19,14 @@ import java.util.Set;
  */
 public class LogicTrackGroup {
     
+    private Global.LogicGroups logicGroup;
     private ArrayList<Switch> switches;
     private StateSet currentTrackState;
+    private StateSet previousTrackState;
     private HashMap<StateSet, UserSwitchState> stateMapping;
     
-    public LogicTrackGroup(){
+    public LogicTrackGroup(Global.LogicGroups logicGroup){
+        this.logicGroup = logicGroup;
         this.switches = new ArrayList<Switch>();
         this.stateMapping = new HashMap<StateSet, UserSwitchState>();
     }
@@ -56,6 +59,21 @@ public class LogicTrackGroup {
     public HashMap<StateSet, UserSwitchState> getStateMapping(){
         return stateMapping;
     }
+
+    public Global.LogicGroups getLogicGroup() {
+        return logicGroup;
+    }
+
+    public StateSet getPreviousTrackState() {
+        return previousTrackState;
+    }
+
+    public void setPreviousTrackState(StateSet previousTrackState) {
+        this.previousTrackState = previousTrackState;
+    }
+    
+    
+    
     
     
 }

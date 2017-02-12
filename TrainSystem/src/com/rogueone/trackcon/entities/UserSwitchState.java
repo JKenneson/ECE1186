@@ -12,6 +12,7 @@ import java.util.LinkedList;
 /**
  *
  * @author kylemonto
+ * mapping of switch ID to its current switch state (Default or Alternate)
  */
 public class UserSwitchState {
     

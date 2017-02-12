@@ -142,7 +142,7 @@ public class TrackController {
                 Global.TrackGroups trackGroup2 = null;
                 Global.TrackGroups trackGroup3 = null;
 
-                LogicTrackGroup logicTrackGroup = new LogicTrackGroup();
+                LogicTrackGroup logicTrackGroup = new LogicTrackGroup(Global.LogicGroups.valueOf(sheet.getSheetName()));
                 Row trackGroupRow = sheet.getRow(1);
 
                 if (s == 3 || s == 4) {
@@ -229,7 +229,7 @@ public class TrackController {
                 Global.TrackGroups trackGroup2 = null;
                 Global.TrackGroups trackGroup3 = null;
 
-                LogicTrackGroup logicTrackGroup = new LogicTrackGroup();
+                LogicTrackGroup logicTrackGroup = new LogicTrackGroup(Global.LogicGroups.valueOf(sheet.getSheetName()));
                 Row trackGroupRow = sheet.getRow(1);
 
                 if (s == 7) {
@@ -299,27 +299,6 @@ public class TrackController {
                     this.redCrossing = new Crossing(line, section, block, crossingStates, Global.CrossingState.INACTIVE);
                 }
 
-            }
-
-            LogicTrackGroup ltg = logicGroupsGreenArray.get(Global.LogicGroups.GREEN_0);
-            StateSet currentState = ltg.getCurrentTrackState();
-
-            System.out.println("Set = " + currentState.toString());
-
-            HashMap<StateSet, UserSwitchState> mappings = ltg.getStateMapping();
-
-            System.out.println("Mappings = " + mappings);
-            //how to search for current state mapping        
-            for (Map.Entry<StateSet, UserSwitchState> entry : mappings.entrySet()) {
-                StateSet key = entry.getKey();
-                UserSwitchState value = entry.getValue();
-                if (key.equals(currentState)) {
-                    System.out.println("Mapping contains current State");
-                    //return UserSwitchState
-                } else {
-                    System.out.println("Mapping does not contain current State");
-                }
-                // do stuff
             }
 
         } catch (FileNotFoundException ex) {
@@ -447,11 +426,55 @@ public class TrackController {
 
     public void setupSimulateTab(Global.LogicGroups logicGroup, TrackControllerGUI gui) {
         LogicTrackGroup selectedLogicGroup = logicGroupsGreenArray.get(logicGroup);
-        if(selectedLogicGroup == null){
+        if (selectedLogicGroup == null) {
             selectedLogicGroup = logicGroupsRedArray.get(logicGroup);
         }
-        
+
         ArrayList<Switch> selectedGroupSwitches = selectedLogicGroup.getSwitches();
         gui.enableInputs(selectedLogicGroup);
+    }
+
+    public UserSwitchState updateStateMapping(LogicTrackGroup selectedLogicTrackGroup, StateSet guiStateSet, TrackControllerGUI gui) {
+        String redOrGreen = null;
+        LogicTrackGroup ltg = logicGroupsGreenArray.get(selectedLogicTrackGroup.getLogicGroup());
+        if(ltg == null){
+            ltg = logicGroupsRedArray.get(selectedLogicTrackGroup.getLogicGroup());
+            redOrGreen = "RED";
+        } else {
+            redOrGreen = "GREEN";
+        }
+        StateSet currentState = ltg.getCurrentTrackState();
+
+        System.out.println("Current Set = " + currentState.toString());
+        
+        System.out.println("GUI Set = " + currentState.toString());
+
+        HashMap<StateSet, UserSwitchState> mappings = ltg.getStateMapping();
+
+        System.out.println("Mappings = " + mappings);
+        //how to search for current state mapping        
+        for (Map.Entry<StateSet, UserSwitchState> entry : mappings.entrySet()) {
+            StateSet key = entry.getKey();
+            UserSwitchState userSwitchState = entry.getValue();
+            if (key.equals(guiStateSet)) {
+                System.out.println("Mapping contains GUI State");
+                System.out.println("Previous State is now Current state");
+                ltg.setPreviousTrackState(currentState);
+                System.out.println("Current State is now GUI state");
+                ltg.setCurrentTrackState(guiStateSet);
+                gui.setSelectedLogicTrackGroup(ltg);
+                if(redOrGreen == "GREEN"){
+                    logicGroupsGreenArray.replace(selectedLogicTrackGroup.getLogicGroup(), ltg);
+                } else {
+                    logicGroupsRedArray.replace(selectedLogicTrackGroup.getLogicGroup(), ltg);
+                }
+                return userSwitchState;
+                //return UserSwitchState
+            } else {
+                System.out.println("Mapping does not contain current State");
+            }
+            // do stuff
+        }
+        return null;
     }
 }
