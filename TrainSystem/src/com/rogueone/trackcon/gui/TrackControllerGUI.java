@@ -5,9 +5,18 @@
  */
 package com.rogueone.trackcon.gui;
 
+import com.rogueone.global.Global;
+import com.rogueone.global.Global.LogicGroups;
 import com.rogueone.trackcon.TrackController;
+import com.rogueone.trackcon.entities.LogicTrackGroup;
+import com.rogueone.trackcon.entities.State;
+import com.rogueone.trackcon.entities.Switch;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Set;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -16,7 +25,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
  * @author kylemonto
  */
 public class TrackControllerGUI extends javax.swing.JPanel {
-    
+
     TrackController trackController;
 
     /**
@@ -29,11 +38,8 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     public TrackControllerGUI(TrackController trackController) {
         initComponents();
         this.trackController = trackController;
-        lineTextField.setText((String)currentTrackControllerComboBox.getSelectedItem());
-        switchNumberTextField.setText("Nothing Selected");
-        blockNumberTextField.setText("Nothing Selected");
-        trackSignalNumberTextField.setText("Nothing Selected");
-        crossingNumberTextField.setText("Nothing Selected");
+        lineTextField.setText((String) currentTrackControllerComboBox.getSelectedItem());
+        hideSimulatePanels();
     }
 
     /**
@@ -61,7 +67,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         lineLabel = new javax.swing.JLabel();
         lineTextField = new javax.swing.JTextField();
         trainNumberLabel = new javax.swing.JLabel();
-        trackNumberTextField = new javax.swing.JTextField();
+        trainNumberTextField = new javax.swing.JTextField();
         switchNumberLabel = new javax.swing.JLabel();
         switchNumberTextField = new javax.swing.JTextField();
         crossingNumberLabel = new javax.swing.JLabel();
@@ -100,6 +106,9 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         imagePanel = new javax.swing.JPanel();
         imageLabel = new javax.swing.JLabel();
         inputsPanel = new javax.swing.JPanel();
+        logicGroupPanel = new javax.swing.JPanel();
+        logicGroupsComboBox = new javax.swing.JComboBox<>();
+        logicGroupLabel = new javax.swing.JLabel();
         position1Panel = new javax.swing.JPanel();
         occupiedPosition1RadioButton = new javax.swing.JRadioButton();
         trainPosition1Label = new javax.swing.JLabel();
@@ -127,9 +136,11 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         switch1Panel = new javax.swing.JPanel();
         switch1AlternateRadioButton = new javax.swing.JRadioButton();
         switch1DefaultRadioButton = new javax.swing.JRadioButton();
+        switch1Label = new javax.swing.JLabel();
         switch2Panel = new javax.swing.JPanel();
         switch2DefaultRadioButton = new javax.swing.JRadioButton();
         switch2AlternateRadioButton = new javax.swing.JRadioButton();
+        switch2Label = new javax.swing.JLabel();
         crossingPanel = new javax.swing.JPanel();
         crossingStatusLabel = new javax.swing.JLabel();
         crossingActiveRadioButton = new javax.swing.JRadioButton();
@@ -190,10 +201,10 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         selectionPanel.add(trainNumberLabel, gridBagConstraints);
 
-        trackNumberTextField.setText("1/(None Selected)");
-        trackNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+        trainNumberTextField.setText("1/(None Selected)");
+        trainNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trackNumberTextFieldActionPerformed(evt);
+                trainNumberTextFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -201,7 +212,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        selectionPanel.add(trackNumberTextField, gridBagConstraints);
+        selectionPanel.add(trainNumberTextField, gridBagConstraints);
 
         switchNumberLabel.setText("Switch Number: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -655,6 +666,43 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         inputsPanel.setPreferredSize(new java.awt.Dimension(800, 400));
         inputsPanel.setLayout(new java.awt.GridBagLayout());
 
+        logicGroupPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Logic Group"));
+        logicGroupPanel.setPreferredSize(new java.awt.Dimension(130, 70));
+        logicGroupPanel.setLayout(new java.awt.GridBagLayout());
+
+        logicGroupsComboBox.setModel(new DefaultComboBoxModel(Global.LogicGroups.values()));
+        logicGroupsComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logicGroupsComboBoxActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        logicGroupPanel.add(logicGroupsComboBox, gridBagConstraints);
+
+        logicGroupLabel.setText("Select Logic Group:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        logicGroupPanel.add(logicGroupLabel, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        inputsPanel.add(logicGroupPanel, gridBagConstraints);
+
         position1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Position 1"));
         position1Panel.setLayout(new java.awt.GridBagLayout());
 
@@ -671,7 +719,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         position1Panel.add(occupiedPosition1RadioButton, gridBagConstraints);
 
-        trainPosition1Label.setText("Train - N/A");
+        trainPosition1Label.setText("Train Presence");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -702,7 +750,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         position1Panel.add(trackStatusPosition1ComboBox, gridBagConstraints);
 
-        trackPosition1Label.setText("Track - F-D");
+        trackPosition1Label.setText("Track");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -711,7 +759,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position1Panel.add(trackPosition1Label, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
@@ -737,7 +785,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         position2Panel.add(unoccupiedPosition2RadioButton, gridBagConstraints);
 
-        trainPosition2Label.setText("Train - 1");
+        trainPosition2Label.setText("Train Presence");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -745,7 +793,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         position2Panel.add(trainPosition2Label, gridBagConstraints);
 
-        trackPosition2Label.setText("Track - C-A");
+        trackPosition2Label.setText("Track");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -763,7 +811,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position2Panel.add(trackStatusPosition2ComboBox, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
@@ -814,7 +862,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position3Panel.add(trackStatusPosition3ComboBox, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
@@ -870,43 +918,48 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         position4Panel.add(trackPosition4Label, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         inputsPanel.add(position4Panel, gridBagConstraints);
 
-        switch1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch - F-D:C-A"));
+        switch1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch"));
         switch1Panel.setLayout(new java.awt.GridBagLayout());
 
         leftTrackButtonGroup.add(switch1AlternateRadioButton);
-        switch1AlternateRadioButton.setText("Track Wayside");
+        switch1AlternateRadioButton.setText("Alternate");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         switch1Panel.add(switch1AlternateRadioButton, gridBagConstraints);
 
         leftTrackButtonGroup.add(switch1DefaultRadioButton);
         switch1DefaultRadioButton.setSelected(true);
-        switch1DefaultRadioButton.setText("Track Straight");
+        switch1DefaultRadioButton.setText("Default");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        switch1Panel.add(switch1DefaultRadioButton, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        switch1Panel.add(switch1DefaultRadioButton, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        switch1Panel.add(switch1Label, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         inputsPanel.add(switch1Panel, gridBagConstraints);
 
-        switch2Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch - N/A"));
+        switch2Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Switch"));
         switch2Panel.setLayout(new java.awt.GridBagLayout());
 
         rightTrackButtonGroup.add(switch2DefaultRadioButton);
         switch2DefaultRadioButton.setSelected(true);
-        switch2DefaultRadioButton.setText("Track Straight");
+        switch2DefaultRadioButton.setText("Default");
         switch2DefaultRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 switch2DefaultRadioButtonActionPerformed(evt);
@@ -914,26 +967,30 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         switch2Panel.add(switch2DefaultRadioButton, gridBagConstraints);
 
         rightTrackButtonGroup.add(switch2AlternateRadioButton);
-        switch2AlternateRadioButton.setText("Track Wayside");
+        switch2AlternateRadioButton.setText("Alternate");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         switch2Panel.add(switch2AlternateRadioButton, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        switch2Panel.add(switch2Label, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         inputsPanel.add(switch2Panel, gridBagConstraints);
 
-        crossingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Crossing - E:19"));
+        crossingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Crossing"));
         crossingPanel.setLayout(new java.awt.GridBagLayout());
 
         crossingStatusLabel.setText("Crossing Status:");
@@ -960,7 +1017,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         crossingPanel.add(crossingInactiveRadioButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
@@ -1059,7 +1116,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         speedAuthorityPanel.add(blockIDTextField, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -1099,7 +1156,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         actionsPanel.add(resetButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
@@ -1135,9 +1192,9 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lineTextFieldActionPerformed
 
-    private void trackNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackNumberTextFieldActionPerformed
+    private void trainNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainNumberTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_trackNumberTextFieldActionPerformed
+    }//GEN-LAST:event_trainNumberTextFieldActionPerformed
 
     private void switchNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_switchNumberTextFieldActionPerformed
         // TODO add your handling code here:
@@ -1192,22 +1249,22 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             File trackDataFile = plcFileChooser.getSelectedFile();
             trackController.loadPLC(trackDataFile);
             plcProgramTextField.setText(trackDataFile.getName());
-        } else if (returnVal == JFileChooser.CANCEL_OPTION){
-           System.out.println("File access cancelled by user.");
-           plcProgramTextField.setText("No file selected");
+        } else if (returnVal == JFileChooser.CANCEL_OPTION) {
+            System.out.println("File access cancelled by user.");
+            plcProgramTextField.setText("No file selected");
         }
     }//GEN-LAST:event_chooseFileButtonActionPerformed
 
     private void currentTrackControllerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentTrackControllerComboBoxActionPerformed
         // TODO add your handling code here:
         trackController.updateSummaryTab(this);
-        lineTextField.setText((String)currentTrackControllerComboBox.getSelectedItem());
+        lineTextField.setText((String) currentTrackControllerComboBox.getSelectedItem());
     }//GEN-LAST:event_currentTrackControllerComboBoxActionPerformed
 
     private void currentSwitchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentSwitchTableMouseClicked
         // TODO add your handling code here:
         int selectedRow = currentSwitchTable.getSelectedRow();
-        if(selectedRow != -1){
+        if (selectedRow != -1) {
             String switchID = (String) currentSwitchTable.getValueAt(selectedRow, 2);
             switchNumberTextField.setText(switchID + "");
         } else {
@@ -1218,7 +1275,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private void currentBlockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentBlockTableMouseClicked
         // TODO add your handling code here:
         int selectedRow = currentBlockTable.getSelectedRow();
-        if(selectedRow != -1){
+        if (selectedRow != -1) {
             String blockID = (String) currentBlockTable.getValueAt(selectedRow, 1);
             blockNumberTextField.setText(blockID + "");
         } else {
@@ -1229,7 +1286,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private void currentTrackSignalsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentTrackSignalsTableMouseClicked
         // TODO add your handling code here:
         int selectedRow = currentTrackSignalsTable.getSelectedRow();
-        if(selectedRow != -1){
+        if (selectedRow != -1) {
             String blockID = (String) currentTrackSignalsTable.getValueAt(selectedRow, 1);
             trackSignalNumberTextField.setText(blockID + "");
         } else {
@@ -1240,13 +1297,20 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private void currentCrossingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentCrossingTableMouseClicked
         // TODO add your handling code here:
         int selectedRow = currentCrossingTable.getSelectedRow();
-        if(selectedRow != -1){
+        if (selectedRow != -1) {
             String blockID = (String) currentCrossingTable.getValueAt(selectedRow, 1);
             crossingNumberTextField.setText(blockID + "");
         } else {
             trackSignalNumberTextField.setText("Nothing Selected");
         }
     }//GEN-LAST:event_currentCrossingTableMouseClicked
+
+    private void logicGroupsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logicGroupsComboBoxActionPerformed
+        // TODO add your handling code here:
+        hideSimulatePanels();
+        trackController.setupSimulateTab((Global.LogicGroups) logicGroupsComboBox.getSelectedItem(), this);
+//        showSimulatePanels();
+    }//GEN-LAST:event_logicGroupsComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1291,6 +1355,9 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.ButtonGroup leftTrackButtonGroup;
     private javax.swing.JLabel lineLabel;
     private javax.swing.JTextField lineTextField;
+    private javax.swing.JLabel logicGroupLabel;
+    private javax.swing.JPanel logicGroupPanel;
+    private javax.swing.JComboBox<String> logicGroupsComboBox;
     private javax.swing.JRadioButton occupiedPosition1RadioButton;
     private javax.swing.JRadioButton occupiedPosition2RadioButton;
     private javax.swing.JRadioButton occupiedPosition3RadioButton;
@@ -1322,9 +1389,11 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JPanel summaryPanel;
     private javax.swing.JRadioButton switch1AlternateRadioButton;
     private javax.swing.JRadioButton switch1DefaultRadioButton;
+    private javax.swing.JLabel switch1Label;
     private javax.swing.JPanel switch1Panel;
     private javax.swing.JRadioButton switch2AlternateRadioButton;
     private javax.swing.JRadioButton switch2DefaultRadioButton;
+    private javax.swing.JLabel switch2Label;
     private javax.swing.JPanel switch2Panel;
     private javax.swing.JLabel switchNumberLabel;
     private javax.swing.JTextField switchNumberTextField;
@@ -1333,7 +1402,6 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JPanel trackControllerPanel;
     private javax.swing.JScrollPane trackControllerScrollPane;
     private javax.swing.JTabbedPane trackControllerTabbedPane;
-    private javax.swing.JTextField trackNumberTextField;
     private javax.swing.JLabel trackPosition1Label;
     private javax.swing.JLabel trackPosition2Label;
     private javax.swing.JLabel trackPosition3Label;
@@ -1345,6 +1413,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> trackStatusPosition3ComboBox;
     private javax.swing.JComboBox<String> trackStatusPosition4ComboBox;
     private javax.swing.JLabel trainNumberLabel;
+    private javax.swing.JTextField trainNumberTextField;
     private javax.swing.JLabel trainPosition1Label;
     private javax.swing.JLabel trainPosition2Label;
     private javax.swing.JLabel trainPosition3Label;
@@ -1354,4 +1423,106 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JRadioButton unoccupiedPosition3RadioButton;
     private javax.swing.JRadioButton unoccupiedPosition4RadioButton;
     // End of variables declaration//GEN-END:variables
+
+    private void resetSelectionsTextFields() {
+        trainNumberTextField.setText("Nothing Selected");
+        switchNumberTextField.setText("Nothing Selected");
+        blockNumberTextField.setText("Nothing Selected");
+        trackSignalNumberTextField.setText("Nothing Selected");
+        crossingNumberTextField.setText("Nothing Selected");
+    }
+
+    private void hideSimulatePanels() {
+        switch1Panel.setVisible(false);
+        switch2Panel.setVisible(false);
+        position1Panel.setVisible(false);
+        position2Panel.setVisible(false);
+        position3Panel.setVisible(false);
+        position4Panel.setVisible(false);
+        crossingPanel.setVisible(false);
+    }
+
+    private void showSimulatePanels() {
+        switch1Panel.setVisible(true);
+        switch2Panel.setVisible(true);
+        position1Panel.setVisible(true);
+        position2Panel.setVisible(true);
+        position3Panel.setVisible(true);
+        position4Panel.setVisible(true);
+        crossingPanel.setVisible(true);
+    }
+
+    public void enableInputs(LogicTrackGroup selectedLogicGroup) {
+        //setup for switch panels
+        ArrayList<Switch> selectedGroupSwitches = selectedLogicGroup.getSwitches();
+        if (selectedGroupSwitches.size() >= 1 ) {
+            switch1Panel.setVisible(true);
+            switch1Label.setText(selectedGroupSwitches.get(0).getSwitchID() + "");
+            if (selectedGroupSwitches.get(0).getSwitchState().getSwitchState() == Global.SwitchState.DEFAULT) {
+                switch1DefaultRadioButton.setEnabled(true);
+            } else {
+                switch1AlternateRadioButton.setEnabled(true);
+            }
+            switch2Panel.setVisible(false);
+        }
+        if (selectedGroupSwitches.size() >= 2 ) {
+            switch2Panel.setVisible(true);
+            switch2Label.setText(selectedGroupSwitches.get(0).getSwitchID() + "");
+            if (selectedGroupSwitches.get(0).getSwitchState().getSwitchState() == Global.SwitchState.DEFAULT) {
+                switch2DefaultRadioButton.setSelected(true);
+            } else {
+                switch2AlternateRadioButton.setSelected(true);
+            }
+        }
+        //setup for position panels
+        Set<State> states = selectedLogicGroup.getCurrentTrackState().getSet();
+        Object[] objArray = states.toArray();
+        State[] statesArray = new State[objArray.length];
+        int i = 0;
+        for (Object o : objArray) {
+            statesArray[i++] = (State) o;
+        }
+        if (states.size() >= 1) {
+            position1Panel.setVisible(true);
+            trainPosition1Label.setText(statesArray[0].getGroup() + "");
+            if (statesArray[0].getPresence() == Global.Presence.UNOCCUPIED) {
+                unoccupiedPosition1RadioButton.setSelected(true);
+            } else {
+                occupiedPosition1RadioButton.setSelected(true);
+            }
+            position2Panel.setVisible(false);
+            position3Panel.setVisible(false);
+            position4Panel.setVisible(false);
+        }
+        if (states.size() >= 2) {
+            position2Panel.setVisible(true);
+            trainPosition2Label.setText(statesArray[1].getGroup() + "");
+            if (statesArray[1].getPresence() == Global.Presence.UNOCCUPIED) {
+                unoccupiedPosition2RadioButton.setSelected(true);
+            } else {
+                occupiedPosition2RadioButton.setSelected(true);
+            }
+            position3Panel.setVisible(false);
+            position4Panel.setVisible(false);
+        }
+        if (states.size() >= 3 ) {
+            position3Panel.setVisible(true);
+            trainPosition3Label.setText(statesArray[2].getGroup() + "");
+            if (statesArray[2].getPresence() == Global.Presence.UNOCCUPIED) {
+                unoccupiedPosition3RadioButton.setSelected(true);
+            } else {
+                occupiedPosition3RadioButton.setSelected(true);
+            }
+            position4Panel.setVisible(false);
+        }
+        if (states.size() >= 4 ) {
+            position4Panel.setVisible(true);
+            trainPosition4Label.setText(statesArray[3].getGroup() + "");
+            if (statesArray[3].getPresence() == Global.Presence.UNOCCUPIED) {
+                unoccupiedPosition4RadioButton.setSelected(true);
+            } else {
+                occupiedPosition4RadioButton.setSelected(true);
+            }
+        }
+    }
 }

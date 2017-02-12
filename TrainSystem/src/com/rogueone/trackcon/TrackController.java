@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -279,8 +280,12 @@ public class TrackController {
                 logicGroupsRedArray.put(Global.LogicGroups.valueOf(sheet.getSheetName()), logicTrackGroup);
             }
 
-            sheet = plcWorkbook.getSheet("GREEN_CROSSING");
             for (int i = 8; i < 10; i++) {
+                if (i == 8) {
+                    sheet = plcWorkbook.getSheet("GREEN_CROSSING");
+                } else {
+                    sheet = plcWorkbook.getSheet("RED_CROSSING");
+                }
                 Row greenRow = sheet.getRow(1);
                 Global.Line line = Global.Line.valueOf(greenRow.getCell(0).getStringCellValue());
                 Global.Section section = Global.Section.valueOf(greenRow.getCell(1).getStringCellValue());
@@ -408,26 +413,29 @@ public class TrackController {
         Iterator crossingLightsIterator = lights.iterator();
         while (crossingLightsIterator.hasNext()) {
             Entry<Global.CrossingState, Global.LightState> lightState = (Entry<Global.CrossingState, Global.LightState>) crossingLightsIterator.next();
-            String lightRowData[] = {displayCrossing.getSection() + "", displayCrossing.getBlockID() + "", lightState.getValue() + ""};
-            lightModel.addRow(lightRowData);
+            if (displayCrossing.getCurrentCrossingState() == lightState.getKey()) {
+                String lightRowData[] = {displayCrossing.getSection() + "", displayCrossing.getBlockID() + "", lightState.getValue() + ""};
+                lightModel.addRow(lightRowData);
+            }
         }
 
         ArrayList<Block> loadBlocks = new ArrayList<Block>();
         loadBlocks.addAll(this.trackModelTest1.getBlocks());
+        ArrayList<Block> currentBlocks = new ArrayList<Block>();
         for (int i = 0; i < loadBlocks.size(); i++) {
-            if (loadBlocks.get(i).getLine().getLineID() != displayLine) {
-                loadBlocks.remove(i);
+            if (loadBlocks.get(i).getLine().getLineID() == displayLine) {
+                currentBlocks.add(loadBlocks.get(i));
             }
         }
 
         String blockColumnNames[] = {"Section", "BlockID", "Occupied", "Status"};
         DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
-        for (int i = 0; i < loadBlocks.size(); i++) {
+        for (int i = 0; i < currentBlocks.size(); i++) {
             String status = "Active";
-            if (loadBlocks.get(i).getFailureBrokenRail() || loadBlocks.get(i).getFailureBrokenRail() || loadBlocks.get(i).getFailureBrokenRail()) {
+            if (currentBlocks.get(i).getFailureBrokenRail() || currentBlocks.get(i).getFailureBrokenRail() || currentBlocks.get(i).getFailureBrokenRail()) {
                 status = "Inactive";
             }
-            String blockRowData[] = {loadBlocks.get(i).getSection() + "", loadBlocks.get(i).getID() + "", loadBlocks.get(i).isOccupied() + "", status + ""};
+            String blockRowData[] = {currentBlocks.get(i).getSection() + "", currentBlocks.get(i).getID() + "", currentBlocks.get(i).isOccupied() + "", status + ""};
             blockModel.addRow(blockRowData);
         }
 
@@ -435,5 +443,15 @@ public class TrackController {
         trackControllerGUITest1.currentBlockTable.setModel(blockModel);
         trackControllerGUITest1.currentTrackSignalsTable.setModel(lightModel);
         trackControllerGUITest1.currentCrossingTable.setModel(crossingModel);
+    }
+
+    public void setupSimulateTab(Global.LogicGroups logicGroup, TrackControllerGUI gui) {
+        LogicTrackGroup selectedLogicGroup = logicGroupsGreenArray.get(logicGroup);
+        if(selectedLogicGroup == null){
+            selectedLogicGroup = logicGroupsRedArray.get(logicGroup);
+        }
+        
+        ArrayList<Switch> selectedGroupSwitches = selectedLogicGroup.getSwitches();
+        gui.enableInputs(selectedLogicGroup);
     }
 }
