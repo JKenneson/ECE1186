@@ -27,6 +27,8 @@ public class TrainModel {
     DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     
     public final double MAX_ACCELERATION = 0.5;         //Max acceleration of 0.5 m/s^2
+    public final double SERVICE_BRAKE_DECEL = -1.2;     //Service brake decelerates at 1.2 m/s^2
+    public final double EMERGENCY_BRAKE_DECEL = -2.73;  //Emergency brake decelerates at 2.73 m/s^2
     public final double COEFFICIENT_OF_FRICTION = 0.16; //Assuming the coefficient of friction between train wheel and track is 0.16 (steel on steel - lubricated)
     public final double NUMBER_OF_WHEELS = 12;          //Assuming there are 12 wheels per car to distribute the force to the track
     public final double GRAVITY = 9.8;                  //9.8 m/s^2 for acceleration due to gravity
@@ -317,6 +319,7 @@ public class TrainModel {
      * 1)   Length, weight, pass max capacity based on number of cars and passengers in train     
      * 2)   Its velocity based on the power sent in from the TrainController
      * 3)   Adjust for friction.  Assuming the coefficient of kinetic friction between the train and track is 0.16 (steel on steel -> lubricated)
+     * 4)   If the brakes are activated, this takes precedent and the train slows down according the which brake is activated
      * 
      * @author Jonathan Kenneson
      */
@@ -362,6 +365,15 @@ public class TrainModel {
         if(this.acceleration > MAX_ACCELERATION * (this.elapsedTime/(double)1000000000)) {
             this.acceleration = MAX_ACCELERATION * (this.elapsedTime/(double)1000000000);
         }
+        
+        //4)   If the brakes are activated, this takes precedent and the train slows down according to which brake is activated
+        if(this.emergencyBrakeActivated || this.emergencyBrakeOverride) {
+            this.acceleration = EMERGENCY_BRAKE_DECEL * (this.elapsedTime/(double)1000000000);
+        }
+        else if (this.serviceBrakeActivated) {
+            this.acceleration = SERVICE_BRAKE_DECEL * (this.elapsedTime/(double)1000000000);
+        }
+        
         System.out.println(this.acceleration);
         //Calculate current speed in ft/s
         this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);    //Find seconds by dividing elapsed time by a billion
