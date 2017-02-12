@@ -7,6 +7,7 @@ package com.rogueone.trackcon;
 
 import com.rogueone.mainframe.MainFrame;
 import com.rogueone.global.Global;
+import com.rogueone.trackcon.entities.Crossing;
 import com.rogueone.trackcon.entities.Light;
 import com.rogueone.trackcon.entities.LogicTrackGroup;
 import com.rogueone.trackcon.entities.State;
@@ -56,6 +57,8 @@ public class TrackController {
     private HashMap<Global.LogicGroups, LogicTrackGroup> logicGroupsRedArray;
     private HashMap<Integer, Switch> switchGreenArray;
     private HashMap<Integer, Switch> switchRedArray;
+    private Crossing greenCrossing;
+    private Crossing redCrossing;
 
     private TrackModel trackModelTest1;
 
@@ -276,6 +279,23 @@ public class TrackController {
                 logicGroupsRedArray.put(Global.LogicGroups.valueOf(sheet.getSheetName()), logicTrackGroup);
             }
 
+            sheet = plcWorkbook.getSheet("GREEN_CROSSING");
+            for (int i = 8; i < 10; i++) {
+                Row greenRow = sheet.getRow(1);
+                Global.Line line = Global.Line.valueOf(greenRow.getCell(0).getStringCellValue());
+                Global.Section section = Global.Section.valueOf(greenRow.getCell(1).getStringCellValue());
+                int block = (int) greenRow.getCell(2).getNumericCellValue();
+                HashMap<Global.CrossingState, Global.LightState> crossingStates = new HashMap<Global.CrossingState, Global.LightState>();
+                crossingStates.put(Global.CrossingState.ACTIVE, Global.LightState.valueOf(greenRow.getCell(3).getStringCellValue()));
+                crossingStates.put(Global.CrossingState.INACTIVE, Global.LightState.valueOf(greenRow.getCell(4).getStringCellValue()));
+                if (i == 8) {
+                    this.greenCrossing = new Crossing(line, section, block, crossingStates, Global.CrossingState.INACTIVE);
+                } else if (i == 9) {
+                    this.redCrossing = new Crossing(line, section, block, crossingStates, Global.CrossingState.INACTIVE);
+                }
+
+            }
+
             LogicTrackGroup ltg = logicGroupsGreenArray.get(Global.LogicGroups.GREEN_0);
             StateSet currentState = ltg.getCurrentTrackState();
 
@@ -329,19 +349,28 @@ public class TrackController {
         }
     }
 
-    private void updateSummaryTab(TrackControllerGUI trackControllerGUITest1) {
+    public void updateSummaryTab(TrackControllerGUI trackControllerGUITest1) {
         String switchColumnNames[] = {"Section", "Block ID", "Switch ID", "State", "Connection"};
         DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
 
         String lightColumnNames[] = {"Section", "Block ID", "Light State"};
         DefaultTableModel lightModel = new DefaultTableModel(lightColumnNames, 0);
 
+        String crossingColumnNames[] = {"Section", "BlockID", "State"};
+        DefaultTableModel crossingModel = new DefaultTableModel(crossingColumnNames, 0);
+
         HashMap<Integer, Switch> displaySwitchArray = null;
+        Crossing displayCrossing = null;
+        Global.Line displayLine = null;
         String selectedController = (String) trackControllerGUITest1.currentTrackControllerComboBox.getSelectedItem();
         if (selectedController.contains("Green")) {
             displaySwitchArray = this.switchGreenArray;
+            displayCrossing = greenCrossing;
+            displayLine = Global.Line.GREEN;
         } else {
             displaySwitchArray = this.switchRedArray;
+            displayCrossing = redCrossing;
+            displayLine = Global.Line.RED;
         }
 
         Set<Entry<Integer, Switch>> switchSet = displaySwitchArray.entrySet();
@@ -371,28 +400,40 @@ public class TrackController {
                 lightModel.addRow(lightRowData);
             }
         }
-        
 
-        ArrayList<Block> blocks = this.trackModelTest1.getBlocks();
-        for (int i = 0; i < blocks.size(); i++) {
-            if (blocks.get(i).getLine().getLineID() != Global.Line.GREEN) {
-                blocks.remove(i);
+        //add crossings to table model - with associated lights
+        String crossingRowData[] = {displayCrossing.getSection() + "", displayCrossing.getBlockID() + "", displayCrossing.getCurrentCrossingState() + ""};
+        crossingModel.addRow(crossingRowData);
+        Set<Entry<Global.CrossingState, Global.LightState>> lights = displayCrossing.getCrossingState().entrySet();
+        Iterator crossingLightsIterator = lights.iterator();
+        while (crossingLightsIterator.hasNext()) {
+            Entry<Global.CrossingState, Global.LightState> lightState = (Entry<Global.CrossingState, Global.LightState>) crossingLightsIterator.next();
+            String lightRowData[] = {displayCrossing.getSection() + "", displayCrossing.getBlockID() + "", lightState.getValue() + ""};
+            lightModel.addRow(lightRowData);
+        }
+
+        ArrayList<Block> loadBlocks = new ArrayList<Block>();
+        loadBlocks.addAll(this.trackModelTest1.getBlocks());
+        for (int i = 0; i < loadBlocks.size(); i++) {
+            if (loadBlocks.get(i).getLine().getLineID() != displayLine) {
+                loadBlocks.remove(i);
             }
         }
 
         String blockColumnNames[] = {"Section", "BlockID", "Occupied", "Status"};
         DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
-        for (int i = 0; i < blocks.size(); i++) {
+        for (int i = 0; i < loadBlocks.size(); i++) {
             String status = "Active";
-            if (blocks.get(i).getFailureBrokenRail() || blocks.get(i).getFailureBrokenRail() || blocks.get(i).getFailureBrokenRail()) {
+            if (loadBlocks.get(i).getFailureBrokenRail() || loadBlocks.get(i).getFailureBrokenRail() || loadBlocks.get(i).getFailureBrokenRail()) {
                 status = "Inactive";
             }
-            String blockRowData[] = {blocks.get(i).getSection() + "", blocks.get(i).getID() + "", blocks.get(i).isOccupied() + "", status + ""};
+            String blockRowData[] = {loadBlocks.get(i).getSection() + "", loadBlocks.get(i).getID() + "", loadBlocks.get(i).isOccupied() + "", status + ""};
             blockModel.addRow(blockRowData);
         }
-        
+
         trackControllerGUITest1.currentSwitchTable.setModel(switchModel);
         trackControllerGUITest1.currentBlockTable.setModel(blockModel);
         trackControllerGUITest1.currentTrackSignalsTable.setModel(lightModel);
+        trackControllerGUITest1.currentCrossingTable.setModel(crossingModel);
     }
 }

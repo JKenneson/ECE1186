@@ -30,7 +30,10 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         initComponents();
         this.trackController = trackController;
         lineTextField.setText((String)currentTrackControllerComboBox.getSelectedItem());
-        
+        switchNumberTextField.setText("Nothing Selected");
+        blockNumberTextField.setText("Nothing Selected");
+        trackSignalNumberTextField.setText("Nothing Selected");
+        crossingNumberTextField.setText("Nothing Selected");
     }
 
     /**
@@ -81,7 +84,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         currentSwitchTable = new javax.swing.JTable();
         currentCrossingsLabel = new javax.swing.JLabel();
         currentCrossingsScrollPane = new javax.swing.JScrollPane();
-        currentCrossingScrollPane = new javax.swing.JTable();
+        currentCrossingTable = new javax.swing.JTable();
         currentBlockLabel = new javax.swing.JLabel();
         currentBlockScrollPane = new javax.swing.JScrollPane();
         currentBlockTable = new javax.swing.JTable();
@@ -416,18 +419,38 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         componentSummaryPanel.add(currentCrossingsLabel, gridBagConstraints);
 
-        currentCrossingScrollPane.setModel(new javax.swing.table.DefaultTableModel(
+        currentCrossingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"E:19", "Inactive"},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Crossing ID", "Crossing State"
+                "Section", "Block ID", "State"
             }
-        ));
-        currentCrossingsScrollPane.setViewportView(currentCrossingScrollPane);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        currentCrossingTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                currentCrossingTableMouseClicked(evt);
+            }
+        });
+        currentCrossingsScrollPane.setViewportView(currentCrossingTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1177,6 +1200,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
     private void currentTrackControllerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentTrackControllerComboBoxActionPerformed
         // TODO add your handling code here:
+        trackController.updateSummaryTab(this);
         lineTextField.setText((String)currentTrackControllerComboBox.getSelectedItem());
     }//GEN-LAST:event_currentTrackControllerComboBoxActionPerformed
 
@@ -1195,8 +1219,8 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = currentBlockTable.getSelectedRow();
         if(selectedRow != -1){
-            String switchID = (String) currentBlockTable.getValueAt(selectedRow, 1);
-            blockNumberTextField.setText(switchID + "");
+            String blockID = (String) currentBlockTable.getValueAt(selectedRow, 1);
+            blockNumberTextField.setText(blockID + "");
         } else {
             blockNumberTextField.setText("Nothing Selected");
         }
@@ -1206,12 +1230,23 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = currentTrackSignalsTable.getSelectedRow();
         if(selectedRow != -1){
-            String switchID = (String) currentTrackSignalsTable.getValueAt(selectedRow, 1);
-            trackSignalNumberTextField.setText(switchID + "");
+            String blockID = (String) currentTrackSignalsTable.getValueAt(selectedRow, 1);
+            trackSignalNumberTextField.setText(blockID + "");
         } else {
             trackSignalNumberTextField.setText("Nothing Selected");
         }
     }//GEN-LAST:event_currentTrackSignalsTableMouseClicked
+
+    private void currentCrossingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentCrossingTableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = currentCrossingTable.getSelectedRow();
+        if(selectedRow != -1){
+            String blockID = (String) currentCrossingTable.getValueAt(selectedRow, 1);
+            crossingNumberTextField.setText(blockID + "");
+        } else {
+            trackSignalNumberTextField.setText("Nothing Selected");
+        }
+    }//GEN-LAST:event_currentCrossingTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1236,7 +1271,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JLabel currentBlockLabel;
     private javax.swing.JScrollPane currentBlockScrollPane;
     public javax.swing.JTable currentBlockTable;
-    private javax.swing.JTable currentCrossingScrollPane;
+    public javax.swing.JTable currentCrossingTable;
     private javax.swing.JLabel currentCrossingsLabel;
     private javax.swing.JScrollPane currentCrossingsScrollPane;
     private javax.swing.JScrollPane currentSwitchScrollPane;

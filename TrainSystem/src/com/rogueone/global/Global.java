@@ -43,4 +43,8 @@ public class Global {
         GREEN_0, GREEN_1_2, GREEN_3, GREEN_4_5, RED_12, RED_6_11
     }
     
+    public enum CrossingState{
+        ACTIVE, INACTIVE
+    }
+    
 }
