@@ -5,7 +5,7 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 2/11/17
+ * @modification date 2/12/17
  */
 package com.rogueone.mbo;
 import java.io.File;
@@ -33,6 +33,8 @@ import javax.swing.table.*;
 public class Mbo{
     public static ArrayList<String> trains = new ArrayList<String>();
     public static MovingBlockGUI mboGui = new MovingBlockGUI();
+   public static File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+   public static int trainIndex;
     
     /**
      * Reads th excel file for the personnel schedule, then outputs it to the GUI
@@ -40,10 +42,9 @@ public class Mbo{
      * @throws IOException
      * @throws InvalidFormatException 
      */
-    public static void readPersonnelSchedule(MovingBlockGUI gui) throws IOException, InvalidFormatException{
+    public static void readPersonnelSchedule(File file) throws IOException, InvalidFormatException{
          String tableInfo="";
         //Openning Excel Sheet
-        File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet personnelSchedule = workbook.getSheetAt(0);
         int numEmployees = personnelSchedule.getLastRowNum();
@@ -74,7 +75,7 @@ public class Mbo{
       columnNames[7]="SAT";
       
       DefaultTableModel model = new DefaultTableModel(data, columnNames);
-      gui.pScheduleTable.setModel(model);
+      mboGui.pScheduleTable.setModel(model);
      
     }
    
@@ -84,8 +85,8 @@ public class Mbo{
      * @throws IOException
      * @throws InvalidFormatException 
      */
-    public static void readRedSchedule(TrainScheduleGUI gui) throws IOException, InvalidFormatException{
-        File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+    public static void readRedSchedule(TrainScheduleGUI gui, File file) throws IOException, InvalidFormatException{
+        
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet redSchedule = workbook.getSheetAt(1);
         int numTrains = redSchedule.getLastRowNum();
@@ -176,60 +177,54 @@ public class Mbo{
      * 
      */
     public static void displayCurrentTrains(){
-        String[] dummyDataRed = {"Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0"};
-        String[] dummyDataGreen = {"Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0"};
+        String[] dummyDataRed = {"Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
+        String[] dummyDataGreen = {"Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
         String[][] dummyData = {dummyDataRed, dummyDataGreen};
         int length = trains.size();
         Object[] trainArray = trains.toArray();
         Object[][] data = new Object[6][9];
         Object[] columnNames={"TRAIN ID", "TRAIN LINE", "TRACK SECTION", "BLOCK", "NEXT STATION", "TIME OF ARRIVAL", "AUTHORITY", "CURRENT SPEED", "SUGGESTED SPEED", "PASSENGERS"};
         int i=0,j=0;
-        
+        mboGui.TrainDropdown.removeAllItems();
         
         for(i=0;i<length;i++){
-            
-           mboGui.TrainDropdown.insertItemAt(trainArray[i].toString(), i);
            
-           
+           mboGui.TrainDropdown.addItem(trainArray[i].toString());
            for(j=0;j<9;j++){
                 if(j==0){
                   data[i][0]= trainArray[i]; 
+                  
                 }
                 else{
                     data[i][j]=dummyData[i][j-1];
                 }
            }
-            //System.out.println(data[0][j]);
         }
        
-         //JPanel mboPanel = new JPanel();
-         //gui.MboPanel.
-         //gui.mboPanel.remove(mboPanel.trainTable);
-         //gui.remove(gui.TrainDropdown);
-           //gui.MboPanel.revalidate();
-            //gui.MboPanel.repaint();
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        //model.addRow(columnNames);
-        //gui.trainTable.revalidate();
         mboGui.trainTable.setModel(model);
         model.fireTableDataChanged();
-        model.fireTableDataChanged();
-        model.fireTableDataChanged();
         mboGui.trainTable.repaint();
-       // model.fireTableChanged(null);
-            
-        
+    }
+    
+    public void updateTrainID(int newIdIndex){
+        if(trains.size()>0){
+        String newID = trains.get(newIdIndex);
+        mboGui.TrainIdValue.setText(newID);
+    }
     }
     
    public void deploy() throws IOException, InvalidFormatException{
        File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet redSchedule = workbook.getSheetAt(1);
-        Row currRow = redSchedule.getRow(1);
+        Row currRow = redSchedule.getRow(trainIndex);
         String trainID = currRow.getCell(0).toString();
         String[] IDs = trainID.split("\\.");
+        
         trains.add(IDs[0]);
-        System.out.println(trainID); 
+        trainIndex=trainIndex+1;
+         
         displayCurrentTrains();
         
    }  
@@ -278,10 +273,11 @@ public class Mbo{
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(mboGui);
         frame.pack();
+        trainIndex = 1;
         //deploy(mboGui);
         //deploy(mboGui);
         displayCurrentTrains();
-        readPersonnelSchedule(mboGui);
+        readPersonnelSchedule(file);
         frame.setVisible(true);
         
     }

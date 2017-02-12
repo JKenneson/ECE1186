@@ -127,8 +127,8 @@ public class MovingBlockGUI extends javax.swing.JPanel {
             TrainSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TrainSchedulePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TrainSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 931, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(TrainSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
+                .addContainerGap())
         );
         TrainSchedulePanelLayout.setVerticalGroup(
             TrainSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +161,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
             PersonnelSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PersonnelSchedulePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PersonnelSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+                .addComponent(PersonnelSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PersonnelSchedulePanelLayout.setVerticalGroup(
@@ -186,9 +186,9 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
         MboSuggestedAuthorityLabel.setText("Suggested Authority:");
 
-        MboUnitLabel.setText("km/hr");
+        MboUnitLabel.setText("mph");
 
-        MboUnitLabel2.setText("km");
+        MboUnitLabel2.setText("feet");
 
         trainDeployButton.setText("Deploy Next Train");
         trainDeployButton.addActionListener(new java.awt.event.ActionListener() {
@@ -540,7 +540,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
                                 .addComponent(MboModePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(PersonnelSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(276, 276, 276))))
+                                .addGap(209, 209, 209))))
                     .addComponent(TrainSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -583,7 +583,12 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_MboOkButton1ActionPerformed
 
     private void TrainDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainDropdownActionPerformed
-        // TODO add your handling code here;:
+        MovingBlockGUI gui = new MovingBlockGUI();
+        Mbo mbo = new Mbo();
+      int trainIdIndex = gui.TrainDropdown.getSelectedIndex();
+       System.out.println(trainIdIndex);
+       mbo.updateTrainID(trainIdIndex);
+       //gui.TrainIdValue.setText(trainID);
     }//GEN-LAST:event_TrainDropdownActionPerformed
 
     private void FixedBlockRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FixedBlockRadioActionPerformed
@@ -591,7 +596,27 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_FixedBlockRadioActionPerformed
 
     private void UploadScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadScheduleButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser scheduleChooser = new JFileChooser();
+        int returnVal = scheduleChooser.showOpenDialog(this);
+        TrainScheduleGUI trainGUI = new TrainScheduleGUI();
+        Mbo mbo = new Mbo();
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = scheduleChooser.getSelectedFile();
+            try {
+                Mbo.readRedSchedule(trainGUI,file);
+                Mbo.readPersonnelSchedule(file);
+            }
+            catch (IOException ex) {
+                System.out.println("problem accessing file"+file.getAbsolutePath());
+            }
+            catch (InvalidFormatException ex) {
+                System.out.println("Please select an .xlsx file.");
+            }
+        } else if (returnVal == JFileChooser.CANCEL_OPTION){
+           System.out.println("File access cancelled by user.");
+        }
+        scheduleChooser.setVisible(true);
+                                       
     }//GEN-LAST:event_UploadScheduleButtonActionPerformed
 
     private void ThroughputRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputRadioActionPerformed
@@ -625,8 +650,9 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
          TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
          Mbo mbo = new Mbo();
+         File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
          try{
-         mbo.readRedSchedule(trainSchedule);
+         mbo.readRedSchedule(trainSchedule, file);
          }
          catch(IOException | InvalidFormatException e){
              
@@ -692,7 +718,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     private javax.swing.JTextField ThroughputInput;
     private javax.swing.JRadioButton ThroughputRadio;
     public javax.swing.JComboBox<String> TrainDropdown;
-    private javax.swing.JLabel TrainIdValue;
+    public javax.swing.JLabel TrainIdValue;
     private javax.swing.JScrollPane TrainSchedule;
     private javax.swing.JPanel TrainSchedulePanel;
     private javax.swing.JButton UploadScheduleButton;

@@ -46,7 +46,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -61,9 +61,9 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="MboModePanel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="PersonnelSchedulePanel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="276" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -113,8 +113,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="TrainSchedule" min="-2" pref="931" max="-2" attributes="0"/>
-                          <EmptySpace pref="20" max="32767" attributes="0"/>
+                          <Component id="TrainSchedule" pref="976" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -318,7 +318,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="PersonnelSchedule" pref="663" max="32767" attributes="0"/>
+                          <Component id="PersonnelSchedule" pref="730" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -605,12 +605,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="MboUnitLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="km/hr"/>
+                    <Property name="text" type="java.lang.String" value="mph"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="MboUnitLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="km"/>
+                    <Property name="text" type="java.lang.String" value="feet"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="trainDeployButton">
@@ -867,6 +867,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0010"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="CurrentSpeedValue">
                   <Properties>
