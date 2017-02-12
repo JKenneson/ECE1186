@@ -6,6 +6,7 @@
 package com.rogueone.traincon;
 
 import com.rogueone.traincon.gui.TrainControllerGUI;
+import com.rogueone.trainmodel.TrainModel; //Should I it this way or how???
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class TrainController {
     private boolean rightDoorOpen;
     private boolean lightsOn;
     private boolean airConditioningOn;
-    private boolean headerOn;
+    private boolean heaterOn;
     private boolean serviceBrakeActivated;
     private boolean emergencyBrakeActivated;
     private boolean emergencyBrakeOverride;
@@ -55,13 +56,12 @@ public class TrainController {
     private double eK_1;
     private double uK;
     private double uK_1;
-    private long lastTime;    
-    private double totalError;
     
     //Announcements
     private String announcement;
     
     //Train Information
+    private TrainModel trainModel;
     private String trainID;
     private String line;
     private String section;
@@ -71,28 +71,34 @@ public class TrainController {
     private int temperature;
     
     //Failures
+    private int failureType;
     private boolean antennaStatus;
     private boolean powerStatus;
     private boolean serviceBrakeStatus;
     
     /**
      * 
+     * @param tm
      * @param setPointSpeed
      * @param authority
+     * @param maxPow
      * @param trainID
      * @param line
      * @param section
      * @param block 
      */
-    public TrainController(int setPointSpeed, int authority, String trainID,
+    public TrainController(TrainModel tm, int setPointSpeed, int authority, double maxPow, String trainID,
            String line, String section, String block){
+        
+        this.trainModel = tm; //Should come from passed (this) reference
+        
         //Initialize Train Controller Object
         this.manualMode = false;
         this.leftDoorOpen = false;
         this.rightDoorOpen = false;
         this.lightsOn = false;
         this.airConditioningOn = false;
-        this.headerOn = false;
+        this.heaterOn = false;
         this.serviceBrakeActivated = false;
         this.emergencyBrakeActivated = false;
         this.emergencyBrakeOverride = false;
@@ -103,14 +109,12 @@ public class TrainController {
         this.authority = authority;
         this.driverSetPoint = 0;
         this.recommendedSetPoint = setPointSpeed;
-        this.powerCommand = calculatePower(0.0, .001);
         this.kP = 0;
         this.kI = 0;
         this.eK = 0;
         this.eK_1 = 0;
         this.uK = 0;
         this.uK_1 = 0;
-
 
         //Announcements
         this.announcement = "Departing Yard";
@@ -120,16 +124,22 @@ public class TrainController {
         this.line = line;
         this.section = section;
         this.block = block;
-        this.maxPower = getMaxPower();
+        this.maxPower = maxPow;
         this.passengers = updatePassengers();
-        this.temperature = updateTemp();
+        updateClimateControl(this.trainModel);
 
         //Failures
+        this.failureType = getFailureType();
         this.antennaStatus = false;
         this.powerStatus = false;
         this.serviceBrakeStatus = false;
     }    
     
+    /**
+     *
+     * @param trainControllerObject
+     * @return
+     */
     public TrainControllerGUI CreateGUIObject(TrainController trainControllerObject){
         //Create GUI object
         TrainControllerGUI trainControllerGUI = new TrainControllerGUI(trainControllerObject);
@@ -145,7 +155,35 @@ public class TrainController {
         trainControllerObject.InitializeInputPanel(trainControllerGUI);
         
         return  trainControllerGUI;  //Return the GUI object
+    }
+    
+    /**
+     * 
+     * @param gui 
+     */
+    private void InitializeInputPanel(TrainControllerGUI gui) {
         
+        gui.TrainInfoText.append("Train ID: " + this.trainID + "\nLine: " + 
+        this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
+        "\nPassengers: " + this.passengers + "\nTemp: " + this.temperature);
+        gui.TrainInfoText.setEditable(false);
+        
+        gui.ActualSpeedLabel.setText(String.valueOf(this.currSpeed));
+        gui.SetSpeedLabel.setText(String.valueOf(this.speedLimit));
+        gui.AuthorityLabel.setText(String.valueOf(this.authority));
+        gui.PowerUsedLabel.setText(String.valueOf(this.powerCommand));
+        gui.MaxPowerLabel.setText(String.valueOf(this.maxPower));
+        gui.NotificationsDisplay.append(this.announcement);
+        gui.NotificationsDisplay.setEditable(false);
+        gui.KiInput.setValue(this.kI);
+        gui.KpInput.setValue(this.kP);
+        gui.ClockText.append(getTime());//Get value from global clock value (EST)
+        
+        for(int i = 0; i < getNumberOfTrains(); i++){
+            //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
+            //snag train array and add them to the drop down list
+        }        
+        //Add more functionality in future    
     }
     
     /**
@@ -198,10 +236,6 @@ public class TrainController {
     public void setKI(int Ki){
         this.kI = Ki;
     }
-
-    private double getSpeed(){//Ask for speed from train model
-        return 0.0;
-    }
     
     /**
      * 
@@ -211,21 +245,19 @@ public class TrainController {
         return 0; 
     }    
     
-    /**
-     * 
-     * @return 
-     */
-    private int updateTemp(){ //should pull temp information from train model
-        return 0; 
-    }
+    
+    
+    //*************CAN I IMPORT TRAINMODEL OR HOW DO I DO THIS?************//
     
     /**
      * 
      * @return 
      */
-    private int getMaxPower() { //should pull temp information from train model
-        return 0;
+    private void updateClimateControl(TrainModel tm){ //should pull temp information from train model
+        this.temperature = tm.getTemperature();
     }
+    
+    //*************CAN I IMPORT TRAINMODEL OR HOW DO I DO THIS?************//
     
     private String getTime(){
         return "4:20:00 PM April 20, 420!"; //Get value from global time class
@@ -238,47 +270,16 @@ public class TrainController {
     private ArrayList getTrainArray(){
         return null;
     }
-    
-    /**
-     * 
-     * @param gui 
-     */
-    private void InitializeInputPanel(TrainControllerGUI gui) {
-        
-        gui.TrainInfoText.append("Train ID: " + this.trainID + "\nLine: " + 
-        this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
-        "\nPassengers: " + this.passengers + "\nTemp: " + this.temperature);
-        gui.TrainInfoText.setEditable(false);
-        
-        gui.ActualSpeedLabel.setText(String.valueOf(this.currSpeed));
-        gui.SetSpeedLabel.setText(String.valueOf(this.speedLimit));
-        gui.AuthorityLabel.setText(String.valueOf(this.authority));
-        gui.PowerUsedLabel.setText(String.valueOf(this.powerCommand));
-        gui.MaxPowerLabel.setText(String.valueOf(this.maxPower));
-        gui.NotificationsDisplay.append(this.announcement);
-        gui.NotificationsDisplay.setEditable(false);
-        gui.KiInput.setValue(this.kI);
-        gui.KpInput.setValue(this.kP);
-        gui.ClockText.append(getTime());//Get value from global clock value (EST)
-        
-        for(int i = 0; i < getNumberOfTrains(); i++){
-            //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
-            //snag train array and add them to the drop down list
-        }        
-        
-        //Add more functionality in future
-        
-    }
-    
-    private boolean getFailure(){//get from train model
-        return false;
-    }
-    
+            
     private int getFailureType(){  //get from train model
         return 0;                        //Set values for different
     }                                       //Failure combos?
+    
+    private void updateValues(){
         
-    private void update(TrainControllerGUI gui){
+    }
+        
+    private void updateGUI(TrainControllerGUI gui){
     
         for(int i = 0; i < getNumberOfTrains(); i++){
             //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
@@ -291,17 +292,38 @@ public class TrainController {
         else {
             gui.LeftDoorClosed.setSelected(true);
         }
+        
         if(this.rightDoorOpen) {
             gui.RightDoorOpened.setSelected(true);
         }
         else {
             gui.RightDoorClosed.setSelected(true);
         }
+        
         if(this.lightsOn) {
             gui.LightsOn.setSelected(true);
         }
         else {
             gui.LightsOff.setSelected(true);
+        }
+
+        if(this.airConditioningOn){
+            gui.ACOn.setSelected(true);
+            gui.ACOff.setSelected(false);
+            gui.HeatOff.setSelected(true);
+            gui.HeatOn.setSelected(false);
+        }
+        else if(this.heaterOn){
+            gui.ACOn.setSelected(false);
+            gui.ACOff.setSelected(true);
+            gui.HeatOff.setSelected(false);
+            gui.HeatOn.setSelected(true);
+        }
+        else{
+            gui.ACOn.setSelected(false);
+            gui.ACOff.setSelected(true);
+            gui.HeatOff.setSelected(true);
+            gui.HeatOn.setSelected(false);
         }
         
         gui.TrainInfoText.setText(null);
