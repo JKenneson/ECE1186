@@ -26,14 +26,17 @@ public class TrainModel {
     NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
     DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     
-    public final double MAX_ACCELERATION = 0.5;     //Max acceleration of 0.5 m/s^2
-    public final double SECONDS_IN_AN_HOUR = 3600;  //3600 seconds in an hour
-    public final double METERS_IN_A_MILE = 1609.34; //1609.34 meters in a mile
-    public final double KG_IN_A_POUND = 0.454;      //0.454 kg = 1 pound
-    public final double CAR_LENGTH = 105.64;        //1 car's train length (in feet)
-    public final double CAR_WEIGHT = 81800;         //1 car's train weight (in lbs)
-    public final int CAR_CAPACITY = 222;            //1 car's passenger max capacity 
-    public final double PASS_WEIGHT = 165.35;       //1 passenger's weight (in lbs)
+    public final double MAX_ACCELERATION = 0.5;         //Max acceleration of 0.5 m/s^2
+    public final double COEFFICIENT_OF_FRICTION = 0.16; //Assuming the coefficient of friction between train wheel and track is 0.16 (steel on steel - lubricated)
+    public final double NUMBER_OF_WHEELS = 12;          //Assuming there are 12 wheels per car to distribute the force to the track
+    public final double GRAVITY = 9.8;                  //9.8 m/s^2 for acceleration due to gravity
+    public final double SECONDS_IN_AN_HOUR = 3600;      //3600 seconds in an hour
+    public final double METERS_IN_A_MILE = 1609.34;     //1609.34 meters in a mile
+    public final double KG_IN_A_POUND = 0.454;          //0.454 kg = 1 pound
+    public final double CAR_LENGTH = 105.64;            //1 car's train length (in feet)
+    public final double CAR_WEIGHT = 81800;             //1 car's train weight (in lbs)
+    public final int CAR_CAPACITY = 222;                //1 car's passenger max capacity 
+    public final double PASS_WEIGHT = 165.35;           //1 passenger's weight (in lbs)
     
     //Variable declaration for the class
     //Nanotime trackers for calculating velocity and distance
@@ -62,6 +65,7 @@ public class TrainModel {
     private double powerReceived;   //kW
     private double grade;
     private double force;           //N
+    private double frictionForce;   //N -> (uk * m)
     private double acceleration;    //m/s^2
     //Station and Passengers
     private String approachingStation;
@@ -111,6 +115,7 @@ public class TrainModel {
         this.powerReceived = 0;
         this.grade = 0;
         this.force = 0;
+        this.frictionForce = 0;
         this.acceleration = 0;
         //Station and Passengers
         this.approachingStation = "";
@@ -311,6 +316,7 @@ public class TrainModel {
      * This method should be called every clock cycle and will update all important characteristics of the TrainModel, such as:
      * 1)   Length, weight, pass max capacity based on number of cars and passengers in train     
      * 2)   Its velocity based on the power sent in from the TrainController
+     * 3)   Adjust for friction.  Assuming the coefficient of kinetic friction between the train and track is 0.16 (steel on steel -> lubricated)
      * 
      * @author Jonathan Kenneson
      */
@@ -342,6 +348,11 @@ public class TrainModel {
             this.force = (this.powerReceived * 1000) / (double)this.currSpeed;
         }
         
+        //3)    Adjust for friction.  uk = 0.16   Friction = uk * FN = uk * m * g
+        this.frictionForce = COEFFICIENT_OF_FRICTION * (this.trainWeight * KG_IN_A_POUND)/NUMBER_OF_WHEELS * GRAVITY;        //Convert lbs to kg
+        //Sum the forces
+        this.force = this.force - this.frictionForce;
+        
         //F=m*a  -> Calculate the acceleration by dividing the force by the mass
         this.acceleration = this.force / (this.trainWeight * KG_IN_A_POUND);        //Convert lbs to kg
         
@@ -354,6 +365,10 @@ public class TrainModel {
         System.out.println(this.acceleration);
         //Calculate current speed in ft/s
         this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);    //Find seconds by dividing elapsed time by a billion
+        //Check for negative speed (impossible)
+        if(this.currSpeed < 0) {
+            this.currSpeed = 0;
+        }
         this.lastSpeed = this.currSpeed;                                                                //Assign the last speed to the current speed for the next cycle
                 
         //Current speed is in ft/s, convert to mph to print out
