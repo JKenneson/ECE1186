@@ -6,22 +6,28 @@
 package com.rogueone.traincon.gui;
 
 import com.rogueone.traincon.TrainController;
+import com.rogueone.trainmodel.TrainModel;
 
 /**
  *
  * @author kylemonto
  */
 public class TrainControllerGUI extends javax.swing.JPanel {
+    
+    //This is to call the main Train Model class's methods while using the GUI
+    TrainController trainController;
 
     /**
      * Creates new form TrainControllerGUI
      */
     public TrainControllerGUI() {
         initComponents();
+        this.trainController = new TrainController(new TrainModel(40, 500, 1), this, 50, 200, 500, "123", "G", "AA", "13"); //for testing purposes
     }
 
-    public TrainControllerGUI(TrainController trainControllerObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TrainControllerGUI(TrainController tc) {
+        initComponents();
+        this.trainController = tc;
     }
 
     /**
@@ -261,6 +267,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         AnnouncementText.setText("Type Announcement Here...");
 
         SendAnnouncement.setText("Make Announcement");
+        SendAnnouncement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SendAnnouncementActionPerformed(evt);
+            }
+        });
 
         KpLabel.setText("Kp");
 
@@ -498,6 +509,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         );
 
         EmergencyBrakeToggleButton.setText("Emergency Brake");
+        EmergencyBrakeToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmergencyBrakeToggleButtonActionPerformed(evt);
+            }
+        });
 
         TrainInformation.setBorder(javax.swing.BorderFactory.createTitledBorder("Train Information"));
 
@@ -796,6 +812,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         ServiceBrakeFailureCheck.setText("Service Brake");
 
         PowerFailureCheck.setText("Power");
+        PowerFailureCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PowerFailureCheckActionPerformed(evt);
+            }
+        });
 
         AntennaFailureCheck.setText("Antenna");
 
@@ -884,20 +905,53 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ServiceBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeToggleButtonActionPerformed
-        // TODO add your handling code here:
+        if(this.ServiceBrakeToggleButton.isSelected()){
+            this.trainController.setServiceBrakeActivated(true);
+            this.trainController.getTrainModel().setServiceBrakeActivated(true); //Is this cool with Jon?
+            this.NotificationsDisplay.append("\nService Brake Activated");
+        }
+        else{
+            this.trainController.setServiceBrakeActivated(false);
+            this.trainController.getTrainModel().setServiceBrakeActivated(false); //Is this cool with Jon?
+            this.NotificationsDisplay.append("\nService Brake Deactivated");
+        }
     }//GEN-LAST:event_ServiceBrakeToggleButtonActionPerformed
 
     private void SetKpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKpActionPerformed
-        // TODO add your handling code here:
+        this.trainController.setKP(Integer.valueOf(this.KpInput.getValue().toString()));
+        this.NotificationsDisplay.append("\nKp Updated");
     }//GEN-LAST:event_SetKpActionPerformed
 
     private void SetKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKiActionPerformed
-        // TODO add your handling code here:
+        this.trainController.setKI(Integer.valueOf(this.KiInput.getValue().toString()));
+        this.NotificationsDisplay.append("\nKi Updated");
     }//GEN-LAST:event_SetKiActionPerformed
 
     private void TrainSelectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainSelectorButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TrainSelectorButtonActionPerformed
+
+    private void SendAnnouncementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendAnnouncementActionPerformed
+        this.NotificationsDisplay.append("\n" + this.AnnouncementText.getText());
+        this.AnnouncementText.setText("Type Announcement Here...");
+    }//GEN-LAST:event_SendAnnouncementActionPerformed
+
+    private void EmergencyBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyBrakeToggleButtonActionPerformed
+        if(this.EmergencyBrakeToggleButton.isSelected()){
+            this.trainController.setEmergencyBrakeActivated(true);
+            this.trainController.getTrainModel().setEmergencyBrakeActivated(true);
+            this.NotificationsDisplay.append("\nEmergency Brake Activated");
+        }
+        else{
+            this.trainController.setEmergencyBrakeActivated(false);
+            this.trainController.getTrainModel().setEmergencyBrakeActivated(false);
+            this.NotificationsDisplay.append("\nEmergency Brake Deactivated");
+        }
+    }//GEN-LAST:event_EmergencyBrakeToggleButtonActionPerformed
+
+    private void PowerFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerFailureCheckActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PowerFailureCheckActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

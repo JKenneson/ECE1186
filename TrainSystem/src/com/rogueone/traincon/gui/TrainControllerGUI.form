@@ -505,6 +505,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Make Announcement"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SendAnnouncementActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="KpInput">
           <AuxValues>
@@ -826,6 +829,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Emergency Brake"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EmergencyBrakeToggleButtonActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -1466,6 +1472,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Power"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PowerFailureCheckActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

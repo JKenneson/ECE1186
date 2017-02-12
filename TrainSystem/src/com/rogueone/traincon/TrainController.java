@@ -7,6 +7,7 @@ package com.rogueone.traincon;
 
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.TrainModel; //Should I it this way or how???
+import com.rogueone.trainmodel.entities.TrainFailures;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -41,6 +42,30 @@ public class TrainController {
     private boolean serviceBrakeActivated;
     private boolean emergencyBrakeActivated;
     private boolean emergencyBrakeOverride;
+
+    public void setLeftDoorOpen(boolean leftDoorOpen) {
+        this.leftDoorOpen = leftDoorOpen;
+    }
+
+    public void setRightDoorOpen(boolean rightDoorOpen) {
+        this.rightDoorOpen = rightDoorOpen;
+    }
+
+    public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
+        this.serviceBrakeActivated = serviceBrakeActivated;
+    }
+
+    public void setEmergencyBrakeActivated(boolean emergencyBrakeActivated) {
+        this.emergencyBrakeActivated = emergencyBrakeActivated;
+    }
+
+    public void setDriverSetPoint(int driverSetPoint) {
+        this.driverSetPoint = driverSetPoint;
+    }
+    
+    public TrainModel getTrainModel() {
+        return this.trainModel;
+    }
     
     //Speed and Authority
     private double currSpeed;
@@ -62,6 +87,7 @@ public class TrainController {
     
     //Train Information
     private TrainModel trainModel;
+    private TrainControllerGUI gui;
     private String trainID;
     private String line;
     private String section;
@@ -87,10 +113,12 @@ public class TrainController {
      * @param section
      * @param block 
      */
-    public TrainController(TrainModel tm, int setPointSpeed, int authority, double maxPow, String trainID,
+    public TrainController(TrainModel tm, TrainControllerGUI gui, int setPointSpeed, int authority, double maxPow, String trainID,
            String line, String section, String block){
         
         this.trainModel = tm; //Should come from passed (this) reference
+        this.gui = gui;
+        
         
         //Initialize Train Controller Object
         this.manualMode = false;
@@ -109,8 +137,8 @@ public class TrainController {
         this.authority = authority;
         this.driverSetPoint = 0;
         this.recommendedSetPoint = setPointSpeed;
-        this.kP = 0;
-        this.kI = 0;
+        this.kP = 500;
+        this.kI = 30000;
         this.eK = 0;
         this.eK_1 = 0;
         this.uK = 0;
@@ -125,14 +153,19 @@ public class TrainController {
         this.section = section;
         this.block = block;
         this.maxPower = maxPow;
-        this.passengers = updatePassengers();
-        updateClimateControl(this.trainModel);
+//        this.passengers = updatePassengers();
+  //      updateClimateControl(this.trainModel);
 
         //Failures
         this.failureType = getFailureType();
         this.antennaStatus = false;
         this.powerStatus = false;
         this.serviceBrakeStatus = false;
+        
+        if(gui != null){
+            this.updateGUI(gui);
+        }
+        
     }    
     
     /**
@@ -191,9 +224,13 @@ public class TrainController {
      * @return 
      */
     private int getSpeedLimit(){ //should pull speed limit information from
-        return 0;                //loaded track xlx after calculating location.
+        return 55;                //loaded track xlx after calculating location.
     }
     
+    /**
+     * 
+     * @return 
+     */
     private double getSetPoint(){
         if(this.manualMode){
             return this.driverSetPoint;
@@ -204,9 +241,38 @@ public class TrainController {
     }
     
     /**
+     * This method is called from the TrainModelGUI when a failure is activated and sent through
+     * the "Send New Failure" button. For now, the response will be to activate the emergency brake. 
+     * Later, the TrainModel will alert the TrainController to handle these
      * 
-     * @param actualSpeed
-     * @param samplePeriod
+     * @author Jonathan Kenneson
+     * @param failure One of 3 TrainFailures as found in TrainFailures.java
+     */
+    public void causeFailure(TrainFailures failure) {
+        //Switch on the failure passed in
+        switch(failure) {
+            //A power failure will prevent the doors, lights, and temp setting from working.  Activate emergency brake
+            case Power:
+                this.powerStatus = false;               //In any setter methods below, the value will not be updated if there is a power failure
+                this.emergencyBrakeOverride = true;
+                break;
+            //A brake failure will prevent the service brake from being activated. Activate the emergency brake
+            case Brake:
+                this.serviceBrakeStatus = false;
+                this.emergencyBrakeOverride = true;
+                break;
+            //Deactivate the track and mbo antenna.  Activate emergency brake
+            case Antenna:
+                this.antennaStatus = false;
+                this.emergencyBrakeOverride = true;
+                break;
+        }
+    }
+    
+    /**
+     * 
+     * @param actualSpeed The current speed from the Train Model
+     * @param samplePeriod The sampling period defined by the Train Model
      * @return 
      */
     public double calculatePower(double actualSpeed, double samplePeriod){ //should pull speed limit information from
@@ -237,24 +303,22 @@ public class TrainController {
         this.kI = Ki;
     }
     
-    /**
-     * 
-     * @return 
-     */
-    private int updatePassengers(){ //should pull passenger information from train model
-        return 0; 
-    }    
-    
-    
-    
     //*************CAN I IMPORT TRAINMODEL OR HOW DO I DO THIS?************//
     
     /**
      * 
      * @return 
      */
-    private void updateClimateControl(TrainModel tm){ //should pull temp information from train model
-        this.temperature = tm.getTemperature();
+    private void updatePassengers(){ //should pull passenger information from train model
+        this.passengers = this.trainModel.getPassengersOnBaord();
+    }    
+    
+    /**
+     * 
+     * @return 
+     */
+    private void updateClimateControl(){ //should pull temp information from train model
+        this.temperature = this.trainModel.getTemperature();
     }
     
     //*************CAN I IMPORT TRAINMODEL OR HOW DO I DO THIS?************//
@@ -272,14 +336,35 @@ public class TrainController {
     }
             
     private int getFailureType(){  //get from train model
-        return 0;                        //Set values for different
-    }                                       //Failure combos?
+        if(!this.powerStatus){
+            if(!this.antennaStatus){
+                if(!this.serviceBrakeStatus){
+                    return 7; //All 3 are failed
+                }
+                return 4; //Power and antenna are out
+            }
+            else if(!this.serviceBrakeStatus){
+                return 5;//Power and service brake are out
+            }
+            return 1; //Only power has failed
+        }
+        else if(!this.antennaStatus){
+            if(!this.serviceBrakeStatus){
+                return 6;
+            }
+            return 2;
+        }
+        else if(!this.serviceBrakeStatus){
+            return 3;
+        }
+        return 0; //default, all clear
+    }                                       
     
-    private void updateValues(){
+    private void updateController(){
         
     }
         
-    private void updateGUI(TrainControllerGUI gui){
+    public void updateGUI(TrainControllerGUI gui){
     
         for(int i = 0; i < getNumberOfTrains(); i++){
             //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
@@ -326,6 +411,9 @@ public class TrainController {
             gui.HeatOn.setSelected(false);
         }
         
+        gui.KpInput.setValue(this.kP);
+        gui.KiInput.setValue(this.kI);
+        
         gui.TrainInfoText.setText(null);
         gui.TrainInfoText.append("Train ID: " + this.trainID + "\nLine: " + 
         this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
@@ -338,11 +426,11 @@ public class TrainController {
                 case 1://Power Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("FAILURE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     gui.StatusAntennaLabel.setText("ACTIVE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     gui.StatusBrakeLabel.setText("ACTIVE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     
                     //Update simulation boxes
                     gui.PowerFailureCheck.setSelected(true);
@@ -353,11 +441,11 @@ public class TrainController {
                 case 2://Antenna Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("ACTIVE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     gui.StatusAntennaLabel.setText("FAILURE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     gui.StatusBrakeLabel.setText("ACTIVE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(false);
@@ -368,11 +456,11 @@ public class TrainController {
                 case 3://Brake Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("ACTIVE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     gui.StatusAntennaLabel.setText("ACTIVE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     gui.StatusBrakeLabel.setText("FAILURE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(false);
@@ -382,11 +470,11 @@ public class TrainController {
                     
                 case 4://Power and Antenna Failure
                     gui.StatusPowerLabel.setText("FAILURE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     gui.StatusAntennaLabel.setText("FAILURE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     gui.StatusBrakeLabel.setText("ACTIVE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(true);
@@ -397,11 +485,11 @@ public class TrainController {
                 case 5://Power and Brake Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("FAILURE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     gui.StatusAntennaLabel.setText("ACTIVE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     gui.StatusBrakeLabel.setText("FAILURE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(true);
@@ -412,11 +500,11 @@ public class TrainController {
                 case 6://Antenna and Brake Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("ACTIVE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     gui.StatusAntennaLabel.setText("FAILURE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     gui.StatusBrakeLabel.setText("FAILURE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(false);
@@ -426,11 +514,11 @@ public class TrainController {
                     
                 case 7://Power, Antenna, and Brake Failure
                     gui.StatusPowerLabel.setText("FAILURE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     gui.StatusAntennaLabel.setText("FAILURE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     gui.StatusBrakeLabel.setText("FAILURE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(true);
@@ -441,11 +529,11 @@ public class TrainController {
                 default:
                     //Update status panel
                     gui.StatusPowerLabel.setText("ACTIVE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     gui.StatusAntennaLabel.setText("ACTIVE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     gui.StatusBrakeLabel.setText("ACTIVE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("TrainSystem/src/com/rougeone/images/CIRC_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
                     
                     //Update simulation boxes
                     gui.PowerFailureCheck.setSelected(false);
