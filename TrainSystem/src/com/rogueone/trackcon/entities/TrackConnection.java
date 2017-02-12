@@ -15,7 +15,7 @@ import org.apache.poi.ss.usermodel.Cell;
  * @author kylemonto
  */
 public class TrackConnection {
-    
+
     private Global.Section section1;
     private Global.Section section2;
     private int blockID1;
@@ -24,7 +24,7 @@ public class TrackConnection {
     public TrackConnection(String stringCellValue) {
         Pattern r = Pattern.compile("(\\w+)-(\\d+):(\\w+)-(\\d+)");
         Matcher m = r.matcher(stringCellValue);
-        if(m.find()){
+        if (m.find()) {
             section1 = Global.Section.valueOf(m.group(1));
             section2 = Global.Section.valueOf(m.group(3));
             blockID1 = Integer.parseInt(m.group(2));
@@ -32,10 +32,7 @@ public class TrackConnection {
         } else {
             System.out.println("Nothing found when parsing Track Connnection");
         }
-        
     }
-
-    
 
     public Global.Section getSection1() {
         return section1;
@@ -68,6 +65,12 @@ public class TrackConnection {
     public void setBlockID2(int blockID2) {
         this.blockID2 = blockID2;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+        b.append(this.section1 + "-" + this.blockID1 + ":" + this.section2 + "-" + this.blockID2);
+        return b.toString();
+    }
+
 }

@@ -25,7 +25,9 @@ public class SwitchState {
         this.alternateConnection = trackConnectionAlternate;
     }
 
-    public SwitchState(TrackConnection trackConnectionDefault, ArrayList<Light> lightsDefault, TrackConnection trackConnectionAlternate, ArrayList<Light> lightsAlternate) {
+
+    public SwitchState(Global.SwitchState switchState, TrackConnection trackConnectionDefault, ArrayList<Light> lightsDefault, TrackConnection trackConnectionAlternate, ArrayList<Light> lightsAlternate) {
+        this.switchState = switchState;
         this.defaultConnection = trackConnectionDefault;
         this.lightsDefault = lightsDefault;
         this.alternateConnection = trackConnectionAlternate;
@@ -56,6 +58,16 @@ public class SwitchState {
     public void setAlternateConnection(TrackConnection alternateConnection) {
         this.alternateConnection = alternateConnection;
     }
+
+    public ArrayList<Light> getLightsDefault() {
+        return lightsDefault;
+    }
+
+    public ArrayList<Light> getLightsAlternate() {
+        return lightsAlternate;
+    }
+    
+    
 
 
     

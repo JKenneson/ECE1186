@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -51,18 +52,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class TrackController {
 
-
     private HashMap<Global.LogicGroups, LogicTrackGroup> logicGroupsGreenArray;
     private HashMap<Global.LogicGroups, LogicTrackGroup> logicGroupsRedArray;
     private HashMap<Integer, Switch> switchGreenArray;
     private HashMap<Integer, Switch> switchRedArray;
-    
+
     private TrackModel trackModelTest1;
-    
-    
-    
-    public TrackController(){
-        
+
+    public TrackController() {
+
         this.trackModelTest1 = new TrackModel();
         try {
             trackModelTest1.parseDataFile(new File("src/com/rogueone/assets/TrackData.xlsx"));
@@ -71,16 +69,18 @@ public class TrackController {
         } catch (InvalidFormatException ex) {
             ex.printStackTrace();
         }
-        
-        
+
     }
 
     public static void main(String[] args) {
-        
-        TrackController trackControllerTest1 = new TrackController();
-        
-        TrackControllerGUI trackControllerGUITest1 = trackControllerTest1.createGUIObject(trackControllerTest1);
 
+        TrackController trackControllerTest1 = new TrackController();
+
+        TrackControllerGUI trackControllerGUITest1 = trackControllerTest1.createGUIObject(trackControllerTest1);
+        File defaultPLC = new File("src/com/rogueone/assets/wayside_fun.xlsx");
+        trackControllerTest1.loadPLC(defaultPLC);
+        trackControllerGUITest1.plcProgramTextField.setText(defaultPLC.getName());
+        trackControllerTest1.updateSummaryTab(trackControllerGUITest1);
         while (true) {
             trackControllerTest1.updateGUI(trackControllerGUITest1);
             if (trackControllerGUITest1.isDisplayable() == false) {
@@ -88,7 +88,7 @@ public class TrackController {
                 break;
             }
         }
-        
+
     }
 
     /**
@@ -120,7 +120,7 @@ public class TrackController {
                 lightsAlternate.add(light1Alternate);
                 lightsAlternate.add(light2Alternate);
                 TrackConnection trackConnectionAlternate = new TrackConnection(tempRow.getCell(5).getStringCellValue());
-                SwitchState switchState = new SwitchState(trackConnectionDefault, lightsDefault, trackConnectionAlternate, lightsAlternate);
+                SwitchState switchState = new SwitchState(Global.SwitchState.DEFAULT, trackConnectionDefault, lightsDefault, trackConnectionAlternate, lightsAlternate);
                 Switch trackSwitch = new Switch((int) tempRow.getCell(0).getNumericCellValue(), tempRow.getCell(1).getStringCellValue(), switchState);
                 switchGreenArray.put(trackSwitch.getSwitchID(), trackSwitch);
             }
@@ -188,7 +188,7 @@ public class TrackController {
 
                 logicGroupsGreenArray.put(Global.LogicGroups.valueOf(sheet.getSheetName()), logicTrackGroup);
             }
-            
+
             //Start of Red line import
             sheet = plcWorkbook.getSheet("RED_SWITCHES");
             switchRedArray = new HashMap<Integer, Switch>();
@@ -210,13 +210,13 @@ public class TrackController {
                 lightsAlternate.add(light2Alternate);
                 lightsAlternate.add(light3Alternate);
                 TrackConnection trackConnectionAlternate = new TrackConnection(tempRow.getCell(6).getStringCellValue());
-                SwitchState switchState = new SwitchState(trackConnectionDefault, lightsDefault, trackConnectionAlternate, lightsAlternate);
+                SwitchState switchState = new SwitchState(Global.SwitchState.DEFAULT, trackConnectionDefault, lightsDefault, trackConnectionAlternate, lightsAlternate);
                 Switch trackSwitch = new Switch((int) tempRow.getCell(0).getNumericCellValue(), tempRow.getCell(1).getStringCellValue(), switchState);
                 switchRedArray.put(trackSwitch.getSwitchID(), trackSwitch);
             }
-            
+
             logicGroupsRedArray = new HashMap<Global.LogicGroups, LogicTrackGroup>();
-            
+
             for (int s = 6; s < 8; s++) {
                 sheet = plcWorkbook.getSheetAt(s);
 
@@ -275,7 +275,6 @@ public class TrackController {
 
                 logicGroupsRedArray.put(Global.LogicGroups.valueOf(sheet.getSheetName()), logicTrackGroup);
             }
-            
 
             LogicTrackGroup ltg = logicGroupsGreenArray.get(Global.LogicGroups.GREEN_0);
             StateSet currentState = ltg.getCurrentTrackState();
@@ -289,7 +288,7 @@ public class TrackController {
             for (Map.Entry<StateSet, UserSwitchState> entry : mappings.entrySet()) {
                 StateSet key = entry.getKey();
                 UserSwitchState value = entry.getValue();
-                if(key.equals(currentState)){
+                if (key.equals(currentState)) {
                     System.out.println("Mapping contains current State");
                     //return UserSwitchState
                 } else {
@@ -324,30 +323,76 @@ public class TrackController {
         try {
             TimeUnit.SECONDS.sleep(5);
             System.out.println("5 Seconds Passed");
-            
-            ArrayList<Block> blocks = this.trackModelTest1.getBlocks();
-            for(int i = 0; i < blocks.size(); i++){
-                if(blocks.get(i).getLine().getLineID() != Global.Line.GREEN){
-                    blocks.remove(i);
-                }
-            }
-            
-                
-            String blockColumnNames[] = { "Section", "BlockID", "Occupied", "Status"};
-            DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
-            for(int i = 0; i < blocks.size(); i++){
-                String status = "Active";
-                if(blocks.get(i).getFailureBrokenRail() || blocks.get(i).getFailureBrokenRail() || blocks.get(i).getFailureBrokenRail()){
-                    status = "Inactive";
-                }
-                String blockRowData[] = { blocks.get(i).getSection() + "", blocks.get(i).getID() + "", blocks.get(i).isOccupied() + "",  status + ""};
-                blockModel.addRow(blockRowData);
-            }
-            
-            trackControllerGUITest1.currentBlockTable.setModel(blockModel);
-            
+
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void updateSummaryTab(TrackControllerGUI trackControllerGUITest1) {
+        String switchColumnNames[] = {"Section", "Block ID", "Switch ID", "State", "Connection"};
+        DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
+
+        String lightColumnNames[] = {"Section", "Block ID", "Light State"};
+        DefaultTableModel lightModel = new DefaultTableModel(lightColumnNames, 0);
+
+        HashMap<Integer, Switch> displaySwitchArray = null;
+        String selectedController = (String) trackControllerGUITest1.currentTrackControllerComboBox.getSelectedItem();
+        if (selectedController.contains("Green")) {
+            displaySwitchArray = this.switchGreenArray;
+        } else {
+            displaySwitchArray = this.switchRedArray;
+        }
+
+        Set<Entry<Integer, Switch>> switchSet = displaySwitchArray.entrySet();
+        Iterator switchIterator = switchSet.iterator();
+        while (switchIterator.hasNext()) {
+            Entry<Integer, Switch> switchIteration = (Entry<Integer, Switch>) switchIterator.next();
+            Integer switchID = switchIteration.getKey();
+            Switch switchObject = switchIteration.getValue();
+            SwitchState switchState = switchObject.getSwitchState();
+            TrackConnection currentTrackConnection = null;
+            ArrayList<Light> currentLights = null;
+            if (switchState.getSwitchState() == Global.SwitchState.DEFAULT) {
+                currentTrackConnection = switchState.getDefaultConnection();
+                currentLights = switchState.getLightsDefault();
+            } else {
+                currentTrackConnection = switchState.getAlternateConnection();
+                currentLights = switchState.getLightsAlternate();
+            }
+            //add switch to table model
+            String switchRowData[] = {switchObject.getSection() + "", switchObject.getBlockID() + "", switchObject.getSwitchID() + "", switchState.getSwitchState() + "", currentTrackConnection + ""};
+            switchModel.addRow(switchRowData);
+            //add lights to table model
+            Iterator lightsIterator = currentLights.iterator();
+            while (lightsIterator.hasNext()) {
+                Light lightIteration = (Light) lightsIterator.next();
+                String lightRowData[] = {lightIteration.getSection() + "", lightIteration.getBlockID() + "", lightIteration.getLightState() + ""};
+                lightModel.addRow(lightRowData);
+            }
+        }
+        
+
+        ArrayList<Block> blocks = this.trackModelTest1.getBlocks();
+        for (int i = 0; i < blocks.size(); i++) {
+            if (blocks.get(i).getLine().getLineID() != Global.Line.GREEN) {
+                blocks.remove(i);
+            }
+        }
+
+        String blockColumnNames[] = {"Section", "BlockID", "Occupied", "Status"};
+        DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
+        for (int i = 0; i < blocks.size(); i++) {
+            String status = "Active";
+            if (blocks.get(i).getFailureBrokenRail() || blocks.get(i).getFailureBrokenRail() || blocks.get(i).getFailureBrokenRail()) {
+                status = "Inactive";
+            }
+            String blockRowData[] = {blocks.get(i).getSection() + "", blocks.get(i).getID() + "", blocks.get(i).isOccupied() + "", status + ""};
+            blockModel.addRow(blockRowData);
+        }
+        
+        trackControllerGUITest1.currentSwitchTable.setModel(switchModel);
+        trackControllerGUITest1.currentBlockTable.setModel(blockModel);
+        trackControllerGUITest1.currentTrackSignalsTable.setModel(lightModel);
     }
 }

@@ -29,6 +29,8 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     public TrackControllerGUI(TrackController trackController) {
         initComponents();
         this.trackController = trackController;
+        lineTextField.setText((String)currentTrackControllerComboBox.getSelectedItem());
+        
     }
 
     /**
@@ -316,6 +318,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         componentSummaryPanel.add(currentTrackControllerComboBox, gridBagConstraints);
 
@@ -323,6 +326,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         componentSummaryPanel.add(currentTrackControllerLabel, gridBagConstraints);
 
@@ -348,14 +352,14 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         componentSummaryPanel.add(currentTrainsScrollPane, gridBagConstraints);
 
-        currentTrainLabel.setText("Current Trains - Red/Green - 1/2");
+        currentTrainLabel.setText("Current Trains");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         componentSummaryPanel.add(currentTrainLabel, gridBagConstraints);
 
-        currentSwitchesLabel.setText("Switches - Red/Green - 1/2");
+        currentSwitchesLabel.setText("Switches");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -364,15 +368,35 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
         currentSwitchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "F-D:C-A"},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Switch ID", "State - Connection"
+                "Section", "Block ID", "Switch ID", "State", "Connection"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        currentSwitchTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                currentSwitchTableMouseClicked(evt);
+            }
+        });
         currentSwitchScrollPane.setViewportView(currentSwitchTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -385,10 +409,10 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         componentSummaryPanel.add(currentSwitchScrollPane, gridBagConstraints);
 
-        currentCrossingsLabel.setText("Crossing - Red/Green - 1/2");
+        currentCrossingsLabel.setText("Crossing");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 2;
         componentSummaryPanel.add(currentCrossingsLabel, gridBagConstraints);
 
@@ -407,7 +431,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -415,10 +439,10 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         componentSummaryPanel.add(currentCrossingsScrollPane, gridBagConstraints);
 
-        currentBlockLabel.setText("Block - Red/Green - 1/2");
+        currentBlockLabel.setText("Block");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         componentSummaryPanel.add(currentBlockLabel, gridBagConstraints);
 
@@ -445,6 +469,11 @@ public class TrackControllerGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        currentBlockTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                currentBlockTableMouseClicked(evt);
+            }
+        });
         currentBlockScrollPane.setViewportView(currentBlockTable);
         if (currentBlockTable.getColumnModel().getColumnCount() > 0) {
             currentBlockTable.getColumnModel().getColumn(0).setResizable(false);
@@ -455,7 +484,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -463,30 +492,55 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         componentSummaryPanel.add(currentBlockScrollPane, gridBagConstraints);
 
-        currentTrackSignalLabel.setText("Track Signals - Red/Green - 1/2");
+        currentTrackSignalLabel.setText("Track Signals");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
         componentSummaryPanel.add(currentTrackSignalLabel, gridBagConstraints);
 
         currentTrackSignalsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"D", "Green"},
-                {"A", "Red"},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Track Signal ID", "Status"
+                "Section", "Block ID", "Light State"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        currentTrackSignalsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                currentTrackSignalsTableMouseClicked(evt);
+            }
+        });
         currentTrackSignalsScrollPane.setViewportView(currentTrackSignalsTable);
+        if (currentTrackSignalsTable.getColumnModel().getColumnCount() > 0) {
+            currentTrackSignalsTable.getColumnModel().getColumn(0).setResizable(false);
+            currentTrackSignalsTable.getColumnModel().getColumn(1).setResizable(false);
+            currentTrackSignalsTable.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -1126,6 +1180,39 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         lineTextField.setText((String)currentTrackControllerComboBox.getSelectedItem());
     }//GEN-LAST:event_currentTrackControllerComboBoxActionPerformed
 
+    private void currentSwitchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentSwitchTableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = currentSwitchTable.getSelectedRow();
+        if(selectedRow != -1){
+            String switchID = (String) currentSwitchTable.getValueAt(selectedRow, 2);
+            switchNumberTextField.setText(switchID + "");
+        } else {
+            switchNumberTextField.setText("Nothing Selected");
+        }
+    }//GEN-LAST:event_currentSwitchTableMouseClicked
+
+    private void currentBlockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentBlockTableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = currentBlockTable.getSelectedRow();
+        if(selectedRow != -1){
+            String switchID = (String) currentBlockTable.getValueAt(selectedRow, 1);
+            blockNumberTextField.setText(switchID + "");
+        } else {
+            blockNumberTextField.setText("Nothing Selected");
+        }
+    }//GEN-LAST:event_currentBlockTableMouseClicked
+
+    private void currentTrackSignalsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentTrackSignalsTableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = currentTrackSignalsTable.getSelectedRow();
+        if(selectedRow != -1){
+            String switchID = (String) currentTrackSignalsTable.getValueAt(selectedRow, 1);
+            trackSignalNumberTextField.setText(switchID + "");
+        } else {
+            trackSignalNumberTextField.setText("Nothing Selected");
+        }
+    }//GEN-LAST:event_currentTrackSignalsTableMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionsPanel;
@@ -1153,13 +1240,13 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JLabel currentCrossingsLabel;
     private javax.swing.JScrollPane currentCrossingsScrollPane;
     private javax.swing.JScrollPane currentSwitchScrollPane;
-    private javax.swing.JTable currentSwitchTable;
+    public javax.swing.JTable currentSwitchTable;
     private javax.swing.JLabel currentSwitchesLabel;
-    private javax.swing.JComboBox<String> currentTrackControllerComboBox;
+    public javax.swing.JComboBox<String> currentTrackControllerComboBox;
     private javax.swing.JLabel currentTrackControllerLabel;
     private javax.swing.JLabel currentTrackSignalLabel;
     private javax.swing.JScrollPane currentTrackSignalsScrollPane;
-    private javax.swing.JTable currentTrackSignalsTable;
+    public javax.swing.JTable currentTrackSignalsTable;
     private javax.swing.JLabel currentTrainLabel;
     private javax.swing.JScrollPane currentTrainsScrollPane;
     private javax.swing.JTable currentTrainsTable;
@@ -1176,7 +1263,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane plcProgramInputScrollPane;
     private javax.swing.JTextArea plcProgramInputTextArea;
     private javax.swing.JLabel plcProgramLabel;
-    private javax.swing.JTextField plcProgramTextField;
+    public javax.swing.JTextField plcProgramTextField;
     private javax.swing.JPanel plcSysNotifPanel;
     private javax.swing.JPanel position1Panel;
     private javax.swing.ButtonGroup position1TrainButtonGroup;

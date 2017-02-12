@@ -58,7 +58,12 @@ public class Light {
         this.section = section;
     }
     
-    
+    @Override
+    public String toString(){
+        StringBuilder b = new StringBuilder();
+        b.append(this.section + "-" + this.blockID + ":" + this.lightState);
+        return b.toString();
+    }
     
     
     

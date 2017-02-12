@@ -59,7 +59,10 @@ public class Switch {
     public void setSwitchState(SwitchState switchState) {
         this.switchState = switchState;
     }
+
+    public Global.Section getSection() {
+        return section;
+    }
     
-    
-    
+ 
 }
