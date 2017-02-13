@@ -125,6 +125,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridheight = 10;
         gridBagConstraints.ipadx = 21;
         gridBagConstraints.ipady = -8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -168,7 +170,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 {"Green",  new Integer(98), "T:2",  new Boolean(true)},
                 {"Green",  new Integer(91), "V:9",  new Boolean(true)},
                 {"Red",  new Integer(120), "X:7", null},
-                {null,  new Integer(5), "Z:2",  new Boolean(true)}
+                {"Green",  new Integer(5), "Z:2",  new Boolean(true)}
             },
             new String [] {
                 "Line", "Train", "Position", "Status"
@@ -382,7 +384,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(BrowserPanel2, gridBagConstraints);
@@ -394,49 +396,49 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel67, gridBagConstraints);
 
         jLabel68.setText("Current Line");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel68, gridBagConstraints);
 
         jLabel69.setText("Current Section");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel69, gridBagConstraints);
 
         jLabel70.setText("Current Block");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel70, gridBagConstraints);
 
         jLabel71.setText("Speed");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel71, gridBagConstraints);
 
         jLabel72.setText("Authority");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel72, gridBagConstraints);
 
         jLabel74.setText("Current Capacity");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel74, gridBagConstraints);
 
         InformationHeader2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
@@ -452,21 +454,21 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel75, gridBagConstraints);
 
         TrainSpeedLabel2.setText("mph");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(TrainSpeedLabel2, gridBagConstraints);
 
         TrainAuthorityLabel2.setText("ft");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(TrainAuthorityLabel2, gridBagConstraints);
 
         TrainNameField.setText("254");
@@ -480,7 +482,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(TrainNameField, gridBagConstraints);
 
@@ -494,7 +496,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(CurrentLineField, gridBagConstraints);
 
@@ -508,7 +510,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(CurrentBlockField, gridBagConstraints);
 
@@ -522,7 +524,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 53;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(CurrentSectionField, gridBagConstraints);
 
@@ -536,8 +538,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 7;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 35.0;
         InformationPanel2.add(AuthorityField, gridBagConstraints);
 
         SpeedField.setText("23.2");
@@ -550,7 +552,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(SpeedField, gridBagConstraints);
 
@@ -564,7 +566,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(MaxCapacityField, gridBagConstraints);
 
@@ -578,29 +580,29 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 8;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 35.0;
         InformationPanel2.add(CurrentCapacityField, gridBagConstraints);
 
         jLabel5.setText("people");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("people");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel6, gridBagConstraints);
 
         jLabel76.setText("Status");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel76, gridBagConstraints);
 
         StatusField.setPreferredSize(new java.awt.Dimension(35, 26));
@@ -612,7 +614,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(StatusField, gridBagConstraints);
 
@@ -652,8 +654,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         AdditionalInfoPanel2.add(TrackShutdownButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(AdditionalInfoPanel2, gridBagConstraints);
@@ -769,7 +771,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(DispatchControlPanel, gridBagConstraints);
@@ -815,6 +818,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         SystemInformationPanel.add(TimeField, gridBagConstraints);
 
@@ -827,6 +831,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         SystemInformationPanel.add(RushHourField, gridBagConstraints);
 
@@ -839,6 +844,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         SystemInformationPanel.add(ThroughputField, gridBagConstraints);
 
@@ -858,7 +864,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(SystemInformationPanel, gridBagConstraints);
@@ -989,6 +995,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
         
+        InitializeGUIObject();
+
         InformationHeader2.setText("Selected Train Information");
 
         jLabel67.setText("Train Name");
@@ -1070,6 +1078,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private void BlockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BlockTableMouseClicked
         //set up screen for Block Info
         
+        InitializeGUIObject();
+        
         InformationHeader2.setText("Selected Block Information");
         jLabel67.setText("Block Section");
         jLabel68.setText("Block Line");
@@ -1097,6 +1107,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         MaxCapacityField.setVisible(true);
         StatusField.setVisible(true);
         
+        
        
         if (evt.getClickCount() == 1){
             JTable blockTable = (JTable)evt.getSource();
@@ -1109,12 +1120,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             CurrentSectionField.setText(Integer.toString(blockNumber));
             CurrentLineField.setText(line);
             
-            Object booleanBlockStatus = blockTable.getValueAt(row, 3);
-            if (booleanBlockStatus == null){
-                StatusField.setText("Disabled");
+            Boolean booleanBlockStatus = (Boolean)blockTable.getValueAt(row, 3);
+            if (booleanBlockStatus == true){
+                StatusField.setText("Operational");
             }
             else {
-                StatusField.setText("Operational");
+                StatusField.setText("Disabled");
             }
             
         }
@@ -1128,6 +1139,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_BlockTableMouseClicked
 
     private void FailureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FailureTableMouseClicked
+        InitializeGUIObject();
+        
         InformationHeader2.setText("Selected Failure Information");
         
         jLabel67.setText("Failure Type");
