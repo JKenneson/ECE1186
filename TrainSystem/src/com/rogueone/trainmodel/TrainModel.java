@@ -134,6 +134,10 @@ public class TrainModel {
         this.trackAntennaActivated = true;
         this.mboAntennaActivated = true;
     }
+
+    public TrainModel(double dispatchSpeed, double dispatchAuthority, int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /**
      * This function will create, display, and return a GUI object for the Train Model class that can be interacted with

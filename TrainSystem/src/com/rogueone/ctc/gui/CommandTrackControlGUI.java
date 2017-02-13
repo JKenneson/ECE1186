@@ -10,12 +10,9 @@ package com.rogueone.ctc.gui;
 //import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import com.rogueone.trainmodel.TrainModel;
 
 
-/**
- *
- * @author kylemonto
- */
 public class CommandTrackControlGUI extends javax.swing.JPanel {
     
     int trainID;
@@ -46,13 +43,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         MapImage2 = new javax.swing.JLabel();
         BrowserPanel2 = new javax.swing.JTabbedPane();
         jPanel19 = new javax.swing.JPanel();
-        jLabel64 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         TrainTable = new javax.swing.JTable();
         ChangeParametersButton3 = new javax.swing.JButton();
         jLabel88 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
-        jLabel66 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane6 = new javax.swing.JScrollPane();
         BlockTable = new javax.swing.JTable();
@@ -79,8 +74,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         SpeedField = new javax.swing.JTextField();
         MaxCapacityField = new javax.swing.JTextField();
         CurrentCapacityField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel76 = new javax.swing.JLabel();
         StatusField = new javax.swing.JTextField();
         AdditionalInfoPanel2 = new javax.swing.JPanel();
@@ -150,14 +143,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         });
         jPanel19.setLayout(new java.awt.GridBagLayout());
 
-        jLabel64.setText("Trains");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
-        jPanel19.add(jLabel64, gridBagConstraints);
-
         TrainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Green",  new Integer(7), "D:2",  new Boolean(true)},
@@ -180,7 +165,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -197,6 +182,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         jScrollPane9.setViewportView(TrainTable);
+        if (TrainTable.getColumnModel().getColumnCount() > 0) {
+            TrainTable.getColumnModel().getColumn(0).setHeaderValue("Line");
+            TrainTable.getColumnModel().getColumn(1).setHeaderValue("Train");
+            TrainTable.getColumnModel().getColumn(2).setHeaderValue("Position");
+            TrainTable.getColumnModel().getColumn(3).setHeaderValue("Status");
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -244,14 +235,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         jPanel20.setLayout(new java.awt.GridBagLayout());
-
-        jLabel66.setText("Blocks");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
-        jPanel20.add(jLabel66, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -298,6 +281,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        BlockTable.setPreferredSize(new java.awt.Dimension(300, 176));
+        BlockTable.setRequestFocusEnabled(false);
         BlockTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BlockTableMouseClicked(evt);
@@ -387,7 +372,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(BrowserPanel2, gridBagConstraints);
 
         InformationPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Information"));
@@ -470,18 +454,22 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         InformationPanel2.add(jLabel75, gridBagConstraints);
 
         TrainSpeedLabel2.setText("mph");
+        TrainSpeedLabel2.setPreferredSize(new java.awt.Dimension(15, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(TrainSpeedLabel2, gridBagConstraints);
 
-        TrainAuthorityLabel2.setText("ft");
+        TrainAuthorityLabel2.setText("feet");
+        TrainAuthorityLabel2.setPreferredSize(new java.awt.Dimension(15, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(TrainAuthorityLabel2, gridBagConstraints);
 
@@ -605,22 +593,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(CurrentCapacityField, gridBagConstraints);
-
-        jLabel5.setText("people");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel5, gridBagConstraints);
-
-        jLabel6.setText("people");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel6, gridBagConstraints);
 
         jLabel76.setText("Status");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -764,7 +736,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jPanel3.add(jLabel11, gridBagConstraints);
 
         DispatchSpeedField.setText("Enter Speed");
+        DispatchSpeedField.setToolTipText("");
         DispatchSpeedField.setPreferredSize(new java.awt.Dimension(100, 26));
+        DispatchSpeedField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DispatchSpeedFieldMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -774,6 +752,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         DispatchAuthorityField.setText("Enter Authority");
         DispatchAuthorityField.setPreferredSize(new java.awt.Dimension(100, 26));
+        DispatchAuthorityField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DispatchAuthorityFieldMouseClicked(evt);
+            }
+        });
         DispatchAuthorityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DispatchAuthorityFieldActionPerformed(evt);
@@ -794,7 +777,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
         jPanel3.add(jLabel12, gridBagConstraints);
 
-        jLabel13.setText("ft");
+        jLabel13.setText("feet");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 4;
@@ -1007,8 +990,21 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_CurrentCapacityFieldActionPerformed
 
+   
     private void RushHourFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RushHourFieldActionPerformed
-        // TODO add your handling code here:
+        int timeHours, timeMinutes;
+        String time = (String)TimeField.getText();
+        String[] timeParts = time.split(":"); 
+        timeHours = Integer.parseInt((timeParts[0]));
+        timeMinutes = Integer.parseInt(timeParts[1]);
+        System.out.println(timeHours);
+        if ((timeHours < 8) && (timeHours > 5)){
+            RushHourField.setText("YES");
+        }
+        else{
+            RushHourField.setText("NO");
+        }
+// TODO add your handling code here:
     }//GEN-LAST:event_RushHourFieldActionPerformed
 
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
@@ -1052,8 +1048,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         
         TrainSpeedLabel2.setText("mph");
         TrainAuthorityLabel2.setText("feet");
-        jLabel5.setText("people");
-        jLabel6.setText("people");
+       
         
         SpeedField.setVisible(true);
         AuthorityField.setVisible(true);
@@ -1105,12 +1100,32 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             
             //TrainHandler.CreateGUIObject(trainID);
         }
-        
-        
-        
+    
                 // TODO add your handling code here:
     }//GEN-LAST:event_TrainTableMouseClicked
-
+    
+    /**
+     *
+     * @param trainID
+     * @param passTrainLine
+     */
+    public void DisableTrain(int trainID, String passTrainLine){
+        //DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
+        Boolean bool = false;
+        for ( int i = 0; i < TrainTable.getRowCount(); i ++){
+            if (((String)TrainTable.getValueAt(i, 0)).equals(passTrainLine)){
+                //System.out.println("match");
+               if ((Integer)TrainTable.getValueAt(i, 1) == trainID){
+                   //System.out.println("id match");
+                    TrainTable.setValueAt(bool, i, 3);
+                    String trainPosition = (String)TrainTable.getValueAt(i, 2);
+                    //updateFailureTable(passTrainLine, trainPosition, )
+               }
+            }
+        }
+        TrainTable.repaint();
+    }
+    
     private void StatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_StatusFieldActionPerformed
@@ -1133,8 +1148,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
    
         TrainSpeedLabel2.setText("");
         TrainAuthorityLabel2.setText("");
-        jLabel5.setText("");
-        jLabel6.setText("");
+       
         
         SpeedField.setVisible(true);
         AuthorityField.setVisible(true);
@@ -1211,8 +1225,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel76.setText("");
         TrainSpeedLabel2.setText("");
         TrainAuthorityLabel2.setText("");
-        jLabel5.setText("");
-        jLabel6.setText("");
         
         
         SpeedField.setVisible(false);
@@ -1258,8 +1270,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         String dispatchBlock = "A";
         int dispatchSection = 1;
 
-         //dispatchSpeed = DispatchSpeedField.getText();
-         //dispatchAuthority = DispatchAuthorityField.getText();
+         double dispatchSpeed = Double.valueOf(DispatchSpeedField.getText());
+         double dispatchAuthority = Double.valueOf(DispatchAuthorityField.getText());
 //        //check time to see number of cars
 //        //String currentTime = CommandTrackControlGUI.TimeField.getText();
 //        //if ( currentTime ...)
@@ -1268,8 +1280,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
           int dispatchID = iterativeID;
         
         addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
-
-        //newTrain(dispatchLine, dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchCurbWeight);
+        TrainModel newTrain = new TrainModel(dispatchSpeed, dispatchAuthority, 1);
 
         //get fields
         //globally dispatch
@@ -1296,6 +1307,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private void DispatchAuthorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchAuthorityFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchAuthorityFieldActionPerformed
+
+    private void DispatchSpeedFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DispatchSpeedFieldMouseClicked
+        DispatchSpeedField.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_DispatchSpeedFieldMouseClicked
+
+    private void DispatchAuthorityFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DispatchAuthorityFieldMouseClicked
+        DispatchAuthorityField.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_DispatchAuthorityFieldMouseClicked
 
 //    private void UpdateTableInformation(java.awt.event.ActionEvent evt){
 //        int selectedRowIndex = TrainTable.getSelectedRow();
@@ -1362,10 +1381,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
@@ -1393,3 +1408,5 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }
+
+
