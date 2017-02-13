@@ -265,18 +265,26 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 {"Green", "A",  new Integer(1),  new Boolean(true)},
                 {"Green", "A",  new Integer(2),  new Boolean(false)},
                 {"Green", "A",  new Integer(3),  new Boolean(true)},
-                {"Green", "B",  new Integer(1),  new Boolean(true)},
-                {"Green", "B",  new Integer(2),  new Boolean(true)},
-                {"Green", "B",  new Integer(3),  new Boolean(false)},
                 {"Green", "B",  new Integer(4),  new Boolean(true)},
                 {"Green", "B",  new Integer(5),  new Boolean(true)},
-                {"Green", "C",  new Integer(1),  new Boolean(true)},
-                {"Green", "C",  new Integer(2),  new Boolean(true)},
-                {"Green", "C",  new Integer(3),  new Boolean(true)},
-                {"Green", "C",  new Integer(4),  new Boolean(true)},
-                {"Green", "D",  new Integer(1),  new Boolean(true)},
-                {"Green", "D",  new Integer(2),  new Boolean(true)},
-                {null, "D",  new Integer(3),  new Boolean(true)}
+                {"Green", "B",  new Integer(6),  new Boolean(false)},
+                {"Green", "C",  new Integer(7),  new Boolean(true)},
+                {"Green", "C",  new Integer(8),  new Boolean(true)},
+                {"Green", "C",  new Integer(9),  new Boolean(true)},
+                {"Green", "C",  new Integer(10),  new Boolean(true)},
+                {"Green", "C",  new Integer(11),  new Boolean(true)},
+                {"Green", "C",  new Integer(12),  new Boolean(true)},
+                {"Green", "D",  new Integer(13),  new Boolean(true)},
+                {"Green", "D",  new Integer(14),  new Boolean(true)},
+                {"Green", "D",  new Integer(15),  new Boolean(true)},
+                {"Green", "D",  new Integer(16),  new Boolean(true)},
+                {"Green", "E",  new Integer(17), null},
+                {"Green", "E",  new Integer(18),  new Boolean(true)},
+                {"Green", "E",  new Integer(19),  new Boolean(true)},
+                {"Green", "E",  new Integer(20),  new Boolean(true)},
+                {"Green", "F",  new Integer(21),  new Boolean(true)},
+                {"Green", "F",  new Integer(22),  new Boolean(true)},
+                {"Green", "F",  new Integer(23),  new Boolean(true)}
             },
             new String [] {
                 "Line", "Section", "Block", "Status"
@@ -285,16 +293,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         BlockTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -397,6 +398,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel67, gridBagConstraints);
 
@@ -404,6 +406,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel68, gridBagConstraints);
 
@@ -411,6 +414,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel69, gridBagConstraints);
 
@@ -418,6 +422,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel70, gridBagConstraints);
 
@@ -425,6 +430,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel71, gridBagConstraints);
 
@@ -432,6 +438,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel72, gridBagConstraints);
 
@@ -439,6 +446,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel74, gridBagConstraints);
 
@@ -448,6 +456,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipady = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(InformationHeader2, gridBagConstraints);
@@ -456,6 +465,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel75, gridBagConstraints);
 
@@ -463,6 +473,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(TrainSpeedLabel2, gridBagConstraints);
 
@@ -470,6 +481,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(TrainAuthorityLabel2, gridBagConstraints);
 
@@ -484,6 +496,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(TrainNameField, gridBagConstraints);
@@ -498,6 +511,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(CurrentLineField, gridBagConstraints);
@@ -512,6 +526,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(CurrentBlockField, gridBagConstraints);
@@ -526,6 +541,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(CurrentSectionField, gridBagConstraints);
@@ -540,6 +556,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(AuthorityField, gridBagConstraints);
@@ -554,6 +571,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(SpeedField, gridBagConstraints);
@@ -568,6 +586,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(MaxCapacityField, gridBagConstraints);
@@ -582,6 +601,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(CurrentCapacityField, gridBagConstraints);
@@ -590,6 +610,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel5, gridBagConstraints);
 
@@ -597,6 +618,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel6, gridBagConstraints);
 
@@ -604,6 +626,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         InformationPanel2.add(jLabel76, gridBagConstraints);
 
@@ -616,6 +639,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(StatusField, gridBagConstraints);
@@ -1104,14 +1128,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel71.setText("Block Speed");
         jLabel72.setText("Station");
         jLabel74.setText("Crossing");
-        jLabel75.setText("Underground");
+        jLabel75.setText("Switch");
         jLabel76.setText("Status");
-        
-        TrainSpeedLabel2.setText("mph");
-        TrainAuthorityLabel2.setText("feet");
-        jLabel5.setText("");
-        jLabel6.setText("");
-        
+   
         TrainSpeedLabel2.setText("");
         TrainAuthorityLabel2.setText("");
         jLabel5.setText("");
@@ -1144,7 +1163,29 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 StatusField.setText("Disabled");
             }
             
-        }
+            if ((blockNumber == 2) || (blockNumber == 9) || (blockNumber == 16) || (blockNumber == 22)){
+                AuthorityField.setText("YES");
+            } //station
+            else{
+                AuthorityField.setText("NO");
+            }
+            
+            if (blockNumber == 12 ){
+                MaxCapacityField.setText("YES");      
+            }
+            else{
+                MaxCapacityField.setText("NO");      
+            } //switch
+            
+            if (blockNumber == 19 ){
+                CurrentCapacityField.setText("YES");      
+            }
+            else{
+                CurrentCapacityField.setText("NO");      
+            } //switch
+            
+            
+        }   
         
         if (evt.getClickCount() == 2){
         }
