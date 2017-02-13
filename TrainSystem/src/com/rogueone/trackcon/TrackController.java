@@ -19,6 +19,7 @@ import com.rogueone.trackcon.entities.UserSwitchState;
 import com.rogueone.trackcon.gui.TrackControllerGUI;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.TrackModel;
+import com.rogueone.trainmodel.TrainModel;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,6 +39,7 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.sl.draw.geom.Guide;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -62,10 +64,12 @@ public class TrackController {
     private Crossing redCrossing;
 
     private TrackModel trackModelTest1;
+    private HashMap<Integer, TrainModel> trainArray;
 
     public TrackController() {
 
         this.trackModelTest1 = new TrackModel();
+        this.trainArray = new HashMap<Integer, TrainModel>();
         try {
             trackModelTest1.parseDataFile(new File("src/com/rogueone/assets/TrackData.xlsx"));
         } catch (IOException ex) {
@@ -77,13 +81,17 @@ public class TrackController {
     }
 
     public static void main(String[] args) {
-
+        //initialize a new track controller
         TrackController trackControllerTest1 = new TrackController();
-
+        //initialize a new track controller GUI
         TrackControllerGUI trackControllerGUITest1 = trackControllerTest1.createGUIObject(trackControllerTest1);
+        //set the default PLC file
         File defaultPLC = new File("src/com/rogueone/assets/wayside_fun.xlsx");
+        //load the plc file into track controller
         trackControllerTest1.loadPLC(defaultPLC);
+        //set the plc program field on the gui
         trackControllerGUITest1.plcProgramTextField.setText(defaultPLC.getName());
+        //load the plc and track model data into the summary tab of track controller
         trackControllerTest1.updateSummaryTab(trackControllerGUITest1);
         while (true) {
             trackControllerTest1.updateGUI(trackControllerGUITest1);
@@ -432,6 +440,7 @@ public class TrackController {
 
         ArrayList<Switch> selectedGroupSwitches = selectedLogicGroup.getSwitches();
         gui.enableInputs(selectedLogicGroup);
+        gui.setImage(logicGroup);
     }
 
     public UserSwitchState updateStateMapping(LogicTrackGroup selectedLogicTrackGroup, StateSet guiStateSet, TrackControllerGUI gui) {
@@ -476,5 +485,26 @@ public class TrackController {
             // do stuff
         }
         return null;
+    }
+
+    public void addTrain(String trainID, String suggestedSpeed, String suggestedAuthority, TrackControllerGUI gui) {
+        TrainModel train = new TrainModel(Integer.parseInt(suggestedSpeed), Integer.parseInt(suggestedAuthority), 1);
+        this.trainArray.put(Integer.parseInt(trainID), train);
+        
+        String trainColumnNames[] = {"Train ID", "Suggested Speed", "Suggested Authority", "Commanded Speed", "Commanded Authority"};
+        DefaultTableModel trainModel = new DefaultTableModel(trainColumnNames, 0);
+        
+        Set<Entry<Integer, TrainModel>> trainSet = this.trainArray.entrySet();
+        Iterator trainIterator = trainSet.iterator();
+        while (trainIterator.hasNext()) {
+            Entry<Integer, TrainModel> currentTrain = (Entry<Integer, TrainModel>) trainIterator.next();
+            TrainModel currentTrainVal = currentTrain.getValue();
+            String trainRowData[] = {currentTrain.getKey() + "", currentTrainVal.getCtcSetPoint() + "", currentTrainVal.getAuthority() + "", currentTrainVal.getCtcSetPoint() + "", currentTrainVal.getAuthority() + ""};
+            trainModel.addRow(trainRowData);
+        }
+        
+        gui.currentTrainsTable.setModel(trainModel);
+        
+        
     }
 }
