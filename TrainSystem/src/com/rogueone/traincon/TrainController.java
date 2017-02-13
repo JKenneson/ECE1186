@@ -97,7 +97,6 @@ public class TrainController {
     private int temperature;
     
     //Failures
-    private int failureType;
     private boolean antennaStatus;
     private boolean powerStatus;
     private boolean serviceBrakeStatus;
@@ -135,7 +134,7 @@ public class TrainController {
         this.currSpeed = 0;
         this.speedLimit = getSpeedLimit();
         this.authority = authority;
-        this.driverSetPoint = 0;
+        this.driverSetPoint = setPointSpeed;
         this.recommendedSetPoint = setPointSpeed;
         this.kP = 500;
         this.kI = 30000;
@@ -157,10 +156,9 @@ public class TrainController {
   //      updateClimateControl(this.trainModel);
 
         //Failures
-        this.failureType = getFailureType();
-        this.antennaStatus = false;
-        this.powerStatus = false;
-        this.serviceBrakeStatus = false;
+        this.antennaStatus = true;
+        this.powerStatus = true;
+        this.serviceBrakeStatus = true;
         
         if(gui != null){
             this.updateGUI(gui);
@@ -187,7 +185,7 @@ public class TrainController {
         //Initialize the GUI
         trainControllerObject.InitializeInputPanel(trainControllerGUI);
         
-        return  trainControllerGUI;  //Return the GUI object
+        return trainControllerGUI;  //Return the GUI object
     }
     
     /**
@@ -240,6 +238,8 @@ public class TrainController {
         }
     }
     
+    
+    //**********SHOULD I INSTANTLY TRIP THE E BRAKE HERE???
     /**
      * This method is called from the TrainModelGUI when a failure is activated and sent through
      * the "Send New Failure" button. For now, the response will be to activate the emergency brake. 
@@ -266,6 +266,28 @@ public class TrainController {
                 this.antennaStatus = false;
                 this.emergencyBrakeOverride = true;
                 break;
+        }
+    }
+    
+    public void fixFailure(TrainFailures failure) {
+        //Switch on the failure passed in
+        switch(failure) {
+            //Undo the power failure
+            case Power:
+                this.powerStatus = true;
+                break;
+            //Undo the brake failure
+            case Brake:
+                this.serviceBrakeStatus = true;
+                break;
+            //Undo the antenna failure
+            case Antenna:
+                this.antennaStatus = true;
+                break;
+        }
+        //If there are no failures, de-activate the emergencyBrakeOverride
+        if(this.powerStatus && this.serviceBrakeStatus && this.antennaStatus) {
+            this.emergencyBrakeOverride = false;
         }
     }
     
@@ -365,7 +387,9 @@ public class TrainController {
     }
         
     public void updateGUI(TrainControllerGUI gui){
-    
+        
+        this.updateController();
+        
         for(int i = 0; i < getNumberOfTrains(); i++){
             //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
             //snag train array and add them to the drop down list
@@ -419,10 +443,13 @@ public class TrainController {
         this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
         "\nPassengers: " + this.passengers + "\nTemp: " + this.temperature);
         
-        if(!this.emergencyBrakeOverride || !this.emergencyBrakeActivated){      //Default to always print emergency brake if both emergency and service are activated
+        if(this.emergencyBrakeOverride || this.emergencyBrakeActivated){      //Default to always print emergency brake if both emergency and service are activated
+            
             gui.EmergencyBrakeToggleButton.setSelected(true);
 
+            System.out.println(getFailureType());
             switch(getFailureType()){
+                
                 case 1://Power Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("FAILURE");
@@ -541,13 +568,23 @@ public class TrainController {
                     gui.ServiceBrakeFailureCheck.setSelected(false);
                     break;
                     //must have been sent by passenger or driver
-                }
             }
+        }
+        else{
+            gui.EmergencyBrakeToggleButton.setSelected(false);
+            //Update status panel
+            gui.StatusPowerLabel.setText("ACTIVE");
+            gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+            gui.StatusAntennaLabel.setText("ACTIVE");
+            gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+            gui.StatusBrakeLabel.setText("ACTIVE");
+            gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+        }
 
-        if(!this.serviceBrakeActivated) {
+        if(this.serviceBrakeActivated) {
             gui.ServiceBrakeToggleButton.setSelected(true);
         }
-        else {
+        else{
             gui.ServiceBrakeToggleButton.setSelected(false);
         }        
         

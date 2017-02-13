@@ -7,6 +7,7 @@ package com.rogueone.traincon.gui;
 
 import com.rogueone.traincon.TrainController;
 import com.rogueone.trainmodel.TrainModel;
+import com.rogueone.trainmodel.entities.TrainFailures;
 
 /**
  *
@@ -441,14 +442,14 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                 .addGroup(StatusAnetnnaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(StatusAnetnnaPanelLayout.createSequentialGroup()
                         .addComponent(StatusAntennaImage, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(StatusAntennaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         StatusAnetnnaPanelLayout.setVerticalGroup(
             StatusAnetnnaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StatusAnetnnaPanelLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(StatusAntennaImage, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(StatusAntennaLabel)
@@ -474,7 +475,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                 .addGroup(StatusServiceBrakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(StatusServiceBrakePanelLayout.createSequentialGroup()
                         .addComponent(StatusBrakeImage, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(StatusBrakeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -810,6 +811,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         FailureSimulationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Failure Simulation"));
 
         ServiceBrakeFailureCheck.setText("Service Brake");
+        ServiceBrakeFailureCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ServiceBrakeFailureCheckActionPerformed(evt);
+            }
+        });
 
         PowerFailureCheck.setText("Power");
         PowerFailureCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -819,6 +825,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         });
 
         AntennaFailureCheck.setText("Antenna");
+        AntennaFailureCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AntennaFailureCheckActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout FailureSimulationPanelLayout = new javax.swing.GroupLayout(FailureSimulationPanel);
         FailureSimulationPanel.setLayout(FailureSimulationPanelLayout);
@@ -928,7 +939,8 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_SetKiActionPerformed
 
     private void TrainSelectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainSelectorButtonActionPerformed
-        // TODO add your handling code here:
+        this.trainController.updateGUI(this);
+        //Just used as an updater for now.
     }//GEN-LAST:event_TrainSelectorButtonActionPerformed
 
     private void SendAnnouncementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendAnnouncementActionPerformed
@@ -950,8 +962,37 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_EmergencyBrakeToggleButtonActionPerformed
 
     private void PowerFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerFailureCheckActionPerformed
-        // TODO add your handling code here:
+        if(this.PowerFailureCheck.isSelected()){
+            this.trainController.causeFailure(TrainFailures.Power);
+            this.NotificationsDisplay.append("\nPower Failure Simulated");
+        }
+        else{
+            this.trainController.fixFailure(TrainFailures.Power);
+            this.NotificationsDisplay.append("\nPower Failure Simulation Ended");
+        } 
     }//GEN-LAST:event_PowerFailureCheckActionPerformed
+
+    private void AntennaFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntennaFailureCheckActionPerformed
+        if(this.AntennaFailureCheck.isSelected()){
+            this.trainController.causeFailure(TrainFailures.Antenna);
+            this.NotificationsDisplay.append("\nAntenna Failure Simulated");
+        }
+        else{
+            this.trainController.fixFailure(TrainFailures.Antenna);
+            this.NotificationsDisplay.append("\nAntenna Failure Simulation Ended");
+        }
+    }//GEN-LAST:event_AntennaFailureCheckActionPerformed
+
+    private void ServiceBrakeFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeFailureCheckActionPerformed
+        if(this.ServiceBrakeFailureCheck.isSelected()){
+            this.trainController.causeFailure(TrainFailures.Brake);
+            this.NotificationsDisplay.append("\nService Brake Failure Simulated");
+        }
+        else{
+            this.trainController.fixFailure(TrainFailures.Brake);
+            this.NotificationsDisplay.append("\nService Brake Failure Simulation Ended");
+        }
+    }//GEN-LAST:event_ServiceBrakeFailureCheckActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
