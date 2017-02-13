@@ -457,7 +457,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         InformationPanel2.add(InformationHeader2, gridBagConstraints);
 
@@ -680,8 +680,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         AdditionalInfoPanel2.add(TrackShutdownButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(AdditionalInfoPanel2, gridBagConstraints);
@@ -692,6 +692,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel8.setText("Please select departure details for the newly dispatched train:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipady = 15;
         DispatchControlPanel.add(jLabel8, gridBagConstraints);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -903,7 +904,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         SystemInformationPanel.add(jLabel7, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -939,9 +940,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 77;
-        gridBagConstraints.ipady = 77;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         add(jScrollPane1, gridBagConstraints);
@@ -1042,7 +1042,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel67.setText("Train Name");
         jLabel68.setText("Current Line");
         jLabel69.setText("Current Section");
-        jLabel70.setText("Current Blcok");
+        jLabel70.setText("Current Block");
         jLabel71.setText("Speed");
         jLabel72.setText("Authority");
         jLabel74.setText("Current Capacity");
