@@ -6,6 +6,7 @@
 
 package com.rogueone.trackmodel.gui;
 
+import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.Line;
 import com.rogueone.trackmodel.Section;
@@ -892,8 +893,20 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 Block b = (Block) trackModelGUI.blockSelectionComboBox.getSelectedItem();
                 
                 //Update Block Info
-                String blockColumnNames[] = { "ID", "Port A", "Port B", "Length (ft)", "Grade (%)", "Speed Limit (mph)", "Elevation (ft)", "Cum. Elevation (ft)", "Underground", "Crossing", "Beacon", "Occupied" };
-                String blockRowData[] = { b.getID() + "", b.getPortA().getID() + "", b.getPortB().getID() + "", b.getLength() + "", b.getGrade() + "", b.getSpeedLimit() + "", b.getElevation() + "", b.getCumulativeElevation() + "", b.isUnderground() + "", b.containsCrossing() + "", b.getBeaconMessage() + "", b.isOccupied() + "" };
+                String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Beacon", "Occupied" };
+                String blockRowData[] = { 
+                    b.getID() + "", 
+                    b.getPortA().getID() + "", 
+                    b.getPortB().getID() + "", 
+                    Global.decimalFormatter.format(b.getLength()) + " ft", 
+                    Global.decimalFormatter.format(b.getGrade()) + "%", 
+                    Global.decimalFormatter.format(b.getSpeedLimit()) + " mph", 
+                    Global.decimalFormatter.format(b.getElevation()) + " ft", 
+                    Global.decimalFormatter.format(b.getCumulativeElevation()) + " ft", 
+                    b.isUnderground() + "", 
+                    b.containsCrossing() + "", 
+                    b.getBeaconMessage() + "", 
+                    b.isOccupied() + "" };
                 DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
                 blockModel.addRow(blockRowData);
                 trackModelGUI.blockTable.setModel(blockModel);
