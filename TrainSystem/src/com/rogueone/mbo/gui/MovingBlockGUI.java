@@ -70,7 +70,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
         FixedBlockRadio = new javax.swing.JRadioButton();
         MovingBlockRadio = new javax.swing.JRadioButton();
         SelectTrainPrompt = new javax.swing.JLabel();
-        TrainDropdown = new javax.swing.JComboBox<String>();
+        TrainDropdown = new javax.swing.JComboBox<>();
         ControlModeLabel = new javax.swing.JLabel();
         SystemStatusLabel = new javax.swing.JLabel();
         MboLabel = new javax.swing.JLabel();
@@ -269,6 +269,11 @@ public class MovingBlockGUI extends javax.swing.JPanel {
         buttonGroup1.add(MovingBlockRadio);
         MovingBlockRadio.setSelected(true);
         MovingBlockRadio.setText("Moving Block");
+        MovingBlockRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MovingBlockRadioActionPerformed(evt);
+            }
+        });
 
         SelectTrainPrompt.setText("Select train to interact with:");
 
@@ -351,11 +356,11 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
         TrainIdValue.setText("0010");
 
-        CurrentSpeedValue.setText("30 mph");
+        CurrentSpeedValue.setText("- mph");
 
-        SuggestedSpeedValue.setText("35 mph");
+        SuggestedSpeedValue.setText("- mph");
 
-        DifferenceValue.setText("(+5 mph)");
+        DifferenceValue.setText("(- mph)");
 
         javax.swing.GroupLayout VariancePanelLayout = new javax.swing.GroupLayout(VariancePanel);
         VariancePanel.setLayout(VariancePanelLayout);
@@ -416,7 +421,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
             }
         });
 
-        UploadScheduleLabel.setText("Upload new personnel schedule (.xlsx)");
+        UploadScheduleLabel.setText("Upload new schedule (.xlsx)");
 
         GenerateScheduleLabel.setText("Generate new train schedule using desired...");
 
@@ -459,9 +464,6 @@ public class MovingBlockGUI extends javax.swing.JPanel {
         SchedulerInputsPanelLayout.setHorizontalGroup(
             SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
-                .addComponent(GenerateScheduleLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
                 .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
@@ -484,10 +486,11 @@ public class MovingBlockGUI extends javax.swing.JPanel {
                         .addGap(128, 128, 128)
                         .addComponent(UploadScheduleButton)))
                 .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SchedulerInputsPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(UploadScheduleLabel)
-                .addGap(53, 53, 53))
+            .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
+                .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(UploadScheduleLabel)
+                    .addComponent(GenerateScheduleLabel))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         SchedulerInputsPanelLayout.setVerticalGroup(
             SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,20 +582,26 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MboOkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton1ActionPerformed
-        // TODO add your handling code here:
+        Mbo mbo = new Mbo();
+        mbo.updateSpeed();
     }//GEN-LAST:event_MboOkButton1ActionPerformed
 
     private void TrainDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainDropdownActionPerformed
-        MovingBlockGUI gui = new MovingBlockGUI();
+        //MovingBlockGUI gui = new MovingBlockGUI();
         Mbo mbo = new Mbo();
-      int trainIdIndex = gui.TrainDropdown.getSelectedIndex();
-       System.out.println(trainIdIndex);
-       mbo.updateTrainID(trainIdIndex);
+      //int trainIdIndex = gui.TrainDropdown.getSelectedIndex();
+      //String trainID = String.valueOf(gui.TrainDropdown.getSelectedItem());
+       //System.out.println(trainIdIndex);
+       //mbo.updateTrainID(trainIdIndex);
+       mbo.updateTrainID();
        //gui.TrainIdValue.setText(trainID);
     }//GEN-LAST:event_TrainDropdownActionPerformed
 
     private void FixedBlockRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FixedBlockRadioActionPerformed
-        // TODO add your handling code here:
+        if(FixedBlockRadio.isSelected())
+        {
+            CurrentModeLabel.setText("Fixed Block Mode");
+        }
     }//GEN-LAST:event_FixedBlockRadioActionPerformed
 
     private void UploadScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadScheduleButtonActionPerformed
@@ -675,14 +684,21 @@ public class MovingBlockGUI extends javax.swing.JPanel {
         model.fireTableDataChanged();
     }//GEN-LAST:event_trainDeployButtonActionPerformed
 
+    private void MovingBlockRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MovingBlockRadioActionPerformed
+        if(MovingBlockRadio.isSelected())
+        {
+            CurrentModeLabel.setText("Moving Block Mode");
+        }
+    }//GEN-LAST:event_MovingBlockRadioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel ControlModeLabel;
     private javax.swing.JLabel CurrentModeLabel;
     private javax.swing.JLabel CurrentSpeedLabel;
-    private javax.swing.JLabel CurrentSpeedValue;
+    public javax.swing.JLabel CurrentSpeedValue;
     private javax.swing.JButton DetailedScheduleButton;
-    private javax.swing.JLabel DifferenceValue;
+    public javax.swing.JLabel DifferenceValue;
     private javax.swing.JRadioButton FixedBlockRadio;
     private javax.swing.JLabel GenerateScheduleLabel;
     private javax.swing.JToggleButton MboAntennaFailureButton;
@@ -694,9 +710,9 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane MboPane;
     public javax.swing.JPanel MboPanel;
     private javax.swing.JLabel MboStatusLabel;
-    private javax.swing.JTextField MboSuggestedAuthorityField;
+    public javax.swing.JTextField MboSuggestedAuthorityField;
     private javax.swing.JLabel MboSuggestedAuthorityLabel;
-    private javax.swing.JTextField MboSuggestedSpeedField;
+    public javax.swing.JTextField MboSuggestedSpeedField;
     private javax.swing.JLabel MboSuggestedSpeedLabel;
     private javax.swing.JLabel MboUnitLabel;
     private javax.swing.JLabel MboUnitLabel2;
@@ -711,7 +727,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     private javax.swing.JLabel SelectTrainPrompt;
     private javax.swing.JLabel SelectedTrainLabel;
     private javax.swing.JLabel SuggestedSpeedLabel;
-    private javax.swing.JLabel SuggestedSpeedValue;
+    public javax.swing.JLabel SuggestedSpeedValue;
     private javax.swing.JLabel SystemIsInLabel;
     private javax.swing.JLabel SystemStatusLabel;
     private javax.swing.JPanel TestInputsPanel;

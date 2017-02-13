@@ -585,6 +585,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="MboSuggestedSpeedField">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="MboAntennaFailureButton">
                   <Properties>
@@ -602,6 +605,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="MboSuggestedAuthorityField">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="MboUnitLabel">
                   <Properties>
@@ -713,6 +719,9 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Moving Block"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MovingBlockRadioActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="SelectTrainPrompt">
                   <Properties>
@@ -873,18 +882,27 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="CurrentSpeedValue">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="30 mph"/>
+                    <Property name="text" type="java.lang.String" value="- mph"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="SuggestedSpeedValue">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="35 mph"/>
+                    <Property name="text" type="java.lang.String" value="- mph"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="DifferenceValue">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="(+5 mph)"/>
+                    <Property name="text" type="java.lang.String" value="(- mph)"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -900,10 +918,6 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="GenerateScheduleLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -936,10 +950,12 @@
                           </Group>
                           <EmptySpace pref="19" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="UploadScheduleLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="GenerateScheduleLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="UploadScheduleLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -981,7 +997,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="UploadScheduleLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Upload new personnel schedule (.xlsx)"/>
+                    <Property name="text" type="java.lang.String" value="Upload new schedule (.xlsx)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="GenerateScheduleLabel">

@@ -35,6 +35,9 @@ public class Mbo{
     public static MovingBlockGUI mboGui = new MovingBlockGUI();
    public static File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
    public static int trainIndex;
+   public static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
+   public static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
+   public static String[][] dummyData = {dummyDataRed, dummyDataGreen};
     
     /**
      * Reads th excel file for the personnel schedule, then outputs it to the GUI
@@ -123,6 +126,11 @@ public class Mbo{
         gui.redTable.setModel(model);
     }
     
+    /**
+     * Converts time from 12.10.55 format to 12:10:55 format
+     * @param time Time value to be converted
+     * @return returns time in proper format
+     */
     public static String convertTime(String time){
         String[] times = time.split("\\.");
         String AMPM = "am";
@@ -155,6 +163,12 @@ public class Mbo{
         return time;
     }
     
+    /**
+     * Calculates time intervals for train schedules, then outputs them
+     * @param time Starting time of train
+     * @param increment Increment of time to be added
+     * @return 
+     */
     public static String incrementTime(String time, String increment){
         String[] times = time.split("\\.");
         String[] increments = increment.split("\\.");
@@ -174,12 +188,10 @@ public class Mbo{
     }
     
     /**
-     * 
+     * Updates table of active trains
      */
     public static void displayCurrentTrains(){
-        String[] dummyDataRed = {"Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
-        String[] dummyDataGreen = {"Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
-        String[][] dummyData = {dummyDataRed, dummyDataGreen};
+        
         int length = trains.size();
         Object[] trainArray = trains.toArray();
         Object[][] data = new Object[6][9];
@@ -196,7 +208,7 @@ public class Mbo{
                   
                 }
                 else{
-                    data[i][j]=dummyData[i][j-1];
+                    data[i][j]=dummyData[i][j];
                 }
            }
         }
@@ -207,13 +219,33 @@ public class Mbo{
         mboGui.trainTable.repaint();
     }
     
-    public void updateTrainID(int newIdIndex){
-        if(trains.size()>0){
-        String newID = trains.get(newIdIndex);
+    /**
+     * Updates train ID label and speeds in variance panel
+     */
+    public void updateTrainID(){
+        //if(trains.size()>0){
+        //String newID = trains.get(newIdIndex);
+        String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
+        if(newID.compareTo("100")==0){
+            mboGui.CurrentSpeedValue.setText("30 mph");
+            mboGui.SuggestedSpeedValue.setText("35 mph");
+            mboGui.DifferenceValue.setText("(+5 mph)");
+        }
+        else{
+            mboGui.CurrentSpeedValue.setText("40 mph");
+            mboGui.SuggestedSpeedValue.setText("30 mph");
+            mboGui.DifferenceValue.setText("(-10 mph)");
+        }
+        System.out.println(newID);
         mboGui.TrainIdValue.setText(newID);
-    }
+    //}
     }
     
+    /**
+     * Deploys next available train
+     * @throws IOException
+     * @throws InvalidFormatException 
+     */
    public void deploy() throws IOException, InvalidFormatException{
        File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -264,6 +296,24 @@ public class Mbo{
      */
     public void generateTrainSchedule(){
         
+    }
+    
+    /**
+     * Updates speed and authority in present trains display
+     */
+    public void updateSpeed(){
+        String tempSpeed = mboGui.MboSuggestedSpeedField.getText();
+        String tempAuthority = mboGui.MboSuggestedAuthorityField.getText();
+        String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
+        if(newID.compareTo("100")==0){
+            dummyData[0][8] = tempSpeed+" mph";
+            dummyData[0][6] = tempAuthority+" ft";
+        }
+        else{
+            dummyData[1][8] = tempSpeed+" mph";
+            dummyData[1][6] = tempAuthority+" ft";
+        }
+        displayCurrentTrains();
     }
     
     public static void main(String[] args) throws IOException, InvalidFormatException{
