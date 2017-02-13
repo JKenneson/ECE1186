@@ -5,11 +5,25 @@
  */
 package com.rogueone.global;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  *
  * @author Dan
+ * @author Jon Kenneson
  */
 public class Global {
+    
+    /**
+     * Comma Formatter will format all commas for large numbers
+     */
+    public static NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
+    /**
+     * Decimal Formatter will create 1 comma for numbers between 1,000 and 100,000 as well as a decimal point with 2 places
+     */
+    public static DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     
     public enum PieceType {
         BLOCK, SWITCH, YARD

@@ -5,12 +5,15 @@
  *
  * @author Jonathan Kenneson
  * @Creation 2/3/17
- * @Modification 2/6/17
+ * @Modification 2/13/17
  */
 package com.rogueone.trainmodel;
 
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainmodel.entities.TrainFailures;
+import com.rogueone.global.Global;
+import com.rogueone.traincon.TrainController;
+import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.sun.javafx.image.impl.IntArgb;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -23,9 +26,6 @@ import javax.swing.*;
  * @author Jonathan Kenneson
  */
 public class TrainModel {
-    
-    NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
-    DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     
     public final double MAX_ACCELERATION = 0.5;         //Max acceleration of 0.5 m/s^2
     public final double SERVICE_BRAKE_DECEL = -1.2;     //Service brake decelerates at 1.2 m/s^2
@@ -43,6 +43,8 @@ public class TrainModel {
     public final double PASS_WEIGHT = 165.35;           //1 passenger's weight (in lbs)
     
     //Variable declaration for the class
+    //Reference to TrainController
+    private TrainController trainController;
     //Nanotime trackers for calculating velocity and distance
     private long startTime;
     private long elapsedTime;
@@ -137,6 +139,10 @@ public class TrainModel {
         this.numCars = numCars;
         this.trackAntennaActivated = true;
         this.mboAntennaActivated = true;
+        
+        //Create a new TrainController object
+        trainController = new TrainController(this, null, setPointSpeed, authority, 300, approachingStation, approachingStation, approachingStation, approachingStation);
+        trainController.CreateGUIObjectVoid(trainController);
     }
     
     /**
@@ -226,12 +232,12 @@ public class TrainModel {
         }        
         
         //Speed and Authority
-        gui.currSpeedState.setText(decimalFormatter.format(this.currSpeedMPH));
+        gui.currSpeedState.setText(Global.decimalFormatter.format(this.currSpeedMPH));
         gui.speedLimitState.setText(Integer.toString(this.speedLimit));
         gui.driverSetPointState.setText(Integer.toString(this.driverSetPoint));
         gui.ctcSetPointState.setText(Integer.toString(this.ctcSetPoint));
-        gui.authorityState.setText(decimalFormatter.format(this.authority));
-        gui.powerState.setText(commaFormatter.format(this.powerReceived));
+        gui.authorityState.setText(Global.decimalFormatter.format(this.authority));
+        gui.powerState.setText(Global.commaFormatter.format(this.powerReceived));
         gui.gradeState.setText(Double.toString(this.grade));
         
         //Station and Passengers
@@ -242,8 +248,8 @@ public class TrainModel {
         gui.maxCapacityState.setText(Integer.toString(this.passengerMaxCapacity));
         
         //Physical Characteristics
-        gui.trainWeightState.setText(commaFormatter.format(this.trainWeight));
-        gui.trainLengthState.setText(commaFormatter.format(this.trainLength));
+        gui.trainWeightState.setText(Global.commaFormatter.format(this.trainWeight));
+        gui.trainLengthState.setText(Global.commaFormatter.format(this.trainLength));
         gui.numCarsState.setText(Integer.toString(this.numCars));
         
         if(this.trackAntennaActivated) {
@@ -351,7 +357,7 @@ public class TrainModel {
         
         //TODO: Send velocity to TrainController, get back a power
         //this.powerReceived = TrainController.calculatePower(this.currSpeed);
-        //For now, power comes from GUI
+        System.out.println("Power: " + this.powerReceived);
         
         //P=F*v  -> Calculate a force by deviding that power by the velocity
         if(this.currSpeed == 0) {    //Can't devide by zero
@@ -417,42 +423,6 @@ public class TrainModel {
         this.startTime = System.nanoTime();
     }
             
-    
-    /**
-     * Main function tests the functionality of the Train Model class independent from the other modules
-     * The user may perform extensive testing of this module through the module's GUI
-     * 
-     * @author Jonathan Kenneson
-     * @param args 
-     */
-    public static void main(String[] args) throws InterruptedException {        
-        //Create a new TrainModel object with a set point speed of 40, authority of 500, and 1 car
-        TrainModel trainModelTest1 = new TrainModel(40, 40000, 1);
-        //Instantiate a GUI for this train
-        TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);
-        
-
-        //Constantly update velocity then the GUI
-        while(true){
-            trainModelTest1.updateTrain();
-            trainModelTest1.UpdateGUI(trainModelGUITest1);
-            if(trainModelGUITest1.isDisplayable() == false) {
-                break;
-            }
-            Thread.sleep(1000);
-        }
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     /**
