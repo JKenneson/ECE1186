@@ -38,6 +38,14 @@ public class TrainController {
     private boolean rightDoorOpen;
     private boolean lightsOn;
     private boolean airConditioningOn;
+
+    public void setAirConditioningOn(boolean airConditioningOn) {
+        this.airConditioningOn = airConditioningOn;
+    }
+
+    public void setHeaterOn(boolean heaterOn) {
+        this.heaterOn = heaterOn;
+    }
     private boolean heaterOn;
     private boolean serviceBrakeActivated;
     private boolean emergencyBrakeActivated;
@@ -59,7 +67,7 @@ public class TrainController {
         this.emergencyBrakeActivated = emergencyBrakeActivated;
     }
 
-    public void setDriverSetPoint(int driverSetPoint) {
+    public void setDriverSetPoint(byte driverSetPoint) {
         this.driverSetPoint = driverSetPoint;
     }
     
@@ -70,10 +78,10 @@ public class TrainController {
     //Speed and Authority
     private double currSpeed;
     private int speedLimit;
-    private int authority;
+    private short authority;
     //private int distanceTraveled; //Distance traveled since last auth command
-    private int driverSetPoint;
-    private int recommendedSetPoint;
+    private byte driverSetPoint;
+    private byte recommendedSetPoint;
     private double powerCommand;
     private int kP;
     private int kI;
@@ -112,26 +120,39 @@ public class TrainController {
      * @param section
      * @param block 
      */
-    public TrainController(TrainModel tm, TrainControllerGUI gui, int setPointSpeed, int authority, double maxPow, String trainID,
+    public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID,
            String line, String section, String block){
         
         this.trainModel = tm; //Should come from passed (this) reference
         this.gui = gui;
         
-        
         //Initialize Train Controller Object
         this.manualMode = false;
-        this.leftDoorOpen = false;
-        this.rightDoorOpen = false;
-        this.lightsOn = false;
-        this.airConditioningOn = false;
-        this.heaterOn = false;
+        this.leftDoorOpen = this.trainModel.isLeftDoorOpen();
+        this.rightDoorOpen = this.trainModel.isRightDoorOpen();
+        this.lightsOn = this.trainModel.isLightsOn();
+        
+        this.temperature = this.trainModel.getTemperature();
+        
+        if(this.temperature>72){
+            this.airConditioningOn = true;
+            this.heaterOn = false;
+        }
+        else if(this.temperature<39){
+            this.airConditioningOn = false;
+            this.heaterOn = true;
+        }
+        else{
+            this.airConditioningOn = false;
+            this.heaterOn = false;            
+        }
+        
         this.serviceBrakeActivated = false;
         this.emergencyBrakeActivated = false;
         this.emergencyBrakeOverride = false;
 
         //Speed and Authority
-        this.currSpeed = 0;
+        this.currSpeed = this.trainModel.getCurrSpeed();
         this.speedLimit = getSpeedLimit();
         this.authority = authority;
         this.driverSetPoint = setPointSpeed;
@@ -145,6 +166,7 @@ public class TrainController {
 
         //Announcements
         this.announcement = "Departing Yard";
+        System.out.println(this.announcement);
 
         //Train Information
         this.trainID = trainID;

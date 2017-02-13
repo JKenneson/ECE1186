@@ -8,6 +8,7 @@ package com.rogueone.traincon.gui;
 import com.rogueone.traincon.TrainController;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainmodel.entities.TrainFailures;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,7 +24,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
      */
     public TrainControllerGUI() {
         initComponents();
-        this.trainController = new TrainController(new TrainModel(40, 500, 1), this, 50, 200, 500, "123", "G", "AA", "13"); //for testing purposes
+        this.trainController = new TrainController(new TrainModel(40, 500, 1), this, (byte) 50, (short) 200, 500, "123", "G", "AA", "13"); //for testing purposes
     }
 
     public TrainControllerGUI(TrainController tc) {
@@ -132,10 +133,20 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         ACGroup.add(ACOn);
         ACOn.setText("On");
+        ACOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ACOnActionPerformed(evt);
+            }
+        });
 
         ACGroup.add(ACOff);
         ACOff.setSelected(true);
         ACOff.setText("Off");
+        ACOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ACOffActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ControlsACLayout = new javax.swing.GroupLayout(ControlsAC);
         ControlsAC.setLayout(ControlsACLayout);
@@ -296,10 +307,20 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         HeatGroup.add(HeatOn);
         HeatOn.setText("On");
+        HeatOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HeatOnActionPerformed(evt);
+            }
+        });
 
         HeatGroup.add(HeatOff);
         HeatOff.setSelected(true);
         HeatOff.setText("Off");
+        HeatOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HeatOffActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ControlsHeatLayout = new javax.swing.GroupLayout(ControlsHeat);
         ControlsHeat.setLayout(ControlsHeatLayout);
@@ -964,10 +985,14 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void PowerFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerFailureCheckActionPerformed
         if(this.PowerFailureCheck.isSelected()){
             this.trainController.causeFailure(TrainFailures.Power);
+            this.StatusPowerLabel.setText("FAILURE");
+            this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulated");
         }
         else{
             this.trainController.fixFailure(TrainFailures.Power);
+            this.StatusPowerLabel.setText("ACTIVE");
+            this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulation Ended");
         } 
     }//GEN-LAST:event_PowerFailureCheckActionPerformed
@@ -975,10 +1000,14 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void AntennaFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntennaFailureCheckActionPerformed
         if(this.AntennaFailureCheck.isSelected()){
             this.trainController.causeFailure(TrainFailures.Antenna);
+            this.StatusAntennaLabel.setText("FAILURE");
+            this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulated");
         }
         else{
             this.trainController.fixFailure(TrainFailures.Antenna);
+            this.StatusAntennaLabel.setText("ACTIVE");
+            this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulation Ended");
         }
     }//GEN-LAST:event_AntennaFailureCheckActionPerformed
@@ -986,13 +1015,51 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void ServiceBrakeFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeFailureCheckActionPerformed
         if(this.ServiceBrakeFailureCheck.isSelected()){
             this.trainController.causeFailure(TrainFailures.Brake);
+            this.StatusBrakeLabel.setText("FAILURE");
+            this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulated");
         }
         else{
             this.trainController.fixFailure(TrainFailures.Brake);
+            this.StatusBrakeLabel.setText("ACTIVE");
+            this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulation Ended");
         }
     }//GEN-LAST:event_ServiceBrakeFailureCheckActionPerformed
+
+    private void ACOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACOnActionPerformed
+        if(this.ACOn.isSelected()){
+            this.trainController.setAirConditioningOn(true);
+            this.NotificationsDisplay.append("\nA/C Activated");
+            if(this.HeatOn.isSelected()){
+                this.trainController.setHeaterOn(false);
+                this.NotificationsDisplay.append("\nHeater Deactivated");
+                this.HeatOff.setSelected(true);
+            }
+        }        
+    }//GEN-LAST:event_ACOnActionPerformed
+
+    private void HeatOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeatOnActionPerformed
+        if(this.HeatOn.isSelected()){
+            this.trainController.setHeaterOn(true);
+            this.NotificationsDisplay.append("\nHeater Activated");
+            if(this.ACOn.isSelected()){
+                this.trainController.setAirConditioningOn(false);
+                this.NotificationsDisplay.append("\nA/C Deactivated");
+                this.ACOff.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_HeatOnActionPerformed
+
+    private void ACOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACOffActionPerformed
+        this.trainController.setAirConditioningOn(false);
+        this.NotificationsDisplay.append("\nA/C Deactivated");
+    }//GEN-LAST:event_ACOffActionPerformed
+
+    private void HeatOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeatOffActionPerformed
+        this.trainController.setHeaterOn(false);
+        this.NotificationsDisplay.append("\nHeater Deactivated");
+    }//GEN-LAST:event_HeatOffActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
