@@ -39,7 +39,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="powerCommandPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Component id="failureInputPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="trainModelOutputPanel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -709,11 +709,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="trainOperationsOutputPanel" min="-2" pref="228" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="speedOutputPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="passengersOutputPanel" min="-2" pref="282" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="physicalTrainOutputPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -924,10 +924,15 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="currSpeedState" pref="37" max="32767" attributes="0"/>
-                                      <Component id="speedLimitState" pref="37" max="32767" attributes="0"/>
+                                      <Component id="currSpeedState" max="32767" attributes="0"/>
+                                      <Component id="speedLimitState" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="64" pref="64" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="currSpeedOutputLabelUnits" min="-2" max="-2" attributes="0"/>
+                                      <Component id="speedLimitOutputLabelUnits" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -944,35 +949,30 @@
                                               <Component id="driverSetPointState" pref="29" max="32767" attributes="0"/>
                                               <Component id="ctcSetPointState" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="driverSetPointOutputLabelUnits" min="-2" max="-2" attributes="0"/>
-                                              <Component id="ctcSetPointOutputLabelUnits" min="-2" max="-2" attributes="0"/>
-                                              <Component id="speedLimitOutputLabelUnits" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="currSpeedOutputLabelUnits" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <Component id="gradeState" min="-2" pref="38" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="gradeOutputLabelUnits" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                       <Component id="powerState" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="authorityState" alignment="0" pref="38" max="32767" attributes="0"/>
+                                                      <Component id="authorityState" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="authorityOutputLabelUnits" min="-2" max="-2" attributes="0"/>
                                                       <Component id="powerOutputLabelUnits" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="ctcSetPointOutputLabelUnits" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="driverSetPointOutputLabelUnits" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -995,7 +995,7 @@
                               <Component id="speedLimitState" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="speedLimitOutputLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="driverSetSpeedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="driverSetPointState" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1110,7 +1110,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="authorityState">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="5000"/>
+                    <Property name="text" type="java.lang.String" value="4,000.00"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
