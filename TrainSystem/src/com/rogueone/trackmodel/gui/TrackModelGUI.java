@@ -66,6 +66,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         summaryTable = new javax.swing.JTable();
         trackConfigurationPanel = new javax.swing.JPanel();
         trackConfigurationLoadButton = new javax.swing.JButton();
+        trackConfigurationResetButton = new javax.swing.JButton();
         trackDetailsPanel = new javax.swing.JPanel();
         trackDetailsSelectionPanel = new javax.swing.JPanel();
         lineSectionPanel = new javax.swing.JPanel();
@@ -88,6 +89,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
         brokenRailFailureButton = new javax.swing.JButton();
         trackCircuitFailureButton = new javax.swing.JButton();
         powerOutageFailureButton = new javax.swing.JButton();
+        testingPanel = new javax.swing.JPanel();
+        toggleTrainPresenceButton = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1070, 720));
         setMinimumSize(new java.awt.Dimension(1070, 720));
@@ -159,8 +162,10 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        trackConfigurationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Track", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        trackConfigurationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuration", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        trackConfigurationPanel.setLayout(new java.awt.GridLayout(1, 2, 1, 1));
 
+        trackConfigurationLoadButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         trackConfigurationLoadButton.setText("Load Data File");
         trackConfigurationLoadButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -172,17 +177,22 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 trackConfigurationLoadButtonActionPerformed(evt);
             }
         });
+        trackConfigurationPanel.add(trackConfigurationLoadButton);
 
-        javax.swing.GroupLayout trackConfigurationPanelLayout = new javax.swing.GroupLayout(trackConfigurationPanel);
-        trackConfigurationPanel.setLayout(trackConfigurationPanelLayout);
-        trackConfigurationPanelLayout.setHorizontalGroup(
-            trackConfigurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(trackConfigurationLoadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        trackConfigurationPanelLayout.setVerticalGroup(
-            trackConfigurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(trackConfigurationLoadButton, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-        );
+        trackConfigurationResetButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        trackConfigurationResetButton.setText("Reset");
+        trackConfigurationResetButton.setEnabled(false);
+        trackConfigurationResetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                trackConfigurationResetButtonMouseClicked(evt);
+            }
+        });
+        trackConfigurationResetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trackConfigurationResetButtonActionPerformed(evt);
+            }
+        });
+        trackConfigurationPanel.add(trackConfigurationResetButton);
 
         javax.swing.GroupLayout trackOverviewPanelLayout = new javax.swing.GroupLayout(trackOverviewPanel);
         trackOverviewPanel.setLayout(trackOverviewPanelLayout);
@@ -207,7 +217,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         .addComponent(trackLayoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(trackConfigurationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         trackModelTabbedPane.addTab("Track Overview", trackOverviewPanel);
@@ -490,6 +500,31 @@ public class TrackModelGUI extends javax.swing.JPanel {
         });
         trackFailureModesPanel.add(powerOutageFailureButton);
 
+        testingPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Testing", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
+
+        toggleTrainPresenceButton.setBackground(new java.awt.Color(255, 255, 255));
+        toggleTrainPresenceButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        toggleTrainPresenceButton.setText("Toggle Train Presence");
+        toggleTrainPresenceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleTrainPresence(evt);
+            }
+        });
+
+        javax.swing.GroupLayout testingPanelLayout = new javax.swing.GroupLayout(testingPanel);
+        testingPanel.setLayout(testingPanelLayout);
+        testingPanelLayout.setHorizontalGroup(
+            testingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(testingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        testingPanelLayout.setVerticalGroup(
+            testingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout trackDetailsPanelLayout = new javax.swing.GroupLayout(trackDetailsPanel);
         trackDetailsPanel.setLayout(trackDetailsPanelLayout);
         trackDetailsPanelLayout.setHorizontalGroup(
@@ -500,8 +535,11 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     .addGroup(trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(trackDetailsSelectionPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(trackDetailsDetailsPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1008, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addGroup(trackDetailsPanelLayout.createSequentialGroup()
+                        .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(testingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         trackDetailsPanelLayout.setVerticalGroup(
             trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,11 +549,15 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(trackDetailsDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addComponent(testingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(131, Short.MAX_VALUE))
         );
 
         trackModelTabbedPane.addTab("Track Details", trackDetailsPanel);
+
+        trackModelTabbedPane.setEnabledAt(1, false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -540,7 +582,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = trackDataFileChooser.getSelectedFile();
             try {
-                trackModel.parseDataFile(trackDataFile);
+                trackModel.parseDataFile(trackDataFile);//Needs error handling
                 updateLineComboBox();
                 updateSectionComboBox();
                 updateBlockComboBox();
@@ -548,6 +590,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 lineSelectionComboBox.addItemListener(new LineChangeListener(this));
                 sectionSelectionComboBox.addItemListener(new SectionChangeListener(this));
                 blockSelectionComboBox.addItemListener(new BlockChangeListener(this));
+                trackModelTabbedPane.setEnabledAt(1, true);
+                trackConfigurationResetButton.setEnabled(true);
             }
             catch (IOException ex) {
                 System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
@@ -724,6 +768,44 @@ public class TrackModelGUI extends javax.swing.JPanel {
         updateSummaryPanel();
     }//GEN-LAST:event_powerOutageFailureButtonActionPerformed
 
+    private void toggleTrainPresence(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleTrainPresence
+        Block b = (Block) blockSelectionComboBox.getSelectedItem();
+        b.setOccupied(!b.isOccupied());
+        if (b.isOccupied()) {
+            toggleTrainPresenceButton.setBackground(GREEN);
+        }
+        else {
+            toggleTrainPresenceButton.setBackground(Color.WHITE);
+        }
+        updateSummaryPanel();
+    }//GEN-LAST:event_toggleTrainPresence
+
+    private void trackConfigurationResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trackConfigurationResetButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trackConfigurationResetButtonMouseClicked
+
+    private void trackConfigurationResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackConfigurationResetButtonActionPerformed
+        trackModel.reset();
+        trackConfigurationResetButton.setEnabled(false);
+        trackModelTabbedPane.setEnabledAt(1,false);
+        summaryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Please load a track data file"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });  
+    }//GEN-LAST:event_trackConfigurationResetButtonActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -747,9 +829,12 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JPanel switchPanel;
     private javax.swing.JScrollPane switchScrollPane;
     private javax.swing.JTable switchTable;
+    private javax.swing.JPanel testingPanel;
+    private javax.swing.JButton toggleTrainPresenceButton;
     private javax.swing.JButton trackCircuitFailureButton;
     private javax.swing.JButton trackConfigurationLoadButton;
     private javax.swing.JPanel trackConfigurationPanel;
+    private javax.swing.JButton trackConfigurationResetButton;
     private javax.swing.JFileChooser trackDataFileChooser;
     private javax.swing.JPanel trackDetailsDetailsPanel;
     private javax.swing.JPanel trackDetailsPanel;
@@ -863,6 +948,12 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 }
                 else {
                     powerOutageFailureButton.setBackground(GREEN);
+                }
+                if (b.isOccupied()) {
+                    toggleTrainPresenceButton.setBackground(GREEN);
+                }
+                else {
+                    toggleTrainPresenceButton.setBackground(Color.WHITE);
                 }
                 
             }

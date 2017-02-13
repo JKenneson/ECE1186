@@ -38,6 +38,15 @@ public class TrackModel {
         frame.pack();
         frame.setVisible(true);
     }
+    
+    public void reset() {
+        lines = new ArrayList<Line>();
+        sections = new ArrayList<Section>();
+        blocks = new ArrayList<Block>();
+        stations = new ArrayList<Station>();
+        switches = new ArrayList<Switch>();
+        yard = new Yard();
+    }
       
     public void parseDataFile(File file) throws IOException, InvalidFormatException {
         //Expected column order in data file for blocks:
