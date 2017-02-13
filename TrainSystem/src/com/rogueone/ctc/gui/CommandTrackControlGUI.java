@@ -1098,10 +1098,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             int row = table.getSelectedRow();
             trainID = (int)table.getValueAt(row, 0);
             
+            
             //TrainHandler.CreateGUIObject(trainID);
         }
     
-                // TODO add your handling code here:
     }//GEN-LAST:event_TrainTableMouseClicked
     
     /**
@@ -1119,13 +1119,26 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                    //System.out.println("id match");
                     TrainTable.setValueAt(bool, i, 3);
                     String trainPosition = (String)TrainTable.getValueAt(i, 2);
-                    //updateFailureTable(passTrainLine, trainPosition, )
+                    updateFailureTable(passTrainLine, trainPosition, trainID, "Disabled");
                }
             }
         }
         TrainTable.repaint();
     }
     
+    public void updateFailureTable( String passTrainLine, String trainPosition, int trainID, String failureType){
+        
+        String[] positionParts = trainPosition.split(":");
+        String failureSection = positionParts[0];
+        String failureBlock = positionParts[1];
+        Object[] newRow = new Object[4];
+        newRow[0] = passTrainLine;
+        newRow[1] = failureSection;
+        newRow[2] = failureBlock;
+        newRow[3] = failureType;
+        DefaultTableModel model = (DefaultTableModel)FailureTable.getModel();
+        model.addRow(newRow);
+    }
     private void StatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_StatusFieldActionPerformed
@@ -1316,15 +1329,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         DispatchAuthorityField.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_DispatchAuthorityFieldMouseClicked
 
-//    private void UpdateTableInformation(java.awt.event.ActionEvent evt){
-//        int selectedRowIndex = TrainTable.getSelectedRow();
-//        String TrainID = TrainTable.getModel().getValueAt(selectedRowIndex, 0).toString(); 
-//        TrainNameField.setText(TrainID);// TODO add your handling code here:
-//    }
-    
-    /**
-     *
-     */
+
     public void InitializeGUIObject(){
         TrainNameField.setText("");
         CurrentLineField.setText("");
