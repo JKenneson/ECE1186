@@ -95,7 +95,7 @@ public class TrainController {
     
     //Train Information
     private TrainModel trainModel;
-    private TrainControllerGUI gui;
+    public TrainControllerGUI gui;
     private String trainID;
     private String line;
     private String section;

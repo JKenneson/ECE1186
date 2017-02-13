@@ -141,7 +141,7 @@ public class TrainModel {
         this.mboAntennaActivated = true;
         
         //Create a new TrainController object
-        trainController = new TrainController(this, null, setPointSpeed, authority, 300, approachingStation, approachingStation, approachingStation, approachingStation);
+        trainController = new TrainController(this, null, (byte)setPointSpeed, (short)authority, 300, approachingStation, approachingStation, approachingStation, approachingStation);
         trainController.CreateGUIObjectVoid(trainController);
     }
     
@@ -264,6 +264,9 @@ public class TrainModel {
         else {
             gui.mboAntennaState.setText("Failed");
         }
+        
+        //Update the TrainController GUI
+        this.trainController.updateGUI(this.trainController.gui);
     }
 
     /**
@@ -354,9 +357,8 @@ public class TrainModel {
         
         //2)   Its velocity based on the power sent in from the TrainController
         //First, ask the TrainController for a new power
-        
-        //TODO: Send velocity to TrainController, get back a power
-        //this.powerReceived = TrainController.calculatePower(this.currSpeed);
+        this.elapsedTime = System.nanoTime() - startTime;                                               //Get elapsed time since last calculation
+        this.powerReceived = trainController.calculatePower(this.lastSpeed, this.elapsedTime);
         System.out.println("Power: " + this.powerReceived);
         
         //P=F*v  -> Calculate a force by deviding that power by the velocity
@@ -382,8 +384,6 @@ public class TrainModel {
         //F=m*a  -> Calculate the acceleration by dividing the force by the mass
         this.acceleration = this.force / (this.trainWeight * KG_IN_A_POUND);        //Convert lbs to kg
         
-        //vf = vi + a*t  -> Final velocity (speed) equals initial velocity + acceleration * time
-        this.elapsedTime = System.nanoTime() - startTime;                                               //Get elapsed time since last calculation
         //Maximum acceleration of 0.5 m/s^2
         if(this.acceleration > MAX_ACCELERATION * (this.elapsedTime/(double)1000000000)) {
             this.acceleration = MAX_ACCELERATION * (this.elapsedTime/(double)1000000000);
@@ -398,6 +398,7 @@ public class TrainModel {
         }        
         System.out.println("Accel: " + this.acceleration);
         
+        //vf = vi + a*t  -> Final velocity (speed) equals initial velocity + acceleration * time
         //Calculate current speed in m/s
         this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);    //Find seconds by dividing elapsed time by a billion
         //Check for negative speed (impossible)
