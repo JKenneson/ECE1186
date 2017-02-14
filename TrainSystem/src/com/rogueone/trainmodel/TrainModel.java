@@ -45,6 +45,7 @@ public class TrainModel {
     //Variable declaration for the class
     //Reference to TrainController
     private TrainController trainController;
+    private TrainControllerGUI trainControllerGUI;
     //Nanotime trackers for calculating velocity and distance
     private long startTime;
     private long elapsedTime;
@@ -140,10 +141,38 @@ public class TrainModel {
         this.trackAntennaActivated = true;
         this.mboAntennaActivated = true;
         
-        //Create a new TrainController object
-        trainController = new TrainController(this, null, (byte)setPointSpeed, (short)authority, 300, approachingStation, approachingStation, approachingStation, approachingStation);
-        trainController.CreateGUIObjectVoid(trainController);
+        this.trainController = null;
+        this.trainControllerGUI = null;
     }
+    
+    /**
+     * This method creates a new TrainController object for this train, with a back-reference to this specific TrainModel
+     * 
+     * @author Jonathan Kenneson
+     */
+    public void createTrainController() {
+        //Create a new TrainController object
+        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)this.authority, 300, approachingStation, approachingStation, approachingStation, approachingStation);
+    }
+    
+    /**
+     * This method creates a new TrainControllerGUI object for this train, with a back-reference to the specific TrainController
+     * 
+     * @author Jonathan Kenneson
+     */
+    public void createTrainControllerGUI() {
+        this.trainControllerGUI = this.trainController.CreateGUIObject(trainController);
+    }
+    
+    /**
+     * This method updates the TrainControllerGUI object for this train
+     * 
+     * @author Jonathan Kenneson
+     */    
+    public void updateTrainControllerGUI() {
+        this.trainController.updateGUI(this.trainControllerGUI);
+    }
+        
     
     /**
      * This function will create, display, and return a GUI object for the Train Model class that can be interacted with

@@ -188,27 +188,6 @@ public class TrainController {
         
     }    
     
-    /**
-     *
-     * @param trainControllerObject
-     * @return
-     */
-    public void CreateGUIObjectVoid(TrainController trainControllerObject){
-        //Create GUI object
-        TrainControllerGUI trainControllerGUI = new TrainControllerGUI(trainControllerObject);
-    
-        //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(trainControllerGUI);
-        frame.pack();
-        frame.setVisible(true);     //Make sure to set it visible
-        
-        //Initialize the GUI
-        trainControllerObject.InitializeInputPanel(trainControllerGUI);
-        
-        this.gui = trainControllerGUI;  //Return the GUI object
-    }
     
     /**
      *
@@ -229,6 +208,7 @@ public class TrainController {
         //Initialize the GUI
         trainControllerObject.InitializeInputPanel(trainControllerGUI);
         
+        this.gui = trainControllerGUI;  //Return the GUI object
         return trainControllerGUI;  //Return the GUI object
     }
     

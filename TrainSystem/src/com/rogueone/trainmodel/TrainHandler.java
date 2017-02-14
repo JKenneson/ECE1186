@@ -34,17 +34,20 @@ public class TrainHandler {
     }
     
     public static void trainModelAndControllerInit() throws InterruptedException {
-        //Create a new TrainModel object with a set point speed of 40, authority of 40000, and 1 car
-        TrainModel trainModelTest1 = new TrainModel(40, 40000, 1);
-        //Instantiate a GUI for this train
-        TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);
+        TrainModel trainModelTest1 = new TrainModel(40, 40000, 1);                              //Create a new TrainModel object with a set point speed of 40, authority of 40000, and 1 car
+        TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);    //Instantiate a GUI for this train
+        
+        trainModelTest1.createTrainController();                                                //Create and attach a TrainController to this train
+        trainModelTest1.createTrainControllerGUI();                                             //Create a TrainControllerGUI
+        
         
         //Constantly update velocity then the GUI
         while(true){
             trainModelTest1.updateTrain();
             trainModelTest1.UpdateGUI(trainModelGUITest1);
+            trainModelTest1.updateTrainControllerGUI();
             if(trainModelGUITest1.isDisplayable() == false) {
-                break;
+                System.exit(0);
             }
             Thread.sleep(1000);
         }
@@ -62,7 +65,7 @@ public class TrainHandler {
             trainModelTest1.updateTrain();
             trainModelTest1.UpdateGUI(trainModelGUITest1);
             if(trainModelGUITest1.isDisplayable() == false) {
-                break;
+                System.exit(0);
             }
             Thread.sleep(1000);
         }
