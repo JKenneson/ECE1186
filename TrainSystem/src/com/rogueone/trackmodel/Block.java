@@ -74,8 +74,9 @@ public class Block implements TrackPiece {
         failurePowerOutage = false;
         failureTrackCircuit = false;
         occupied = false;
-        beaconMessage = null;
+        beaconMessage = "";
         station = null;
+        trackCircuit = new TrackCircuit();
     }
     
     // TrackPiece interface methods
@@ -214,7 +215,12 @@ public class Block implements TrackPiece {
         station = newStation;
     }
     public TrackCircuit getTrackCircuit() {
-        return trackCircuit;
+        if(failureTrackCircuit) {
+            return new TrackCircuit((byte) -1,(short) -1);
+        }
+        else {
+            return trackCircuit;
+        }
     }
     public void setTrackCircuit(TrackCircuit newTrackCircuit) {
         trackCircuit = newTrackCircuit;

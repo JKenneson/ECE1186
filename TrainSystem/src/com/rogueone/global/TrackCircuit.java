@@ -19,7 +19,7 @@ public class TrackCircuit {
         authority = 0;
     }
     
-    public TrackCircuit(byte newSpeed, byte newAuthority) {
+    public TrackCircuit(byte newSpeed, short newAuthority) {
         speed = newSpeed;
         authority = newAuthority;
     }

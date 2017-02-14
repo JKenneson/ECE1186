@@ -92,9 +92,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
         powerOutageFailureButton = new javax.swing.JButton();
         testingPanel = new javax.swing.JPanel();
         toggleTrainPresenceButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        trackCircuitPanel = new javax.swing.JPanel();
+        trackCircuitScrollPanel = new javax.swing.JScrollPane();
+        trackCircuitTable = new javax.swing.JTable();
 
         setMaximumSize(new java.awt.Dimension(1070, 720));
         setMinimumSize(new java.awt.Dimension(1070, 720));
@@ -528,9 +528,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
             .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Track Circuit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
+        trackCircuitPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Track Circuit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        trackCircuitTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
             },
@@ -538,21 +538,21 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 "Speed", "Authority"
             }
         ));
-        jTable1.setRowHeight(30);
-        jScrollPane1.setViewportView(jTable1);
+        trackCircuitTable.setRowHeight(30);
+        trackCircuitScrollPanel.setViewportView(trackCircuitTable);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout trackCircuitPanelLayout = new javax.swing.GroupLayout(trackCircuitPanel);
+        trackCircuitPanel.setLayout(trackCircuitPanelLayout);
+        trackCircuitPanelLayout.setHorizontalGroup(
+            trackCircuitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trackCircuitPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(trackCircuitScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        trackCircuitPanelLayout.setVerticalGroup(
+            trackCircuitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(trackCircuitScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout trackDetailsPanelLayout = new javax.swing.GroupLayout(trackDetailsPanel);
@@ -569,7 +569,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(testingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(trackCircuitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         trackDetailsPanelLayout.setVerticalGroup(
@@ -581,7 +581,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 .addComponent(trackDetailsDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(trackCircuitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(testingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                 .addContainerGap(112, Short.MAX_VALUE))
@@ -621,9 +621,10 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 updateSectionComboBox();
                 updateBlockComboBox();
                 updateSummaryPanel();
-                lineSelectionComboBox.addItemListener(new LineChangeListener(this));
-                sectionSelectionComboBox.addItemListener(new SectionChangeListener(this));
-                blockSelectionComboBox.addItemListener(new BlockChangeListener(this));
+                updateDetailsPanel();
+                lineSelectionComboBox.addItemListener(new LineChangeListener());
+                sectionSelectionComboBox.addItemListener(new SectionChangeListener());
+                blockSelectionComboBox.addItemListener(new BlockChangeListener());
                 trackModelTabbedPane.setEnabledAt(1, true);
                 trackConfigurationResetButton.setEnabled(true);
             }
@@ -746,6 +747,114 @@ public class TrackModelGUI extends javax.swing.JPanel {
         summaryTable.repaint();
     }
     
+    public void updateDetailsPanel() {
+        Block b = (Block) blockSelectionComboBox.getSelectedItem();
+        if(b != null) {
+            updateDetailsPanel(b);
+        } 
+    }
+    
+    public void updateDetailsPanel(Block b) {
+        if(b != null) {
+            updateBlock(b);
+            updateStation(b);
+            updateSwitch(b);
+            updateTrackCircuit(b);
+            updateFailures(b);
+        }
+    }
+    
+    public void updateBlock(Block b) {
+            String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Beacon", "Occupied" };
+                String blockRowData[] = { 
+                    b.getID() + "", 
+                    b.getPortA().getID() + "", 
+                    b.getPortB().getID() + "", 
+                    Global.decimalFormatter.format(b.getLength()) + " ft", 
+                    Global.decimalFormatter.format(b.getGrade()) + "%", 
+                    Global.decimalFormatter.format(b.getSpeedLimit()) + " mph", 
+                    Global.decimalFormatter.format(b.getElevation()) + " ft", 
+                    Global.decimalFormatter.format(b.getCumulativeElevation()) + " ft", 
+                    b.isUnderground() + "", 
+                    b.containsCrossing() + "", 
+                    b.getBeaconMessage() + "", 
+                    b.isOccupied() + "" };
+                DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
+                blockModel.addRow(blockRowData);
+                blockTable.setModel(blockModel);
+        }
+        
+        public void updateTrackCircuit(Block b) {
+            String trackCircuitColumnNames[] = { "Speed", "Authority" };
+                String trackCircuitRowData[] = { 
+                    b.getTrackCircuit().speed + " mph", 
+                    b.getTrackCircuit().authority + " ft" };
+                DefaultTableModel trackCircuitModel = new DefaultTableModel(trackCircuitColumnNames, 0);
+                trackCircuitModel.addRow(trackCircuitRowData);
+                trackCircuitTable.setModel(trackCircuitModel);
+        }
+        
+        public void updateSwitch(Block b) {
+            if (b.getSwitchID() != -1 && b.getPortB() != null) {
+                    Switch switchBlock = (Switch) b.getPortB();
+                    
+                    String switchColumnNames[] = { "ID", "Static Block", "Default Dependent Block", "Alternate Dependent Block" };
+                    String switchRowData[] = { switchBlock.getID() + "", switchBlock.getPortA().getID() + "", switchBlock.getPortB().getID() + "", switchBlock.getPortC().getID() + "" };
+                    DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
+                    switchModel.addRow(switchRowData);
+                    switchTable.setModel(switchModel);
+                }
+                else {
+                    String switchColumnNames[] = { "No switches to display" };
+                    DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
+                    switchTable.setModel(switchModel);
+                }
+        }
+        
+        public void updateStation(Block b) {
+            if (b.getStation() != null) {
+                    Station station = (Station) b.getStation();
+                    
+                    String stationColumnNames[] = { "ID", "Name", "Block A", "Block B", "Right", "Left" };
+                    String stationRowData[] = { station.getID() + "", station.getStationName(), station.getBlockA().getID() + "", station.getBlockA().getID() + "", station.isRightSide() + "", station.isLeftSide() + "" };
+                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
+                    stationModel.addRow(stationRowData);
+                    stationTable.setModel(stationModel);
+                }
+                else {
+                    String stationColumnNames[] = { "No stations to display" };
+                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
+                    stationTable.setModel(stationModel);
+                }
+        }
+        
+        public void updateFailures(Block b) {
+            if (b.getFailureTrackCircuit()) {
+                    trackCircuitFailureButton.setBackground(RED);
+                }
+                else {
+                    trackCircuitFailureButton.setBackground(GREEN);
+                }
+                if (b.getFailureBrokenRail()) {
+                    brokenRailFailureButton.setBackground(RED);
+                }
+                else {
+                    brokenRailFailureButton.setBackground(GREEN);
+                }
+                if (b.getFailurePowerOutage()) {
+                    powerOutageFailureButton.setBackground(RED);
+                }
+                else {
+                    powerOutageFailureButton.setBackground(GREEN);
+                }
+                if (b.isOccupied()) {
+                    toggleTrainPresenceButton.setBackground(GREEN);
+                }
+                else {
+                    toggleTrainPresenceButton.setBackground(Color.WHITE);
+                }
+        }
+    
     @SuppressWarnings("unchecked")
     private void updateLineComboBox() {
         lineSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(trackModel.getLines().toArray()));
@@ -769,48 +878,28 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private void brokenRailFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brokenRailFailureButtonActionPerformed
         Block b = (Block) blockSelectionComboBox.getSelectedItem();
         b.setFailureBrokenRail(!b.getFailureBrokenRail());
-        if (b.getFailureBrokenRail()) {
-            brokenRailFailureButton.setBackground(RED);
-        }
-        else {
-            brokenRailFailureButton.setBackground(GREEN);
-        }
+        updateDetailsPanel();
         updateSummaryPanel();
     }//GEN-LAST:event_brokenRailFailureButtonActionPerformed
 
     private void trackCircuitFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackCircuitFailureButtonActionPerformed
         Block b = (Block) blockSelectionComboBox.getSelectedItem();
         b.setFailureTrackCircuit(!b.getFailureTrackCircuit());
-        if (b.getFailureTrackCircuit()) {
-            trackCircuitFailureButton.setBackground(RED);
-        }
-        else {
-            trackCircuitFailureButton.setBackground(GREEN);
-        }
+        updateDetailsPanel();
         updateSummaryPanel();
     }//GEN-LAST:event_trackCircuitFailureButtonActionPerformed
 
     private void powerOutageFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powerOutageFailureButtonActionPerformed
         Block b = (Block) blockSelectionComboBox.getSelectedItem();
         b.setFailurePowerOutage(!b.getFailurePowerOutage());
-        if (b.getFailurePowerOutage()) {
-            powerOutageFailureButton.setBackground(RED);
-        }
-        else {
-            powerOutageFailureButton.setBackground(GREEN);
-        }
+        updateDetailsPanel();
         updateSummaryPanel();
     }//GEN-LAST:event_powerOutageFailureButtonActionPerformed
 
     private void toggleTrainPresence(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleTrainPresence
         Block b = (Block) blockSelectionComboBox.getSelectedItem();
         b.setOccupied(!b.isOccupied());
-        if (b.isOccupied()) {
-            toggleTrainPresenceButton.setBackground(GREEN);
-        }
-        else {
-            toggleTrainPresenceButton.setBackground(Color.WHITE);
-        }
+        updateDetailsPanel();
         updateSummaryPanel();
     }//GEN-LAST:event_toggleTrainPresence
 
@@ -849,9 +938,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JPanel blockSelectionPanel;
     private javax.swing.JTable blockTable;
     private javax.swing.JButton brokenRailFailureButton;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel lineSectionPanel;
     private javax.swing.JComboBox<String> lineSelectionComboBox;
     private javax.swing.JButton powerOutageFailureButton;
@@ -869,6 +955,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JPanel testingPanel;
     private javax.swing.JButton toggleTrainPresenceButton;
     private javax.swing.JButton trackCircuitFailureButton;
+    private javax.swing.JPanel trackCircuitPanel;
+    private javax.swing.JScrollPane trackCircuitScrollPanel;
+    private javax.swing.JTable trackCircuitTable;
     private javax.swing.JButton trackConfigurationLoadButton;
     private javax.swing.JPanel trackConfigurationPanel;
     private javax.swing.JButton trackConfigurationResetButton;
@@ -884,129 +973,33 @@ public class TrackModelGUI extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     class LineChangeListener implements ItemListener{
-        
-        TrackModelGUI trackModelGUI;
-        
-        public LineChangeListener(TrackModelGUI tm) {
-            trackModelGUI = tm;
-        }
-
         @Override
         public void itemStateChanged(ItemEvent event) {
            if (event.getStateChange() == ItemEvent.SELECTED) {
-              trackModelGUI.updateSectionComboBox();
+              updateSectionComboBox();
+              updateBlockComboBox();
+              updateDetailsPanel();
            }
         }       
     }
     
-    class SectionChangeListener implements ItemListener{
-        
-        TrackModelGUI trackModelGUI;
-        
-        public SectionChangeListener(TrackModelGUI tm) {
-            trackModelGUI = tm;
-        }
-        
+    class SectionChangeListener implements ItemListener{   
         @Override
         public void itemStateChanged(ItemEvent event) {
            if (event.getStateChange() == ItemEvent.SELECTED) {
-              trackModelGUI.updateBlockComboBox();
+              updateBlockComboBox();
+              updateDetailsPanel();
            }
         }       
     }
     
     class BlockChangeListener implements ItemListener{
-        
-        TrackModelGUI trackModelGUI;
-        
-        public BlockChangeListener(TrackModelGUI tm) {
-            trackModelGUI = tm;
-        }
-
         @Override
         public void itemStateChanged(ItemEvent event) {
             if (event.getStateChange() == ItemEvent.SELECTED) {
-                Block b = (Block) trackModelGUI.blockSelectionComboBox.getSelectedItem();
-                
-                //Update Block Info
-                String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Beacon", "Occupied" };
-                String blockRowData[] = { 
-                    b.getID() + "", 
-                    b.getPortA().getID() + "", 
-                    b.getPortB().getID() + "", 
-                    Global.decimalFormatter.format(b.getLength()) + " ft", 
-                    Global.decimalFormatter.format(b.getGrade()) + "%", 
-                    Global.decimalFormatter.format(b.getSpeedLimit()) + " mph", 
-                    Global.decimalFormatter.format(b.getElevation()) + " ft", 
-                    Global.decimalFormatter.format(b.getCumulativeElevation()) + " ft", 
-                    b.isUnderground() + "", 
-                    b.containsCrossing() + "", 
-                    b.getBeaconMessage() + "", 
-                    b.isOccupied() + "" };
-                DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
-                blockModel.addRow(blockRowData);
-                trackModelGUI.blockTable.setModel(blockModel);
-                
-                //Update Station Info
-                if (b.getSwitchID() != -1 && b.getPortB() != null) {
-                    Switch switchBlock = (Switch) b.getPortB();
-                    
-                    String switchColumnNames[] = { "ID", "Static Block", "Default Dependent Block", "Alternate Dependent Block" };
-                    String switchRowData[] = { switchBlock.getID() + "", switchBlock.getPortA().getID() + "", switchBlock.getPortB().getID() + "", switchBlock.getPortC().getID() + "" };
-                    DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
-                    switchModel.addRow(switchRowData);
-                    trackModelGUI.switchTable.setModel(switchModel);
-                }
-                else {
-                    String switchColumnNames[] = { "No switches to display" };
-                    DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
-                    trackModelGUI.switchTable.setModel(switchModel);
-                }
-                
-                //Update Switch Info
-                if (b.getStation() != null) {
-                    Station station = (Station) b.getStation();
-                    
-                    String stationColumnNames[] = { "ID", "Name", "Block A", "Block B", "Right", "Left" };
-                    String stationRowData[] = { station.getID() + "", station.getStationName(), station.getBlockA().getID() + "", station.getBlockA().getID() + "", station.isRightSide() + "", station.isLeftSide() + "" };
-                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
-                    stationModel.addRow(stationRowData);
-                    trackModelGUI.stationTable.setModel(stationModel);
-                }
-                else {
-                    String stationColumnNames[] = { "No stations to display" };
-                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
-                    trackModelGUI.stationTable.setModel(stationModel);
-                }
-                
-                //Update Failure Info
-                if (b.getFailureTrackCircuit()) {
-                    trackCircuitFailureButton.setBackground(RED);
-                }
-                else {
-                    trackCircuitFailureButton.setBackground(GREEN);
-                }
-                if (b.getFailureBrokenRail()) {
-                    brokenRailFailureButton.setBackground(RED);
-                }
-                else {
-                    brokenRailFailureButton.setBackground(GREEN);
-                }
-                if (b.getFailureTrackCircuit()) {
-                    powerOutageFailureButton.setBackground(RED);
-                }
-                else {
-                    powerOutageFailureButton.setBackground(GREEN);
-                }
-                if (b.isOccupied()) {
-                    toggleTrainPresenceButton.setBackground(GREEN);
-                }
-                else {
-                    toggleTrainPresenceButton.setBackground(Color.WHITE);
-                }
-                
+                updateDetailsPanel();
             }
-        }       
+        }
     }
 
 }
