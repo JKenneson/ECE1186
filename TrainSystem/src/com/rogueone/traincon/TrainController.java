@@ -157,15 +157,15 @@ public class TrainController {
         this.authority = authority;
         this.driverSetPoint = setPointSpeed;
         this.recommendedSetPoint = setPointSpeed;
-        this.kP = 500;
-        this.kI = 30000;
+        this.kP = 4; //Seem to +=6 .5; +=12 1; +=17 1.5; +=19 2.0 assuming no passengers
+        this.kI = 50000;
         this.eK = 0;
         this.eK_1 = 0;
         this.uK = 0;
         this.uK_1 = 0;
 
         //Announcements
-        this.announcement = "Departing Yard";
+        this.announcement = this.trainID + "Departing Yard";
         System.out.println(this.announcement);
 
         //Train Information
@@ -255,10 +255,22 @@ public class TrainController {
      */
     private double getSetPoint(){
         if(this.manualMode){
+            if(this.trainModel.getDriverSetPoint() > this.getSpeedLimit()){
+                this.driverSetPoint = (byte) this.getSpeedLimit();
+            }
+            else{
+                this.driverSetPoint = (byte) this.trainModel.getDriverSetPoint();
+            }
             return this.driverSetPoint;
         }
         else{
-            return this.recommendedSetPoint;
+            if(this.trainModel.getCtcSetPoint() > this.getSpeedLimit()){
+                this.recommendedSetPoint = (byte) this.getSpeedLimit();
+            }
+            else{
+                this.recommendedSetPoint = (byte) this.trainModel.getCtcSetPoint();
+            }
+            return this.recommendedSetPoint; //////////////////////////////////////////////////////////////NEED TO GET CTC OR MBO!!!
         }
     }
     
@@ -279,16 +291,19 @@ public class TrainController {
             case Power:
                 this.powerStatus = false;               //In any setter methods below, the value will not be updated if there is a power failure
                 this.emergencyBrakeOverride = true;
+                this.trainModel.causeFailure(TrainFailures.Power);
                 break;
             //A brake failure will prevent the service brake from being activated. Activate the emergency brake
             case Brake:
                 this.serviceBrakeStatus = false;
                 this.emergencyBrakeOverride = true;
+                this.trainModel.causeFailure(TrainFailures.Brake);
                 break;
             //Deactivate the track and mbo antenna.  Activate emergency brake
             case Antenna:
                 this.antennaStatus = false;
                 this.emergencyBrakeOverride = true;
+                this.trainModel.causeFailure(TrainFailures.Antenna);
                 break;
         }
     }
@@ -299,14 +314,17 @@ public class TrainController {
             //Undo the power failure
             case Power:
                 this.powerStatus = true;
+                this.trainModel.fixFailure(TrainFailures.Power);
                 break;
             //Undo the brake failure
             case Brake:
                 this.serviceBrakeStatus = true;
+                this.trainModel.fixFailure(TrainFailures.Brake);
                 break;
             //Undo the antenna failure
             case Antenna:
                 this.antennaStatus = true;
+                this.trainModel.fixFailure(TrainFailures.Antenna);
                 break;
         }
         //If there are no failures, de-activate the emergencyBrakeOverride
@@ -323,6 +341,12 @@ public class TrainController {
      */
     public double calculatePower(double actualSpeed, double samplePeriod){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
+                        
+        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.trainModel.getGrade()<0){
+            this.currSpeed = actualSpeed;
+            this.powerCommand = 0.0;
+            return 0.0;
+        }
         
         this.eK = getSetPoint()-actualSpeed;   //Calc error difference
         this.currSpeed = actualSpeed;           //Save actual speed
@@ -365,6 +389,19 @@ public class TrainController {
      */
     private void updateClimateControl(){ //should pull temp information from train model
         this.temperature = this.trainModel.getTemperature();
+        
+        if(this.temperature>72){
+            this.airConditioningOn = true;
+            this.heaterOn = false;
+        }
+        else if(this.temperature<39){
+            this.airConditioningOn = false;
+            this.heaterOn = true;
+        }
+        else{
+            this.airConditioningOn = false;
+            this.heaterOn = false;            
+        }
     }
     
     //*************CAN I IMPORT TRAINMODEL OR HOW DO I DO THIS?************//
@@ -407,6 +444,8 @@ public class TrainController {
     }                                       
     
     private void updateController(){
+        this.updateClimateControl();
+        this.updatePassengers();
         
     }
         
@@ -439,24 +478,25 @@ public class TrainController {
         else {
             gui.LightsOff.setSelected(true);
         }
-
-        if(this.airConditioningOn){
-            gui.ACOn.setSelected(true);
-            gui.ACOff.setSelected(false);
+        
+        if(this.airConditioningOn && this.heaterOn){
+            System.out.println("Both climate control systems activated at the same time, disabling both.");
+            this.airConditioningOn = false;
+            this.heaterOn = false;
+            gui.ACOff.setSelected(true);
             gui.HeatOff.setSelected(true);
-            gui.HeatOn.setSelected(false);
+        }
+        else if(this.airConditioningOn){
+            gui.ACOn.setSelected(true);
+            gui.HeatOff.setSelected(true);
         }
         else if(this.heaterOn){
-            gui.ACOn.setSelected(false);
             gui.ACOff.setSelected(true);
-            gui.HeatOff.setSelected(false);
             gui.HeatOn.setSelected(true);
         }
         else{
-            gui.ACOn.setSelected(false);
             gui.ACOff.setSelected(true);
             gui.HeatOff.setSelected(true);
-            gui.HeatOn.setSelected(false);
         }
         
         gui.KpInput.setValue(this.kP);
@@ -465,7 +505,7 @@ public class TrainController {
         gui.TrainInfoText.setText(null);
         gui.TrainInfoText.append("Train ID: " + this.trainID + "\nLine: " + 
         this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
-        "\nPassengers: " + this.passengers + "\nTemp: " + this.temperature);
+        "\nPassengers: " + this.passengers + "\nTemp: " + this.temperature + " F");
         
         if(this.emergencyBrakeOverride || this.emergencyBrakeActivated){      //Default to always print emergency brake if both emergency and service are activated
             
