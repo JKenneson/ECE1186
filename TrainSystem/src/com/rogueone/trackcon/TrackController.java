@@ -432,13 +432,11 @@ public class TrackController {
         trackControllerGUITest1.currentCrossingTable.setModel(crossingModel);
     }
 
-    public void setupSimulateTab(Global.LogicGroups logicGroup, TrackControllerGUI gui) {
+    public void setupSimulateTabSwitch(Global.LogicGroups logicGroup, TrackControllerGUI gui) {
         LogicTrackGroup selectedLogicGroup = logicGroupsGreenArray.get(logicGroup);
         if (selectedLogicGroup == null) {
             selectedLogicGroup = logicGroupsRedArray.get(logicGroup);
         }
-
-        ArrayList<Switch> selectedGroupSwitches = selectedLogicGroup.getSwitches();
         gui.enableInputs(selectedLogicGroup);
         gui.setImage(logicGroup);
     }
@@ -506,5 +504,30 @@ public class TrackController {
         gui.currentTrainsTable.setModel(trainModel);
         
         
+    }
+
+    public void setupSimulateTabCrossing(Global.LogicGroups logicGroup, TrackControllerGUI gui) {
+        Crossing crossing = null;
+        LogicTrackGroup selectedLogicGroup = logicGroupsGreenArray.get(logicGroup);
+        if (selectedLogicGroup == null) {
+            selectedLogicGroup = logicGroupsRedArray.get(logicGroup);
+            crossing = redCrossing;
+        } else {
+            crossing = greenCrossing;
+        }
+        gui.enableInputs(crossing);
+        gui.setImage(crossing);
+    }
+
+    public void updateCrossing(Crossing selectedCrossing, Global.CrossingState selectedCrossState, TrackControllerGUI gui) {
+        selectedCrossing.setCurrentCrossingState(selectedCrossState);
+        if(selectedCrossing.getLine() == Global.Line.GREEN){
+           greenCrossing = selectedCrossing;
+           gui.setSelectedCrossing(greenCrossing);
+       } else {
+           redCrossing = selectedCrossing;
+           gui.setSelectedCrossing(redCrossing);
+       }
+               
     }
 }

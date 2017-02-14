@@ -9,6 +9,7 @@ import com.rogueone.global.Global;
 import com.rogueone.global.Global.LogicGroups;
 import com.rogueone.global.Global.SwitchState;
 import com.rogueone.trackcon.TrackController;
+import com.rogueone.trackcon.entities.Crossing;
 import com.rogueone.trackcon.entities.LogicTrackGroup;
 import com.rogueone.trackcon.entities.State;
 import com.rogueone.trackcon.entities.StateSet;
@@ -24,6 +25,7 @@ import java.util.Set;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
+import javax.swing.text.DefaultCaret;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
@@ -34,6 +36,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
     TrackController trackController;
     private LogicTrackGroup selectedLogicTrackGroup;
+    private Crossing selectedCrossing;
     private int currentNumberOfSwitches;
     private int currentNumberOfPositions;
 
@@ -727,6 +730,8 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         systemOutputTextArea.setRows(5);
         systemOutputTextArea.setText("System Output\n\n");
         systemOutputScrollPane.setViewportView(systemOutputTextArea);
+        DefaultCaret caret = (DefaultCaret)systemOutputTextArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -848,7 +853,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         logicGroupPanel.add(selectCrossingLabel, gridBagConstraints);
 
-        crossingComboBox.setModel(new DefaultComboBoxModel(Global.LogicGroups.values()));
+        crossingComboBox.setModel(new DefaultComboBoxModel(Global.TrackCrossing.values()));
+        crossingComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crossingComboBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -1289,41 +1299,62 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_switch2DefaultRadioButtonActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        StateSet guiStateSet = this.generateStateSet();
-        UserSwitchState uss = trackController.updateStateMapping(this.selectedLogicTrackGroup, guiStateSet, this);
-        if(uss != null){
-            LinkedList<SimpleEntry<Integer, SwitchState>> switches =  uss.getUserSwitchStates();
-            Iterator switchIterator = switches.iterator();
-            while(switchIterator.hasNext()){
-                SimpleEntry<Integer, SwitchState> switchState = (SimpleEntry<Integer, SwitchState>) switchIterator.next();
-                for(int i = 0; i < currentNumberOfSwitches; i++){
-                    if(switchState.getKey() == Integer.parseInt(switch1Label.getText())){
-                        if(switchState.getValue() == Global.SwitchState.DEFAULT){
-                            switch1DefaultRadioButton.setSelected(true);
-                        } else if(switchState.getValue() == Global.SwitchState.ALTERNATE){
-                            switch1AlternateRadioButton.setSelected(true);
-                        } else {
-                            System.out.println("Something went wrong should not be here 0000");
-                        }
-                    }
-                    if (currentNumberOfSwitches == 2) {
-                        if (switchState.getKey() == Integer.parseInt(switch2Label.getText())) {
+        
+        if (!crossingPanel.isVisible()) {
+            StateSet guiStateSet = this.generateStateSet();
+            UserSwitchState uss = trackController.updateStateMapping(this.selectedLogicTrackGroup, guiStateSet, this);
+            if (uss != null) {
+                LinkedList<SimpleEntry<Integer, SwitchState>> switches = uss.getUserSwitchStates();
+                Iterator switchIterator = switches.iterator();
+                while (switchIterator.hasNext()) {
+                    SimpleEntry<Integer, SwitchState> switchState = (SimpleEntry<Integer, SwitchState>) switchIterator.next();
+                    for (int i = 0; i < currentNumberOfSwitches; i++) {
+                        if (switchState.getKey() == Integer.parseInt(switch1Label.getText())) {
                             if (switchState.getValue() == Global.SwitchState.DEFAULT) {
-                                switch2DefaultRadioButton.setSelected(true);
+                                switch1DefaultRadioButton.setSelected(true);
+                                systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.DEFAULT + "\n");
                             } else if (switchState.getValue() == Global.SwitchState.ALTERNATE) {
-                                switch2AlternateRadioButton.setSelected(true);
+                                switch1AlternateRadioButton.setSelected(true);
+                                systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.ALTERNATE + "\n");
                             } else {
-                                System.out.println("Something went wrong should not be here 0001");
+                                System.out.println("Something went wrong should not be here 0000");
+                            }
+                        }
+                        if (currentNumberOfSwitches == 2) {
+                            if (switchState.getKey() == Integer.parseInt(switch2Label.getText())) {
+                                if (switchState.getValue() == Global.SwitchState.DEFAULT) {
+                                    switch2DefaultRadioButton.setSelected(true);
+//                                    systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.DEFAULT + "\n");
+                                } else if (switchState.getValue() == Global.SwitchState.ALTERNATE) {
+                                    switch2AlternateRadioButton.setSelected(true);
+//                                    systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.ALTERNATE + "\n");
+                                } else {
+                                    System.out.println("Something went wrong should not be here 0001");
+                                }
                             }
                         }
                     }
                 }
+                systemOutputTextArea.append("Previous State:\t " + this.selectedLogicTrackGroup.getPreviousTrackState().toString() + "\n");
+                systemOutputTextArea.append("Current State:\t " + this.selectedLogicTrackGroup.getCurrentTrackState().toString() + "\n");
+                
+            } else {
+                System.out.println("The positions you picked did not return a result");
             }
-            systemOutputTextArea.append("Previous State " + this.selectedLogicTrackGroup.getPreviousTrackState().toString() + "\n");
-            systemOutputTextArea.append("Current State " + this.selectedLogicTrackGroup.getCurrentTrackState().toString() + "\n");
         } else {
-            System.out.println("The positions you picked did not return a result");
+            Crossing selectedCrossing = this.generateCrossing();
+            Global.CrossingState selectedCrossState = null;
+            if(crossingActiveRadioButton.isSelected()){
+                selectedCrossState = Global.CrossingState.ACTIVE;
+                systemOutputTextArea.append("Crossing:\t " + Global.CrossingState.ACTIVE + "\n");
+            } else if (crossingInactiveRadioButton.isSelected()){
+                selectedCrossState = Global.CrossingState.INACTIVE;
+                systemOutputTextArea.append("Crossing:\t " + Global.CrossingState.INACTIVE + "\n");
+            }
+            trackController.updateCrossing(selectedCrossing, selectedCrossState, this);
+            this.setImage(this.selectedCrossing);
         }
+        systemOutputTextArea.setCaretPosition(systemOutputTextArea.getDocument().getLength());
 
 //        if (switch2DefaultRadioButton.isSelected() && switch1DefaultRadioButton.isSelected()) {
 //            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img01.png"))); // NOI18N
@@ -1400,7 +1431,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private void logicGroupsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logicGroupsComboBoxActionPerformed
         // TODO add your handling code here:
         hideSimulatePanels();
-        trackController.setupSimulateTab((Global.LogicGroups) logicGroupsComboBox.getSelectedItem(), this);
+        trackController.setupSimulateTabSwitch((Global.LogicGroups) logicGroupsComboBox.getSelectedItem(), this);
 //        showSimulatePanels();
     }//GEN-LAST:event_logicGroupsComboBoxActionPerformed
 
@@ -1410,6 +1441,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             logicGroupsComboBox.setEnabled(true);
             crossingComboBox.setEnabled(false);
         }
+        hideSimulatePanels();
     }//GEN-LAST:event_testSwitchRadioButtonActionPerformed
 
     private void testCrossingRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testCrossingRadioButtonActionPerformed
@@ -1418,6 +1450,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             logicGroupsComboBox.setEnabled(false);
             crossingComboBox.setEnabled(true);
         }
+        hideSimulatePanels();
     }//GEN-LAST:event_testCrossingRadioButtonActionPerformed
 
     private void suggestSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggestSpeedTextFieldActionPerformed
@@ -1455,6 +1488,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             commandedAuthorityTextField.setText("");
         }
     }//GEN-LAST:event_currentTrainsTableMouseClicked
+
+    private void crossingComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crossingComboBoxActionPerformed
+        // TODO add your handling code here:
+        hideSimulatePanels();
+        trackController.setupSimulateTabCrossing((Global.LogicGroups) logicGroupsComboBox.getSelectedItem(), this);
+    }//GEN-LAST:event_crossingComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1580,6 +1619,9 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     }
 
     private void hideSimulatePanels() {
+        refreshButton.setEnabled(false);
+        simulateButton.setEnabled(false);
+        resetButton.setEnabled(false);
         switch1Panel.setVisible(false);
         switch2Panel.setVisible(false);
         position1Panel.setVisible(false);
@@ -1600,6 +1642,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     }
 
     public void enableInputs(LogicTrackGroup selectedLogicGroup) {
+        refreshButton.setEnabled(true);
         this.selectedLogicTrackGroup = selectedLogicGroup;
         //setup for switch panels
         ArrayList<Switch> selectedGroupSwitches = selectedLogicGroup.getSwitches();
@@ -1754,6 +1797,32 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     public void setImage(LogicGroups logicGroup) {
         imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/" + logicGroup.toString() + ".png"))); // NOI18N
     }
+
+    public void enableInputs(Crossing crossing) {
+        refreshButton.setEnabled(true);
+        this.selectedCrossing = crossing;
+        crossingPanel.setVisible(true);
+        if(crossing.getCurrentCrossingState() == Global.CrossingState.ACTIVE){
+            crossingActiveRadioButton.setSelected(true);
+        } else if(crossing.getCurrentCrossingState() == Global.CrossingState.INACTIVE){
+            crossingActiveRadioButton.setSelected(false);
+        }
+    }
+
+    public void setImage(Crossing crossing) {
+        imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/CROSSING_" + crossing.getCurrentCrossingState() + ".png"))); // NOI18N
+    }
+
+    private Crossing generateCrossing() {
+        Crossing selectedCrossing = this.selectedCrossing;
+        return selectedCrossing;
+    }
+
+    public void setSelectedCrossing(Crossing selectedCrossing) {
+        this.selectedCrossing = selectedCrossing;
+    }
+    
+    
     
     
 }

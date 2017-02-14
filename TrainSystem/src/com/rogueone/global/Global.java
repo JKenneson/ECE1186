@@ -49,6 +49,10 @@ public class Global {
         ABC, DEF, GHI, J, KLM, N, OPQ, RSTUVWXYZ, ZZ, YY, U, DE15, F16_J52, J53_N66
     }
     
+    public enum TrackCrossing {
+        E_19, I_47
+    }
+    
     public enum Presence {
         OCCUPIED, UNOCCUPIED
     }
