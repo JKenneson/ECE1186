@@ -293,9 +293,6 @@ public class TrainModel {
         else {
             gui.mboAntennaState.setText("Failed");
         }
-        
-        //Update the TrainController GUI
-        this.trainController.updateGUI(this.trainController.gui);
     }
 
     /**
@@ -387,7 +384,9 @@ public class TrainModel {
         //2)   Its velocity based on the power sent in from the TrainController
         //First, ask the TrainController for a new power
         this.elapsedTime = System.nanoTime() - startTime;                                               //Get elapsed time since last calculation
-        this.powerReceived = trainController.calculatePower(this.lastSpeed, this.elapsedTime);
+        if(this.trainController != null) {
+            this.powerReceived = this.trainController.calculatePower(this.lastSpeed, this.elapsedTime);
+        }        
         System.out.println("Power: " + this.powerReceived);
         
         //P=F*v  -> Calculate a force by deviding that power by the velocity

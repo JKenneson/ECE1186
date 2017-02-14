@@ -27,9 +27,9 @@ public class TrainHandler {
      */
     public static void main(String[] args) throws InterruptedException  { 
         
-        //trainModelInit();
+        trainModelInit();
         
-        trainModelAndControllerInit();
+        //trainModelAndControllerInit();
         
     }
     
