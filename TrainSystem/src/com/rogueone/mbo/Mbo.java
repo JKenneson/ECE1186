@@ -31,14 +31,28 @@ import javax.swing.table.*;
  * @author Brian Stevenson
  */
 public class Mbo{
-    public static ArrayList<String> trains = new ArrayList<String>();
-    public static MovingBlockGUI mboGui = new MovingBlockGUI();
-   public static File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
-   public static int trainIndex;
-   public static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
-   public static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
-   public static String[][] dummyData = {dummyDataRed, dummyDataGreen};
+    private static ArrayList<String> trains = new ArrayList<String>();
+    private static MovingBlockGUI mboGui = new MovingBlockGUI();
+   private static File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+   private static int trainIndex;
+  private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
+   private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
+   private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
     
+   public MovingBlockGUI newGui() throws IOException, InvalidFormatException{
+       //JFrame frame = new JFrame();
+       // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //frame.getContentPane().add(mboGui);
+        //frame.pack();
+        trainIndex = 1;
+        //deploy(mboGui);
+        //deploy(mboGui);
+        displayCurrentTrains();
+        readPersonnelSchedule(file);
+        //frame.setVisible(true);
+        return mboGui;
+   }
+   
     /**
      * Reads th excel file for the personnel schedule, then outputs it to the GUI
      * @param gui MBO GUI to be updated with personnel schedule information
@@ -319,16 +333,7 @@ public class Mbo{
     public static void main(String[] args) throws IOException, InvalidFormatException{
         //ArrayList<String> trains = new ArrayList<String>();
         //MovingBlockGUI mboGui = new MovingBlockGUI();
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(mboGui);
-        frame.pack();
-        trainIndex = 1;
-        //deploy(mboGui);
-        //deploy(mboGui);
-        displayCurrentTrains();
-        readPersonnelSchedule(file);
-        frame.setVisible(true);
+        
         
     }
 }

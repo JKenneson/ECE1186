@@ -102,7 +102,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
         MboPanel.setPreferredSize(new java.awt.Dimension(1000, 650));
 
-        TrainSchedulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Train Schedule"));
+        TrainSchedulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Active Trains"));
 
         trainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
