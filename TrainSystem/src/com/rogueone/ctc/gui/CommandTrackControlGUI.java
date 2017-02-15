@@ -8,6 +8,7 @@ package com.rogueone.ctc.gui;
 //import java.awt.event.*;
 //import java.text.*;
 //import java.util.*;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import com.rogueone.trainmodel.TrainModel;
@@ -24,6 +25,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     public CommandTrackControlGUI() {
         initComponents();
         InitializeGUIObject();
+
 
     }
 
@@ -328,16 +330,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         FailureTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -830,7 +825,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         SystemInformationPanel.add(jLabel4, gridBagConstraints);
 
-        TimeField.setText("12:31");
+        TimeField.setText("6:43");
         TimeField.setPreferredSize(new java.awt.Dimension(45, 26));
         TimeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1015,12 +1010,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
 
     private void TrackShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackShutdownButtonActionPerformed
-        TrackShutdownGUI trackShutdown = new TrackShutdownGUI();
+        TrackShutdownGUI trackShutdown = new TrackShutdownGUI(this);
         trackShutdown.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_TrackShutdownButtonActionPerformed
 
     private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
-        TrainShutdownGUI trainShutdown = new TrainShutdownGUI();
+        TrainShutdownGUI trainShutdown = new TrainShutdownGUI(this);
         trainShutdown.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_TrainShutdownButtonActionPerformed
@@ -1114,19 +1109,19 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         Boolean bool = false;
         for ( int i = 0; i < TrainTable.getRowCount(); i ++){
             if (((String)TrainTable.getValueAt(i, 0)).equals(passTrainLine)){
-                //System.out.println("match");
+                System.out.println("match");
                if ((Integer)TrainTable.getValueAt(i, 1) == trainID){
-                   //System.out.println("id match");
+                   System.out.println("id match");
                     TrainTable.setValueAt(bool, i, 3);
                     String trainPosition = (String)TrainTable.getValueAt(i, 2);
-                    updateFailureTable(passTrainLine, trainPosition, trainID, "Disabled");
+                    updateFailureTable(passTrainLine, trainPosition, "Disabled");
                }
             }
         }
         TrainTable.repaint();
     }
     
-    public void updateFailureTable( String passTrainLine, String trainPosition, int trainID, String failureType){
+    public void updateFailureTable( String passTrainLine, String trainPosition, String failureType){
         
         String[] positionParts = trainPosition.split(":");
         String failureSection = positionParts[0];
@@ -1139,6 +1134,26 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)FailureTable.getModel();
         model.addRow(newRow);
     }
+    
+    public void DisableTrack(String lineName, String segmentName, String blockName){
+        Boolean bool = false;
+        for ( int i = 0; i < BlockTable.getRowCount(); i ++){
+            if (((String)BlockTable.getValueAt(i, 0)).equals(lineName)){
+                System.out.println("match");
+                if (((String)BlockTable.getValueAt(i, 1)).equals(segmentName)){
+
+                    if (((String)BlockTable.getValueAt(i, 2)).equals(blockName)){
+                       System.out.println("id match");
+                        BlockTable.setValueAt(bool, i, 3);
+                        String trainPosition = (segmentName+":"+blockName);
+                        updateFailureTable(lineName, trainPosition, "Disabled");
+                   }
+                }
+            }
+        }
+        BlockTable.repaint();
+    }
+    
     private void StatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_StatusFieldActionPerformed

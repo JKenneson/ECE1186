@@ -17,6 +17,13 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     public TrackShutdownGUI() {
         initComponents();
     }
+    
+    private CommandTrackControlGUI ctcGUI;
+    
+    public TrackShutdownGUI(CommandTrackControlGUI ctcGUI) {
+        this.ctcGUI = ctcGUI;
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,9 +171,10 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_BlockComboBoxActionPerformed
   
     private void disableTrackSegment(String lineName, String segmentName, String blockName){
-        //globally disable track segment
-        //update failure table
+        this.ctcGUI.DisableTrack(lineName, segmentName, blockName);
     }
+                                 
+    
     /**
      * @param args the command line arguments
      */

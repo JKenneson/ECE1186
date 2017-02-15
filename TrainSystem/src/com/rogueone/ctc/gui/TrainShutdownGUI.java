@@ -17,7 +17,13 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     public TrainShutdownGUI() {
         initComponents();
     }
-
+    
+    private CommandTrackControlGUI ctcGUI;
+    
+    public TrainShutdownGUI(CommandTrackControlGUI ctcGUI) {
+        this.ctcGUI = ctcGUI;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,8 +141,7 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_disableButtonActionPerformed
     
     public void disableSignal(int passTrainName, String passTrainLine){
-        CommandTrackControlGUI ctcGUI = new CommandTrackControlGUI();
-        ctcGUI.DisableTrain(passTrainName, passTrainLine);
+        this.ctcGUI.DisableTrain(passTrainName, passTrainLine);
     }
     
     private void lineSelectBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineSelectBoxActionPerformed
