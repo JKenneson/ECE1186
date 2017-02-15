@@ -5,13 +5,14 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 2/12/17
+ * @modification date 2/15/17
  */
 package com.rogueone.mbo;
 import java.io.File;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.*;
@@ -286,8 +287,42 @@ public class Mbo{
      * Function to generate a new employee schedule in excel
      * @param file excel file to be written to
      */
-    public void generatePersonnelSchedule(File file) throws IOException, InvalidFormatException{
-        int numEmployees = 0;
+    public void generateSchedule(int numTrains) throws IOException, InvalidFormatException{
+        Workbook workbook = new XSSFWorkbook();
+        System.out.println("There are: "+numTrains+" trains!");
+        
+        
+        
+        int i=0,j=0;
+        String[] personnelHeaders = {"Name","SUN","MON","TUES","WED","THURS","FRI","SAT"};
+        String[] trainHeaders = {"Train ID","Driver","Departure"};
+        //Sheet redSchedule = workbook.getSheetAt(1);
+        Sheet peopleSheet = workbook.createSheet("Personnel");
+        Sheet redSheet = workbook.createSheet("Red");
+        Sheet greenSheet = workbook.createSheet("Green");
+       
+        for(j=0;j<numTrains;j++){
+            if(j==0){
+                Row peopleRow = peopleSheet.createRow(j);
+                Row redRow = redSheet.createRow(j);
+                Row greenRow = greenSheet.createRow(j);
+                for(i=0;i<8;i++){
+                Cell cell = peopleRow.createCell(i);
+                cell.setCellValue(personnelHeaders[i]);
+                }
+                for(i=0;i<3;i++){
+                    Cell redCell = redRow.createCell(i);
+                    Cell greenCell = greenRow.createCell(i);
+                    redCell.setCellValue(trainHeaders[i]);
+                    greenCell.setCellValue(trainHeaders[i]);
+                }
+            }
+        }
+        
+        FileOutputStream output = new FileOutputStream("src\\com\\rogueone\\assets\\altSchedule.xlsx");
+        workbook.write(output);
+        output.close();
+        /*
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         workbook.createSheet("Personnel");
         XSSFSheet personnelSchedule = workbook.getSheetAt(1);
@@ -301,19 +336,11 @@ public class Mbo{
                 names.add(tempString);
             }
         
-        numEmployees = names.size();
+        numTrains = names.size();
         
         //for(int i=0; i<numEmployees; i=i+3){
         //}
-            
-        
-    }
-    
-    /**
-     * Generates a new train schedule and writes it to an excel sheet
-     */
-    public void generateTrainSchedule(){
-        
+        */
     }
     
     /**

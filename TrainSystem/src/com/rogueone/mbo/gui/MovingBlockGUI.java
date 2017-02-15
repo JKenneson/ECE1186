@@ -24,7 +24,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 /**
  *
- * @author kylemonto
+ * @author Brian Stevenson
  */
 public class MovingBlockGUI extends javax.swing.JPanel {
 
@@ -643,7 +643,18 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_ThroughputInputActionPerformed
 
     private void MboOkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton2ActionPerformed
-        // TODO add your handling code here:
+        Mbo mbo = new Mbo();
+            //File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
+            if(NumTrainsRadio.isSelected()){
+                String numTrainStr = NumTrainsInput.getText();
+                int numTrains = Integer.parseInt(numTrainStr);
+                try{
+                mbo.generateSchedule(numTrains);
+                }
+                catch(IOException | InvalidFormatException e){
+
+                }
+            }
     }//GEN-LAST:event_MboOkButton2ActionPerformed
 
     private void NumTrainsRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumTrainsRadioActionPerformed
@@ -653,6 +664,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
             MboUnits4.setEnabled(true);
             ThroughputInput.setEnabled(false);
             MboUnits3.setEnabled(false);
+            
         }
     }//GEN-LAST:event_NumTrainsRadioActionPerformed
 
