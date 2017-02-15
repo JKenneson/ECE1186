@@ -567,7 +567,7 @@ public class TrainModel {
 
     public void setAuthority(double authority) {
         this.authority = authority;
-        this.trainController.setAuthority((short)authority);
+        this.trainController.setAuthority((short)(authority/FEET_IN_A_METER));
     }
     
     public double getDistanceTraveled() {
