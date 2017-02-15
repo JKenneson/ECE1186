@@ -17,7 +17,6 @@ public class MurphyGUI extends javax.swing.JFrame {
     public MurphyGUI() {
         initComponents();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,7 +37,6 @@ public class MurphyGUI extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -73,13 +71,8 @@ public class MurphyGUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel6.add(jLabel24, gridBagConstraints);
 
-        jComboBox5.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green", "Red" }));
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
-            }
-        });
+        jComboBox5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -87,30 +80,30 @@ public class MurphyGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         jPanel6.add(jComboBox5, gridBagConstraints);
 
-        jComboBox6.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Power", "Antenna", "Service Brake" }));
+        jComboBox6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         jPanel6.add(jComboBox6, gridBagConstraints);
 
-        jButton6.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jButton6.setText("Disable");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipady = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel6.add(jButton6, gridBagConstraints);
 
-        jButton9.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        jButton9.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jButton9.setText("Reset Search");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel6.add(jButton9, gridBagConstraints);
 
@@ -119,19 +112,9 @@ public class MurphyGUI extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         jPanel6.add(jLabel26, gridBagConstraints);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Train", "Track", "Switch", "Lights" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(170, 27));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel6.add(jComboBox1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -182,10 +165,6 @@ public class MurphyGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox5ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -224,7 +203,6 @@ public class MurphyGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel19;

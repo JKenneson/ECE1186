@@ -9,6 +9,7 @@ import com.rogueone.global.Global;
 import com.rogueone.global.Global.LogicGroups;
 import com.rogueone.global.Global.SwitchState;
 import com.rogueone.trackcon.TrackController;
+import com.rogueone.trackcon.entities.Crossing;
 import com.rogueone.trackcon.entities.LogicTrackGroup;
 import com.rogueone.trackcon.entities.State;
 import com.rogueone.trackcon.entities.StateSet;
@@ -24,6 +25,7 @@ import java.util.Set;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
+import javax.swing.text.DefaultCaret;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
@@ -34,6 +36,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
     TrackController trackController;
     private LogicTrackGroup selectedLogicTrackGroup;
+    private Crossing selectedCrossing;
     private int currentNumberOfSwitches;
     private int currentNumberOfPositions;
 
@@ -78,8 +81,6 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         selectionPanel = new javax.swing.JPanel();
         lineLabel = new javax.swing.JLabel();
         lineTextField = new javax.swing.JTextField();
-        trainNumberLabel = new javax.swing.JLabel();
-        trainNumberTextField = new javax.swing.JTextField();
         switchNumberLabel = new javax.swing.JLabel();
         switchNumberTextField = new javax.swing.JTextField();
         crossingNumberLabel = new javax.swing.JLabel();
@@ -91,6 +92,18 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         plcProgramTextField = new javax.swing.JTextField();
         trackSignalNumberTextField = new javax.swing.JTextField();
         trackSignalNumberLabel = new javax.swing.JLabel();
+        speedAuthorityPanel = new javax.swing.JPanel();
+        suggestSpeedLabel = new javax.swing.JLabel();
+        suggestSpeedTextField = new javax.swing.JTextField();
+        suggestAuthorityTextField = new javax.swing.JTextField();
+        suggestAuthorityLabel = new javax.swing.JLabel();
+        commandedSpeedLabel = new javax.swing.JLabel();
+        commandedSpeedTextField = new javax.swing.JTextField();
+        commandedAuthorityLabel = new javax.swing.JLabel();
+        commandedAuthorityTextField = new javax.swing.JTextField();
+        trainNumberLabel = new javax.swing.JLabel();
+        trainNumberTextField = new javax.swing.JTextField();
+        addTrain = new javax.swing.JButton();
         componentSummaryPanel = new javax.swing.JPanel();
         currentTrackControllerComboBox = new javax.swing.JComboBox<>();
         currentTrackControllerLabel = new javax.swing.JLabel();
@@ -111,8 +124,6 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         currentTrackSignalsTable = new javax.swing.JTable();
         simulatePanel = new javax.swing.JPanel();
         plcSysNotifPanel = new javax.swing.JPanel();
-        plcProgramInputScrollPane = new javax.swing.JScrollPane();
-        plcProgramInputTextArea = new javax.swing.JTextArea();
         systemOutputScrollPane = new javax.swing.JScrollPane();
         systemOutputTextArea = new javax.swing.JTextArea();
         imagePanel = new javax.swing.JPanel();
@@ -162,17 +173,6 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         crossingStatusLabel = new javax.swing.JLabel();
         crossingActiveRadioButton = new javax.swing.JRadioButton();
         crossingInactiveRadioButton = new javax.swing.JRadioButton();
-        speedAuthorityPanel = new javax.swing.JPanel();
-        suggestSpeedLabel = new javax.swing.JLabel();
-        suggestSpeedTextField = new javax.swing.JTextField();
-        suggestAuthorityTextField = new javax.swing.JTextField();
-        suggestAuthorityLabel = new javax.swing.JLabel();
-        commandedSpeedLabel = new javax.swing.JLabel();
-        commandedSpeedTextField = new javax.swing.JTextField();
-        commandedAuthorityLabel = new javax.swing.JLabel();
-        commandedAuthorityTextField = new javax.swing.JTextField();
-        blockIDLabel = new javax.swing.JLabel();
-        blockIDTextField = new javax.swing.JTextField();
         actionsPanel = new javax.swing.JPanel();
         refreshButton = new javax.swing.JButton();
         simulateButton = new javax.swing.JButton();
@@ -193,7 +193,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         lineLabel.setText("Line: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         selectionPanel.add(lineLabel, gridBagConstraints);
 
@@ -205,31 +205,11 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         selectionPanel.add(lineTextField, gridBagConstraints);
-
-        trainNumberLabel.setText("Train Number:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        selectionPanel.add(trainNumberLabel, gridBagConstraints);
-
-        trainNumberTextField.setText("1/(None Selected)");
-        trainNumberTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trainNumberTextFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        selectionPanel.add(trainNumberTextField, gridBagConstraints);
 
         switchNumberLabel.setText("Switch ID: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -329,6 +309,120 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridy = 4;
         selectionPanel.add(trackSignalNumberLabel, gridBagConstraints);
 
+        speedAuthorityPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed/Authority"));
+        speedAuthorityPanel.setLayout(new java.awt.GridBagLayout());
+
+        suggestSpeedLabel.setText("Suggested Speed(mph):");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        speedAuthorityPanel.add(suggestSpeedLabel, gridBagConstraints);
+
+        suggestSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suggestSpeedTextFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        speedAuthorityPanel.add(suggestSpeedTextField, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        speedAuthorityPanel.add(suggestAuthorityTextField, gridBagConstraints);
+
+        suggestAuthorityLabel.setText("Suggested Authority(ft):");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        speedAuthorityPanel.add(suggestAuthorityLabel, gridBagConstraints);
+
+        commandedSpeedLabel.setText("Commanded Speed(mph):");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        speedAuthorityPanel.add(commandedSpeedLabel, gridBagConstraints);
+
+        commandedSpeedTextField.setEditable(false);
+        commandedSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commandedSpeedTextFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        speedAuthorityPanel.add(commandedSpeedTextField, gridBagConstraints);
+
+        commandedAuthorityLabel.setText("Commanded Authority(ft):");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        speedAuthorityPanel.add(commandedAuthorityLabel, gridBagConstraints);
+
+        commandedAuthorityTextField.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        speedAuthorityPanel.add(commandedAuthorityTextField, gridBagConstraints);
+
+        trainNumberLabel.setText("Train Number:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        speedAuthorityPanel.add(trainNumberLabel, gridBagConstraints);
+
+        trainNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trainNumberTextFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 70;
+        speedAuthorityPanel.add(trainNumberTextField, gridBagConstraints);
+
+        addTrain.setText("Dispatch Train");
+        addTrain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTrainActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        speedAuthorityPanel.add(addTrain, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        selectionPanel.add(speedAuthorityPanel, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -363,14 +457,34 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
         currentTrainsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "A-C", "15", "1500"},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Train Number", "Current Block", "Current Speed", "Authority"
+                "Train ID", "Suggested Speed", "Suggested Authority", "Commanded Speed", "Commanded Authority"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        currentTrainsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                currentTrainsTableMouseClicked(evt);
+            }
+        });
         currentTrainsScrollPane.setViewportView(currentTrainsTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -612,29 +726,16 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         plcSysNotifPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PLC and System Notifications"));
         plcSysNotifPanel.setLayout(new java.awt.GridBagLayout());
 
-        plcProgramInputTextArea.setColumns(20);
-        plcProgramInputTextArea.setRows(5);
-        plcProgramInputTextArea.setText("PLC Program Input\n");
-        plcProgramInputScrollPane.setViewportView(plcProgramInputTextArea);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        plcSysNotifPanel.add(plcProgramInputScrollPane, gridBagConstraints);
-
         systemOutputTextArea.setColumns(20);
         systemOutputTextArea.setRows(5);
         systemOutputTextArea.setText("System Output\n\n");
         systemOutputScrollPane.setViewportView(systemOutputTextArea);
+        DefaultCaret caret = (DefaultCaret)systemOutputTextArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
@@ -752,7 +853,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         logicGroupPanel.add(selectCrossingLabel, gridBagConstraints);
 
-        crossingComboBox.setModel(new DefaultComboBoxModel(Global.LogicGroups.values()));
+        crossingComboBox.setModel(new DefaultComboBoxModel(Global.TrackCrossing.values()));
+        crossingComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crossingComboBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -1083,111 +1189,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         crossingPanel.add(crossingInactiveRadioButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         inputsPanel.add(crossingPanel, gridBagConstraints);
-
-        speedAuthorityPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed/Authority"));
-        speedAuthorityPanel.setLayout(new java.awt.GridBagLayout());
-
-        suggestSpeedLabel.setText("Suggested Speed(mph):");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        speedAuthorityPanel.add(suggestSpeedLabel, gridBagConstraints);
-
-        suggestSpeedTextField.setText("15");
-        suggestSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                suggestSpeedTextFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        speedAuthorityPanel.add(suggestSpeedTextField, gridBagConstraints);
-
-        suggestAuthorityTextField.setText("2000");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        speedAuthorityPanel.add(suggestAuthorityTextField, gridBagConstraints);
-
-        suggestAuthorityLabel.setText("Suggested Authority(ft): ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        speedAuthorityPanel.add(suggestAuthorityLabel, gridBagConstraints);
-
-        commandedSpeedLabel.setText("Commanded Speed(mph): ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        speedAuthorityPanel.add(commandedSpeedLabel, gridBagConstraints);
-
-        commandedSpeedTextField.setText("12.5");
-        commandedSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                commandedSpeedTextFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        speedAuthorityPanel.add(commandedSpeedTextField, gridBagConstraints);
-
-        commandedAuthorityLabel.setText("Commanded Authority(ft):");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        speedAuthorityPanel.add(commandedAuthorityLabel, gridBagConstraints);
-
-        commandedAuthorityTextField.setText("1879");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        speedAuthorityPanel.add(commandedAuthorityTextField, gridBagConstraints);
-
-        blockIDLabel.setText("Block ID: ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        speedAuthorityPanel.add(blockIDLabel, gridBagConstraints);
-
-        blockIDTextField.setText("C12");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        speedAuthorityPanel.add(blockIDTextField, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        inputsPanel.add(speedAuthorityPanel, gridBagConstraints);
 
         actionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
         actionsPanel.setLayout(new java.awt.GridBagLayout());
@@ -1207,23 +1214,24 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
         simulateButton.setText("Simulate");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         actionsPanel.add(simulateButton, gridBagConstraints);
 
         resetButton.setText("Reset");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         actionsPanel.add(resetButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         inputsPanel.add(actionsPanel, gridBagConstraints);
@@ -1290,50 +1298,63 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_switch2DefaultRadioButtonActionPerformed
 
-    private void suggestSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggestSpeedTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_suggestSpeedTextFieldActionPerformed
-
-    private void commandedSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commandedSpeedTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_commandedSpeedTextFieldActionPerformed
-
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        StateSet guiStateSet = this.generateStateSet();
-        UserSwitchState uss = trackController.updateStateMapping(this.selectedLogicTrackGroup, guiStateSet, this);
-        if(uss != null){
-            LinkedList<SimpleEntry<Integer, SwitchState>> switches =  uss.getUserSwitchStates();
-            Iterator switchIterator = switches.iterator();
-            while(switchIterator.hasNext()){
-                SimpleEntry<Integer, SwitchState> switchState = (SimpleEntry<Integer, SwitchState>) switchIterator.next();
-                for(int i = 0; i < currentNumberOfSwitches; i++){
-                    if(switchState.getKey() == Integer.parseInt(switch1Label.getText())){
-                        if(switchState.getValue() == Global.SwitchState.DEFAULT){
-                            switch1DefaultRadioButton.setSelected(true);
-                        } else if(switchState.getValue() == Global.SwitchState.ALTERNATE){
-                            switch1AlternateRadioButton.setSelected(true);
-                        } else {
-                            System.out.println("Something went wrong should not be here 0000");
-                        }
-                    }
-                    if (currentNumberOfSwitches == 2) {
-                        if (switchState.getKey() == Integer.parseInt(switch2Label.getText())) {
+        
+        if (!crossingPanel.isVisible()) {
+            StateSet guiStateSet = this.generateStateSet();
+            UserSwitchState uss = trackController.updateStateMapping(this.selectedLogicTrackGroup, guiStateSet, this);
+            if (uss != null) {
+                LinkedList<SimpleEntry<Integer, SwitchState>> switches = uss.getUserSwitchStates();
+                Iterator switchIterator = switches.iterator();
+                while (switchIterator.hasNext()) {
+                    SimpleEntry<Integer, SwitchState> switchState = (SimpleEntry<Integer, SwitchState>) switchIterator.next();
+                    for (int i = 0; i < currentNumberOfSwitches; i++) {
+                        if (switchState.getKey() == Integer.parseInt(switch1Label.getText())) {
                             if (switchState.getValue() == Global.SwitchState.DEFAULT) {
-                                switch2DefaultRadioButton.setSelected(true);
+                                switch1DefaultRadioButton.setSelected(true);
+                                systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.DEFAULT + "\n");
                             } else if (switchState.getValue() == Global.SwitchState.ALTERNATE) {
-                                switch2AlternateRadioButton.setSelected(true);
+                                switch1AlternateRadioButton.setSelected(true);
+                                systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.ALTERNATE + "\n");
                             } else {
-                                System.out.println("Something went wrong should not be here 0001");
+                                System.out.println("Something went wrong should not be here 0000");
+                            }
+                        }
+                        if (currentNumberOfSwitches == 2) {
+                            if (switchState.getKey() == Integer.parseInt(switch2Label.getText())) {
+                                if (switchState.getValue() == Global.SwitchState.DEFAULT) {
+                                    switch2DefaultRadioButton.setSelected(true);
+//                                    systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.DEFAULT + "\n");
+                                } else if (switchState.getValue() == Global.SwitchState.ALTERNATE) {
+                                    switch2AlternateRadioButton.setSelected(true);
+//                                    systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.ALTERNATE + "\n");
+                                } else {
+                                    System.out.println("Something went wrong should not be here 0001");
+                                }
                             }
                         }
                     }
                 }
+                systemOutputTextArea.append("Previous State:\t " + this.selectedLogicTrackGroup.getPreviousTrackState().toString() + "\n");
+                systemOutputTextArea.append("Current State:\t " + this.selectedLogicTrackGroup.getCurrentTrackState().toString() + "\n");
+                
+            } else {
+                System.out.println("The positions you picked did not return a result");
             }
-            systemOutputTextArea.append("Previous State " + this.selectedLogicTrackGroup.getPreviousTrackState().toString() + "\n");
-            systemOutputTextArea.append("Current State " + this.selectedLogicTrackGroup.getCurrentTrackState().toString() + "\n");
         } else {
-            System.out.println("The positions you picked did not return a result");
+            Crossing selectedCrossing = this.generateCrossing();
+            Global.CrossingState selectedCrossState = null;
+            if(crossingActiveRadioButton.isSelected()){
+                selectedCrossState = Global.CrossingState.ACTIVE;
+                systemOutputTextArea.append("Crossing:\t " + Global.CrossingState.ACTIVE + "\n");
+            } else if (crossingInactiveRadioButton.isSelected()){
+                selectedCrossState = Global.CrossingState.INACTIVE;
+                systemOutputTextArea.append("Crossing:\t " + Global.CrossingState.INACTIVE + "\n");
+            }
+            trackController.updateCrossing(selectedCrossing, selectedCrossState, this);
+            this.setImage(this.selectedCrossing);
         }
+        systemOutputTextArea.setCaretPosition(systemOutputTextArea.getDocument().getLength());
 
 //        if (switch2DefaultRadioButton.isSelected() && switch1DefaultRadioButton.isSelected()) {
 //            imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/Wayside_img01.png"))); // NOI18N
@@ -1410,7 +1431,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private void logicGroupsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logicGroupsComboBoxActionPerformed
         // TODO add your handling code here:
         hideSimulatePanels();
-        trackController.setupSimulateTab((Global.LogicGroups) logicGroupsComboBox.getSelectedItem(), this);
+        trackController.setupSimulateTabSwitch((Global.LogicGroups) logicGroupsComboBox.getSelectedItem(), this);
 //        showSimulatePanels();
     }//GEN-LAST:event_logicGroupsComboBoxActionPerformed
 
@@ -1420,6 +1441,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             logicGroupsComboBox.setEnabled(true);
             crossingComboBox.setEnabled(false);
         }
+        hideSimulatePanels();
     }//GEN-LAST:event_testSwitchRadioButtonActionPerformed
 
     private void testCrossingRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testCrossingRadioButtonActionPerformed
@@ -1428,13 +1450,55 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             logicGroupsComboBox.setEnabled(false);
             crossingComboBox.setEnabled(true);
         }
+        hideSimulatePanels();
     }//GEN-LAST:event_testCrossingRadioButtonActionPerformed
+
+    private void suggestSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggestSpeedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_suggestSpeedTextFieldActionPerformed
+
+    private void commandedSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commandedSpeedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_commandedSpeedTextFieldActionPerformed
+
+    private void addTrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTrainActionPerformed
+        // TODO add your handling code here:
+        trackController.addTrain( trainNumberTextField.getText(), suggestSpeedTextField.getText(), suggestAuthorityTextField.getText(), this);
+    }//GEN-LAST:event_addTrainActionPerformed
+
+    private void currentTrainsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentTrainsTableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = currentTrainsTable.getSelectedRow();
+        if (selectedRow != -1) {
+            String trainID = (String) currentTrainsTable.getValueAt(selectedRow, 0);
+            trainNumberTextField.setText(trainID + "");
+            String sugSpeed = (String) currentTrainsTable.getValueAt(selectedRow, 1);
+            suggestSpeedTextField.setText(sugSpeed + "");
+            String sugAuthority = (String) currentTrainsTable.getValueAt(selectedRow, 2);
+            suggestAuthorityTextField.setText(sugAuthority + "");
+            String comSpeed = (String) currentTrainsTable.getValueAt(selectedRow, 3);
+            commandedSpeedTextField.setText(comSpeed + "");
+            String comAuthority = (String) currentTrainsTable.getValueAt(selectedRow, 4);
+            commandedAuthorityTextField.setText(comAuthority + "");
+        } else {
+            trainNumberTextField.setText("Nothing Selected");
+            suggestSpeedTextField.setText("");
+            suggestAuthorityTextField.setText("");
+            commandedSpeedTextField.setText("");
+            commandedAuthorityTextField.setText("");
+        }
+    }//GEN-LAST:event_currentTrainsTableMouseClicked
+
+    private void crossingComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crossingComboBoxActionPerformed
+        // TODO add your handling code here:
+        hideSimulatePanels();
+        trackController.setupSimulateTabCrossing((Global.LogicGroups) logicGroupsComboBox.getSelectedItem(), this);
+    }//GEN-LAST:event_crossingComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionsPanel;
-    private javax.swing.JLabel blockIDLabel;
-    private javax.swing.JTextField blockIDTextField;
+    private javax.swing.JButton addTrain;
     private javax.swing.JLabel blockNumberLabel;
     private javax.swing.JTextField blockNumberTextField;
     private javax.swing.JButton chooseFileButton;
@@ -1467,7 +1531,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     public javax.swing.JTable currentTrackSignalsTable;
     private javax.swing.JLabel currentTrainLabel;
     private javax.swing.JScrollPane currentTrainsScrollPane;
-    private javax.swing.JTable currentTrainsTable;
+    public javax.swing.JTable currentTrainsTable;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JPanel inputsPanel;
@@ -1481,8 +1545,6 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.JRadioButton occupiedPosition2RadioButton;
     private javax.swing.JRadioButton occupiedPosition3RadioButton;
     private javax.swing.JRadioButton occupiedPosition4RadioButton;
-    private javax.swing.JScrollPane plcProgramInputScrollPane;
-    private javax.swing.JTextArea plcProgramInputTextArea;
     private javax.swing.JLabel plcProgramLabel;
     public javax.swing.JTextField plcProgramTextField;
     private javax.swing.JPanel plcSysNotifPanel;
@@ -1557,6 +1619,9 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     }
 
     private void hideSimulatePanels() {
+        refreshButton.setEnabled(false);
+        simulateButton.setEnabled(false);
+        resetButton.setEnabled(false);
         switch1Panel.setVisible(false);
         switch2Panel.setVisible(false);
         position1Panel.setVisible(false);
@@ -1577,6 +1642,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     }
 
     public void enableInputs(LogicTrackGroup selectedLogicGroup) {
+        refreshButton.setEnabled(true);
         this.selectedLogicTrackGroup = selectedLogicGroup;
         //setup for switch panels
         ArrayList<Switch> selectedGroupSwitches = selectedLogicGroup.getSwitches();
@@ -1727,6 +1793,36 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     public void setSelectedLogicTrackGroup(LogicTrackGroup selectedLogicTrackGroup) {
         this.selectedLogicTrackGroup = selectedLogicTrackGroup;
     }
+
+    public void setImage(LogicGroups logicGroup) {
+        imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/" + logicGroup.toString() + ".png"))); // NOI18N
+    }
+
+    public void enableInputs(Crossing crossing) {
+        refreshButton.setEnabled(true);
+        this.selectedCrossing = crossing;
+        crossingPanel.setVisible(true);
+        if(crossing.getCurrentCrossingState() == Global.CrossingState.ACTIVE){
+            crossingActiveRadioButton.setSelected(true);
+        } else if(crossing.getCurrentCrossingState() == Global.CrossingState.INACTIVE){
+            crossingActiveRadioButton.setSelected(false);
+        }
+    }
+
+    public void setImage(Crossing crossing) {
+        imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/CROSSING_" + crossing.getCurrentCrossingState() + ".png"))); // NOI18N
+    }
+
+    private Crossing generateCrossing() {
+        Crossing selectedCrossing = this.selectedCrossing;
+        return selectedCrossing;
+    }
+
+    public void setSelectedCrossing(Crossing selectedCrossing) {
+        this.selectedCrossing = selectedCrossing;
+    }
+    
+    
     
     
 }

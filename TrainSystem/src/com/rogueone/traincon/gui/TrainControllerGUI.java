@@ -8,6 +8,7 @@ package com.rogueone.traincon.gui;
 import com.rogueone.traincon.TrainController;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainmodel.entities.TrainFailures;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,7 +24,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
      */
     public TrainControllerGUI() {
         initComponents();
-        this.trainController = new TrainController(new TrainModel(40, 500, 1), this, 50, 200, 500, "123", "G", "AA", "13"); //for testing purposes
+        this.trainController = new TrainController(new TrainModel(40, 500, 1), this, (byte) 50, (short) 200, 500, "123", "G", "AA", "13"); //for testing purposes
     }
 
     public TrainControllerGUI(TrainController tc) {
@@ -132,10 +133,20 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         ACGroup.add(ACOn);
         ACOn.setText("On");
+        ACOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ACOnActionPerformed(evt);
+            }
+        });
 
         ACGroup.add(ACOff);
         ACOff.setSelected(true);
         ACOff.setText("Off");
+        ACOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ACOffActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ControlsACLayout = new javax.swing.GroupLayout(ControlsAC);
         ControlsAC.setLayout(ControlsACLayout);
@@ -158,10 +169,20 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         LightsGroup.add(LightsOn);
         LightsOn.setText("On");
+        LightsOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LightsOnActionPerformed(evt);
+            }
+        });
 
         LightsGroup.add(LightsOff);
         LightsOff.setSelected(true);
         LightsOff.setText("Off");
+        LightsOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LightsOffActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ControlsLightsLayout = new javax.swing.GroupLayout(ControlsLights);
         ControlsLights.setLayout(ControlsLightsLayout);
@@ -184,10 +205,20 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         LeftDoorGroup.add(LeftDoorOpened);
         LeftDoorOpened.setText("Opened");
+        LeftDoorOpened.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LeftDoorOpenedActionPerformed(evt);
+            }
+        });
 
         LeftDoorGroup.add(LeftDoorClosed);
         LeftDoorClosed.setSelected(true);
         LeftDoorClosed.setText("Closed");
+        LeftDoorClosed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LeftDoorClosedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ControlsLeftDoorLayout = new javax.swing.GroupLayout(ControlsLeftDoor);
         ControlsLeftDoor.setLayout(ControlsLeftDoorLayout);
@@ -211,9 +242,19 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         RightDoorGroup.add(RightDoorClosed);
         RightDoorClosed.setSelected(true);
         RightDoorClosed.setText("Closed");
+        RightDoorClosed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RightDoorClosedActionPerformed(evt);
+            }
+        });
 
         RightDoorGroup.add(RightDoorOpened);
         RightDoorOpened.setText("Opened");
+        RightDoorOpened.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RightDoorOpenedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ControlsRightDoorLayout = new javax.swing.GroupLayout(ControlsRightDoor);
         ControlsRightDoor.setLayout(ControlsRightDoorLayout);
@@ -233,15 +274,30 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         );
 
         SetSpeed.setText("Set Speed");
+        SetSpeed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SetSpeedActionPerformed(evt);
+            }
+        });
 
         ControlsSystemMode.setBorder(javax.swing.BorderFactory.createTitledBorder("System Mode"));
 
         ModeGroup.add(ManualModeSelect);
         ManualModeSelect.setText("Manual");
+        ManualModeSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManualModeSelectActionPerformed(evt);
+            }
+        });
 
         ModeGroup.add(AutoModeSelect);
         AutoModeSelect.setSelected(true);
         AutoModeSelect.setText("Automatic");
+        AutoModeSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AutoModeSelectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ControlsSystemModeLayout = new javax.swing.GroupLayout(ControlsSystemMode);
         ControlsSystemMode.setLayout(ControlsSystemModeLayout);
@@ -296,10 +352,20 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
         HeatGroup.add(HeatOn);
         HeatOn.setText("On");
+        HeatOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HeatOnActionPerformed(evt);
+            }
+        });
 
         HeatGroup.add(HeatOff);
         HeatOff.setSelected(true);
         HeatOff.setText("Off");
+        HeatOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HeatOffActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ControlsHeatLayout = new javax.swing.GroupLayout(ControlsHeat);
         ControlsHeat.setLayout(ControlsHeatLayout);
@@ -537,7 +603,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
             .addComponent(TrainInfoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
         );
 
-        TrainSelectorDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TrainSelectorDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Train 1", "Train 2", "Train 3" }));
 
         RealTimeHUD.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Real Time HUD"));
 
@@ -557,10 +623,9 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         ActualSpeedPanelLayout.setHorizontalGroup(
             ActualSpeedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ActualSpeedPanelLayout.createSequentialGroup()
-                .addComponent(ActualSpeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ActualSpeedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ActualSpeedUnitsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(ActualSpeedUnitsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         ActualSpeedPanelLayout.setVerticalGroup(
             ActualSpeedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,7 +673,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                         .addComponent(SetSpeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SetSpeedUnitsLabel)))
-                .addGap(26, 26, 26))
+                .addGap(31, 31, Short.MAX_VALUE))
         );
         SpeedLimitPanelLayout.setVerticalGroup(
             SpeedLimitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -630,19 +695,20 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         AuthorityUnitsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         AuthorityUnitsLabel.setText("feet");
 
-        AuthorityLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        AuthorityLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         AuthorityLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         AuthorityLabel.setText("300");
+        AuthorityLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout AuthorityPanelLayout = new javax.swing.GroupLayout(AuthorityPanel);
         AuthorityPanel.setLayout(AuthorityPanelLayout);
         AuthorityPanelLayout.setHorizontalGroup(
             AuthorityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AuthorityPanelLayout.createSequentialGroup()
-                .addComponent(AuthorityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AuthorityUnitsLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(AuthorityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AuthorityUnitsLabel))
         );
         AuthorityPanelLayout.setVerticalGroup(
             AuthorityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -661,8 +727,8 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                 .addComponent(ActualSpeedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SpeedLimitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AuthorityPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AuthorityPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         RealTimeSpeedAndAuthorityLayout.setVerticalGroup(
             RealTimeSpeedAndAuthorityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,7 +742,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         MaxPowerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Maximum Power"));
 
         MaxPowerUnitsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        MaxPowerUnitsLabel.setText("W");
+        MaxPowerUnitsLabel.setText("kW");
 
         MaxPowerLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         MaxPowerLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -701,7 +767,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         PowerUsedPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Power Utilization"));
 
         PowerUnitsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        PowerUnitsLabel.setText("W");
+        PowerUnitsLabel.setText("kW");
 
         PowerUsedLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         PowerUsedLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -872,10 +938,10 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                     .addComponent(TrainInformation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(EmergencyBrakeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(FailureSimulationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(TrainSelectorDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TrainSelectorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TrainSelectorDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TrainSelectorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(RealTimeHUD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -930,12 +996,12 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void SetKpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKpActionPerformed
         this.trainController.setKP(Integer.valueOf(this.KpInput.getValue().toString()));
-        this.NotificationsDisplay.append("\nKp Updated");
+        this.NotificationsDisplay.append("\nKp Updated to " + this.trainController.getkP());
     }//GEN-LAST:event_SetKpActionPerformed
 
     private void SetKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKiActionPerformed
         this.trainController.setKI(Integer.valueOf(this.KiInput.getValue().toString()));
-        this.NotificationsDisplay.append("\nKi Updated");
+        this.NotificationsDisplay.append("\nKi Updated to " + this.trainController.getkI());
     }//GEN-LAST:event_SetKiActionPerformed
 
     private void TrainSelectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainSelectorButtonActionPerformed
@@ -964,10 +1030,14 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void PowerFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerFailureCheckActionPerformed
         if(this.PowerFailureCheck.isSelected()){
             this.trainController.causeFailure(TrainFailures.Power);
+            this.StatusPowerLabel.setText("FAILURE");
+            this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulated");
         }
         else{
             this.trainController.fixFailure(TrainFailures.Power);
+            this.StatusPowerLabel.setText("ACTIVE");
+            this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulation Ended");
         } 
     }//GEN-LAST:event_PowerFailureCheckActionPerformed
@@ -975,10 +1045,14 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void AntennaFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntennaFailureCheckActionPerformed
         if(this.AntennaFailureCheck.isSelected()){
             this.trainController.causeFailure(TrainFailures.Antenna);
+            this.StatusAntennaLabel.setText("FAILURE");
+            this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulated");
         }
         else{
             this.trainController.fixFailure(TrainFailures.Antenna);
+            this.StatusAntennaLabel.setText("ACTIVE");
+            this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulation Ended");
         }
     }//GEN-LAST:event_AntennaFailureCheckActionPerformed
@@ -986,13 +1060,108 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void ServiceBrakeFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeFailureCheckActionPerformed
         if(this.ServiceBrakeFailureCheck.isSelected()){
             this.trainController.causeFailure(TrainFailures.Brake);
+            this.StatusBrakeLabel.setText("FAILURE");
+            this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulated");
         }
         else{
             this.trainController.fixFailure(TrainFailures.Brake);
+            this.StatusBrakeLabel.setText("ACTIVE");
+            this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulation Ended");
         }
     }//GEN-LAST:event_ServiceBrakeFailureCheckActionPerformed
+
+    private void ACOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACOnActionPerformed
+        if(this.ACOn.isSelected()){
+            this.trainController.setAirConditioningOn(true);
+            this.NotificationsDisplay.append("\nA/C Activated");
+            if(this.HeatOn.isSelected()){
+                this.trainController.setHeaterOn(false);
+                this.NotificationsDisplay.append("\nHeater Deactivated");
+                this.HeatOff.setSelected(true);
+            }
+        }        
+    }//GEN-LAST:event_ACOnActionPerformed
+
+    private void HeatOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeatOnActionPerformed
+        if(this.HeatOn.isSelected()){
+            this.trainController.setHeaterOn(true);
+            this.NotificationsDisplay.append("\nHeater Activated");
+            if(this.ACOn.isSelected()){
+                this.trainController.setAirConditioningOn(false);
+                this.NotificationsDisplay.append("\nA/C Deactivated");
+                this.ACOff.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_HeatOnActionPerformed
+
+    private void ACOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACOffActionPerformed
+        this.trainController.setAirConditioningOn(false);
+        this.NotificationsDisplay.append("\nA/C Deactivated");
+    }//GEN-LAST:event_ACOffActionPerformed
+
+    private void HeatOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeatOffActionPerformed
+        this.trainController.setHeaterOn(false);
+        this.NotificationsDisplay.append("\nHeater Deactivated");
+    }//GEN-LAST:event_HeatOffActionPerformed
+
+    private void LightsOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LightsOnActionPerformed
+        this.trainController.setLightsOn(true);
+        this.NotificationsDisplay.append("\nLights Activated");
+    }//GEN-LAST:event_LightsOnActionPerformed
+
+    private void LightsOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LightsOffActionPerformed
+        this.trainController.setLightsOn(false);
+        this.NotificationsDisplay.append("\nLights Deactivated");
+    }//GEN-LAST:event_LightsOffActionPerformed
+
+    private void ManualModeSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManualModeSelectActionPerformed
+        this.trainController.setManualMode(true);
+        this.NotificationsDisplay.append("\nManual Mode Activated");
+    }//GEN-LAST:event_ManualModeSelectActionPerformed
+
+    private void AutoModeSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AutoModeSelectActionPerformed
+        this.trainController.setManualMode(false);
+        this.NotificationsDisplay.append("\nAutomatic Mode Activated");
+    }//GEN-LAST:event_AutoModeSelectActionPerformed
+
+    private void LeftDoorOpenedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LeftDoorOpenedActionPerformed
+        if(this.trainController.getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
+            this.trainController.setLeftDoorOpen(true);
+            this.NotificationsDisplay.append("\nLeft Door Opened");
+        }
+        else{
+            this.trainController.setLeftDoorOpen(false);
+            this.NotificationsDisplay.append("\nTrain still moving. Please wait until completely stopped.");
+        }
+    }//GEN-LAST:event_LeftDoorOpenedActionPerformed
+
+    private void RightDoorOpenedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RightDoorOpenedActionPerformed
+        if(this.trainController.getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
+            this.trainController.setRightDoorOpen(true);
+            this.NotificationsDisplay.append("\nRight Door Opened");
+        }
+        else{
+            this.trainController.setRightDoorOpen(false);
+            this.NotificationsDisplay.append("\nTrain still moving. Please wait until completely stopped.");
+        }
+    }//GEN-LAST:event_RightDoorOpenedActionPerformed
+
+    private void LeftDoorClosedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LeftDoorClosedActionPerformed
+        this.trainController.setLeftDoorOpen(false);
+        this.NotificationsDisplay.append("\nLeft Door Closed");
+    }//GEN-LAST:event_LeftDoorClosedActionPerformed
+
+    private void RightDoorClosedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RightDoorClosedActionPerformed
+        this.trainController.setRightDoorOpen(false);
+        this.NotificationsDisplay.append("\nRight Door Closed");
+    }//GEN-LAST:event_RightDoorClosedActionPerformed
+
+    private void SetSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetSpeedActionPerformed
+        this.trainController.setDriverSetPoint(Byte.valueOf(this.SpeedInput.getValue().toString()));
+        this.NotificationsDisplay.append("\nDriver set point updated to " + this.trainController.getDriverSetPoint());
+    }//GEN-LAST:event_SetSpeedActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

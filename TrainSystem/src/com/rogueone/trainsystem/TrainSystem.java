@@ -11,7 +11,7 @@ import java.awt.BorderLayout;
 /**
  *
  * @author kylemonto
- * @autho Jonathan Kenneson
+ * @author Jonathan Kenneson
  */
 public class TrainSystem {
 

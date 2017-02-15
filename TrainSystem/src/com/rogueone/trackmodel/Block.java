@@ -7,6 +7,7 @@ package com.rogueone.trackmodel;
 
 import com.rogueone.global.Global;
 import com.rogueone.global.Global.PieceType;
+import com.rogueone.global.TrackCircuit;
 
 /**
  *
@@ -40,6 +41,7 @@ public class Block implements TrackPiece {
     private boolean occupied;
     private String beaconMessage;
     private Station station;
+    private TrackCircuit trackCircuit;
     
     // Constructor
     public Block(Line newLine, Section newSection, int newBlockID, 
@@ -72,8 +74,9 @@ public class Block implements TrackPiece {
         failurePowerOutage = false;
         failureTrackCircuit = false;
         occupied = false;
-        beaconMessage = null;
+        beaconMessage = "";
         station = null;
+        trackCircuit = new TrackCircuit();
     }
     
     // TrackPiece interface methods
@@ -210,6 +213,17 @@ public class Block implements TrackPiece {
     }
     public void setStation(Station newStation) {
         station = newStation;
+    }
+    public TrackCircuit getTrackCircuit() {
+        if(failureTrackCircuit) {
+            return new TrackCircuit((byte) -1,(short) -1);
+        }
+        else {
+            return trackCircuit;
+        }
+    }
+    public void setTrackCircuit(TrackCircuit newTrackCircuit) {
+        trackCircuit = newTrackCircuit;
     }
     
     //Overridden methods

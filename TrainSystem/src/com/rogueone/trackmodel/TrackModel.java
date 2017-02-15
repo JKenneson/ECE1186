@@ -38,6 +38,15 @@ public class TrackModel {
         frame.pack();
         frame.setVisible(true);
     }
+    
+    public void reset() {
+        lines = new ArrayList<Line>();
+        sections = new ArrayList<Section>();
+        blocks = new ArrayList<Block>();
+        stations = new ArrayList<Station>();
+        switches = new ArrayList<Switch>();
+        yard = new Yard();
+    }
       
     public void parseDataFile(File file) throws IOException, InvalidFormatException {
         //Expected column order in data file for blocks:
@@ -68,16 +77,16 @@ public class TrackModel {
         parseSwitches(testWorkbook.getSheetAt(4));
         connectBlocks();
         
-        System.out.println("\nLINES:");
-        printLines();
-        System.out.println("\nSECTIONS:");
-        printSections();
-        System.out.println("\nBLOCKS:");
-        printBlocks();
-        System.out.println("\nSTATIONS:");
-        printStations();
-        System.out.println("\nSWITCHES:");
-        printSwitches();
+        //System.out.println("\nLINES:");
+        //printLines();
+        //System.out.println("\nSECTIONS:");
+        //printSections();
+        //System.out.println("\nBLOCKS:");
+        //printBlocks();
+        //System.out.println("\nSTATIONS:");
+        //printStations();
+        //System.out.println("\nSWITCHES:");
+        //printSwitches();
        
     }
     
@@ -145,6 +154,10 @@ public class TrackModel {
         }
     }
     
+    private void addLine(Line l) {
+        lines.add(l);
+    }
+    
     private void parseSections(XSSFSheet sheet) {
         
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
@@ -152,6 +165,17 @@ public class TrackModel {
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
             Global.Section tempSectionID = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
             addSection(new Section(tempSectionID, getLineByID(tempLineID)));
+        }
+    }
+    
+    private void addSection(Section s) {
+        //Add reference to top-level array
+        sections.add(s);
+        //Add reference to Line objects
+        for(Line l : lines) {
+            if(l.equals(s.getLine())) {
+                l.addSection(s);
+            }
         }
     }
     
@@ -207,72 +231,6 @@ public class TrackModel {
         }
     }
     
-    private void parseStations(XSSFSheet sheet) {
-   
-        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-            Row rowTemp = sheet.getRow(i);
-            //Parse ints
-            int tempStationID = (int) rowTemp.getCell(0).getNumericCellValue();
-            //Parse enums
-            String tempStationName = rowTemp.getCell(1).getStringCellValue();
-            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
-            //Parse booleans
-            boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
-            boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
-            //Associate lineID with object
-            Line tempLine = getLineByID(tempLineID);
-            
-            //Formatting is weird, but easier to develop (for now)
-            Station newStation = new Station(
-                tempStationID,
-                tempStationName,
-                tempLine,
-                null,   //Block A TBD
-                null,   //Section A TBD
-                null,   //Block B TBD
-                null,   //Section B TBD
-                tempRightSide,
-                tempLeftSide );
-            addStation(newStation);
-        }
-    }
-    
-    private void parseSwitches(XSSFSheet sheet) {
- 
-        //Iterate over all rows in the first column
-        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-            Row rowTemp = sheet.getRow(i);
-            int tempSwitchID = (int) rowTemp.getCell(0).getNumericCellValue();
-            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(1).getStringCellValue());
-            //Associate lineID with object
-            Line tempLine = getLineByID(tempLineID);
-            
-            Switch newSwitch = new Switch(
-                tempSwitchID,
-                tempLine,
-                null,   //Port A TBD
-                null,   //Port B TBD
-                null ); //Port C TBD
-            
-            addSwitch(newSwitch);
-        }     
-    }
-    
-    private void addLine(Line l) {
-        lines.add(l);
-    }
-    
-    private void addSection(Section s) {
-        //Add reference to top-level array
-        sections.add(s);
-        //Add reference to Line objects
-        for(Line l : lines) {
-            if(s.getLine().equals(l)) {
-                l.addSection(s);
-            }
-        }
-    }
-    
     private void addBlock(Block b) {
         //Add reference to top-level array
         blocks.add(b);
@@ -280,67 +238,111 @@ public class TrackModel {
         for(Line l : lines) {
             if(b.getLine().equals(l)) {
                 for(Section s : l.getSections()) {
-                    if(b.getSection().equals(s)) {
+                    if(s.equals(b.getSection())) {
                         s.addBlock(b);
                     }
                 }
             }
         }
-    }
+    } 
     
+    private void parseStations(XSSFSheet sheet) {
+   
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row rowTemp = sheet.getRow(i);
+            //Parse ints
+            int tempStationID = (int) rowTemp.getCell(0).getNumericCellValue();
+            int tempBlockAID = (int) rowTemp.getCell(3).getNumericCellValue();
+            // Parse Strings
+            String tempStationName = rowTemp.getCell(1).getStringCellValue();
+            //Parse enums
+            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
+            Global.Section tempSectionAID = Global.Section.valueOf(rowTemp.getCell(4).getStringCellValue());
+            //Parse booleans
+            boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
+            boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
+            //Associate IDs with objects
+            Line tempLine = getLineByID(tempLineID);
+            Block tempBlockA = getBlockByLineIDAndSectionIDAndBlockID(tempLineID,tempSectionAID,tempBlockAID);
+            Section tempSectionA = getSectionByLineIDAndSectionID(tempLineID, tempSectionAID);
+            //Parse second block, if applicable
+            Block tempBlockB = null;
+            Section tempSectionB = null;
+            if(rowTemp.getCell(5) != null && rowTemp.getCell(6) != null) {
+                int tempBlockBID = (int) rowTemp.getCell(5).getNumericCellValue();
+                Global.Section tempSectionBID = Global.Section.valueOf(rowTemp.getCell(6).getStringCellValue());
+                tempBlockB = getBlockByLineIDAndSectionIDAndBlockID(tempLineID,tempSectionBID,tempBlockBID);
+                tempSectionB = getSectionByLineIDAndSectionID(tempLineID, tempSectionBID);
+            } 
+            
+            //Formatting is weird, but easier to develop (for now)
+            Station newStation = new Station(
+                tempStationID,
+                tempStationName,
+                tempLine,
+                tempBlockA,
+                tempSectionA,
+                tempBlockB,
+                tempSectionB,
+                tempRightSide,
+                tempLeftSide );
+            addStation(newStation);
+        }
+    }
     private void addStation(Station st) {
         //Add reference to top-level array
         stations.add(st);
-        for(Block b : blocks) {
-            if(b.getLine() == st.getLine() && b.getID() == st.getID()) {
-                //Assign station to block
-                if(b.getStation() == null) {
-                    b.setStation(st);
-                }
-                else {
-                    System.out.println("Block " + b.getID() + " can't own station " + st.getID() + " because it already owns station " + b.getStation().getID());
-                }
-                //Assign block to station
-                if(st.getBlockA() == null) {
-                    st.setBlockA(b);
-                    st.setSectionA(b.getSection());
-                }
-                else if(st.getBlockB() == null) {
-                    st.setBlockB(b);
-                    st.setSectionB(b.getSection());
-                }
-                else {
-                    System.out.println("Station already has two blocks.");
-                }    
-            }
+        //Add reference to blocks
+        Block block = (Block)st.getBlockA();
+        if(block != null) {
+            block.setStation(st);
         }
+        block = (Block)st.getBlockB();
+        if(block != null) {
+            block.setStation(st);
+        }       
+    }
+    
+    private void parseSwitches(XSSFSheet sheet) {
+ 
+        //Iterate over all rows in the first column
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row rowTemp = sheet.getRow(i);
+            // Parse ints
+            int tempSwitchID = (int) rowTemp.getCell(0).getNumericCellValue();
+            int tempBlockAID = (int) rowTemp.getCell(2).getNumericCellValue();
+            int tempBlockBID = (int) rowTemp.getCell(3).getNumericCellValue();
+            int tempBlockCID = (int) rowTemp.getCell(4).getNumericCellValue();
+            // Parse enums
+            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(1).getStringCellValue());
+            //Associate IDs with objects
+            Line tempLine = getLineByID(tempLineID);
+            Block tempBlockA = getBlockByLineIDAndBlockID(tempLineID, tempBlockAID);
+            Block tempBlockB = getBlockByLineIDAndBlockID(tempLineID, tempBlockBID);
+            Block tempBlockC = getBlockByLineIDAndBlockID(tempLineID, tempBlockCID);
+            
+            Switch newSwitch = new Switch(
+                tempSwitchID,
+                tempLine,
+                tempBlockA,
+                tempBlockB,
+                tempBlockC );
+            
+            addSwitch(newSwitch);
+        }     
     }
     
     private void addSwitch(Switch sw) {
         //Add reference to top-level array
         switches.add(sw);
-        for(Block b : blocks) {
-            if(b.getSwitchID() == sw.getID()) {
-                //Assign switch to block
-                if(b.getPortB() == null) {
-                    b.setPortB(sw);
-                }
-                //Assign block to switch
-                if(b.isStaticSwitchBlock()) {
-                    sw.setPortA(b);
-                }
-                else if(sw.getPortB() == null) {
-                    sw.setPortB(b);
-                }
-                else if(sw.getPortC() == null) {
-                    sw.setPortC(b);
-                }
-                else {
-                    System.out.println("Error in data file. Too many blocks assigned to single switch.");
-                }
-            }
+        //Add reference to blocks (can only be port B)
+        Block block = (Block)sw.getPortB();
+        if(block != null) {
+            block.setPortB(sw);
         }
     }
+    
+    //UTILITY ACCESS METHODS
     
     public Line getLineByID(Global.Line line) {
         for (Line l : lines) {
@@ -354,7 +356,7 @@ public class TrackModel {
     public Section getSectionByLineIDAndSectionID(Global.Line line, Global.Section section) {
         for (Line l : lines) {
             if (l.getLineID() == line) {
-                for (Section s : sections) {
+                for (Section s : l.getSections()) {
                     if (s.getSectionID() == section) {
                         return s;
                     }
@@ -364,9 +366,36 @@ public class TrackModel {
         return null;
     }
     
-    //Overload
-    public Section getSectionByLineIDAndSectionID(Line line, Global.Section section) {
-        return getSectionByLineIDAndSectionID(line.getLineID(), section);
+    public Block getBlockByLineIDAndSectionIDAndBlockID(Global.Line line, Global.Section section, int block) {
+        for (Line l : lines) {
+            if (l.getLineID() == line) {
+                for (Section s : sections) {
+                    if (s.getSectionID() == section) {
+                        for (Block b : s.getBlocks()) {
+                            if (b.getID() == block) {
+                                return b;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    public Block getBlockByLineIDAndBlockID(Global.Line line, int block) {
+        for (Line l : lines) {
+            if (l.getLineID() == line) {
+                for (Section s : sections) {  
+                    for (Block b : s.getBlocks()) {
+                        if (b.getID() == block) {
+                            return b;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
     
     public void printLines() {

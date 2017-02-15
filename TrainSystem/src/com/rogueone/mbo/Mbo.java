@@ -5,13 +5,14 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 2/12/17
+ * @modification date 2/15/17
  */
 package com.rogueone.mbo;
 import java.io.File;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.*;
@@ -31,14 +32,28 @@ import javax.swing.table.*;
  * @author Brian Stevenson
  */
 public class Mbo{
-    public static ArrayList<String> trains = new ArrayList<String>();
-    public static MovingBlockGUI mboGui = new MovingBlockGUI();
-   public static File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
-   public static int trainIndex;
-   public static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
-   public static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
-   public static String[][] dummyData = {dummyDataRed, dummyDataGreen};
+    private static ArrayList<String> trains = new ArrayList<String>();
+    private static MovingBlockGUI mboGui = new MovingBlockGUI();
+   private static File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+   private static int trainIndex;
+  private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
+   private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
+   private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
     
+   public MovingBlockGUI newGui() throws IOException, InvalidFormatException{
+       //JFrame frame = new JFrame();
+       // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //frame.getContentPane().add(mboGui);
+        //frame.pack();
+        trainIndex = 1;
+        //deploy(mboGui);
+        //deploy(mboGui);
+        displayCurrentTrains();
+        readPersonnelSchedule(file);
+        //frame.setVisible(true);
+        return mboGui;
+   }
+   
     /**
      * Reads th excel file for the personnel schedule, then outputs it to the GUI
      * @param gui MBO GUI to be updated with personnel schedule information
@@ -100,16 +115,18 @@ public class Mbo{
         int i,j;
         String oldInfo = "";
         String info = "";
-        for(i = 1; i < numTrains; i++){
+        for(i = 0; i < numTrains; i++){
             Row currRow = redSchedule.getRow(i);
             
             for(j = 0; j < 11; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
-                    if(i==0){
+                    System.out.println(i);
+                    if(i==0){     
+                        System.out.println("HERE");
                         columnNames[j] = info;
                     }
-                        if(j==2){
+                    else if(j==2){
                             oldInfo = info;
                             info = convertTime(info);
                         }
@@ -119,7 +136,9 @@ public class Mbo{
                     oldInfo = incrementTime(oldInfo, redIncrements[j-3]);
                     info = convertTime(oldInfo);
                 }
+                if((i>0)){
                 data[i][j] = info;
+                }
             }
         }
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
@@ -268,8 +287,42 @@ public class Mbo{
      * Function to generate a new employee schedule in excel
      * @param file excel file to be written to
      */
-    public void generatePersonnelSchedule(File file) throws IOException, InvalidFormatException{
-        int numEmployees = 0;
+    public void generateSchedule(int numTrains) throws IOException, InvalidFormatException{
+        Workbook workbook = new XSSFWorkbook();
+        System.out.println("There are: "+numTrains+" trains!");
+        
+        
+        
+        int i=0,j=0;
+        String[] personnelHeaders = {"Name","SUN","MON","TUES","WED","THURS","FRI","SAT"};
+        String[] trainHeaders = {"Train ID","Driver","Departure"};
+        //Sheet redSchedule = workbook.getSheetAt(1);
+        Sheet peopleSheet = workbook.createSheet("Personnel");
+        Sheet redSheet = workbook.createSheet("Red");
+        Sheet greenSheet = workbook.createSheet("Green");
+       
+        for(j=0;j<numTrains;j++){
+            if(j==0){
+                Row peopleRow = peopleSheet.createRow(j);
+                Row redRow = redSheet.createRow(j);
+                Row greenRow = greenSheet.createRow(j);
+                for(i=0;i<8;i++){
+                Cell cell = peopleRow.createCell(i);
+                cell.setCellValue(personnelHeaders[i]);
+                }
+                for(i=0;i<3;i++){
+                    Cell redCell = redRow.createCell(i);
+                    Cell greenCell = greenRow.createCell(i);
+                    redCell.setCellValue(trainHeaders[i]);
+                    greenCell.setCellValue(trainHeaders[i]);
+                }
+            }
+        }
+        
+        FileOutputStream output = new FileOutputStream("src\\com\\rogueone\\assets\\altSchedule.xlsx");
+        workbook.write(output);
+        output.close();
+        /*
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         workbook.createSheet("Personnel");
         XSSFSheet personnelSchedule = workbook.getSheetAt(1);
@@ -283,19 +336,11 @@ public class Mbo{
                 names.add(tempString);
             }
         
-        numEmployees = names.size();
+        numTrains = names.size();
         
         //for(int i=0; i<numEmployees; i=i+3){
         //}
-            
-        
-    }
-    
-    /**
-     * Generates a new train schedule and writes it to an excel sheet
-     */
-    public void generateTrainSchedule(){
-        
+        */
     }
     
     /**
@@ -319,16 +364,7 @@ public class Mbo{
     public static void main(String[] args) throws IOException, InvalidFormatException{
         //ArrayList<String> trains = new ArrayList<String>();
         //MovingBlockGUI mboGui = new MovingBlockGUI();
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(mboGui);
-        frame.pack();
-        trainIndex = 1;
-        //deploy(mboGui);
-        //deploy(mboGui);
-        displayCurrentTrains();
-        readPersonnelSchedule(file);
-        frame.setVisible(true);
+        
         
     }
 }

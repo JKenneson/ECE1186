@@ -633,7 +633,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         authorityOutputLabel.setText("Authority:");
 
-        authorityState.setText("5000");
+        authorityState.setText("4,000.00");
 
         authorityOutputLabelUnits.setText("ft");
 
@@ -662,9 +662,13 @@ public class TrainModelGUI extends javax.swing.JPanel {
                             .addComponent(speedLimitOutputLabel))
                         .addGap(18, 18, 18)
                         .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(currSpeedState, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                            .addComponent(speedLimitState, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                        .addGap(64, 64, 64))
+                            .addComponent(currSpeedState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(speedLimitState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(currSpeedOutputLabelUnits)
+                            .addComponent(speedLimitOutputLabelUnits))
+                        .addGap(21, 21, 21))
                     .addGroup(speedOutputPanelLayout.createSequentialGroup()
                         .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(driverSetSpeedLabel)
@@ -678,28 +682,24 @@ public class TrainModelGUI extends javax.swing.JPanel {
                                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(driverSetPointState, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                                     .addComponent(ctcSetPointState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(driverSetPointOutputLabelUnits)
-                                    .addComponent(ctcSetPointOutputLabelUnits)
-                                    .addComponent(speedLimitOutputLabelUnits)
-                                    .addComponent(currSpeedOutputLabelUnits))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(speedOutputPanelLayout.createSequentialGroup()
                                 .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(speedOutputPanelLayout.createSequentialGroup()
                                         .addComponent(gradeState, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(18, 18, 18)
                                         .addComponent(gradeOutputLabelUnits))
                                     .addGroup(speedOutputPanelLayout.createSequentialGroup()
                                         .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(powerState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(authorityState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                                            .addComponent(authorityState, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(authorityOutputLabelUnits)
-                                            .addComponent(powerOutputLabelUnits))))
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                            .addComponent(powerOutputLabelUnits)
+                                            .addComponent(ctcSetPointOutputLabelUnits)
+                                            .addComponent(driverSetPointOutputLabelUnits))))
+                                .addGap(0, 22, Short.MAX_VALUE))))))
         );
         speedOutputPanelLayout.setVerticalGroup(
             speedOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -936,11 +936,11 @@ public class TrainModelGUI extends javax.swing.JPanel {
             .addGroup(trainModelOutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(trainOperationsOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(speedOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passengersOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(physicalTrainOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1010,7 +1010,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addGroup(mainTrainModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainTrainModelPanelLayout.createSequentialGroup()
                         .addComponent(powerCommandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(failureInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(trainModelOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1085,7 +1085,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
         
         //CTC SetPointSpeed and Authority
         trainModel.setCtcSetPoint(Integer.valueOf(this.ctcSetPointSpinner.getValue().toString()));
-        trainModel.setAuthority(Integer.valueOf(this.ctcAuthoritySpinner.getValue().toString()));
+        trainModel.setAuthority(Double.valueOf(this.ctcAuthoritySpinner.getValue().toString()));
         
         //Driver SetPointSpeed and Power
         trainModel.setDriverSetPoint(Integer.valueOf(this.driverSetPointSpinner.getValue().toString()));

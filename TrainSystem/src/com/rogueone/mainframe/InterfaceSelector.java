@@ -8,6 +8,7 @@ package com.rogueone.mainframe;
 
 import com.rogueone.ctc.gui.CommandTrackControlGUI;
 import com.rogueone.mbo.gui.MovingBlockGUI;
+import com.rogueone.mbo.Mbo;
 import com.rogueone.trackcon.gui.TrackControllerGUI;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trackmodel.gui.TrackModelGUI;
@@ -15,6 +16,8 @@ import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import java.io.IOException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
  *
@@ -223,9 +226,16 @@ public class InterfaceSelector extends javax.swing.JPanel {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         main.getContentPane().removeAll();
-        MovingBlockGUI movingBlockGUI = new MovingBlockGUI();
-        main.getContentPane().add(movingBlockGUI, BorderLayout.CENTER);
+        Mbo mbo = new Mbo();
+        try{
+        MovingBlockGUI movingBlockGUI = mbo.newGui();
+         main.getContentPane().add(movingBlockGUI, BorderLayout.CENTER);
         main.setVisible(true);
+        }
+        catch(IOException | InvalidFormatException e){
+            
+        }
+       
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

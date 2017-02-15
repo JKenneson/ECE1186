@@ -5,12 +5,16 @@
  *
  * @author Jonathan Kenneson
  * @Creation 2/3/17
- * @Modification 2/6/17
+ * @Modification 2/13/17
  */
 package com.rogueone.trainmodel;
 
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainmodel.entities.TrainFailures;
+import com.rogueone.global.Global;
+import com.rogueone.traincon.TrainController;
+import com.rogueone.traincon.gui.TrainControllerGUI;
+import com.sun.javafx.image.impl.IntArgb;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -23,9 +27,6 @@ import javax.swing.*;
  */
 public class TrainModel {
     
-    NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
-    DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
-    
     public final double MAX_ACCELERATION = 0.5;         //Max acceleration of 0.5 m/s^2
     public final double SERVICE_BRAKE_DECEL = -1.2;     //Service brake decelerates at 1.2 m/s^2
     public final double EMERGENCY_BRAKE_DECEL = -2.73;  //Emergency brake decelerates at 2.73 m/s^2
@@ -34,6 +35,7 @@ public class TrainModel {
     public final double GRAVITY = 9.8;                  //9.8 m/s^2 for acceleration due to gravity
     public final double SECONDS_IN_AN_HOUR = 3600;      //3600 seconds in an hour
     public final double METERS_IN_A_MILE = 1609.34;     //1609.34 meters in a mile
+    public final double FEET_IN_A_METER = 3.28;         //3.28 feet = 1 meter
     public final double KG_IN_A_POUND = 0.454;          //0.454 kg = 1 pound
     public final double CAR_LENGTH = 105.64;            //1 car's train length (in feet)
     public final double CAR_WEIGHT = 81800;             //1 car's train weight (in lbs)
@@ -41,6 +43,9 @@ public class TrainModel {
     public final double PASS_WEIGHT = 165.35;           //1 passenger's weight (in lbs)
     
     //Variable declaration for the class
+    //Reference to TrainController
+    private TrainController trainController;
+    private TrainControllerGUI trainControllerGUI;
     //Nanotime trackers for calculating velocity and distance
     private long startTime;
     private long elapsedTime;
@@ -63,7 +68,8 @@ public class TrainModel {
     private int speedLimit;
     private int driverSetPoint;
     private int ctcSetPoint;
-    private int authority;
+    private double authority;       //feet remaining
+    private double distanceTraveled;//meters traveled this cycle
     private double powerReceived;   //kW
     private double grade;
     private double angleOfSlope;
@@ -115,6 +121,7 @@ public class TrainModel {
         this.driverSetPoint = 0;
         this.ctcSetPoint = setPointSpeed;
         this.authority = authority;
+        this.distanceTraveled = 0;
         this.powerReceived = 0;
         this.grade = 0;
         this.angleOfSlope = 0;
@@ -133,11 +140,39 @@ public class TrainModel {
         this.numCars = numCars;
         this.trackAntennaActivated = true;
         this.mboAntennaActivated = true;
+        
+        this.trainController = null;
+        this.trainControllerGUI = null;
     }
-
-    public TrainModel(double dispatchSpeed, double dispatchAuthority, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    /**
+     * This method creates a new TrainController object for this train, with a back-reference to this specific TrainModel
+     * 
+     * @author Jonathan Kenneson
+     */
+    public void createTrainController() {
+        //Create a new TrainController object
+        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, approachingStation, approachingStation, approachingStation, approachingStation);
     }
+    
+    /**
+     * This method creates a new TrainControllerGUI object for this train, with a back-reference to the specific TrainController
+     * 
+     * @author Jonathan Kenneson
+     */
+    public void createTrainControllerGUI() {
+        this.trainControllerGUI = this.trainController.CreateGUIObject(trainController);
+    }
+    
+    /**
+     * This method updates the TrainControllerGUI object for this train
+     * 
+     * @author Jonathan Kenneson
+     */    
+    public void updateTrainControllerGUI() {
+        this.trainController.updateGUI(this.trainControllerGUI);
+    }
+        
     
     /**
      * This function will create, display, and return a GUI object for the Train Model class that can be interacted with
@@ -172,6 +207,8 @@ public class TrainModel {
     public void InitializeInputPanel(TrainModelGUI gui) {
         //All spinner values initialized just once
         gui.temperatureInputSpinner.setValue(this.temperature);
+        gui.gradeInputSpinner.setValue(this.grade);
+        gui.speedLimitSpinner.setValue(this.speedLimit);
         
         gui.ctcSetPointSpinner.setValue(this.ctcSetPoint);
         gui.ctcAuthoritySpinner.setValue(this.authority);
@@ -224,12 +261,12 @@ public class TrainModel {
         }        
         
         //Speed and Authority
-        gui.currSpeedState.setText(decimalFormatter.format(this.currSpeedMPH));
+        gui.currSpeedState.setText(Global.decimalFormatter.format(this.currSpeedMPH));
         gui.speedLimitState.setText(Integer.toString(this.speedLimit));
         gui.driverSetPointState.setText(Integer.toString(this.driverSetPoint));
         gui.ctcSetPointState.setText(Integer.toString(this.ctcSetPoint));
-        gui.authorityState.setText(Integer.toString(this.authority));
-        gui.powerState.setText(commaFormatter.format(this.powerReceived));
+        gui.authorityState.setText(Global.decimalFormatter.format(this.authority));
+        gui.powerState.setText(Global.commaFormatter.format(this.powerReceived));
         gui.gradeState.setText(Double.toString(this.grade));
         
         //Station and Passengers
@@ -240,8 +277,8 @@ public class TrainModel {
         gui.maxCapacityState.setText(Integer.toString(this.passengerMaxCapacity));
         
         //Physical Characteristics
-        gui.trainWeightState.setText(commaFormatter.format(this.trainWeight));
-        gui.trainLengthState.setText(commaFormatter.format(this.trainLength));
+        gui.trainWeightState.setText(Global.commaFormatter.format(this.trainWeight));
+        gui.trainLengthState.setText(Global.commaFormatter.format(this.trainLength));
         gui.numCarsState.setText(Integer.toString(this.numCars));
         
         if(this.trackAntennaActivated) {
@@ -327,12 +364,13 @@ public class TrainModel {
      * 3)   Adjust for friction.  Assuming the coefficient of kinetic friction between the train and track is 0.16 (steel on steel -> lubricated)
      * 4)   Take grade into account and sum the new forces
      * 5)   If the brakes are activated, this takes precedent and the train slows down according the which brake is activated
+     * 6)   Calculate distance traveled since last cycle and subtract that from remaining authority
      * 
      * @author Jonathan Kenneson
      */
     public void updateTrain() {
         //1)   Length, weight, pass max capacity based on number of cars and passengers in train     
-        //Hacky, but easy to calculate this way: rest weight and length each cycle and re-calculate based on new values
+        //Not time efficient, but easy to calculate this way: reset weight and length each cycle and re-calculate based on new values
         this.trainWeight = 0;
         this.trainLength = 0;
         //First, update the train length and weight based on number of cars
@@ -345,10 +383,11 @@ public class TrainModel {
         
         //2)   Its velocity based on the power sent in from the TrainController
         //First, ask the TrainController for a new power
-        
-        //TODO: Send velocity to TrainController, get back a power
-        //this.powerReceived = TrainController.calculatePower(this.currSpeed);
-        //For now, power comes from GUI
+        this.elapsedTime = System.nanoTime() - startTime;                                               //Get elapsed time since last calculation
+        if(this.trainController != null) {
+            this.powerReceived = this.trainController.calculatePower(this.currSpeedMPH, this.elapsedTime/(double)1000000000); //Ask for a new power
+        }        
+        System.out.println("Power: " + this.powerReceived);
         
         //P=F*v  -> Calculate a force by deviding that power by the velocity
         if(this.currSpeed == 0) {    //Can't devide by zero
@@ -373,8 +412,6 @@ public class TrainModel {
         //F=m*a  -> Calculate the acceleration by dividing the force by the mass
         this.acceleration = this.force / (this.trainWeight * KG_IN_A_POUND);        //Convert lbs to kg
         
-        //vf = vi + a*t  -> Final velocity (speed) equals initial velocity + acceleration * time
-        this.elapsedTime = System.nanoTime() - startTime;                                               //Get elapsed time since last calculation
         //Maximum acceleration of 0.5 m/s^2
         if(this.acceleration > MAX_ACCELERATION * (this.elapsedTime/(double)1000000000)) {
             this.acceleration = MAX_ACCELERATION * (this.elapsedTime/(double)1000000000);
@@ -386,60 +423,35 @@ public class TrainModel {
         }
         else if (this.serviceBrakeActivated) {
             this.acceleration = SERVICE_BRAKE_DECEL * (this.elapsedTime/(double)1000000000);
-        }
+        }        
+        System.out.println("Accel: " + this.acceleration);
         
-        System.out.println("Accel: " + this.acceleration + "\n");
-        //Calculate current speed in ft/s
+        //vf = vi + a*t  -> Final velocity (speed) equals initial velocity + acceleration * time
+        //Calculate current speed in m/s
         this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);    //Find seconds by dividing elapsed time by a billion
         //Check for negative speed (impossible)
         if(this.currSpeed < 0) {
             this.currSpeed = 0;
         }
-        this.lastSpeed = this.currSpeed;                                                                //Assign the last speed to the current speed for the next cycle
+        
+        //6)   Calculate distance traveled since last cycle and subtract that from remaining authority  -> s = vi*t + 1/2*a*t^2
+        this.distanceTraveled = this.lastSpeed * (this.elapsedTime/(double)1000000000) + (1/2 * this.acceleration * Math.pow((this.elapsedTime/(double)1000000000), 2));    //In meters
+        this.distanceTraveled = this.distanceTraveled * FEET_IN_A_METER;        //Convert to feet
+        System.out.println("Distance: " + this.distanceTraveled + "\n");
+        
+        //Subtract the distance traveled from remaining authority
+        this.authority -= this.distanceTraveled;
+        
+        //Assign the last speed to the current speed for the next cycle
+        this.lastSpeed = this.currSpeed;                                                                
                 
-        //Current speed is in ft/s, convert to mph to print out
+        //Current speed is in m/s, convert to mph to print out
         this.currSpeedMPH = this.currSpeed * SECONDS_IN_AN_HOUR / METERS_IN_A_MILE;
         
         //Reset the start time for the next run of the loop
         this.startTime = System.nanoTime();
     }
             
-    
-    /**
-     * Main function tests the functionality of the Train Model class independent from the other modules
-     * The user may perform extensive testing of this module through the module's GUI
-     * 
-     * @author Jonathan Kenneson
-     * @param args 
-     */
-    public static void main(String[] args) throws InterruptedException {        
-        //Create a new TrainModel object with a set point speed of 40, authority of 500, and 1 car
-        TrainModel trainModelTest1 = new TrainModel(40, 500, 1);
-        //Instantiate a GUI for this train
-        TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);
-        
-
-        //Constantly update velocity then the GUI
-        while(true){
-            trainModelTest1.updateTrain();
-            trainModelTest1.UpdateGUI(trainModelGUITest1);
-            if(trainModelGUITest1.isDisplayable() == false) {
-                break;
-            }
-            Thread.sleep(1000);
-        }
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     /**
@@ -549,12 +561,21 @@ public class TrainModel {
         this.ctcSetPoint = ctcSetPoint;
     }
 
-    public int getAuthority() {
+    public double getAuthority() {
         return authority;
     }
 
-    public void setAuthority(int authority) {
+    public void setAuthority(double authority) {
         this.authority = authority;
+        this.trainController.setAuthority((short)(authority/FEET_IN_A_METER));
+    }
+    
+    public double getDistanceTraveled() {
+        return this.distanceTraveled;
+    }
+    
+    public void setDistanceTraveled(double distanceTravled) {
+        this.distanceTraveled = distanceTravled;
     }
 
     public double getPowerReceived() {
