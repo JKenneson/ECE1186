@@ -114,16 +114,18 @@ public class Mbo{
         int i,j;
         String oldInfo = "";
         String info = "";
-        for(i = 1; i < numTrains; i++){
+        for(i = 0; i < numTrains; i++){
             Row currRow = redSchedule.getRow(i);
             
             for(j = 0; j < 11; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
-                    if(i==0){
+                    System.out.println(i);
+                    if(i==0){     
+                        System.out.println("HERE");
                         columnNames[j] = info;
                     }
-                        if(j==2){
+                    else if(j==2){
                             oldInfo = info;
                             info = convertTime(info);
                         }
@@ -133,7 +135,9 @@ public class Mbo{
                     oldInfo = incrementTime(oldInfo, redIncrements[j-3]);
                     info = convertTime(oldInfo);
                 }
+                if((i>0)){
                 data[i][j] = info;
+                }
             }
         }
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
