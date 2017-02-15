@@ -152,7 +152,7 @@ public class TrainModel {
      */
     public void createTrainController() {
         //Create a new TrainController object
-        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)this.authority, 300, approachingStation, approachingStation, approachingStation, approachingStation);
+        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, approachingStation, approachingStation, approachingStation, approachingStation);
     }
     
     /**

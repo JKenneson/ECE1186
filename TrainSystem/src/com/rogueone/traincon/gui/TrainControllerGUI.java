@@ -673,7 +673,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                         .addComponent(SetSpeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SetSpeedUnitsLabel)))
-                .addGap(26, 26, 26))
+                .addGap(31, 31, Short.MAX_VALUE))
         );
         SpeedLimitPanelLayout.setVerticalGroup(
             SpeedLimitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -695,19 +695,20 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         AuthorityUnitsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         AuthorityUnitsLabel.setText("feet");
 
-        AuthorityLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        AuthorityLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         AuthorityLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         AuthorityLabel.setText("300");
+        AuthorityLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout AuthorityPanelLayout = new javax.swing.GroupLayout(AuthorityPanel);
         AuthorityPanel.setLayout(AuthorityPanelLayout);
         AuthorityPanelLayout.setHorizontalGroup(
             AuthorityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AuthorityPanelLayout.createSequentialGroup()
-                .addComponent(AuthorityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AuthorityUnitsLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(AuthorityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AuthorityUnitsLabel))
         );
         AuthorityPanelLayout.setVerticalGroup(
             AuthorityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -726,8 +727,8 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                 .addComponent(ActualSpeedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SpeedLimitPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AuthorityPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AuthorityPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         RealTimeSpeedAndAuthorityLayout.setVerticalGroup(
             RealTimeSpeedAndAuthorityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

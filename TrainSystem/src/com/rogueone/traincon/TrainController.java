@@ -95,10 +95,11 @@ public class TrainController {
     public double getCurrSpeed() {
         return currSpeed;
     }
-    private short authority;
+    private double authority;
 
     public void setAuthority(short authority) {
-        this.authority = authority;
+        this.authority = (double)authority*this.FEET_IN_A_METER;
+        System.out.println(this.authority);
     }
 
     public void setRecommendedSetPoint(byte recommendedSetPoint) {
@@ -191,11 +192,11 @@ public class TrainController {
         //Speed and Authority
         this.currSpeed = this.trainModel.getCurrSpeed();
         this.speedLimit = getSpeedLimit();
-        this.authority = authority;
+        this.authority = (double)authority*this.FEET_IN_A_METER;
         this.driverSetPoint = setPointSpeed;
         this.recommendedSetPoint = setPointSpeed;
-        this.kP = 4; //Seem to +=6 .5; +=12 1; +=17 1.5; +=19 2.0 assuming no passengers
-        this.kI = 50000;
+        this.kP = 100; //Seem to +=6 .5; +=12 1; +=17 1.5; +=19 2.0 assuming no passengers
+        this.kI = 15;
         this.eK = 0;
         this.eK_1 = 0;
         this.uK = 0;
@@ -391,10 +392,15 @@ public class TrainController {
         
         this.uK = this.uK_1 + ((samplePeriod/2)*(this.eK+this.eK_1));
         
+        System.out.println("Setpt = " + this.getSetPoint());
+        System.out.println("eK = " + this.eK);
+        System.out.println("kP*eK = " + this.kP*this.eK);
+        System.out.println("kI*uK = " + this.kI*this.uK);
         this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
         if(this.powerCommand > this.maxPower){
             this.uK = this.uK_1;
             this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
+            
         }
         
         this.eK_1 = this.eK;
@@ -482,12 +488,23 @@ public class TrainController {
     }                                       
     
     private void updateController(){
+        this.authority -= this.trainModel.getDistanceTraveled();
         if(!this.manualMode)
             this.updateClimateControl();
         this.updatePassengers();
-        this.authority -= this.trainModel.getDistanceTraveled();
+        
+        updateSafeSpeed();
         
         
+    }
+    
+    private void updateSafeSpeed(){
+        if(this.currSpeed>this.getSetPoint()+1 && !this.manualMode){
+            this.setServiceBrakeActivated(true);
+        }
+        else{
+            this.setServiceBrakeActivated(false);
+        }
     }
         
     public void updateGUI(TrainControllerGUI gui){
@@ -691,7 +708,7 @@ public class TrainController {
         }        
         
         //Speed and Authority
-        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.currSpeed * SECONDS_IN_AN_HOUR / METERS_IN_A_MILE));
+        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.currSpeed));
         gui.SetSpeedLabel.setText(Integer.toString(this.speedLimit));
         
         if(this.manualMode){
@@ -705,7 +722,7 @@ public class TrainController {
             gui.SetSpeedLabel.setText(Integer.toString(this.recommendedSetPoint));
         }
         
-        gui.AuthorityLabel.setText(Integer.toString(getRemainingAuthority()));
+        gui.AuthorityLabel.setText(this.decimalFormatter.format(this.authority));
         gui.SpeedLimitLabel.setText(Integer.toString(this.speedLimit));
         gui.MaxPowerLabel.setText(decimalFormatter.format(this.maxPower));
         gui.PowerUsedLabel.setText(decimalFormatter.format(this.powerCommand));
@@ -725,7 +742,7 @@ public class TrainController {
         this.emergencyBrakeActivated = true;
     }
     
-    private int getRemainingAuthority(){
+    private double getRemainingAuthority(){
         return this.authority - this.getDistanceTraveled();
     }
     
