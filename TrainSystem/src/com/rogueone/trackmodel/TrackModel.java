@@ -77,16 +77,16 @@ public class TrackModel {
         parseSwitches(testWorkbook.getSheetAt(4));
         connectBlocks();
         
-        System.out.println("\nLINES:");
-        printLines();
-        System.out.println("\nSECTIONS:");
-        printSections();
-        System.out.println("\nBLOCKS:");
-        printBlocks();
-        System.out.println("\nSTATIONS:");
-        printStations();
-        System.out.println("\nSWITCHES:");
-        printSwitches();
+        //System.out.println("\nLINES:");
+        //printLines();
+        //System.out.println("\nSECTIONS:");
+        //printSections();
+        //System.out.println("\nBLOCKS:");
+        //printBlocks();
+        //System.out.println("\nSTATIONS:");
+        //printStations();
+        //System.out.println("\nSWITCHES:");
+        //printSwitches();
        
     }
     
@@ -356,7 +356,7 @@ public class TrackModel {
     public Section getSectionByLineIDAndSectionID(Global.Line line, Global.Section section) {
         for (Line l : lines) {
             if (l.getLineID() == line) {
-                for (Section s : sections) {
+                for (Section s : l.getSections()) {
                     if (s.getSectionID() == section) {
                         return s;
                     }
@@ -364,11 +364,6 @@ public class TrackModel {
             }
         }
         return null;
-    }
-    
-    //Overload
-    public Section getSectionByLineIDAndSectionID(Line line, Global.Section section) {
-        return getSectionByLineIDAndSectionID(line.getLineID(), section);
     }
     
     public Block getBlockByLineIDAndSectionIDAndBlockID(Global.Line line, Global.Section section, int block) {
