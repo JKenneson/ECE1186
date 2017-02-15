@@ -96,6 +96,14 @@ public class TrainController {
         return currSpeed;
     }
     private short authority;
+
+    public void setAuthority(short authority) {
+        this.authority = authority;
+    }
+
+    public void setRecommendedSetPoint(byte recommendedSetPoint) {
+        this.recommendedSetPoint = recommendedSetPoint;
+    }
     //private int distanceTraveled; //Distance traveled since last auth command
     private byte driverSetPoint;
 
@@ -259,6 +267,7 @@ public class TrainController {
         gui.MaxPowerLabel.setText(String.valueOf(this.maxPower));
         gui.NotificationsDisplay.append(this.announcement);
         gui.NotificationsDisplay.setEditable(false);
+        gui.SpeedInput.setValue(this.driverSetPoint);
         gui.KiInput.setValue(this.kI);
         gui.KpInput.setValue(this.kP);
         gui.ClockText.append(getTime());//Get value from global clock value (EST)
@@ -371,7 +380,7 @@ public class TrainController {
     public double calculatePower(double actualSpeed, double samplePeriod){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
                         
-        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.trainModel.getGrade()<0){
+        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.trainModel.getGrade()<0 || this.getSetPoint()==0.0){
             this.currSpeed = actualSpeed;
             this.powerCommand = 0.0;
             return 0.0;
@@ -476,6 +485,8 @@ public class TrainController {
         if(!this.manualMode)
             this.updateClimateControl();
         this.updatePassengers();
+        this.authority -= this.trainModel.getDistanceTraveled();
+        
         
     }
         

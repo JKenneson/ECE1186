@@ -741,7 +741,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         MaxPowerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Maximum Power"));
 
         MaxPowerUnitsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        MaxPowerUnitsLabel.setText("W");
+        MaxPowerUnitsLabel.setText("kW");
 
         MaxPowerLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         MaxPowerLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -766,7 +766,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         PowerUsedPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Power Utilization"));
 
         PowerUnitsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        PowerUnitsLabel.setText("W");
+        PowerUnitsLabel.setText("kW");
 
         PowerUsedLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         PowerUsedLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
