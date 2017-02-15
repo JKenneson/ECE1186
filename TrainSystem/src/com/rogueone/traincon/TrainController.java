@@ -306,7 +306,7 @@ public class TrainController {
                 this.recommendedSetPoint = (byte) this.getSpeedLimit();
             }
             else{
-                this.recommendedSetPoint = (byte) this.trainModel.getCtcSetPoint();
+                this.recommendedSetPoint = (byte) this.trainModel.getCtcSetPoint();//Is this legal?
             }
             return this.recommendedSetPoint; //////////////////////////////////////////////////////////////NEED TO GET CTC OR MBO!!!
         }
