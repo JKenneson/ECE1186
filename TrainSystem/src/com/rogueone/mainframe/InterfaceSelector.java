@@ -9,12 +9,14 @@ package com.rogueone.mainframe;
 import com.rogueone.ctc.gui.CommandTrackControlGUI;
 import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.mbo.Mbo;
+import com.rogueone.trackcon.TrackController;
 import com.rogueone.trackcon.gui.TrackControllerGUI;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trackmodel.gui.TrackModelGUI;
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import java.awt.BorderLayout;
+import java.io.File;
 import javax.swing.JFrame;
 import java.io.IOException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -202,7 +204,16 @@ public class InterfaceSelector extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         main.getContentPane().removeAll();
-        TrackControllerGUI trackControllerGUI = new TrackControllerGUI();
+        TrackController trackControllerTest1 = new TrackController();
+        TrackControllerGUI trackControllerGUI = new TrackControllerGUI(trackControllerTest1);
+        //set the default PLC file
+        File defaultPLC = new File("src/com/rogueone/assets/wayside_fun.xlsx");
+        //load the plc file into track controller
+        trackControllerTest1.loadPLC(defaultPLC);
+        //set the plc program field on the gui
+        trackControllerGUI.plcProgramTextField.setText(defaultPLC.getName());
+        //load the plc and track model data into the summary tab of track controller
+        trackControllerTest1.updateSummaryTab(trackControllerGUI);
         main.getContentPane().add(trackControllerGUI, BorderLayout.CENTER);
         main.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed

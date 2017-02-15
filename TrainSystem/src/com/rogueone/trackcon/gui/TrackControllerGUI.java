@@ -913,7 +913,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         position1Panel.add(unoccupiedPosition1RadioButton, gridBagConstraints);
 
-        trackStatusPosition1ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
+        trackStatusPosition1ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Maintenance", "" }));
+        trackStatusPosition1ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trackStatusPosition1ComboBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -973,7 +978,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         position2Panel.add(trackPosition2Label, gridBagConstraints);
 
-        trackStatusPosition2ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
+        trackStatusPosition2ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Maintenance", "" }));
+        trackStatusPosition2ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trackStatusPosition2ComboBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1024,7 +1034,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         position3Panel.add(trackPosition3Label, gridBagConstraints);
 
-        trackStatusPosition3ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
+        trackStatusPosition3ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Maintenance", "" }));
+        trackStatusPosition3ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trackStatusPosition3ComboBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1067,7 +1082,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         position4Panel.add(unoccupiedPosition4RadioButton, gridBagConstraints);
 
-        trackStatusPosition4ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Disconnected" }));
+        trackStatusPosition4ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Broken", "Maintenance", "" }));
         trackStatusPosition4ComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trackStatusPosition4ComboBoxActionPerformed(evt);
@@ -1292,6 +1307,15 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
     private void trackStatusPosition4ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackStatusPosition4ComboBoxActionPerformed
         // TODO add your handling code here:
+        if(((String) trackStatusPosition4ComboBox.getSelectedItem()).equals("Normal")){
+            unoccupiedPosition4RadioButton.setSelected(true);
+            occupiedPosition4RadioButton.setEnabled(true);
+            unoccupiedPosition4RadioButton.setEnabled(true);
+        } else {
+            occupiedPosition4RadioButton.setSelected(true);
+            occupiedPosition4RadioButton.setEnabled(false);
+            unoccupiedPosition4RadioButton.setEnabled(false);
+        }
     }//GEN-LAST:event_trackStatusPosition4ComboBoxActionPerformed
 
     private void switch2DefaultRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_switch2DefaultRadioButtonActionPerformed
@@ -1299,7 +1323,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_switch2DefaultRadioButtonActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        
+
         if (!crossingPanel.isVisible()) {
             StateSet guiStateSet = this.generateStateSet();
             UserSwitchState uss = trackController.updateStateMapping(this.selectedLogicTrackGroup, guiStateSet, this);
@@ -1308,46 +1332,44 @@ public class TrackControllerGUI extends javax.swing.JPanel {
                 Iterator switchIterator = switches.iterator();
                 while (switchIterator.hasNext()) {
                     SimpleEntry<Integer, SwitchState> switchState = (SimpleEntry<Integer, SwitchState>) switchIterator.next();
-                    for (int i = 0; i < currentNumberOfSwitches; i++) {
-                        if (switchState.getKey() == Integer.parseInt(switch1Label.getText())) {
-                            if (switchState.getValue() == Global.SwitchState.DEFAULT) {
-                                switch1DefaultRadioButton.setSelected(true);
-                                systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.DEFAULT + "\n");
-                            } else if (switchState.getValue() == Global.SwitchState.ALTERNATE) {
-                                switch1AlternateRadioButton.setSelected(true);
-                                systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.ALTERNATE + "\n");
-                            } else {
-                                System.out.println("Something went wrong should not be here 0000");
-                            }
+                    if (switchState.getKey() == Integer.parseInt(switch1Label.getText())) {
+                        if (switchState.getValue() == Global.SwitchState.DEFAULT) {
+                            switch1DefaultRadioButton.setSelected(true);
+                            systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.DEFAULT + "\n");
+                        } else if (switchState.getValue() == Global.SwitchState.ALTERNATE) {
+                            switch1AlternateRadioButton.setSelected(true);
+                            systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.ALTERNATE + "\n");
+                        } else {
+                            System.out.println("Something went wrong should not be here 0000");
                         }
-                        if (currentNumberOfSwitches == 2) {
-                            if (switchState.getKey() == Integer.parseInt(switch2Label.getText())) {
-                                if (switchState.getValue() == Global.SwitchState.DEFAULT) {
-                                    switch2DefaultRadioButton.setSelected(true);
-//                                    systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.DEFAULT + "\n");
-                                } else if (switchState.getValue() == Global.SwitchState.ALTERNATE) {
-                                    switch2AlternateRadioButton.setSelected(true);
-//                                    systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.ALTERNATE + "\n");
-                                } else {
-                                    System.out.println("Something went wrong should not be here 0001");
-                                }
+                    }
+                    if (currentNumberOfSwitches == 2) {
+                        if (switchState.getKey() == Integer.parseInt(switch2Label.getText())) {
+                            if (switchState.getValue() == Global.SwitchState.DEFAULT) {
+                                switch2DefaultRadioButton.setSelected(true);
+                                    systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.DEFAULT + "\n");
+                            } else if (switchState.getValue() == Global.SwitchState.ALTERNATE) {
+                                switch2AlternateRadioButton.setSelected(true);
+                                    systemOutputTextArea.append("Switch " + switchState.getKey() + " :\t " + Global.SwitchState.ALTERNATE + "\n");
+                            } else {
+                                System.out.println("Something went wrong should not be here 0001");
                             }
                         }
                     }
+
                 }
                 systemOutputTextArea.append("Previous State:\t " + this.selectedLogicTrackGroup.getPreviousTrackState().toString() + "\n");
                 systemOutputTextArea.append("Current State:\t " + this.selectedLogicTrackGroup.getCurrentTrackState().toString() + "\n");
-                
             } else {
                 System.out.println("The positions you picked did not return a result");
             }
         } else {
             Crossing selectedCrossing = this.generateCrossing();
             Global.CrossingState selectedCrossState = null;
-            if(crossingActiveRadioButton.isSelected()){
+            if (crossingActiveRadioButton.isSelected()) {
                 selectedCrossState = Global.CrossingState.ACTIVE;
                 systemOutputTextArea.append("Crossing:\t " + Global.CrossingState.ACTIVE + "\n");
-            } else if (crossingInactiveRadioButton.isSelected()){
+            } else if (crossingInactiveRadioButton.isSelected()) {
                 selectedCrossState = Global.CrossingState.INACTIVE;
                 systemOutputTextArea.append("Crossing:\t " + Global.CrossingState.INACTIVE + "\n");
             }
@@ -1437,7 +1459,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
     private void testSwitchRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testSwitchRadioButtonActionPerformed
         // TODO add your handling code here:
-        if(testSwitchRadioButton.isSelected()){
+        if (testSwitchRadioButton.isSelected()) {
             logicGroupsComboBox.setEnabled(true);
             crossingComboBox.setEnabled(false);
         }
@@ -1446,7 +1468,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
     private void testCrossingRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testCrossingRadioButtonActionPerformed
         // TODO add your handling code here:
-        if(testCrossingRadioButton.isSelected()){
+        if (testCrossingRadioButton.isSelected()) {
             logicGroupsComboBox.setEnabled(false);
             crossingComboBox.setEnabled(true);
         }
@@ -1463,7 +1485,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
 
     private void addTrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTrainActionPerformed
         // TODO add your handling code here:
-        trackController.addTrain( trainNumberTextField.getText(), suggestSpeedTextField.getText(), suggestAuthorityTextField.getText(), this);
+        trackController.addTrain(trainNumberTextField.getText(), suggestSpeedTextField.getText(), suggestAuthorityTextField.getText(), this);
     }//GEN-LAST:event_addTrainActionPerformed
 
     private void currentTrainsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentTrainsTableMouseClicked
@@ -1494,6 +1516,45 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         hideSimulatePanels();
         trackController.setupSimulateTabCrossing((Global.LogicGroups) logicGroupsComboBox.getSelectedItem(), this);
     }//GEN-LAST:event_crossingComboBoxActionPerformed
+
+    private void trackStatusPosition1ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackStatusPosition1ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if(((String) trackStatusPosition1ComboBox.getSelectedItem()).equals("Normal")){
+            unoccupiedPosition1RadioButton.setSelected(true);
+            occupiedPosition1RadioButton.setEnabled(true);
+            unoccupiedPosition1RadioButton.setEnabled(true);
+        } else {
+            occupiedPosition1RadioButton.setSelected(true);
+            occupiedPosition1RadioButton.setEnabled(false);
+            unoccupiedPosition1RadioButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_trackStatusPosition1ComboBoxActionPerformed
+
+    private void trackStatusPosition2ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackStatusPosition2ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if(((String) trackStatusPosition2ComboBox.getSelectedItem()).equals("Normal")){
+            unoccupiedPosition2RadioButton.setSelected(true);
+            occupiedPosition2RadioButton.setEnabled(true);
+            unoccupiedPosition2RadioButton.setEnabled(true);
+        } else {
+            occupiedPosition2RadioButton.setSelected(true);
+            occupiedPosition2RadioButton.setEnabled(false);
+            unoccupiedPosition2RadioButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_trackStatusPosition2ComboBoxActionPerformed
+
+    private void trackStatusPosition3ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackStatusPosition3ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if(((String) trackStatusPosition3ComboBox.getSelectedItem()).equals("Normal")){
+            unoccupiedPosition3RadioButton.setSelected(true);
+            occupiedPosition3RadioButton.setEnabled(true);
+            unoccupiedPosition3RadioButton.setEnabled(true);
+        } else {
+            occupiedPosition3RadioButton.setSelected(true);
+            occupiedPosition3RadioButton.setEnabled(false);
+            unoccupiedPosition3RadioButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_trackStatusPosition3ComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1647,7 +1708,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         //setup for switch panels
         ArrayList<Switch> selectedGroupSwitches = selectedLogicGroup.getSwitches();
         this.currentNumberOfSwitches = selectedGroupSwitches.size();
-        if (selectedGroupSwitches.size() >= 1 ) {
+        if (selectedGroupSwitches.size() >= 1) {
             switch1Panel.setVisible(true);
             switch1Label.setText(selectedGroupSwitches.get(0).getSwitchID() + "");
             if (selectedGroupSwitches.get(0).getSwitchState().getSwitchState() == Global.SwitchState.DEFAULT) {
@@ -1657,7 +1718,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             }
             switch2Panel.setVisible(false);
         }
-        if (selectedGroupSwitches.size() >= 2 ) {
+        if (selectedGroupSwitches.size() >= 2) {
             switch2Panel.setVisible(true);
             switch2Label.setText(selectedGroupSwitches.get(1).getSwitchID() + "");
             if (selectedGroupSwitches.get(1).getSwitchState().getSwitchState() == Global.SwitchState.DEFAULT) {
@@ -1698,7 +1759,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             position3Panel.setVisible(false);
             position4Panel.setVisible(false);
         }
-        if (states.size() >= 3 ) {
+        if (states.size() >= 3) {
             position3Panel.setVisible(true);
             trainPosition3Label.setText(statesArray[2].getGroup() + "");
             if (statesArray[2].getPresence() == Global.Presence.UNOCCUPIED) {
@@ -1708,7 +1769,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             }
             position4Panel.setVisible(false);
         }
-        if (states.size() >= 4 ) {
+        if (states.size() >= 4) {
             position4Panel.setVisible(true);
             trainPosition4Label.setText(statesArray[3].getGroup() + "");
             if (statesArray[3].getPresence() == Global.Presence.UNOCCUPIED) {
@@ -1722,12 +1783,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private StateSet generateStateSet() {
         StateSet guiStateSet = new StateSet();
         State pos1 = null;
-        if(position1Panel.isVisible()){
+        if (position1Panel.isVisible()) {
             Global.TrackGroups pos1TrackGroup = Global.TrackGroups.valueOf(trainPosition1Label.getText());
             Global.Presence position1Presence = null;
-            if(occupiedPosition1RadioButton.isSelected()){
+            if (occupiedPosition1RadioButton.isSelected()) {
                 position1Presence = Global.Presence.OCCUPIED;
-            } else if (unoccupiedPosition1RadioButton.isSelected()){
+            } else if (unoccupiedPosition1RadioButton.isSelected()) {
                 position1Presence = Global.Presence.UNOCCUPIED;
             } else {
                 System.out.println("A Position must be choosen!");
@@ -1735,12 +1796,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             pos1 = new State(pos1TrackGroup, position1Presence);
         }
         State pos2 = null;
-        if(position2Panel.isVisible()){
+        if (position2Panel.isVisible()) {
             Global.TrackGroups pos2TrackGroup = Global.TrackGroups.valueOf(trainPosition2Label.getText());
             Global.Presence position2Presence = null;
-            if(occupiedPosition2RadioButton.isSelected()){
+            if (occupiedPosition2RadioButton.isSelected()) {
                 position2Presence = Global.Presence.OCCUPIED;
-            } else if (unoccupiedPosition2RadioButton.isSelected()){
+            } else if (unoccupiedPosition2RadioButton.isSelected()) {
                 position2Presence = Global.Presence.UNOCCUPIED;
             } else {
                 System.out.println("A Position must be choosen!");
@@ -1748,12 +1809,12 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             pos2 = new State(pos2TrackGroup, position2Presence);
         }
         State pos3 = null;
-        if(position3Panel.isVisible()){
+        if (position3Panel.isVisible()) {
             Global.TrackGroups pos3TrackGroup = Global.TrackGroups.valueOf(trainPosition3Label.getText());
             Global.Presence position3Presence = null;
-            if(occupiedPosition3RadioButton.isSelected()){
+            if (occupiedPosition3RadioButton.isSelected()) {
                 position3Presence = Global.Presence.OCCUPIED;
-            } else if (unoccupiedPosition3RadioButton.isSelected()){
+            } else if (unoccupiedPosition3RadioButton.isSelected()) {
                 position3Presence = Global.Presence.UNOCCUPIED;
             } else {
                 System.out.println("A Position must be choosen!");
@@ -1761,26 +1822,26 @@ public class TrackControllerGUI extends javax.swing.JPanel {
             pos3 = new State(pos3TrackGroup, position3Presence);
         }
         State pos4 = null;
-        if(position4Panel.isVisible()){
+        if (position4Panel.isVisible()) {
             Global.TrackGroups pos4TrackGroup = Global.TrackGroups.valueOf(trainPosition4Label.getText());
             Global.Presence position4Presence = null;
-            if(occupiedPosition4RadioButton.isSelected()){
+            if (occupiedPosition4RadioButton.isSelected()) {
                 position4Presence = Global.Presence.OCCUPIED;
-            } else if (unoccupiedPosition4RadioButton.isSelected()){
+            } else if (unoccupiedPosition4RadioButton.isSelected()) {
                 position4Presence = Global.Presence.UNOCCUPIED;
             } else {
                 System.out.println("A Position must be choosen!");
             }
             pos4 = new State(pos4TrackGroup, position4Presence);
         }
-        if(currentNumberOfPositions >= 2){
+        if (currentNumberOfPositions >= 2) {
             guiStateSet.addState(pos1);
             guiStateSet.addState(pos2);
-        } 
-        if(currentNumberOfPositions >= 3){
+        }
+        if (currentNumberOfPositions >= 3) {
             guiStateSet.addState(pos3);
         }
-        if(currentNumberOfPositions >= 4){
+        if (currentNumberOfPositions >= 4) {
             guiStateSet.addState(pos4);
         }
         return guiStateSet;
@@ -1802,9 +1863,9 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         refreshButton.setEnabled(true);
         this.selectedCrossing = crossing;
         crossingPanel.setVisible(true);
-        if(crossing.getCurrentCrossingState() == Global.CrossingState.ACTIVE){
+        if (crossing.getCurrentCrossingState() == Global.CrossingState.ACTIVE) {
             crossingActiveRadioButton.setSelected(true);
-        } else if(crossing.getCurrentCrossingState() == Global.CrossingState.INACTIVE){
+        } else if (crossing.getCurrentCrossingState() == Global.CrossingState.INACTIVE) {
             crossingActiveRadioButton.setSelected(false);
         }
     }
@@ -1821,8 +1882,5 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     public void setSelectedCrossing(Crossing selectedCrossing) {
         this.selectedCrossing = selectedCrossing;
     }
-    
-    
-    
-    
+
 }

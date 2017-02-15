@@ -79,6 +79,27 @@ public class TrackController {
         }
 
     }
+    
+    public TrackController(JFrame mf){
+        TrackController trackControllerTest1 = new TrackController();
+        //initialize a new track controller GUI
+        TrackControllerGUI trackControllerGUITest1 = trackControllerTest1.createGUIObject(trackControllerTest1, mf);
+        //set the default PLC file
+        File defaultPLC = new File("src/com/rogueone/assets/wayside_fun.xlsx");
+        //load the plc file into track controller
+        trackControllerTest1.loadPLC(defaultPLC);
+        //set the plc program field on the gui
+        trackControllerGUITest1.plcProgramTextField.setText(defaultPLC.getName());
+        //load the plc and track model data into the summary tab of track controller
+        trackControllerTest1.updateSummaryTab(trackControllerGUITest1);
+        while (true) {
+            trackControllerTest1.updateGUI(trackControllerGUITest1);
+            if (trackControllerGUITest1.isDisplayable() == false) {
+                System.out.println("Window Closed");
+                break;
+            }
+        }
+    }
 
     public static void main(String[] args) {
         //initialize a new track controller
@@ -317,7 +338,7 @@ public class TrackController {
 
     }
 
-    private TrackControllerGUI createGUIObject(TrackController trackControllerTest1) {
+    public TrackControllerGUI createGUIObject(TrackController trackControllerTest1) {
         //Create a GUI object
         TrackControllerGUI trackControllerGUI = new TrackControllerGUI(trackControllerTest1);
 
@@ -330,8 +351,22 @@ public class TrackController {
 
         return trackControllerGUI;  //Return the GUI
     }
+    
+    public TrackControllerGUI createGUIObject(TrackController trackControllerTest1, JFrame mf) {
+        //Create a GUI object
+        TrackControllerGUI trackControllerGUI = new TrackControllerGUI(trackControllerTest1);
 
-    private void updateGUI(TrackControllerGUI trackControllerGUITest1) {
+        //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
+//        MainFrame mf = new MainFrame();
+//        mf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        mf.getContentPane().add(trackControllerGUI);
+//        mf.pack();
+//        mf.setVisible(true);     //Make sure to set it visible
+
+        return trackControllerGUI;  //Return the GUI
+    }
+
+    public void updateGUI(TrackControllerGUI trackControllerGUITest1) {
         try {
             TimeUnit.SECONDS.sleep(5);
             System.out.println("5 Seconds Passed");

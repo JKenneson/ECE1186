@@ -1078,13 +1078,17 @@
                             <Component class="javax.swing.JComboBox" name="trackStatusPosition1ComboBox">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="3">
+                                  <StringArray count="4">
                                     <StringItem index="0" value="Normal"/>
                                     <StringItem index="1" value="Broken"/>
-                                    <StringItem index="2" value="Disconnected"/>
+                                    <StringItem index="2" value="Maintenance"/>
+                                    <StringItem index="3" value=""/>
                                   </StringArray>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trackStatusPosition1ComboBoxActionPerformed"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                               </AuxValues>
@@ -1172,13 +1176,17 @@
                             <Component class="javax.swing.JComboBox" name="trackStatusPosition2ComboBox">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="3">
+                                  <StringArray count="4">
                                     <StringItem index="0" value="Normal"/>
                                     <StringItem index="1" value="Broken"/>
-                                    <StringItem index="2" value="Disconnected"/>
+                                    <StringItem index="2" value="Maintenance"/>
+                                    <StringItem index="3" value=""/>
                                   </StringArray>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trackStatusPosition2ComboBoxActionPerformed"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                               </AuxValues>
@@ -1255,13 +1263,17 @@
                             <Component class="javax.swing.JComboBox" name="trackStatusPosition3ComboBox">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="3">
+                                  <StringArray count="4">
                                     <StringItem index="0" value="Normal"/>
                                     <StringItem index="1" value="Broken"/>
-                                    <StringItem index="2" value="Disconnected"/>
+                                    <StringItem index="2" value="Maintenance"/>
+                                    <StringItem index="3" value=""/>
                                   </StringArray>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trackStatusPosition3ComboBoxActionPerformed"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                               </AuxValues>
@@ -1328,10 +1340,11 @@
                             <Component class="javax.swing.JComboBox" name="trackStatusPosition4ComboBox">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="3">
+                                  <StringArray count="4">
                                     <StringItem index="0" value="Normal"/>
                                     <StringItem index="1" value="Broken"/>
-                                    <StringItem index="2" value="Disconnected"/>
+                                    <StringItem index="2" value="Maintenance"/>
+                                    <StringItem index="3" value=""/>
                                   </StringArray>
                                 </Property>
                               </Properties>
