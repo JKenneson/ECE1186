@@ -39,11 +39,15 @@ public class Section {
     }
     
     public Block getBlock(int block) {
+        System.out.println("SEARCHING");
         for (Block b : blocks) {
+            System.out.println("\t" + b.getID() + "-" + block);
             if (b.getID() == block) {
                 return b;
             }
         }
+        
+        System.err.println("Block " + line + ":" + sectionID + ":" + block + " not found in section " + sectionID);
         return null;
     }
     

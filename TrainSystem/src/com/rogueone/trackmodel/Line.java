@@ -34,25 +34,26 @@ public class Line {
     }
     
     public Block getBlock(int block) {
+        //System.out.println("SEARCHING FOR " + block);
         for (Section s : sections) {
             for(Block b : s.getBlocks()) {
+                //System.out.println(s.getSectionID() + " " + b.getID());
                 if(b.getID() == block) {
                     return b;
                 }
             }
         }
+        System.err.println("Block " + lineID + ":" + block + " not found in line " + lineID);
         return null;
     }
     
     public Block getBlock(Section section, int block) {
         for (Section s : sections) {
-            if (s.getLine().getLineID() == Global.Line.RED && section.getLine().getLineID() == Global.Line.RED) {
-                System.out.println(";=");
-            }
             if (s.equals(section)) {
                 return s.getBlock(block);
             }
         }
+        System.err.println("Block " + lineID + ":" + section + ":" + block + " not found in " + lineID);
         return null;
     }
     

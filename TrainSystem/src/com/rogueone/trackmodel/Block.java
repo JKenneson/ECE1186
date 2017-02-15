@@ -87,6 +87,7 @@ public class Block implements TrackPiece {
             return portA;
         }
         else {
+            System.err.println("Next block not found");
             return null;
         }
     } 

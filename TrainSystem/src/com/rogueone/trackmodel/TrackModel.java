@@ -97,11 +97,17 @@ public class TrackModel {
                     b.setPortA(yard);
                 }
                 else {
-                    b.setPortA(getBlock(b.getLine(),b.getSection(),b.getPortAID()));
-                }     
+                    b.setPortA(getBlock(b.getLine(),b.getPortAID()));
+                }
+                if(b.getPortA() == null) {
+                    System.err.println("ERROR: Port A not assigned");
+                }
             }
             if(b.getPortB() == null) {
-                b.setPortB(getBlock(b.getLine(),b.getSection(),b.getPortBID()));
+                b.setPortB(getBlock(b.getLine(),b.getPortBID()));
+                if(b.getPortB() == null) {
+                    System.err.println("ERROR: Port B not assigned");
+                }
             }
         }
     }
@@ -112,6 +118,7 @@ public class TrackModel {
                 return l.getBlock(section, block);
             }
         }
+        System.err.println("Block " + line + ":" + section + ":" + block + " not found");
         return null;
     }
     
@@ -121,6 +128,7 @@ public class TrackModel {
                 return l.getBlock(block);
             }
         }
+        System.err.println("Block " + line + ":" + block + " not found");
         return null;
     }
     
@@ -340,6 +348,9 @@ public class TrackModel {
         if(block != null) {
             block.setPortB(sw);
         }
+        else {
+            System.err.println("ERROR: Switch not assigned to block");
+        }
     }
     
     //UTILITY ACCESS METHODS
@@ -350,6 +361,7 @@ public class TrackModel {
                 return l;
             }
         }
+        System.err.println("Line " + line + " not found");
         return null;
     }
     
@@ -363,6 +375,7 @@ public class TrackModel {
                 }
             }
         }
+        System.err.println("Section " + line + ":" + section + " not found");
         return null;
     }
     
@@ -380,6 +393,7 @@ public class TrackModel {
                 }
             }
         }
+        System.err.println("Block " + line + ":" + section + ":" + block + " not found");
         return null;
     }
     
@@ -395,6 +409,7 @@ public class TrackModel {
                 }
             }
         }
+        System.err.println("Block " + line + ":" + block + " not found");
         return null;
     }
     
