@@ -385,7 +385,7 @@ public class TrainModel {
         //First, ask the TrainController for a new power
         this.elapsedTime = System.nanoTime() - startTime;                                               //Get elapsed time since last calculation
         if(this.trainController != null) {
-            this.powerReceived = this.trainController.calculatePower(this.lastSpeed, this.elapsedTime);
+            this.powerReceived = this.trainController.calculatePower(this.lastSpeed, this.elapsedTime/(double)1000000000); //Ask for a new power
         }        
         System.out.println("Power: " + this.powerReceived);
         
