@@ -26,17 +26,25 @@ public class TrainController {
     NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
     DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     
-    
-    public enum failureModes{
-        POWER_FAILURE, ANTENNA_FAILURE, BRAKE_FAILURE
-    }
+    public final double METERS_IN_A_MILE = 1609.34;     //1609.34 meters in a mile
+    public final double FEET_IN_A_METER = 3.28;         //3.28 feet = 1 meter
+    public final double SECONDS_IN_AN_HOUR = 3600;      //3600 seconds in an hour
     
     //Variable declaration for the class
     //Train Operations
     private boolean manualMode;
+
+    public void setManualMode(boolean manualMode) {
+        this.manualMode = manualMode;
+    }
     private boolean leftDoorOpen;
     private boolean rightDoorOpen;
     private boolean lightsOn;
+
+    public void setLightsOn(boolean lightsOn) {
+        this.lightsOn = lightsOn;
+        this.trainModel.setLightsOn(lightsOn);
+    }
     private boolean airConditioningOn;
 
     public void setAirConditioningOn(boolean airConditioningOn) {
@@ -53,22 +61,27 @@ public class TrainController {
 
     public void setLeftDoorOpen(boolean leftDoorOpen) {
         this.leftDoorOpen = leftDoorOpen;
+        this.trainModel.setLeftDoorOpen(leftDoorOpen);
     }
 
     public void setRightDoorOpen(boolean rightDoorOpen) {
         this.rightDoorOpen = rightDoorOpen;
+        this.trainModel.setRightDoorOpen(rightDoorOpen);
     }
 
     public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
         this.serviceBrakeActivated = serviceBrakeActivated;
+        this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
     }
 
     public void setEmergencyBrakeActivated(boolean emergencyBrakeActivated) {
         this.emergencyBrakeActivated = emergencyBrakeActivated;
+        this.trainModel.setEmergencyBrakeActivated(emergencyBrakeActivated);
     }
 
     public void setDriverSetPoint(byte driverSetPoint) {
         this.driverSetPoint = driverSetPoint;
+        this.trainModel.setDriverSetPoint(driverSetPoint);
     }
     
     public TrainModel getTrainModel() {
@@ -78,12 +91,28 @@ public class TrainController {
     //Speed and Authority
     private double currSpeed;
     private int speedLimit;
+
+    public double getCurrSpeed() {
+        return currSpeed;
+    }
     private short authority;
     //private int distanceTraveled; //Distance traveled since last auth command
     private byte driverSetPoint;
+
+    public byte getDriverSetPoint() {
+        return driverSetPoint;
+    }
     private byte recommendedSetPoint;
     private double powerCommand;
     private int kP;
+
+    public int getkP() {
+        return kP;
+    }
+
+    public int getkI() {
+        return kI;
+    }
     private int kI;
     private double eK;
     private double eK_1;
@@ -444,7 +473,8 @@ public class TrainController {
     }                                       
     
     private void updateController(){
-        this.updateClimateControl();
+        if(!this.manualMode)
+            this.updateClimateControl();
         this.updatePassengers();
         
     }
@@ -498,10 +528,7 @@ public class TrainController {
             gui.ACOff.setSelected(true);
             gui.HeatOff.setSelected(true);
         }
-        
-        gui.KpInput.setValue(this.kP);
-        gui.KiInput.setValue(this.kI);
-        
+               
         gui.TrainInfoText.setText(null);
         gui.TrainInfoText.append("Train ID: " + this.trainID + "\nLine: " + 
         this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
@@ -653,7 +680,7 @@ public class TrainController {
         }        
         
         //Speed and Authority
-        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.currSpeed));
+        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.currSpeed * SECONDS_IN_AN_HOUR / METERS_IN_A_MILE));
         gui.SetSpeedLabel.setText(Integer.toString(this.speedLimit));
         
         if(this.manualMode){
