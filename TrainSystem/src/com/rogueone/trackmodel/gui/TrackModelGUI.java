@@ -815,8 +815,16 @@ public class TrackModelGUI extends javax.swing.JPanel {
             if (b.getStation() != null) {
                     Station station = (Station) b.getStation();
                     
-                    String stationColumnNames[] = { "ID", "Name", "Block A", "Block B", "Right", "Left" };
-                    String stationRowData[] = { station.getID() + "", station.getStationName(), station.getBlockA().getID() + "", station.getBlockB().getID() + "", station.isRightSide() + "", station.isLeftSide() + "" };
+                    String stationColumnNames[] = { "ID", "Name", "Block A", "Section A", "Block B", "Section B", "Right", "Left" };
+                    String stationRowData[] = { 
+                        station.getID() + "", 
+                        station.getStationName(), 
+                        station.getBlockA().getID() + "",
+                        ((Block) station.getBlockA()).getSection().toString() + "", 
+                        ((station.getBlockB() == null) ? "n/a" : station.getBlockB().getID() + ""), 
+                        ((station.getBlockB() == null) ? "n/a" : ((Block) station.getBlockB()).getSection().toString() + ""), 
+                        station.isRightSide() + "", 
+                        station.isLeftSide() + "" };
                     DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
                     stationModel.addRow(stationRowData);
                     stationTable.setModel(stationModel);

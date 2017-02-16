@@ -81,33 +81,35 @@ public class TrackModel {
         //printLines();
         //System.out.println("\nSECTIONS:");
         //printSections();
-        //System.out.println("\nBLOCKS:");
-        //printBlocks();
-        //System.out.println("\nSTATIONS:");
-        //printStations();
-        //System.out.println("\nSWITCHES:");
-        //printSwitches();
+        System.out.println("\nBLOCKS:");
+        printBlocks();
+        System.out.println("\nSTATIONS:");
+        printStations();
+        System.out.println("\nSWITCHES:");
+        printSwitches();
        
     }
     
     private void connectBlocks() {
         for (Block b : blocks) {
+            if(b.getPortAID() == 0) {
+                b.setPortA(yard);
+            }
+            else {
+                b.setPortA(getBlock(b.getLine(),b.getPortAID()));
+            }
+            if(b.getPortBID() == -1) {
+                b.setPortB(getSwitch(b.getSwitchID()));
+            }
+            else {
+                b.setPortB(getBlock(b.getLine(),b.getPortBID()));
+            }
+            //Error checking
             if(b.getPortA() == null) {
-                if(b.getPortAID() == 0) {
-                    b.setPortA(yard);
-                }
-                else {
-                    b.setPortA(getBlock(b.getLine(),b.getPortAID()));
-                }
-                if(b.getPortA() == null) {
-                    System.err.println("ERROR: Port A not assigned");
-                }
+                System.err.println("ERROR: Port A not assigned to block " + b.getID());
             }
             if(b.getPortB() == null) {
-                b.setPortB(getBlock(b.getLine(),b.getPortBID()));
-                if(b.getPortB() == null) {
-                    System.err.println("ERROR: Port B not assigned");
-                }
+                System.err.println("ERROR: Port B not assigned to block " + b.getID());
             }
         }
     }
@@ -129,6 +131,16 @@ public class TrackModel {
             }
         }
         System.err.println("Block " + line + ":" + block + " not found");
+        return null;
+    }
+    
+    public Switch getSwitch(int switchID) {
+        for (Switch s : switches) {
+            if(s.getID() == switchID) {
+                return s;
+            }
+        }
+        System.err.println("Switch " + switchID + " not found.");
         return null;
     }
     
@@ -343,14 +355,7 @@ public class TrackModel {
     private void addSwitch(Switch sw) {
         //Add reference to top-level array
         switches.add(sw);
-        //Add reference to blocks (can only be port B)
-        Block block = (Block)sw.getPortB();
-        if(block != null) {
-            block.setPortB(sw);
-        }
-        else {
-            System.err.println("ERROR: Switch not assigned to block");
-        }
+        //Will be added to blocks in connectBlocks
     }
     
     //UTILITY ACCESS METHODS
