@@ -168,13 +168,13 @@ public class Mbo{
         String[] times = time.split("\\.");
         String AMPM = "am";
         int hours=0, minutes=0, seconds=0;
-        System.out.println(times[0]+" "+times[1]+" "+times[2]);
+        //System.out.println(times[0]+" "+times[1]+" "+times[2]);
         hours=Integer.parseInt(times[0]);
         minutes=Integer.parseInt(times[1]);
         seconds=Integer.parseInt(times[2]);
         
         
-        time = hours+":"+minutes+AMPM;
+        
         if(seconds>60)
         {
             seconds=seconds-60;
@@ -190,10 +190,15 @@ public class Mbo{
             hours=hours-12;
             AMPM="pm";
         }
+        if(hours==2){
+            AMPM = "pm";
+        }
+        time = hours+":"+minutes+AMPM;
         if(minutes<10)
         {
             time = hours+":0"+minutes+AMPM;
         }
+        
         //System.out.println(time);
         return time;
     }
@@ -286,7 +291,7 @@ public class Mbo{
             mboGui.SuggestedSpeedValue.setText("30 mph");
             mboGui.DifferenceValue.setText("(-10 mph)");
         }
-        System.out.println(newID);
+        //System.out.println(newID);
         mboGui.TrainIdValue.setText(newID);
     //}
     }
@@ -317,7 +322,7 @@ public class Mbo{
      */
     public void generateSchedule(int numTrains) throws IOException, InvalidFormatException{
         Workbook workbook = new XSSFWorkbook();
-        System.out.println("There are: "+numTrains+" trains!");
+       // System.out.println("There are: "+numTrains+" trains!");
         
         
         
@@ -407,10 +412,12 @@ public class Mbo{
                         if((j &1)==0){
                         cell.setCellValue(startTimeDay);
                         startTimeDay = incrementTime(startTimeDay,"7.0");
+                       //startTimeDay  = convertTime(startTimeDay);
                     }
                         else{
                            cell.setCellValue(startTimeEvening);
                             startTimeEvening = incrementTime(startTimeEvening,"7.0"); 
+                           // startTimeEvening  = convertTime(startTimeEvening);
                         }
                     }
                 }
