@@ -1222,6 +1222,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         
         if ( !(existsInTable(FailureTable, newRow)) ){
             model.addRow(newRow);
+            FailureTable.repaint();
         }
         
     }
