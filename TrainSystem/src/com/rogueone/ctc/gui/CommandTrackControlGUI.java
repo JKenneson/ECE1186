@@ -1188,7 +1188,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         DefaultTableModel blockTable = (DefaultTableModel)BlockTable.getModel();
         
         for ( int i = 0; i < TrainTable.getRowCount(); i++ ){
-            if ( TrainTable.getValueAt(i, 3) == null){
+            if ( (Boolean)TrainTable.getValueAt(i, 3) == false){
                 String tableLine = (String)TrainTable.getValueAt(i, 0);
                 String trainPosition = (String)(TrainTable.getValueAt(i,2));
                 String failureType = "Shutdown";
@@ -1197,7 +1197,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
         
         for ( int i = 0; i < BlockTable.getRowCount(); i++ ){
-            if ( BlockTable.getValueAt(i, 3) == null){
+            if ( (Boolean)BlockTable.getValueAt(i, 3) == false){
                 String tableLine = (String)BlockTable.getValueAt(i, 0);
                 String trainPosition = (String)((BlockTable.getValueAt(i,1) + ":" + BlockTable.getValueAt(i,2)));
                 String failureType = "Shutdown";
