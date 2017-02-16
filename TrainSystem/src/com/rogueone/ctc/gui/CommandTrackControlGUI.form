@@ -444,10 +444,10 @@
                                   <Data value="B"/>
                                   <Data value="F"/>
                                 </Column>
-                                <Column editable="true" title="Block" type="java.lang.Integer">
-                                  <Data value="2"/>
-                                  <Data value="3"/>
-                                  <Data value="2"/>
+                                <Column editable="true" title="Block" type="java.lang.String">
+                                  <Data value="1"/>
+                                  <Data value="4"/>
+                                  <Data value="21"/>
                                 </Column>
                                 <Column editable="true" title="Type" type="java.lang.String">
                                   <Data value="Power"/>
