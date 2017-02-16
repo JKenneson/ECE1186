@@ -21,13 +21,14 @@ import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.mbo.gui.TrainScheduleGUI;
 import com.rogueone.global.Global;
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.*;;
 /**
  *
  * @author Brian Stevenson
  */
 public class MovingBlockGUI extends javax.swing.JPanel {
 
+private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
     /**
      * Creates new form MovingBlockGUI
      */
@@ -610,10 +611,11 @@ public class MovingBlockGUI extends javax.swing.JPanel {
         TrainScheduleGUI trainGUI = new TrainScheduleGUI();
         Mbo mbo = new Mbo();
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = scheduleChooser.getSelectedFile();
+            File newFile = scheduleChooser.getSelectedFile();
             try {
-                Mbo.readRedSchedule(trainGUI,file);
-                Mbo.readPersonnelSchedule(file);
+                file = newFile;
+                Mbo.readRedSchedule(newFile);
+                Mbo.readPersonnelSchedule(newFile);
             }
             catch (IOException ex) {
                 System.out.println("problem accessing file"+file.getAbsolutePath());
@@ -671,14 +673,15 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
          TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
          Mbo mbo = new Mbo();
-         File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+         
          try{
-         mbo.readRedSchedule(trainSchedule, file);
+         mbo.readRedSchedule(file);
+         mbo.setScheduleVisible();
          }
          catch(IOException | InvalidFormatException e){
              
          }
-        trainSchedule.setVisible(true);
+        //trainSchedule.setVisible(true);
     }//GEN-LAST:event_DetailedScheduleButtonActionPerformed
 
     private void trainDeployButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainDeployButtonActionPerformed

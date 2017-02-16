@@ -39,6 +39,7 @@ public class Mbo{
   private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
    private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
    private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
+   private static TrainScheduleGUI scheduleGUI = new TrainScheduleGUI();
     
    public MovingBlockGUI newGui() throws IOException, InvalidFormatException{
        //JFrame frame = new JFrame();
@@ -97,14 +98,18 @@ public class Mbo{
      
     }
    
+    public void setScheduleVisible(){
+        scheduleGUI.setVisible(true);
+    }
+    
     /**
      * Reads information from excel sheet regarding train schedules, then outputs them to the GUI
      * @param gui GUI to be updated with train schedule information 
      * @throws IOException
      * @throws InvalidFormatException 
      */
-    public static void readRedSchedule(TrainScheduleGUI gui, File file) throws IOException, InvalidFormatException{
-        
+    public static void readRedSchedule( File file) throws IOException, InvalidFormatException{
+        //scheduleGUI.setVisible(true);
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet redSchedule = workbook.getSheetAt(1);
         int numTrains = redSchedule.getLastRowNum();
@@ -121,9 +126,9 @@ public class Mbo{
             for(j = 0; j < 11; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
-                    System.out.println(i);
+                    //System.out.println(i);
                     if(i==0){     
-                        System.out.println("HERE");
+                        //System.out.println("HERE");
                         columnNames[j] = info;
                     }
                     else if(j==2){
@@ -142,7 +147,7 @@ public class Mbo{
             }
         }
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        gui.redTable.setModel(model);
+        scheduleGUI.redTable.setModel(model);
     }
     
     /**
@@ -279,10 +284,7 @@ public class Mbo{
         displayCurrentTrains();
         
    }  
-   
-   public static void refresh(MovingBlockGUI gui){
-       
-   }
+  
     /**
      * Function to generate a new employee schedule in excel
      * @param file excel file to be written to
@@ -293,30 +295,84 @@ public class Mbo{
         
         
         
-        int i=0,j=0;
+        int i=0,j=0,k=0;
         String[] personnelHeaders = {"Name","SUN","MON","TUES","WED","THURS","FRI","SAT"};
-        String[] trainHeaders = {"Train ID","Driver","Departure"};
+        String[] trainHeaders = {"Train ID","Driver","Departure","SHADYSIDE","HERRON","SWISSVILLE","PENN STATION","STEEL PLAZA","FIRST AVE","ST SQUARE","STH HILLS"};
+
         //Sheet redSchedule = workbook.getSheetAt(1);
         Sheet peopleSheet = workbook.createSheet("Personnel");
         Sheet redSheet = workbook.createSheet("Red");
         Sheet greenSheet = workbook.createSheet("Green");
-       
-        for(j=0;j<numTrains;j++){
+        int employeeNumber = 0;
+        int trainID = 100;
+        int dayOff1 = 0;
+        int dayOff2 = dayOff1+1;
+        int dayOffInterval = 7/numTrains;
+        String startTime = "06.00.00";
+        for(j=0;j<numTrains+1;j++){
+            Row peopleRow = peopleSheet.createRow(j);
+            Row redRow = redSheet.createRow(j);
+            Row greenRow = greenSheet.createRow(j);
             if(j==0){
-                Row peopleRow = peopleSheet.createRow(j);
-                Row redRow = redSheet.createRow(j);
-                Row greenRow = greenSheet.createRow(j);
                 for(i=0;i<8;i++){
-                Cell cell = peopleRow.createCell(i);
-                cell.setCellValue(personnelHeaders[i]);
+                    Cell cell = peopleRow.createCell(i);
+                    cell.setCellValue(personnelHeaders[i]);
                 }
-                for(i=0;i<3;i++){
+                for(i=0;i<11;i++){
                     Cell redCell = redRow.createCell(i);
                     Cell greenCell = greenRow.createCell(i);
                     redCell.setCellValue(trainHeaders[i]);
                     greenCell.setCellValue(trainHeaders[i]);
                 }
             }
+            else{
+                String[] driverNames = new String[numTrains+1];
+                System.out.println(dayOffInterval);
+                for(i=0;i<8;i++){
+                    Cell cell = peopleRow.createCell(i);
+                    if(i==0){
+                        driverNames[j]="Employee "+employeeNumber;
+                        cell.setCellValue("Employee "+employeeNumber);
+                    }
+                    else if(i==dayOff1 || i==dayOff2){
+                        cell.setCellValue("OFF");
+                    }
+                    else{
+                        if((j &1)==0){
+                            cell.setCellValue("6am - 2:30pm");
+                        }
+                        else{
+                            cell.setCellValue("2pm - 10:30pm");
+                        }
+                    }
+                    
+                    
+                }
+                for(i=0;i<3;i++){
+                    Cell cell = redRow.createCell(i);
+                    if(i==0){
+                        cell.setCellValue(trainID);
+                    }
+                    else if(i==1){
+                        cell.setCellValue(driverNames[j]);
+                    }
+                    else if(i==2){
+                        cell.setCellValue(startTime);
+                    }
+                }
+            }
+            employeeNumber++;
+            dayOff1=dayOff1+dayOffInterval;
+            dayOff2=dayOff1+1;
+            if(dayOff1>7){
+                dayOff1=0;
+            }
+            if(dayOff2>7){
+                dayOff2=0;
+            }
+            trainID++;
+            startTime = incrementTime(startTime,"7.0");
+            System.out.println(startTime);
         }
         
         FileOutputStream output = new FileOutputStream("src\\com\\rogueone\\assets\\altSchedule.xlsx");
