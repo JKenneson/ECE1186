@@ -32,96 +32,26 @@ public class TrainController {
     
     //Variable declaration for the class
     //Train Operations
-    private boolean manualMode;
-
-    public void setManualMode(boolean manualMode) {
-        this.manualMode = manualMode;
-    }
+    private boolean manualMode;   
     private boolean leftDoorOpen;
     private boolean rightDoorOpen;
     private boolean lightsOn;
-
-    public void setLightsOn(boolean lightsOn) {
-        this.lightsOn = lightsOn;
-        this.trainModel.setLightsOn(lightsOn);
-    }
     private boolean airConditioningOn;
-
-    public void setAirConditioningOn(boolean airConditioningOn) {
-        this.airConditioningOn = airConditioningOn;
-    }
-
-    public void setHeaterOn(boolean heaterOn) {
-        this.heaterOn = heaterOn;
-    }
     private boolean heaterOn;
     private boolean serviceBrakeActivated;
     private boolean emergencyBrakeActivated;
     private boolean emergencyBrakeOverride;
-
-    public void setLeftDoorOpen(boolean leftDoorOpen) {
-        this.leftDoorOpen = leftDoorOpen;
-        this.trainModel.setLeftDoorOpen(leftDoorOpen);
-    }
-
-    public void setRightDoorOpen(boolean rightDoorOpen) {
-        this.rightDoorOpen = rightDoorOpen;
-        this.trainModel.setRightDoorOpen(rightDoorOpen);
-    }
-
-    public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
-        this.serviceBrakeActivated = serviceBrakeActivated;
-        this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
-    }
-
-    public void setEmergencyBrakeActivated(boolean emergencyBrakeActivated) {
-        this.emergencyBrakeActivated = emergencyBrakeActivated;
-        this.trainModel.setEmergencyBrakeActivated(emergencyBrakeActivated);
-    }
-
-    public void setDriverSetPoint(byte driverSetPoint) {
-        this.driverSetPoint = driverSetPoint;
-        this.trainModel.setDriverSetPoint(driverSetPoint);
-    }
-    
-    public TrainModel getTrainModel() {
-        return this.trainModel;
-    }
     
     //Speed and Authority
     private double currSpeed;
     private int speedLimit;
-
-    public double getCurrSpeed() {
-        return currSpeed;
-    }
-    private double authority;
-
-    public void setAuthority(short authority) {
-        this.authority = (double)authority*this.FEET_IN_A_METER;
-        System.out.println(this.authority);
-    }
-
-    public void setRecommendedSetPoint(byte recommendedSetPoint) {
-        this.recommendedSetPoint = recommendedSetPoint;
-    }
+    
     //private int distanceTraveled; //Distance traveled since last auth command
     private byte driverSetPoint;
-
-    public byte getDriverSetPoint() {
-        return driverSetPoint;
-    }
+    private double authority;
     private byte recommendedSetPoint;
     private double powerCommand;
     private int kP;
-
-    public int getkP() {
-        return kP;
-    }
-
-    public int getkI() {
-        return kI;
-    }
     private int kI;
     private double eK;
     private double eK_1;
@@ -279,41 +209,7 @@ public class TrainController {
         }        
         //Add more functionality in future    
     }
-    
-    /**
-     * 
-     * @return 
-     */
-    private int getSpeedLimit(){ //should pull speed limit information from
-        return 55;                //loaded track xlx after calculating location.
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-    private double getSetPoint(){
-        if(this.manualMode){
-            if(this.trainModel.getDriverSetPoint() > this.getSpeedLimit()){
-                this.driverSetPoint = (byte) this.getSpeedLimit();
-            }
-            else{
-                this.driverSetPoint = (byte) this.trainModel.getDriverSetPoint();
-            }
-            return this.driverSetPoint;
-        }
-        else{
-            if(this.trainModel.getCtcSetPoint() > this.getSpeedLimit()){
-                this.recommendedSetPoint = (byte) this.getSpeedLimit();
-            }
-            else{
-                this.recommendedSetPoint = (byte) this.trainModel.getCtcSetPoint();//Is this legal?
-            }
-            return this.recommendedSetPoint; //////////////////////////////////////////////////////////////NEED TO GET CTC OR MBO!!!
-        }
-    }
-    
-    
+        
     //**********SHOULD I INSTANTLY TRIP THE E BRAKE HERE???
     /**
      * This method is called from the TrainModelGUI when a failure is activated and sent through
@@ -451,7 +347,7 @@ public class TrainController {
     //*************CAN I IMPORT TRAINMODEL OR HOW DO I DO THIS?************//
     
     private String getTime(){
-        return "4:20:00 PM April 20, 420!"; //Get value from global time class
+        return "7:00:00 PM April 20, 2017"; //Get value from global time class
     }
     
     private int getNumberOfTrains(){
@@ -492,6 +388,8 @@ public class TrainController {
         if(!this.manualMode)
             this.updateClimateControl();
         this.updatePassengers();
+        if(this.authority<0)
+            this.setEmergencyBrakeActivated(true);
         
         updateSafeSpeed();
         
@@ -749,4 +647,173 @@ public class TrainController {
     private int getDistanceTraveled(){
         return 0;//Calculate the distance traveled using speed and time
     }        
+    
+    /**
+     * 
+     * @param airConditioningOn Boolean to set the status of the A/C. True = on.
+     */
+    public void setAirConditioningOn(boolean airConditioningOn) {
+        this.airConditioningOn = airConditioningOn;
+    }
+
+    /**
+     * 
+     * @param heaterOn Boolean to set the status of the heater. True = on.
+     */
+    public void setHeaterOn(boolean heaterOn) {
+        this.heaterOn = heaterOn;
+    }
+    
+    /**
+     * 
+     * @param manualMode Boolean to set mode. Pass "True" for manual and "False" for automatic
+     */
+    public void setManualMode(boolean manualMode) {
+        this.manualMode = manualMode;
+    }
+    
+    /**
+     * 
+     * @param lightsOn Boolean to set the status of the lights. True = on. Also updates train model.
+     */
+    public void setLightsOn(boolean lightsOn) {
+        this.lightsOn = lightsOn;
+        this.trainModel.setLightsOn(lightsOn);
+    }
+    
+    
+    /**
+     * 
+     * @param leftDoorOpen Boolean to set the status of the left door. True = open. Also updates train model.
+     */
+    public void setLeftDoorOpen(boolean leftDoorOpen) {
+        this.leftDoorOpen = leftDoorOpen;
+        this.trainModel.setLeftDoorOpen(leftDoorOpen);
+    }
+
+    /**
+     * 
+     * @param rightDoorOpen Boolean to set the status of the right door. True = open. Also updates train model.
+     */
+    public void setRightDoorOpen(boolean rightDoorOpen) {
+        this.rightDoorOpen = rightDoorOpen;
+        this.trainModel.setRightDoorOpen(rightDoorOpen);
+    }
+
+    /**
+     * 
+     * @param serviceBrakeActivated Boolean to set the status of the service brake. True = on. Also updates train model.
+     */
+    public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
+        this.serviceBrakeActivated = serviceBrakeActivated;
+        this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
+    }
+
+    /**
+     * 
+     * @param emergencyBrakeActivated Boolean to set the status of the e brake. True = on. Also updates train model.
+     */
+    public void setEmergencyBrakeActivated(boolean emergencyBrakeActivated) {
+        this.emergencyBrakeActivated = emergencyBrakeActivated;
+        this.trainModel.setEmergencyBrakeActivated(emergencyBrakeActivated);
+    }
+
+    /**
+     * 
+     * @param driverSetPoint Sets the set point of the driver
+     */
+    public void setDriverSetPoint(byte driverSetPoint) {
+        this.driverSetPoint = driverSetPoint;
+        this.trainModel.setDriverSetPoint(driverSetPoint);
+    }
+    
+    /**
+     * 
+     * @return Reference to the controllers train model
+     */
+    public TrainModel getTrainModel() {
+        return this.trainModel;
+    }
+
+    /**
+     * 
+     * @return The current speed of the train
+     */
+    public double getCurrSpeed() {
+        return currSpeed;
+    } 
+    
+    /**
+     * 
+     * @param authority Sets a new authority for the train control to follow 
+     */
+    public void setAuthority(short authority) {
+        this.authority = (double)authority*this.FEET_IN_A_METER;
+        System.out.println(this.authority);
+    }
+
+    /**
+     * 
+     * @param recommendedSetPoint Set point sent by ctc or mbo
+     */
+    public void setRecommendedSetPoint(byte recommendedSetPoint) {
+        this.recommendedSetPoint = recommendedSetPoint;
+    }
+    
+    /**
+     * 
+     * @return the setpoint that the driver had set
+     */
+    public byte getDriverSetPoint() {
+        return driverSetPoint;
+    }
+    
+    /**
+     * 
+     * @return the set KP value
+     */
+    public int getkP() {
+        return kP;
+    }
+
+    /**
+     * 
+     * @return the set KI value
+     */
+    public int getkI() {
+        return kI;
+    }
+    
+    /**
+     * 
+     * @return the speed limit of the current block
+     */
+    private int getSpeedLimit(){ //should pull speed limit information from
+        return 55;                //loaded track xlx after calculating location.
+    }
+    
+    /**
+     * 
+     * @return the set point based on the mode (man or auto) of the train
+     */
+    private double getSetPoint(){
+        if(this.manualMode){
+            if(this.trainModel.getDriverSetPoint() > this.getSpeedLimit()){
+                this.driverSetPoint = (byte) this.getSpeedLimit();
+            }
+            else{
+                this.driverSetPoint = (byte) this.trainModel.getDriverSetPoint();
+            }
+            return this.driverSetPoint;
+        }
+        else{
+            if(this.trainModel.getCtcSetPoint() > this.getSpeedLimit()){
+                this.recommendedSetPoint = (byte) this.getSpeedLimit();
+            }
+            else{
+                this.recommendedSetPoint = (byte) this.trainModel.getCtcSetPoint();//Is this legal?
+            }
+            return this.recommendedSetPoint; //////////////////////////////////////////////////////////////NEED TO GET CTC OR MBO!!!
+        }
+    }
 }
