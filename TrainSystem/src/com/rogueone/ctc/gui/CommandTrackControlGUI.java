@@ -1364,13 +1364,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             int row = failureTable.getSelectedRow();
             String failureLine = (String)failureTable.getValueAt(row, 0);
             String failureSection = (String)failureTable.getValueAt(row, 1);
-            int failureBlock = (int)failureTable.getValueAt(row, 2);
+            String failureBlock = (String)failureTable.getValueAt(row, 2);
             String failureType = (String)failureTable.getValueAt(row, 3);
             
             TrainNameField.setText(failureType);
             CurrentLineField.setText(failureLine);
             CurrentSectionField.setText(failureSection);
-            CurrentBlockField.setText(Integer.toString(failureBlock));
+            CurrentBlockField.setText(failureBlock);
             
         }
         
