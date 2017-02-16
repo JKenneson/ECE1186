@@ -39,10 +39,10 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         LineComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        BlockComboBox = new javax.swing.JComboBox<>();
+        SegmentComboBox = new javax.swing.JComboBox<>();
         TrackDisableButton = new javax.swing.JButton();
         CloseTrackDisableButton = new javax.swing.JButton();
-        SegmentComboBox = new javax.swing.JComboBox<>();
+        BlockComboBox = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -74,7 +74,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(LineComboBox, gridBagConstraints);
 
-        jLabel3.setText("Block");
+        jLabel3.setText("Segment");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -82,17 +82,17 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(jLabel3, gridBagConstraints);
 
-        BlockComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
-        BlockComboBox.addActionListener(new java.awt.event.ActionListener() {
+        SegmentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
+        SegmentComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BlockComboBoxActionPerformed(evt);
+                SegmentComboBoxActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(BlockComboBox, gridBagConstraints);
+        getContentPane().add(SegmentComboBox, gridBagConstraints);
 
         TrackDisableButton.setText("Disable");
         TrackDisableButton.setPreferredSize(new java.awt.Dimension(80, 29));
@@ -122,14 +122,14 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(CloseTrackDisableButton, gridBagConstraints);
 
-        SegmentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
+        BlockComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(SegmentComboBox, gridBagConstraints);
+        getContentPane().add(BlockComboBox, gridBagConstraints);
 
-        jLabel4.setText("Segment");
+        jLabel4.setText("Block");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -154,7 +154,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     private void TrackDisableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackDisableButtonActionPerformed
         String lineName = (String)LineComboBox.getSelectedItem();
         String segmentName = (String)SegmentComboBox.getSelectedItem();
-        String blockName = (String)BlockComboBox.getSelectedItem();
+        int blockName = Integer.valueOf((String)BlockComboBox.getSelectedItem());
         
         disableTrackSegment(lineName, segmentName, blockName);
         
@@ -166,11 +166,11 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_TrackDisableButtonActionPerformed
 
-    private void BlockComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlockComboBoxActionPerformed
+    private void SegmentComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SegmentComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BlockComboBoxActionPerformed
+    }//GEN-LAST:event_SegmentComboBoxActionPerformed
   
-    private void disableTrackSegment(String lineName, String segmentName, String blockName){
+    private void disableTrackSegment(String lineName, String segmentName, int blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, blockName);
     }
                                  

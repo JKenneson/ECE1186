@@ -9,8 +9,12 @@ package com.rogueone.ctc.gui;
 //import java.text.*;
 //import java.util.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.Calendar;
+
 //import com.rogueone.trainmodel.TrainModel;
 
 
@@ -23,6 +27,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      * Creates new form CommandTrackControlGUI
      */
     public CommandTrackControlGUI() {
+        Clock();
         initComponents();
         InitializeGUIObject();
     }
@@ -147,14 +152,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             new Object [][] {
                 {"Green",  new Integer(7), "D:2",  new Boolean(true)},
                 {"Green",  new Integer(12), "G:3",  new Boolean(true)},
-                {"Red",  new Integer(52), "G:9", null},
+                {"Red",  new Integer(52), "G:9",  new Boolean(true)},
                 {"Red",  new Integer(31), "M:1",  new Boolean(true)},
                 {"Green",  new Integer(122), "M:10",  new Boolean(true)},
                 {"Red",  new Integer(142), "Q:3",  new Boolean(true)},
                 {"Red",  new Integer(103), "S:7",  new Boolean(true)},
                 {"Green",  new Integer(98), "T:2",  new Boolean(true)},
                 {"Green",  new Integer(91), "V:9",  new Boolean(true)},
-                {"Red",  new Integer(120), "X:7", null},
+                {"Red",  new Integer(120), "X:7",  new Boolean(true)},
                 {"Green",  new Integer(5), "Z:2",  new Boolean(true)}
             },
             new String [] {
@@ -182,12 +187,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         jScrollPane9.setViewportView(TrainTable);
-        if (TrainTable.getColumnModel().getColumnCount() > 0) {
-            TrainTable.getColumnModel().getColumn(0).setHeaderValue("Line");
-            TrainTable.getColumnModel().getColumn(1).setHeaderValue("Train");
-            TrainTable.getColumnModel().getColumn(2).setHeaderValue("Position");
-            TrainTable.getColumnModel().getColumn(3).setHeaderValue("Status");
-        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -247,11 +246,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         BlockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Green", "A",  new Integer(1),  new Boolean(true)},
-                {"Green", "A",  new Integer(2),  new Boolean(false)},
+                {"Green", "A",  new Integer(2),  new Boolean(true)},
                 {"Green", "A",  new Integer(3),  new Boolean(true)},
                 {"Green", "B",  new Integer(4),  new Boolean(true)},
                 {"Green", "B",  new Integer(5),  new Boolean(true)},
-                {"Green", "B",  new Integer(6),  new Boolean(false)},
+                {"Green", "B",  new Integer(6),  new Boolean(true)},
                 {"Green", "C",  new Integer(7),  new Boolean(true)},
                 {"Green", "C",  new Integer(8),  new Boolean(true)},
                 {"Green", "C",  new Integer(9),  new Boolean(true)},
@@ -262,7 +261,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 {"Green", "D",  new Integer(14),  new Boolean(true)},
                 {"Green", "D",  new Integer(15),  new Boolean(true)},
                 {"Green", "D",  new Integer(16),  new Boolean(true)},
-                {"Green", "E",  new Integer(17), null},
+                {"Green", "E",  new Integer(17),  new Boolean(true)},
                 {"Green", "E",  new Integer(18),  new Boolean(true)},
                 {"Green", "E",  new Integer(19),  new Boolean(true)},
                 {"Green", "E",  new Integer(20),  new Boolean(true)},
@@ -277,9 +276,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         BlockTable.setPreferredSize(new java.awt.Dimension(300, 176));
@@ -640,14 +646,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         AdditionalInfoPanel2.add(TrackShutdownButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(AdditionalInfoPanel2, gridBagConstraints);
@@ -824,8 +831,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         SystemInformationPanel.add(jLabel4, gridBagConstraints);
 
-        TimeField.setText("6:43");
-        TimeField.setPreferredSize(new java.awt.Dimension(45, 26));
+        TimeField.setPreferredSize(new java.awt.Dimension(48, 26));
         TimeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TimeFieldActionPerformed(evt);
@@ -834,12 +840,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipadx = 60;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         SystemInformationPanel.add(TimeField, gridBagConstraints);
 
         RushHourField.setText("YES");
-        RushHourField.setPreferredSize(new java.awt.Dimension(45, 26));
+        RushHourField.setPreferredSize(new java.awt.Dimension(48, 26));
         RushHourField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RushHourFieldActionPerformed(evt);
@@ -848,12 +854,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipadx = 60;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         SystemInformationPanel.add(RushHourField, gridBagConstraints);
 
         ThroughputField.setText("1203");
-        ThroughputField.setPreferredSize(new java.awt.Dimension(45, 26));
+        ThroughputField.setPreferredSize(new java.awt.Dimension(48, 26));
         ThroughputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThroughputFieldActionPerformed(evt);
@@ -862,7 +868,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipadx = 60;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         SystemInformationPanel.add(ThroughputField, gridBagConstraints);
 
@@ -899,14 +905,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 30;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel4.add(SelectOperationMode2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(jPanel4, gridBagConstraints);
@@ -923,7 +929,47 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+    
+    javax.swing.Timer m_t;
 
+    private void Clock() {
+        //... Create a 1-second timer.
+        int timeConstant = 1000;
+        m_t = new javax.swing.Timer(timeConstant, new ClockTickAction());
+        m_t.start();  // Start the timer
+    }
+
+      private class ClockTickAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //... Get the current time.
+            Calendar now = Calendar.getInstance();
+            int h = now.get(Calendar.HOUR_OF_DAY);
+            int m = now.get(Calendar.MINUTE);
+            int s = now.get(Calendar.SECOND);
+            
+            if (h > 12){
+                h = h - 12;
+                jLabel7.setText("PM");
+            }
+            else {
+                jLabel7.setText("AM");
+            }
+            
+            TimeField.setText(h + ":" + m + ":" + s);
+            
+            if ((h > 5) && (h < 8)){
+                RushHourField.setText("YES");
+            }
+            else{
+                RushHourField.setText("NO");
+            }
+        }
+    }
+    
+    
+    
+    
     private void jPanel19ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel19ComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel19ComponentShown
@@ -986,18 +1032,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
    
     private void RushHourFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RushHourFieldActionPerformed
-        int timeHours, timeMinutes;
-        String time = (String)TimeField.getText();
-        String[] timeParts = time.split(":"); 
-        timeHours = Integer.parseInt((timeParts[0]));
-        timeMinutes = Integer.parseInt(timeParts[1]);
-        System.out.println(timeHours);
-        if ((timeHours < 8) && (timeHours > 5)){
-            RushHourField.setText("YES");
-        }
-        else{
-            RushHourField.setText("NO");
-        }
+
+        
 // TODO add your handling code here:
     }//GEN-LAST:event_RushHourFieldActionPerformed
 
@@ -1059,8 +1095,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             ChangeParametersButton3.setEnabled(false);
         }
         
-        
-        
+       
         if ( evt.getClickCount() == 1){
             
             JTable table = (JTable)evt.getSource();
@@ -1074,8 +1109,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             String[] parts = position.split(":");
             String partSection = parts[0]; 
             String partBlock = parts[1];
-            Object booleanStatus = table.getValueAt(row, 3);
-            if (booleanStatus == null){
+            Boolean booleanStatus = (Boolean)(table.getValueAt(row, 3));
+            if (booleanStatus == false){
                 StatusField.setText("Disabled");
             }
             else {
@@ -1117,17 +1152,34 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         Boolean bool = false;
         for ( int i = 0; i < TrainTable.getRowCount(); i ++){
             if (((String)TrainTable.getValueAt(i, 0)).equals(passTrainLine)){
-                System.out.println("match");
                if ((Integer)TrainTable.getValueAt(i, 1) == trainID){
-                   System.out.println("id match");
                     TrainTable.setValueAt(bool, i, 3);
-                    String trainPosition = (String)TrainTable.getValueAt(i, 2);
+                    //String trainPosition = (String)TrainTable.getValueAt(i, 2);
                }
             }
         }
         TrainTable.repaint();
         checkForFailure();
     }
+    
+        
+    public void DisableTrack(String lineName, String segmentName, int blockName){
+        Boolean trackBool = false;
+      
+        for ( int i = 0; i < BlockTable.getRowCount(); i ++){
+            if (((String)BlockTable.getValueAt(i, 0)).equals(lineName)){
+                if (((String)BlockTable.getValueAt(i, 1)).equals(segmentName)){
+                    if ((Integer)BlockTable.getValueAt(i, 2) == blockName){
+                        BlockTable.setValueAt(trackBool, i, 3);
+                        //String trainPosition = (segmentName+":"+blockName);
+                   }
+                }
+            }
+        }
+        BlockTable.repaint();
+        checkForFailure();
+    }
+    
     
     public void checkForFailure(){
         Object newFailureRow = new Object[4];
@@ -1157,7 +1209,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     public void updateFailureTable( String passTrainLine, String trainPosition, String failureType){
         
         //check if value already exists
-        
+      
         String[] positionParts = trainPosition.split(":");
         String failureSection = positionParts[0];
         String failureBlock = positionParts[1];
@@ -1167,25 +1219,38 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         newRow[2] = failureBlock;
         newRow[3] = failureType;
         DefaultTableModel model = (DefaultTableModel)FailureTable.getModel();
-        model.addRow(newRow);
+        
+        if ( !(existsInTable(FailureTable, newRow)) ){
+            model.addRow(newRow);
+        }
+        
     }
     
-    public void DisableTrack(String lineName, String segmentName, String blockName){
-        Boolean bool = false;
-        for ( int i = 0; i < BlockTable.getRowCount(); i ++){
-            if (((String)BlockTable.getValueAt(i, 0)).equals(lineName)){
-                if (((String)BlockTable.getValueAt(i, 1)).equals(segmentName)){
-                    if (((String)BlockTable.getValueAt(i, 2)).equals(blockName)){
-                        BlockTable.setValueAt(bool, i, 3);
-                        String trainPosition = (segmentName+":"+blockName);
-                   }
-                }
+    public boolean existsInTable(JTable table, Object[] entry) {
+
+        // Get row and column count
+        int rowCount = table.getRowCount();
+        int colCount = table.getColumnCount();
+
+        // Get Current Table Entry
+        String curEntry = "";
+        for (Object o : entry) {
+            String e = o.toString();
+            curEntry = curEntry + " " + e;
+        }
+
+        // Check against all entries
+        for (int i = 0; i < rowCount; i++) {
+            String rowEntry = "";
+            for (int j = 0; j < colCount; j++)
+                rowEntry = rowEntry + " " + table.getValueAt(i, j).toString();
+            if (rowEntry.equalsIgnoreCase(curEntry)) {
+                return true;
             }
         }
-        BlockTable.repaint();
-        checkForFailure();
+        return false;
     }
-    
+
     private void StatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_StatusFieldActionPerformed
@@ -1328,22 +1393,29 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         String dispatchLine = (String)DispatchLineBox.getSelectedItem();
         String dispatchBlock = "A";
-        int dispatchSection = 1;
-
-         double dispatchSpeed = Double.valueOf(DispatchSpeedField.getText());
-         double dispatchAuthority = Double.valueOf(DispatchAuthorityField.getText());
-//        //check time to see number of cars
-//        //String currentTime = CommandTrackControlGUI.TimeField.getText();
-//        //if ( currentTime ...)
-//        //attatch extra cars based on time and redo weight
+        int dispatchSection = 1;   
+        double dispatchSpeed = Double.valueOf(DispatchSpeedField.getText());
+        double dispatchAuthority = Double.valueOf(DispatchAuthorityField.getText());
+         
+         if (RushHourField.getText().equals("YES")){
+            int numberCars = 2;
+         }
+         else {
+            int numberCars = 1;
+         }
           iterativeID++;
           int dispatchID = iterativeID;
         
-        addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
-        //TrainModel newTrain = new TrainModel(dispatchSpeed, dispatchAuthority, 1);
-
-        //get fields
-        //globally dispatch
+          Object[] newTrain = new Object[4];
+          newTrain[0] = dispatchLine;
+          newTrain[1] = dispatchID;
+          newTrain[2] = (dispatchSection + ":" + dispatchBlock);
+          newTrain[3] = true;
+          
+        if ( !(existsInTable(TrainTable, newTrain))){
+            addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
+        }
+        //TrainModel newTrain = new TrainModel(dispatchSpeed, dispatchAuthority, numberCars);
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
     
@@ -1377,7 +1449,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_DispatchAuthorityFieldMouseClicked
 
 
-    public void InitializeGUIObject(){
+    private void InitializeGUIObject(){
         TrainNameField.setText("");
         CurrentLineField.setText("");
         CurrentBlockField.setText("0");
