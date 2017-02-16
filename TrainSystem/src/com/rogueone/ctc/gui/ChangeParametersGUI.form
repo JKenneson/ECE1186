@@ -140,6 +140,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Enter Speed"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SetSpeedFieldMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetSpeedFieldActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="CurrentSpeedField">
           <Properties>
@@ -222,6 +226,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Enter Authority"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SetAuthorityFieldMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="CurrentAuthorityField">
           <Properties>

@@ -14,13 +14,24 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form ChangeParametersGUI
-     * @param trainID
      */
-    public ChangeParametersGUI(int trainID) {
+    //private CommandTrackControlGUI ctcGUI;
+    int trainID;
+    
+    public ChangeParametersGUI(int trainID){
+//        String trainIDString = Integer.toString(trainID);
+//        TempTrain.setText(trainIDString);
+       
         initComponents();
-        String trainIDString = Integer.toString(trainID);
-        TempTrain.setText(trainIDString);
+        
     }
+    
+//    public ChangeParametersGUI(int trainID, CommandTrackControlGUI ctcGUI ) {
+//        this.ctcGUI = ctcGUI;
+//        String trainIDString = Integer.toString(trainID);
+//        TempTrain.setText(trainIDString);
+//        initComponents();
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +74,16 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         jLabel3.setText("Set Point Speed");
 
         SetSpeedField.setText("Enter Speed");
+        SetSpeedField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SetSpeedFieldMouseClicked(evt);
+            }
+        });
+        SetSpeedField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SetSpeedFieldActionPerformed(evt);
+            }
+        });
 
         CurrentSpeedField.setText("52");
         CurrentSpeedField.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +136,11 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         jLabel5.setText("Set Point Authority");
 
         SetAuthorityField.setText("Enter Authority");
+        SetAuthorityField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SetAuthorityFieldMouseClicked(evt);
+            }
+        });
 
         CurrentAuthorityField.setText("1245");
 
@@ -264,6 +290,18 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SetAuthorityButtonActionPerformed
 
+    private void SetSpeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetSpeedFieldActionPerformed
+               // TODO add your handling code here:
+    }//GEN-LAST:event_SetSpeedFieldActionPerformed
+
+    private void SetSpeedFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetSpeedFieldMouseClicked
+        SetSpeedField.setText("");         // TODO add your handling code here:
+    }//GEN-LAST:event_SetSpeedFieldMouseClicked
+
+    private void SetAuthorityFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetAuthorityFieldMouseClicked
+        SetAuthorityField.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_SetAuthorityFieldMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -293,6 +331,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 int tempID = 0;
                 new ChangeParametersGUI(tempID).setVisible(true);
