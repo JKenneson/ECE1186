@@ -5,7 +5,7 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 2/15/17
+ * @modification date 2/16/17
  */
 package com.rogueone.mbo;
 import java.io.File;
@@ -40,6 +40,7 @@ public class Mbo{
    private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
    private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
    private static TrainScheduleGUI scheduleGUI = new TrainScheduleGUI();
+   
     
    public MovingBlockGUI newGui() throws IOException, InvalidFormatException{
        //JFrame frame = new JFrame();
@@ -116,20 +117,25 @@ public class Mbo{
         String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
          Object[] columnNames = new Object[11];
         
-        Object[][] data = new Object[numTrains][11];
+        Object[][] data = new Object[numTrains+1][11];
         int i,j;
         String oldInfo = "";
         String info = "";
-        for(i = 0; i < numTrains; i++){
+        for(i = 0; i < numTrains+1; i++){
             Row currRow = redSchedule.getRow(i);
-            
+            if(currRow != null){
             for(j = 0; j < 11; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
+                    
                     //System.out.println(i);
                     if(i==0){     
                         //System.out.println("HERE");
                         columnNames[j] = info;
+                    }
+                    else if(j==0){
+                        String[] infos = info.split("\\.");
+                        info = infos[0];
                     }
                     else if(j==2){
                             oldInfo = info;
@@ -137,13 +143,16 @@ public class Mbo{
                         }
                     
                 }
-                else{
+                else if(j>2){
+                    if(oldInfo.compareTo("")!=0){
                     oldInfo = incrementTime(oldInfo, redIncrements[j-3]);
                     info = convertTime(oldInfo);
+                    }
                 }
                 if((i>0)){
                 data[i][j] = info;
                 }
+            }
             }
         }
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
@@ -159,9 +168,11 @@ public class Mbo{
         String[] times = time.split("\\.");
         String AMPM = "am";
         int hours=0, minutes=0, seconds=0;
+        System.out.println(times[0]+" "+times[1]+" "+times[2]);
         hours=Integer.parseInt(times[0]);
         minutes=Integer.parseInt(times[1]);
         seconds=Integer.parseInt(times[2]);
+        
         
         time = hours+":"+minutes+AMPM;
         if(seconds>60)
@@ -206,8 +217,23 @@ public class Mbo{
         
         minutes = minutes+tens;
         seconds = seconds+(60*(decimal/10));
-        time = hours+"."+minutes+"."+seconds;
         
+        if(seconds>60)
+        {
+            seconds=seconds-60;
+            minutes++;
+        }
+        if(minutes > 60)
+        {
+            minutes=minutes-60;
+            hours++;
+        }
+        if(hours>12)
+        {
+            hours=hours-12;
+            AMPM="pm";
+        }
+        time = hours+"."+minutes+"."+seconds;
         return time;
     }
     
@@ -218,7 +244,7 @@ public class Mbo{
         
         int length = trains.size();
         Object[] trainArray = trains.toArray();
-        Object[][] data = new Object[6][9];
+        Object[][] data = new Object[6][10];
         Object[] columnNames={"TRAIN ID", "TRAIN LINE", "TRACK SECTION", "BLOCK", "NEXT STATION", "TIME OF ARRIVAL", "AUTHORITY", "CURRENT SPEED", "SUGGESTED SPEED", "PASSENGERS"};
         int i=0,j=0;
         mboGui.TrainDropdown.removeAllItems();
@@ -226,7 +252,7 @@ public class Mbo{
         for(i=0;i<length;i++){
            
            mboGui.TrainDropdown.addItem(trainArray[i].toString());
-           for(j=0;j<9;j++){
+           for(j=0;j<10;j++){
                 if(j==0){
                   data[i][0]= trainArray[i]; 
                   
@@ -308,8 +334,20 @@ public class Mbo{
         int dayOff1 = 0;
         int dayOff2 = dayOff1+1;
         int dayOffInterval = 7/numTrains;
-        String startTime = "06.00.00";
+        String startTimeDay = "06.00.00";
+        String startTimeEvening = "14.00.00";
+        int currentDay = 1;
+        int testTrigger = 0;
+        int lastUnused = 0;
+        int numberMissed = 0;
+        int isOff = 0;
+        ArrayList<Integer> workingEmployees = new ArrayList<Integer>();
+        if(dayOffInterval==0){
+        dayOffInterval =1;
+        }
         for(j=0;j<numTrains+1;j++){
+            isOff = 0;
+            testTrigger = 0;
             Row peopleRow = peopleSheet.createRow(j);
             Row redRow = redSheet.createRow(j);
             Row greenRow = greenSheet.createRow(j);
@@ -321,13 +359,17 @@ public class Mbo{
                 for(i=0;i<11;i++){
                     Cell redCell = redRow.createCell(i);
                     Cell greenCell = greenRow.createCell(i);
+                    if(j==0){
                     redCell.setCellValue(trainHeaders[i]);
                     greenCell.setCellValue(trainHeaders[i]);
+                    }
+                    else{
+                        redCell.setCellValue("");
+                    }
                 }
             }
             else{
                 String[] driverNames = new String[numTrains+1];
-                System.out.println(dayOffInterval);
                 for(i=0;i<8;i++){
                     Cell cell = peopleRow.createCell(i);
                     if(i==0){
@@ -335,9 +377,13 @@ public class Mbo{
                         cell.setCellValue("Employee "+employeeNumber);
                     }
                     else if(i==dayOff1 || i==dayOff2){
+                        if(currentDay == i){
+                            isOff = 1;
+                        }
                         cell.setCellValue("OFF");
                     }
                     else{
+                        
                         if((j &1)==0){
                             cell.setCellValue("6am - 2:30pm");
                         }
@@ -348,6 +394,7 @@ public class Mbo{
                     
                     
                 }
+                   if(isOff == 0){
                 for(i=0;i<3;i++){
                     Cell cell = redRow.createCell(i);
                     if(i==0){
@@ -357,9 +404,30 @@ public class Mbo{
                         cell.setCellValue(driverNames[j]);
                     }
                     else if(i==2){
-                        cell.setCellValue(startTime);
+                        if((j &1)==0){
+                        cell.setCellValue(startTimeDay);
+                        startTimeDay = incrementTime(startTimeDay,"7.0");
+                    }
+                        else{
+                           cell.setCellValue(startTimeEvening);
+                            startTimeEvening = incrementTime(startTimeEvening,"7.0"); 
+                        }
                     }
                 }
+                            
+                   }
+                   else{
+                       Row deleted = redSheet.getRow(j);
+                       redSheet.removeRow(deleted);
+                       /*
+                       System.out.println("J+1: "+(j+1)+" Last row: "+numTrains);
+                       if(j+1<numTrains){
+                           System.out.println("SHIFTING");
+                        redSheet.shiftRows(j, j, 1);
+                       
+                       }
+                       */
+                   }
             }
             employeeNumber++;
             dayOff1=dayOff1+dayOffInterval;
@@ -371,8 +439,6 @@ public class Mbo{
                 dayOff2=0;
             }
             trainID++;
-            startTime = incrementTime(startTime,"7.0");
-            System.out.println(startTime);
         }
         
         FileOutputStream output = new FileOutputStream("src\\com\\rogueone\\assets\\altSchedule.xlsx");
