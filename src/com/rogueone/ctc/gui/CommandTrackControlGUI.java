@@ -11,7 +11,7 @@ package com.rogueone.ctc.gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import com.rogueone.trainmodel.TrainModel;
+//import com.rogueone.trainmodel.TrainModel;
 
 
 public class CommandTrackControlGUI extends javax.swing.JPanel {
@@ -25,8 +25,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     public CommandTrackControlGUI() {
         initComponents();
         InitializeGUIObject();
-
-
     }
 
     /**
@@ -206,6 +204,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jPanel19.add(jScrollPane9, gridBagConstraints);
 
         ChangeParametersButton3.setText("CHANGE ");
+        ChangeParametersButton3.setEnabled(false);
         ChangeParametersButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeParametersButton3ActionPerformed(evt);
@@ -1050,14 +1049,23 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         CurrentCapacityField.setVisible(true);
         MaxCapacityField.setVisible(true);
         StatusField.setVisible(true);
-       
+        
+        JTable selectCheck = (JTable)evt.getSource();
+        
+        if (selectCheck != null){
+            ChangeParametersButton3.setEnabled(true);
+        }
+        else {
+            ChangeParametersButton3.setEnabled(false);
+        }
+        
         
         
         if ( evt.getClickCount() == 1){
+            
             JTable table = (JTable)evt.getSource();
             int row = table.getSelectedRow();
             trainID = (int)table.getValueAt(row, 1);
-
             //global to program
             
             //parse position field
@@ -1114,14 +1122,41 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                    System.out.println("id match");
                     TrainTable.setValueAt(bool, i, 3);
                     String trainPosition = (String)TrainTable.getValueAt(i, 2);
-                    updateFailureTable(passTrainLine, trainPosition, "Disabled");
                }
             }
         }
         TrainTable.repaint();
+        checkForFailure();
     }
     
+    public void checkForFailure(){
+        Object newFailureRow = new Object[4];
+        
+        DefaultTableModel trainTable = (DefaultTableModel)TrainTable.getModel();
+        DefaultTableModel blockTable = (DefaultTableModel)BlockTable.getModel();
+        
+        for ( int i = 0; i < TrainTable.getRowCount(); i++ ){
+            if ( TrainTable.getValueAt(i, 3) == null){
+                String tableLine = (String)TrainTable.getValueAt(i, 0);
+                String trainPosition = (String)(TrainTable.getValueAt(i,2));
+                String failureType = "Shutdown";
+                updateFailureTable(tableLine, trainPosition, failureType);
+            }
+        }
+        
+        for ( int i = 0; i < BlockTable.getRowCount(); i++ ){
+            if ( BlockTable.getValueAt(i, 3) == null){
+                String tableLine = (String)BlockTable.getValueAt(i, 0);
+                String trainPosition = (String)((BlockTable.getValueAt(i,1) + ":" + BlockTable.getValueAt(i,2)));
+                String failureType = "Shutdown";
+                updateFailureTable(tableLine, trainPosition, failureType);
+            }
+        }
+        
+    }
     public void updateFailureTable( String passTrainLine, String trainPosition, String failureType){
+        
+        //check if value already exists
         
         String[] positionParts = trainPosition.split(":");
         String failureSection = positionParts[0];
@@ -1139,19 +1174,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         Boolean bool = false;
         for ( int i = 0; i < BlockTable.getRowCount(); i ++){
             if (((String)BlockTable.getValueAt(i, 0)).equals(lineName)){
-                System.out.println("match");
                 if (((String)BlockTable.getValueAt(i, 1)).equals(segmentName)){
-
                     if (((String)BlockTable.getValueAt(i, 2)).equals(blockName)){
-                       System.out.println("id match");
                         BlockTable.setValueAt(bool, i, 3);
                         String trainPosition = (segmentName+":"+blockName);
-                        updateFailureTable(lineName, trainPosition, "Disabled");
                    }
                 }
             }
         }
         BlockTable.repaint();
+        checkForFailure();
     }
     
     private void StatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusFieldActionPerformed

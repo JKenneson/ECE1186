@@ -14,13 +14,24 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form ChangeParametersGUI
-     * @param trainID
      */
-    public ChangeParametersGUI(int trainID) {
+    //private CommandTrackControlGUI ctcGUI;
+    int trainID;
+    
+    public ChangeParametersGUI(int trainID){
+//        String trainIDString = Integer.toString(trainID);
+//        TempTrain.setText(trainIDString);
+       
         initComponents();
-        String trainIDString = Integer.toString(trainID);
-        TempTrain.setText(trainIDString);
+        
     }
+    
+//    public ChangeParametersGUI(int trainID, CommandTrackControlGUI ctcGUI ) {
+//        this.ctcGUI = ctcGUI;
+//        String trainIDString = Integer.toString(trainID);
+//        TempTrain.setText(trainIDString);
+//        initComponents();
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -320,6 +331,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 int tempID = 0;
                 new ChangeParametersGUI(tempID).setVisible(true);
