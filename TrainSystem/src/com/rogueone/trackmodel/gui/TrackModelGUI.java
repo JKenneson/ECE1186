@@ -611,7 +611,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
     private void trackConfigurationLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackConfigurationLoadButtonActionPerformed
 
-        trackDataFileChooser = new JFileChooser();
+        trackDataFileChooser = new JFileChooser(new File("src/com/rogueone/assets/"));
         int returnVal = trackDataFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = trackDataFileChooser.getSelectedFile();
