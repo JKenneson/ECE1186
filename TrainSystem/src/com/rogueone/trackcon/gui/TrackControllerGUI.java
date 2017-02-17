@@ -1388,7 +1388,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void chooseFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileButtonActionPerformed
-        JFileChooser plcFileChooser = new JFileChooser();
+        JFileChooser plcFileChooser = new JFileChooser(new File("src/com/rogueone/assets"));
         int returnVal = plcFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = plcFileChooser.getSelectedFile();
