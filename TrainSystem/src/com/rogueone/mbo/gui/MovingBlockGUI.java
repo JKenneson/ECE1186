@@ -607,7 +607,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
     }//GEN-LAST:event_FixedBlockRadioActionPerformed
 
     private void UploadScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadScheduleButtonActionPerformed
-        JFileChooser scheduleChooser = new JFileChooser();
+        JFileChooser scheduleChooser = new JFileChooser("src/com/rogueone/assets");
         int returnVal = scheduleChooser.showOpenDialog(this);
         TrainScheduleGUI trainGUI = new TrainScheduleGUI();
         Mbo mbo = new Mbo();
