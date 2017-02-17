@@ -126,7 +126,7 @@ public class TrainController {
         this.driverSetPoint = setPointSpeed;
         this.recommendedSetPoint = setPointSpeed;
         this.kP = 100; //Seem to +=6 .5; +=12 1; +=17 1.5; +=19 2.0 assuming no passengers
-        this.kI = 15;
+        this.kI = 2;
         this.eK = 0;
         this.eK_1 = 0;
         this.uK = 0;
@@ -296,12 +296,15 @@ public class TrainController {
         if(this.powerCommand > this.maxPower){
             this.uK = this.uK_1;
             this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
+            this.powerCommand = this.maxPower;
             
         }
         
         this.eK_1 = this.eK;
         this.uK_1 = this.uK;
-        
+        if(this.powerCommand<0){
+            this.powerCommand = 0;
+        }
         return this.powerCommand;
     }
     
@@ -397,7 +400,7 @@ public class TrainController {
     }
     
     private void updateSafeSpeed(){
-        if(this.currSpeed>this.getSetPoint()+1 && !this.manualMode){
+        if(this.currSpeed>this.getSetPoint() && !this.manualMode){
             this.setServiceBrakeActivated(true);
         }
         else{
