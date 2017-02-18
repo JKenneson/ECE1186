@@ -442,7 +442,7 @@ public class TrackController {
         }
 
         ArrayList<Block> loadBlocks = new ArrayList<Block>();
-        loadBlocks.addAll(this.trackModelTest1.getBlocks());
+        loadBlocks.addAll(this.trackModelTest1.getBlockArray());
         ArrayList<Block> currentBlocks = new ArrayList<Block>();
         for (int i = 0; i < loadBlocks.size(); i++) {
             if (loadBlocks.get(i).getLine().getLineID() == displayLine) {

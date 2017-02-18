@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rogueone.trackmodel;
 
 import com.rogueone.global.Global;
@@ -16,8 +11,9 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
- *
+ * The top-level Track Model class, which owns all Lines, Sections, and Blocks.
  * @author Dan Bednarczyk
  */
 public class TrackModel {
@@ -39,6 +35,10 @@ public class TrackModel {
         frame.setVisible(true);
     }
     
+    /**
+     * Resets the Track Model class by deleting all Lines, Sections, Blocks, Stations, Switches, and Yards.
+     * @author Dan Bednarczyk
+     */
     public void reset() {
         lines = new ArrayList<Line>();
         sections = new ArrayList<Section>();
@@ -47,7 +47,42 @@ public class TrackModel {
         switches = new ArrayList<Switch>();
         yard = new Yard();
     }
-      
+    
+    /**
+     * Connects all track components after they have been loaded, parsed, and instantiated.
+     * @author Dan Bednarczyk
+     */
+    private void connectBlocks() {
+        for (Block b : blocks) {
+            if(b.getPortAID() == 0) {
+                b.setPortA(yard);
+            }
+            else {
+                b.setPortA(TrackModel.this.getBlock(b.getLine(),b.getPortAID()));
+            }
+            if(b.getPortBID() == -1) {
+                b.setPortB(getSwitch(b.getSwitchID()));
+            }
+            else {
+                b.setPortB(TrackModel.this.getBlock(b.getLine(),b.getPortBID()));
+            }
+            //Error checking
+            if(b.getPortA() == null) {
+                System.err.println("ERROR: Port A not assigned to block " + b.getID());
+            }
+            if(b.getPortB() == null) {
+                System.err.println("ERROR: Port B not assigned to block " + b.getID());
+            }
+        }
+    }
+    
+    // PARSING METHODS
+    
+    /**
+     * Loads track data file and parses into objects.
+     * @author Dan Bednarczyk
+     * @param file the track data file
+     */
     public void parseDataFile(File file) throws IOException, InvalidFormatException {
         //Expected column order in data file for blocks:
         //0     line
@@ -81,89 +116,20 @@ public class TrackModel {
         //printLines();
         //System.out.println("\nSECTIONS:");
         //printSections();
-        System.out.println("\nBLOCKS:");
-        printBlocks();
-        System.out.println("\nSTATIONS:");
-        printStations();
-        System.out.println("\nSWITCHES:");
-        printSwitches();
+        //System.out.println("\nBLOCKS:");
+        //printBlocks();
+        //System.out.println("\nSTATIONS:");
+        //printStations();
+        //System.out.println("\nSWITCHES:");
+        //printSwitches();
        
     }
     
-    private void connectBlocks() {
-        for (Block b : blocks) {
-            if(b.getPortAID() == 0) {
-                b.setPortA(yard);
-            }
-            else {
-                b.setPortA(getBlock(b.getLine(),b.getPortAID()));
-            }
-            if(b.getPortBID() == -1) {
-                b.setPortB(getSwitch(b.getSwitchID()));
-            }
-            else {
-                b.setPortB(getBlock(b.getLine(),b.getPortBID()));
-            }
-            //Error checking
-            if(b.getPortA() == null) {
-                System.err.println("ERROR: Port A not assigned to block " + b.getID());
-            }
-            if(b.getPortB() == null) {
-                System.err.println("ERROR: Port B not assigned to block " + b.getID());
-            }
-        }
-    }
-    
-    public Block getBlock(Line line, Section section, int block) {
-        for (Line l : lines) {
-            if (l.equals(line)) {
-                return l.getBlock(section, block);
-            }
-        }
-        System.err.println("Block " + line + ":" + section + ":" + block + " not found");
-        return null;
-    }
-    
-    public Block getBlock(Line line, int block) {
-        for (Line l : lines) {
-            if (l.equals(line)) {
-                return l.getBlock(block);
-            }
-        }
-        System.err.println("Block " + line + ":" + block + " not found");
-        return null;
-    }
-    
-    public Switch getSwitch(int switchID) {
-        for (Switch s : switches) {
-            if(s.getID() == switchID) {
-                return s;
-            }
-        }
-        System.err.println("Switch " + switchID + " not found.");
-        return null;
-    }
-    
-    public ArrayList<Line> getLines() {
-        return lines;
-    }
-    
-    public ArrayList<Section> getSections() {
-        return sections;
-    }
-    
-    public ArrayList<Block> getBlocks() {
-        return blocks;
-    }
-    
-    public ArrayList<Station> getStations() {
-        return stations;
-    }
-    
-    public ArrayList<Switch> getSwitches() {
-        return switches;
-    }
-    
+    /**
+     * Parses Excel sheet into Line objects.
+     * @author Dan Bednarczyk
+     * @param sheet the sheet containing line information
+     */
     private void parseLines(XSSFSheet sheet) {
 
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
@@ -174,20 +140,35 @@ public class TrackModel {
         }
     }
     
+    /**
+     * Adds Line to top-level array.
+     * @author Dan Bednarczyk
+     * @param l the line to be added
+     */
     private void addLine(Line l) {
         lines.add(l);
     }
     
+    /**
+     * Parses Excel sheet into Section objects.
+     * @author Dan Bednarczyk
+     * @param sheet the sheet containing section information
+     */
     private void parseSections(XSSFSheet sheet) {
         
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row rowTemp = sheet.getRow(i);      
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
             Global.Section tempSectionID = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
-            addSection(new Section(tempSectionID, getLineByID(tempLineID)));
+            addSection(new Section(tempSectionID, getLine(tempLineID)));
         }
     }
     
+    /**
+     * Adds Section to top-level array and Lines.
+     * @author Dan Bednarczyk
+     * @param s the section to be added
+     */
     private void addSection(Section s) {
         //Add reference to top-level array
         sections.add(s);
@@ -199,6 +180,11 @@ public class TrackModel {
         }
     }
     
+    /**
+     * Parses Excel sheet into Block objects.
+     * @author Dan Bednarczyk
+     * @param sheet the sheet containing block information
+     */
     private void parseBlocks(XSSFSheet sheet) {
   
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
@@ -225,8 +211,8 @@ public class TrackModel {
             boolean tempIsUnderground = rowTemp.getCell(12) != null && rowTemp.getCell(12).getStringCellValue().equals("Y");
             boolean tempIsStaticSwitchBlock = rowTemp.getCell(16) != null && rowTemp.getCell(16).getStringCellValue().equals("Y");
             //Associate lineID and sectionID with objects
-            Line tempLine = getLineByID(tempLineID);
-            Section tempSection = getSectionByLineIDAndSectionID(tempLineID, tempSectionID);
+            Line tempLine = getLine(tempLineID);
+            Section tempSection = getSection(tempLineID, tempSectionID);
             
             //Formatting is weird, but easier to develop (for now)
             Block newBlock = new Block(
@@ -251,6 +237,11 @@ public class TrackModel {
         }
     }
     
+    /**
+     * Adds Block to top-level array and Sections.
+     * @author Dan Bednarczyk
+     * @param b the block to be added
+     */
     private void addBlock(Block b) {
         //Add reference to top-level array
         blocks.add(b);
@@ -266,6 +257,11 @@ public class TrackModel {
         }
     } 
     
+    /**
+     * Parses Excel sheet into Station objects.
+     * @author Dan Bednarczyk
+     * @param sheet the sheet containing Station information
+     */
     private void parseStations(XSSFSheet sheet) {
    
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
@@ -282,17 +278,17 @@ public class TrackModel {
             boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
             boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
             //Associate IDs with objects
-            Line tempLine = getLineByID(tempLineID);
-            Block tempBlockA = getBlockByLineIDAndSectionIDAndBlockID(tempLineID,tempSectionAID,tempBlockAID);
-            Section tempSectionA = getSectionByLineIDAndSectionID(tempLineID, tempSectionAID);
+            Line tempLine = getLine(tempLineID);
+            Block tempBlockA = getBlock(tempLineID,tempSectionAID,tempBlockAID);
+            Section tempSectionA = getSection(tempLineID, tempSectionAID);
             //Parse second block, if applicable
             Block tempBlockB = null;
             Section tempSectionB = null;
             if(rowTemp.getCell(5) != null && rowTemp.getCell(6) != null) {
                 int tempBlockBID = (int) rowTemp.getCell(5).getNumericCellValue();
                 Global.Section tempSectionBID = Global.Section.valueOf(rowTemp.getCell(6).getStringCellValue());
-                tempBlockB = getBlockByLineIDAndSectionIDAndBlockID(tempLineID,tempSectionBID,tempBlockBID);
-                tempSectionB = getSectionByLineIDAndSectionID(tempLineID, tempSectionBID);
+                tempBlockB = getBlock(tempLineID,tempSectionBID,tempBlockBID);
+                tempSectionB = getSection(tempLineID, tempSectionBID);
             } 
             
             //Formatting is weird, but easier to develop (for now)
@@ -309,6 +305,12 @@ public class TrackModel {
             addStation(newStation);
         }
     }
+    
+    /**
+     * Adds Station to top-level array and Blocks.
+     * @author Dan Bednarczyk
+     * @param st the station to be added
+     */
     private void addStation(Station st) {
         //Add reference to top-level array
         stations.add(st);
@@ -323,6 +325,11 @@ public class TrackModel {
         }       
     }
     
+    /**
+     * Parses Excel sheet into Switch objects.
+     * @author Dan Bednarczyk
+     * @param sheet the sheet containing switch information
+     */
     private void parseSwitches(XSSFSheet sheet) {
  
         //Iterate over all rows in the first column
@@ -336,10 +343,10 @@ public class TrackModel {
             // Parse enums
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(1).getStringCellValue());
             //Associate IDs with objects
-            Line tempLine = getLineByID(tempLineID);
-            Block tempBlockA = getBlockByLineIDAndBlockID(tempLineID, tempBlockAID);
-            Block tempBlockB = getBlockByLineIDAndBlockID(tempLineID, tempBlockBID);
-            Block tempBlockC = getBlockByLineIDAndBlockID(tempLineID, tempBlockCID);
+            Line tempLine = getLine(tempLineID);
+            Block tempBlockA = TrackModel.this.getBlock(tempLineID, tempBlockAID);
+            Block tempBlockB = TrackModel.this.getBlock(tempLineID, tempBlockBID);
+            Block tempBlockC = TrackModel.this.getBlock(tempLineID, tempBlockCID);
             
             Switch newSwitch = new Switch(
                 tempSwitchID,
@@ -352,15 +359,26 @@ public class TrackModel {
         }     
     }
     
+    /**
+     * Adds Switch to top-level array.
+     * @author Dan Bednarczyk
+     * @param sw the switch to be added
+     */
     private void addSwitch(Switch sw) {
         //Add reference to top-level array
         switches.add(sw);
         //Will be added to blocks in connectBlocks
     }
     
-    //UTILITY ACCESS METHODS
+    //GETTER METHODS
     
-    public Line getLineByID(Global.Line line) {
+    /**
+     * Gets specified Line.
+     * @author Dan Bednarczyk
+     * @param line the enum of the line
+     * @return the line specified, null otherwise
+     */
+    public Line getLine(Global.Line line) {
         for (Line l : lines) {
             if (l.getLineID() == line) {
                 return l;
@@ -370,7 +388,14 @@ public class TrackModel {
         return null;
     }
     
-    public Section getSectionByLineIDAndSectionID(Global.Line line, Global.Section section) {
+    /**
+     * Gets specified Section.
+     * @author Dan Bednarczyk
+     * @param line the enum of the line
+     * @param section the enum of the section
+     * @return the section specified, null otherwise
+     */
+    public Section getSection(Global.Line line, Global.Section section) {
         for (Line l : lines) {
             if (l.getLineID() == line) {
                 for (Section s : l.getSections()) {
@@ -384,7 +409,15 @@ public class TrackModel {
         return null;
     }
     
-    public Block getBlockByLineIDAndSectionIDAndBlockID(Global.Line line, Global.Section section, int block) {
+    /**
+     * Gets specified Block.
+     * @author Dan Bednarczyk
+     * @param line the enum of the line
+     * @param section the enum of the section
+     * @param block the ID of the block
+     * @return the block specified, null otherwise
+     */
+    public Block getBlock(Global.Line line, Global.Section section, int block) {
         for (Line l : lines) {
             if (l.getLineID() == line) {
                 for (Section s : sections) {
@@ -402,7 +435,14 @@ public class TrackModel {
         return null;
     }
     
-    public Block getBlockByLineIDAndBlockID(Global.Line line, int block) {
+    /**
+     * Gets specified Block.
+     * @author Dan Bednarczyk
+     * @param line the enum of the line
+     * @param block the ID of the block
+     * @return the block specified, null otherwise
+     */
+    public Block getBlock(Global.Line line, int block) {
         for (Line l : lines) {
             if (l.getLineID() == line) {
                 for (Section s : sections) {  
@@ -418,30 +458,148 @@ public class TrackModel {
         return null;
     }
     
+    /**
+     * Gets specified Block.
+     * @author Dan Bednarczyk
+     * @param line the Line object containing the Block
+     * @param section the Section object containing the block
+     * @param block the ID of the block
+     * @return the block specified, null otherwise
+     */
+    public Block getBlock(Line line, Section section, int block) {
+        for (Line l : lines) {
+            if (l.equals(line)) {
+                return l.getBlock(section, block);
+            }
+        }
+        System.err.println("Block " + line + ":" + section + ":" + block + " not found");
+        return null;
+    }
+    
+    /**
+     * Gets specified Block.
+     * @author Dan Bednarczyk
+     * @param line the Line object containing the Block
+     * @param block the ID of the block
+     * @return the block specified, null otherwise
+     */
+    public Block getBlock(Line line, int block) {
+        for (Line l : lines) {
+            if (l.equals(line)) {
+                return l.getBlock(block);
+            }
+        }
+        System.err.println("Block " + line + ":" + block + " not found");
+        return null;
+    }
+    
+    /**
+     * Gets specified Switch.
+     * @author Dan Bednarczyk
+     * @param switchID the ID of the switch
+     * @return the switch specified, null otherwise
+     */
+    public Switch getSwitch(int switchID) {
+        for (Switch s : switches) {
+            if(s.getID() == switchID) {
+                return s;
+            }
+        }
+        System.err.println("Switch " + switchID + " not found.");
+        return null;
+    }
+    
+    /**
+     * Gets all Lines as ArrayList.
+     * @author Dan Bednarczyk
+     * @return the top-level ArrayList of Lines
+     */
+    public ArrayList<Line> getLineArray() {
+        return lines;
+    }
+    
+    /**
+     * Gets all Sections as ArrayList.
+     * @author Dan Bednarczyk
+     * @return the top-level ArrayList of Sections
+     */
+    public ArrayList<Section> getSectionArray() {
+        return sections;
+    }
+    
+    /**
+     * Gets all Blocks as ArrayList.
+     * @author Dan Bednarczyk
+     * @return the top-level ArrayList of Blocks
+     */
+    public ArrayList<Block> getBlockArray() {
+        return blocks;
+    }
+    
+    /**
+     * Gets all Stations as ArrayList.
+     * @author Dan Bednarczyk
+     * @return the top-level ArrayList of Stations
+     */
+    public ArrayList<Station> getStationArray() {
+        return stations;
+    }
+    
+    /**
+     * Gets all Switches as ArrayList.
+     * @author Dan Bednarczyk
+     * @return the top-level ArrayList of Switches
+     */
+    public ArrayList<Switch> getSwitchArray() {
+        return switches;
+    }
+    
+    //PRINTING METHODS
+    
+    /**
+     * Prints top-level ArrayList of Lines in detail.
+     * @author Dan Bednarczyk
+     */
     public void printLines() {
         for(Line l : lines) {
             System.out.println(l.getLineID());
         }
     }
     
+    /**
+     * Prints top-level ArrayList of Sections in detail.
+     * @author Dan Bednarczyk
+     */
     public void printSections() {
         for(Section s : sections) {
             System.out.println(s.toStringDetail());
         }
     }
     
+    /**
+     * Prints top-level ArrayList of Blocks in detail.
+     * @author Dan Bednarczyk
+     */
     public void printBlocks() {
         for(Block b : blocks) {
             System.out.println(b.toStringDetail());
         }
     }
     
+    /**
+     * Prints top-level ArrayList of Stations in detail.
+     * @author Dan Bednarczyk
+     */
     public void printStations() {
         for(Station s : stations) {
             System.out.println(s.toStringDetail());
         }
     }
     
+    /**
+     * Prints top-level ArrayList of Switches in detail.
+     * @author Dan Bednarczyk
+     */
     public void printSwitches() {
         for(Switch s : switches) {
             System.out.println(s.toStringDetail());

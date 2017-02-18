@@ -641,7 +641,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_trackConfigurationLoadButtonActionPerformed
     
     private void updateSummaryPanel() {
-        ArrayList<Block> blocks = trackModel.getBlocks();
+        ArrayList<Block> blocks = trackModel.getBlockArray();
         String blockColumnNames[] = { "Line", "Section", "Block", "Occupied", "Rail Fail", "Circuit Fail", "Power Fail" };
         DefaultTableModel summaryModel = new DefaultTableModel(blockColumnNames, 0);
         for (Block b : blocks) {
@@ -865,7 +865,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
     
     @SuppressWarnings("unchecked")
     private void updateLineComboBox() {
-        lineSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(trackModel.getLines().toArray()));
+        lineSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(trackModel.getLineArray().toArray()));
     }
     
     @SuppressWarnings("unchecked")
