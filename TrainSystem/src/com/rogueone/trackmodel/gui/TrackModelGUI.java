@@ -906,7 +906,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
     private void toggleTrainPresence(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleTrainPresence
         Block b = (Block) blockSelectionComboBox.getSelectedItem();
-        b.setOccupied(!b.isOccupied());
+        b.setOccupancy(!b.isOccupied());
         updateDetailsPanel();
         updateSummaryPanel();
     }//GEN-LAST:event_toggleTrainPresence

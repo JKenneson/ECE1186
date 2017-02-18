@@ -69,19 +69,27 @@ public class Switch implements TrackPiece {
     }
     public TrackPiece getNext(TrackPiece previous) {
         //entering from dependent block B, exiting the static port
-        if (previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+        if (!activated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
             return portA;
         }
+        //entering from dependent block C, no block available until switch is activated
+        else if (!activated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
+            return null;
+        }
+        //entering from dependent block B, no switch available until switch is deactivated
+        if (activated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+            return null;
+        }
         //entering from dependent block C, exiting the static port
-        else if (previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
+        else if (activated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
             return portA;
         }
         //entering from the static port, exiting the default dependent port
-        else if (previous.getType() == portA.getType() && previous.getID() == portA.getID() && !activated) {
+        else if (!activated && previous.getType() == portA.getType() && previous.getID() == portA.getID()) {
             return portB;
         }
         //entering from the static port, exiting the alternate dependent port
-        else if (previous.getType() == portA.getType() && previous.getID() == portA.getID() && activated) {
+        else if (activated && previous.getType() == portA.getType() && previous.getID() == portA.getID()) {
             return portC;
         }
         //invalid block

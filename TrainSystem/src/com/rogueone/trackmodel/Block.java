@@ -99,15 +99,100 @@ public class Block implements TrackPiece {
         trackCircuit = new TrackCircuit();
     }
     
-    // TrackPiece interface methods
-    public TrackPiece getNext(TrackPiece previous) {
-        if (previous.getType() == portA.getType() && previous.getID() == portA.getID())
-            return portB;
-        else if (previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
-            return portA;
+    /**
+    * Get the next Block using previous Block as a means of direction specification, also updates occupancy of current and next blocks.
+    * @author Dan Bednarczyk
+    * @return the next Block object, null if it is yard
+    */
+    public Block exitBlock(Block previous) {
+        Block next = getNextBlock(previous);
+        if (next != null) {
+            this.setOccupancy(false);
+            next.setOccupancy(true); 
         }
         else {
+            System.err.println("Next block could not be found.");
+        }
+        return next;
+    }
+    
+    /**
+    * Get the TrackPiece that train will exit from (should not be mistaken for getNextBlock, which only returns Blocks).
+    * @author Dan Bednarczyk
+    * @return the TrackPiece from which the train did not enter
+    */
+    public TrackPiece getNext(TrackPiece previous) {
+        //Train came from Port A, return Port B
+        if(portA.getType() == previous.getType() && portA.getID() == previous.getID()) {
+            return portB;
+        }
+        //Train came from Port B, return Port A
+        if(portB.getType() == previous.getType() && portB.getID() == previous.getID()) {
+            return portA;
+        }
+        //Previous does not match either port, an error occured
+        else {
+            System.err.println("Next TrackPiece not found");
+            return null;  
+        } 
+    }
+    
+    /**
+    * Get the next Block (without altering presence) using previous Block as a means of direction specification.
+    * @author Dan Bednarczyk
+    * @return the next Block object
+    */
+    public Block getNextBlock(TrackPiece previous) {
+        //System.out.println(previous.getType() + " " + previous.getID());
+        //System.out.println(portA.getType() + " " + portA.getID());
+        //System.out.println(portB.getType() + " " + portB.getID());
+        //Train came from Port A, get next block via Port B
+        if(portA.getType() == previous.getType() && portA.getID() == previous.getID()) {
+            return getNextBlockViaPortB();
+        }
+        //Train came from Port B, get next block via Port A
+        if(portB.getType() == previous.getType() && portB.getID() == previous.getID()) {
+            return getNextBlockViaPortA();
+        }
+        //Previous does not match either port, an error occured
+        else {
             System.err.println("Next block not found");
+            return null;  
+        } 
+    }
+    
+    /**
+    * Get the next Block via Port A.
+    * @author Dan Bednarczyk
+    * @return (1) Port A if Port A is a block (2) The next Block if Port A is a Switch (3) null otherwise 
+    */
+    private Block getNextBlockViaPortA() {
+        if (portA.getType() == Global.PieceType.BLOCK) {
+            return (Block) portA;
+        }
+        else if (portA.getType() == Global.PieceType.SWITCH) {
+            return (Block) (((Switch) portA).getNext(this));
+        }
+        else {
+            System.err.println("Next block not found via port A");
+            return null;
+        }
+    }
+    
+    /**
+    * Get the next Block via Port B.
+    * @author Dan Bednarczyk
+    * @return (1) Port B if Port B is a block (2) The next Block if Port B is a Switch (3) null otherwise 
+    */
+    private Block getNextBlockViaPortB() {
+        if (portB.getType() == Global.PieceType.BLOCK) {
+            return (Block) portB;
+        }
+        else if (portB.getType() == Global.PieceType.SWITCH) {
+            return (Block) (((Switch) portB).getNext(this));
+        }
+        else {
+            System.err.println("Next block not found via port B");
             return null;
         }
     }
@@ -435,7 +520,7 @@ public class Block implements TrackPiece {
     * @author Dan Bednarczyk
     * @param presence boolean indicating whether or not block is occupied
     */
-    public void setOccupied(boolean presence) {
+    public void setOccupancy(boolean presence) {
         occupied = presence;
     }
     
