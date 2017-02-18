@@ -13,6 +13,8 @@ import com.rogueone.global.Global.PieceType;
  * @author Dan
  */
 public class Yard implements TrackPiece {
+    
+    private static final int YARD_ID = 0;
 
     public TrackPiece getNext(TrackPiece previous) {
         return null;
@@ -23,7 +25,7 @@ public class Yard implements TrackPiece {
     }
 
     public int getID() {
-        return 0;
+        return YARD_ID;
     }
     
 }

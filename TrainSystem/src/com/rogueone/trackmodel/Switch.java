@@ -14,82 +14,73 @@ import com.rogueone.global.Global.PieceType;
  */
 public class Switch implements TrackPiece {
     
-    private int centralSwitchID;
+    private int switchID;
     private Line line;
     private TrackPiece portA;
     private TrackPiece portB;
     private TrackPiece portC;
-    private boolean activated;
+    private boolean isActivated;
     
     //Constructor
-    public Switch(int newCentralSwitchID, Line newLine, TrackPiece newPortA, TrackPiece newPortB, TrackPiece newPortC) {
-        centralSwitchID = newCentralSwitchID;
+    public Switch(int newSwitchID, Line newLine, TrackPiece newPortA, TrackPiece newPortB, TrackPiece newPortC) {
+        switchID = newSwitchID;
         line = newLine;
         portA = newPortA;   //static port
         portB = newPortB;   //default dependent port
         portC = newPortC;   //alternate dependent port
-        activated = false;
+        isActivated = false;
     }
     
     //Getters & Setters
     public Line getLine() {
         return line;
     }
-    public void setPortA(TrackPiece port){
-        portA = port;
-    }
     public TrackPiece getPortA() {
         return portA;
     }
-    public void setPortB(TrackPiece port){
-        portB = port;
-    }
     public TrackPiece getPortB() {
         return portB;
-    }
-    public void setPortC(TrackPiece port){
-        portC = port;
     }
     public TrackPiece getPortC() {
         return portC;
     }
     public void toggleSwitch() {
-        activated = !activated;
+        isActivated = !isActivated;
     }
     public void setSwitch(boolean activate) {
-        activated = activate;
+        isActivated = activate;
     }
     
     //TrackPiece interface methods
     public int getID() {
-        return centralSwitchID;
+        return switchID;
     }
     public Global.PieceType getType() {
         return PieceType.SWITCH;
     }
     public TrackPiece getNext(TrackPiece previous) {
         //entering from dependent block B, exiting the static port
-        if (!activated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+        if (!isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
             return portA;
         }
         //entering from dependent block C, no block available until switch is activated
-        else if (!activated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
+        else if (!isActivated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
             return null;
         }
         //entering from dependent block B, no switch available until switch is deactivated
-        if (activated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+        if (isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
             return null;
         }
         //entering from dependent block C, exiting the static port
-        else if (activated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
+        else if (isActivated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
             return portA;
         }
         //entering from the static port, exiting the default dependent port
-        else if (!activated && previous.getType() == portA.getType() && previous.getID() == portA.getID()) {
+        else if (!isActivated && previous.getType() == portA.getType() && previous.getID() == portA.getID()) {
             return portB;
         }
         //entering from the static port, exiting the alternate dependent port
-        else if (activated && previous.getType() == portA.getType() && previous.getID() == portA.getID()) {
+        else if (isActivated && previous.getType() == portA.getType() && previous.getID() == portA.getID()) {
             return portC;
         }
         //invalid block
@@ -100,17 +91,17 @@ public class Switch implements TrackPiece {
     
     //Overridden methods
     public boolean equals(Switch otherSwitch) {
-        return this.line.equals(otherSwitch.getLine()) && this.centralSwitchID == otherSwitch.getID();
+        return this.line.equals(otherSwitch.getLine()) && this.switchID == otherSwitch.getID();
     }
     
     public String toString() {
-        return "" + centralSwitchID;
+        return "" + switchID;
     }
     
     public String toStringDetail() {
         StringBuilder sb = new StringBuilder();
         sb.append("Switch: ");
-        sb.append(centralSwitchID);
+        sb.append(switchID);
         sb.append(", Line: ");
         sb.append(line);
         sb.append(", Port A: ");

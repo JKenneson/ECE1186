@@ -14,11 +14,11 @@ import com.rogueone.global.Global;
 public class Station {
     
     private int stationID;
-    private String stationName;
+    private String name;
     private Line line;
-    private TrackPiece blockA;
+    private Block blockA;
     private Section sectionA;
-    private TrackPiece blockB;
+    private Block blockB;
     private Section sectionB;
     private boolean rightSide;
     private boolean leftSide;
@@ -27,10 +27,10 @@ public class Station {
     private boolean heaterOn = false;
     
     //Contructor
-    public Station(int newStationID, String newStationName, Line newLine, TrackPiece newBlockA, Section newSectionA, 
-            TrackPiece newBlockB, Section newSectionB, boolean newRightSide, boolean newLeftSide) {
+    public Station(int newStationID, String newStationName, Line newLine, Block newBlockA, Section newSectionA, 
+            Block newBlockB, Section newSectionB, boolean newRightSide, boolean newLeftSide) {
         stationID = newStationID;
-        stationName = newStationName;
+        name = newStationName;
         line = newLine;
         blockA = newBlockA;
         sectionA = newSectionA;
@@ -47,56 +47,29 @@ public class Station {
     public int getID() {
         return stationID;
     }
-    public void setID(int stationID) {
-        this.stationID = stationID;
-    }
-    public String getStationName() {
-        return stationName;
-    }
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
+    public String getName() {
+        return name;
     }
     public Line getLine() {
         return line;
     }
-    public void setLine(Line line) {
-        this.line = line;
-    }
-    public TrackPiece getBlockA() {
+    public Block getBlockA() {
         return blockA;
-    }
-    public void setBlockA(TrackPiece blockA) {
-        this.blockA = blockA;
     }
     public Section getSectionA() {
         return sectionA;
     }
-    public void setSectionA(Section newSectionA) {
-        this.sectionA = newSectionA;
-    }
-    public TrackPiece getBlockB() {
+    public Block getBlockB() {
         return blockB;
-    }
-    public void setBlockB(TrackPiece blockB) {
-        this.blockB = blockB;
     }
     public Section getSectionB() {
         return sectionB;
     }
-    public void setSectionB(Section newSectionB) {
-        this.sectionB = newSectionB;
-    }
     public boolean isRightSide() {
         return rightSide;
     }
-    public void setRightSide(boolean rightSide) {
-        this.rightSide = rightSide;
-    }
     public boolean isLeftSide() {
         return leftSide;
-    }
-    public void setLeftSide(boolean leftSide) {
-        this.leftSide = leftSide;
     }
     public void setHeater(boolean on)
     {
@@ -104,9 +77,6 @@ public class Station {
     }
     public boolean isHeaterOn() {
         return heaterOn;
-    }
-    public void setTemperature(int newTemperature) {
-        temperature = newTemperature;
     }
     public int getTemperature() {
         return temperature;
@@ -123,12 +93,12 @@ public class Station {
         return this.line.equals(otherStation.getLine()) && this.stationID == otherStation.getID();
     }
     public String toString() {
-        return stationName + " (" + stationID + ")";
+        return name + " (" + stationID + ")";
     }
     public String toStringDetail() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ");
-        sb.append(stationName);
+        sb.append(name);
         sb.append(", ID: ");
         sb.append(stationID);
         sb.append(", line: ");

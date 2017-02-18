@@ -658,7 +658,7 @@ public class Block implements TrackPiece {
             sb.append(", Station ");
             sb.append(stationID);
             sb.append(": ");
-            sb.append(station.getStationName());
+            sb.append(station.getName());
         }
         sb.append(", Speed Limit: ");
         sb.append(speedLimit);

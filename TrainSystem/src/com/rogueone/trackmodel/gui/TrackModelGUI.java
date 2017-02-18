@@ -818,7 +818,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     String stationColumnNames[] = { "ID", "Name", "Block A", "Section A", "Block B", "Section B", "Right", "Left" };
                     String stationRowData[] = { 
                         station.getID() + "", 
-                        station.getStationName(), 
+                        station.getName(), 
                         station.getBlockA().getID() + "",
                         ((Block) station.getBlockA()).getSection().toString() + "", 
                         ((station.getBlockB() == null) ? "n/a" : station.getBlockB().getID() + ""), 
