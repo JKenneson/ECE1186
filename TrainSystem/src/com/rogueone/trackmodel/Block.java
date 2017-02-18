@@ -43,7 +43,27 @@ public class Block implements TrackPiece {
     private Station station;
     private TrackCircuit trackCircuit;
     
-    // Constructor
+    /**
+     * Creates new Block with minimum necessary information.
+     * @author Dan Bednarczyk
+     * @param newLine the Line object
+     * @param newSection the Section object
+     * @param newBlockID the Block ID
+     * @param newPortAID the first port ID
+     * @param newPortBID the second port ID
+     * @param newSwitchID the switch ID, -1 otherwise
+     * @param newIsStaticSwitchBlock static switch block indicator
+     * @param newStationID the station ID, -1 otherwise
+     * @param newLength the length
+     * @param newGrade the grade
+     * @param newSpeedLimit the speed limit
+     * @param newElevation the elevation
+     * @param newCumulativeElevation the cumulative elevation
+     * @param newIsHead section head indicator
+     * @param newIsTail section tail indicator
+     * @param newContainsCrossing crossing indicator
+     * @param newIsUnderground underground indicator
+     */
     public Block(Line newLine, Section newSection, int newBlockID, 
             int newPortAID, int newPortBID, int newSwitchID, boolean newIsStaticSwitchBlock, 
             int newStationID, double newLength, double newGrade, double newSpeedLimit,
@@ -90,131 +110,376 @@ public class Block implements TrackPiece {
             System.err.println("Next block not found");
             return null;
         }
-    } 
+    }
+    
+    /**
+    * Get type of TrackPeice.
+    * @author Dan Bednarczyk
+    * @return the type enum implementing the TrackPeice interface (Block)
+    */
     public Global.PieceType getType() {
         return PieceType.BLOCK;
     }
+    /**
+    * Get block ID.
+    * @author Dan Bednarczyk
+    * @return the block ID
+    */
     public int getID() {
         return blockID;
     }
     
     // Getters & Setters
+    
+    /**
+    * Get Line object that owns the Block.
+    * @author Dan Bednarczyk
+    * @return the Line object that owns the Block
+    */
     public Line getLine() {
         return line;
     }
+    
+    /**
+    * Get Section object that owns the Block.
+    * @author Dan Bednarczyk
+    * @return the Section object that owns the Block
+    */
     public Section getSection() {
         return section;
     }
+    
+    /**
+    * Get the first port.
+    * @author Dan Bednarczyk
+    * @return the TrackPeice in the first port, should be of type Block or Yard
+    */
     public TrackPiece getPortA() {
         return portA;
     }
+    
+    /**
+    * Set the first port.
+    * @author Dan Bednarczyk
+    * @param newPortA A TrackPeice to be set in port A
+    */
     public void setPortA(TrackPiece newPortA) {
         portA = newPortA;
-        //portAID = newPortA.getID();
+        portAID = newPortA.getID();
     }
+    
+    /**
+    * Get the second port.
+    * @author Dan Bednarczyk
+    * @return the TrackPeice in the second port, should be of type Block or Switch
+    */
     public TrackPiece getPortB() {
         return portB;
     }
+    
+    /**
+    * Set the second port.
+    * @author Dan Bednarczyk
+    * @param newPortB A TrackPeice to be set in port B
+    */
     public void setPortB(TrackPiece newPortB) {
         portB = newPortB;
-        //portBID = newPortB.getID();
+        portBID = newPortB.getID();
     }
+    
+    /**
+    * Get the ID of the first port.
+    * @author Dan Bednarczyk
+    * @return the ID of the first port
+    */
     public int getPortAID() {
         return portAID;
     }
+    
+    /**
+    * Get the ID of the second port.
+    * @author Dan Bednarczyk
+    * @return the ID of the second port
+    */
     public int getPortBID() {
         return portBID;
     }
+    
+    /**
+    * Get the ID of the switch.
+    * @author Dan Bednarczyk
+    * @return the ID of the switch, -1 otherwise
+    */
     public int getSwitchID() {
         return switchID;
     }
+    
+    /**
+    * Get the ID of the station.
+    * @author Dan Bednarczyk
+    * @return the ID of the station, -1 otherwise
+    */
     public int getStationID() {
         return stationID;
     }
+    
+    /**
+    * Get the block length.
+    * @author Dan Bednarczyk
+    * @return the block length
+    */
     public double getLength() {
         return length;
     }
+    
+    /**
+    * Set the block length.
+    * @author Dan Bednarczyk
+    * @param newLength the block length
+    */
     public void setLength(int newLength) {
         length = newLength;
     }
+    
+    /**
+    * Get the block grade.
+    * @author Dan Bednarczyk
+    * @return the block grade
+    */
     public double getGrade() {
         return grade;
     }
+    
+    /**
+    * Set the block grade.
+    * @author Dan Bednarczyk
+    * @param newGrade the block grade
+    */
     public void setGrade(double newGrade) {
         grade = newGrade;
     }
+    
+    /**
+    * Get the block elevation.
+    * @author Dan Bednarczyk
+    * @return the block elevation
+    */
     public double getElevation() {
         return elevation;
     }
+    
+    /**
+    * Set the block elevation.
+    * @author Dan Bednarczyk
+    * @param newElevation the block elevation
+    */
     public void setElevation(double newElevation) {
         elevation = newElevation;
     }
+    
+    /**
+    * Get the block cumulative elevation.
+    * @author Dan Bednarczyk
+    * @return the block cumulative elevation
+    */
     public double getCumulativeElevation() {
         return cumulativeElevation;
     }
+    
+    /**
+    * Set the cumulative block elevation.
+    * @author Dan Bednarczyk
+    * @param newCumulativeElevation the block cumulative elevation
+    */
     public void setCumulativeElevation(double newCumulativeElevation) {
         cumulativeElevation = newCumulativeElevation;
     }
+    
+    /**
+    * Get the block speed limit.
+    * @author Dan Bednarczyk
+    * @return the block speed limit
+    */
     public double getSpeedLimit() {
         return speedLimit;
     }
+    
+    /**
+    * Set the block speed limit.
+    * @author Dan Bednarczyk
+    * @param newSpeedLimit the block speed limit
+    */
     public void setSpeedLimit(double newSpeedLimit) {
         speedLimit = newSpeedLimit;
     }
+    
+    /**
+    * Check if block is static switch block.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block is static switch block
+    */
     public boolean isStaticSwitchBlock() {
         return isStaticSwitchBlock;
     }
+    
+    /**
+    * Check if block is section head.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block is section head
+    */
     public boolean isHead() {
         return isHead;
     }
+    
+    /**
+    * Check if block is section tail.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block is section tail
+    */
     public boolean isTail() {
         return isTail;
     }
+    
+    /**
+    * Check if block contains crossing.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block contains crossing
+    */
     public boolean containsCrossing() {
         return containsCrossing;
     }
+    
+    /**
+    * Check if block is underground.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block is underground
+    */
     public boolean isUnderground() {
         return isUnderground;
     }
+    
+    /**
+    * Check if block crossing is down.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block crossing is down, false by default
+    */
     public boolean isCrossingDown() {
         return isCrossingDown;
     }
+    
+    /**
+    * Set broken rail failure state.
+    * @author Dan Bednarczyk
+    * @param fail boolean indicating new state of failure
+    */
     public void setFailureBrokenRail(boolean fail) {
         failureBrokenRail = fail;
     }
+    
+    /**
+    * Check if block has broken rail.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block has broken rail
+    */
     public boolean getFailureBrokenRail() {
         return failureBrokenRail;
     }
+    
+    /**
+    * Set power outage failure state.
+    * @author Dan Bednarczyk
+    * @param fail boolean indicating new state of failure
+    */
     public void setFailurePowerOutage(boolean fail) {
         failurePowerOutage = fail;
     }
+    
+    /**
+    * Check if block has power outage.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block has power outage
+    */
     public boolean getFailurePowerOutage() {
         return failurePowerOutage;
     }
+    
+    /**
+    * Set track circuit failure state.
+    * @author Dan Bednarczyk
+    * @param fail boolean indicating new state of failure
+    */
     public void setFailureTrackCircuit(boolean fail) {
         failureTrackCircuit = fail;
     }
+    
+    /**
+    * Check if block has track circuit failure.
+    * @author Dan Bednarczyk
+    * @return boolean indicating if block has track circuit failure
+    */
     public boolean getFailureTrackCircuit() {
         return failureTrackCircuit;
     }
+    
+    /**
+    * Check if block is occupied by a train.
+    * @author Dan Bednarczyk
+    * @return boolean indicating block occupancy
+    */
     public boolean isOccupied() {
         return occupied;
     }
-    public void setOccupied(boolean newOccupied) {
-        occupied = newOccupied;
+    
+    /**
+    * Set block occupancy
+    * @author Dan Bednarczyk
+    * @param presence boolean indicating whether or not block is occupied
+    */
+    public void setOccupied(boolean presence) {
+        occupied = presence;
     }
+    
+    /**
+    * Get block beacon message.
+    * @author Dan Bednarczyk
+    * @return String containing beacon message, empty by default
+    */
     public String getBeaconMessage() {
         return beaconMessage;
     }
+    
+    /**
+    * Set block beacon message.
+    * @author Dan Bednarczyk
+    * @param newBeaconMessage String specifying beacon message
+    */
     public void setBeaconMessage(String newBeaconMessage) {
         beaconMessage = newBeaconMessage;
     }
+    
+    /**
+    * Get station on Block.
+    * @author Dan Bednarczyk
+    * @return Station object on block, null otherwise
+    */
     public Station getStation() {
         return station;
     }
+    
+    /**
+    * Set station on Block.
+    * @author Dan Bednarczyk
+    * @param newStation Station object
+    */
     public void setStation(Station newStation) {
         station = newStation;
     }
+    
+    /**
+    * Get Track Circuit object.
+    * @author Dan Bednarczyk
+    * @return Track Circuit object, 0s by default, -1s if there is a failure
+    */
     public TrackCircuit getTrackCircuit() {
         if(failureTrackCircuit) {
             return new TrackCircuit((byte) -1,(short) -1);
@@ -223,19 +488,39 @@ public class Block implements TrackPiece {
             return trackCircuit;
         }
     }
+    
+    /**
+    * Set Track Circuit
+    * @author Dan Bednarczyk
+    * @param newTrackCircuit Track Circuit object
+    */
     public void setTrackCircuit(TrackCircuit newTrackCircuit) {
         trackCircuit = newTrackCircuit;
     }
     
-    //Overridden methods
+    /**
+    * Check equality with other block, true if and only if they share the same Line, Section, and Block ID.
+    * @author Dan Bednarczyk
+    * @return boolean indicating equality
+    */
     public boolean equals(Block otherBlock) {
         return this.line.equals(otherBlock.getLine()) && this.section.equals(otherBlock.getSection())&& this.blockID == otherBlock.getID();
     }
     
+    /**
+    * Get ID of block as a String.
+    * @author Dan Bednarczyk
+    * @return String containing block ID
+    */
     public String toString() {
         return "" + this.getID();
     }
     
+    /**
+    * Get cleanly formatted String containing all Block details.
+    * @author Dan Bednarczyk
+    * @return One-line String containing all Block details
+    */
     public String toStringDetail() {
         StringBuilder sb = new StringBuilder();
         sb.append("Line: ");
