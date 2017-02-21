@@ -102,6 +102,7 @@ public class Block implements TrackPiece {
     /**
     * Get the next Block using previous Block as a means of direction specification, also updates occupancy of current and next blocks.
     * @author Dan Bednarczyk
+    * @param previous the previous block
     * @return the next Block object, null if it is yard
     */
     public Block exitBlock(Block previous) {
@@ -119,6 +120,7 @@ public class Block implements TrackPiece {
     /**
     * Get the TrackPiece that train will exit from (should not be mistaken for getNextBlock, which only returns Blocks).
     * @author Dan Bednarczyk
+    * @param previous the previous TrackPiece
     * @return the TrackPiece from which the train did not enter
     */
     public TrackPiece getNext(TrackPiece previous) {
@@ -140,18 +142,19 @@ public class Block implements TrackPiece {
     /**
     * Get the next Block (without altering presence) using previous Block as a means of direction specification.
     * @author Dan Bednarczyk
+    * @param previous the previous block
     * @return the next Block object
     */
-    public Block getNextBlock(TrackPiece previous) {
+    public Block getNextBlock(Block previous) {
         //System.out.println(previous.getType() + " " + previous.getID());
         //System.out.println(portA.getType() + " " + portA.getID());
         //System.out.println(portB.getType() + " " + portB.getID());
         //Train came from Port A, get next block via Port B
-        if(portA.getType() == previous.getType() && portA.getID() == previous.getID()) {
+        if(getNextBlockViaPortA().equals(previous)) {
             return getNextBlockViaPortB();
         }
         //Train came from Port B, get next block via Port A
-        if(portB.getType() == previous.getType() && portB.getID() == previous.getID()) {
+        if(getNextBlockViaPortB().equals(previous)) {
             return getNextBlockViaPortA();
         }
         //Previous does not match either port, an error occured

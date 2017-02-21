@@ -119,31 +119,27 @@ public class TrackModel {
         //printLines();
         //System.out.println("\nSECTIONS:");
         //printSections();
-        System.out.println("\nBLOCKS:");
-        printBlocks();
+        //System.out.println("\nBLOCKS:");
+        //printBlocks();
         //System.out.println("\nSTATIONS:");
         //printStations();
-        System.out.println("\nSWITCHES:");
-        printSwitches();
-       
-        TrackPiece prev = getBlock(Global.Line.GREEN, Global.Section.A, 1);
-        TrackPiece cur = getBlock(Global.Line.GREEN, Global.Section.A, 2);
-        TrackPiece next = null;
-        TrackPiece curTemp = null;
+        //System.out.println("\nSWITCHES:");
+        //printSwitches();
+        
+    }
+    
+    public void simulateTrain() {
+        Block prev = getBlock(Global.Line.GREEN, Global.Section.A, 1);
+        Block cur = getBlock(Global.Line.GREEN, Global.Section.A, 2);
+        Block next = null;
+        Block curTemp = null;
         while (cur != null) {
             System.out.println(cur);
-
-            next = cur.getNext(prev);
-            if (next.getType() == Global.PieceType.SWITCH) {
-                cur = ((Block) cur).getNextBlock(prev);
-                prev = next;
-            }
-            else {
-                curTemp = cur;
-                cur = next;
-                prev = curTemp;
-            }        
-            
+            next = cur.exitBlock(prev);
+            curTemp = cur;
+            cur = next;
+            prev = curTemp;
+        
             try {
                 TimeUnit.MILLISECONDS.sleep(250);
             } catch (InterruptedException ex) {

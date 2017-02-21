@@ -22,6 +22,9 @@ import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -35,6 +38,12 @@ import javax.swing.table.TableCellRenderer;
 public class TrackModelGUI extends javax.swing.JPanel {
     
     private TrackModel trackModel;
+    //For visual train testing
+    Block prev = null;
+    Block cur = null;
+    Block next = null;
+    Block curTemp = null;
+    //Constants
     private final Color GREEN = new Color(125, 236, 188);
     private final Color RED = new Color(242, 149, 149);
 
@@ -110,6 +119,11 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackLayoutPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Layout", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         trackLayoutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/layout_small.jpg"))); // NOI18N
+        trackLayoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                trackLayoutLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout trackLayoutPanelLayout = new javax.swing.GroupLayout(trackLayoutPanel);
         trackLayoutPanel.setLayout(trackLayoutPanelLayout);
@@ -243,7 +257,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             lineSectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lineSectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lineSelectionComboBox, 0, 308, Short.MAX_VALUE)
+                .addComponent(lineSelectionComboBox, 0, 349, Short.MAX_VALUE)
                 .addContainerGap())
         );
         lineSectionPanelLayout.setVerticalGroup(
@@ -266,7 +280,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             sectionSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sectionSelectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sectionSelectionComboBox, 0, 308, Short.MAX_VALUE)
+                .addComponent(sectionSelectionComboBox, 0, 349, Short.MAX_VALUE)
                 .addContainerGap())
         );
         sectionSelectionPanelLayout.setVerticalGroup(
@@ -289,7 +303,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             blockSelectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(blockSelectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(blockSelectionComboBox, 0, 308, Short.MAX_VALUE)
+                .addComponent(blockSelectionComboBox, 0, 349, Short.MAX_VALUE)
                 .addContainerGap())
         );
         blockSelectionPanelLayout.setVerticalGroup(
@@ -353,7 +367,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             blockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(blockPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(blockScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
+                .addComponent(blockScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
                 .addContainerGap())
         );
         blockPanelLayout.setVerticalGroup(
@@ -406,7 +420,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             switchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(switchPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(switchScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
+                .addComponent(switchScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
                 .addContainerGap())
         );
         switchPanelLayout.setVerticalGroup(
@@ -461,7 +475,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             stationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(stationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(stationScrolPane, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
+                .addComponent(stationScrolPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
                 .addContainerGap())
         );
         stationPanelLayout.setVerticalGroup(
@@ -521,11 +535,12 @@ public class TrackModelGUI extends javax.swing.JPanel {
             testingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addContainerGap())
         );
         testingPanelLayout.setVerticalGroup(
             testingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         trackCircuitPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Track Circuit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
@@ -545,10 +560,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackCircuitPanel.setLayout(trackCircuitPanelLayout);
         trackCircuitPanelLayout.setHorizontalGroup(
             trackCircuitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(trackCircuitPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(trackCircuitScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(trackCircuitScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         trackCircuitPanelLayout.setVerticalGroup(
             trackCircuitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,7 +582,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         .addComponent(testingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(trackCircuitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         trackDetailsPanelLayout.setVerticalGroup(
             trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,8 +595,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 .addGroup(trackDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(trackCircuitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(testingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                    .addComponent(trackFailureModesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         trackModelTabbedPane.addTab("Track Details", trackDetailsPanel);
@@ -597,7 +609,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(trackModelTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,6 +639,10 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 blockSelectionComboBox.addItemListener(new BlockChangeListener());
                 trackModelTabbedPane.setEnabledAt(1, true);
                 trackConfigurationResetButton.setEnabled(true);
+                
+                //For visual train testing
+                prev = trackModel.getBlock(Global.Line.GREEN, Global.Section.A, 1);
+                cur = trackModel.getBlock(Global.Line.GREEN, Global.Section.A, 2);
             }
             catch (IOException ex) {
                 System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
@@ -936,6 +952,14 @@ public class TrackModelGUI extends javax.swing.JPanel {
             }
         });  
     }//GEN-LAST:event_trackConfigurationResetButtonActionPerformed
+
+    private void trackLayoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trackLayoutLabelMouseClicked
+        updateSummaryPanel();
+        next = cur.exitBlock(prev);
+        curTemp = cur;
+        cur = next;
+        prev = curTemp;
+    }//GEN-LAST:event_trackLayoutLabelMouseClicked
 
     
 

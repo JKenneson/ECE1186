@@ -38,7 +38,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="trackModelTabbedPane" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="8" max="32767" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -135,6 +135,9 @@
                       <Image iconType="3" name="/com/rogueone/images/layout_small.jpg"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="trackLayoutLabelMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -287,7 +290,7 @@
                               <Component id="trackCircuitPanel" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                      <EmptySpace pref="-105" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -302,9 +305,9 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="trackCircuitPanel" max="32767" attributes="0"/>
                           <Component id="testingPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="trackFailureModesPanel" alignment="0" pref="110" max="32767" attributes="0"/>
+                          <Component id="trackFailureModesPanel" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="112" max="32767" attributes="0"/>
+                      <EmptySpace pref="108" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -342,7 +345,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lineSelectionComboBox" pref="308" max="32767" attributes="0"/>
+                              <Component id="lineSelectionComboBox" pref="349" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -386,7 +389,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="sectionSelectionComboBox" pref="308" max="32767" attributes="0"/>
+                              <Component id="sectionSelectionComboBox" pref="349" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -433,7 +436,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="blockSelectionComboBox" pref="308" max="32767" attributes="0"/>
+                              <Component id="blockSelectionComboBox" pref="349" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -501,7 +504,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="blockScrollPane" pref="968" max="32767" attributes="0"/>
+                              <Component id="blockScrollPane" pref="1127" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -632,7 +635,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="switchScrollPane" pref="968" max="32767" attributes="0"/>
+                              <Component id="switchScrollPane" pref="1127" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -715,7 +718,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="stationScrolPane" pref="968" max="32767" attributes="0"/>
+                              <Component id="stationScrolPane" pref="1127" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -865,13 +868,14 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="toggleTrainPresenceButton" max="32767" attributes="0"/>
+                          <Component id="toggleTrainPresenceButton" pref="189" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="toggleTrainPresenceButton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="toggleTrainPresenceButton" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -906,11 +910,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="trackCircuitScrollPanel" pref="0" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="trackCircuitScrollPanel" alignment="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
