@@ -190,10 +190,10 @@ public class TrainController {
     }
     
     /**
+     * This method initializes the gui's visual attributes
      * 
-     * 
-     * @author 
-     * @param gui 
+     * @author Tyler Protivnak
+     * @param gui the TrainControllerGUI that will be initialized
      */
     private void InitializeInputPanel(TrainControllerGUI gui) {
         
@@ -222,11 +222,11 @@ public class TrainController {
     }
         
     /**
-     * This method is called from the TrainModelGUI when a failure is activated and sent through
-     * the "Send New Failure" button. For now, the response will be to activate the emergency brake. 
-     * Later, the TrainModel will alert the TrainController to handle these
+     * This method is called from the TrainControllerGUI when a failure is activated and sent through
+     * the failure simulation radio buttons. This method will flip the brakes on the 
+     * train controller and model.
      * 
-     * @author Jonathan Kenneson
+     * @author Tyler Protivnak
      * @param failure One of 3 TrainFailures as found in TrainFailures.java
      */
     public void causeFailure(TrainFailures failure) {
@@ -253,6 +253,14 @@ public class TrainController {
         }
     }
     
+    /**
+     * This method is called from the TrainControllerGUI when a failure is deactivated
+     * and sent through the failure simulation radio buttons. This method will flip the brakes on the 
+     * train controller and model.
+     * 
+     * @author Tyler Protivnak
+     * @param failure One of 3 TrainFailures as found in TrainFailures.java
+     */
     public void fixFailure(TrainFailures failure) {
         //Switch on the failure passed in
         switch(failure) {
@@ -279,10 +287,13 @@ public class TrainController {
     }
     
     /**
+     * This function should be called by the train model to find out the next power
+     * command for the engine.
      * 
+     * @author Tyler Protivnak
      * @param actualSpeed The current speed from the Train Model
      * @param samplePeriod The sampling period defined by the Train Model
-     * @return 
+     * @return power after calculations
      */
     public double calculatePower(double actualSpeed, double samplePeriod){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
@@ -318,27 +329,42 @@ public class TrainController {
         return this.powerCommand;
     }
     
+    /**
+     * Sets the Kp as passed by the train controller gui
+     * 
+     * @author Tyler Protivnak
+     * @param Kp the new kp from the engineer
+     */
     public void setKP(int Kp){
         this.kP = Kp;
     }
     
+    /**
+     * Sets the Ki as passed by the train controller gui
+     * 
+     * @author Tyler Protivnak
+     * @param Ki 
+     */
     public void setKI(int Ki){
         this.kI = Ki;
     }
-    
-    //*************CAN I IMPORT TRAINMODEL OR HOW DO I DO THIS?************//
-    
+        
     /**
+     * This method pulls the number of passengers from the train model and sets
+     * the train controllers passengers variable to the most updated value.
      * 
-     * @return 
+     * @author Tyler Protivnak
+     * @return the number of passengers on train
      */
     private void updatePassengers(){ //should pull passenger information from train model
         this.passengers = this.trainModel.getPassengersOnBaord();
     }    
     
     /**
+     * This method pulls the internal temperature from the train model and decides 
+     * how to adjust the climate control systems
      * 
-     * @return 
+     * @author Tyler Protivnak
      */
     private void updateClimateControl(){ //should pull temp information from train model
         this.temperature = this.trainModel.getTemperature();
@@ -357,11 +383,16 @@ public class TrainController {
         }
     }
     
-    //*************CAN I IMPORT TRAINMODEL OR HOW DO I DO THIS?************//
-    
+    /**
+     * This function pulls the time and date of the system from a global class
+     * 
+     * @author Tyler Protivnak
+     * @return the current date and time of the system
+     */
     private String getTime(){
         return "7:00:00 PM April 20, 2017"; //Get value from global time class
     }
+    
     
     private int getNumberOfTrains(){
         return 0; //Get value from ?????
@@ -371,6 +402,14 @@ public class TrainController {
         return null;
     }
             
+    
+    /**
+     * This function figures out how to set the gui visual aids for the failures
+     * on the train controller
+     * 
+     * @author Tyler Protivnak
+     * @return value cooresponding to failure type
+     */
     private int getFailureType(){  //get from train model
         if(!this.powerStatus){
             if(!this.antennaStatus){
@@ -396,6 +435,11 @@ public class TrainController {
         return 0; //default, all clear
     }                                       
     
+    /**
+     * The update function for the full controller
+     * 
+     * @author Tyler Protivnak
+     */
     public void updateController(){
         this.authority -= this.trainModel.getDistanceTraveled();
         if(!this.manualMode)
@@ -408,6 +452,7 @@ public class TrainController {
         
         
     }
+    
     
     private void updateSafeSpeed(){
         if(this.currSpeed>this.getSetPoint() && !this.manualMode){
