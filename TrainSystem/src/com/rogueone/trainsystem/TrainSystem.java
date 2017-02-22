@@ -43,7 +43,7 @@ public class TrainSystem {
         timeToRefresh = 1000;
 
         this.trackModel = new TrackModel(new File("src/com/rogueone/assets/TrackData.xlsx"));
-        this.trainHandler = new TrainHandler();
+        this.trainHandler = new TrainHandler(this);
         this.timer = new Timer();
         this.task = new Action(this);
         timer.schedule(task, 0, timeToRefresh);

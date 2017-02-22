@@ -156,8 +156,10 @@ public class TrainModel {
         
         this.trainSystem = trainSystem;
         //Block setting
-        this.prevBlock = trainSystem.getTrackModel().getBlock(Global.Line.valueOf(line.toUpperCase()), Global.Section.A, 0);
-        
+        this.prevBlock = trainSystem.getTrackModel().getBlock(Global.Line.valueOf(line.toUpperCase()), Global.Section.A, 1);
+        this.currBlock = trainSystem.getTrackModel().getBlock(Global.Line.valueOf(line.toUpperCase()), Global.Section.A, 2);
+        this.nextBlock = null;
+        this.currTempBlock = null;
     }
     
     /**
