@@ -27,22 +27,19 @@ public class TrackModel {
     ArrayList<Station> stations = new ArrayList<Station>();
     ArrayList<Switch> switches = new ArrayList<Switch>();
     Yard yard = new Yard();
+    TrackModelGUI trackModelGUI = null;
     
     public static void main(String[] args) throws InterruptedException {
-        TrackModelGUI trackModelGUI = new TrackModelGUI();
+        
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(trackModelGUI);
+        frame.getContentPane().add(new TrackModelGUI());
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(true); 
     }
     
-    /**
-     * Default constructor
-     * @author Dan Bednarczyk
-     */
-    public TrackModel() {
-        //default
+    public void updateGUI() {
+        trackModelGUI.updateSummaryPanel();
     }
     
     /**
@@ -51,6 +48,8 @@ public class TrackModel {
      * @param trackDataFile the File to load
      */
     public TrackModel(File trackDataFile) {
+        trackModelGUI = new TrackModelGUI();
+
         try {
             parseDataFile(trackDataFile);
             System.out.println("Track loaded successfully");

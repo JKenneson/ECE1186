@@ -644,7 +644,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackDataFileChooser.setVisible(true);
     }//GEN-LAST:event_trackConfigurationLoadButtonActionPerformed
     
-    private void updateSummaryPanel() {
+    public void updateSummaryPanel() {
         ArrayList<Block> blocks = trackModel.getBlockArray();
         String blockColumnNames[] = { "Line", "Section", "Block", "Occupied", "Rail Fail", "Circuit Fail", "Power Fail" };
         DefaultTableModel summaryModel = new DefaultTableModel(blockColumnNames, 0);
