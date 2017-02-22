@@ -530,7 +530,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             testingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addComponent(toggleTrainPresenceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 189, Short.MAX_VALUE)
                 .addContainerGap())
         );
         testingPanelLayout.setVerticalGroup(

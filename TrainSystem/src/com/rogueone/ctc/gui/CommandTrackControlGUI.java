@@ -9,7 +9,9 @@ package com.rogueone.ctc.gui;
 //import java.text.*;
 //import java.util.*;
 
+//import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainmodel.TrainHandler;
+import com.rogueone.trainsystem.TrainSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -20,6 +22,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     int trainID;
     int iterativeID = 0;
+    public TrainSystem trainSystem;
 
     /**
      * Creates new form CommandTrackControlGUI
@@ -28,6 +31,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         Clock();
         initComponents();
         InitializeGUIObject();
+    }
+    
+      public CommandTrackControlGUI(TrainSystem ts) {
+        initComponents();
+        trainSystem = new TrainSystem();
     }
 
     /**
@@ -1046,7 +1054,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
         TrainShutdownGUI trainShutdown = new TrainShutdownGUI(this);
         trainShutdown.setVisible(true);
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_TrainShutdownButtonActionPerformed
 
     private void TrainNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainNameFieldActionPerformed
@@ -1391,7 +1399,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
         }
         
-//        TrainHandler dispatchTrain = new TrainHandler(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine);
+        TrainHandler dispatchTrain = new TrainHandler(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine);
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 
