@@ -55,6 +55,10 @@ public class TrainSystem {
         InterfaceSelector is = new InterfaceSelector(mf);
         mf.getContentPane().add(is, BorderLayout.CENTER);
         mf.setVisible(true);
+        
+        
+        
+        testTrain();
     }
 
     public TrackModel getTrackModel() {

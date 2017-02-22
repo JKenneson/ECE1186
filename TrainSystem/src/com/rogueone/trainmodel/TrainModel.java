@@ -72,6 +72,7 @@ public class TrainModel {
     private int driverSetPoint;
     private int ctcSetPoint;
     private double authority;       //feet remaining
+    private double distanceIntoBlock;//The distance we have traveled into the block
     private double distanceTraveled;//meters traveled this cycle
     private double powerReceived;   //kW
     private double grade;
@@ -128,6 +129,7 @@ public class TrainModel {
         this.driverSetPoint = 0;
         this.ctcSetPoint = setPointSpeed;
         this.authority = authority;
+        this.distanceIntoBlock = 0;
         this.distanceTraveled = 0;
         this.powerReceived = 0;
         this.grade = 0;
@@ -383,6 +385,7 @@ public class TrainModel {
      * 4)   Take grade into account and sum the new forces
      * 5)   If the brakes are activated, this takes precedent and the train slows down according the which brake is activated
      * 6)   Calculate distance traveled since last cycle and subtract that from remaining authority
+     * 7)   Calculate distance into block and ask for new block if we've gone the length of the block
      * 
      * @author Jonathan Kenneson
      */
@@ -464,6 +467,21 @@ public class TrainModel {
                 
         //Current speed is in m/s, convert to mph to print out
         this.currSpeedMPH = this.currSpeed * SECONDS_IN_AN_HOUR / METERS_IN_A_MILE;
+        
+        //7)   Calculate distance into block and ask for new block if we've gone the length of the block
+        this.distanceIntoBlock += this.distanceTraveled;
+        
+        //If we've passsed into the next block, get the next block
+        if(this.distanceIntoBlock > currBlock.getLength()) {
+            this.distanceIntoBlock -= currBlock.getLength();
+            
+            this.nextBlock = this.currBlock.exitBlock(this.prevBlock);
+            this.currTempBlock = this.currBlock;
+            this.currBlock = this.nextBlock;
+            this.prevBlock = this.currTempBlock;
+            
+            System.out.println("Current Block: " + this.currBlock);
+        }
         
     }
             
