@@ -29,8 +29,7 @@ public class TrackModel {
     Yard yard = new Yard();
     
     public static void main(String[] args) throws InterruptedException {
-        TrackModelGUI trackModelGUI = new TrackModelGUI(new TrackModel());
-        
+        TrackModelGUI trackModelGUI = new TrackModelGUI();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(trackModelGUI);
@@ -54,6 +53,7 @@ public class TrackModel {
     public TrackModel(File trackDataFile) {
         try {
             parseDataFile(trackDataFile);
+            System.out.println("Track loaded successfully");
         }
         catch (IOException ex) {
             System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
@@ -111,7 +111,7 @@ public class TrackModel {
      * @author Dan Bednarczyk
      * @param file the track data file
      */
-    public void parseDataFile(File file) throws IOException, InvalidFormatException {
+    private void parseDataFile(File file) throws IOException, InvalidFormatException {
         //Expected column order in data file for blocks:
         //0     line
         //1     section

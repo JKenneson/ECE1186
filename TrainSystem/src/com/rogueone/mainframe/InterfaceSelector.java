@@ -260,7 +260,7 @@ public class InterfaceSelector extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         main.getContentPane().removeAll();
-        TrackModelGUI trackModelGUI = new TrackModelGUI(new TrackModel());
+        TrackModelGUI trackModelGUI = new TrackModelGUI();
         main.getContentPane().add(trackModelGUI, BorderLayout.CENTER);
         main.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed

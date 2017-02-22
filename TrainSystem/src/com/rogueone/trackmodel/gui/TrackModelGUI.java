@@ -51,11 +51,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
     public TrackModelGUI() {
         initComponents();
     }
-    
-    public TrackModelGUI(TrackModel tm) {
-        initComponents();
-        trackModel = new TrackModel();
-    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -627,30 +622,23 @@ public class TrackModelGUI extends javax.swing.JPanel {
         int returnVal = trackDataFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = trackDataFileChooser.getSelectedFile();
-            try {
-                trackModel.parseDataFile(trackDataFile);//Needs error handling
-                updateLineComboBox();
-                updateSectionComboBox();
-                updateBlockComboBox();
-                updateSummaryPanel();
-                updateDetailsPanel();
-                lineSelectionComboBox.addItemListener(new LineChangeListener());
-                sectionSelectionComboBox.addItemListener(new SectionChangeListener());
-                blockSelectionComboBox.addItemListener(new BlockChangeListener());
-                trackModelTabbedPane.setEnabledAt(1, true);
-                trackConfigurationResetButton.setEnabled(true);
-                
-                //For visual train testing
-                prev = trackModel.getBlock(Global.Line.GREEN, Global.Section.A, 1);
-                cur = trackModel.getBlock(Global.Line.GREEN, Global.Section.A, 2);
-            }
-            catch (IOException ex) {
-                System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
-            }
-            catch (InvalidFormatException ex) {
-                System.out.println("Please select an .xlsx file.");
-            }
-        } else if (returnVal == JFileChooser.CANCEL_OPTION){
+            trackModel = new TrackModel(trackDataFile);
+            updateLineComboBox();
+            updateSectionComboBox();
+            updateBlockComboBox();
+            updateSummaryPanel();
+            updateDetailsPanel();
+            lineSelectionComboBox.addItemListener(new LineChangeListener());
+            sectionSelectionComboBox.addItemListener(new SectionChangeListener());
+            blockSelectionComboBox.addItemListener(new BlockChangeListener());
+            trackModelTabbedPane.setEnabledAt(1, true);
+            trackConfigurationResetButton.setEnabled(true);
+
+            //For visual train testing
+            prev = trackModel.getBlock(Global.Line.GREEN, Global.Section.A, 1);
+            cur = trackModel.getBlock(Global.Line.GREEN, Global.Section.A, 2);
+        }
+        else if (returnVal == JFileChooser.CANCEL_OPTION) {
            System.out.println("File access cancelled by user.");
         }
         trackDataFileChooser.setVisible(true);
