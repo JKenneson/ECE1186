@@ -67,10 +67,15 @@ public class TrainSystem {
 
     public void dispatchTrain(int speed, int authortiy, int numCars, String line) {
         trainHandler.dispatchNewTrain(speed, authortiy, numCars, line);
+        
     }
 
+    /**
+     * This method gets called every second or 10th of a second
+     */
     void updateTrainSystem() {
         this.trainHandler.updateTrains();
+        //this.trackModel.updateGUI();
     }
 
     public void updateTimer(int timeToRefresh) {
