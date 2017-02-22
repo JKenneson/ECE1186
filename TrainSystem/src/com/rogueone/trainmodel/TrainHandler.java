@@ -64,7 +64,7 @@ public class TrainHandler {
         for (TrainModel train : TrainHandler.trains) {
             train.updateTrain();
             train.UpdateGUI(train.getTrainModelGUI());
-            
+            train.trainController.updateController();
             train.updateTrainControllerGUI();
         }
     }
