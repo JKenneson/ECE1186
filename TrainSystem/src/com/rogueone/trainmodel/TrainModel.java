@@ -12,8 +12,10 @@ package com.rogueone.trainmodel;
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.global.Global;
+import com.rogueone.trackmodel.Block;
 import com.rogueone.traincon.TrainController;
 import com.rogueone.traincon.gui.TrainControllerGUI;
+import com.rogueone.trainsystem.TrainSystem;
 import com.sun.javafx.image.impl.IntArgb;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -43,6 +45,8 @@ public class TrainModel {
     public final double PASS_WEIGHT = 165.35;           //1 passenger's weight (in lbs)
     
     //Variable declaration for the class
+    //Train System reference
+    private TrainSystem trainSystem;
     //Reference to TrainController
     public TrainController trainController;
     private TrainControllerGUI trainControllerGUI;
@@ -89,6 +93,12 @@ public class TrainModel {
     private boolean mboAntennaActivated;
     private String line;
     
+    //Blocks
+    private Block prevBlock;
+    private Block currBlock;
+    private Block nextBlock;
+    private Block currTempBlock;
+    
     /**
      * Initializer for the TrainModel class, sets all variables to a default state
      * 
@@ -97,7 +107,7 @@ public class TrainModel {
      * @param authority The desired authority set by the CTC
      * @param numCars How many cars are to be created (1 or 2)
      */
-    public TrainModel(int setPointSpeed, int authority, int numCars, String line) {
+    public TrainModel(int setPointSpeed, int authority, int numCars, String line, TrainSystem trainSystem) {
         //Failures
         this.powerFailure = false;
         this.brakeFailure = false;
@@ -143,6 +153,11 @@ public class TrainModel {
         this.trainControllerGUI = null;
         
         this.trainModelGUI = null;
+        
+        this.trainSystem = trainSystem;
+        //Block setting
+        this.prevBlock = trainSystem.getTrackModel().getBlock(Global.Line.valueOf(line.toUpperCase()), Global.Section.A, 0);
+        
     }
     
     /**

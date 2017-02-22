@@ -9,6 +9,7 @@
 package com.rogueone.trainmodel;
 
 import com.rogueone.trainmodel.gui.TrainModelGUI;
+import com.rogueone.trainsystem.TrainSystem;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,13 @@ import java.util.ArrayList;
  */
 public class TrainHandler {
     
+    private TrainSystem trainSystem;
     private static ArrayList<TrainModel> trains = new ArrayList<TrainModel>();
+    
+    
+    public TrainHandler(TrainSystem trainSystem) {
+        this.trainSystem = trainSystem;
+    }
     
     /**
      * Main function currently tests the functionality of the Train Model class independent from the other modules
@@ -32,7 +39,7 @@ public class TrainHandler {
         
         //trainModelInit();
         
-        trainModelAndControllerInit();
+        //trainModelAndControllerInit();
         
     }
     
@@ -46,7 +53,7 @@ public class TrainHandler {
      * @param line  The line the train will be traveling on (Red or Green)
      */
     public void dispatchNewTrain(int setPoint, int authority, int numCars, String line) {
-        TrainModel trainToAdd = new TrainModel(setPoint, authority, numCars, line);
+        TrainModel trainToAdd = new TrainModel(setPoint, authority, numCars, line, this.trainSystem);
         trainToAdd.CreateGUIObject(trainToAdd);
         trainToAdd.createTrainController();
         trainToAdd.createTrainControllerGUI();
@@ -69,6 +76,7 @@ public class TrainHandler {
         }
     }
     
+    /*
     public static void trainModelAndControllerInit() throws InterruptedException {
         TrainModel trainModelTest1 = new TrainModel(0, 40000, 1, "Green");                              //Create a new TrainModel object with a set point speed of 40, authority of 40000, and 1 car
         TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);    //Instantiate a GUI for this train
@@ -106,11 +114,9 @@ public class TrainHandler {
             Thread.sleep(1000);
         }
     }
+    */
 
-
-    public TrainHandler() {
-        
-    }
+    
     
     
     
