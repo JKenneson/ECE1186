@@ -140,7 +140,7 @@ public class TrainController {
 
         //Announcements
         this.announcement = this.trainID + "Departing Yard";
-        System.out.println(this.announcement);
+        //System.out.println(this.announcement);
 
         //Train Information
         this.trainID = trainID;
@@ -309,10 +309,10 @@ public class TrainController {
         
         this.uK = this.uK_1 + ((samplePeriod/2)*(this.eK+this.eK_1));
         
-        System.out.println("Setpt = " + this.getSetPoint());
-        System.out.println("eK = " + this.eK);
-        System.out.println("kP*eK = " + this.kP*this.eK);
-        System.out.println("kI*uK = " + this.kI*this.uK);
+        //System.out.println("Setpt = " + this.getSetPoint());
+        //System.out.println("eK = " + this.eK);
+        //System.out.println("kP*eK = " + this.kP*this.eK);
+        //System.out.println("kI*uK = " + this.kI*this.uK);
         this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
         if(this.powerCommand > this.maxPower){
             this.uK = this.uK_1;
@@ -494,7 +494,7 @@ public class TrainController {
         }
         
         if(this.airConditioningOn && this.heaterOn){
-            System.out.println("Both climate control systems activated at the same time, disabling both.");
+            //System.out.println("Both climate control systems activated at the same time, disabling both.");
             this.airConditioningOn = false;
             this.heaterOn = false;
             gui.ACOff.setSelected(true);
@@ -522,7 +522,7 @@ public class TrainController {
             
             gui.EmergencyBrakeToggleButton.setSelected(true);
 
-            System.out.println(getFailureType());
+            //System.out.println(getFailureType());
             switch(getFailureType()){
                 
                 case 1://Power Failure
@@ -807,7 +807,7 @@ public class TrainController {
      */
     public void setAuthority(short authority) {
         this.authority = (double)authority*this.FEET_IN_A_METER;
-        System.out.println(this.authority);
+        //System.out.println(this.authority);
     }
 
     /**

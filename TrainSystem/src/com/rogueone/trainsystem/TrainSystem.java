@@ -93,7 +93,7 @@ class Action extends TimerTask {
 
     public void run() {
         last = scheduledExecutionTime();
-        System.out.println("tick last = " + last);
+        //System.out.println("tick last = " + last);
         this.trainSystem.updateTrainSystem();
     }
 

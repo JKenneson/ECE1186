@@ -407,7 +407,7 @@ public class TrainModel {
         if(this.trainController != null) {
             this.powerReceived = this.trainController.calculatePower(this.currSpeedMPH, 1); //Ask for a new power
         }        
-        System.out.println("Power: " + this.powerReceived);
+        //System.out.println("Power: " + this.powerReceived);
         
         //P=F*v  -> Calculate a force by deviding that power by the velocity
         if(this.currSpeed == 0) {    //Can't devide by zero
@@ -423,8 +423,8 @@ public class TrainModel {
         this.angleOfSlope = Math.toDegrees(Math.atan2(this.grade, 100));            //Taking the arctan(%slope/100) will give the angle of the track
         this.frictionForce = (this.trainWeight * KG_IN_A_POUND/NUMBER_OF_WHEELS * GRAVITY * Math.sin(this.angleOfSlope)) + (this.frictionForce * Math.cos(this.angleOfSlope));
         
-        System.out.println("Angle: " + angleOfSlope);
-        System.out.println("Ff: " + frictionForce);
+        //System.out.println("Angle: " + angleOfSlope);
+        //System.out.println("Ff: " + frictionForce);
         
         //Sum the forces
         this.force = this.force - this.frictionForce;
@@ -444,7 +444,7 @@ public class TrainModel {
         else if (this.serviceBrakeActivated) {
             this.acceleration = SERVICE_BRAKE_DECEL * 1;
         }        
-        System.out.println("Accel: " + this.acceleration);
+        //System.out.println("Accel: " + this.acceleration);
         
         //vf = vi + a*t  -> Final velocity (speed) equals initial velocity + acceleration * time
         //Calculate current speed in m/s
@@ -457,7 +457,7 @@ public class TrainModel {
         //6)   Calculate distance traveled since last cycle and subtract that from remaining authority  -> s = vi*t + 1/2*a*t^2
         this.distanceTraveled = this.lastSpeed * 1 + (1/2 * this.acceleration * Math.pow(1, 2));    //In meters
         this.distanceTraveled = this.distanceTraveled * FEET_IN_A_METER;        //Convert to feet
-        System.out.println("Distance: " + this.distanceTraveled + "\n");
+        //System.out.println("Distance: " + this.distanceTraveled + "\n");
         
         //Subtract the distance traveled from remaining authority
         this.authority -= this.distanceTraveled;
