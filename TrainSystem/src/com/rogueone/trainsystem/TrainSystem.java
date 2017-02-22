@@ -5,8 +5,10 @@
  */
 package com.rogueone.trainsystem;
 
+import com.rogueone.global.Global;
 import com.rogueone.mainframe.*;
 import com.rogueone.trackmodel.TrackModel;
+import com.rogueone.trainmodel.TrainHandler;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.util.TimerTask;
@@ -21,6 +23,9 @@ public class TrainSystem {
 
     public static int timeToRefresh;
     public TrackModel trackModel;
+    public TrainHandler trainHandler;
+    public Timer timer;
+    public Action task;
 
     /**
      * @param args the command line arguments
@@ -30,54 +35,62 @@ public class TrainSystem {
         TrainSystem ts = new TrainSystem();
         ts.initializeTrainSystem();
 
-
     }
 
     public void initializeTrainSystem() {
-        MainFrame mf = new MainFrame();
+        
+
+        timeToRefresh = 1000;
+
+        this.trackModel = new TrackModel(new File("src/com/rogueone/assets/TrackData.xlsx"));
+        this.trainHandler = new TrainHandler();
+        this.timer = new Timer();
+        this.task = new Action(this);
+        timer.schedule(task, 0, timeToRefresh);
+        // this is where the user request a new interval, 2 sec.
+        
+        MainFrame mf = new MainFrame(this);
         mf.setLayout(new BorderLayout());
 
         InterfaceSelector is = new InterfaceSelector(mf);
         mf.getContentPane().add(is, BorderLayout.CENTER);
         mf.setVisible(true);
-
-        timeToRefresh = 1000;
-
-        Action task = null;
-        try {
-            this.trackModel = new TrackModel(new File("src/com/rogueone/assets/TrackData.xlsx"));
-            Timer timer = new Timer();
-            task = new Action();
-            timer.schedule(task, 0, timeToRefresh);
-            Thread.sleep(4000);
-            // this is where the user request a new interval, 2 sec.
-            task.cancel();
-            timeToRefresh += 3000;
-            timer.schedule(new Action(), 0, timeToRefresh);
-            Thread.sleep(8000);
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        }
-        task.cancel();
     }
 
     public TrackModel getTrackModel() {
         return trackModel;
     }
-    
-//    public void testTrain(){
-//        TrainHandler
-//    }
+
+    public void testTrain() {
+        trainHandler.dispatchNewTrain(25, 5000, 1, "GREEN");
+    }
+
+    void updateTrainSystem() {
+        this.trainHandler.updateTrains();
+    }
+
+    public void updateTimer(int timeToRefresh) {
+        this.task.cancel();
+        this.timeToRefresh = timeToRefresh;
+        this.task = new Action(this);
+        this.timer.schedule(this.task, 0, this.timeToRefresh);
+    }
 
 }
 
 class Action extends TimerTask {
 
     private long last;
+    TrainSystem trainSystem;
+
+    public Action(TrainSystem trainSystem) {
+        this.trainSystem = trainSystem;
+    }
 
     public void run() {
         last = scheduledExecutionTime();
-        System.out.println("tick");
+        System.out.println("tick last = " + last);
+        this.trainSystem.updateTrainSystem();
     }
 
     public long getLast() {

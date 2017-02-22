@@ -5,6 +5,7 @@
  */
 package com.rogueone.mainframe;
 
+import com.rogueone.trainsystem.TrainSystem;
 import java.awt.BorderLayout;
 
 /**
@@ -13,10 +14,16 @@ import java.awt.BorderLayout;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    public TrainSystem trainSystem;
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainFrame(TrainSystem trainSystem) {
+        initComponents();
+        this.trainSystem = trainSystem;
+    }
+
+    private MainFrame() {
         initComponents();
     }
 
@@ -68,6 +75,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         timeButtonGroup.add(jRadioButtonMenuItem2);
         jRadioButtonMenuItem2.setText("10x Normal Time");
+        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jRadioButtonMenuItem2);
 
         jMenuBar1.add(jMenu5);
@@ -106,7 +118,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
         // TODO add your handling code here:
+        this.trainSystem.updateTimer(1000);
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        this.trainSystem.updateTimer(100);
+    }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1391,7 +1391,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
         }
         
-        TrainHandler dispatchTrain = new TrainHandler(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine);
+//        TrainHandler dispatchTrain = new TrainHandler(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine);
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 

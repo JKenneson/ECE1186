@@ -337,11 +337,11 @@ public class TrackController {
         TrackControllerGUI trackControllerGUI = new TrackControllerGUI(trackControllerTest1);
 
         //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
-        MainFrame mf = new MainFrame();
-        mf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        mf.getContentPane().add(trackControllerGUI);
-        mf.pack();
-        mf.setVisible(true);     //Make sure to set it visible
+//        MainFrame mf = new MainFrame();
+//        mf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        mf.getContentPane().add(trackControllerGUI);
+//        mf.pack();
+//        mf.setVisible(true);     //Make sure to set it visible
 
         return trackControllerGUI;  //Return the GUI
     }
@@ -515,8 +515,8 @@ public class TrackController {
     }
 
     public void addTrain(String trainID, String suggestedSpeed, String suggestedAuthority, TrackControllerGUI gui) {
-        TrainModel train = new TrainModel(Integer.parseInt(suggestedSpeed), Integer.parseInt(suggestedAuthority), 1);
-        this.trainArray.put(Integer.parseInt(trainID), train);
+//        TrainModel train = new TrainModel(Integer.parseInt(suggestedSpeed), Integer.parseInt(suggestedAuthority), 1);
+//        this.trainArray.put(Integer.parseInt(trainID), train);
         
         String trainColumnNames[] = {"Train ID", "Suggested Speed", "Suggested Authority", "Commanded Speed", "Commanded Authority"};
         DefaultTableModel trainModel = new DefaultTableModel(trainColumnNames, 0);

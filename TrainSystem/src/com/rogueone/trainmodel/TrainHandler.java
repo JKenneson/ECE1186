@@ -45,7 +45,7 @@ public class TrainHandler {
      * @param numCars The number of cars on the train (1 or 2)
      * @param line  The line the train will be traveling on (Red or Green)
      */
-    public static void dispatchNewTrain(int setPoint, int authority, int numCars, String line) {
+    public void dispatchNewTrain(int setPoint, int authority, int numCars, String line) {
         trains.add(new TrainModel(setPoint, authority, numCars, line));
     }
     
@@ -53,7 +53,7 @@ public class TrainHandler {
      * Update all the trains along the track, this will calculate all new speeds and distances for all trains
      * This function also updates all the train controllers attached to the trains
      */
-    public static void updateTrains() {
+    public void updateTrains() {
         for (TrainModel train : TrainHandler.trains) {
             train.updateTrain();
             train.UpdateGUI(train.getTrainModelGUI());
@@ -99,8 +99,9 @@ public class TrainHandler {
         }
     }
 
-    public TrainHandler(double dispatchSpeed, double dispatchAuthority, int numberCars, String dispatchLine) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    public TrainHandler() {
+        
     }
     
     
