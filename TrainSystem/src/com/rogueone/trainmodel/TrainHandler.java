@@ -46,17 +46,25 @@ public class TrainHandler {
      * @param line  The line the train will be traveling on (Red or Green)
      */
     public void dispatchNewTrain(int setPoint, int authority, int numCars, String line) {
-        trains.add(new TrainModel(setPoint, authority, numCars, line));
+        TrainModel trainToAdd = new TrainModel(setPoint, authority, numCars, line);
+        trainToAdd.CreateGUIObject(trainToAdd);
+        trainToAdd.createTrainController();
+        trainToAdd.createTrainControllerGUI();
+        
+        trains.add(trainToAdd);
     }
     
     /**
      * Update all the trains along the track, this will calculate all new speeds and distances for all trains
      * This function also updates all the train controllers attached to the trains
+     * 
+     * @author Jonathan Kenneson
      */
     public void updateTrains() {
         for (TrainModel train : TrainHandler.trains) {
             train.updateTrain();
             train.UpdateGUI(train.getTrainModelGUI());
+            
             train.updateTrainControllerGUI();
         }
     }

@@ -44,7 +44,7 @@ public class TrainModel {
     
     //Variable declaration for the class
     //Reference to TrainController
-    private TrainController trainController;
+    public TrainController trainController;
     private TrainControllerGUI trainControllerGUI;
     //Reference to GUI
     private TrainModelGUI trainModelGUI;
@@ -143,10 +143,6 @@ public class TrainModel {
         this.trainControllerGUI = null;
         
         this.trainModelGUI = null;
-    }
-
-    public TrainModel(double dispatchSpeed, double dispatchAuthority, int numberCars, String dispatchLine) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**
@@ -679,4 +675,5 @@ public class TrainModel {
     public TrainModelGUI getTrainModelGUI() {
         return this.trainModelGUI;
     }
+    
 }
