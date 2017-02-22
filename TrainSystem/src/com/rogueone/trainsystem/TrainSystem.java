@@ -6,7 +6,9 @@
 package com.rogueone.trainsystem;
 
 import com.rogueone.mainframe.*;
+import com.rogueone.trackmodel.TrackModel;
 import java.awt.BorderLayout;
+import java.io.File;
 import java.util.TimerTask;
 import java.util.Timer;
 
@@ -18,12 +20,20 @@ import java.util.Timer;
 public class TrainSystem {
 
     public static int timeToRefresh;
+    public TrackModel trackModel;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         //Create a new MainFrame and an interface selector
+        TrainSystem ts = new TrainSystem();
+        ts.initializeTrainSystem();
+
+
+    }
+
+    public void initializeTrainSystem() {
         MainFrame mf = new MainFrame();
         mf.setLayout(new BorderLayout());
 
@@ -35,6 +45,7 @@ public class TrainSystem {
 
         Action task = null;
         try {
+            this.trackModel = new TrackModel(new File("src/com/rogueone/assets/TrackData.xlsx"));
             Timer timer = new Timer();
             task = new Action();
             timer.schedule(task, 0, timeToRefresh);
@@ -48,8 +59,15 @@ public class TrainSystem {
             interruptedException.printStackTrace();
         }
         task.cancel();
-
     }
+
+    public TrackModel getTrackModel() {
+        return trackModel;
+    }
+    
+//    public void testTrain(){
+//        TrainHandler
+//    }
 
 }
 
