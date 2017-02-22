@@ -69,15 +69,8 @@ public class TrackController {
 
     public TrackController() {
 
-        this.trackModelTest1 = new TrackModel();
+        this.trackModelTest1 = new TrackModel(new File("src/com/rogueone/assets/TrackData.xlsx"));
         this.trainArray = new HashMap<Integer, TrainModel>();
-        try {
-            trackModelTest1.parseDataFile(new File("src/com/rogueone/assets/TrackData.xlsx"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (InvalidFormatException ex) {
-            ex.printStackTrace();
-        }
 
     }
     
