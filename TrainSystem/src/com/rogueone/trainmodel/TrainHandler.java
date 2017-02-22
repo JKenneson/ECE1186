@@ -70,6 +70,10 @@ public class TrainHandler {
             Thread.sleep(1000);
         }
     }
+
+    public TrainHandler(double dispatchSpeed, double dispatchAuthority, int numberCars, String dispatchLine) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

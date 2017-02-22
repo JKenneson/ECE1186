@@ -9,20 +9,18 @@ package com.rogueone.ctc.gui;
 //import java.text.*;
 //import java.util.*;
 
+import com.rogueone.trainmodel.TrainHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Calendar;
 
-//import com.rogueone.trainmodel.TrainModel;
-
-
 public class CommandTrackControlGUI extends javax.swing.JPanel {
-    
+
     int trainID;
     int iterativeID = 0;
-    
+
     /**
      * Creates new form CommandTrackControlGUI
      */
@@ -929,7 +927,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     javax.swing.Timer m_t;
 
     private void Clock() {
@@ -939,7 +937,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         m_t.start();  // Start the timer
     }
 
-      private class ClockTickAction implements ActionListener {
+    private class ClockTickAction implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             //... Get the current time.
@@ -947,29 +946,25 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             int h = now.get(Calendar.HOUR_OF_DAY);
             int m = now.get(Calendar.MINUTE);
             int s = now.get(Calendar.SECOND);
-            
-            if (h > 12){
+
+            if (h > 12) {
                 h = h - 12;
                 jLabel7.setText("PM");
-            }
-            else {
+            } else {
                 jLabel7.setText("AM");
             }
-            
+
             TimeField.setText(h + ":" + m + ":" + s);
-            
-            if ((h > 5) && (h < 8)){
+
+            if ((h > 5) && (h < 8)) {
                 RushHourField.setText("YES");
-            }
-            else{
+            } else {
                 RushHourField.setText("NO");
             }
         }
     }
-    
-    
-    
-    
+
+
     private void jPanel19ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel19ComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel19ComponentShown
@@ -984,7 +979,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             DispatchButton1.setEnabled(true);
             TrainShutdownButton.setEnabled(true);
             TrackShutdownButton.setEnabled(true);
-        }       // TODO add your handling code here:
+        } // TODO add your handling code here:
         else {
             ChangeParametersButton3.setEnabled(false);
             DispatchButton1.setEnabled(false);
@@ -1030,10 +1025,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_CurrentCapacityFieldActionPerformed
 
-   
+
     private void RushHourFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RushHourFieldActionPerformed
 
-        
 // TODO add your handling code here:
     }//GEN-LAST:event_RushHourFieldActionPerformed
 
@@ -1056,11 +1050,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_TrainShutdownButtonActionPerformed
 
     private void TrainNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainNameFieldActionPerformed
-        
+
     }//GEN-LAST:event_TrainNameFieldActionPerformed
 
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
-        
+
         InitializeGUIObject();
 
         InformationHeader2.setText("Selected Train Information");
@@ -1075,141 +1069,132 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel75.setText("Max Capacity");
         jLabel76.setText("Status");
 
-        
         TrainSpeedLabel2.setText("mph");
         TrainAuthorityLabel2.setText("feet");
-       
-        
+
         SpeedField.setVisible(true);
         AuthorityField.setVisible(true);
         CurrentCapacityField.setVisible(true);
         MaxCapacityField.setVisible(true);
         StatusField.setVisible(true);
-        
-        JTable selectCheck = (JTable)evt.getSource();
-        
-        if (selectCheck != null){
+
+        JTable selectCheck = (JTable) evt.getSource();
+
+        if (selectCheck != null) {
             ChangeParametersButton3.setEnabled(true);
-        }
-        else {
+        } else {
             ChangeParametersButton3.setEnabled(false);
         }
-        
-       
-        if ( evt.getClickCount() == 1){
-            
-            JTable table = (JTable)evt.getSource();
+
+        if (evt.getClickCount() == 1) {
+
+            JTable table = (JTable) evt.getSource();
             int row = table.getSelectedRow();
-            trainID = (int)table.getValueAt(row, 1);
+            trainID = (int) table.getValueAt(row, 1);
             //global to program
-            
+
             //parse position field
-            String line = (String)table.getValueAt(row, 0);
-            String position = (String)table.getValueAt(row, 2);
+            String line = (String) table.getValueAt(row, 0);
+            String position = (String) table.getValueAt(row, 2);
             String[] parts = position.split(":");
-            String partSection = parts[0]; 
+            String partSection = parts[0];
             String partBlock = parts[1];
-            Boolean booleanStatus = (Boolean)(table.getValueAt(row, 3));
-            if (booleanStatus == false){
+            Boolean booleanStatus = (Boolean) (table.getValueAt(row, 3));
+            if (booleanStatus == false) {
                 StatusField.setText("Disabled");
-            }
-            else {
+            } else {
                 StatusField.setText("Operational");
             }
-            
+
             CurrentLineField.setText(line);
             CurrentSectionField.setText(partSection);
             CurrentBlockField.setText(partBlock);
             TrainNameField.setText(Integer.toString(trainID));
-            
-            if (SelectOperationMode2.getSelectedIndex() == 1){
+
+            if (SelectOperationMode2.getSelectedIndex() == 1) {
                 ChangeParametersButton3.setEnabled(false);
-            }
-            else { 
+            } else {
                 ChangeParametersButton3.setEnabled(true);
             }
         }
-        
-        if ( evt.getClickCount() == 2){
+
+        if (evt.getClickCount() == 2) {
             //double mouse click calls Train Model CreateGUIObject to dispalay IDed train model
-            JTable table = (JTable)evt.getSource();
+            JTable table = (JTable) evt.getSource();
             int row = table.getSelectedRow();
-            trainID = (int)table.getValueAt(row, 0);
-            
-            
+            trainID = (int) table.getValueAt(row, 0);
+
             //TrainHandler.CreateGUIObject(trainID);
         }
-    
+
     }//GEN-LAST:event_TrainTableMouseClicked
-    
+
     /**
      *
      * @param trainID
      * @param passTrainLine
      */
-    public void DisableTrain(int trainID, String passTrainLine){
+    public void DisableTrain(int trainID, String passTrainLine) {
         //DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
         Boolean bool = false;
-        for ( int i = 0; i < TrainTable.getRowCount(); i ++){
-            if (((String)TrainTable.getValueAt(i, 0)).equals(passTrainLine)){
-               if ((Integer)TrainTable.getValueAt(i, 1) == trainID){
+        for (int i = 0; i < TrainTable.getRowCount(); i++) {
+            if (((String) TrainTable.getValueAt(i, 0)).equals(passTrainLine)) {
+                if ((Integer) TrainTable.getValueAt(i, 1) == trainID) {
                     TrainTable.setValueAt(bool, i, 3);
                     //String trainPosition = (String)TrainTable.getValueAt(i, 2);
-               }
+                }
             }
         }
         TrainTable.repaint();
         checkForFailure();
     }
-    
-        
-    public void DisableTrack(String lineName, String segmentName, int blockName){
+
+    public void DisableTrack(String lineName, String segmentName, int blockName) {
         Boolean trackBool = false;
-      
-        for ( int i = 0; i < BlockTable.getRowCount(); i ++){
-            if (((String)BlockTable.getValueAt(i, 0)).equals(lineName)){
-                if (((String)BlockTable.getValueAt(i, 1)).equals(segmentName)){
-                    if ((Integer)BlockTable.getValueAt(i, 2) == blockName){
+
+        for (int i = 0; i < BlockTable.getRowCount(); i++) {
+            if (((String) BlockTable.getValueAt(i, 0)).equals(lineName)) {
+                if (((String) BlockTable.getValueAt(i, 1)).equals(segmentName)) {
+                    if ((Integer) BlockTable.getValueAt(i, 2) == blockName) {
                         BlockTable.setValueAt(trackBool, i, 3);
                         //String trainPosition = (segmentName+":"+blockName);
-                   }
+                    }
                 }
             }
         }
         BlockTable.repaint();
         checkForFailure();
     }
-    
-    
-    public void checkForFailure(){
+
+    public void checkForFailure() {
         Object newFailureRow = new Object[4];
-        
-        DefaultTableModel trainTable = (DefaultTableModel)TrainTable.getModel();
-        DefaultTableModel blockTable = (DefaultTableModel)BlockTable.getModel();
-        
-        for ( int i = 0; i < TrainTable.getRowCount(); i++ ){
-            if ( (Boolean)TrainTable.getValueAt(i, 3) == false){
-                String tableLine = (String)TrainTable.getValueAt(i, 0);
-                String trainPosition = (String)(TrainTable.getValueAt(i,2));
+
+        DefaultTableModel trainTable = (DefaultTableModel) TrainTable.getModel();
+        DefaultTableModel blockTable = (DefaultTableModel) BlockTable.getModel();
+
+        for (int i = 0; i < TrainTable.getRowCount(); i++) {
+            if ((Boolean) TrainTable.getValueAt(i, 3) == false) {
+                String tableLine = (String) TrainTable.getValueAt(i, 0);
+                String trainPosition = (String) (TrainTable.getValueAt(i, 2));
                 String failureType = "Shutdown";
                 updateFailureTable(tableLine, trainPosition, failureType);
             }
         }
-        
-        for ( int i = 0; i < BlockTable.getRowCount(); i++ ){
-            if ( (Boolean)BlockTable.getValueAt(i, 3) == false){
-                String tableLine = (String)BlockTable.getValueAt(i, 0);
-                String trainPosition = (String)((BlockTable.getValueAt(i,1) + ":" + BlockTable.getValueAt(i,2)));
+
+        for (int i = 0; i < BlockTable.getRowCount(); i++) {
+            if ((Boolean) BlockTable.getValueAt(i, 3) == false) {
+                String tableLine = (String) BlockTable.getValueAt(i, 0);
+                String trainPosition = (String) ((BlockTable.getValueAt(i, 1) + ":" + BlockTable.getValueAt(i, 2)));
                 String failureType = "Shutdown";
                 updateFailureTable(tableLine, trainPosition, failureType);
             }
         }
-        
+
     }
-    public void updateFailureTable( String passTrainLine, String trainPosition, String failureType){
-        
+
+    public void updateFailureTable(String passTrainLine, String trainPosition, String failureType) {
+
         //check if value already exists
-      
         String[] positionParts = trainPosition.split(":");
         String failureSection = positionParts[0];
         String failureBlock = positionParts[1];
@@ -1218,15 +1203,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         newRow[1] = failureSection;
         newRow[2] = failureBlock;
         newRow[3] = failureType;
-        DefaultTableModel model = (DefaultTableModel)FailureTable.getModel();
-        
-        if ( !(existsInTable(FailureTable, newRow)) ){
+        DefaultTableModel model = (DefaultTableModel) FailureTable.getModel();
+
+        if (!(existsInTable(FailureTable, newRow))) {
             model.addRow(newRow);
             FailureTable.repaint();
         }
-        
+
     }
-    
+
     public boolean existsInTable(JTable table, Object[] entry) {
 
         // Get row and column count
@@ -1243,8 +1228,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         // Check against all entries
         for (int i = 0; i < rowCount; i++) {
             String rowEntry = "";
-            for (int j = 0; j < colCount; j++)
+            for (int j = 0; j < colCount; j++) {
                 rowEntry = rowEntry + " " + table.getValueAt(i, j).toString();
+            }
             if (rowEntry.equalsIgnoreCase(curEntry)) {
                 return true;
             }
@@ -1258,9 +1244,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     private void BlockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BlockTableMouseClicked
         //set up screen for Block Info
-        
+
         InitializeGUIObject();
-        
+
         InformationHeader2.setText("Selected Block Information");
         jLabel67.setText("Block Section");
         jLabel68.setText("Block Line");
@@ -1271,75 +1257,66 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel74.setText("Crossing");
         jLabel75.setText("Switch");
         jLabel76.setText("Status");
-   
+
         TrainSpeedLabel2.setText("");
         TrainAuthorityLabel2.setText("");
-       
-        
+
         SpeedField.setVisible(true);
         AuthorityField.setVisible(true);
         CurrentCapacityField.setVisible(true);
         MaxCapacityField.setVisible(true);
         StatusField.setVisible(true);
-        
-        
-       
-        if (evt.getClickCount() == 1){
-            JTable blockTable = (JTable)evt.getSource();
+
+        if (evt.getClickCount() == 1) {
+            JTable blockTable = (JTable) evt.getSource();
             int row = blockTable.getSelectedRow();
-            String blockSection = (String)blockTable.getValueAt(row, 1);
-            int blockNumber = (int)blockTable.getValueAt(row, 2);
-            String line = (String)blockTable.getValueAt(row, 0);
+            String blockSection = (String) blockTable.getValueAt(row, 1);
+            int blockNumber = (int) blockTable.getValueAt(row, 2);
+            String line = (String) blockTable.getValueAt(row, 0);
 
             TrainNameField.setText(blockSection);
             CurrentSectionField.setText(Integer.toString(blockNumber));
             CurrentLineField.setText(line);
-            
-            Boolean booleanBlockStatus = (Boolean)blockTable.getValueAt(row, 3);
-            if (booleanBlockStatus == true){
+
+            Boolean booleanBlockStatus = (Boolean) blockTable.getValueAt(row, 3);
+            if (booleanBlockStatus == true) {
                 StatusField.setText("Operational");
-            }
-            else {
+            } else {
                 StatusField.setText("Disabled");
             }
-            
-            if ((blockNumber == 2) || (blockNumber == 9) || (blockNumber == 16) || (blockNumber == 22)){
+
+            if ((blockNumber == 2) || (blockNumber == 9) || (blockNumber == 16) || (blockNumber == 22)) {
                 AuthorityField.setText("YES");
             } //station
-            else{
+            else {
                 AuthorityField.setText("NO");
             }
-            
-            if (blockNumber == 12 ){
-                MaxCapacityField.setText("YES");      
-            }
-            else{
-                MaxCapacityField.setText("NO");      
+
+            if (blockNumber == 12) {
+                MaxCapacityField.setText("YES");
+            } else {
+                MaxCapacityField.setText("NO");
             } //switch
-            
-            if (blockNumber == 19 ){
-                CurrentCapacityField.setText("YES");      
-            }
-            else{
-                CurrentCapacityField.setText("NO");      
+
+            if (blockNumber == 19) {
+                CurrentCapacityField.setText("YES");
+            } else {
+                CurrentCapacityField.setText("NO");
             } //switch
-            
-            
-        }   
-        
-        if (evt.getClickCount() == 2){
+
         }
 
-
+        if (evt.getClickCount() == 2) {
+        }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_BlockTableMouseClicked
 
     private void FailureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FailureTableMouseClicked
         InitializeGUIObject();
-        
+
         InformationHeader2.setText("Selected Failure Information");
-        
+
         jLabel67.setText("Failure Type");
         jLabel68.setText("Failure Line");
         jLabel69.setText("Failure Block");
@@ -1351,35 +1328,32 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel76.setText("");
         TrainSpeedLabel2.setText("");
         TrainAuthorityLabel2.setText("");
-        
-        
+
         SpeedField.setVisible(false);
         AuthorityField.setVisible(false);
         CurrentCapacityField.setVisible(false);
         MaxCapacityField.setVisible(false);
         StatusField.setVisible(false);
-        
-        if (evt.getClickCount() == 1){
-            JTable failureTable = (JTable)evt.getSource();
+
+        if (evt.getClickCount() == 1) {
+            JTable failureTable = (JTable) evt.getSource();
             int row = failureTable.getSelectedRow();
-            String failureLine = (String)failureTable.getValueAt(row, 0);
-            String failureSection = (String)failureTable.getValueAt(row, 1);
-            String failureBlock = (String)failureTable.getValueAt(row, 2);
-            String failureType = (String)failureTable.getValueAt(row, 3);
-            
+            String failureLine = (String) failureTable.getValueAt(row, 0);
+            String failureSection = (String) failureTable.getValueAt(row, 1);
+            String failureBlock = (String) failureTable.getValueAt(row, 2);
+            String failureType = (String) failureTable.getValueAt(row, 3);
+
             TrainNameField.setText(failureType);
             CurrentLineField.setText(failureLine);
             CurrentSectionField.setText(failureSection);
             CurrentBlockField.setText(failureBlock);
-            
+
         }
-        
-        if (evt.getClickCount() == 2){
-            
+
+        if (evt.getClickCount() == 2) {
+
         }
-            
-        
-        
+
 // TODO add your handling code here:
     }//GEN-LAST:event_FailureTableMouseClicked
 
@@ -1392,44 +1366,45 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     private void DispatchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchButton1ActionPerformed
 
-        String dispatchLine = (String)DispatchLineBox.getSelectedItem();
+        String dispatchLine = (String) DispatchLineBox.getSelectedItem();
         String dispatchBlock = "A";
-        int dispatchSection = 1;   
-        double dispatchSpeed = Double.valueOf(DispatchSpeedField.getText());
-        double dispatchAuthority = Double.valueOf(DispatchAuthorityField.getText());
-         
-         if (RushHourField.getText().equals("YES")){
-            int numberCars = 2;
-         }
-         else {
-            int numberCars = 1;
-         }
-          iterativeID++;
-          int dispatchID = iterativeID;
+        int dispatchSection = 1;
+        int dispatchSpeed = Integer.valueOf(DispatchSpeedField.getText());
+        int dispatchAuthority = Integer.valueOf(DispatchAuthorityField.getText());
+        int numberCars;
         
-          Object[] newTrain = new Object[4];
-          newTrain[0] = dispatchLine;
-          newTrain[1] = dispatchID;
-          newTrain[2] = (dispatchSection + ":" + dispatchBlock);
-          newTrain[3] = true;
-          
-        if ( !(existsInTable(TrainTable, newTrain))){
+        if (RushHourField.getText().equals("YES")) {
+            numberCars = 2;
+        } else {
+            numberCars = 1;
+        }
+        iterativeID++;
+        int dispatchID = iterativeID;
+
+        Object[] newTrain = new Object[4];
+        newTrain[0] = dispatchLine;
+        newTrain[1] = dispatchID;
+        newTrain[2] = (dispatchSection + ":" + dispatchBlock);
+        newTrain[3] = true;
+
+        if (!(existsInTable(TrainTable, newTrain))) {
             addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
         }
-        //TrainModel newTrain = new TrainModel(dispatchSpeed, dispatchAuthority, numberCars);
+        
+        TrainHandler dispatchTrain = new TrainHandler(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine);
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
-    
+
     public void addRow(String dispatchLine, String dispatchBlock, int dispatchSection, int dispatchID) {
-      String concatination = (dispatchBlock + ":" + Integer.toString(dispatchSection));
-      Object[] newRow = new Object[4];
-      newRow[0] = dispatchLine;
-      newRow[1] = dispatchID;
-      newRow[2] = concatination;
-      newRow[3] = true;
-      DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
-      model.addRow(newRow);
-   }
+        String concatination = (dispatchBlock + ":" + Integer.toString(dispatchSection));
+        Object[] newRow = new Object[4];
+        newRow[0] = dispatchLine;
+        newRow[1] = dispatchID;
+        newRow[2] = concatination;
+        newRow[3] = true;
+        DefaultTableModel model = (DefaultTableModel) TrainTable.getModel();
+        model.addRow(newRow);
+    }
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
         DispatchSpeedField.setText("0");
         DispatchAuthorityField.setText("0");
@@ -1449,8 +1424,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         DispatchAuthorityField.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_DispatchAuthorityFieldMouseClicked
 
-
-    private void InitializeGUIObject(){
+    private void InitializeGUIObject() {
         TrainNameField.setText("");
         CurrentLineField.setText("");
         CurrentBlockField.setText("0");
@@ -1460,7 +1434,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         CurrentCapacityField.setText("");
         MaxCapacityField.setText("");
         ThroughputField.setText("");
-        StatusField.setText("");   
+        StatusField.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1533,4 +1507,3 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }
-

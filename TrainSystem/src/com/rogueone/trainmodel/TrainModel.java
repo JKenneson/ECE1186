@@ -144,6 +144,10 @@ public class TrainModel {
         this.trainController = null;
         this.trainControllerGUI = null;
     }
+
+    public TrainModel(double dispatchSpeed, double dispatchAuthority, int numberCars, String dispatchLine) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /**
      * This method creates a new TrainController object for this train, with a back-reference to this specific TrainModel
