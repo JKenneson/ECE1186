@@ -5,6 +5,7 @@
  */
 package com.rogueone.trainsystem;
 
+import com.rogueone.ctc.gui.CommandTrackControlGUI;
 import com.rogueone.global.Global;
 import com.rogueone.mainframe.*;
 import com.rogueone.trackmodel.TrackModel;
@@ -24,6 +25,7 @@ public class TrainSystem {
     public static int timeToRefresh;
     public TrackModel trackModel;
     public TrainHandler trainHandler;
+    public CommandTrackControlGUI ctcObject;
     public Timer timer;
     public Action task;
 
@@ -45,6 +47,7 @@ public class TrainSystem {
 
         this.trackModel = new TrackModel(new File("src/com/rogueone/assets/TrackData.xlsx"));
         this.trainHandler = new TrainHandler(this);
+        this.ctcObject = new CommandTrackControlGUI(this);
         this.timer = new Timer();
         this.task = new Action(this);
         timer.schedule(task, 0, timeToRefresh);
