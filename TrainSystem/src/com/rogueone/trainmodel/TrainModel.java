@@ -48,9 +48,6 @@ public class TrainModel {
     private TrainControllerGUI trainControllerGUI;
     //Reference to GUI
     private TrainModelGUI trainModelGUI;
-    //Nanotime trackers for calculating velocity and distance
-    private long startTime;
-    private long elapsedTime;
     //Failures
     private boolean powerFailure;
     private boolean brakeFailure;
@@ -101,9 +98,6 @@ public class TrainModel {
      * @param numCars How many cars are to be created (1 or 2)
      */
     public TrainModel(int setPointSpeed, int authority, int numCars, String line) {
-        //Nanotime trackers
-        this.startTime = System.nanoTime();    
-        this.elapsedTime = System.nanoTime() - startTime;
         //Failures
         this.powerFailure = false;
         this.brakeFailure = false;
@@ -394,9 +388,8 @@ public class TrainModel {
         
         //2)   Its velocity based on the power sent in from the TrainController
         //First, ask the TrainController for a new power
-        this.elapsedTime = System.nanoTime() - startTime;                                               //Get elapsed time since last calculation
         if(this.trainController != null) {
-            this.powerReceived = this.trainController.calculatePower(this.currSpeedMPH, this.elapsedTime/(double)1000000000); //Ask for a new power
+            this.powerReceived = this.trainController.calculatePower(this.currSpeedMPH, 1); //Ask for a new power
         }        
         System.out.println("Power: " + this.powerReceived);
         
@@ -424,29 +417,29 @@ public class TrainModel {
         this.acceleration = this.force / (this.trainWeight * KG_IN_A_POUND);        //Convert lbs to kg
         
         //Maximum acceleration of 0.5 m/s^2
-        if(this.acceleration > MAX_ACCELERATION * (this.elapsedTime/(double)1000000000)) {
-            this.acceleration = MAX_ACCELERATION * (this.elapsedTime/(double)1000000000);
+        if(this.acceleration > MAX_ACCELERATION * 1) {      //Always have 1 second intervals
+            this.acceleration = MAX_ACCELERATION * 1;
         }
         
         //5)   If the brakes are activated, this takes precedent and the train slows down according to which brake is activated
         if(this.emergencyBrakeActivated || this.emergencyBrakeOverride) {
-            this.acceleration = EMERGENCY_BRAKE_DECEL * (this.elapsedTime/(double)1000000000);
+            this.acceleration = EMERGENCY_BRAKE_DECEL * 1;
         }
         else if (this.serviceBrakeActivated) {
-            this.acceleration = SERVICE_BRAKE_DECEL * (this.elapsedTime/(double)1000000000);
+            this.acceleration = SERVICE_BRAKE_DECEL * 1;
         }        
         System.out.println("Accel: " + this.acceleration);
         
         //vf = vi + a*t  -> Final velocity (speed) equals initial velocity + acceleration * time
         //Calculate current speed in m/s
-        this.currSpeed = this.lastSpeed + this.acceleration * (this.elapsedTime/(double)1000000000);    //Find seconds by dividing elapsed time by a billion
+        this.currSpeed = this.lastSpeed + this.acceleration * 1;    //Find seconds by dividing elapsed time by a billion
         //Check for negative speed (impossible)
         if(this.currSpeed < 0) {
             this.currSpeed = 0;
         }
         
         //6)   Calculate distance traveled since last cycle and subtract that from remaining authority  -> s = vi*t + 1/2*a*t^2
-        this.distanceTraveled = this.lastSpeed * (this.elapsedTime/(double)1000000000) + (1/2 * this.acceleration * Math.pow((this.elapsedTime/(double)1000000000), 2));    //In meters
+        this.distanceTraveled = this.lastSpeed * 1 + (1/2 * this.acceleration * Math.pow(1, 2));    //In meters
         this.distanceTraveled = this.distanceTraveled * FEET_IN_A_METER;        //Convert to feet
         System.out.println("Distance: " + this.distanceTraveled + "\n");
         
@@ -459,8 +452,6 @@ public class TrainModel {
         //Current speed is in m/s, convert to mph to print out
         this.currSpeedMPH = this.currSpeed * SECONDS_IN_AN_HOUR / METERS_IN_A_MILE;
         
-        //Reset the start time for the next run of the loop
-        this.startTime = System.nanoTime();
     }
             
     
