@@ -46,6 +46,8 @@ public class TrainModel {
     //Reference to TrainController
     private TrainController trainController;
     private TrainControllerGUI trainControllerGUI;
+    //Reference to GUI
+    private TrainModelGUI trainModelGUI;
     //Nanotime trackers for calculating velocity and distance
     private long startTime;
     private long elapsedTime;
@@ -88,6 +90,7 @@ public class TrainModel {
     private int numCars;
     private boolean trackAntennaActivated;
     private boolean mboAntennaActivated;
+    private String line;
     
     /**
      * Initializer for the TrainModel class, sets all variables to a default state
@@ -97,7 +100,7 @@ public class TrainModel {
      * @param authority The desired authority set by the CTC
      * @param numCars How many cars are to be created (1 or 2)
      */
-    public TrainModel(int setPointSpeed, int authority, int numCars) {
+    public TrainModel(int setPointSpeed, int authority, int numCars, String line) {
         //Nanotime trackers
         this.startTime = System.nanoTime();    
         this.elapsedTime = System.nanoTime() - startTime;
@@ -140,9 +143,12 @@ public class TrainModel {
         this.numCars = numCars;
         this.trackAntennaActivated = true;
         this.mboAntennaActivated = true;
+        this.line = line;
         
         this.trainController = null;
         this.trainControllerGUI = null;
+        
+        this.trainModelGUI = null;
     }
 
     public TrainModel(double dispatchSpeed, double dispatchAuthority, int numberCars, String dispatchLine) {
@@ -199,6 +205,7 @@ public class TrainModel {
         //Initialize the GUI
         trainModelObject.InitializeInputPanel(trainModelGUI);
         
+        this.trainModelGUI = trainModelGUI;
         return  trainModelGUI;  //Return the GUI object
     }
     
@@ -458,6 +465,14 @@ public class TrainModel {
             
     
     
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * Following are all getters and setters for the TrainModel class
      * 
@@ -670,4 +685,7 @@ public class TrainModel {
         this.mboAntennaActivated = mboAntennaActivated;
     }
     
+    public TrainModelGUI getTrainModelGUI() {
+        return this.trainModelGUI;
+    }
 }

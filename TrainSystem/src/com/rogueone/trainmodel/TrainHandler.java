@@ -9,6 +9,7 @@
 package com.rogueone.trainmodel;
 
 import com.rogueone.trainmodel.gui.TrainModelGUI;
+import java.util.ArrayList;
 
 /**
  * Class declaration for TrainHandler
@@ -16,6 +17,8 @@ import com.rogueone.trainmodel.gui.TrainModelGUI;
  * @author Jon Kenneson
  */
 public class TrainHandler {
+    
+    private static ArrayList<TrainModel> trains = new ArrayList<TrainModel>();
     
     /**
      * Main function currently tests the functionality of the Train Model class independent from the other modules
@@ -33,8 +36,33 @@ public class TrainHandler {
         
     }
     
+    /**
+     * Dispatch a new train with a set point speed, authority, number of cars, and the line (Red or Green)
+     * 
+     * @author Jonathan Kenneson
+     * @param setPoint The initial CTC Set Point Speed
+     * @param authority The initial CTC authority
+     * @param numCars The number of cars on the train (1 or 2)
+     * @param line  The line the train will be traveling on (Red or Green)
+     */
+    public static void dispatchNewTrain(int setPoint, int authority, int numCars, String line) {
+        trains.add(new TrainModel(setPoint, authority, numCars, line));
+    }
+    
+    /**
+     * Update all the trains along the track, this will calculate all new speeds and distances for all trains
+     * This function also updates all the train controllers attached to the trains
+     */
+    public static void updateTrains() {
+        for (TrainModel train : TrainHandler.trains) {
+            train.updateTrain();
+            train.UpdateGUI(train.getTrainModelGUI());
+            train.updateTrainControllerGUI();
+        }
+    }
+    
     public static void trainModelAndControllerInit() throws InterruptedException {
-        TrainModel trainModelTest1 = new TrainModel(40, 40000, 1);                              //Create a new TrainModel object with a set point speed of 40, authority of 40000, and 1 car
+        TrainModel trainModelTest1 = new TrainModel(0, 40000, 1, "Green");                              //Create a new TrainModel object with a set point speed of 40, authority of 40000, and 1 car
         TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);    //Instantiate a GUI for this train
         
         trainModelTest1.createTrainController();                                                //Create and attach a TrainController to this train
@@ -56,7 +84,7 @@ public class TrainHandler {
     
     public static void trainModelInit () throws InterruptedException {
         //Create a new TrainModel object with a set point speed of 40, authority of 40000, and 1 car
-        TrainModel trainModelTest1 = new TrainModel(40, 40000, 1);
+        TrainModel trainModelTest1 = new TrainModel(40, 40000, 1, "Green");
         //Instantiate a GUI for this train
         TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);
         
