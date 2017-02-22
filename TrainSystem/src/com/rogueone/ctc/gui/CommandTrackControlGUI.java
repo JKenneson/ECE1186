@@ -10,7 +10,7 @@ package com.rogueone.ctc.gui;
 //import java.util.*;
 
 //import com.rogueone.trackmodel.TrackModel;
-import com.rogueone.trainmodel.TrainHandler;
+//import com.rogueone.trainmodel.TrainHandler;
 import com.rogueone.trainsystem.TrainSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +35,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     
       public CommandTrackControlGUI(TrainSystem ts) {
         initComponents();
-        trainSystem = new TrainSystem();
+        trainSystem = ts;
     }
 
     /**
@@ -1399,7 +1399,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
         }
         
-        TrainHandler dispatchTrain = new TrainHandler(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine);
+        trainSystem.dispatchTrain(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine);
         
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
