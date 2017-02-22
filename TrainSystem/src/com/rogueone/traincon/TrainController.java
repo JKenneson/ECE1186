@@ -19,7 +19,7 @@ import javax.swing.*;
  *
  * Class declaration for Train Controller
  * 
- * @author Tyler
+ * @author Tyler Protivnak
  */
 public class TrainController {
     
@@ -76,17 +76,23 @@ public class TrainController {
     private boolean antennaStatus;
     private boolean powerStatus;
     private boolean serviceBrakeStatus;
-    
+        
     /**
+     * This method is the constructor that should be used to make a new Train controller.
+     * This should only be called when a new train model is created and thus, only called
+     * by the train model. If a gui is not needed for the controller, pass "null" for the 
+     * gui.
      * 
-     * @param tm
-     * @param setPointSpeed
-     * @param authority
-     * @param maxPow
-     * @param trainID
-     * @param line
-     * @param section
-     * @param block 
+     * @author Tyler Protivnak 
+     * @param tm should be a "this" reference to the Train model using this controller
+     * @param gui trainController GUI object if it exists, else pass null
+     * @param setPointSpeed suggested Speed passed through track
+     * @param authority given authority passed through track
+     * @param maxPow maximum power allowed by the train
+     * @param trainID train ID from CTC
+     * @param line line ID from CTC
+     * @param section initial section, should be from yard
+     * @param block initial block, should be from yard
      */
     public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID,
            String line, String section, String block){
@@ -158,9 +164,12 @@ public class TrainController {
     
     
     /**
-     *
-     * @param trainControllerObject
-     * @return
+     * This method makes the train controller gui and initializes it's view for
+     * the user. It also sets the gui object for the train controller.
+     *      * 
+     * @author Tyler Protivnak
+     * @param trainControllerObject 
+     * @return the created train controller object
      */
     public TrainControllerGUI CreateGUIObject(TrainController trainControllerObject){
         //Create GUI object
@@ -182,6 +191,8 @@ public class TrainController {
     
     /**
      * 
+     * 
+     * @author 
      * @param gui 
      */
     private void InitializeInputPanel(TrainControllerGUI gui) {
@@ -210,7 +221,6 @@ public class TrainController {
         //Add more functionality in future    
     }
         
-    //**********SHOULD I INSTANTLY TRIP THE E BRAKE HERE???
     /**
      * This method is called from the TrainModelGUI when a failure is activated and sent through
      * the "Send New Failure" button. For now, the response will be to activate the emergency brake. 
@@ -386,7 +396,7 @@ public class TrainController {
         return 0; //default, all clear
     }                                       
     
-    private void updateController(){
+    public void updateController(){
         this.authority -= this.trainModel.getDistanceTraveled();
         if(!this.manualMode)
             this.updateClimateControl();
