@@ -39,6 +39,31 @@ public class TrackModel {
     }
     
     /**
+     * Default constructor
+     * @author Dan Bednarczyk
+     */
+    public TrackModel() {
+        //default
+    }
+    
+    /**
+     * Initializes TrackModel with data file
+     * @author Dan Bednarczyk
+     * @param trackDataFile the File to load
+     */
+    public TrackModel(File trackDataFile) {
+        try {
+            parseDataFile(trackDataFile);
+        }
+        catch (IOException ex) {
+            System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
+        }
+        catch (InvalidFormatException ex) {
+            System.out.println("Please select an .xlsx file.");
+        }
+    }
+    
+    /**
      * Resets the Track Model class by deleting all Lines, Sections, Blocks, Stations, Switches, and Yards.
      * @author Dan Bednarczyk
      */
@@ -126,11 +151,13 @@ public class TrackModel {
         //System.out.println("\nSWITCHES:");
         //printSwitches();
         
+        //simulateTrain();
+         
     }
     
     public void simulateTrain() {
-        Block prev = getBlock(Global.Line.GREEN, Global.Section.A, 1);
-        Block cur = getBlock(Global.Line.GREEN, Global.Section.A, 2);
+        Block prev = getBlock(Global.Line.GREEN, Global.Section.A, 0);
+        Block cur = getBlock(Global.Line.GREEN, Global.Section.A, 1);
         Block next = null;
         Block curTemp = null;
         while (cur != null) {
