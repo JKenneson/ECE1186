@@ -58,15 +58,15 @@ public class TrainSystem {
         
         
         
-        testTrain();
+        dispatchTrain(25, 5000, 1, "GREEN");
     }
 
     public TrackModel getTrackModel() {
         return trackModel;
     }
 
-    public void testTrain() {
-        trainHandler.dispatchNewTrain(25, 5000, 1, "GREEN");
+    public void dispatchTrain(int speed, int authortiy, int numCars, String line) {
+        trainHandler.dispatchNewTrain(speed, authortiy, numCars, line);
     }
 
     void updateTrainSystem() {
