@@ -20,6 +20,7 @@ import com.rogueone.trackcon.gui.TrackControllerGUI;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainmodel.TrainModel;
+import com.rogueone.trackmodel.Section;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -565,4 +566,8 @@ public class TrackController {
        }
                
     }
+    
+//    public updatePresence(){
+//        ArrayList<Section> sectionsArray = trackModelTest1.getLine(Global.Line.GREEN).getSections();
+//    }
 }
