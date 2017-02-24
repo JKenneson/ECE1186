@@ -24,6 +24,7 @@ import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.mbo.gui.TrainScheduleGUI;
 import com.rogueone.global.Global;
+import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -40,7 +41,11 @@ public class Mbo{
    private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
    private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
    private static TrainScheduleGUI scheduleGUI = new TrainScheduleGUI();
+   private TrainSystem trainSystem;
    
+   public Mbo(TrainSystem ts) {
+       trainSystem = ts;
+   }
     
    public MovingBlockGUI newGui() throws IOException, InvalidFormatException{
        //JFrame frame = new JFrame();

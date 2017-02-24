@@ -3,6 +3,7 @@ package com.rogueone.trackmodel;
 import com.rogueone.global.Global;
 import com.rogueone.global.UnitConversion;
 import com.rogueone.trackmodel.gui.TrackModelGUI;
+import com.rogueone.trainsystem.TrainSystem;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +22,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class TrackModel {
     
-    ArrayList<Line> lines = new ArrayList<Line>();
-    ArrayList<Section> sections = new ArrayList<Section>();
-    ArrayList<Block> blocks = new ArrayList<Block>();
-    ArrayList<Station> stations = new ArrayList<Station>();
-    ArrayList<Switch> switches = new ArrayList<Switch>();
-    Yard yard = new Yard();
-    TrackModelGUI trackModelGUI = null;
+    private ArrayList<Line> lines = new ArrayList<Line>();
+    private ArrayList<Section> sections = new ArrayList<Section>();
+    private ArrayList<Block> blocks = new ArrayList<Block>();
+    private ArrayList<Station> stations = new ArrayList<Station>();
+    private ArrayList<Switch> switches = new ArrayList<Switch>();
+    private Yard yard = new Yard();
+    private TrackModelGUI trackModelGUI = null;
+    private TrainSystem trainSystem = null;
     
     public static void main(String[] args) throws InterruptedException {
         
@@ -47,7 +49,8 @@ public class TrackModel {
      * @author Dan Bednarczyk
      * @param trackDataFile the File to load
      */
-    public TrackModel(File trackDataFile) {
+    public TrackModel(TrainSystem ts, File trackDataFile) {
+        trainSystem = ts;
         trackModelGUI = new TrackModelGUI();
 
         try {

@@ -17,6 +17,7 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import com.rogueone.trackmodel.TrackModel;
+import com.rogueone.trainsystem.TrainSystem;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
@@ -622,7 +623,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         int returnVal = trackDataFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File trackDataFile = trackDataFileChooser.getSelectedFile();
-            trackModel = new TrackModel(trackDataFile);
+            trackModel = new TrackModel(new TrainSystem(), trackDataFile);//temp
             updateLineComboBox();
             updateSectionComboBox();
             updateBlockComboBox();

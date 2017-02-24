@@ -24,7 +24,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
      */
     public TrainControllerGUI() {
         initComponents();
-        this.trainController = new TrainController(new TrainModel(40, 500, 1), this, (byte) 50, (short) 200, 500, "123", "G", "AA", "13"); //for testing purposes
+        //this.trainController = new TrainController(new TrainModel(40, 500, 1), this, (byte) 50, (short) 200, 500, "123", "G", "AA", "13"); //for testing purposes
     }
 
     public TrainControllerGUI(TrainController tc) {

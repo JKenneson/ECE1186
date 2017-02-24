@@ -235,7 +235,7 @@ public class InterfaceSelector extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+       /*
         main.getContentPane().removeAll();
         Mbo mbo = new Mbo();
         try{
@@ -246,7 +246,7 @@ public class InterfaceSelector extends javax.swing.JPanel {
         catch(IOException | InvalidFormatException e){
             
         }
-       
+       */
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

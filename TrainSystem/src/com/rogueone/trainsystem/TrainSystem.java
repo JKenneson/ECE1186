@@ -8,6 +8,8 @@ package com.rogueone.trainsystem;
 import com.rogueone.ctc.gui.CommandTrackControlGUI;
 import com.rogueone.global.Global;
 import com.rogueone.mainframe.*;
+import com.rogueone.mbo.Mbo;
+import com.rogueone.trackcon.TrackControllerHandler;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainmodel.TrainHandler;
 import java.awt.BorderLayout;
@@ -22,63 +24,55 @@ import java.util.Timer;
  */
 public class TrainSystem {
 
+    // Time utilities
     public static int timeToRefresh;
-    public TrackModel trackModel;
-    public TrainHandler trainHandler;
-    public CommandTrackControlGUI ctcObject;
     public Timer timer;
     public Action task;
-
+    
+    // Modules
+    private CommandTrackControlGUI ctc;
+    private TrackControllerHandler trackControllerHandler;
+    private TrackModel trackModel;
+    private TrainHandler trainHandler;
+    private Mbo mbo;
+    
+    // GUI
+    private MainFrame mainFrame;
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Create a new MainFrame and an interface selector
         TrainSystem ts = new TrainSystem();
         ts.initializeTrainSystem();
-
     }
-
 
     public void initializeTrainSystem() {
         
-
+        // Initialize clock
         timeToRefresh = 1000;
-
-        this.trackModel = new TrackModel(new File("src/com/rogueone/assets/TrackData.xlsx"));
-        this.trainHandler = new TrainHandler(this);
-        this.ctcObject = new CommandTrackControlGUI(this);
         this.timer = new Timer();
         this.task = new Action(this);
         timer.schedule(task, 0, timeToRefresh);
-        // this is where the user request a new interval, 2 sec.
         
-        MainFrame mf = new MainFrame(this);
-        mf.setLayout(new BorderLayout());
-
-        InterfaceSelector is = new InterfaceSelector(mf);
-        mf.getContentPane().add(is, BorderLayout.CENTER);
-        mf.setVisible(true);
+        // Initialize modules
+        this.ctc = new CommandTrackControlGUI(this);
+        this.trackControllerHandler = new TrackControllerHandler(this);
+        this.trackModel = new TrackModel(this, new File("src/com/rogueone/assets/TrackData.xlsx"));
+        this.trainHandler = new TrainHandler(this);
+        this.mbo = new Mbo(this);
         
-        
-        
-        dispatchTrain(25, 5000, 1, "GREEN");
+        // Initialize GUI
+        mainFrame = new MainFrame(this);
+        mainFrame.setLayout(new BorderLayout());
+        mainFrame.getContentPane().add(ctc, BorderLayout.CENTER);
+        mainFrame.setVisible(true);
+          
+        //dispatchTrain(25, 5000, 1, "GREEN");
     }
-
-    public TrackModel getTrackModel() {
-        return trackModel;
-    }
-
-    public void dispatchTrain(int speed, int authortiy, int numCars, String line) {
-        trainHandler.dispatchNewTrain(speed, authortiy, numCars, line);
-        
-    }
-
-    /**
-     * This method gets called every second or 10th of a second
-     */
+    
     void updateTrainSystem() {
-        this.trainHandler.updateTrains();
+        //this.trainHandler.updateTrains();
         //this.trackModel.updateGUI();
     }
 
@@ -88,7 +82,31 @@ public class TrainSystem {
         this.task = new Action(this);
         this.timer.schedule(this.task, 0, this.timeToRefresh);
     }
-
+    
+    public void dispatchTrain(int speed, int authortiy, int numCars, String line) {
+        trainHandler.dispatchNewTrain(speed, authortiy, numCars, line);  
+    }
+    
+    // GETTERS
+    public CommandTrackControlGUI getCTC() {
+        return ctc;
+    }
+    
+    public TrackControllerHandler getTrackControllerHandler() {
+        return trackControllerHandler;
+    }
+    
+    public TrackModel getTrackModel() {
+        return trackModel;
+    }
+    
+    public TrainHandler getTrainHandler() {
+        return trainHandler;
+    }
+    
+    public Mbo getMBO() {
+        return mbo;
+    }
 }
 
 class Action extends TimerTask {

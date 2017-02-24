@@ -21,6 +21,7 @@ import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trackmodel.Section;
+import com.rogueone.trainsystem.TrainSystem;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -69,7 +70,7 @@ public class TrackController {
 
     public TrackController() {
 
-        this.trackModelTest1 = new TrackModel(new File("src/com/rogueone/assets/TrackData.xlsx"));
+        this.trackModelTest1 = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
         this.trainArray = new HashMap<Integer, TrainModel>();
 
     }

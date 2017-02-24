@@ -20,6 +20,7 @@ import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.mbo.gui.TrainScheduleGUI;
 import com.rogueone.global.Global;
+import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.*;
 import javax.swing.table.*;;
 /**
@@ -584,13 +585,13 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
     }// </editor-fold>//GEN-END:initComponents
 
     private void MboOkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton1ActionPerformed
-        Mbo mbo = new Mbo();
+        Mbo mbo = new Mbo(new TrainSystem());
         mbo.updateSpeed();
     }//GEN-LAST:event_MboOkButton1ActionPerformed
 
     private void TrainDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainDropdownActionPerformed
         //MovingBlockGUI gui = new MovingBlockGUI();
-        Mbo mbo = new Mbo();
+        Mbo mbo = new Mbo(new TrainSystem());
       //int trainIdIndex = gui.TrainDropdown.getSelectedIndex();
       //String trainID = String.valueOf(gui.TrainDropdown.getSelectedItem());
        //System.out.println(trainIdIndex);
@@ -610,7 +611,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
         JFileChooser scheduleChooser = new JFileChooser("src/com/rogueone/assets");
         int returnVal = scheduleChooser.showOpenDialog(this);
         TrainScheduleGUI trainGUI = new TrainScheduleGUI();
-        Mbo mbo = new Mbo();
+        Mbo mbo = new Mbo(new TrainSystem());
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File newFile = scheduleChooser.getSelectedFile();
             try {
@@ -646,7 +647,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
     }//GEN-LAST:event_ThroughputInputActionPerformed
 
     private void MboOkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton2ActionPerformed
-        Mbo mbo = new Mbo();
+        Mbo mbo = new Mbo(new TrainSystem());
             //File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
             if(NumTrainsRadio.isSelected()){
                 String numTrainStr = NumTrainsInput.getText();
@@ -673,7 +674,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
          TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
-         Mbo mbo = new Mbo();
+         Mbo mbo = new Mbo(new TrainSystem());
          
          try{
          mbo.readRedSchedule(file);
@@ -686,7 +687,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
     }//GEN-LAST:event_DetailedScheduleButtonActionPerformed
 
     private void trainDeployButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainDeployButtonActionPerformed
-        Mbo mbo = new Mbo();
+        Mbo mbo = new Mbo(new TrainSystem());
         DefaultTableModel model = (DefaultTableModel)trainTable.getModel();
         MovingBlockGUI gui = new MovingBlockGUI();
         try{
