@@ -25,9 +25,11 @@ import java.util.Timer;
 public class TrainSystem {
 
     // Time utilities
-    public static int timeToRefresh;
-    public Timer timer;
-    public Action task;
+    private Timer timer;
+    private SystemTimer task;
+    //private Clock clock;
+    public static final int NORMAL_TIME = 1000;
+    public static final int x10_TIME = 1000;
     
     // Modules
     private CommandTrackControlGUI ctc;
@@ -35,9 +37,13 @@ public class TrainSystem {
     private TrackModel trackModel;
     private TrainHandler trainHandler;
     private Mbo mbo;
+    //private Schedule schedule;
     
     // GUI
     private MainFrame mainFrame;
+    
+    //OTHER
+    private static final String trackDataFilePath ="src/com/rogueone/assets/TrackData.xlsx";
     
     /**
      * @param args the command line arguments
@@ -47,18 +53,20 @@ public class TrainSystem {
         ts.initializeTrainSystem();
     }
 
+    /**
+     * Initialize an instance of a TrainSystem.
+     */
     public void initializeTrainSystem() {
         
         // Initialize clock
-        timeToRefresh = 1000;
         this.timer = new Timer();
-        this.task = new Action(this);
-        timer.schedule(task, 0, timeToRefresh);
+        this.task = new SystemTimer(this);
+        timer.schedule(task, 0, NORMAL_TIME);
         
         // Initialize modules
         this.ctc = new CommandTrackControlGUI(this);
         this.trackControllerHandler = new TrackControllerHandler(this);
-        this.trackModel = new TrackModel(this, new File("src/com/rogueone/assets/TrackData.xlsx"));
+        this.trackModel = new TrackModel(this, new File(trackDataFilePath));
         this.trainHandler = new TrainHandler(this);
         this.mbo = new Mbo(this);
         
@@ -71,6 +79,7 @@ public class TrainSystem {
         //dispatchTrain(25, 5000, 1, "GREEN");
     }
     
+    // UPDATES
     void updateTrainSystem() {
         //this.trainHandler.updateTrains();
         //this.trackModel.updateGUI();
@@ -78,43 +87,64 @@ public class TrainSystem {
 
     public void updateTimer(int timeToRefresh) {
         this.task.cancel();
-        this.timeToRefresh = timeToRefresh;
-        this.task = new Action(this);
-        this.timer.schedule(this.task, 0, this.timeToRefresh);
+        this.task = new SystemTimer(this);
+        this.timer.schedule(this.task, 0, timeToRefresh);
     }
     
+    // TESTING
     public void dispatchTrain(int speed, int authortiy, int numCars, String line) {
         trainHandler.dispatchNewTrain(speed, authortiy, numCars, line);  
     }
     
     // GETTERS
+    
+    /**
+     * Get shared CTC object.
+     * @return CommandTrackControlGUI The global CTC object
+     */
     public CommandTrackControlGUI getCTC() {
         return ctc;
     }
     
+    /**
+     * Get shared TrackControllerHandler object.
+     * @return TrackControllerHandler The global TrackControllerHandler object
+     */
     public TrackControllerHandler getTrackControllerHandler() {
         return trackControllerHandler;
     }
     
+    /**
+     * Get shared TrackModel object.
+     * @return TrackModel The global TrackModel object
+     */
     public TrackModel getTrackModel() {
         return trackModel;
     }
     
+    /**
+     * Get shared TrainHandler object.
+     * @return TrainHandler The global TrainHandler object
+     */
     public TrainHandler getTrainHandler() {
         return trainHandler;
     }
     
+    /**
+     * Get shared MBO object.
+     * @return Mbo The global MBO object
+     */
     public Mbo getMBO() {
         return mbo;
     }
 }
 
-class Action extends TimerTask {
+class SystemTimer extends TimerTask {
 
     private long last;
     TrainSystem trainSystem;
 
-    public Action(TrainSystem trainSystem) {
+    public SystemTimer(TrainSystem trainSystem) {
         this.trainSystem = trainSystem;
     }
 

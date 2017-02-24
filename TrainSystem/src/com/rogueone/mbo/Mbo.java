@@ -61,6 +61,10 @@ public class Mbo{
         return mboGui;
    }
    
+   public MovingBlockGUI getGUI() {
+       return mboGui;
+   }
+   
     /**
      * Reads th excel file for the personnel schedule, then outputs it to the GUI
      * @param gui MBO GUI to be updated with personnel schedule information

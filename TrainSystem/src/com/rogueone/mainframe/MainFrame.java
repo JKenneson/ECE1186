@@ -17,14 +17,11 @@ public class MainFrame extends javax.swing.JFrame {
     public TrainSystem trainSystem;
     /**
      * Creates new form MainFrame
+     * @param trainSystem the TrainSystem
      */
     public MainFrame(TrainSystem trainSystem) {
         initComponents();
         this.trainSystem = trainSystem;
-    }
-
-    private MainFrame() {
-        initComponents();
     }
 
     /**
@@ -37,141 +34,187 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         timeButtonGroup = new javax.swing.ButtonGroup();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mainMenuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        editMenu = new javax.swing.JMenu();
+        speedMenu = new javax.swing.JMenu();
+        normalTimeRadioButton = new javax.swing.JRadioButtonMenuItem();
+        x10SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
+        moduleMenu = new javax.swing.JMenu();
+        ctcMenuItem = new javax.swing.JMenuItem();
+        trackControllerHandlerMenuItem = new javax.swing.JMenuItem();
+        trackModelMenuItem = new javax.swing.JMenuItem();
+        trainHandlerMenuItem = new javax.swing.JMenuItem();
+        mboMenuItem = new javax.swing.JMenuItem();
+        helpMenu = new javax.swing.JMenu();
+        helpText = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1040, 720));
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mainMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        fileMenu.setText("File");
+        mainMenuBar.add(fileMenu);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        editMenu.setText("Edit");
+        mainMenuBar.add(editMenu);
 
-        jMenu5.setText("Time");
+        speedMenu.setText("Speed");
 
-        timeButtonGroup.add(jRadioButtonMenuItem1);
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Normal Time");
-        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        timeButtonGroup.add(normalTimeRadioButton);
+        normalTimeRadioButton.setSelected(true);
+        normalTimeRadioButton.setText("Normal Time");
+        normalTimeRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem1ActionPerformed(evt);
+                normalTimeRadioButtonActionPerformed(evt);
             }
         });
-        jMenu5.add(jRadioButtonMenuItem1);
+        speedMenu.add(normalTimeRadioButton);
 
-        timeButtonGroup.add(jRadioButtonMenuItem2);
-        jRadioButtonMenuItem2.setText("10x Normal Time");
-        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        timeButtonGroup.add(x10SpeedRadioButton);
+        x10SpeedRadioButton.setText("10x Normal Time");
+        x10SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem2ActionPerformed(evt);
+                x10SpeedRadioButtonActionPerformed(evt);
             }
         });
-        jMenu5.add(jRadioButtonMenuItem2);
+        speedMenu.add(x10SpeedRadioButton);
 
-        jMenuBar1.add(jMenu5);
+        mainMenuBar.add(speedMenu);
 
-        jMenu4.setText("Back To Start");
+        moduleMenu.setText("Module");
 
-        jMenuItem2.setText("Go back to start");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        ctcMenuItem.setText("CTC");
+        ctcMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                ctcMenuItemActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem2);
+        moduleMenu.add(ctcMenuItem);
 
-        jMenuBar1.add(jMenu4);
+        trackControllerHandlerMenuItem.setText("Track Controller Handler");
+        trackControllerHandlerMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trackControllerHandlerMenuItemActionPerformed(evt);
+            }
+        });
+        moduleMenu.add(trackControllerHandlerMenuItem);
 
-        jMenu3.setText("Help");
+        trackModelMenuItem.setText("Track Model");
+        trackModelMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trackModelMenuItemActionPerformed(evt);
+            }
+        });
+        moduleMenu.add(trackModelMenuItem);
 
-        jMenuItem1.setText("Display Screen Information");
-        jMenu3.add(jMenuItem1);
+        trainHandlerMenuItem.setText("Train Handler");
+        trainHandlerMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trainHandlerMenuItemActionPerformed(evt);
+            }
+        });
+        moduleMenu.add(trainHandlerMenuItem);
 
-        jMenuBar1.add(jMenu3);
+        mboMenuItem.setText("MBO");
+        mboMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mboMenuItemActionPerformed(evt);
+            }
+        });
+        moduleMenu.add(mboMenuItem);
 
-        setJMenuBar(jMenuBar1);
+        mainMenuBar.add(moduleMenu);
+
+        helpMenu.setText("Help");
+
+        helpText.setText("Display Screen Information");
+        helpMenu.add(helpText);
+
+        mainMenuBar.add(helpMenu);
+
+        setJMenuBar(mainMenuBar);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        this.getContentPane().removeAll();
-        InterfaceSelector is = new InterfaceSelector(this);
-        this.getContentPane().add(is, BorderLayout.CENTER);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        this.trainSystem.updateTimer(1000);
-    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
-
-    private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        this.trainSystem.updateTimer(100);
-    }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
+    /**
+     * Set normal time
+     */
+    private void normalTimeRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_normalTimeRadioButtonActionPerformed
+        this.trainSystem.updateTimer(TrainSystem.NORMAL_TIME);
+    }//GEN-LAST:event_normalTimeRadioButtonActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Set x10 time
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void x10SpeedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x10SpeedRadioButtonActionPerformed
+        this.trainSystem.updateTimer(TrainSystem.x10_TIME);
+    }//GEN-LAST:event_x10SpeedRadioButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
-        });
-    }
+    /**
+     * Set CTC visible
+     */
+    private void ctcMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctcMenuItemActionPerformed
+        this.getContentPane().removeAll();
+        this.getContentPane().add(this.trainSystem.getCTC(), BorderLayout.CENTER);
+        this.setVisible(true);
+    }//GEN-LAST:event_ctcMenuItemActionPerformed
+
+    /**
+     * Set TrackControllerHandler visible
+     */
+    private void trackControllerHandlerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackControllerHandlerMenuItemActionPerformed
+        this.getContentPane().removeAll();
+        //this.getContentPane().add(this.trainSystem.getTrackControllerHandler().getGUI(), BorderLayout.CENTER);
+        this.setVisible(true);
+    }//GEN-LAST:event_trackControllerHandlerMenuItemActionPerformed
+
+    /**
+     * Set TrackModel visible
+     */
+    private void trackModelMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackModelMenuItemActionPerformed
+        this.getContentPane().removeAll();
+        this.getContentPane().add(this.trainSystem.getTrackModel().getGUI(), BorderLayout.CENTER);
+        this.setVisible(true);
+    }//GEN-LAST:event_trackModelMenuItemActionPerformed
+
+    /**
+     * Set TrainHandler visible
+     */
+    private void trainHandlerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainHandlerMenuItemActionPerformed
+        this.getContentPane().removeAll();
+        //this.getContentPane().add(this.trainSystem.getTrainHandler().getGUI(), BorderLayout.CENTER);
+        this.setVisible(true);
+    }//GEN-LAST:event_trainHandlerMenuItemActionPerformed
+
+    /**
+     * Set MBO visible
+     */
+    private void mboMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mboMenuItemActionPerformed
+        this.getContentPane().removeAll();
+        this.getContentPane().add(this.trainSystem.getMBO().getGUI(), BorderLayout.CENTER);
+        this.setVisible(true);
+    }//GEN-LAST:event_mboMenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JMenuItem ctcMenuItem;
+    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem helpText;
+    private javax.swing.JMenuBar mainMenuBar;
+    private javax.swing.JMenuItem mboMenuItem;
+    private javax.swing.JMenu moduleMenu;
+    private javax.swing.JRadioButtonMenuItem normalTimeRadioButton;
+    private javax.swing.JMenu speedMenu;
     private javax.swing.ButtonGroup timeButtonGroup;
+    private javax.swing.JMenuItem trackControllerHandlerMenuItem;
+    private javax.swing.JMenuItem trackModelMenuItem;
+    private javax.swing.JMenuItem trainHandlerMenuItem;
+    private javax.swing.JRadioButtonMenuItem x10SpeedRadioButton;
     // End of variables declaration//GEN-END:variables
 }

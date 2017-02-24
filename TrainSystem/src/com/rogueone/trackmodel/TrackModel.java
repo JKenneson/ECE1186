@@ -44,6 +44,10 @@ public class TrackModel {
         trackModelGUI.updateSummaryPanel();
     }
     
+    public TrackModelGUI getGUI() {
+        return trackModelGUI;
+    }
+    
     /**
      * Initializes TrackModel with data file
      * @author Dan Bednarczyk
