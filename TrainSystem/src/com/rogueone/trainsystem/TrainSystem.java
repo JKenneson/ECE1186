@@ -6,6 +6,7 @@
 package com.rogueone.trainsystem;
 
 import com.rogueone.ctc.gui.CommandTrackControlGUI;
+import com.rogueone.global.Clock;
 import com.rogueone.global.Global;
 import com.rogueone.mainframe.*;
 import com.rogueone.mbo.Mbo;
@@ -27,9 +28,9 @@ public class TrainSystem {
     // Time utilities
     private Timer timer;
     private SystemTimer task;
-    //private Clock clock;
+    private Clock clock;
     public static final int NORMAL_TIME = 1000;
-    public static final int x10_TIME = 1000;
+    public static final int x10_TIME = 100;
     
     // Modules
     private CommandTrackControlGUI ctc;
@@ -58,10 +59,8 @@ public class TrainSystem {
      */
     public void initializeTrainSystem() {
         
-        // Initialize clock
-        this.timer = new Timer();
-        this.task = new SystemTimer(this);
-        timer.schedule(task, 0, NORMAL_TIME);
+        //Initialize the clock
+        this.clock = new Clock();
         
         // Initialize modules
         this.ctc = new CommandTrackControlGUI(this);
@@ -76,6 +75,11 @@ public class TrainSystem {
         mainFrame.getContentPane().add(ctc, BorderLayout.CENTER);
         mainFrame.setVisible(true);
           
+        // Initialize timer and scheduler
+        this.timer = new Timer();
+        this.task = new SystemTimer(this);
+        timer.schedule(this.task, 0, NORMAL_TIME);
+        
         //dispatchTrain(25, 5000, 1, "GREEN");
     }
     
@@ -83,6 +87,8 @@ public class TrainSystem {
     void updateTrainSystem() {
         //this.trainHandler.updateTrains();
         //this.trackModel.updateGUI();
+        this.clock.updateClock();               //Increment the clock
+        System.out.println(this.clock.printClock());
     }
 
     public void updateTimer(int timeToRefresh) {
