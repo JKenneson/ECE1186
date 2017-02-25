@@ -5,6 +5,7 @@
  */
 package com.rogueone.global;
 
+import java.awt.Color;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -15,6 +16,9 @@ import java.util.Locale;
  * @author Jon Kenneson
  */
 public class Global {
+    
+    public static final Color GREEN = new Color(125, 236, 188);
+    public static final Color RED = new Color(242, 149, 149);
     
     /**
      * Comma Formatter will format all commas for large numbers
@@ -63,6 +67,6 @@ public class Global {
     
     public enum CrossingState{
         ACTIVE, INACTIVE
-    }
+    } 
     
 }

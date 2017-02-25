@@ -40,10 +40,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
     
     private TrackModel trackModel;
 
-    //Constants
-    private final Color GREEN = new Color(125, 236, 188);
-    private final Color RED = new Color(242, 149, 149);
-
     /** Creates new form TrackModelGUI */
     public TrackModelGUI(TrackModel tm) {
         trackModel = tm;
@@ -640,104 +636,55 @@ public class TrackModelGUI extends javax.swing.JPanel {
         String blockColumnNames[] = { "Line", "Section", "Block", "Occupied", "Rail Fail", "Circuit Fail", "Power Fail" };
         DefaultTableModel summaryModel = new DefaultTableModel(blockColumnNames, 0);
         for (Block b : blocks) {
-            String blockRowData[] = { b.getLine().getLineID() + "", b.getSection().getSectionID() + "", b.getID() + "", b.isOccupied() + "", b.getFailureBrokenRail() + "", b.getFailureTrackCircuit() + "", b.getFailurePowerOutage() + "" };
+            String line =  b.getLine().getLineID() + "";
+            if(line.equalsIgnoreCase("GREEN")) {
+                line = "Green";
+            }
+            else if(line.equalsIgnoreCase("RED")) {
+                line = "Red";
+            }
+            String section = b.getSection().getSectionID() + "";
+            String ID = b.getID() + "";
+            String presence = b.isOccupied() + "";
+            if(presence.equalsIgnoreCase("TRUE")) {
+                presence = "Yes";
+            }
+            else {
+                presence = "No";
+            }
+            String failureBrokenRail = b.getFailureBrokenRail() + "";
+            if(failureBrokenRail.equalsIgnoreCase("TRUE")) {
+                failureBrokenRail = "Failure";
+            }
+            else {
+                failureBrokenRail = "Ok";
+            }
+            String failureTrackCircuit = b.getFailureTrackCircuit() + "";
+            if(failureTrackCircuit.equalsIgnoreCase("TRUE")) {
+                failureTrackCircuit = "Failure";
+            }
+            else {
+                failureTrackCircuit = "Ok";
+            }
+            String failurePowerOutage = b.getFailurePowerOutage() + "";
+            if(failurePowerOutage.equalsIgnoreCase("TRUE")) {
+                failurePowerOutage = "Failure";
+            }
+            else {
+                failurePowerOutage = "Ok";
+            }
+            String blockRowData[] = {line, section, ID, presence, failureBrokenRail, failureTrackCircuit, failurePowerOutage};
+       
             summaryModel.addRow(blockRowData);
         }
         summaryTable.setModel(summaryModel);
-        
-        /*
-        * NOTE: The following renderers should be put into their own classes and should be more efficient,
-        *           but they are functional and good enough for the prototype for now
-        */
-        
-        //LINE  
-        summaryTable.getColumnModel().getColumn(0).setCellRenderer(
-            new DefaultTableCellRenderer() {
-                @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-                    if (value.toString().equalsIgnoreCase("GREEN")) {
-                        renderer.setBackground(GREEN);
-                        //table.getModel().setValueAt("Green", row, 0);
-                    }
-                    else if (value.toString().equalsIgnoreCase("RED")) {
-                        renderer.setBackground(RED);
-                        //table.getModel().setValueAt("Red", row, 0);
-                    }                
-                    return renderer;
-                }
-            });
-        //OCCUPIED  
-        summaryTable.getColumnModel().getColumn(3).setCellRenderer(
-            new DefaultTableCellRenderer() {
-                @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                    if (value.toString().equalsIgnoreCase("TRUE") || value.toString().equalsIgnoreCase("Y")) {
-                        renderer.setBackground(GREEN);
-                        //table.getModel().setValueAt("Y", row, 3);
-                    }
-                    else if (value.toString().equalsIgnoreCase("FALSE") || value.toString().equalsIgnoreCase("N")) {
-                        renderer.setBackground(Color.WHITE);
-                        //table.getModel().setValueAt("N", row, 3);
-                    }                
-                    return renderer;
-                }
-            });
-        //FAILURES  
-        summaryTable.getColumnModel().getColumn(4).setCellRenderer(
-            new DefaultTableCellRenderer() {
-                @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                    if (value.toString().equalsIgnoreCase("FALSE") || value.toString().equalsIgnoreCase("OK")) {
-                        renderer.setBackground(GREEN);
-                        //table.getModel().setValueAt("OK", row, 4);
-                    }
-                    else if (value.toString().equalsIgnoreCase("TRUE") || value.toString().equalsIgnoreCase("Failure")) {
-                        renderer.setBackground(RED);
-                        //table.getModel().setValueAt("Failure", row, 4);
-                    }                
-                    return renderer;
-                }
-            });
-        summaryTable.getColumnModel().getColumn(5).setCellRenderer(
-            new DefaultTableCellRenderer() {
-                @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                    if (value.toString().equalsIgnoreCase("FALSE") || value.toString().equalsIgnoreCase("OK")) {
-                        renderer.setBackground(GREEN);
-                        //table.getModel().setValueAt("OK", row, 5);
-                    }
-                    else if (value.toString().equalsIgnoreCase("TRUE") || value.toString().equalsIgnoreCase("Failure")) {
-                        renderer.setBackground(RED);
-                        //table.getModel().setValueAt("Failure", row, 5);
-                    }                
-                    return renderer;
-                }
-            });
-        summaryTable.getColumnModel().getColumn(6).setCellRenderer(
-            new DefaultTableCellRenderer() {
-                @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                    if (value.toString().equalsIgnoreCase("FALSE") || value.toString().equalsIgnoreCase("OK")) {
-                        renderer.setBackground(GREEN);
-                        //table.getModel().setValueAt("OK", row, 6);
-                    }
-                    else if (value.toString().equalsIgnoreCase("TRUE") || value.toString().equalsIgnoreCase("Failure")) {
-                        renderer.setBackground(RED);
-                        //table.getModel().setValueAt("Failure", row, 6);
-                    }                
-                    return renderer;
-                }
-            });
+        summaryTable.getColumnModel().getColumn(0).setCellRenderer(new LineRenderer());
+        summaryTable.getColumnModel().getColumn(3).setCellRenderer(new PresenceRenderer());
+        FailureRenderer failureRenderer = new FailureRenderer();
+        summaryTable.getColumnModel().getColumn(4).setCellRenderer(failureRenderer);
+        summaryTable.getColumnModel().getColumn(5).setCellRenderer(failureRenderer);
+        summaryTable.getColumnModel().getColumn(6).setCellRenderer(failureRenderer);
         
         summaryTable.repaint();
     }
@@ -833,25 +780,25 @@ public class TrackModelGUI extends javax.swing.JPanel {
         
         public void updateFailures(Block b) {
             if (b.getFailureTrackCircuit()) {
-                    trackCircuitFailureButton.setBackground(RED);
+                    trackCircuitFailureButton.setBackground(Global.RED);
                 }
                 else {
-                    trackCircuitFailureButton.setBackground(GREEN);
+                    trackCircuitFailureButton.setBackground(Global.GREEN);
                 }
                 if (b.getFailureBrokenRail()) {
-                    brokenRailFailureButton.setBackground(RED);
+                    brokenRailFailureButton.setBackground(Global.RED);
                 }
                 else {
-                    brokenRailFailureButton.setBackground(GREEN);
+                    brokenRailFailureButton.setBackground(Global.GREEN);
                 }
                 if (b.getFailurePowerOutage()) {
-                    powerOutageFailureButton.setBackground(RED);
+                    powerOutageFailureButton.setBackground(Global.RED);
                 }
                 else {
-                    powerOutageFailureButton.setBackground(GREEN);
+                    powerOutageFailureButton.setBackground(Global.GREEN);
                 }
                 if (b.isOccupied()) {
-                    toggleTrainPresenceButton.setBackground(GREEN);
+                    toggleTrainPresenceButton.setBackground(Global.GREEN);
                 }
                 else {
                     toggleTrainPresenceButton.setBackground(Color.WHITE);
