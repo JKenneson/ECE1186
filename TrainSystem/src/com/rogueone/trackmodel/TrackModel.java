@@ -30,14 +30,29 @@ public class TrackModel {
     private Yard yard = new Yard();
     private TrackModelGUI trackModelGUI = null;
     private TrainSystem trainSystem = null;
+    private static final String DEFAULT_PATH = "src/com/rogueone/assets/TrackData.xlsx";
     
+    //Used only when running standalone TrackModel
     public static void main(String[] args) throws InterruptedException {
-        
+        //Initialize track model
+        TrackModel trackModel= new TrackModel(null, new File(DEFAULT_PATH));
+        //Open GUI
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(new TrackModelGUI());
+        frame.getContentPane().add(trackModel.getGUI());
         frame.pack();
         frame.setVisible(true); 
+    }
+    
+    /**
+     * Initializes TrackModel with data file
+     * @author Dan Bednarczyk
+     * @param trackDataFile the File to load
+     */
+    public TrackModel(TrainSystem ts, File file) {
+        trainSystem = ts;
+        parseDataFile(file);
+        trackModelGUI = new TrackModelGUI(this);
     }
     
     public void updateGUI() {
@@ -46,27 +61,6 @@ public class TrackModel {
     
     public TrackModelGUI getGUI() {
         return trackModelGUI;
-    }
-    
-    /**
-     * Initializes TrackModel with data file
-     * @author Dan Bednarczyk
-     * @param trackDataFile the File to load
-     */
-    public TrackModel(TrainSystem ts, File trackDataFile) {
-        trainSystem = ts;
-        trackModelGUI = new TrackModelGUI();
-
-        try {
-            parseDataFile(trackDataFile);
-            System.out.println("Track loaded successfully");
-        }
-        catch (IOException ex) {
-            System.out.println("problem accessing file"+trackDataFile.getAbsolutePath());
-        }
-        catch (InvalidFormatException ex) {
-            System.out.println("Please select an .xlsx file.");
-        }
     }
     
     /**
@@ -117,47 +111,53 @@ public class TrackModel {
      * @author Dan Bednarczyk
      * @param file the track data file
      */
-    private void parseDataFile(File file) throws IOException, InvalidFormatException {
-        //Expected column order in data file for blocks:
-        //0     line
-        //1     section
-        //2     isHead
-        //3     isTail
-        //4     blockID
-        //5     portA
-        //6     portB
-        //7     switchID
-        //8     length
-        //9     grade
-        //10    speedLimit
-        //11    containsCrossing
-        //12    isUnderground
-        //13    stationID
-        //14    elevation
-        //15    cumulativeElevation
-        //16    isStaticSwitchBlock
-        
-        XSSFWorkbook testWorkbook = new XSSFWorkbook(file);
-  
-        parseLines(testWorkbook.getSheetAt(0));
-        parseSections(testWorkbook.getSheetAt(1));
-        parseBlocks(testWorkbook.getSheetAt(2));
-        parseStations(testWorkbook.getSheetAt(3));
-        parseSwitches(testWorkbook.getSheetAt(4));
-        connectBlocks();
-        
-        //System.out.println("\nLINES:");
-        //printLines();
-        //System.out.println("\nSECTIONS:");
-        //printSections();
-        //System.out.println("\nBLOCKS:");
-        //printBlocks();
-        //System.out.println("\nSTATIONS:");
-        //printStations();
-        //System.out.println("\nSWITCHES:");
-        //printSwitches();
-        
-        //simulateTrain();
+    public void parseDataFile(File file) {
+        try {
+            //Expected column order in data file for blocks:
+            //0     line
+            //1     section
+            //2     isHead
+            //3     isTail
+            //4     blockID
+            //5     portA
+            //6     portB
+            //7     switchID
+            //8     length
+            //9     grade
+            //10    speedLimit
+            //11    containsCrossing
+            //12    isUnderground
+            //13    stationID
+            //14    elevation
+            //15    cumulativeElevation
+            //16    isStaticSwitchBlock
+            
+            XSSFWorkbook testWorkbook = new XSSFWorkbook(file);
+            
+            parseLines(testWorkbook.getSheetAt(0));
+            parseSections(testWorkbook.getSheetAt(1));
+            parseBlocks(testWorkbook.getSheetAt(2));
+            parseStations(testWorkbook.getSheetAt(3));
+            parseSwitches(testWorkbook.getSheetAt(4));
+            connectBlocks();
+            
+            //System.out.println("\nLINES:");
+            //printLines();
+            //System.out.println("\nSECTIONS:");
+            //printSections();
+            //System.out.println("\nBLOCKS:");
+            //printBlocks();
+            //System.out.println("\nSTATIONS:");
+            //printStations();
+            //System.out.println("\nSWITCHES:");
+            //printSwitches();
+            
+            System.out.println("Track loaded successfully.");
+        } catch (IOException ex) {
+            System.err.println("Error reading data file.");
+        } catch (InvalidFormatException ex) {
+            System.err.println("Incorrect format for data file.");
+        }
          
     }
     

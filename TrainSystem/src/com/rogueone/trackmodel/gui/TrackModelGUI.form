@@ -50,9 +50,6 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="trackModelTabbedPane">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="trackModelTabbedPane.setEnabledAt(1, false);"/>
-      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -135,9 +132,6 @@
                       <Image iconType="3" name="/com/rogueone/images/layout_small.jpg"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="trackLayoutLabelMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
