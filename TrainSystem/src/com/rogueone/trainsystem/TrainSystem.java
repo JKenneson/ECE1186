@@ -88,7 +88,8 @@ public class TrainSystem {
         //this.trainHandler.updateTrains();
         //this.trackModel.updateGUI();
         this.clock.updateClock();               //Increment the clock
-        System.out.println(this.clock.printClock());
+        this.mainFrame.timeLabel.setText(this.clock.printClock() + "     ");
+        //System.out.println(this.clock.printClock());
     }
 
     public void updateTimer(int timeToRefresh) {

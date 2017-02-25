@@ -7,12 +7,16 @@ package com.rogueone.mainframe;
 
 import com.rogueone.trainsystem.TrainSystem;
 import java.awt.BorderLayout;
+import javax.swing.Box;
+import javax.swing.JLabel;
 
 /**
  *
  * @author kylemonto
  */
 public class MainFrame extends javax.swing.JFrame {
+    
+    public JLabel timeLabel;
 
     public TrainSystem trainSystem;
     /**
@@ -135,6 +139,10 @@ public class MainFrame extends javax.swing.JFrame {
         helpMenu.add(helpText);
 
         mainMenuBar.add(helpMenu);
+
+        mainMenuBar.add(Box.createHorizontalGlue());
+        timeLabel = new JLabel("Time");
+        mainMenuBar.add(timeLabel);
 
         setJMenuBar(mainMenuBar);
 
