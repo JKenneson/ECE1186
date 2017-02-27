@@ -36,7 +36,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      */
     public CommandTrackControlGUI() {
         initComponents();
-        initializeBlockTable();
         InitializeGUIObject();
     }
     
@@ -45,8 +44,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         this.trainSystem = ts;
         this.trackModel = ts.getTrackModel();
-        //initializeBlockTable();
-
+        updateGUI();
     }
      
 
@@ -932,10 +930,17 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void initializeBlockTable(){
-        ArrayList<Block> blocks = trackModel.getBlockArray();
-        ArrayList<Line> lines = trackModel.getLineArray();
-        ArrayList<Section> sections = trackModel.getSectionArray();
+    
+    public void updateGUI(){
+        updateTime();
+        updateBlockTable();    
+    }
+    
+    
+    public void updateBlockTable(){
+        ArrayList<Block> blocks = this.trackModel.getBlockArray();
+        ArrayList<Line> lines = this.trackModel.getLineArray();
+        ArrayList<Section> sections = this.trackModel.getSectionArray();
         
         DefaultTableModel blockModel = (DefaultTableModel) BlockTable.getModel();
         Object[] newBlock = new Object[4];
@@ -950,15 +955,25 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                     newBlock[3] = (boolean)true;
                             
                     blockModel.addRow(newBlock);
+                    BlockTable.repaint();
                     
                 }
            }  
         }
     }
     
-    public void updateGUI(){
-        TimeField.setText(trainSystem.getClock().printClock());
+    public void updateTime(){
+        TimeField.setText(trainSystem.getClock().getHour() + ":" + trainSystem.getClock().getMinute() + "." + trainSystem.getClock().getSecond());
+        
+        if ( (trainSystem.getClock().getHour() > 5) && (trainSystem.getClock().getHour() < 8)){
+            RushHourField.setText("YES");
+        }
+        else {
+            RushHourField.setText("NO");
+        }
+        
     }
+
     
             
 
@@ -1389,7 +1404,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
         }
         
-        trainSystem.dispatchTrain(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine);
+        trainSystem.dispatchTrain(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine, dispatchID);
         
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
