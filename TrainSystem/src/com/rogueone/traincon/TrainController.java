@@ -5,9 +5,11 @@
  */
 package com.rogueone.traincon;
 
+import com.rogueone.global.Clock;
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.TrainModel; //Should I it this way or how???
 import com.rogueone.trainmodel.entities.TrainFailures;
+import com.rogueone.trainsystem.TrainSystem;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -64,6 +66,7 @@ public class TrainController {
     //Train Information
     private TrainModel trainModel;
     public TrainControllerGUI gui;
+    public TrainSystem ts;
     private String trainID;
     private String line;
     private String section;
@@ -95,8 +98,9 @@ public class TrainController {
      * @param block initial block, should be from yard
      */
     public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID,
-           String line, String section, String block){
+           String line, String section, String block, TrainSystem ts){
         
+        this.ts = ts;
         this.trainModel = tm; //Should come from passed (this) reference
         this.gui = gui;
         
@@ -683,18 +687,19 @@ public class TrainController {
         gui.MaxPowerLabel.setText(decimalFormatter.format(this.maxPower));
         gui.PowerUsedLabel.setText(decimalFormatter.format(this.powerCommand));
         
-        gui.ClockText.setText(getTime());
+        //gui.ClockText.setText(Clock.printClock());
         
         //Will add more as we move forward.
     }
     
+    
     public void activateServiceBrake(){
-        //trainMode.setServiceBrakeActivated(true);
+        this.trainModel.setServiceBrakeActivated(true);
         this.serviceBrakeActivated = true;
     }
     
     public void activateEmergencyBrake(){
-        //trainMode.setEmergencyBrakeActivated(true);
+        this.trainModel.setEmergencyBrakeActivated(true);
         this.emergencyBrakeActivated = true;
     }
     
