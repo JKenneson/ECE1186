@@ -28,6 +28,10 @@ public class Global {
      * Decimal Formatter will create 1 comma for numbers between 1,000 and 100,000 as well as a decimal point with 2 places
      */
     public static DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
+    /**
+     * Decimal Formatter will create 1 comma for numbers between 1,000 and 100,000 as well as a decimal point with 2 places
+     */
+    public static DecimalFormat gradeFormatter = new DecimalFormat("#0.00");
     
     public enum PieceType {
         BLOCK, SWITCH, YARD
