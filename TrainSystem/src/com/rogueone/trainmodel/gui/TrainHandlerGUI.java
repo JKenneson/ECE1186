@@ -6,6 +6,7 @@
 package com.rogueone.trainmodel.gui;
 
 import com.rogueone.trainmodel.TrainHandler;
+import com.rogueone.trainmodel.TrainModel;
 
 /**
  *
@@ -90,7 +91,8 @@ public class TrainHandlerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_trainSelectorDropdownActionPerformed
 
     private void trainSelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainSelectButtonActionPerformed
-        // TODO add your handling code here:
+        ((TrainModel) this.trainSelectorDropdown.getSelectedItem()).showGUIObject();
+        ((TrainModel) this.trainSelectorDropdown.getSelectedItem()).trainController.showGUIObject();
         
     }//GEN-LAST:event_trainSelectButtonActionPerformed
 

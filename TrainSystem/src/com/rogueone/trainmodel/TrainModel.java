@@ -207,18 +207,20 @@ public class TrainModel {
         //Create a GUI object
         TrainModelGUI trainModelGUI = new TrainModelGUI(trainModelObject);
         
-        //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(trainModelGUI);
-        frame.pack();
-        frame.setVisible(true);     //Make sure to set it visible
-        
         //Initialize the GUI
         trainModelObject.InitializeInputPanel(trainModelGUI);
         
         this.trainModelGUI = trainModelGUI;
         return  trainModelGUI;  //Return the GUI object
+    }
+    
+    public void showGUIObject() {
+        //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(this.trainModelGUI);
+        frame.pack();
+        frame.setVisible(true);     //Make sure to set it visible
     }
     
     /**
