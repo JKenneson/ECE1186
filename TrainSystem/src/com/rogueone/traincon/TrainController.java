@@ -458,7 +458,6 @@ public class TrainController {
     }
         
     public void updateGUI(TrainControllerGUI gui){
-        
         this.updateController();
         
         for(int i = 0; i < getNumberOfTrains(); i++){

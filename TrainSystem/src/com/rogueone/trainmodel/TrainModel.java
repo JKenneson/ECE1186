@@ -190,9 +190,7 @@ public class TrainModel {
      * @author Jonathan Kenneson
      */    
     public void updateTrainControllerGUI() {
-        if(this.trainControllerGUI.isValid()) {   //Only update if the GUI window is active
-            this.trainController.updateGUI(this.trainControllerGUI);
-        }
+        this.trainController.updateGUI(this.trainControllerGUI);
     }
         
     
@@ -252,9 +250,6 @@ public class TrainModel {
      * @param gui A TrainModelGUI object that will get updated with values from the class
      */
     public void UpdateGUI(TrainModelGUI gui) {
-        if(!gui.isValid()) {       //If the gui isn't showing, just return
-            return;
-        }
         //Train Operations
         if(this.leftDoorOpen) {
             gui.leftDoorState.setText("Open");
@@ -488,7 +483,7 @@ public class TrainModel {
             this.currBlock = this.nextBlock;
             this.prevBlock = this.currTempBlock;
             
-            System.out.println("Current Block: " + this.currBlock);
+            //System.out.println("Current Block: " + this.currBlock);
         }
         
     }
