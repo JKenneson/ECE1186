@@ -5,7 +5,6 @@
  */
 package com.rogueone.traincon;
 
-import com.rogueone.global.Clock;
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.TrainModel; //Should I it this way or how???
 import com.rogueone.trainmodel.entities.TrainFailures;
@@ -285,7 +284,7 @@ public class TrainController {
                 break;
         }
         //If there are no failures, de-activate the emergencyBrakeOverride
-        if(this.powerStatus && this.serviceBrakeStatus && this.antennaStatus) {
+        if(this.powerStatus && this.serviceBrakeStatus && this.antennaStatus && this.authority>0) {
             this.emergencyBrakeOverride = false;
         }
     }
@@ -438,7 +437,7 @@ public class TrainController {
             this.updateClimateControl();
         this.updatePassengers();
         if(this.authority<0)
-            this.setEmergencyBrakeActivated(true);
+            this.emergencyBrakeOverride = true;
         updateSafeSpeed();
         //this.currSpeed = this.trainModel.getCurrSpeed();
         
@@ -648,7 +647,6 @@ public class TrainController {
             gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
         }
         
-        System.out.println("Service brake = " + this.serviceBrakeActivated);
         if(this.serviceBrakeActivated) {
             gui.ServiceBrakeToggleButton.setSelected(true);
         }
@@ -748,7 +746,6 @@ public class TrainController {
     public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
         this.serviceBrakeActivated = serviceBrakeActivated;
         this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
-        System.out.println("Service brake set to " + this.serviceBrakeActivated);
     }
 
     /**
@@ -791,7 +788,6 @@ public class TrainController {
      */
     public void setAuthority(short authority) {
         this.authority = (double)authority*this.FEET_IN_A_METER;
-        //System.out.println(this.authority);
     }
 
     /**
