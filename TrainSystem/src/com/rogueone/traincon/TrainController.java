@@ -440,7 +440,11 @@ public class TrainController {
             this.updateClimateControl();
         this.updatePassengers();
         if(this.authority<0)
-            this.emergencyBrakeOverride = true;
+            this.setEmergencyBrakeActivated(true);
+        else if(!this.emergencyBrakeOverride){
+            this.setEmergencyBrakeActivated(false);
+        }
+            
         updateSafeSpeed();
         //this.currSpeed = this.trainModel.getCurrSpeed();
         
