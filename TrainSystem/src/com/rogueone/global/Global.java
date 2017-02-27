@@ -49,6 +49,7 @@ public class Global {
         GO, STOP
     }
     
+    //need to alter in order to account for red line
     public enum TrackGroups {
         ABC, DEF, GHI, J, KLM, N, OPQ, RSTUVWXYZ, ZZ, YY, U, DE15, F16_J52, J53_N66
     }

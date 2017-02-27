@@ -57,7 +57,7 @@ public class StateSet {
                     count++;
                     break;
                 } 
-                System.out.println("Count = " + count);
+//                System.out.println("Count = " + count);
             }
         }
         if(count == requiredCount){

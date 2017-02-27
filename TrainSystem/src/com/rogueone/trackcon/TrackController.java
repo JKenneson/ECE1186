@@ -30,6 +30,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -58,11 +59,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class TrackController {
 
+    private TrainSystem trainSystem;
     private Global.Line controllerLine;
     private HashMap<Global.LogicGroups, LogicTrackGroup> logicGroupsArray;
     private HashMap<Integer, Switch> switchArray;
     private Crossing crossing;
-    
+
     private TrackControllerGUI trackControllerGUI = null;
 
     private TrackModel trackModel;
@@ -71,11 +73,11 @@ public class TrackController {
     public TrackController(TrainSystem ts) {
 
 //        this.trackModel = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
-        this.trackModel = ts.getTrackModel(); 
+        this.trackModel = ts.getTrackModel();
 
     }
-    
-    public TrackController(){
+
+    public TrackController() {
         this.trackModel = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
     }
 
@@ -125,10 +127,10 @@ public class TrackController {
 
     public TrackController(Global.Line line, TrainSystem trainSystem) {
         this.controllerLine = line;
-        //initialize a new track controller
-//        TrackController trackController = new TrackController(trainSystem);
+        //set the train System
+        this.trainSystem = trainSystem;
         //load the track model
-        this.trackModel = trainSystem.getTrackModel();
+        this.trackModel = this.trainSystem.getTrackModel();
         //initialize a new track controller GUI
         this.trackControllerGUI = this.createGUIObject(this);
         //set the default PLC file
@@ -412,7 +414,7 @@ public class TrackController {
         displaySwitchArray = this.switchArray;
         displayCrossing = crossing;
         displayLine = this.controllerLine;
-            
+
         Set<Entry<Integer, Switch>> switchSet = displaySwitchArray.entrySet();
         Iterator switchIterator = switchSet.iterator();
         while (switchIterator.hasNext()) {
@@ -484,7 +486,7 @@ public class TrackController {
         LogicTrackGroup selectedLogicGroup = logicGroupsArray.get(logicGroup);
         if (selectedLogicGroup == null) {
             System.out.println("Logic group is not in selected Track Controller");
-            String message = "Logic group is not in selected Track Controller";
+            String message = "Logic group is not in selected Track Controller\n";
             return message;
         }
         this.trackControllerGUI.enableInputs(selectedLogicGroup);
@@ -498,9 +500,9 @@ public class TrackController {
         if (ltg == null) {
             System.out.println("No valid logic group found in current track controller");
             return null;
-        } 
+        }
         lineSelected = this.controllerLine.toString();
-        
+
         StateSet currentState = ltg.getCurrentTrackState();
 
         System.out.println("Current Set = " + currentState.toString());
@@ -532,6 +534,32 @@ public class TrackController {
         return null;
     }
 
+    public UserSwitchState evaluateLogicGroup(Global.LogicGroups logicGroup, StateSet stateSet) {
+        LogicTrackGroup ltg = logicGroupsArray.get(logicGroup);
+        if (ltg == null) {
+            System.out.println("No valid logic group found in current track controller");
+            return null;
+        }
+
+        StateSet currentState = ltg.getCurrentTrackState();
+
+        HashMap<StateSet, UserSwitchState> mappings = ltg.getStateMapping();
+        //how to search for current state mapping        
+        for (Map.Entry<StateSet, UserSwitchState> entry : mappings.entrySet()) {
+            StateSet key = entry.getKey();
+            UserSwitchState userSwitchState = entry.getValue();
+            if (key.equals(stateSet)) {
+                ltg.setPreviousTrackState(currentState);
+                ltg.setCurrentTrackState(stateSet);
+                this.trackControllerGUI.setSelectedLogicTrackGroup(ltg);
+                this.logicGroupsArray.replace(logicGroup, ltg);
+                return userSwitchState;
+            }
+            // do stuff
+        }
+        return null;
+    }
+
     public void addTrain(String trainID, String suggestedSpeed, String suggestedAuthority, TrackControllerGUI gui) {
 //        TrainModel train = new TrainModel(Integer.parseInt(suggestedSpeed), Integer.parseInt(suggestedAuthority), 1);
 //        this.trainArray.put(Integer.parseInt(trainID), train);
@@ -557,9 +585,9 @@ public class TrackController {
         LogicTrackGroup selectedLogicGroup = logicGroupsArray.get(logicGroup);
         if (selectedLogicGroup == null) {
             System.out.println("Logic group is not in selected Track Controller cannot get crossing");
-            String message = "Logic group is not in selected Track Controller cannot get crossing";
+            String message = "Logic group is not in selected Track Controller cannot get crossing\n";
             return message;
-        } 
+        }
         this.trackControllerGUI.enableInputs(crossing);
         this.trackControllerGUI.setImage(crossing);
         return null;
@@ -576,12 +604,94 @@ public class TrackController {
         }
 
     }
-    
-    
 
-//    public updatePresence(){
-//        ArrayList<Section> sectionsArray = trackModelTest1.getLine(Global.Line.GREEN).getSections();
-//    }
+    public void updatePresence() {
+        //get mappings from handler
+        HashMap<Global.Section, Global.TrackGroups> sectionMappings = this.trainSystem.getTrackControllerHandler().getSectionToGroupMapping();
+        HashMap<Global.TrackGroups, Global.LogicGroups> groupMappings = this.trainSystem.getTrackControllerHandler().getGroupToLogicMapping();
+        //determine number of logic groups
+        int numberOfLogicGroups = 0;
+        for (Global.LogicGroups lg : Global.LogicGroups.values()) {
+            if (lg.toString().contains(controllerLine.toString())) {
+                numberOfLogicGroups++;
+            }
+        }
+
+        //create hashmap for sections
+        HashMap<Global.Section, Global.Presence> sectionPresence = new HashMap<Global.Section, Global.Presence>();
+        //get the sections for the current line
+        ArrayList<Section> sectionsArray = this.trackModel.getLine(controllerLine).getSections();
+        for (Section s : sectionsArray) {
+            //get the blocks for the current line
+            ArrayList<Block> blockArray = s.getBlocks();
+            boolean occupied = false;
+            //determine whether a block is occupied on a particular line
+            for (Block b : blockArray) {
+                if (b.isOccupied()) {
+                    occupied = true;
+                    break;
+                }
+            }
+            //set the presence of a section in a hashmap
+            Global.Presence sectionOccupancy = (occupied) ? Global.Presence.OCCUPIED : Global.Presence.UNOCCUPIED;
+            sectionPresence.put(s.getSectionID(), sectionOccupancy);
+        }
+
+        //translate the section presence into track group presence
+        HashMap<Global.TrackGroups, Global.Presence> groupPresence = new HashMap<Global.TrackGroups, Global.Presence>();
+        for (Entry<Global.Section, Global.Presence> sectionEntry : sectionPresence.entrySet()) {
+            //condition for potential overwrite of presence
+            if (sectionEntry.getValue() == Global.Presence.OCCUPIED) {
+                groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
+            } else {
+                groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
+            }
+        }
+
+        HashMap<Global.LogicGroups, StateSet> logicSets = new HashMap<Global.LogicGroups, StateSet>();
+        for (Entry<Global.TrackGroups, Global.Presence> groupEntry : groupPresence.entrySet()) {
+            //make new state given the current track group and its presence
+            State state = new State(groupEntry.getKey(), groupEntry.getValue());
+            //if the logic set hashmap does not yet contain the logic group key yet, create it and a state set,
+            //add the current state to it, and put it in the hashmap
+            if (!logicSets.containsKey(groupMappings.get(groupEntry.getKey()))) {
+                StateSet stateSet = new StateSet();
+                stateSet.addState(state);
+                logicSets.put(groupMappings.get(groupEntry.getKey()), stateSet);
+            } //if the logic set hashmap does contain the logic group key, get the current state set and add the 
+            //state to it and put it back 
+            else {
+                StateSet stateSet = logicSets.get(groupMappings.get(groupEntry.getKey()));
+                stateSet.addState(state);
+                logicSets.replace(groupMappings.get(groupEntry.getKey()), stateSet);
+            }
+        }
+
+        for (Entry<Global.LogicGroups, StateSet> logicSet : logicSets.entrySet()) {
+            UserSwitchState userSwitchState = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
+            System.out.println(printSwitchState(userSwitchState));
+        }
+
+    }
+
+    private String printSwitchState(UserSwitchState userSwitchState) {
+        StringBuilder s = new StringBuilder();
+        LinkedList<AbstractMap.SimpleEntry<Integer, Global.SwitchState>> switches = userSwitchState.getUserSwitchStates();
+        Iterator switchIterator = switches.iterator();
+        while (switchIterator.hasNext()) {
+            AbstractMap.SimpleEntry<Integer, Global.SwitchState> switchState = (AbstractMap.SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
+            s.append("\nSwitch " + switchState.getKey() + " is in " + switchState.getValue() + " state");
+            Switch sw = switchArray.get(switchState.getKey());
+            if(switchState.getValue() == Global.SwitchState.DEFAULT){
+                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getDefaultConnection().toString());
+                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsDefault().toString());
+            } else {
+                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getAlternateConnection().toString());
+                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsAlternate().toString());
+            }
+        }
+        return s.toString();
+    }
 
     public TrackControllerGUI getTrackControllerGUI() {
         return trackControllerGUI;
@@ -591,6 +701,4 @@ public class TrackController {
         return controllerLine;
     }
 
-    
-    
 }
