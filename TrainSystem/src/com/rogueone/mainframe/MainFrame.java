@@ -169,6 +169,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void ctcMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctcMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getCTC(), BorderLayout.CENTER);
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
         this.setVisible(true);
     }//GEN-LAST:event_ctcMenuItemActionPerformed
 
@@ -178,6 +180,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void trackControllerHandlerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackControllerHandlerMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getTrackControllerHandler().getTrackHandlerGUI(), BorderLayout.CENTER);
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
         this.setVisible(true);
     }//GEN-LAST:event_trackControllerHandlerMenuItemActionPerformed
 
@@ -187,6 +191,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void trackModelMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackModelMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getTrackModel().getGUI(), BorderLayout.CENTER);
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
         this.setVisible(true);
     }//GEN-LAST:event_trackModelMenuItemActionPerformed
 
@@ -197,6 +203,8 @@ public class MainFrame extends javax.swing.JFrame {
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getTrainHandler().getGUI(), BorderLayout.CENTER);
         this.trainSystem.getTrainHandler().getGUI().updateTrainHandlerGUI();
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
         this.setVisible(true);
     }//GEN-LAST:event_trainHandlerMenuItemActionPerformed
 
@@ -206,6 +214,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void mboMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mboMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getMBO().getGUI(), BorderLayout.CENTER);
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
         this.setVisible(true);
     }//GEN-LAST:event_mboMenuItemActionPerformed
 

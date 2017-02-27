@@ -641,11 +641,25 @@ public class TrackController {
         HashMap<Global.TrackGroups, Global.Presence> groupPresence = new HashMap<Global.TrackGroups, Global.Presence>();
         for (Entry<Global.Section, Global.Presence> sectionEntry : sectionPresence.entrySet()) {
             //condition for potential overwrite of presence
-            if (sectionEntry.getValue() == Global.Presence.OCCUPIED) {
+            if (groupPresence.containsKey(sectionMappings.get(sectionEntry.getKey())) ) {
+                if(groupPresence.get(sectionMappings.get(sectionEntry.getKey())) == Global.Presence.OCCUPIED){
+                    groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
+                } else {
+                    groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
+                }
+            } else if (!groupPresence.containsKey(sectionMappings.get(sectionEntry.getKey()))){
+                if (sectionEntry.getValue() == Global.Presence.OCCUPIED) {
                 groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
-            } else {
-                groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
+                } else {
+                    groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
+                }
             }
+//            groupPresence.get(sectionMappings.get(sectionEntry.getKey()));
+//            if (sectionEntry.getValue() == Global.Presence.OCCUPIED) {
+//                groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
+//            } else {
+//                groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
+//            }
         }
 
         HashMap<Global.LogicGroups, StateSet> logicSets = new HashMap<Global.LogicGroups, StateSet>();
@@ -675,19 +689,21 @@ public class TrackController {
     }
 
     private String printSwitchState(UserSwitchState userSwitchState) {
+        
         StringBuilder s = new StringBuilder();
         LinkedList<AbstractMap.SimpleEntry<Integer, Global.SwitchState>> switches = userSwitchState.getUserSwitchStates();
         Iterator switchIterator = switches.iterator();
         while (switchIterator.hasNext()) {
             AbstractMap.SimpleEntry<Integer, Global.SwitchState> switchState = (AbstractMap.SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
+//            trainSystem.getTrackModel().getSwitch(switchState.getKey()).setSwitch(true);
             s.append("\nSwitch " + switchState.getKey() + " is in " + switchState.getValue() + " state");
             Switch sw = switchArray.get(switchState.getKey());
-            if(switchState.getValue() == Global.SwitchState.DEFAULT){
-                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getDefaultConnection().toString());
-                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsDefault().toString());
+            if (switchState.getValue() == Global.SwitchState.DEFAULT) {
+//                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getDefaultConnection().toString());
+//                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsDefault().toString());
             } else {
-                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getAlternateConnection().toString());
-                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsAlternate().toString());
+//                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getAlternateConnection().toString());
+//                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsAlternate().toString());
             }
         }
         return s.toString();
