@@ -1106,9 +1106,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             //double mouse click calls Train Model CreateGUIObject to dispalay IDed train model
             JTable table = (JTable) evt.getSource();
             int row = table.getSelectedRow();
-            trainID = (int) table.getValueAt(row, 0);
+            String trainString = table.getValueAt(row, 1).toString();
+            trainID = Integer.parseInt(trainString);
 
-            trainSystem.trainHandler.showObjectsFromCTC(trainID);
+            trainSystem.getTrainHandler().showObjectsFromCTC(trainID);
             
         }
 
