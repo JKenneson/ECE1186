@@ -257,7 +257,7 @@ public class TrackModel {
             //Parse doubles
             double tempGrade = rowTemp.getCell(9).getNumericCellValue();
             double tempLength = UnitConversion.metersToFeet(rowTemp.getCell(8).getNumericCellValue());
-            double tempSpeedLimit = UnitConversion.metersToFeet(rowTemp.getCell(10).getNumericCellValue());
+            double tempSpeedLimit = UnitConversion.kilometersPerHourToMilesPerHour(rowTemp.getCell(10).getNumericCellValue());
             double tempElevation = UnitConversion.metersToFeet(rowTemp.getCell(14).getNumericCellValue());
             double tempCumulativeElevation = UnitConversion.metersToFeet(rowTemp.getCell(15).getNumericCellValue()); 
             //Parse booleans
