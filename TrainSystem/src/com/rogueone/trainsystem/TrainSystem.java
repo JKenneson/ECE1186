@@ -80,7 +80,7 @@ public class TrainSystem {
         this.task = new SystemTimer(this);
         timer.schedule(this.task, 0, NORMAL_TIME);
         
-        dispatchTrain(45, 40000, 1, "GREEN", 1);
+        //dispatchTrain(45, 40000, 1, "GREEN", 1);
     }
     
     // UPDATES

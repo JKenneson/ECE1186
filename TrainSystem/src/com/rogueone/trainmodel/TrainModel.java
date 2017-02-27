@@ -93,7 +93,7 @@ public class TrainModel {
     private boolean trackAntennaActivated;
     private boolean mboAntennaActivated;
     private String line;
-    private int trainID;
+    public int trainID;
     
     //Blocks
     private Block prevBlock;

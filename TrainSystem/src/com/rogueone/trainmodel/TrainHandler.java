@@ -76,6 +76,20 @@ public class TrainHandler {
     }
 
     /**
+     * Displays the GUIs based on trainID passed in
+     * @author Jonathan Kenneson
+     * @param trainID The ID of the train to display
+     */
+    public void showObjectsFromCTC(int trainID) {
+        for (TrainModel train : TrainHandler.trains) {
+            if(train.trainID == trainID) {  //If we find the trainID, display the GUIs
+                train.showGUIObject();
+                train.trainController.showGUIObject();
+            }
+        }
+    }
+    
+    /**
      * Returns the ArrayList of trains
      * @author Jonathan Kenneson
      * @return ArrayList of trains
