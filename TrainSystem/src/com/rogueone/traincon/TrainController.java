@@ -66,7 +66,7 @@ public class TrainController {
     //Train Information
     private TrainModel trainModel;
     public TrainControllerGUI gui;
-    public TrainSystem ts;
+    public TrainSystem trainSystem;
     private String trainID;
     private String line;
     private String section;
@@ -100,7 +100,7 @@ public class TrainController {
     public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID,
            String line, String section, String block, TrainSystem ts){
         
-        this.ts = ts;
+        this.trainSystem = ts;
         this.trainModel = tm; //Should come from passed (this) reference
         this.gui = gui;
         
@@ -216,7 +216,7 @@ public class TrainController {
         gui.SpeedInput.setValue(this.driverSetPoint);
         gui.KiInput.setValue(this.kI);
         gui.KpInput.setValue(this.kP);
-        gui.ClockText.append(this.ts.getClock().printClock());//Get value from global clock value (EST)
+        gui.ClockText.append(this.trainSystem.getClock().printClock());//Get value from global clock value (EST)
         
         for(int i = 0; i < getNumberOfTrains(); i++){
             //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
@@ -387,17 +387,6 @@ public class TrainController {
         }
     }
     
-    /**
-     * This function pulls the time and date of the system from a global class
-     * 
-     * @author Tyler Protivnak
-     * @return the current date and time of the system
-     */
-    private String getTime(){
-        return "7:00:00 PM April 20, 2017"; //Get value from global time class
-    }
-    
-    
     private int getNumberOfTrains(){
         return 0; //Get value from ?????
     }
@@ -405,14 +394,13 @@ public class TrainController {
     private ArrayList getTrainArray(){
         return null;
     }
-            
-    
+              
     /**
      * This function figures out how to set the gui visual aids for the failures
      * on the train controller
      * 
      * @author Tyler Protivnak
-     * @return value cooresponding to failure type
+     * @return value corresponding to failure type
      */
     private int getFailureType(){  //get from train model
         if(!this.powerStatus){
@@ -451,15 +439,15 @@ public class TrainController {
         this.updatePassengers();
         if(this.authority<0)
             this.setEmergencyBrakeActivated(true);
-        
         updateSafeSpeed();
+        //this.currSpeed = this.trainModel.getCurrSpeed();
         
         
     }
     
     
     private void updateSafeSpeed(){
-        if(this.currSpeed>this.getSetPoint() && !this.manualMode){
+        if((this.currSpeed>this.getSetPoint() && !this.manualMode) || this.serviceBrakeActivated){
             this.setServiceBrakeActivated(true);
         }
         else{
@@ -659,7 +647,8 @@ public class TrainController {
             gui.StatusBrakeLabel.setText("ACTIVE");
             gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
         }
-
+        
+        System.out.println("Service brake = " + this.serviceBrakeActivated);
         if(this.serviceBrakeActivated) {
             gui.ServiceBrakeToggleButton.setSelected(true);
         }
@@ -687,20 +676,9 @@ public class TrainController {
         gui.MaxPowerLabel.setText(decimalFormatter.format(this.maxPower));
         gui.PowerUsedLabel.setText(decimalFormatter.format(this.powerCommand));
         
-        //gui.ClockText.setText(Clock.printClock());
+        gui.ClockText.setText(this.trainSystem.getClock().printClock());
         
         //Will add more as we move forward.
-    }
-    
-    
-    public void activateServiceBrake(){
-        this.trainModel.setServiceBrakeActivated(true);
-        this.serviceBrakeActivated = true;
-    }
-    
-    public void activateEmergencyBrake(){
-        this.trainModel.setEmergencyBrakeActivated(true);
-        this.emergencyBrakeActivated = true;
     }
     
     private double getRemainingAuthority(){
@@ -770,6 +748,7 @@ public class TrainController {
     public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
         this.serviceBrakeActivated = serviceBrakeActivated;
         this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
+        System.out.println("Service brake set to " + this.serviceBrakeActivated);
     }
 
     /**
