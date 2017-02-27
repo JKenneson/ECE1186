@@ -307,9 +307,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         FailureTable.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.select"));
         FailureTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Green", "A", "1", "Power"},
-                {"Green", "B", "4", "Power"},
-                {"Red", "F", "21", "Broken Rail"}
+
             },
             new String [] {
                 "Track", "Section", "Block", "Type"

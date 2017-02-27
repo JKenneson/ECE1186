@@ -289,27 +289,11 @@
                               <Color blue="66" green="66" id="Button.select" palette="3" red="ff" type="palette"/>
                             </Property>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="4" rowCount="3">
-                                <Column editable="true" title="Track" type="java.lang.String">
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Red"/>
-                                </Column>
-                                <Column editable="true" title="Section" type="java.lang.String">
-                                  <Data value="A"/>
-                                  <Data value="B"/>
-                                  <Data value="F"/>
-                                </Column>
-                                <Column editable="true" title="Block" type="java.lang.String">
-                                  <Data value="1"/>
-                                  <Data value="4"/>
-                                  <Data value="21"/>
-                                </Column>
-                                <Column editable="true" title="Type" type="java.lang.String">
-                                  <Data value="Power"/>
-                                  <Data value="Power"/>
-                                  <Data value="Broken Rail"/>
-                                </Column>
+                              <Table columnCount="4" rowCount="0">
+                                <Column editable="true" title="Track" type="java.lang.String"/>
+                                <Column editable="true" title="Section" type="java.lang.String"/>
+                                <Column editable="true" title="Block" type="java.lang.String"/>
+                                <Column editable="true" title="Type" type="java.lang.String"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
