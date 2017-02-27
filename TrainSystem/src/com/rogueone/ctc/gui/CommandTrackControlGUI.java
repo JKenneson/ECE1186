@@ -11,10 +11,12 @@ package com.rogueone.ctc.gui;
 
 //import com.rogueone.trackmodel.TrackModel;
 //import com.rogueone.trainmodel.TrainHandler;
+import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.Line;
 import com.rogueone.trainsystem.TrainSystem;
 import com.rogueone.trackmodel.Section;
+import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -1264,32 +1266,25 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             CurrentSectionField.setText(Integer.toString(blockNumber));
             CurrentLineField.setText(line);
 
-            Boolean booleanBlockStatus = (Boolean) blockTable.getValueAt(row, 3);
-            if (booleanBlockStatus == true) {
-                StatusField.setText("Operational");
-            } else {
-                StatusField.setText("Disabled");
+            for (Block b : this.trackModel.getBlockArray()){
+                if (b.getID() == blockNumber){
+                    //double blockGrade = b.getGrade();
+                    double blockLength = b.getLength();
+                    double blockSpeedLimit = b.getSpeedLimit();
+                    Station blockStation = b.getStation();
+                    int blockSwitchID = b.getSwitchID();
+                    boolean blockCrossing = b.containsCrossing();
+                    
+                    CurrentBlockField.setText(Double.toString(blockLength));
+                    SpeedField.setText(Double.toString(blockSpeedLimit));
+                    //AuthorityField.setText(blockStation);
+                    CurrentCapacityField.setText(Boolean.toString(blockCrossing));
+                    MaxCapacityField.setText(Integer.toString(blockSwitchID));
+                    
+                }
+                
             }
-
-            if ((blockNumber == 2) || (blockNumber == 9) || (blockNumber == 16) || (blockNumber == 22)) {
-                AuthorityField.setText("YES");
-            } //station
-            else {
-                AuthorityField.setText("NO");
-            }
-
-            if (blockNumber == 12) {
-                MaxCapacityField.setText("YES");
-            } else {
-                MaxCapacityField.setText("NO");
-            } //switch
-
-            if (blockNumber == 19) {
-                CurrentCapacityField.setText("YES");
-            } else {
-                CurrentCapacityField.setText("NO");
-            } //switch
-
+            
         }
 
         if (evt.getClickCount() == 2) {
