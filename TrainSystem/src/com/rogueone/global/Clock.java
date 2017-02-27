@@ -140,4 +140,32 @@ public class Clock {
             return DayOfTheWeek.Monday;
         }
     }
+
+    
+    /**
+     * Below are all getters for the clock class
+     */
+    
+    public DayOfTheWeek getDayOfTheWeek() {
+        return dayOfTheWeek;
+    }
+
+    public TimeOfDay getTimeOfDay() {
+        return timeOfDay;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+    
+    
+    
 }
