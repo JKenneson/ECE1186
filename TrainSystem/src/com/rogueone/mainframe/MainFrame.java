@@ -177,7 +177,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void trackControllerHandlerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackControllerHandlerMenuItemActionPerformed
         this.getContentPane().removeAll();
-        //this.getContentPane().add(this.trainSystem.getTrackControllerHandler().getGUI(), BorderLayout.CENTER);
+        this.getContentPane().add(this.trainSystem.getTrackControllerHandler().getTrackHandlerGUI(), BorderLayout.CENTER);
         this.setVisible(true);
     }//GEN-LAST:event_trackControllerHandlerMenuItemActionPerformed
 

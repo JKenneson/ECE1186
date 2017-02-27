@@ -64,8 +64,8 @@ public class TrainSystem {
         
         // Initialize modules
         this.ctc = new CommandTrackControlGUI(this);
-        this.trackControllerHandler = new TrackControllerHandler(this);
         this.trackModel = new TrackModel(this, new File(trackDataFilePath));
+        this.trackControllerHandler = new TrackControllerHandler(this);
         this.trainHandler = new TrainHandler(this);
         this.mbo = new Mbo(this);
         
