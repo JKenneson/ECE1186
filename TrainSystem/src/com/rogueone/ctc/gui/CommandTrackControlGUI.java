@@ -1023,12 +1023,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
 
     private void TrackShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackShutdownButtonActionPerformed
-        TrackShutdownGUI trackShutdown = new TrackShutdownGUI(this);
+        TrackShutdownGUI trackShutdown = new TrackShutdownGUI(this, trainSystem);
         trackShutdown.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_TrackShutdownButtonActionPerformed
 
     private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
-        TrainShutdownGUI trainShutdown = new TrainShutdownGUI(this);
+        TrainShutdownGUI trainShutdown = new TrainShutdownGUI(this, trainSystem);
         trainShutdown.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_TrainShutdownButtonActionPerformed
@@ -1337,12 +1337,27 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
 
         if (evt.getClickCount() == 2) {
-
+            JTable failureTable = (JTable) evt.getSource();
+            int failureRow = failureTable.getSelectedRow();
+            //resolveFailure(failureTable.getValueAt(failureRow,0), failureTable.getValueAt(failureRow,1), failureTable.getValueAt(failureRow,2));
         }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_FailureTableMouseClicked
-
+    
+//    public void resolveFailure(Object line, Object section, Object block){
+//      
+//        Object[] failureCompare = {line, section, block};
+//        
+//        if (existsInTable(TrainTable, failureCompare)){
+//            
+//        } 
+//        if (existsInTable(BlockTable, failureCompare)){
+//            
+//        }
+//    }
+    
+    
     private void SystemInformationPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SystemInformationPanelMouseEntered
     }//GEN-LAST:event_SystemInformationPanelMouseEntered
 

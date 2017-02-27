@@ -5,6 +5,10 @@
  */
 package com.rogueone.ctc.gui;
 
+import com.rogueone.trackmodel.Line;
+import com.rogueone.trackmodel.TrackModel;
+import com.rogueone.trainsystem.TrainSystem;
+
 /**
  *
  * @author Robert
@@ -19,9 +23,13 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     }
     
     private CommandTrackControlGUI ctcGUI;
+    public TrainSystem trainSystem;
+    private TrackModel trackModel;
     
-    public TrainShutdownGUI(CommandTrackControlGUI ctcGUI) {
+    public TrainShutdownGUI(CommandTrackControlGUI ctcGUI, TrainSystem ts) {
         this.ctcGUI = ctcGUI;
+        this.trainSystem = ts;
+        this.trackModel = ts.getTrackModel();
         initComponents();
     }
     /**
@@ -71,7 +79,8 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(jLabel3, gridBagConstraints);
 
-        lineSelectBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green", "Red" }));
+        lineSelectBox.setModel(new javax.swing.DefaultComboBoxModel(trackModel.getLineArray().toArray())
+        );
         lineSelectBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lineSelectBoxActionPerformed(evt);
@@ -83,7 +92,8 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(lineSelectBox, gridBagConstraints);
 
-        trainSelectBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        trainSelectBox.setModel(new javax.swing.DefaultComboBoxModel(((Line)(lineSelectBox.getSelectedItem())).getSections().toArray())
+        );
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
