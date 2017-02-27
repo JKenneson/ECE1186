@@ -29,7 +29,7 @@ public class Global {
      */
     public static DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
     /**
-     * Decimal Formatter will create 1 comma for numbers between 1,000 and 100,000 as well as a decimal point with 2 places
+     * Decimal Formatter will always show at least 1 zero with two decimal places
      */
     public static DecimalFormat gradeFormatter = new DecimalFormat("#0.00");
     

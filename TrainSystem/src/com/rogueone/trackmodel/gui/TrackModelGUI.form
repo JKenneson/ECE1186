@@ -14,7 +14,7 @@
     </Property>
     <Property name="name" type="java.lang.String" value="" noResource="true"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1070, 720]"/>
+      <Dimension value="[1040, 720]"/>
     </Property>
     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
   </Properties>
@@ -38,7 +38,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="trackModelTabbedPane" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <EmptySpace pref="-26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -274,15 +274,13 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="trackDetailsSelectionPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="trackDetailsDetailsPanel" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="trackFailureModesPanel" min="-2" pref="450" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="testingPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="trackCircuitPanel" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="trackDetailsDetailsPanel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="trackDetailsSelectionPanel" alignment="0" min="-2" pref="1010" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -298,8 +296,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="trackCircuitPanel" max="32767" attributes="0"/>
-                          <Component id="testingPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="trackFailureModesPanel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="trackFailureModesPanel" alignment="0" pref="110" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="108" max="32767" attributes="0"/>
                   </Group>
@@ -339,7 +336,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lineSelectionComboBox" pref="349" max="32767" attributes="0"/>
+                              <Component id="lineSelectionComboBox" pref="287" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -383,7 +380,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="sectionSelectionComboBox" pref="349" max="32767" attributes="0"/>
+                              <Component id="sectionSelectionComboBox" pref="287" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -430,7 +427,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="blockSelectionComboBox" pref="349" max="32767" attributes="0"/>
+                              <Component id="blockSelectionComboBox" pref="287" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -498,7 +495,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="blockScrollPane" pref="1127" max="32767" attributes="0"/>
+                              <Component id="blockScrollPane" pref="942" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -629,7 +626,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="switchScrollPane" pref="1127" max="32767" attributes="0"/>
+                              <Component id="switchScrollPane" pref="942" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -712,7 +709,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="stationScrolPane" pref="1127" max="32767" attributes="0"/>
+                              <Component id="stationScrolPane" pref="942" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -846,50 +843,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="testingPanel">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Testing">
-                      <Font PropertyName="font" name="Dialog" size="24" style="1"/>
-                    </TitledBorder>
-                  </Border>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="toggleTrainPresenceButton" pref="189" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="toggleTrainPresenceButton" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JButton" name="toggleTrainPresenceButton">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Dialog" size="18" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Toggle Presence"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toggleTrainPresence"/>
-                  </Events>
-                </Component>
-              </SubComponents>
-            </Container>
             <Container class="javax.swing.JPanel" name="trackCircuitPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -904,7 +857,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="trackCircuitScrollPanel" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="trackCircuitScrollPanel" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
