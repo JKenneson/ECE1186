@@ -80,7 +80,7 @@ public class TrainSystem {
         this.task = new SystemTimer(this);
         timer.schedule(this.task, 0, NORMAL_TIME);
         
-        dispatchTrain(45, 40000, 1, "GREEN");
+        dispatchTrain(45, 40000, 1, "GREEN", 1);
     }
     
     // UPDATES
@@ -100,8 +100,8 @@ public class TrainSystem {
     }
     
     // TESTING
-    public void dispatchTrain(int speed, int authortiy, int numCars, String line) {
-        trainHandler.dispatchNewTrain(speed, authortiy, numCars, line);  
+    public void dispatchTrain(int speed, int authortiy, int numCars, String line, int trainID) {
+        trainHandler.dispatchNewTrain(speed, authortiy, numCars, line, trainID);  
     }
     
     // GETTERS

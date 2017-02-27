@@ -38,9 +38,10 @@ public class TrainHandler {
      * @param authority The initial CTC authority
      * @param numCars The number of cars on the train (1 or 2)
      * @param line  The line the train will be traveling on (Red or Green)
+     * @param trainID The ID of the train
      */
-    public void dispatchNewTrain(int setPoint, int authority, int numCars, String line) {
-        TrainModel trainToAdd = new TrainModel(setPoint, authority, numCars, line, this.trainSystem);
+    public void dispatchNewTrain(int setPoint, int authority, int numCars, String line, int trainID) {
+        TrainModel trainToAdd = new TrainModel(setPoint, authority, numCars, line, this.trainSystem, trainID);
         trainToAdd.CreateGUIObject(trainToAdd);
         trainToAdd.createTrainController();
         trainToAdd.createTrainControllerGUI();
@@ -70,6 +71,15 @@ public class TrainHandler {
      */
     public TrainHandlerGUI getGUI() {
         return this.trainHandlerGUI;
+    }
+
+    /**
+     * Returns the ArrayList of trains
+     * @author Jonathan Kenneson
+     * @return ArrayList of trains
+     */
+    public ArrayList<TrainModel> getTrains() {
+        return trains;
     }
     
     

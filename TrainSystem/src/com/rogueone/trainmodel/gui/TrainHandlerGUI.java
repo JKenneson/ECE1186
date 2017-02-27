@@ -49,7 +49,6 @@ public class TrainHandlerGUI extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         add(trainSelectLabel, gridBagConstraints);
 
-        trainSelectorDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         trainSelectorDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trainSelectorDropdownActionPerformed(evt);
@@ -81,8 +80,12 @@ public class TrainHandlerGUI extends javax.swing.JPanel {
         add(trainSelectButton, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void updateTrainHandlerGUI() {
+        this.trainSelectorDropdown.setModel(new javax.swing.DefaultComboBoxModel(this.trainHandler.getTrains().toArray()));
+    }
+    
     private void trainSelectorDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainSelectorDropdownActionPerformed
-        // TODO add your handling code here:
+        this.trainHandler.getTrains();
         
     }//GEN-LAST:event_trainSelectorDropdownActionPerformed
 

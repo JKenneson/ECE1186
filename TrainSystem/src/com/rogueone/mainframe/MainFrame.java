@@ -196,6 +196,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void trainHandlerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainHandlerMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getTrainHandler().getGUI(), BorderLayout.CENTER);
+        this.trainSystem.getTrainHandler().getGUI().updateTrainHandlerGUI();
         this.setVisible(true);
     }//GEN-LAST:event_trainHandlerMenuItemActionPerformed
 

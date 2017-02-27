@@ -93,6 +93,7 @@ public class TrainModel {
     private boolean trackAntennaActivated;
     private boolean mboAntennaActivated;
     private String line;
+    private int trainID;
     
     //Blocks
     private Block prevBlock;
@@ -110,7 +111,7 @@ public class TrainModel {
      * @param line The line the train will be on (Red or Green)
      * @param trainSystem A back reference to the over-arching train system
      */
-    public TrainModel(int setPointSpeed, int authority, int numCars, String line, TrainSystem trainSystem) {
+    public TrainModel(int setPointSpeed, int authority, int numCars, String line, TrainSystem trainSystem, int trainID) {
         //Failures
         this.powerFailure = false;
         this.brakeFailure = false;
@@ -152,6 +153,7 @@ public class TrainModel {
         this.trackAntennaActivated = true;
         this.mboAntennaActivated = true;
         this.line = line;
+        this.trainID = trainID;
         
         this.trainController = null;
         this.trainControllerGUI = null;
@@ -489,7 +491,14 @@ public class TrainModel {
         
     }
             
-    
+    /**
+     * Returns the StringID
+     * @author Jonathan Kenneson
+     * @return The TrainID
+     */
+    public String toString() {
+        return String.valueOf(this.trainID);
+    }
     
     
     
