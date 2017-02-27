@@ -8,6 +8,7 @@
  */
 package com.rogueone.trainmodel;
 
+import com.rogueone.trainmodel.gui.TrainHandlerGUI;
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainsystem.TrainSystem;
 import java.util.ArrayList;
@@ -21,10 +22,12 @@ public class TrainHandler {
     
     private TrainSystem trainSystem;
     private static ArrayList<TrainModel> trains = new ArrayList<TrainModel>();
+    private TrainHandlerGUI trainHandlerGUI;
     
     
     public TrainHandler(TrainSystem trainSystem) {
         this.trainSystem = trainSystem;
+        this.trainHandlerGUI = new TrainHandlerGUI(this);
     }
     
     /**
@@ -60,6 +63,14 @@ public class TrainHandler {
         }
     }
     
+    /**
+     * Returns the Train Handler GUI
+     * @author Jonathan Kenneson
+     * @return The TrainHandlerGUI that is attached to this handler
+     */
+    public TrainHandlerGUI getGUI() {
+        return this.trainHandlerGUI;
+    }
     
     
     /**
