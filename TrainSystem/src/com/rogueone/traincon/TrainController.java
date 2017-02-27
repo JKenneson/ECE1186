@@ -216,7 +216,7 @@ public class TrainController {
         gui.SpeedInput.setValue(this.driverSetPoint);
         gui.KiInput.setValue(this.kI);
         gui.KpInput.setValue(this.kP);
-        gui.ClockText.append(getTime());//Get value from global clock value (EST)
+        gui.ClockText.append(this.ts.getClock().printClock());//Get value from global clock value (EST)
         
         for(int i = 0; i < getNumberOfTrains(); i++){
             //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));

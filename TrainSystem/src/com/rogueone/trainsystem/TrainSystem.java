@@ -145,6 +145,14 @@ public class TrainSystem {
     public Mbo getMBO() {
         return mbo;
     }
+    
+    /**
+     * Getter for ref to global clock
+     * @return clock reference
+     */
+    public Clock getClock() {
+        return clock;
+    }
 }
 
 class SystemTimer extends TimerTask {
