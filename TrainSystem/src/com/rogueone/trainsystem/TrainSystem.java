@@ -80,16 +80,16 @@ public class TrainSystem {
         this.task = new SystemTimer(this);
         timer.schedule(this.task, 0, NORMAL_TIME);
         
-//        dispatchTrain(25, 40000, 1, "GREEN");
+        dispatchTrain(45, 40000, 1, "GREEN");
     }
     
     // UPDATES
     void updateTrainSystem() {
-        //this.trainHandler.updateTrains();
-        //this.trackModel.updateGUI();
+        this.trainHandler.updateTrains();
+        this.trackModel.updateGUI();
         this.clock.updateClock();               //Increment the clock
         this.mainFrame.timeLabel.setText(this.clock.printClock() + "     ");
-//        this.trackControllerHandler.updateTrack();
+        //this.trackControllerHandler.updateTrack();
         //System.out.println(this.clock.printClock());
     }
 

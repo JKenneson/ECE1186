@@ -28,22 +28,6 @@ public class TrainHandler {
     }
     
     /**
-     * Main function currently tests the functionality of the Train Model class independent from the other modules
-     * The user may perform extensive testing of this module through the module's GUI
-     * Also, small functionality from the TrainController may be implemented here
-     * 
-     * @author Jonathan Kenneson
-     * @param args 
-     */
-    public static void main(String[] args) throws InterruptedException  { 
-        
-        //trainModelInit();
-        
-        //trainModelAndControllerInit();
-        
-    }
-    
-    /**
      * Dispatch a new train with a set point speed, authority, number of cars, and the line (Red or Green)
      * 
      * @author Jonathan Kenneson
@@ -76,7 +60,26 @@ public class TrainHandler {
         }
     }
     
+    
+    
+    /**
+     * Main function currently tests the functionality of the Train Model class independent from the other modules
+     * The user may perform extensive testing of this module through the module's GUI
+     * Also, small functionality from the TrainController may be implemented here
+     * 
+     * @author Jonathan Kenneson
+     * @param args 
+     */
     /*
+    public static void main(String[] args) throws InterruptedException  { 
+        
+        //trainModelInit();
+        
+        //trainModelAndControllerInit();
+        
+    }
+    
+    
     public static void trainModelAndControllerInit() throws InterruptedException {
         TrainModel trainModelTest1 = new TrainModel(0, 40000, 1, "Green");                              //Create a new TrainModel object with a set point speed of 40, authority of 40000, and 1 car
         TrainModelGUI trainModelGUITest1 = trainModelTest1.CreateGUIObject(trainModelTest1);    //Instantiate a GUI for this train

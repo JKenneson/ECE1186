@@ -65,7 +65,7 @@ public class Clock {
         if(this.hour == 12 && this.timeOfDay == TimeOfDay.AM) { //If we move into the afternoon, set the time of day to PM
             this.timeOfDay = TimeOfDay.PM;
         }
-        if(this.hour == 13) {       //Wrapping around (really 1:00 PM
+        if(this.hour == 13) {       //Wrapping around (really 1:00 PM)
             this.hour = 1;
         }
         if(this.hour == 11 && this.timeOfDay == TimeOfDay.PM) { //If it's 11:00 PM, move into the next day and reset the clock back to 6:00AM

@@ -107,6 +107,8 @@ public class TrainModel {
      * @param setPointSpeed The desired speed set by the CTC
      * @param authority The desired authority set by the CTC
      * @param numCars How many cars are to be created (1 or 2)
+     * @param line The line the train will be on (Red or Green)
+     * @param trainSystem A back reference to the over-arching train system
      */
     public TrainModel(int setPointSpeed, int authority, int numCars, String line, TrainSystem trainSystem) {
         //Failures
@@ -166,17 +168,15 @@ public class TrainModel {
     
     /**
      * This method creates a new TrainController object for this train, with a back-reference to this specific TrainModel
-     * 
      * @author Jonathan Kenneson
      */
     public void createTrainController() {
         //Create a new TrainController object
-        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, approachingStation, approachingStation, approachingStation, approachingStation);
+        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, approachingStation, approachingStation, approachingStation, approachingStation, this.trainSystem);
     }
     
     /**
      * This method creates a new TrainControllerGUI object for this train, with a back-reference to the specific TrainController
-     * 
      * @author Jonathan Kenneson
      */
     public void createTrainControllerGUI() {
@@ -185,11 +185,12 @@ public class TrainModel {
     
     /**
      * This method updates the TrainControllerGUI object for this train
-     * 
      * @author Jonathan Kenneson
      */    
     public void updateTrainControllerGUI() {
-        this.trainController.updateGUI(this.trainControllerGUI);
+        if(this.trainControllerGUI != null) {   //Only update if the GUI window is active
+            this.trainController.updateGUI(this.trainControllerGUI);
+        }
     }
         
     
@@ -247,6 +248,10 @@ public class TrainModel {
      * @param gui A TrainModelGUI object that will get updated with values from the class
      */
     public void UpdateGUI(TrainModelGUI gui) {
+        System.out.println("GUI: " + this.trainModelGUI.isValid());
+        if(gui == null) {       //If the gui hasn't been set, just return
+            return;
+        }
         //Train Operations
         if(this.leftDoorOpen) {
             gui.leftDoorState.setText("Open");
