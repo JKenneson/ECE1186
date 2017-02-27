@@ -90,7 +90,7 @@ public class TrainSystem {
         this.clock.updateClock();               //Increment the clock
         this.mainFrame.timeLabel.setText(this.clock.printClock() + "     ");
         //this.trackControllerHandler.updateTrack();
-        //System.out.println(this.clock.printClock());
+        this.ctc.updateGUI();
     }
 
     public void updateTimer(int timeToRefresh) {

@@ -188,7 +188,7 @@ public class TrainModel {
      * @author Jonathan Kenneson
      */    
     public void updateTrainControllerGUI() {
-        if(this.trainControllerGUI != null) {   //Only update if the GUI window is active
+        if(this.trainControllerGUI.isValid()) {   //Only update if the GUI window is active
             this.trainController.updateGUI(this.trainControllerGUI);
         }
     }
@@ -248,8 +248,7 @@ public class TrainModel {
      * @param gui A TrainModelGUI object that will get updated with values from the class
      */
     public void UpdateGUI(TrainModelGUI gui) {
-        System.out.println("GUI: " + this.trainModelGUI.isValid());
-        if(gui == null) {       //If the gui hasn't been set, just return
+        if(!gui.isValid()) {       //If the gui isn't showing, just return
             return;
         }
         //Train Operations

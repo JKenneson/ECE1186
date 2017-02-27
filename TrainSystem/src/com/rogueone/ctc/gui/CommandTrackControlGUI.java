@@ -43,7 +43,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
       public CommandTrackControlGUI(TrainSystem ts) {
         initComponents();
 
-        //trainSystem = ts;
+        this.trainSystem = ts;
         this.trackModel = ts.getTrackModel();
         //initializeBlockTable();
 
