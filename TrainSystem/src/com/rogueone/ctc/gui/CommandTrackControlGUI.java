@@ -1108,7 +1108,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             int row = table.getSelectedRow();
             trainID = (int) table.getValueAt(row, 0);
 
-            //TrainHandler.CreateGUIObject(trainID);
+            trainSystem.trainHandler.showObjectsFromCTC(trainID);
+            
         }
 
     }//GEN-LAST:event_TrainTableMouseClicked
