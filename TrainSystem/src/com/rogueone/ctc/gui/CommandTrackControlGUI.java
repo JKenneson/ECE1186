@@ -956,8 +956,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
     }
     
-    public void updateAll(){
-        TimeField.setText(trainSystem.clock.printClock());
+    public void updateGUI(){
+        TimeField.setText(trainSystem.getClock().printClock());
     }
     
             
@@ -983,6 +983,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             TrainShutdownButton.setEnabled(false);
             TrackShutdownButton.setEnabled(false);
         }
+
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
     private void ThroughputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputFieldActionPerformed
