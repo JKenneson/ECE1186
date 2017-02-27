@@ -168,22 +168,22 @@
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title/>
+                                  <Title value="Line"/>
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title/>
+                                  <Title value="Train"/>
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title/>
+                                  <Title value="Position"/>
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title/>
+                                  <Title value="Status"/>
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
@@ -261,107 +261,11 @@
                         <Component class="javax.swing.JTable" name="BlockTable">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="4" rowCount="23">
-                                <Column editable="false" title="Line" type="java.lang.String">
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                  <Data value="Green"/>
-                                </Column>
-                                <Column editable="false" title="Section" type="java.lang.String">
-                                  <Data value="A"/>
-                                  <Data value="A"/>
-                                  <Data value="A"/>
-                                  <Data value="B"/>
-                                  <Data value="B"/>
-                                  <Data value="B"/>
-                                  <Data value="C"/>
-                                  <Data value="C"/>
-                                  <Data value="C"/>
-                                  <Data value="C"/>
-                                  <Data value="C"/>
-                                  <Data value="C"/>
-                                  <Data value="D"/>
-                                  <Data value="D"/>
-                                  <Data value="D"/>
-                                  <Data value="D"/>
-                                  <Data value="E"/>
-                                  <Data value="E"/>
-                                  <Data value="E"/>
-                                  <Data value="E"/>
-                                  <Data value="F"/>
-                                  <Data value="F"/>
-                                  <Data value="F"/>
-                                </Column>
-                                <Column editable="false" title="Block" type="java.lang.Integer">
-                                  <Data value="1"/>
-                                  <Data value="2"/>
-                                  <Data value="3"/>
-                                  <Data value="4"/>
-                                  <Data value="5"/>
-                                  <Data value="6"/>
-                                  <Data value="7"/>
-                                  <Data value="8"/>
-                                  <Data value="9"/>
-                                  <Data value="10"/>
-                                  <Data value="11"/>
-                                  <Data value="12"/>
-                                  <Data value="13"/>
-                                  <Data value="14"/>
-                                  <Data value="15"/>
-                                  <Data value="16"/>
-                                  <Data value="17"/>
-                                  <Data value="18"/>
-                                  <Data value="19"/>
-                                  <Data value="20"/>
-                                  <Data value="21"/>
-                                  <Data value="22"/>
-                                  <Data value="23"/>
-                                </Column>
-                                <Column editable="true" title="Status" type="java.lang.Boolean">
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                  <Data value="true"/>
-                                </Column>
+                              <Table columnCount="4" rowCount="0">
+                                <Column editable="false" title="Line" type="java.lang.String"/>
+                                <Column editable="false" title="Section" type="java.lang.String"/>
+                                <Column editable="false" title="Block" type="java.lang.Integer"/>
+                                <Column editable="true" title="Status" type="java.lang.Boolean"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

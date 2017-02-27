@@ -11,9 +11,14 @@ package com.rogueone.ctc.gui;
 
 //import com.rogueone.trackmodel.TrackModel;
 //import com.rogueone.trainmodel.TrainHandler;
+import com.rogueone.trackmodel.Block;
+import com.rogueone.trackmodel.Line;
 import com.rogueone.trainsystem.TrainSystem;
+import com.rogueone.trackmodel.Section;
+import com.rogueone.trackmodel.TrackModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Calendar;
@@ -23,20 +28,27 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     int trainID;
     int iterativeID = 0;
     public TrainSystem trainSystem;
+    private TrackModel trackModel;
+
 
     /**
      * Creates new form CommandTrackControlGUI
      */
     public CommandTrackControlGUI() {
-        Clock();
         initComponents();
+        initializeBlockTable();
         InitializeGUIObject();
     }
     
       public CommandTrackControlGUI(TrainSystem ts) {
         initComponents();
-        trainSystem = ts;
+
+        //trainSystem = ts;
+        this.trackModel = ts.getTrackModel();
+        //initializeBlockTable();
+
     }
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -193,6 +205,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         jScrollPane9.setViewportView(TrainTable);
+        if (TrainTable.getColumnModel().getColumnCount() > 0) {
+            TrainTable.getColumnModel().getColumn(0).setHeaderValue("Line");
+            TrainTable.getColumnModel().getColumn(1).setHeaderValue("Train");
+            TrainTable.getColumnModel().getColumn(2).setHeaderValue("Position");
+            TrainTable.getColumnModel().getColumn(3).setHeaderValue("Status");
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -251,29 +269,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         BlockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Green", "A",  new Integer(1),  new Boolean(true)},
-                {"Green", "A",  new Integer(2),  new Boolean(true)},
-                {"Green", "A",  new Integer(3),  new Boolean(true)},
-                {"Green", "B",  new Integer(4),  new Boolean(true)},
-                {"Green", "B",  new Integer(5),  new Boolean(true)},
-                {"Green", "B",  new Integer(6),  new Boolean(true)},
-                {"Green", "C",  new Integer(7),  new Boolean(true)},
-                {"Green", "C",  new Integer(8),  new Boolean(true)},
-                {"Green", "C",  new Integer(9),  new Boolean(true)},
-                {"Green", "C",  new Integer(10),  new Boolean(true)},
-                {"Green", "C",  new Integer(11),  new Boolean(true)},
-                {"Green", "C",  new Integer(12),  new Boolean(true)},
-                {"Green", "D",  new Integer(13),  new Boolean(true)},
-                {"Green", "D",  new Integer(14),  new Boolean(true)},
-                {"Green", "D",  new Integer(15),  new Boolean(true)},
-                {"Green", "D",  new Integer(16),  new Boolean(true)},
-                {"Green", "E",  new Integer(17),  new Boolean(true)},
-                {"Green", "E",  new Integer(18),  new Boolean(true)},
-                {"Green", "E",  new Integer(19),  new Boolean(true)},
-                {"Green", "E",  new Integer(20),  new Boolean(true)},
-                {"Green", "F",  new Integer(21),  new Boolean(true)},
-                {"Green", "F",  new Integer(22),  new Boolean(true)},
-                {"Green", "F",  new Integer(23),  new Boolean(true)}
+
             },
             new String [] {
                 "Line", "Section", "Block", "Status"
@@ -936,42 +932,35 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    javax.swing.Timer m_t;
+    public void initializeBlockTable(){
+        ArrayList<Block> blocks = trackModel.getBlockArray();
+        ArrayList<Line> lines = trackModel.getLineArray();
+        ArrayList<Section> sections = trackModel.getSectionArray();
+        
+        DefaultTableModel blockModel = (DefaultTableModel) BlockTable.getModel();
+        Object[] newBlock = new Object[4];
 
-    private void Clock() {
-        //... Create a 1-second timer.
-        int timeConstant = 1000;
-        m_t = new javax.swing.Timer(timeConstant, new ClockTickAction());
-        m_t.start();  // Start the timer
-    }
-
-    private class ClockTickAction implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //... Get the current time.
-            Calendar now = Calendar.getInstance();
-            int h = now.get(Calendar.HOUR_OF_DAY);
-            int m = now.get(Calendar.MINUTE);
-            int s = now.get(Calendar.SECOND);
-
-            if (h > 12) {
-                h = h - 12;
-                jLabel7.setText("PM");
-            } else {
-                jLabel7.setText("AM");
-            }
-
-            TimeField.setText(h + ":" + m + ":" + s);
-
-            if ((h > 5) && (h < 8)) {
-                RushHourField.setText("YES");
-            } else {
-                RushHourField.setText("NO");
-            }
+        for (Line l: lines) {
+            for (Section s: sections){
+                for (Block b: blocks){
+                           
+                    newBlock[0] = (Object)l.getLineID().toString();
+                    newBlock[1] = (Object)s.getSectionID().toString();
+                    newBlock[2] = (int)b.getID();
+                    newBlock[3] = (boolean)true;
+                            
+                    blockModel.addRow(newBlock);
+                    
+                }
+           }  
         }
     }
-
+    
+    public void updateAll(){
+        TimeField.setText(trainSystem.clock.printClock());
+    }
+    
+            
 
     private void jPanel19ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel19ComponentShown
         // TODO add your handling code here:
