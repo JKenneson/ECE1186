@@ -44,7 +44,7 @@ public class TrainSystem {
     private MainFrame mainFrame;
     
     //OTHER
-    private static final String trackDataFilePath ="src/com/rogueone/assets/TrackData.xlsx";
+    private static final String trackDataFilePath = "src/com/rogueone/assets/TrackData.xlsx";
     
     /**
      * @param args the command line arguments
@@ -87,6 +87,7 @@ public class TrainSystem {
     void updateTrainSystem() {
         this.trainHandler.updateTrains();
         this.trackModel.updateGUI();
+        this.trackModel.updateStationEnvironments();
         this.clock.updateClock();               //Increment the clock
         this.mainFrame.timeLabel.setText(this.clock.printClock() + "     ");
         //this.trackControllerHandler.updateTrack();

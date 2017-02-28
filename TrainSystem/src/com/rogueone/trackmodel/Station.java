@@ -6,6 +6,7 @@
 package com.rogueone.trackmodel;
 
 import com.rogueone.global.Global;
+import java.util.Random;
 
 /**
  *
@@ -25,6 +26,12 @@ public class Station {
     private int waitingPassengers = 0;
     private int temperature = -1;
     private boolean heaterOn = false;
+    private Random random;
+    private static final int MAX_TEMPURATURE = 100;
+    private static final int MIN_TEMPURATURE = 0;
+    private static final int MAX_TEMPURATURE_CHANGE = 5;
+    private static final int MAX_PASSENGER_CHANGE = 3;
+    private static final int HEATER_THRESHOLD = 32;
     
     //Contructor
     public Station(int newStationID, String newStationName, Line newLine, Block newBlockA, Section newSectionA, 
@@ -38,10 +45,35 @@ public class Station {
         sectionB = newSectionB;
         rightSide = newRightSide;
         leftSide = newLeftSide;
-        //Mock passenger and temperature data for now, until the random simulators are finished.
         waitingPassengers = 0;
-        temperature = -1;
+        temperature = 70;
         heaterOn = false;
+        random = new Random();
+    }
+    public int updateTemperature() {
+        //Adjust temperature
+        int difference = MAX_TEMPURATURE_CHANGE - random.nextInt(2 * MAX_TEMPURATURE_CHANGE + 1);
+        temperature += difference;
+        //Adjust heater
+        if(temperature < HEATER_THRESHOLD) {
+            heaterOn = true;
+        }
+        else {
+            heaterOn = false;
+        }
+        //Enforce boundaries
+        if(temperature < MIN_TEMPURATURE) {
+            temperature = MIN_TEMPURATURE;
+        }
+        if(temperature > MAX_TEMPURATURE) {
+            temperature = MAX_TEMPURATURE;
+        }
+        return temperature;
+    }
+    public int updatePassengers() {
+        int difference = (MAX_PASSENGER_CHANGE - 1) - random.nextInt(MAX_PASSENGER_CHANGE + 1);
+        waitingPassengers += difference;
+        return waitingPassengers;
     }
     //Getters and Setters
     public int getID() {
@@ -71,10 +103,6 @@ public class Station {
     public boolean isLeftSide() {
         return leftSide;
     }
-    public void setHeater(boolean on)
-    {
-        heaterOn = on;  
-    }
     public boolean isHeaterOn() {
         return heaterOn;
     }
@@ -88,6 +116,9 @@ public class Station {
         waitingPassengers =- boardingPassengers;
         return waitingPassengers;
         //No support for negative passengers YET
+    }
+    public int getWaitingPassengers() {
+        return waitingPassengers;
     }
     public boolean equals(Station otherStation) {
         return this.line.equals(otherStation.getLine()) && this.stationID == otherStation.getID();

@@ -727,7 +727,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             if (b.getStation() != null) {
                     Station station = (Station) b.getStation();
                     
-                    String stationColumnNames[] = { "ID", "Name", "Block A", "Section A", "Block B", "Section B", "Right", "Left", "Temperature", "Heater" };
+                    String stationColumnNames[] = { "ID", "Name", "Block A", "Section A", "Block B", "Section B", "Right", "Left", "Temperature", "Heater", "Waiting" };
                     String heaterOn = "Off";
                     if(station.isHeaterOn()) {
                         heaterOn = "On";
@@ -742,7 +742,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         station.isRightSide() + "", 
                         station.isLeftSide() + "",
                         station.getTemperature() + "",
-                        heaterOn};
+                        heaterOn,
+                        station.getWaitingPassengers() + ""};
                     DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
                     stationModel.addRow(stationRowData);
                     stationTable.setModel(stationModel);

@@ -60,6 +60,14 @@ public class TrackModel {
     
     public void updateGUI() {
         trackModelGUI.updateSummaryPanel();
+        trackModelGUI.updateDetailsPanel();
+    }
+    
+    public void updateStationEnvironments() {
+        for(Station station : stations) {
+            station.updatePassengers();
+            station.updateTemperature();
+        }
     }
     
     public TrackModelGUI getGUI() {
