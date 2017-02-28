@@ -5,7 +5,6 @@
  */
 package com.rogueone.trackmodel;
 
-import com.rogueone.global.Global;
 import java.util.Random;
 
 /**
@@ -26,7 +25,7 @@ public class Station {
     private int waitingPassengers = 0;
     private int temperature = -1;
     private boolean heaterOn = false;
-    private Random random;
+    private final Random random;
     private static final int MAX_TEMPURATURE = 100;
     private static final int MIN_TEMPURATURE = 0;
     private static final int MAX_TEMPURATURE_CHANGE = 5;
@@ -112,10 +111,23 @@ public class Station {
     public void queuePassengers(int newPassengers) {
         waitingPassengers =+ newPassengers;
     }
+    /**
+     * Request passengers from the station to board the train
+     * @param boardingPassengers the number of passengers requested
+     * @return the deficit of requested passengers, otherwise 0
+     */
     public int boardPassengers(int boardingPassengers) {
-        waitingPassengers =- boardingPassengers;
-        return waitingPassengers;
-        //No support for negative passengers YET
+        int surplusPassengers = waitingPassengers - boardingPassengers;
+        //Enough waiting passengers
+        if (surplusPassengers >= 0) {
+            waitingPassengers = surplusPassengers;
+            return 0;
+        }
+        //Not enough waiting passengers
+        else {
+            waitingPassengers = 0;
+            return -surplusPassengers;
+        }
     }
     public int getWaitingPassengers() {
         return waitingPassengers;
@@ -123,6 +135,7 @@ public class Station {
     public boolean equals(Station otherStation) {
         return this.line.equals(otherStation.getLine()) && this.stationID == otherStation.getID();
     }
+    @Override
     public String toString() {
         return name + " (" + stationID + ")";
     }
