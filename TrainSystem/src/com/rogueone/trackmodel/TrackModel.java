@@ -31,6 +31,8 @@ public class TrackModel {
     private TrackModelGUI trackModelGUI = null;
     private TrainSystem trainSystem = null;
     private static final String DEFAULT_PATH = "src/com/rogueone/assets/TrackData.xlsx";
+    private static final int FIRST_BLOCK_GREEN = 152;
+    private static final int FIRST_BLOCK_RED = 77;
     
     //Used only when running standalone TrackModel
     public static void main(String[] args) throws InterruptedException {
@@ -47,7 +49,8 @@ public class TrackModel {
     /**
      * Initializes TrackModel with data file
      * @author Dan Bednarczyk
-     * @param trackDataFile the File to load
+     * @param ts the main TrainSystem
+     * @param file the File to load
      */
     public TrackModel(TrainSystem ts, File file) {
         trainSystem = ts;
@@ -61,6 +64,24 @@ public class TrackModel {
     
     public TrackModelGUI getGUI() {
         return trackModelGUI;
+    }
+    
+    public Block enterTrack(Global.Line line) {
+        Block firstBlock = null;
+        if(line == Global.Line.GREEN) { 
+            firstBlock = getBlock(line, FIRST_BLOCK_GREEN);
+            firstBlock.setOccupancy(true);
+            return firstBlock;
+        }
+        else if(line == Global.Line.RED) {
+            firstBlock = getBlock(line, FIRST_BLOCK_RED);
+            firstBlock.setOccupancy(true);
+            return firstBlock;
+        }
+        else {
+            System.err.println("Line could not be found");
+            return null;
+        }
     }
     
     /**
@@ -159,26 +180,6 @@ public class TrackModel {
             System.err.println("Incorrect format for data file.");
         }
          
-    }
-    
-    public void simulateTrain() {
-        Block prev = getBlock(Global.Line.GREEN, Global.Section.A, 0);
-        Block cur = getBlock(Global.Line.GREEN, Global.Section.A, 1);
-        Block next = null;
-        Block curTemp = null;
-        while (cur != null) {
-            System.out.println(cur);
-            next = cur.exitBlock(prev);
-            curTemp = cur;
-            cur = next;
-            prev = curTemp;
-        
-            try {
-                TimeUnit.MILLISECONDS.sleep(250);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(TrackModel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
     
     /**
@@ -563,6 +564,10 @@ public class TrackModel {
         }
         System.err.println("Switch " + switchID + " not found.");
         return null;
+    }
+    
+    public Yard getYard() {
+        return yard;
     }
     
     /**

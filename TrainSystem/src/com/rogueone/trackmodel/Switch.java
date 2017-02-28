@@ -58,17 +58,19 @@ public class Switch implements TrackPiece {
     public Global.PieceType getType() {
         return PieceType.SWITCH;
     }
-    public TrackPiece getNext(TrackPiece previous) {
+    public TrackPiece getNext(TrackPiece previous) {    
         //entering from dependent block B, exiting the static port
         if (!isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
             return portA;
         }
         //entering from dependent block C, no block available until switch is activated
         else if (!isActivated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
+            System.out.println("Train halted at switch");
             return null;
         }
         //entering from dependent block B, no switch available until switch is deactivated
-        if (isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+        else if (isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
+            System.out.println("Train halted at switch");
             return null;
         }
         //entering from dependent block C, exiting the static port

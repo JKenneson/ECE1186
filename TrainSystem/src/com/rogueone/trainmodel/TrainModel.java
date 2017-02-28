@@ -13,6 +13,7 @@ import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
+import com.rogueone.trackmodel.TrackPiece;
 import com.rogueone.traincon.TrainController;
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainsystem.TrainSystem;
@@ -96,7 +97,7 @@ public class TrainModel {
     public int trainID;
     
     //Blocks
-    private Block prevBlock;
+    private TrackPiece prevBlock;
     private Block currBlock;
     private Block nextBlock;
     private Block currTempBlock;
@@ -162,8 +163,8 @@ public class TrainModel {
         
         this.trainSystem = trainSystem;
         //Block setting
-        this.prevBlock = trainSystem.getTrackModel().getBlock(Global.Line.valueOf(line.toUpperCase()), Global.Section.A, 1);
-        this.currBlock = trainSystem.getTrackModel().getBlock(Global.Line.valueOf(line.toUpperCase()), Global.Section.A, 2);
+        this.prevBlock = trainSystem.getTrackModel().getYard();
+        this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
         this.nextBlock = null;
         this.currTempBlock = null;
     }
@@ -483,7 +484,7 @@ public class TrainModel {
             this.currBlock = this.nextBlock;
             this.prevBlock = this.currTempBlock;
             
-            //System.out.println("Current Block: " + this.currBlock);
+            System.out.println("Current Block: " + this.currBlock);
         }
         
     }

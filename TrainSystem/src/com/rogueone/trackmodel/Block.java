@@ -105,16 +105,27 @@ public class Block implements TrackPiece {
     * @param previous the previous block
     * @return the next Block object, null if it is yard
     */
-    public Block exitBlock(Block previous) {
-        Block next = getNextBlock(previous);
-        if (next != null) {
-            this.setOccupancy(false);
-            next.setOccupancy(true); 
+    public Block exitBlock(TrackPiece previous) {
+        // Coming from another block
+        if(previous.getType() == Global.PieceType.BLOCK) {
+            Block next = getNextBlock((Block)previous);
+            if (next != null) {
+                this.setOccupancy(false);
+                next.setOccupancy(true);
+            }
+            else {
+                System.err.println("Next block could not be found.");
+            }
+            return next;
+        }
+        // Yard is always portA
+        else if(previous.getType() == Global.PieceType.YARD) {
+            return getNextBlockViaPortB();
         }
         else {
-            System.err.println("Next block could not be found.");
+            System.err.println("Invalid argument. Previous must be of type BLOCK or YARD.");
+            return null;
         }
-        return next;
     }
     
     /**
@@ -146,9 +157,6 @@ public class Block implements TrackPiece {
     * @return the next Block object
     */
     public Block getNextBlock(Block previous) {
-        //System.out.println(previous.getType() + " " + previous.getID());
-        //System.out.println(portA.getType() + " " + portA.getID());
-        //System.out.println(portB.getType() + " " + portB.getID());
         //Train came from Port A, get next block via Port B
         if(getNextBlockViaPortA().equals(previous)) {
             return getNextBlockViaPortB();
