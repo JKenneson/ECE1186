@@ -79,17 +79,18 @@ public class TrackModel {
         if(line == Global.Line.GREEN) { 
             firstBlock = getBlock(line, FIRST_BLOCK_GREEN);
             firstBlock.setOccupancy(true);
-            return firstBlock;
         }
         else if(line == Global.Line.RED) {
             firstBlock = getBlock(line, FIRST_BLOCK_RED);
             firstBlock.setOccupancy(true);
-            return firstBlock;
         }
         else {
             System.err.println("Line could not be found");
-            return null;
         }
+        if(firstBlock == null) {
+            System.err.println("First block on line " + line + " could not be found");
+        }
+        return firstBlock;
     }
     
     /**
@@ -175,7 +176,7 @@ public class TrackModel {
             //System.out.println("\nSECTIONS:");
             //printSections();
             //System.out.println("\nBLOCKS:");
-            //printBlocks();
+            printBlocks();
             //System.out.println("\nSTATIONS:");
             //printStations();
             //System.out.println("\nSWITCHES:");

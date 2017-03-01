@@ -100,35 +100,6 @@ public class Block implements TrackPiece {
     }
     
     /**
-    * Get the next Block using previous Block as a means of direction specification, also updates occupancy of current and next blocks.
-    * @author Dan Bednarczyk
-    * @param previous the previous block
-    * @return the next Block object, null if it is yard
-    */
-    public Block exitBlock(TrackPiece previous) {
-        // Coming from another block
-        if(previous.getType() == Global.PieceType.BLOCK) {
-            Block next = getNextBlock((Block)previous);
-            if (next != null) {
-                this.setOccupancy(false);
-                next.setOccupancy(true);
-            }
-            else {
-                System.err.println("Next block could not be found.");
-            }
-            return next;
-        }
-        // Yard is always portA
-        else if(previous.getType() == Global.PieceType.YARD) {
-            return getNextBlockViaPortB();
-        }
-        else {
-            System.err.println("Invalid argument. Previous must be of type BLOCK or YARD.");
-            return null;
-        }
-    }
-    
-    /**
     * Get the TrackPiece that train will exit from (should not be mistaken for getNextBlock, which only returns Blocks).
     * @author Dan Bednarczyk
     * @param previous the previous TrackPiece
@@ -156,20 +127,40 @@ public class Block implements TrackPiece {
     * @param previous the previous block
     * @return the next Block object
     */
-    public Block getNextBlock(Block previous) {
-        //Train came from Port A, get next block via Port B
-        if(getNextBlockViaPortA().equals(previous)) {
-            return getNextBlockViaPortB();
+    public TrackPiece getNextTrackPiece(TrackPiece previous) {
+        TrackPiece portABlock = getNextTrackPieceViaPortA();
+        TrackPiece portBBlock = getNextTrackPieceViaPortB();
+        
+        if(portABlock == null || portBBlock == null) {
+            System.err.println("Block " + this.getID() + " is not fully connected. Please check your track configuation. "
+                    + "This can occur if train is at open switch.");
+            return null;
         }
-        //Train came from Port B, get next block via Port A
-        if(getNextBlockViaPortB().equals(previous)) {
-            return getNextBlockViaPortA();
+        
+        // Train is on regular piece of track
+        if(previous.getType() == Global.PieceType.BLOCK) {
+            if(portABlock.equals(previous)) {
+                //Train came from Port A, get next block via Port B
+                return portBBlock;
+            }
+            if(portBBlock.equals(previous)) {
+                //Train came from Port B, get next block via Port A
+                return portABlock;
+            }
+            else {
+                //Previous does not match either port, an error occured
+                System.err.println("Next block not found");
+                return null;  
+            } 
         }
-        //Previous does not match either port, an error occured
+        // Train is dispatched from the yard
+        else if(previous.getType() == Global.PieceType.YARD) {
+            return portBBlock; // Yard is always portA
+        }
         else {
-            System.err.println("Next block not found");
-            return null;  
-        } 
+            System.err.println("Invalid argument. Previous must be of type BLOCK or YARD.");
+            return null;
+        }   
     }
     
     /**
@@ -177,12 +168,12 @@ public class Block implements TrackPiece {
     * @author Dan Bednarczyk
     * @return (1) Port A if Port A is a block (2) The next Block if Port A is a Switch (3) null otherwise 
     */
-    private Block getNextBlockViaPortA() {
-        if (portA.getType() == Global.PieceType.BLOCK) {
-            return (Block) portA;
+    private TrackPiece getNextTrackPieceViaPortA() {
+        if (portA.getType() == Global.PieceType.BLOCK || portA.getType() == Global.PieceType.YARD) {
+            return portA;
         }
         else if (portA.getType() == Global.PieceType.SWITCH) {
-            return (Block) (((Switch) portA).getNext(this));
+            return ((Switch) portA).getNext(this);
         }
         else {
             System.err.println("Next block not found via port A");
@@ -195,12 +186,12 @@ public class Block implements TrackPiece {
     * @author Dan Bednarczyk
     * @return (1) Port B if Port B is a block (2) The next Block if Port B is a Switch (3) null otherwise 
     */
-    private Block getNextBlockViaPortB() {
-        if (portB.getType() == Global.PieceType.BLOCK) {
-            return (Block) portB;
+    private TrackPiece getNextTrackPieceViaPortB() {
+        if (portB.getType() == Global.PieceType.BLOCK || portB.getType() == Global.PieceType.YARD) {
+            return portB;
         }
         else if (portB.getType() == Global.PieceType.SWITCH) {
-            return (Block) (((Switch) portB).getNext(this));
+            return ((Switch) portB).getNext(this);
         }
         else {
             System.err.println("Next block not found via port B");

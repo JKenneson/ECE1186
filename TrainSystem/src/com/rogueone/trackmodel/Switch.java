@@ -58,19 +58,22 @@ public class Switch implements TrackPiece {
     public Global.PieceType getType() {
         return PieceType.SWITCH;
     }
-    public TrackPiece getNext(TrackPiece previous) {    
+    public TrackPiece getNext(TrackPiece previous) {
+        if (portA == null || portB == null || portC == null) {
+            System.err.println("Switch is not fully connected. Please check your track configuration.");
+        }
         //entering from dependent block B, exiting the static port
         if (!isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
             return portA;
         }
         //entering from dependent block C, no block available until switch is activated
         else if (!isActivated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
-            System.out.println("Train halted at switch");
+            System.err.println("Train halted at switch");
             return null;
         }
         //entering from dependent block B, no switch available until switch is deactivated
         else if (isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
-            System.out.println("Train halted at switch");
+            System.err.println("Train halted at switch");
             return null;
         }
         //entering from dependent block C, exiting the static port
@@ -87,6 +90,7 @@ public class Switch implements TrackPiece {
         }
         //invalid block
         else {
+            System.err.println("Invalid block passed to switch.");
             return null;
         }
     }

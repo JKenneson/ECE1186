@@ -28,4 +28,9 @@ public class Yard implements TrackPiece {
         return YARD_ID;
     }
     
+    @Override
+    public String toString() {
+        return "Yard";
+    }
+    
 }

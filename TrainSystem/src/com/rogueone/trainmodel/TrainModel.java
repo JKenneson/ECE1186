@@ -97,10 +97,11 @@ public class TrainModel {
     public int trainID;
     
     //Blocks
-    private TrackPiece prevBlock;
     private Block currBlock;
-    private Block nextBlock;
     private Block currTempBlock;
+    private TrackPiece prevBlock;
+    private TrackPiece nextBlock;
+    
     
     /**
      * Initializer for the TrainModel class, sets all variables to a default state
@@ -475,23 +476,38 @@ public class TrainModel {
         //7)   Calculate distance into block and ask for new block if we've gone the length of the block
         this.distanceIntoBlock += this.distanceTraveled;
         
-        //Set block presence
-        //if(this.currBlock != null) {         //Set the occupancy to true each update
-        //    this.currBlock.setOccupancy(true);
-        //}                                     
+        //Set the occupancy to true each update
+        this.currBlock.setOccupancy(true);                                
         
         //If we've passsed into the next block, get the next block
         if(this.distanceIntoBlock > currBlock.getLength()) {
+            
+            //Set new distnace into block
             this.distanceIntoBlock -= currBlock.getLength();
+            //Set the occupancy to false as we leave
+            this.currBlock.setOccupancy(false); 
+            //Get next TrackPiece. Should be Block or Yard
+            this.nextBlock = this.currBlock.getNextTrackPiece(this.prevBlock);
             
-            //this.currBlock.setOccupancy(false);                                 //Set the occupancy to false as we leave  
+            if(this.nextBlock != null) {
+
+                System.out.println("currBlock: " + this.currBlock + ", prevBlock: " + this.prevBlock + ", nextBlock: " + this.nextBlock);
+
+                //Normal execution
+                if(this.nextBlock.getType() == Global.PieceType.BLOCK) {
+                    this.currTempBlock = this.currBlock;
+                    this.currBlock = (Block) this.nextBlock;
+                    this.prevBlock = this.currTempBlock;
+                }
+                //Train has reached end of track
+                else if (this.nextBlock.getType() == Global.PieceType.YARD) {
+                    System.out.println("Train has reached the yard");
+                }
+            }
+            else {
+               System.err.println("Train cannot get next block");    
+            }
             
-            this.nextBlock = this.currBlock.exitBlock(this.prevBlock);
-            this.currTempBlock = this.currBlock;
-            this.currBlock = this.nextBlock;
-            this.prevBlock = this.currTempBlock;
-            
-            //System.out.println("Current Block: " + this.currBlock);
         }
         
     }

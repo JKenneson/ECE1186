@@ -690,13 +690,13 @@ public class TrackController {
 
     private String printSwitchState(UserSwitchState userSwitchState) {
         
-        StringBuilder s = new StringBuilder();
+        StringBuilder s = new StringBuilder();/*
         LinkedList<AbstractMap.SimpleEntry<Integer, Global.SwitchState>> switches = userSwitchState.getUserSwitchStates();
         Iterator switchIterator = switches.iterator();
         while (switchIterator.hasNext()) {
             AbstractMap.SimpleEntry<Integer, Global.SwitchState> switchState = (AbstractMap.SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
 //            trainSystem.getTrackModel().getSwitch(switchState.getKey()).setSwitch(true);
-            s.append("\nSwitch " + switchState.getKey() + " is in " + switchState.getValue() + " state");
+//            s.append("\nSwitch " + switchState.getKey() + " is in " + switchState.getValue() + " state");
             Switch sw = switchArray.get(switchState.getKey());
             if (switchState.getValue() == Global.SwitchState.DEFAULT) {
 //                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getDefaultConnection().toString());
@@ -706,6 +706,7 @@ public class TrackController {
 //                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsAlternate().toString());
             }
         }
+     */   
         return s.toString();
     }
 
