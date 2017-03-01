@@ -85,12 +85,15 @@ public class TrainSystem {
     
     // UPDATES
     void updateTrainSystem() {
-        this.trainHandler.updateTrains();
-        this.trackModel.updateGUI();
-        this.trackModel.updateStationEnvironments();
         this.clock.updateClock();               //Increment the clock
         this.mainFrame.timeLabel.setText(this.clock.printClock() + "     ");
-        //this.trackControllerHandler.updateTrack();
+        
+        this.trainHandler.updateTrains();
+        
+        this.trackModel.updateGUI();
+        this.trackModel.updateStationEnvironments();
+        this.trackControllerHandler.updateTrack();
+        
         this.ctc.updateGUI();
     }
 

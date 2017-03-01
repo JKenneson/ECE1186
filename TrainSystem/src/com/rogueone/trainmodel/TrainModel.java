@@ -476,13 +476,15 @@ public class TrainModel {
         this.distanceIntoBlock += this.distanceTraveled;
         
         //Set block presence
-        this.currBlock.setOccupancy(true);                                      //Set the occupancy to true each update
+        //if(this.currBlock != null) {         //Set the occupancy to true each update
+        //    this.currBlock.setOccupancy(true);
+        //}                                     
         
         //If we've passsed into the next block, get the next block
         if(this.distanceIntoBlock > currBlock.getLength()) {
             this.distanceIntoBlock -= currBlock.getLength();
             
-            this.currBlock.setOccupancy(false);                                 //Set the occupancy to false as we leave  
+            //this.currBlock.setOccupancy(false);                                 //Set the occupancy to false as we leave  
             
             this.nextBlock = this.currBlock.exitBlock(this.prevBlock);
             this.currTempBlock = this.currBlock;
