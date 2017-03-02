@@ -683,14 +683,14 @@ public class TrackController {
 
         for (Entry<Global.LogicGroups, StateSet> logicSet : logicSets.entrySet()) {
             UserSwitchState userSwitchState = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
-            System.out.println(printSwitchState(userSwitchState));
+            //System.out.println(printSwitchState(userSwitchState));
         }
 
     }
 
     private String printSwitchState(UserSwitchState userSwitchState) {
         
-        StringBuilder s = new StringBuilder();/*
+        StringBuilder s = new StringBuilder();
         LinkedList<AbstractMap.SimpleEntry<Integer, Global.SwitchState>> switches = userSwitchState.getUserSwitchStates();
         Iterator switchIterator = switches.iterator();
         while (switchIterator.hasNext()) {
@@ -706,7 +706,7 @@ public class TrackController {
 //                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsAlternate().toString());
             }
         }
-     */   
+        
         return s.toString();
     }
 

@@ -176,7 +176,7 @@ public class TrackModel {
             //System.out.println("\nSECTIONS:");
             //printSections();
             //System.out.println("\nBLOCKS:");
-            printBlocks();
+            //printBlocks();
             //System.out.println("\nSTATIONS:");
             //printStations();
             //System.out.println("\nSWITCHES:");
