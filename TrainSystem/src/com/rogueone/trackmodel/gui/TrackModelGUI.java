@@ -39,6 +39,9 @@ import javax.swing.table.TableCellRenderer;
 public class TrackModelGUI extends javax.swing.JPanel {
     
     private TrackModel trackModel;
+    private FailureRenderer failureRenderer;
+    private PresenceRenderer presenceRenderer;
+    private LineRenderer lineRenderer;
 
     /** Creates new form TrackModelGUI */
     public TrackModelGUI(TrackModel tm) {
@@ -48,6 +51,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
         lineSelectionComboBox.addItemListener(new LineChangeListener());
         sectionSelectionComboBox.addItemListener(new SectionChangeListener());
         blockSelectionComboBox.addItemListener(new BlockChangeListener());
+        failureRenderer = new FailureRenderer();
+        presenceRenderer = new PresenceRenderer();
+        lineRenderer = new LineRenderer();
     }
 
     /** This method is called from within the constructor to
@@ -649,9 +655,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
         }
         summaryTable.setModel(summaryModel);
 
-        summaryTable.getColumnModel().getColumn(0).setCellRenderer(new LineRenderer());
-        summaryTable.getColumnModel().getColumn(3).setCellRenderer(new PresenceRenderer());
-        FailureRenderer failureRenderer = new FailureRenderer();
+        summaryTable.getColumnModel().getColumn(0).setCellRenderer(lineRenderer);
+        summaryTable.getColumnModel().getColumn(3).setCellRenderer(presenceRenderer);
         summaryTable.getColumnModel().getColumn(4).setCellRenderer(failureRenderer);
         summaryTable.getColumnModel().getColumn(5).setCellRenderer(failureRenderer);
         summaryTable.getColumnModel().getColumn(6).setCellRenderer(failureRenderer);
