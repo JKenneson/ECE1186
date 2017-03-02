@@ -128,22 +128,26 @@ public class Block implements TrackPiece {
     * @return the next Block object
     */
     public TrackPiece getNextTrackPiece(TrackPiece previous) {
-        TrackPiece portABlock = getNextTrackPieceViaPortA();
-        TrackPiece portBBlock = getNextTrackPieceViaPortB();
         
-        if(portABlock == null || portBBlock == null) {
-            System.err.println("Block " + this.getID() + " is not fully connected. Please check your track configuation. "
-                    + "This can occur if train is at open switch.");
+        if(portA == null) {
+            System.err.println("Block " + this.getID() + " is missing Port A. Please check your track configuation.");
+            return null;
+        }
+        if(portB == null) {
+            System.err.println("Block " + this.getID() + " is missing Port B. Please check your track configuation.");
             return null;
         }
         
+        TrackPiece portABlock = getNextTrackPieceViaPortA();
+        TrackPiece portBBlock = getNextTrackPieceViaPortB();
+        
         // Train is on regular piece of track
         if(previous.getType() == Global.PieceType.BLOCK) {
-            if(portABlock.equals(previous)) {
+            if(portABlock != null && portABlock.equals(previous)) {
                 //Train came from Port A, get next block via Port B
                 return portBBlock;
             }
-            if(portBBlock.equals(previous)) {
+            else if(portBBlock != null && portBBlock.equals(previous)) {
                 //Train came from Port B, get next block via Port A
                 return portABlock;
             }
