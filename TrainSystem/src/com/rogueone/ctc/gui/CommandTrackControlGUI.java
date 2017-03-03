@@ -4,13 +4,6 @@
  * and open the template in the editor.
  */
 package com.rogueone.ctc.gui;
-//import java.awt.*;
-//import java.awt.event.*;
-//import java.text.*;
-//import java.util.*;
-
-//import com.rogueone.trackmodel.TrackModel;
-//import com.rogueone.trainmodel.TrainHandler;
 import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.Line;
@@ -903,14 +896,21 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    /**
+     * updates all necessary fields in the GUI 
+     */
     public void updateGUI(){
         updateTime();
-        updateBlockTable();    
+        updateBlockTable(); 
+        updateTrainTable();
     }
     
-    
+    /**
+     * initializes block table with information from Track Model
+     */
     public void updateBlockTable(){
+        BlockTable.removeAll();
+        
         ArrayList<Block> blocks = this.trackModel.getBlockArray();
         ArrayList<Line> lines = this.trackModel.getLineArray();
         ArrayList<Section> sections = this.trackModel.getSectionArray();
@@ -935,8 +935,22 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * calculates offsets in presence to determine train position
+     */
+    public void updateTrainTable(){
+        
+        
+    }
+    
+    /**
+     * Updates time and rush hour fields in GUI
+     */
     public void updateTime(){
-        TimeField.setText(trainSystem.getClock().getHour() + ":" + trainSystem.getClock().getMinute() + "." + trainSystem.getClock().getSecond());
+       int updateMinute = trainSystem.getClock().getMinute();
+       int updateSecond = trainSystem.getClock().getSecond();
+        
+        TimeField.setText(trainSystem.getClock().getHour() + ":" + String.format("%02d",updateMinute) + "." + String.format("%02d",updateSecond));
         
         if ( (trainSystem.getClock().getHour() > 5) && (trainSystem.getClock().getHour() < 8)){
             RushHourField.setText("YES");
@@ -970,10 +984,30 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             DispatchButton1.setEnabled(false);
             TrainShutdownButton.setEnabled(false);
             TrackShutdownButton.setEnabled(false);
+            
+            //dispatchFromMBO();
         }
 
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
+//    private void dispatchFromMBO(){
+//        while(SelectOperationMode2.getSelectedIndex() == 1){
+//                int autoDispatchHour = trainSystem.getClock().getHour();
+//                int autoDispatchMinute = trainSystem.getClock().getMinute();
+//                int autoDispatchSecond = trainSystem.getClock().getSecond();
+//            autoDispatch(autoDispatchHour, autoDispatchMinute, autoDispatchSecond); 
+//        }
+//    }
+//    
+//    private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
+//        trainSystem.getMBO().getDispatch(autoDispatchHour, autoDispatchMinute, autoDispatchSecond);
+//        //int autoDispatchNumberCars = getNumberCars();
+//        //String autoDispatchLine = 
+//        trainSystem.dispatchTrain(autoDispatchSpeed, autoDispatchAuthority, autoDispatchNumberCars, autoDispatchLine, autoDispatchID);
+//
+//    }
+//    
+    
     private void ThroughputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ThroughputFieldActionPerformed
@@ -1367,13 +1401,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         int dispatchSection = 1;
         int dispatchSpeed = Integer.valueOf(DispatchSpeedField.getText());
         int dispatchAuthority = Integer.valueOf(DispatchAuthorityField.getText());
-        int numberCars;
-        
-        if (RushHourField.getText().equals("YES")) {
-            numberCars = 2;
-        } else {
-            numberCars = 1;
-        }
+        int dispatchNumberCars = getNumberCars();
         iterativeID++;
         int dispatchID = iterativeID;
 
@@ -1382,16 +1410,30 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         newTrain[1] = dispatchID;
         newTrain[2] = (dispatchSection + ":" + dispatchBlock);
         newTrain[3] = true;
+        
 
         if (!(existsInTable(TrainTable, newTrain))) {
             addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
         }
         
-        trainSystem.dispatchTrain(dispatchSpeed, dispatchAuthority, numberCars, dispatchLine, dispatchID);
+//        if ( trainSystem.TrackHandler.requestDispatch(dispatchBlock) ){
+            trainSystem.dispatchTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
+//        }
+        
         
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 
+    public int getNumberCars(){
+        int numberCars;
+        if (RushHourField.getText().equals("YES")) {
+            numberCars = 2;
+        } else {
+            numberCars = 1;
+        }    
+        return numberCars;
+    }
+    
     public void addRow(String dispatchLine, String dispatchBlock, int dispatchSection, int dispatchID) {
         String concatination = (dispatchBlock + ":" + Integer.toString(dispatchSection));
         Object[] newRow = new Object[4];
