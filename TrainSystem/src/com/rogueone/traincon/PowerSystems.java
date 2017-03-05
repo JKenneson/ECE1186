@@ -11,7 +11,7 @@ import com.rogueone.trainmodel.TrainModel;
  *
  * @author Tyler
  */
-public class PowerSystems {
+public class PowerSystems implements Updateable{
     
     private TrainModel trainModel;
     
@@ -51,7 +51,7 @@ public class PowerSystems {
      * 
      * @author Tyler Protivnak
      */
-    private void updateClimateControl(){ //should pull temp information from train model
+    public void update(){ 
         this.temperature = this.trainModel.getTemperature();
         
         if(this.temperature>72){
@@ -149,6 +149,14 @@ public class PowerSystems {
      */
     public boolean isHeaterOn() {
         return heaterOn;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public int getTemperature() {
+        return temperature;
     }
     
     

@@ -14,7 +14,7 @@ import java.util.Locale;
  *
  * @author Tyler
  */
-public class SpeedControl {
+public class SpeedControl implements Updateable{
     
     NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
     DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
@@ -42,7 +42,8 @@ public class SpeedControl {
         this.vitals = vitals;
     }
 
-    private void updateSafeSpeed(double currSpeed){
+    public void update(){
+        double currSpeed = this.gps.getCurrSpeed();
         if((currSpeed>this.findSetPoint() && !this.trainController.isManualMode()) || this.vitals.isServiceBrakeActivated()){
             this.trainController.setServiceBrakeActivated(true);
         }

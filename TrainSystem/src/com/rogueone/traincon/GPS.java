@@ -14,7 +14,7 @@ import com.rogueone.trainsystem.TrainSystem;
  *
  * @author Tyler
  */
-public class GPS {
+public class GPS implements Updateable{
     
     
     public final double METERS_IN_A_MILE = 1609.34;     //1609.34 meters in a mile
@@ -71,9 +71,8 @@ public class GPS {
     }
         
         
-    public void updatePosition(double currentSpeed){
+    public void update(){
         
-        this.currSpeed = currentSpeed;
         this.distanceTraveled = ((this.lastSpeed + this.currSpeed)/2) * 1;    //In meters
         this.distanceTraveled = this.distanceTraveled * FEET_IN_A_METER;      //Convert to feet
         
@@ -97,8 +96,6 @@ public class GPS {
             this.currTempBlock = this.currBlock;
             this.currBlock = this.nextBlock;
             this.prevBlock = this.currTempBlock;
-            
-            System.out.println("Current Block: " + this.currBlock);
         }
         
     }
@@ -131,6 +128,10 @@ public class GPS {
         return this.currBlock.getSpeedLimit();
     }
 
+    /**
+     * 
+     * @return the remaining authority of the train
+     */
     public double getAuthority() {
         return authority;
     }
@@ -142,6 +143,15 @@ public class GPS {
     public void setAuthority(short authority) {
         this.authority = (double)authority*this.FEET_IN_A_METER;
     }
+
+    public double getCurrSpeed() {
+        return currSpeed;
+    }
+
+    public void setCurrSpeed(double currSpeed) {
+        this.currSpeed = currSpeed;
+    }
+
     
     
 }

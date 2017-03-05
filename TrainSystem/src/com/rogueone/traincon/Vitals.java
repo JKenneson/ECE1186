@@ -38,12 +38,20 @@ public class Vitals {
     private boolean serviceBrakeStatus;
     
     
-    
-    public Vitals(TrainController tc, TrainModel tm, GPS gps, SpeedControl sc, double maxPow){
+    /**
+     * Constructor for Vitals module
+     * 
+     * @author Tyler Protivnak
+     * @param tc ref to overall train controller
+     * @param tm ref to attached train model
+     * @param gps ref to tc gps module
+     * @param sc ref to attached speed controller
+     * @param maxPow max power of the attached train
+     */
+    public Vitals(TrainController tc, TrainModel tm, GPS gps, double maxPow){
         this.trainController = tc;
         this.trainModel = tm;
         this.gps = gps;
-        this.speedControl = sc;
         
         this.serviceBrakeActivated = false;
         this.emergencyBrakeActivated = false;
@@ -63,6 +71,14 @@ public class Vitals {
         this.maxPower = maxPow;
     }
  
+    public void update(){
+        if(this.gps.getAuthority()<0)
+            this.setEmergencyBrakeActivated(true);
+        else if(!this.emergencyBrakeOverride){
+            this.setEmergencyBrakeActivated(false);
+        }
+    }
+    
     /**
      * This method is called from the TrainControllerGUI when a failure is activated and sent through
      * the failure simulation radio buttons. This method will flip the brakes on the 
@@ -135,7 +151,7 @@ public class Vitals {
      * @author Tyler Protivnak
      * @return value corresponding to failure type
      */
-    private int getFailureType(){  //get from train model
+    public int getFailureType(){  //get from train model
         if(!this.powerStatus){
             if(!this.antennaStatus){
                 if(!this.serviceBrakeStatus){
@@ -160,6 +176,9 @@ public class Vitals {
         return 0; //default, all clear
     }
     
+    
+    
+    
     /**
      * This function should be called by the train model to find out the next power
      * command for the engine.
@@ -178,7 +197,8 @@ public class Vitals {
         }
         
         this.eK = this.speedControl.getSetPoint()-actualSpeed;   //Calc error difference
-        this.gps.updatePosition(actualSpeed);           //Save actual speed
+        this.gps.setCurrSpeed(actualSpeed);
+        this.gps.update();           //Save actual speed
         
         this.uK = this.uK_1 + ((samplePeriod/2)*(this.eK+this.eK_1));
 
@@ -187,7 +207,6 @@ public class Vitals {
             this.uK = this.uK_1;
             this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
             this.powerCommand = this.maxPower;
-            
         }
         
         this.eK_1 = this.eK;
@@ -255,4 +274,41 @@ public class Vitals {
         this.emergencyBrakeActivated = emergencyBrakeActivated;
         this.trainModel.setEmergencyBrakeActivated(emergencyBrakeActivated);
     }
+
+    public void setSpeedControl(SpeedControl speedControl) {
+        this.speedControl = speedControl;
+    }
+
+    /**
+     * 
+     * @return power command that was passed to the train model
+     */
+    public double getPowerCommand() {
+        return powerCommand;
+    }
+    
+    /**
+     * 
+     * @return the max power for the given train
+     */
+    public double getMaxPower() {
+        return maxPower;
+    }
+
+    /**
+     * 
+     * @return true if E brake is activated
+     */
+    public boolean isEmergencyBrakeActivated() {
+        return emergencyBrakeActivated;
+    }
+
+    /**
+     * 
+     * @return true if override is triggered
+     */
+    public boolean isEmergencyBrakeOverride() {
+        return emergencyBrakeOverride;
+    }
+        
 }

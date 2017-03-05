@@ -995,13 +995,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_ServiceBrakeToggleButtonActionPerformed
 
     private void SetKpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKpActionPerformed
-        this.trainController.setKP(Integer.valueOf(this.KpInput.getValue().toString()));
-        this.NotificationsDisplay.append("\nKp Updated to " + this.trainController.getkP());
+        this.trainController.vitals.setKP(Integer.valueOf(this.KpInput.getValue().toString()));
+        this.NotificationsDisplay.append("\nKp Updated to " + this.trainController.vitals.getkP());
     }//GEN-LAST:event_SetKpActionPerformed
 
     private void SetKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKiActionPerformed
-        this.trainController.setKI(Integer.valueOf(this.KiInput.getValue().toString()));
-        this.NotificationsDisplay.append("\nKi Updated to " + this.trainController.getkI());
+        this.trainController.vitals.setKI(Integer.valueOf(this.KiInput.getValue().toString()));
+        this.NotificationsDisplay.append("\nKi Updated to " + this.trainController.vitals.getkI());
     }//GEN-LAST:event_SetKiActionPerformed
 
     private void TrainSelectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainSelectorButtonActionPerformed
@@ -1029,13 +1029,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void PowerFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerFailureCheckActionPerformed
         if(this.PowerFailureCheck.isSelected()){
-            this.trainController.causeFailure(TrainFailures.Power);
+            this.trainController.vitals.causeFailure(TrainFailures.Power);
             this.StatusPowerLabel.setText("FAILURE");
             this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulated");
         }
         else{
-            this.trainController.fixFailure(TrainFailures.Power);
+            this.trainController.vitals.fixFailure(TrainFailures.Power);
             this.StatusPowerLabel.setText("ACTIVE");
             this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulation Ended");
@@ -1044,13 +1044,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void AntennaFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntennaFailureCheckActionPerformed
         if(this.AntennaFailureCheck.isSelected()){
-            this.trainController.causeFailure(TrainFailures.Antenna);
+            this.trainController.vitals.causeFailure(TrainFailures.Antenna);
             this.StatusAntennaLabel.setText("FAILURE");
             this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulated");
         }
         else{
-            this.trainController.fixFailure(TrainFailures.Antenna);
+            this.trainController.vitals.fixFailure(TrainFailures.Antenna);
             this.StatusAntennaLabel.setText("ACTIVE");
             this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulation Ended");
@@ -1059,13 +1059,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void ServiceBrakeFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeFailureCheckActionPerformed
         if(this.ServiceBrakeFailureCheck.isSelected()){
-            this.trainController.causeFailure(TrainFailures.Brake);
+            this.trainController.vitals.causeFailure(TrainFailures.Brake);
             this.StatusBrakeLabel.setText("FAILURE");
             this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulated");
         }
         else{
-            this.trainController.fixFailure(TrainFailures.Brake);
+            this.trainController.vitals.fixFailure(TrainFailures.Brake);
             this.StatusBrakeLabel.setText("ACTIVE");
             this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulation Ended");
@@ -1127,7 +1127,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_AutoModeSelectActionPerformed
 
     private void LeftDoorOpenedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LeftDoorOpenedActionPerformed
-        if(this.trainController.getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
+        if(this.trainController.gps.getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
             this.trainController.setLeftDoorOpen(true);
             this.NotificationsDisplay.append("\nLeft Door Opened");
         }
@@ -1138,7 +1138,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_LeftDoorOpenedActionPerformed
 
     private void RightDoorOpenedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RightDoorOpenedActionPerformed
-        if(this.trainController.getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
+        if(this.trainController.gps.getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
             this.trainController.setRightDoorOpen(true);
             this.NotificationsDisplay.append("\nRight Door Opened");
         }
@@ -1160,7 +1160,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void SetSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetSpeedActionPerformed
         this.trainController.setDriverSetPoint(Byte.valueOf(this.SpeedInput.getValue().toString()));
-        this.NotificationsDisplay.append("\nDriver set point updated to " + this.trainController.getDriverSetPoint());
+        this.NotificationsDisplay.append("\nDriver set point updated to " + this.trainController.speedControl.getDriverSetPoint());
     }//GEN-LAST:event_SetSpeedActionPerformed
 
 
