@@ -7,7 +7,6 @@ package com.rogueone.traincon;
 
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.TrainModel; //Should I it this way or how???
-import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.trainsystem.TrainSystem;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -33,51 +32,26 @@ public class TrainController {
     
     //Variable declaration for the class
     //Train Operations
-    private boolean manualMode;   
-    private boolean leftDoorOpen;
-    private boolean rightDoorOpen;
-    private boolean lightsOn;
-    private boolean airConditioningOn;
-    private boolean heaterOn;
-    private boolean serviceBrakeActivated;
-    private boolean emergencyBrakeActivated;
-    private boolean emergencyBrakeOverride;
-    
-    //Speed and Authority
-    private double currSpeed;
-    private int speedLimit;
-    
-    //private int distanceTraveled; //Distance traveled since last auth command
-    private byte driverSetPoint;
-    private double authority;
-    private byte recommendedSetPoint;
-    private double powerCommand;
-    private int kP;
-    private int kI;
-    private double eK;
-    private double eK_1;
-    private double uK;
-    private double uK_1;
-    
+    private boolean manualMode;       
+        
     //Announcements
     private String announcement;
     
     //Train Information
     private TrainModel trainModel;
+    private GPS gps;
+    private PowerSystems powerSystem;
+    private SpeedControl speedControl;
+    private Vitals vitals;
     public TrainControllerGUI gui;
     public TrainSystem trainSystem;
     private String trainID;
     private String line;
     private String section;
     private String block;
-    private double maxPower;
     private int passengers;
-    private int temperature;
     
-    //Failures
-    private boolean antennaStatus;
-    private boolean powerStatus;
-    private boolean serviceBrakeStatus;
+    
         
     /**
      * This method is the constructor that should be used to make a new Train controller.
@@ -103,44 +77,15 @@ public class TrainController {
         this.trainModel = tm; //Should come from passed (this) reference
         this.gui = gui;
         
+        this.gps = new GPS(authority, this.trainSystem, this.trainID);
+        this.powerSystem = new PowerSystems(this.trainModel);
+        this.speedControl = new SpeedControl(driverSetPoint, recommendedSetPoint, tm, this, this.gps);
+        
+        
+        
         //Initialize Train Controller Object
-        this.manualMode = false;
-        this.leftDoorOpen = this.trainModel.isLeftDoorOpen();
-        this.rightDoorOpen = this.trainModel.isRightDoorOpen();
-        this.lightsOn = this.trainModel.isLightsOn();
-        
-        this.temperature = this.trainModel.getTemperature();
-        
-        if(this.temperature>72){
-            this.airConditioningOn = true;
-            this.heaterOn = false;
-        }
-        else if(this.temperature<39){
-            this.airConditioningOn = false;
-            this.heaterOn = true;
-        }
-        else{
-            this.airConditioningOn = false;
-            this.heaterOn = false;            
-        }
-        
-        this.serviceBrakeActivated = false;
-        this.emergencyBrakeActivated = false;
-        this.emergencyBrakeOverride = false;
-
-        //Speed and Authority
-        this.currSpeed = this.trainModel.getCurrSpeed();
-        this.speedLimit = getSpeedLimit();
-        this.authority = (double)authority*this.FEET_IN_A_METER;
-        this.driverSetPoint = setPointSpeed;
-        this.recommendedSetPoint = setPointSpeed;
-        this.kP = 100; //Seem to +=6 .5; +=12 1; +=17 1.5; +=19 2.0 assuming no passengers
-        this.kI = 2;
-        this.eK = 0;
-        this.eK_1 = 0;
-        this.uK = 0;
-        this.uK_1 = 0;
-
+        this.manualMode = false;        
+              
         //Announcements
         this.announcement = this.trainID + "Departing Yard";
         //System.out.println(this.announcement);
@@ -150,14 +95,8 @@ public class TrainController {
         this.line = line;
         this.section = section;
         this.block = block;
-        this.maxPower = maxPow;
+        
 //        this.passengers = updatePassengers();
-  //      updateClimateControl(this.trainModel);
-
-        //Failures
-        this.antennaStatus = true;
-        this.powerStatus = true;
-        this.serviceBrakeStatus = true;
         
         if(gui != null){
             this.updateGUI(gui);
@@ -227,133 +166,9 @@ public class TrainController {
         //Add more functionality in future    
     }
         
-    /**
-     * This method is called from the TrainControllerGUI when a failure is activated and sent through
-     * the failure simulation radio buttons. This method will flip the brakes on the 
-     * train controller and model.
-     * 
-     * @author Tyler Protivnak
-     * @param failure One of 3 TrainFailures as found in TrainFailures.java
-     */
-    public void causeFailure(TrainFailures failure) {
-        //Switch on the failure passed in
-        switch(failure) {
-            //A power failure will prevent the doors, lights, and temp setting from working.  Activate emergency brake
-            case Power:
-                this.powerStatus = false;               //In any setter methods below, the value will not be updated if there is a power failure
-                this.emergencyBrakeOverride = true;
-                this.trainModel.causeFailure(TrainFailures.Power);
-                break;
-            //A brake failure will prevent the service brake from being activated. Activate the emergency brake
-            case Brake:
-                this.serviceBrakeStatus = false;
-                this.emergencyBrakeOverride = true;
-                this.trainModel.causeFailure(TrainFailures.Brake);
-                break;
-            //Deactivate the track and mbo antenna.  Activate emergency brake
-            case Antenna:
-                this.antennaStatus = false;
-                this.emergencyBrakeOverride = true;
-                this.trainModel.causeFailure(TrainFailures.Antenna);
-                break;
-        }
-    }
     
-    /**
-     * This method is called from the TrainControllerGUI when a failure is deactivated
-     * and sent through the failure simulation radio buttons. This method will flip the brakes on the 
-     * train controller and model.
-     * 
-     * @author Tyler Protivnak
-     * @param failure One of 3 TrainFailures as found in TrainFailures.java
-     */
-    public void fixFailure(TrainFailures failure) {
-        //Switch on the failure passed in
-        switch(failure) {
-            //Undo the power failure
-            case Power:
-                this.powerStatus = true;
-                this.trainModel.fixFailure(TrainFailures.Power);
-                break;
-            //Undo the brake failure
-            case Brake:
-                this.serviceBrakeStatus = true;
-                this.trainModel.fixFailure(TrainFailures.Brake);
-                break;
-            //Undo the antenna failure
-            case Antenna:
-                this.antennaStatus = true;
-                this.trainModel.fixFailure(TrainFailures.Antenna);
-                break;
-        }
-        //If there are no failures, de-activate the emergencyBrakeOverride
-        if(this.powerStatus && this.serviceBrakeStatus && this.antennaStatus && this.authority>0) {
-            this.emergencyBrakeOverride = false;
-        }
-    }
     
-    /**
-     * This function should be called by the train model to find out the next power
-     * command for the engine.
-     * 
-     * @author Tyler Protivnak
-     * @param actualSpeed The current speed from the Train Model
-     * @param samplePeriod The sampling period defined by the Train Model
-     * @return power after calculations
-     */
-    public double calculatePower(double actualSpeed, double samplePeriod){ //should pull speed limit information from
-                        //loaded track xlx after calculating location.
-                        
-        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.trainModel.getGrade()<0 || this.getSetPoint()==0.0){
-            this.currSpeed = actualSpeed;
-            this.powerCommand = 0.0;
-            return 0.0;
-        }
-        
-        this.eK = getSetPoint()-actualSpeed;   //Calc error difference
-        this.currSpeed = actualSpeed;           //Save actual speed
-        
-        this.uK = this.uK_1 + ((samplePeriod/2)*(this.eK+this.eK_1));
-        
-        //System.out.println("Setpt = " + this.getSetPoint());
-        //System.out.println("eK = " + this.eK);
-        //System.out.println("kP*eK = " + this.kP*this.eK);
-        //System.out.println("kI*uK = " + this.kI*this.uK);
-        this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
-        if(this.powerCommand > this.maxPower){
-            this.uK = this.uK_1;
-            this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
-            this.powerCommand = this.maxPower;
-            
-        }
-        
-        this.eK_1 = this.eK;
-        this.uK_1 = this.uK;
-        if(this.powerCommand<0){
-            this.powerCommand = 0;
-        }
-        return this.powerCommand;
-    }
     
-    /**
-     * Sets the Kp as passed by the train controller gui
-     * 
-     * @author Tyler Protivnak
-     * @param Kp the new kp from the engineer
-     */
-    public void setKP(int Kp){
-        this.kP = Kp;
-    }
-    
-    /**
-     * Sets the Ki as passed by the train controller gui
-     * 
-     * @author Tyler Protivnak
-     * @param Ki 
-     */
-    public void setKI(int Ki){
-        this.kI = Ki;
-    }
         
     /**
      * This method pulls the number of passengers from the train model and sets
@@ -366,29 +181,6 @@ public class TrainController {
         this.passengers = this.trainModel.getPassengersOnBaord();
     }    
     
-    /**
-     * This method pulls the internal temperature from the train model and decides 
-     * how to adjust the climate control systems
-     * 
-     * @author Tyler Protivnak
-     */
-    private void updateClimateControl(){ //should pull temp information from train model
-        this.temperature = this.trainModel.getTemperature();
-        
-        if(this.temperature>72){
-            this.airConditioningOn = true;
-            this.heaterOn = false;
-        }
-        else if(this.temperature<39){
-            this.airConditioningOn = false;
-            this.heaterOn = true;
-        }
-        else{
-            this.airConditioningOn = false;
-            this.heaterOn = false;            
-        }
-    }
-    
     private int getNumberOfTrains(){
         return 0; //Get value from ?????
     }
@@ -397,37 +189,7 @@ public class TrainController {
         return null;
     }
               
-    /**
-     * This function figures out how to set the gui visual aids for the failures
-     * on the train controller
-     * 
-     * @author Tyler Protivnak
-     * @return value corresponding to failure type
-     */
-    private int getFailureType(){  //get from train model
-        if(!this.powerStatus){
-            if(!this.antennaStatus){
-                if(!this.serviceBrakeStatus){
-                    return 7; //All 3 are failed
-                }
-                return 4; //Power and antenna are out
-            }
-            else if(!this.serviceBrakeStatus){
-                return 5;//Power and service brake are out
-            }
-            return 1; //Only power has failed
-        }
-        else if(!this.antennaStatus){
-            if(!this.serviceBrakeStatus){
-                return 6;
-            }
-            return 2;
-        }
-        else if(!this.serviceBrakeStatus){
-            return 3;
-        }
-        return 0; //default, all clear
-    }                                       
+                                           
     
     /**
      * The update function for the full controller
@@ -435,6 +197,7 @@ public class TrainController {
      * @author Tyler Protivnak
      */
     public void updateController(){
+        this.gps.updatePosition();
         this.authority -= this.trainModel.getDistanceTraveled();
         if(!this.manualMode)
             this.updateClimateControl();
@@ -698,7 +461,7 @@ public class TrainController {
      * @param airConditioningOn Boolean to set the status of the A/C. True = on.
      */
     public void setAirConditioningOn(boolean airConditioningOn) {
-        this.airConditioningOn = airConditioningOn;
+        this.powerSystem.setAirConditioningOn(airConditioningOn);
     }
 
     /**
@@ -706,7 +469,7 @@ public class TrainController {
      * @param heaterOn Boolean to set the status of the heater. True = on.
      */
     public void setHeaterOn(boolean heaterOn) {
-        this.heaterOn = heaterOn;
+        this.setHeaterOn(heaterOn);
     }
     
     /**
@@ -722,7 +485,7 @@ public class TrainController {
      * @param lightsOn Boolean to set the status of the lights. True = on. Also updates train model.
      */
     public void setLightsOn(boolean lightsOn) {
-        this.lightsOn = lightsOn;
+        this.powerSystem.setLightsOn(lightsOn);
         this.trainModel.setLightsOn(lightsOn);
     }
     
@@ -732,7 +495,7 @@ public class TrainController {
      * @param leftDoorOpen Boolean to set the status of the left door. True = open. Also updates train model.
      */
     public void setLeftDoorOpen(boolean leftDoorOpen) {
-        this.leftDoorOpen = leftDoorOpen;
+        this.powerSystem.setLeftDoorOpen(leftDoorOpen);
         this.trainModel.setLeftDoorOpen(leftDoorOpen);
     }
 
@@ -741,7 +504,7 @@ public class TrainController {
      * @param rightDoorOpen Boolean to set the status of the right door. True = open. Also updates train model.
      */
     public void setRightDoorOpen(boolean rightDoorOpen) {
-        this.rightDoorOpen = rightDoorOpen;
+        this.powerSystem.setRightDoorOpen(rightDoorOpen);
         this.trainModel.setRightDoorOpen(rightDoorOpen);
     }
 
@@ -750,7 +513,7 @@ public class TrainController {
      * @param serviceBrakeActivated Boolean to set the status of the service brake. True = on. Also updates train model.
      */
     public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
-        this.serviceBrakeActivated = serviceBrakeActivated;
+        this.vitals.setServiceBrakeActivated(serviceBrakeActivated);
         this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
     }
 
@@ -759,7 +522,7 @@ public class TrainController {
      * @param emergencyBrakeActivated Boolean to set the status of the e brake. True = on. Also updates train model.
      */
     public void setEmergencyBrakeActivated(boolean emergencyBrakeActivated) {
-        this.emergencyBrakeActivated = emergencyBrakeActivated;
+        this.vitals.setEmergencyBrakeActivated(emergencyBrakeActivated);
         this.trainModel.setEmergencyBrakeActivated(emergencyBrakeActivated);
     }
 
@@ -782,22 +545,6 @@ public class TrainController {
 
     /**
      * 
-     * @return The current speed of the train
-     */
-    public double getCurrSpeed() {
-        return currSpeed;
-    } 
-    
-    /**
-     * 
-     * @param authority Sets a new authority for the train control to follow 
-     */
-    public void setAuthority(short authority) {
-        this.authority = (double)authority*this.FEET_IN_A_METER;
-    }
-
-    /**
-     * 
      * @param recommendedSetPoint Set point sent by ctc or mbo
      */
     public void setRecommendedSetPoint(byte recommendedSetPoint) {
@@ -812,52 +559,13 @@ public class TrainController {
         return driverSetPoint;
     }
     
-    /**
-     * 
-     * @return the set KP value
-     */
-    public int getkP() {
-        return kP;
+
+   
+    public boolean isManualMode() {
+        return manualMode;
     }
 
-    /**
-     * 
-     * @return the set KI value
-     */
-    public int getkI() {
-        return kI;
-    }
     
-    /**
-     * 
-     * @return the speed limit of the current block
-     */
-    private int getSpeedLimit(){ //should pull speed limit information from
-        return 55;                //loaded track xlx after calculating location.
-    }
     
-    /**
-     * 
-     * @return the set point based on the mode (man or auto) of the train
-     */
-    private double getSetPoint(){
-        if(this.manualMode){
-            if(this.trainModel.getDriverSetPoint() > this.getSpeedLimit()){
-                this.driverSetPoint = (byte) this.getSpeedLimit();
-            }
-            else{
-                this.driverSetPoint = (byte) this.trainModel.getDriverSetPoint();
-            }
-            return this.driverSetPoint;
-        }
-        else{
-            if(this.trainModel.getCtcSetPoint() > this.getSpeedLimit()){
-                this.recommendedSetPoint = (byte) this.getSpeedLimit();
-            }
-            else{
-                this.recommendedSetPoint = (byte) this.trainModel.getCtcSetPoint();//Is this legal?
-            }
-            return this.recommendedSetPoint; //////////////////////////////////////////////////////////////NEED TO GET CTC OR MBO!!!
-        }
-    }
+    
 }
