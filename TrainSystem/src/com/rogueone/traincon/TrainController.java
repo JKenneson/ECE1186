@@ -204,18 +204,7 @@ public class TrainController {
         }
         this.updatePassengers();
         this.speedControl.update();
-    }
-    
-    
-    
-    
-    private void updateSafeSpeed(){
-        if((this.gps.getCurrSpeed()>this.speedControl.getSetPoint() && !this.manualMode) || this.vitals.isServiceBrakeActivated()){
-            this.setServiceBrakeActivated(true);
-        }
-        else{
-            this.setServiceBrakeActivated(false);
-        }
+        this.vitals.update();
     }
         
     public void updateGUI(TrainControllerGUI gui){
@@ -268,8 +257,8 @@ public class TrainController {
         }
                
         gui.TrainInfoText.setText(null);
-        gui.TrainInfoText.append("Train ID: " + this.trainID + "\nLine: " + 
-        this.line + "\nSection: " + this.section + "\nBlock: " + this.block + 
+        gui.TrainInfoText.append("Train ID: " + this.gps.trainID + "\nLine: " + 
+        this.gps.getCurrBlock().getLine() + "\nSection: " + this.gps.getCurrBlock().getSection() + "\nBlock: " + this.gps.getCurrBlock() + 
         "\nPassengers: " + this.passengers + "\nTemp: " + this.powerSystem.getTemperature() + " F");
         
         if(this.vitals.isEmergencyBrakeOverride() || this.vitals.isEmergencyBrakeActivated()){      //Default to always print emergency brake if both emergency and service are activated

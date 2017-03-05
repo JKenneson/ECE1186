@@ -31,8 +31,6 @@ public class SpeedControl implements Updateable{
     private byte driverSetPoint;
     private byte recommendedSetPoint;
     
-    private byte safeSetPoint;
-    
     public SpeedControl(byte driverSetPoint, byte recommendedSetPoint, TrainModel tm, TrainController tc, GPS gps, Vitals vitals){
         this.driverSetPoint = driverSetPoint;
         this.recommendedSetPoint = recommendedSetPoint;
@@ -78,7 +76,7 @@ public class SpeedControl implements Updateable{
     }
     
     public double getSetPoint(){
-        return this.safeSetPoint;
+        return this.findSetPoint();
     }
     
     /**
@@ -87,7 +85,7 @@ public class SpeedControl implements Updateable{
      */
 
     public byte getDriverSetPoint() {
-        return driverSetPoint;
+        return this.driverSetPoint;
     }
 
     public void setDriverSetPoint(byte driverSetPoint) {
@@ -95,7 +93,7 @@ public class SpeedControl implements Updateable{
     }
 
     public byte getRecommendedSetPoint() {
-        return recommendedSetPoint;
+        return this.recommendedSetPoint;
     }
 
     public void setRecommendedSetPoint(byte recommendedSetPoint) {

@@ -57,7 +57,7 @@ public class GPS implements Updateable{
         this.currSpeedMPH = 0;
         this.lastSpeed = 0;
         this.speedLimit = 0;
-        this.authority = authority;
+        this.authority = (double)authority*this.FEET_IN_A_METER;
         this.distanceIntoBlock = 0;
         this.distanceTraveled = 0;
         this.trainID = trainID;
