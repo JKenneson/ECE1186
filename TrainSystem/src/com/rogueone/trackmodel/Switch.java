@@ -100,6 +100,7 @@ public class Switch implements TrackPiece {
         return this.line.equals(otherSwitch.getLine()) && this.switchID == otherSwitch.getID();
     }
     
+    @Override
     public String toString() {
         return "" + switchID;
     }

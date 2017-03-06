@@ -35,6 +35,7 @@ public class Block implements TrackPiece {
     private boolean containsCrossing;
     private boolean isCrossingDown;
     private boolean isUnderground;
+    private boolean isOpen;
     private boolean failureBrokenRail;
     private boolean failurePowerOutage;
     private boolean failureTrackCircuit;
@@ -90,6 +91,7 @@ public class Block implements TrackPiece {
         containsCrossing = newContainsCrossing;
         isCrossingDown = false;
         isUnderground = newIsUnderground;
+        isOpen = true;
         failureBrokenRail = false;
         failurePowerOutage = false;
         failureTrackCircuit = false;
@@ -100,34 +102,12 @@ public class Block implements TrackPiece {
     }
     
     /**
-    * Get the TrackPiece that train will exit from (should not be mistaken for getNextBlock, which only returns Blocks).
-    * @author Dan Bednarczyk
-    * @param previous the previous TrackPiece
-    * @return the TrackPiece from which the train did not enter
-    */
-    public TrackPiece getNext(TrackPiece previous) {
-        //Train came from Port A, return Port B
-        if(portA.getType() == previous.getType() && portA.getID() == previous.getID()) {
-            return portB;
-        }
-        //Train came from Port B, return Port A
-        if(portB.getType() == previous.getType() && portB.getID() == previous.getID()) {
-            return portA;
-        }
-        //Previous does not match either port, an error occured
-        else {
-            System.err.println("Next TrackPiece not found");
-            return null;  
-        } 
-    }
-    
-    /**
     * Get the next Block (without altering presence) using previous Block as a means of direction specification.
     * @author Dan Bednarczyk
     * @param previous the previous block
     * @return the next Block object
     */
-    public TrackPiece getNextTrackPiece(TrackPiece previous) {
+    public TrackPiece getNext(TrackPiece previous) {
         
         if(portA == null) {
             System.err.println("Block " + this.getID() + " is missing Port A. Please check your track configuation.");
@@ -138,8 +118,8 @@ public class Block implements TrackPiece {
             return null;
         }
         
-        TrackPiece portABlock = getNextTrackPieceViaPortA();
-        TrackPiece portBBlock = getNextTrackPieceViaPortB();
+        TrackPiece portABlock = getNextViaPortA();
+        TrackPiece portBBlock = getNextViaPortB();
         
         // Train is on regular piece of track
         if(previous.getType() == Global.PieceType.BLOCK) {
@@ -172,7 +152,7 @@ public class Block implements TrackPiece {
     * @author Dan Bednarczyk
     * @return (1) Port A if Port A is a block (2) The next Block if Port A is a Switch (3) null otherwise 
     */
-    private TrackPiece getNextTrackPieceViaPortA() {
+    private TrackPiece getNextViaPortA() {
         if (portA.getType() == Global.PieceType.BLOCK || portA.getType() == Global.PieceType.YARD) {
             return portA;
         }
@@ -190,7 +170,7 @@ public class Block implements TrackPiece {
     * @author Dan Bednarczyk
     * @return (1) Port B if Port B is a block (2) The next Block if Port B is a Switch (3) null otherwise 
     */
-    private TrackPiece getNextTrackPieceViaPortB() {
+    private TrackPiece getNextViaPortB() {
         if (portB.getType() == Global.PieceType.BLOCK || portB.getType() == Global.PieceType.YARD) {
             return portB;
         }
@@ -450,12 +430,28 @@ public class Block implements TrackPiece {
     }
     
     /**
-    * Check if block crossing is down.
+    * Check if block is open.
     * @author Dan Bednarczyk
-    * @return boolean indicating if block crossing is down, false by default
+    * @return boolean indicating if block is open
     */
-    public boolean isCrossingDown() {
-        return isCrossingDown;
+    public boolean isOpen() {
+        return isOpen;
+    }
+    
+    /**
+    * Open block
+    * @author Dan Bednarczyk
+    */
+    public void open() {
+        isOpen = true;
+    }
+    
+    /**
+    * Close block
+    * @author Dan Bednarczyk
+    */
+    public void close() {
+        isOpen = false;
     }
     
     /**
@@ -603,6 +599,7 @@ public class Block implements TrackPiece {
     * @author Dan Bednarczyk
     * @return String containing block ID
     */
+    @Override
     public String toString() {
         return "" + this.getID();
     }

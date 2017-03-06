@@ -487,7 +487,7 @@ public class TrainModel {
             //Set the occupancy to false as we leave
             this.currBlock.setOccupancy(false); 
             //Get next TrackPiece. Should be Block or Yard
-            this.nextBlock = this.currBlock.getNextTrackPiece(this.prevBlock);
+            this.nextBlock = this.currBlock.getNext(this.prevBlock);
             
             if(this.nextBlock != null) {
 

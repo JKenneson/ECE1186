@@ -8,7 +8,7 @@ package com.rogueone.trackmodel;
 import com.rogueone.global.Global.PieceType;
 
 /**
- *
+ * Interface for Block, Switch, and Yard
  * @author Dan
  */
 public interface TrackPiece {
@@ -18,5 +18,8 @@ public interface TrackPiece {
     public PieceType getType();
     
     public int getID();
+    
+    @Override
+    public String toString();
      
 }
