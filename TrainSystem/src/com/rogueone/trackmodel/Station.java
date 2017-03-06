@@ -133,7 +133,7 @@ public class Station {
         return waitingPassengers;
     }
     public boolean equals(Station otherStation) {
-        return this.line.equals(otherStation.getLine()) && this.stationID == otherStation.getID();
+        return this.stationID == otherStation.getID();
     }
     @Override
     public String toString() {

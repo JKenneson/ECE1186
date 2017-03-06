@@ -33,4 +33,11 @@ public class Yard implements TrackPiece {
         return "Yard";
     }
     
+    public boolean equals(TrackPiece otherPiece) {
+        if (otherPiece.getType() == this.getType() && otherPiece.getID() == this.getID()) {
+            return true;
+        }
+        return false;
+    }
+    
 }

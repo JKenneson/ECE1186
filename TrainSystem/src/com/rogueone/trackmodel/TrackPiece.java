@@ -21,5 +21,7 @@ public interface TrackPiece {
     
     @Override
     public String toString();
+    
+    public boolean equals(TrackPiece otherPiece);
      
 }

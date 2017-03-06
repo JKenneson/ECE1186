@@ -60,7 +60,6 @@ public class Section {
     }
     
     public boolean equals(Section otherSection) {
-        return this.line.equals(otherSection.getLine()) && this.sectionID == otherSection.getSectionID();
+        return this.line.getLineID() == otherSection.getLine().getLineID() && this.sectionID == otherSection.getSectionID();
     }
-    //NOTE: This cannot be overloaded with a Global.Section argument becuase lineID is needed to be certain of equality
 }

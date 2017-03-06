@@ -95,9 +95,11 @@ public class Switch implements TrackPiece {
         }
     }
     
-    //Overridden methods
-    public boolean equals(Switch otherSwitch) {
-        return this.line.equals(otherSwitch.getLine()) && this.switchID == otherSwitch.getID();
+    public boolean equals(TrackPiece otherPiece) {
+        if (this.getType() == otherPiece.getType() && this.switchID == otherPiece.getID()) {
+            return true;
+        }
+        return false;
     }
     
     @Override

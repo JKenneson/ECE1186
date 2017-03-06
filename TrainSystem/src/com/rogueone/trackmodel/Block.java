@@ -588,10 +588,14 @@ public class Block implements TrackPiece {
     /**
     * Check equality with other block, true if and only if they share the same Line, Section, and Block ID.
     * @author Dan Bednarczyk
+    * @param otherPiece the Block to compare
     * @return boolean indicating equality
     */
-    public boolean equals(Block otherBlock) {
-        return this.line.equals(otherBlock.getLine()) && this.section.equals(otherBlock.getSection())&& this.blockID == otherBlock.getID();
+    public boolean equals(TrackPiece otherPiece) {
+        if (this.getType() == otherPiece.getType() && this.line.getLineID() == ((Block)otherPiece).getLine().getLineID()  && this.section.getSectionID() == ((Block)otherPiece).getSection().getSectionID() && this.blockID == ((Block)otherPiece).getID()) {
+            return true;
+        }
+        return false;
     }
     
     /**
