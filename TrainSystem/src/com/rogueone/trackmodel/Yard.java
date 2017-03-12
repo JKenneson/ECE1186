@@ -33,6 +33,10 @@ public class Yard implements TrackPiece {
         return "Yard";
     }
     
+    public String toStringDetail() {
+        return "Yard (" + YARD_ID + ")";
+    }
+    
     public boolean equals(TrackPiece otherPiece) {
         if (otherPiece.getType() == this.getType() && otherPiece.getID() == this.getID()) {
             return true;

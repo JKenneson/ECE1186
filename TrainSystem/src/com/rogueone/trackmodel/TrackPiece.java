@@ -19,9 +19,11 @@ public interface TrackPiece {
     
     public int getID();
     
+    public boolean equals(TrackPiece otherPiece);
+    
     @Override
     public String toString();
     
-    public boolean equals(TrackPiece otherPiece);
+    public String toStringDetail();
      
 }
