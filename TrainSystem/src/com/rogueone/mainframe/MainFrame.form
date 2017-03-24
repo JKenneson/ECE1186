@@ -54,6 +54,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="x100SpeedRadioButton">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="timeButtonGroup"/>
+                </Property>
                 <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="false" type="code"/>
                 </Property>
@@ -65,6 +68,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="x1000SpeedRadioButton">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="timeButtonGroup"/>
+                </Property>
                 <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="false" type="code"/>
                 </Property>

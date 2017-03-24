@@ -89,6 +89,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         speedMenu.add(x10SpeedRadioButton);
 
+        timeButtonGroup.add(x100SpeedRadioButton);
         x100SpeedRadioButton.setSelected(false);
         x100SpeedRadioButton.setText("100x Normal Time");
         x100SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +99,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         speedMenu.add(x100SpeedRadioButton);
 
+        timeButtonGroup.add(x1000SpeedRadioButton);
         x1000SpeedRadioButton.setSelected(false);
         x1000SpeedRadioButton.setText("1000x Normal Time");
         x1000SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
