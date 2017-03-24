@@ -66,10 +66,42 @@ public class TrackControllerHandler {
     public HashMap<Global.TrackGroups, Global.LogicGroups> getGroupToLogicMapping() {
         return groupToLogicMapping;
     }
+    
+    public boolean requestDispatch(Global.Line line){
+        boolean returnValue = false;
+        if(line == Global.Line.GREEN){
+            returnValue = trackControllers.get(0).canDispatchProceed();
+        } else {
+//            returnValue = trackControllers.get(1).canDispatchProceed();
+        }
+        return returnValue;
+    }
+    
+    public boolean requestMaintenance(Global.Line line, int blockID){
+        boolean returnValue = false;
+        if(line == Global.Line.GREEN){
+            returnValue = trackControllers.get(0).canClose(blockID);
+        } else {
+//            returnValue = trackControllers.get(1).canClose(blockID);
+        }
+        return returnValue;
+    }
+    
+    public boolean requestOpen(Global.Line line, int blockID){
+        boolean returnValue = false;
+        if(line == Global.Line.GREEN){
+            returnValue = trackControllers.get(0).canOpen(blockID);
+        } else {
+//            returnValue = trackControllers.get(1).canOpen(blockID);
+        }
+        return returnValue;
+    }
 
     public void updateTrack() {
         TrackController trackController = trackControllers.get(0);
-        trackController.updatePresence();
+//        trackController.evaluateProceed();
+        trackController.evaluateSwitches();
+//        trackController.evaluateCrossing();
     }
     
     

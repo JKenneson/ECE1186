@@ -10,6 +10,7 @@ import com.rogueone.global.Global;
 import com.rogueone.trackcon.entities.Crossing;
 import com.rogueone.trackcon.entities.Light;
 import com.rogueone.trackcon.entities.LogicTrackGroup;
+import com.rogueone.trackcon.entities.PresenceBlock;
 import com.rogueone.trackcon.entities.State;
 import com.rogueone.trackcon.entities.StateSet;
 import com.rogueone.trackcon.entities.SwitchState;
@@ -64,6 +65,7 @@ public class TrackController {
     private HashMap<Global.LogicGroups, LogicTrackGroup> logicGroupsArray;
     private HashMap<Integer, Switch> switchArray;
     private Crossing crossing;
+    private LinkedList<PresenceBlock> occupiedBlocks;
 
     private TrackControllerGUI trackControllerGUI = null;
 
@@ -141,6 +143,7 @@ public class TrackController {
         this.trackControllerGUI.plcProgramTextField.setText(defaultPLC.getName());
         //load the plc and track model data into the summary tab of track controller
         this.updateSummaryTab();
+        this.occupiedBlocks = new LinkedList<PresenceBlock>();
     }
 
     /**
@@ -605,17 +608,10 @@ public class TrackController {
 
     }
 
-    public void updatePresence() {
+    public void evaluateSwitches() {
         //get mappings from handler
         HashMap<Global.Section, Global.TrackGroups> sectionMappings = this.trainSystem.getTrackControllerHandler().getSectionToGroupMapping();
         HashMap<Global.TrackGroups, Global.LogicGroups> groupMappings = this.trainSystem.getTrackControllerHandler().getGroupToLogicMapping();
-        //determine number of logic groups
-        int numberOfLogicGroups = 0;
-        for (Global.LogicGroups lg : Global.LogicGroups.values()) {
-            if (lg.toString().contains(controllerLine.toString())) {
-                numberOfLogicGroups++;
-            }
-        }
 
         //create hashmap for sections
         HashMap<Global.Section, Global.Presence> sectionPresence = new HashMap<Global.Section, Global.Presence>();
@@ -641,15 +637,15 @@ public class TrackController {
         HashMap<Global.TrackGroups, Global.Presence> groupPresence = new HashMap<Global.TrackGroups, Global.Presence>();
         for (Entry<Global.Section, Global.Presence> sectionEntry : sectionPresence.entrySet()) {
             //condition for potential overwrite of presence
-            if (groupPresence.containsKey(sectionMappings.get(sectionEntry.getKey())) ) {
-                if(groupPresence.get(sectionMappings.get(sectionEntry.getKey())) == Global.Presence.OCCUPIED){
+            if (groupPresence.containsKey(sectionMappings.get(sectionEntry.getKey()))) {
+                if (groupPresence.get(sectionMappings.get(sectionEntry.getKey())) == Global.Presence.OCCUPIED) {
                     groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
                 } else {
                     groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
                 }
-            } else if (!groupPresence.containsKey(sectionMappings.get(sectionEntry.getKey()))){
+            } else if (!groupPresence.containsKey(sectionMappings.get(sectionEntry.getKey()))) {
                 if (sectionEntry.getValue() == Global.Presence.OCCUPIED) {
-                groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
+                    groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
                 } else {
                     groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
                 }
@@ -683,13 +679,163 @@ public class TrackController {
 
         for (Entry<Global.LogicGroups, StateSet> logicSet : logicSets.entrySet()) {
             UserSwitchState userSwitchState = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
-            //System.out.println(printSwitchState(userSwitchState));
+            printSwitchState(userSwitchState);
         }
 
     }
 
+    public boolean canDispatchProceed() {
+        //check if track is not broken or closed at start
+        //check if track is not occupied at start 
+        int lookahead = 5;      //need to define lookahead distance
+        boolean val = false;
+        PresenceBlock lookaheadBlock = new PresenceBlock(this.trainSystem, controllerLine);
+        lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+        for (int i = 0; i < lookahead; i++) {
+            System.out.print("TC:(dispatch) starting block: 152 , lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
+            //check to see if that block ahead is occupied or not
+            Block checkBlock = this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID());
+            if (checkBlock.isOccupied() || !checkBlock.isOpen() || checkBlock.getFailureBrokenRail() || checkBlock.getFailurePowerOutage() || checkBlock.getFailureTrackCircuit()) {
+                System.out.print(" Occupied\n");
+                return false;
+            } else {
+                System.out.print(" Unoccupied\n");
+                val = true;
+            }
+            //move ahead by one block
+            Block tempBlock = lookaheadBlock.getCurrBlock();
+            lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
+            lookaheadBlock.setPrevBlock(tempBlock);
+            lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+        }
+        return val;
+    }
+
+    public void evaluateProceed() {
+        //create hashmap for sections
+        HashMap<Global.Section, Global.Presence> sectionPresence = new HashMap<Global.Section, Global.Presence>();
+        //get the sections for the current line
+        ArrayList<Section> sectionsArray = this.trackModel.getLine(controllerLine).getSections();
+
+        for (Section s : sectionsArray) {
+            //get the blocks for the current line
+            ArrayList<Block> blockArray = s.getBlocks();
+            boolean occupied = false;
+            //determine whether a block is occupied on a particular line
+            for (Block b : blockArray) {
+                //if the first block of the green line is occupied add a new PresenceBlock to list
+                if (controllerLine == Global.Line.GREEN) {
+                    PresenceBlock pb = new PresenceBlock(this.trainSystem, this.controllerLine);
+                    if (b.isOccupied() && b.getID() == 152 && !occupiedBlocks.contains(pb)) {
+                        pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
+                        System.out.println("TC:(new) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
+                        occupiedBlocks.add(pb);
+                    }
+                } else if (controllerLine == Global.Line.RED) {
+                    PresenceBlock pb = new PresenceBlock(this.trainSystem, this.controllerLine);
+                    if (b.isOccupied() && b.getID() == 77 && !occupiedBlocks.contains(pb)) {
+                        pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
+                        System.out.println("TC: currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
+                        occupiedBlocks.add(pb);
+                    }
+                }
+                //if list is not empty
+                if (!occupiedBlocks.isEmpty()) {
+                    for (PresenceBlock pb : occupiedBlocks) {
+                        //if the current block being looked at is occupied and the next block ID of the current block
+                        //the occupied list is the same as the occupied block move that block forward
+//                        System.out.println("Occupied = " + b.isOccupied() + " and " + pb.getNextBlock().getID() +" : " + b.getID());
+                        if (b.isOccupied() && pb.getNextBlock().getID() == b.getID()) {
+                            Block tempBlock = pb.getCurrBlock();
+                            pb.setCurrBlock((Block) pb.getNextBlock());
+                            pb.setPrevBlock(tempBlock);
+                            pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
+                            System.out.println("TC:(moving) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
+                        }
+                        //need a check to look ahead by a specific amount of blocks or by sections
+                        int lookahead = 5;
+                        PresenceBlock lookaheadBlock = new PresenceBlock(pb);
+                        for (int i = 0; i < lookahead; i++) {
+                            System.out.print("TC:(check) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
+                            //check to see if that block ahead is occupied or not
+                            if (this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied()) {
+                                System.out.print(" Occupied\n");
+                                //this is where logic for telling the train to stop comes into play
+                            } else {
+                                System.out.print(" Unoccupied\n");
+                            }
+                            //move ahead by one block
+                            Block tempBlock = lookaheadBlock.getCurrBlock();
+                            lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
+                            lookaheadBlock.setPrevBlock(tempBlock);
+                            lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void evaluateCrossing() {
+        //number of blocks to lookahead
+        //could do with block or distance, need metric for stopping distance
+        int lookahead = 5;
+        if (!occupiedBlocks.isEmpty()) {
+            for (PresenceBlock pb : occupiedBlocks) {
+                //need a check to look ahead by a specific amount of blocks or by sections
+                PresenceBlock lookaheadBlock = new PresenceBlock(pb);
+                for (int i = 0; i < lookahead; i++) {
+                    System.out.print("TC:(check cross) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
+                    //check to see if that block ahead is occupied or not
+                    if (this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).containsCrossing()) {
+                        System.out.print(" Occupied\n");
+                        //this is where logic for telling the either the train to stop
+                        //or activate the crossing, or combo of both
+                    } else {
+                        System.out.print(" Unoccupied\n");
+                    }
+                    //move ahead by one block
+                    Block tempBlock = lookaheadBlock.getCurrBlock();
+                    lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
+                    lookaheadBlock.setPrevBlock(tempBlock);
+                    lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+                }
+            }
+        }
+    }
+    
+    public boolean canClose(int blockID) {
+        boolean returnValue = false;
+        //get the section that the block is currently in
+        //check to ensure that there are no trains within range, before (or after [red]) the section
+        //after checks are complete continue and close that section of track
+        Block closeBlock = this.trackModel.getBlock(controllerLine, blockID);
+        if (closeBlock.isOccupied() || !closeBlock.isOpen() || closeBlock.getFailureBrokenRail() || closeBlock.getFailurePowerOutage() || closeBlock.getFailureTrackCircuit()) {
+            returnValue = false;
+            return returnValue;
+        }
+        //need to be able to determine which section is before and after this section
+        //in order to traverse
+        Global.Section closeSection = closeBlock.getSection().getSectionID();
+//        closeBlock.close();
+        return returnValue;
+    }
+    
+    boolean canOpen(int blockID) {
+        boolean returnValue = false;
+        Block openBlock = this.trackModel.getBlock(controllerLine, blockID);
+        //if not occupied, not open, not broken (3 ways) then open the track
+        if (!openBlock.isOccupied() && !openBlock.isOpen() && !openBlock.getFailureBrokenRail() && !openBlock.getFailurePowerOutage() && !openBlock.getFailureTrackCircuit()) {
+            openBlock.open();
+            returnValue = true;
+        } else {
+            returnValue = false;
+        }
+        return returnValue;
+    }
+
     private String printSwitchState(UserSwitchState userSwitchState) {
-        
+
         StringBuilder s = new StringBuilder();
         LinkedList<AbstractMap.SimpleEntry<Integer, Global.SwitchState>> switches = userSwitchState.getUserSwitchStates();
         Iterator switchIterator = switches.iterator();
@@ -699,14 +845,16 @@ public class TrackController {
 //            s.append("\nSwitch " + switchState.getKey() + " is in " + switchState.getValue() + " state");
             Switch sw = switchArray.get(switchState.getKey());
             if (switchState.getValue() == Global.SwitchState.DEFAULT) {
+                this.trackModel.getSwitch(switchState.getKey()).setSwitch(false);
 //                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getDefaultConnection().toString());
 //                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsDefault().toString());
             } else {
+                this.trackModel.getSwitch(switchState.getKey()).setSwitch(true);
 //                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getAlternateConnection().toString());
 //                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsAlternate().toString());
             }
         }
-        
+
         return s.toString();
     }
 
@@ -717,5 +865,9 @@ public class TrackController {
     public Global.Line getControllerLine() {
         return controllerLine;
     }
+
+    
+
+    
 
 }
