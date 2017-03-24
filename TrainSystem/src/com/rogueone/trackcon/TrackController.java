@@ -679,7 +679,7 @@ public class TrackController {
 
         for (Entry<Global.LogicGroups, StateSet> logicSet : logicSets.entrySet()) {
             UserSwitchState userSwitchState = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
-            printSwitchState(userSwitchState);
+            System.out.println(printSwitchState(userSwitchState));
         }
 
     }
@@ -842,7 +842,7 @@ public class TrackController {
         while (switchIterator.hasNext()) {
             AbstractMap.SimpleEntry<Integer, Global.SwitchState> switchState = (AbstractMap.SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
 //            trainSystem.getTrackModel().getSwitch(switchState.getKey()).setSwitch(true);
-//            s.append("\nSwitch " + switchState.getKey() + " is in " + switchState.getValue() + " state");
+            s.append("\nSwitch " + switchState.getKey() + " is in " + switchState.getValue() + " state");
             Switch sw = switchArray.get(switchState.getKey());
             if (switchState.getValue() == Global.SwitchState.DEFAULT) {
                 this.trackModel.getSwitch(switchState.getKey()).setSwitch(false);

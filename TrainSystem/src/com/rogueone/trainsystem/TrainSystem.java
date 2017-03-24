@@ -92,7 +92,7 @@ public class TrainSystem {
         
         this.trackModel.updateGUI();
         this.trackModel.updateStationEnvironments();
-        this.trackControllerHandler.updateTrack();
+        //this.trackControllerHandler.updateTrack();
         
         this.ctc.updateGUI();
     }

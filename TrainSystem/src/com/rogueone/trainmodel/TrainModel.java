@@ -488,10 +488,11 @@ public class TrainModel {
             this.currBlock.setOccupancy(false); 
             //Get next TrackPiece. Should be Block or Yard
             this.nextBlock = this.currBlock.getNext(this.prevBlock);
+            this.trainSystem.getTrackControllerHandler().updateTrack();
+            
+            System.out.println("currBlock: " + this.currBlock + ", prevBlock: " + this.prevBlock + ", nextBlock: " + this.nextBlock);
             
             if(this.nextBlock != null) {
-
-                System.out.println("currBlock: " + this.currBlock + ", prevBlock: " + this.prevBlock + ", nextBlock: " + this.nextBlock);
 
                 //Normal execution
                 if(this.nextBlock.getType() == Global.PieceType.BLOCK) {
@@ -505,7 +506,7 @@ public class TrainModel {
                 }
             }
             else {
-               System.err.println("Train cannot get next block");    
+               System.err.println("Train cannot get TrackPiece following Block " + currBlock);    
             }
             
         }

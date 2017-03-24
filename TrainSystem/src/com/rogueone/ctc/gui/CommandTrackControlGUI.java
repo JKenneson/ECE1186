@@ -704,7 +704,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         jPanel3.add(jLabel11, gridBagConstraints);
 
-        DispatchSpeedField.setText("Enter Speed");
+        DispatchSpeedField.setText("400");
         DispatchSpeedField.setToolTipText("");
         DispatchSpeedField.setPreferredSize(new java.awt.Dimension(100, 26));
         DispatchSpeedField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -719,7 +719,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel3.add(DispatchSpeedField, gridBagConstraints);
 
-        DispatchAuthorityField.setText("Enter Authority");
+        DispatchAuthorityField.setText("40000");
         DispatchAuthorityField.setPreferredSize(new java.awt.Dimension(100, 26));
         DispatchAuthorityField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

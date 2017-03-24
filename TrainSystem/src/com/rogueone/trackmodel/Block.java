@@ -133,7 +133,7 @@ public class Block implements TrackPiece {
             }
             else {
                 //Previous does not match either port, an error occured
-                System.err.println("Next block not found");
+                System.err.println("Next block not found for Block " + this.blockID + " and previous Block " + previous + ". Port A = " + portABlock + ", Port B = " + portBBlock);
                 return null;  
             } 
         }

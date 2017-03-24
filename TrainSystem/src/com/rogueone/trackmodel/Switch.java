@@ -60,7 +60,7 @@ public class Switch implements TrackPiece {
     }
     public TrackPiece getNext(TrackPiece previous) {
         if (portA == null || portB == null || portC == null) {
-            System.err.println("Switch is not fully connected. Please check your track configuration.");
+            System.err.println("Switch " + switchID + " is not fully connected. Please check your track configuration.");
         }
         //entering from dependent block B, exiting the static port
         if (!isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
@@ -68,12 +68,12 @@ public class Switch implements TrackPiece {
         }
         //entering from dependent block C, no block available until switch is activated
         else if (!isActivated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
-            System.err.println("Train halted at switch");
+            System.err.println("Train halted at switch " + switchID + ". Port A = " + portA + ", Port B = " + portB + ". Port C = " + portC + ", Activated = " + isActivated);
             return null;
         }
         //entering from dependent block B, no switch available until switch is deactivated
         else if (isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
-            System.err.println("Train halted at switch");
+            System.err.println("Train halted at switch " + switchID + ". Port A = " + portA + ", Port B = " + portB + ". Port C = " + portC + ", Activated = " + isActivated);
             return null;
         }
         //entering from dependent block C, exiting the static port
