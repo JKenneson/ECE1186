@@ -44,6 +44,8 @@ public class MainFrame extends javax.swing.JFrame {
         speedMenu = new javax.swing.JMenu();
         normalTimeRadioButton = new javax.swing.JRadioButtonMenuItem();
         x10SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
+        x100SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
+        x1000SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
         moduleMenu = new javax.swing.JMenu();
         ctcMenuItem = new javax.swing.JMenuItem();
         trackControllerHandlerMenuItem = new javax.swing.JMenuItem();
@@ -86,6 +88,24 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         speedMenu.add(x10SpeedRadioButton);
+
+        x100SpeedRadioButton.setSelected(false);
+        x100SpeedRadioButton.setText("100x Normal Time");
+        x100SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                x100SpeedRadioButtonActionPerformed(evt);
+            }
+        });
+        speedMenu.add(x100SpeedRadioButton);
+
+        x1000SpeedRadioButton.setSelected(false);
+        x1000SpeedRadioButton.setText("1000x Normal Time");
+        x1000SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                x1000SpeedRadioButtonActionPerformed(evt);
+            }
+        });
+        speedMenu.add(x1000SpeedRadioButton);
 
         mainMenuBar.add(speedMenu);
 
@@ -219,6 +239,20 @@ public class MainFrame extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_mboMenuItemActionPerformed
 
+    /**
+     * Set x100 time
+     */
+    private void x100SpeedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x100SpeedRadioButtonActionPerformed
+        this.trainSystem.updateTimer(TrainSystem.x100_TIME);
+    }//GEN-LAST:event_x100SpeedRadioButtonActionPerformed
+
+    /**
+     * Set x1000 time
+     */
+    private void x1000SpeedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x1000SpeedRadioButtonActionPerformed
+        this.trainSystem.updateTimer(TrainSystem.x1000_TIME);
+    }//GEN-LAST:event_x1000SpeedRadioButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ctcMenuItem;
     private javax.swing.JMenu editMenu;
@@ -234,6 +268,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem trackControllerHandlerMenuItem;
     private javax.swing.JMenuItem trackModelMenuItem;
     private javax.swing.JMenuItem trainHandlerMenuItem;
+    private javax.swing.JRadioButtonMenuItem x1000SpeedRadioButton;
+    private javax.swing.JRadioButtonMenuItem x100SpeedRadioButton;
     private javax.swing.JRadioButtonMenuItem x10SpeedRadioButton;
     // End of variables declaration//GEN-END:variables
 }
