@@ -22,6 +22,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     int trainID;
     int iterativeID = 0;
+    int trainsDispatched = 1;
     public TrainSystem trainSystem;
     private TrackModel trackModel;
 
@@ -947,6 +948,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      * Updates time and rush hour fields in GUI
      */
     public void updateTime(){
+       double throughputValue = 0;
+       int hoursPassed = 1;
+       
        int updateMinute = trainSystem.getClock().getMinute();
        int updateSecond = trainSystem.getClock().getSecond();
         
@@ -959,6 +963,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             RushHourField.setText("NO");
         }
         
+        if ((trainSystem.getClock().getSecond() >= 59) && (trainSystem.getClock().getMinute() >= 59)){
+            hoursPassed++;
+        }
+     
+        throughputValue = trainsDispatched/hoursPassed;
+        ThroughputField.setText(String.format("%.2f", throughputValue));
     }
 
     
@@ -1416,9 +1426,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
         }
         
-//        if ( trainSystem.TrackHandler.requestDispatch(dispatchBlock) ){
-            trainSystem.dispatchTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
-//        }
+        trainSystem.dispatchTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
+        
+        trainsDispatched++;
         
         
         // TODO add your handling code here:
