@@ -687,7 +687,16 @@ public class TrackModelGUI extends javax.swing.JPanel {
     
     public void updateBlock(Block b) {
             String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Beacon", "Occupied" };
-                String blockRowData[] = { 
+            String crossingData = "No";
+            if(b.getCrossing() != null) {
+                if(b.getCrossing().getState()) {
+                    crossingData = "Lowered";
+                }
+                else {
+                    crossingData = "Rasied";
+                }   
+            }
+            String blockRowData[] = { 
                     b.getID() + "", 
                     b.getPortA().getID() + "", 
                     b.getPortB().getID() + "", 
@@ -697,7 +706,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     Global.decimalFormatter.format(b.getElevation()) + " ft",
                     Global.decimalFormatter.format(b.getCumulativeElevation()) + " ft",
                     b.isUnderground() + "", 
-                    b.containsCrossing() + "", 
+                    crossingData, 
                     b.getBeaconMessage() + "", 
                     b.isOccupied() + "" };
                 DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);

@@ -32,14 +32,13 @@ public class Block implements TrackPiece {
     private boolean isStaticSwitchBlock;
     private boolean isHead;
     private boolean isTail;
-    private boolean containsCrossing;
-    private boolean isCrossingDown;
     private boolean isUnderground;
     private boolean isOpen;
     private boolean failureBrokenRail;
     private boolean failurePowerOutage;
     private boolean failureTrackCircuit;
     private boolean occupied;
+    private Crossing crossing;
     private String beaconMessage;
     private Station station;
     private TrackCircuit trackCircuit;
@@ -62,14 +61,14 @@ public class Block implements TrackPiece {
      * @param newCumulativeElevation the cumulative elevation
      * @param newIsHead section head indicator
      * @param newIsTail section tail indicator
-     * @param newContainsCrossing crossing indicator
+     * @param containsCrossing crossing indicator
      * @param newIsUnderground underground indicator
      */
     public Block(Line newLine, Section newSection, int newBlockID, 
             int newPortAID, int newPortBID, int newSwitchID, boolean newIsStaticSwitchBlock, 
             int newStationID, double newLength, double newGrade, double newSpeedLimit,
             double newElevation, double newCumulativeElevation, 
-            boolean newIsHead, boolean newIsTail, boolean newContainsCrossing, 
+            boolean newIsHead, boolean newIsTail, boolean containsCrossing, 
             boolean newIsUnderground) {
         line = newLine;
         section = newSection;
@@ -88,8 +87,6 @@ public class Block implements TrackPiece {
         cumulativeElevation = newCumulativeElevation;
         isHead = newIsHead;
         isTail = newIsTail;
-        containsCrossing = newContainsCrossing;
-        isCrossingDown = false;
         isUnderground = newIsUnderground;
         isOpen = true;
         failureBrokenRail = false;
@@ -99,6 +96,12 @@ public class Block implements TrackPiece {
         beaconMessage = "";
         station = null;
         trackCircuit = new TrackCircuit();
+        if(containsCrossing) {
+            crossing = new Crossing();
+        }
+        else {
+            crossing = null;
+        }
     }
     
     /**
@@ -412,12 +415,16 @@ public class Block implements TrackPiece {
     }
     
     /**
-    * Check if block contains crossing.
+    * Get crossing, if block contains one
     * @author Dan Bednarczyk
-    * @return boolean indicating if block contains crossing
+    * @return Crossing on the Block, otherwise null
     */
+    public Crossing getCrossing() {
+        return crossing;
+    }
+    
     public boolean containsCrossing() {
-        return containsCrossing;
+        return crossing != null;
     }
     
     /**
@@ -657,8 +664,11 @@ public class Block implements TrackPiece {
         sb.append(isHead);
         sb.append(", Tail: ");
         sb.append(isTail);
-        sb.append(", Crossing: ");
-        sb.append(containsCrossing);
+        if (crossing != null) {
+            sb.append(", Crossing (State = ");
+            sb.append(crossing.getState());
+            sb.append(")");
+        }
         sb.append(", Underground: ");
         sb.append(isUnderground);
         if (station != null) {
