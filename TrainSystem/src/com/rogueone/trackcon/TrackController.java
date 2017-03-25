@@ -623,9 +623,12 @@ public class TrackController {
             boolean occupied = false;
             //determine whether a block is occupied on a particular line
             for (Block b : blockArray) {
-                if (b.isOccupied()) {
+                if (b.isOccupied() && b.getSwitchID() != -1) {
+                    //if on switch block do not complete switch calculation, leave track in current state
+                    return;
+                } else if (b.isOccupied() && b.getSwitchID() == -1) {
+                    // else set section as occupied
                     occupied = true;
-                    break;
                 }
             }
             //set the presence of a section in a hashmap
@@ -638,7 +641,7 @@ public class TrackController {
         for (Entry<Global.Section, Global.Presence> sectionEntry : sectionPresence.entrySet()) {
             //condition for potential overwrite of presence
             if (groupPresence.containsKey(sectionMappings.get(sectionEntry.getKey()))) {
-                if (groupPresence.get(sectionMappings.get(sectionEntry.getKey())) == Global.Presence.OCCUPIED) {
+                if (groupPresence.get(sectionMappings.get(sectionEntry.getKey())) == Global.Presence.OCCUPIED || sectionEntry.getValue() == Global.Presence.OCCUPIED) {
                     groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
                 } else {
                     groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
@@ -679,7 +682,7 @@ public class TrackController {
 
         for (Entry<Global.LogicGroups, StateSet> logicSet : logicSets.entrySet()) {
             UserSwitchState userSwitchState = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
-            System.out.println(printSwitchState(userSwitchState));
+            System.out.print(printSwitchState(userSwitchState));
         }
 
     }
@@ -842,7 +845,7 @@ public class TrackController {
         while (switchIterator.hasNext()) {
             AbstractMap.SimpleEntry<Integer, Global.SwitchState> switchState = (AbstractMap.SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
 //            trainSystem.getTrackModel().getSwitch(switchState.getKey()).setSwitch(true);
-            s.append("\nSwitch " + switchState.getKey() + " is in " + switchState.getValue() + " state");
+            s.append("Switch " + switchState.getKey() + " is in " + switchState.getValue() + " state\n");
             Switch sw = switchArray.get(switchState.getKey());
             if (switchState.getValue() == Global.SwitchState.DEFAULT) {
                 this.trackModel.getSwitch(switchState.getKey()).setSwitch(false);

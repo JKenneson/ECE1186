@@ -610,7 +610,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
     public void updateSummaryPanel() {
         ArrayList<Block> blocks = trackModel.getBlockArray();
         String blockColumnNames[] = { "Line", "Section", "Block", "Occupied", "Rail Fail", "Circuit Fail", "Power Fail" };
-        DefaultTableModel summaryModel = new DefaultTableModel(blockColumnNames, 0);
+//        DefaultTableModel summaryModel = new DefaultTableModel(blockColumnNames, 0);
+        Object[][] rows = new Object[blocks.size()][];
+        int counter = 0;
         for (Block b : blocks) {
             String line =  b.getLine().getLineID() + "";
             if(line.equalsIgnoreCase("GREEN")) {
@@ -651,8 +653,10 @@ public class TrackModelGUI extends javax.swing.JPanel {
             }
             String blockRowData[] = {line, section, ID, presence, failureBrokenRail, failureTrackCircuit, failurePowerOutage};
        
-            summaryModel.addRow(blockRowData);
+            rows[counter++] = blockRowData;
+//            summaryModel.addRow(blockRowData);
         }
+        DefaultTableModel summaryModel = new DefaultTableModel(rows, blockColumnNames);
         summaryTable.setModel(summaryModel);
 
         summaryTable.getColumnModel().getColumn(0).setCellRenderer(lineRenderer);
