@@ -1176,26 +1176,6 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="passDisembarkLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="maxCapacityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="passOnBoardLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="passOnBoardState" pref="42" max="32767" attributes="0"/>
-                                      <Component id="passAtStationState" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="passDisembarkState" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="maxCapacityState" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="passDisembarkLabelUnits" min="-2" max="-2" attributes="0"/>
-                                      <Component id="maxCapacityLabelUnits" min="-2" max="-2" attributes="0"/>
-                                      <Component id="passOnBoardLabelUnits" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="nextStationOutputLabel" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                       <Component id="passAtStationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -1206,6 +1186,29 @@
                                           <Component id="passAtStationLabelUnits" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="nextStationState" min="-2" pref="107" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="passDisembarkLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="maxCapacityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passOnBoardLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="crewOnBoardLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="passOnBoardState" pref="42" max="32767" attributes="0"/>
+                                      <Component id="passAtStationState" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="passDisembarkState" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="maxCapacityState" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="crewOnBoardState" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="crewOnBoardLabelUnits" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passDisembarkLabelUnits" min="-2" max="-2" attributes="0"/>
+                                      <Component id="maxCapacityLabelUnits" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passOnBoardLabelUnits" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1248,6 +1251,12 @@
                               <Component id="maxCapacityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="maxCapacityState" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="maxCapacityLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="crewOnBoardLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="crewOnBoardState" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="crewOnBoardLabelUnits" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1338,6 +1347,24 @@
                 <Component class="javax.swing.JLabel" name="maxCapacityLabelUnits">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="people"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="crewOnBoardLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Crew on Board:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="crewOnBoardState">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="1"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="crewOnBoardLabelUnits">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="person"/>
                   </Properties>
                 </Component>
               </SubComponents>

@@ -87,6 +87,7 @@ public class TrainModel {
     private int passengersOnBaord;
     private int passengersDisembarking;
     private int passengerMaxCapacity;
+    private int crewOnBoard;                //For now, there will always be only 1 crew member on board
     //Physical Characteristics
     private double trainWeight;
     private double trainLength;
@@ -147,10 +148,11 @@ public class TrainModel {
         this.passengersAtStation = 0;
         this.passengersOnBaord = 0;
         this.passengersDisembarking = 0;
-        this.passengerMaxCapacity = 0;                                                                          //TODO: Set initial max capacity based off of number of cars
+        this.passengerMaxCapacity = this.CAR_CAPACITY * numCars;
+        this.crewOnBoard = 1;
         //Physical Characteristics
-        this.trainWeight = 0;                                                                                   //TODO: Set train weight and length based off numCars
-        this.trainLength = 0;
+        this.trainWeight = this.CAR_WEIGHT * numCars;
+        this.trainLength = this.CAR_LENGTH * numCars;
         this.numCars = numCars;
         this.trackAntennaActivated = true;
         this.mboAntennaActivated = true;
@@ -300,6 +302,7 @@ public class TrainModel {
         gui.passOnBoardState.setText(Integer.toString(this.passengersOnBaord));
         gui.passDisembarkState.setText(Integer.toString(this.passengersDisembarking));
         gui.maxCapacityState.setText(Integer.toString(this.passengerMaxCapacity));
+        gui.crewOnBoardState.setText(Integer.toString(this.crewOnBoard));
         
         //Physical Characteristics
         gui.trainWeightState.setText(Global.commaFormatter.format(this.trainWeight));
@@ -402,8 +405,8 @@ public class TrainModel {
         //First, update the train length and weight based on number of cars
         this.trainLength = CAR_LENGTH * this.numCars;
         this.trainWeight = CAR_WEIGHT * this.numCars;
-        //Then, add in based on how many passengers there are
-        this.trainWeight += PASS_WEIGHT * this.passengersOnBaord;
+        //Then, add in based on how many passengers and crew there are
+        this.trainWeight += (PASS_WEIGHT * (this.passengersOnBaord + this.crewOnBoard));
         this.passengerMaxCapacity = CAR_CAPACITY * this.numCars;    //Passenger max capacity
         
         

@@ -139,6 +139,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
         maxCapacityLabel = new javax.swing.JLabel();
         maxCapacityState = new javax.swing.JLabel();
         maxCapacityLabelUnits = new javax.swing.JLabel();
+        crewOnBoardLabel = new javax.swing.JLabel();
+        crewOnBoardState = new javax.swing.JLabel();
+        crewOnBoardLabelUnits = new javax.swing.JLabel();
         physicalTrainOutputPanel = new javax.swing.JPanel();
         trainWeightLabel = new javax.swing.JLabel();
         trainWeightState = new javax.swing.JLabel();
@@ -772,6 +775,12 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         maxCapacityLabelUnits.setText("people");
 
+        crewOnBoardLabel.setText("Crew on Board:");
+
+        crewOnBoardState.setText("1");
+
+        crewOnBoardLabelUnits.setText("person");
+
         javax.swing.GroupLayout passengersOutputPanelLayout = new javax.swing.GroupLayout(passengersOutputPanel);
         passengersOutputPanel.setLayout(passengersOutputPanelLayout);
         passengersOutputPanelLayout.setHorizontalGroup(
@@ -781,22 +790,6 @@ public class TrainModelGUI extends javax.swing.JPanel {
                 .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(passengersOutputPanelLayout.createSequentialGroup()
                         .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passDisembarkLabel)
-                            .addComponent(maxCapacityLabel)
-                            .addComponent(passOnBoardLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(passOnBoardState, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                            .addComponent(passAtStationState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(passDisembarkState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(maxCapacityState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passDisembarkLabelUnits)
-                            .addComponent(maxCapacityLabelUnits)
-                            .addComponent(passOnBoardLabelUnits)))
-                    .addGroup(passengersOutputPanelLayout.createSequentialGroup()
-                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nextStationOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(passAtStationLabel))
                         .addGap(33, 33, 33)
@@ -804,7 +797,26 @@ public class TrainModelGUI extends javax.swing.JPanel {
                             .addGroup(passengersOutputPanelLayout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addComponent(passAtStationLabelUnits))
-                            .addComponent(nextStationState, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(nextStationState, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(passengersOutputPanelLayout.createSequentialGroup()
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passDisembarkLabel)
+                            .addComponent(maxCapacityLabel)
+                            .addComponent(passOnBoardLabel)
+                            .addComponent(crewOnBoardLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(passOnBoardState, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                            .addComponent(passAtStationState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(passDisembarkState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(maxCapacityState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(crewOnBoardState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crewOnBoardLabelUnits)
+                            .addComponent(passDisembarkLabelUnits)
+                            .addComponent(maxCapacityLabelUnits)
+                            .addComponent(passOnBoardLabelUnits))))
                 .addContainerGap())
         );
         passengersOutputPanelLayout.setVerticalGroup(
@@ -836,6 +848,11 @@ public class TrainModelGUI extends javax.swing.JPanel {
                     .addComponent(maxCapacityLabel)
                     .addComponent(maxCapacityState)
                     .addComponent(maxCapacityLabelUnits))
+                .addGap(24, 24, 24)
+                .addGroup(passengersOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(crewOnBoardLabel)
+                    .addComponent(crewOnBoardState)
+                    .addComponent(crewOnBoardLabelUnits))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1159,6 +1176,9 @@ public class TrainModelGUI extends javax.swing.JPanel {
     private javax.swing.JPanel brakeInputPanel;
     private javax.swing.JLabel brakesOutputLabel;
     public javax.swing.JLabel brakesState;
+    private javax.swing.JLabel crewOnBoardLabel;
+    private javax.swing.JLabel crewOnBoardLabelUnits;
+    public javax.swing.JLabel crewOnBoardState;
     private javax.swing.JLabel ctcAuthorityInputLabel;
     private javax.swing.JLabel ctcAuthorityInputLabelUnits;
     public javax.swing.JSpinner ctcAuthoritySpinner;
