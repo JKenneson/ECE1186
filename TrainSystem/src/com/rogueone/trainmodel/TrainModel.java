@@ -5,7 +5,7 @@
  *
  * @author Jonathan Kenneson
  * @Creation 2/3/17
- * @Modification 2/13/17
+ * @Modification 3/25/17
  */
 package com.rogueone.trainmodel;
 
@@ -222,6 +222,11 @@ public class TrainModel {
         return  trainModelGUI;  //Return the GUI object
     }
     
+    /**
+     * This function displays the gui attached to the TrainModel object
+     * 
+     * @author Jonathan Kenneson
+     */
     public void showGUIObject() {
         //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
         JFrame frame = new JFrame();

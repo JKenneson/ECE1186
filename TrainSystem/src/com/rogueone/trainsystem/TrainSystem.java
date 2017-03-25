@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The train system is the driving force behind the entire train operation
+ * All modules are created here and can interact with each other from this class.
+ * The modules are also called to update from this class depending on the speed of the timer
+ *
+ * @authors Jonathan Kenneson, Kyle Monto, Dan Bednarczyk, Tyler Protivnak, Brian Stevenson, Rob Goldshear
+ * @Creation 2/5/17
+ * @Modification 3/24/17
  */
 package com.rogueone.trainsystem;
 
