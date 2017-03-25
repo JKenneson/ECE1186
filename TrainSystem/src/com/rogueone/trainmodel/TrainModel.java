@@ -44,6 +44,8 @@ public class TrainModel {
     public final double CAR_WEIGHT = 81800;             //1 car's train weight (in lbs)
     public final int CAR_CAPACITY = 222;                //1 car's passenger max capacity 
     public final double PASS_WEIGHT = 165.35;           //1 passenger's weight (in lbs)
+    public final double TRAIN_HEIGHT = 11.22;           //Train height (in feet)
+    public final double TRAIN_WIDTH = 8.70;             //Train width (in feet)
     
     //Variable declaration for the class
     //Train System reference
@@ -91,6 +93,8 @@ public class TrainModel {
     //Physical Characteristics
     private double trainWeight;
     private double trainLength;
+    private double trainHeight;
+    private double trainWidth;
     private int numCars;
     private boolean trackAntennaActivated;
     private boolean mboAntennaActivated;
@@ -153,6 +157,8 @@ public class TrainModel {
         //Physical Characteristics
         this.trainWeight = this.CAR_WEIGHT * numCars;
         this.trainLength = this.CAR_LENGTH * numCars;
+        this.trainHeight = this.TRAIN_HEIGHT;               //Height and width are similar for all trains
+        this.trainWidth = this.TRAIN_WIDTH;
         this.numCars = numCars;
         this.trackAntennaActivated = true;
         this.mboAntennaActivated = true;
@@ -307,6 +313,8 @@ public class TrainModel {
         //Physical Characteristics
         gui.trainWeightState.setText(Global.commaFormatter.format(this.trainWeight));
         gui.trainLengthState.setText(Global.commaFormatter.format(this.trainLength));
+        gui.trainHeightState.setText(Global.commaFormatter.format(this.trainHeight));
+        gui.trainWidthState.setText(Global.commaFormatter.format(this.trainWidth));
         gui.numCarsState.setText(Integer.toString(this.numCars));
         
         if(this.trackAntennaActivated) {
