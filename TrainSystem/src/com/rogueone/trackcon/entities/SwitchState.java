@@ -9,7 +9,8 @@ import com.rogueone.global.Global;
 import java.util.ArrayList;
 
 /**
- *
+ * SwitchState class holds and maps information for a particular switch to the default and 
+ * alternate connections and lights
  * @author kylemonto
  */
 public class SwitchState {

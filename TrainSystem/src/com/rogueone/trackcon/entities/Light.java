@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import org.apache.poi.ss.usermodel.Cell;
 
 /**
- *
+ * Light class that will parse and store information about lights in the train system
  * @author kylemonto
  */
 public class Light {

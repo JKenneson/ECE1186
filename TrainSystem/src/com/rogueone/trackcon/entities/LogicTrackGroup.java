@@ -14,7 +14,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- *
+ * LogicTrackGroup class that will store information pertaining to switches and state mappings for 
+ * track groups in a logical arrangement of the track sections
  * @author kylemonto
  */
 public class LogicTrackGroup {

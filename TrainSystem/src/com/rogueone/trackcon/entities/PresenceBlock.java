@@ -12,7 +12,8 @@ import com.rogueone.trainsystem.TrainSystem;
 import java.util.Objects;
 
 /**
- *
+ *  PresenceBlock is a basic representation of a train on the track
+ *  used for checks involving trains proceeding, crossings, and opening and closing blocks 
  * @author kylemonto
  */
 public class PresenceBlock {

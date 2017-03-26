@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- *
+ * Set that will hold State of the track
  * @author kylemonto
  */
 public class StateSet {

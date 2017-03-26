@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import org.apache.poi.ss.usermodel.Cell;
 
 /**
- *
+ * Switch class that will parse and hold information about the track systems switches
  * @author kylemonto
  */
 public class Switch {

@@ -9,7 +9,7 @@ import com.rogueone.global.Global;
 import java.util.HashMap;
 
 /**
- *
+ * Crossing class that stores information pertinent to crossings in the system
  * @author kylemonto
  */
 public class Crossing {

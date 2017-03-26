@@ -8,7 +8,7 @@ package com.rogueone.trackcon;
 import javax.swing.JFrame;
 
 /**
- *
+ * Basic GUI for the Track Handler
  * @author kylemonto
  */
 public class TrackHandlerGUI extends javax.swing.JPanel {

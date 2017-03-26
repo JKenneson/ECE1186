@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import org.apache.poi.ss.usermodel.Cell;
 
 /**
- *
+ * TrackConnection will parse and hold information about track connection details
  * @author kylemonto
  */
 public class TrackConnection {

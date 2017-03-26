@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- *
+ * State class that serves as a mapping for a track group to a particular presence
  * @author kylemonto
  */
 public class State {
