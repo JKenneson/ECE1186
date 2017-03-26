@@ -80,6 +80,9 @@ public class TrainSystem {
         mainFrame.setLayout(new BorderLayout());
         mainFrame.getContentPane().add(ctc, BorderLayout.CENTER);
         mainFrame.setVisible(true);
+        
+        //initial run for track Controller tables
+        this.trackControllerHandler.updateTrack();
           
         // Initialize timer and scheduler
         this.timer = new Timer();

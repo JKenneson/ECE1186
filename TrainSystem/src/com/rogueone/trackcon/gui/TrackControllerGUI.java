@@ -55,6 +55,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         logicGroupsComboBox.setEnabled(true);
         crossingComboBox.setEnabled(false);
         speedAuthorityPanel.setVisible(false);
+        plcPanel.setVisible(false);
         
     }
 
@@ -87,8 +88,6 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         switchNumberTextField = new javax.swing.JTextField();
         crossingNumberLabel = new javax.swing.JLabel();
         crossingNumberTextField = new javax.swing.JTextField();
-        blockNumberLabel = new javax.swing.JLabel();
-        blockNumberTextField = new javax.swing.JTextField();
         trackSignalNumberTextField = new javax.swing.JTextField();
         trackSignalNumberLabel = new javax.swing.JLabel();
         speedAuthorityPanel = new javax.swing.JPanel();
@@ -108,6 +107,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         plcProgramLabel = new javax.swing.JLabel();
         plcProgramTextField = new javax.swing.JTextField();
         plcLineComboBox = new javax.swing.JComboBox<>();
+        toggleSwitchButton = new javax.swing.JToggleButton();
         componentSummaryPanel = new javax.swing.JPanel();
         currentSwitchesLabel = new javax.swing.JLabel();
         currentSwitchScrollPane = new javax.swing.JScrollPane();
@@ -246,21 +246,6 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         selectionPanel.add(crossingNumberTextField, gridBagConstraints);
-
-        blockNumberLabel.setText("Block ID: ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        selectionPanel.add(blockNumberLabel, gridBagConstraints);
-
-        blockNumberTextField.setText("#/(None Selected)");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        selectionPanel.add(blockNumberTextField, gridBagConstraints);
 
         trackSignalNumberTextField.setText("#/(None Selected)");
         trackSignalNumberTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -435,6 +420,25 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         selectionPanel.add(plcPanel, gridBagConstraints);
+
+        toggleSwitchButton.setText("Toggle Switch");
+        toggleSwitchButton.setEnabled(false);
+        toggleSwitchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                toggleSwitchButtonMouseClicked(evt);
+            }
+        });
+        toggleSwitchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleSwitchButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        selectionPanel.add(toggleSwitchButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -1297,6 +1301,8 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         if (selectedRow != -1) {
             String switchID = (String) currentSwitchTable.getValueAt(selectedRow, 2);
             switchNumberTextField.setText(switchID + "");
+            toggleSwitchButton.setEnabled(true);
+            toggleSwitchButton.setText("Toggle Switch " + switchID + ": " + (String) currentSwitchTable.getValueAt(selectedRow, 3));
         } else {
             switchNumberTextField.setText("Nothing Selected");
         }
@@ -1412,12 +1418,25 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_trackStatusPosition3ComboBoxActionPerformed
 
+    private void toggleSwitchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleSwitchButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toggleSwitchButtonActionPerformed
+
+    private void toggleSwitchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toggleSwitchButtonMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = currentSwitchTable.getSelectedRow();
+        if (selectedRow != -1) {
+            String switchIDString = (String) currentSwitchTable.getValueAt(selectedRow, 2);
+            Integer switchID = Integer.parseInt(switchIDString);
+            trackController.toggleSwitch(switchID);
+            toggleSwitchButton.setText("Toggle Switch " + switchIDString + ": " + (String) currentSwitchTable.getValueAt(selectedRow, 3));
+        }
+    }//GEN-LAST:event_toggleSwitchButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionsPanel;
     private javax.swing.JButton addTrain;
-    private javax.swing.JLabel blockNumberLabel;
-    private javax.swing.JTextField blockNumberTextField;
     private javax.swing.JButton chooseFileButton;
     private javax.swing.JLabel commandedAuthorityLabel;
     private javax.swing.JTextField commandedAuthorityTextField;
@@ -1496,6 +1515,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private javax.swing.ButtonGroup testSwitchOrCrossingButtonGroup;
     private javax.swing.JLabel testSwitchOrCrossingLabel;
     private javax.swing.JRadioButton testSwitchRadioButton;
+    private javax.swing.JToggleButton toggleSwitchButton;
     private javax.swing.JPanel trackControllerPanel;
     private javax.swing.JScrollPane trackControllerScrollPane;
     private javax.swing.JTabbedPane trackControllerTabbedPane;
@@ -1524,7 +1544,6 @@ public class TrackControllerGUI extends javax.swing.JPanel {
     private void resetSelectionsTextFields() {
         trainNumberTextField.setText("Nothing Selected");
         switchNumberTextField.setText("Nothing Selected");
-        blockNumberTextField.setText("Nothing Selected");
         trackSignalNumberTextField.setText("Nothing Selected");
         crossingNumberTextField.setText("Nothing Selected");
     }

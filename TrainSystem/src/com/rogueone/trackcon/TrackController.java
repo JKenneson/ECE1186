@@ -101,7 +101,7 @@ public class TrackController {
         //set the plc program field on the gui
         this.trackControllerGUI.plcProgramTextField.setText(defaultPLC.getName());
         //load the plc and track model data into the summary tab of track controller
-        this.updateSummaryTab();
+//        this.updateSummaryTab();
         this.occupiedBlocks = new LinkedList<PresenceBlock>();
         this.currentSwitchStates = new LinkedList<UserSwitchState>();
     }
@@ -919,6 +919,28 @@ public class TrackController {
                 this.trackModel.getSwitch(switchState.getKey()).setSwitch(true);
             }
         }
+    }
+    
+    public void toggleSwitch(Integer switchID){
+        Iterator listIterator = this.currentSwitchStates.iterator();
+        while(listIterator.hasNext()){
+            UserSwitchState uss = (UserSwitchState) listIterator.next();
+            Iterator switchIterator = uss.getUserSwitchStates().iterator();
+            while(switchIterator.hasNext()){
+                SimpleEntry<Integer, Global.SwitchState> switchEntry = (SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
+                if(switchID == switchEntry.getKey()){
+                    Global.SwitchState currentState = switchEntry.getValue();
+                    if(currentState == Global.SwitchState.DEFAULT){
+                        switchEntry.setValue(Global.SwitchState.ALTERNATE);
+                    } else {
+                        switchEntry.setValue(Global.SwitchState.DEFAULT);
+                    }
+                    updateSwitches(uss);
+                    break;
+                }
+            }
+        }
+        updateSummaryTab();
     }
 
     class SwitchTableModel extends AbstractTableModel {

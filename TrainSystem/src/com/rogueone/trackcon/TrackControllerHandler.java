@@ -24,10 +24,6 @@ public class TrackControllerHandler {
     
     public TrackControllerHandler(TrainSystem ts) {
         trainSystem = ts;
-        TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem);
-        TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem);
-        trackControllers.add(greenTrackController);
-        trackControllers.add(redTrackController);
         
         sectionToGroupMapping = new HashMap<Global.Section, Global.TrackGroups>();
         for(Global.Section s : Global.Section.values()){
@@ -51,6 +47,11 @@ public class TrackControllerHandler {
                 groupToLogicMapping.put(tg, Global.LogicGroups.GREEN_0 );
             }
         }
+        
+        TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem);
+        TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem);
+        trackControllers.add(greenTrackController);
+        trackControllers.add(redTrackController);
         
         trackHandlerGUI = new TrackHandlerGUI(this);
     }
