@@ -142,6 +142,26 @@ public class TrackControllerHandler {
 //            returnValue = trackControllers.get(1).canOpen(blockID);
         }
     }
+    
+    public String getSwitchInformation(Global.Line line){
+        String returnString = null;
+        if(line == Global.Line.GREEN){
+            returnString = trackControllers.get(0).getSwitches();
+        } else {
+//            returnValue = trackControllers.get(1).canOpen(blockID);
+        }
+        return returnString;
+    }
+    
+    public String getCrossingInformation(Global.Line line){
+        String returnString = null;
+        if(line == Global.Line.GREEN){
+            returnString = trackControllers.get(0).getCrossing();
+        } else {
+//            returnValue = trackControllers.get(1).canOpen(blockID);            
+        }
+        return returnString;
+    }
 
     /**
      * Function that will update the track controllers when called

@@ -943,10 +943,34 @@ public class TrackController {
         updateSummaryTab();
     }
 
-    void updateSpeedAuthority(int blockID, byte speed, short authority) {
+    public void updateSpeedAuthority(int blockID, byte speed, short authority) {
         Block b = this.trackModel.getBlock(controllerLine, blockID);
         b.getTrackCircuit().speed = speed;
         b.getTrackCircuit().authority = authority;
+    }
+
+    public String getSwitches() {
+        StringBuilder b = new StringBuilder();
+        if (this.currentSwitchStates != null) {
+            Iterator iterator = this.currentSwitchStates.iterator();
+            while (iterator.hasNext()) {
+                UserSwitchState uss = (UserSwitchState) iterator.next();
+                Iterator switches = uss.getUserSwitchStates().iterator();
+                while (switches.hasNext()) {
+                    SimpleEntry<Integer, Global.SwitchState> state = (SimpleEntry<Integer, Global.SwitchState>) switches.next();
+                    b.append(state.getKey()).append(":").append(state.getValue());
+                }
+            }
+            return b.toString();
+        }
+        return null;
+    }
+
+    public String getCrossing() {
+        if(crossing != null){
+            StringBuilder b = new StringBuilder();
+        }
+        return null;
     }
 
     class SwitchTableModel extends AbstractTableModel {
