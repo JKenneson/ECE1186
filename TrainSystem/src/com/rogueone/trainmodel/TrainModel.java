@@ -504,9 +504,8 @@ public class TrainModel {
             this.currBlock.setOccupancy(false); 
             //Get next TrackPiece. Should be Block or Yard
             this.nextBlock = this.currBlock.getNext(this.prevBlock);
-//            this.trainSystem.getTrackControllerHandler().updateTrack();
             
-            System.out.println("currBlock: " + this.currBlock + ", prevBlock: " + this.prevBlock + ", nextBlock: " + this.nextBlock);
+            System.out.println("Train " + this.trainID + ": Line " + currBlock.getLine() + ", Section " + currBlock.getSection() + ", Block: " + this.currBlock + " (prev: " + this.prevBlock + ", next: " + this.nextBlock + ")");
             
             if(this.nextBlock != null) {
 
