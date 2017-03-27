@@ -98,6 +98,27 @@ public class TrainHandler {
         return trains;
     }
     
+    /**
+     * Returns the current block of a train specified by the ID passed in
+     * 
+     * @author Jonathan Kenneson
+     * @param trainID The ID of the train
+     * @return The formatted current block output, or an empty string if the trainID is not here
+     */
+    public String getBlockForTrain(int trainID) {
+        for (TrainModel train : TrainHandler.trains) {
+            if(train.trainID == trainID) {  //If we find the trainID, display the GUIs
+                StringBuilder sb = new StringBuilder();
+                sb.append(train.getCurrBlock().getSection());
+                sb.append(" : ");
+                sb.append(train.getCurrBlock().getID());
+                return sb.toString();
+            }
+        }
+        
+        return "";
+    }
+    
     
     /**
      * Main function currently tests the functionality of the Train Model class independent from the other modules

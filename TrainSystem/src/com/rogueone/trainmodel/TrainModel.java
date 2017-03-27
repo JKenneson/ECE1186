@@ -764,4 +764,7 @@ public class TrainModel {
         return this.trainModelGUI;
     }
     
+    public Block getCurrBlock() {
+        return this.currBlock;
+    }
 }
