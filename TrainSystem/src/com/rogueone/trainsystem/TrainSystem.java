@@ -98,11 +98,7 @@ public class TrainSystem {
         this.mainFrame.timeLabel.setText(this.clock.printClock() + "     ");
         
         this.trainHandler.updateTrains();
-        
-        this.trackModel.updateGUI();
-        this.trackModel.updateStationEnvironments();
-//        this.trackControllerHandler.updateTrack();
-        
+        this.trackModel.updateStationEnvironments();   
         this.ctc.updateGUI();
     }
 

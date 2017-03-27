@@ -517,6 +517,7 @@ public class TrainModel {
                     this.prevBlock = this.currTempBlock;
                     this.currBlock.setOccupancy(true);
                     this.trainSystem.getTrackControllerHandler().updateTrack();
+                    this.trainSystem.getTrackModel().updateGUI();
                 }
                 //Train has reached end of track
                 else if (this.nextBlock.getType() == Global.PieceType.YARD) {
