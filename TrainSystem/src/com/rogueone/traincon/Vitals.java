@@ -7,17 +7,19 @@ package com.rogueone.traincon;
 
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainmodel.entities.TrainFailures;
+import com.rogueone.trainsystem.TrainSystem;
 
 /**
  *
  * @author Tyler
  */
 public class Vitals {
-    
-    private TrainController trainController;
-    private TrainModel trainModel;
-    private GPS gps;
+
+    //private TrainController trainController;
+    //private final TrainSystem trainSystem;
+    private final TrainModel trainModel;
     private SpeedControl speedControl;
+    private GPS gps;
        
     private double powerCommand;
     private double maxPower;
@@ -38,20 +40,18 @@ public class Vitals {
     private boolean serviceBrakeStatus;
     
     
+    
     /**
      * Constructor for Vitals module
      * 
      * @author Tyler Protivnak
-     * @param tc ref to overall train controller
      * @param tm ref to attached train model
      * @param gps ref to tc gps module
-     * @param sc ref to attached speed controller
      * @param maxPow max power of the attached train
      */
-    public Vitals(TrainController tc, TrainModel tm, GPS gps, double maxPow){
-        this.trainController = tc;
+    public Vitals(TrainSystem ts, TrainModel tm, TrainController tc, double maxPow, byte setPointSpeed, short authority, String trainID){
+        //this.trainSystem = ts;
         this.trainModel = tm;
-        this.gps = gps;
         
         this.serviceBrakeActivated = false;
         this.emergencyBrakeActivated = false;
@@ -67,16 +67,20 @@ public class Vitals {
         this.eK_1 = 0;
         this.uK = 0;
         this.uK_1 = 0;
-        
         this.maxPower = maxPow;
+        
+        this.gps = new GPS(authority, ts, trainID);
+        this.speedControl = new SpeedControl(setPointSpeed, setPointSpeed, tm, this.gps);
     }
  
-    public void update(){
-        if(this.gps.getAuthority()<0)
+    public void update(boolean manualMode){
+        this.gps.update();
+        if(this.gps.getAuthority()<0 || this.emergencyBrakeOverride)
             this.setEmergencyBrakeActivated(true);
         else if(!this.emergencyBrakeOverride){
             this.setEmergencyBrakeActivated(false);
         }
+        this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated));
     }
     
     /**
@@ -188,17 +192,17 @@ public class Vitals {
      * @param samplePeriod The sampling period defined by the Train Model
      * @return power after calculations
      */
-    public double calculatePower(double actualSpeed, double samplePeriod){ //should pull speed limit information from
+    public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
                         
-        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.trainModel.getGrade()<0 || this.speedControl.getSetPoint()==0.0){
+        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)==0.0){
+            //Maybe I shouldn't do when grade is less than 0
             this.powerCommand = 0.0;
             return 0.0;
         }
         
-        this.eK = this.speedControl.getSetPoint()-actualSpeed;   //Calc error difference
+        this.eK = this.speedControl.getSetPoint(manualMode)-actualSpeed;   //Calc error difference
         this.gps.setCurrSpeed(actualSpeed);
-        this.gps.update();           //Save actual speed
         
         this.uK = this.uK_1 + ((samplePeriod/2)*(this.eK+this.eK_1));
 
@@ -237,15 +241,13 @@ public class Vitals {
         this.kI = Ki;
     }
     
-    public boolean isServiceBrakeActivated() {
-        return serviceBrakeActivated;
-    }
+   
     
     /**
      * 
      * @return the set KP value
      */
-    public int getkP() {
+    public int getKP() {
         return kP;
     }
 
@@ -253,8 +255,12 @@ public class Vitals {
      * 
      * @return the set KI value
      */
-    public int getkI() {
+    public int getKI() {
         return kI;
+    }
+    
+     public boolean isServiceBrakeActivated() {
+        return serviceBrakeActivated;
     }
     
     /**
@@ -266,6 +272,14 @@ public class Vitals {
         this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
     }
 
+    /**
+     * 
+     * @return true if E brake is activated
+     */
+    public boolean isEmergencyBrakeActivated() {
+        return emergencyBrakeActivated;
+    }
+    
     /**
      * 
      * @param emergencyBrakeActivated Boolean to set the status of the e brake. True = on. Also updates train model.
@@ -295,13 +309,7 @@ public class Vitals {
         return maxPower;
     }
 
-    /**
-     * 
-     * @return true if E brake is activated
-     */
-    public boolean isEmergencyBrakeActivated() {
-        return emergencyBrakeActivated;
-    }
+    
 
     /**
      * 
@@ -309,6 +317,14 @@ public class Vitals {
      */
     public boolean isEmergencyBrakeOverride() {
         return emergencyBrakeOverride;
+    }
+    
+    public SpeedControl getSpeedControl(){
+        return this.speedControl;
+    }
+    
+    public GPS getGPS() {
+        return this.gps;
     }
         
 }

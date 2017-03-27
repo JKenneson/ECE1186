@@ -5,15 +5,13 @@
  */
 package com.rogueone.traincon;
 
-import com.rogueone.trainmodel.TrainModel;
-
 /**
  *
  * @author Tyler
  */
 public class PowerSystems implements Updateable{
     
-    private TrainModel trainModel;
+    private TrainController trainController;
     
     private boolean leftDoorOpen;
     private boolean rightDoorOpen;
@@ -22,14 +20,14 @@ public class PowerSystems implements Updateable{
     private boolean heaterOn;
     private int temperature;
     
-    public PowerSystems(TrainModel tm){
+    public PowerSystems(TrainController tc){
         
-        this.trainModel = tm;
-        this.leftDoorOpen = this.trainModel.isLeftDoorOpen();
-        this.rightDoorOpen = this.trainModel.isRightDoorOpen();
-        this.lightsOn = this.trainModel.isLightsOn();
+        this.trainController = tc;
+        this.leftDoorOpen = this.trainController.trainModel.isLeftDoorOpen();
+        this.rightDoorOpen = this.trainController.trainModel.isRightDoorOpen();
+        this.lightsOn = this.trainController.trainModel.isLightsOn();
         
-        this.temperature = this.trainModel.getTemperature();
+        this.temperature = this.trainController.trainModel.getTemperature();
         
         if(this.temperature>72){
             this.airConditioningOn = true;
@@ -52,7 +50,7 @@ public class PowerSystems implements Updateable{
      * @author Tyler Protivnak
      */
     public void update(){ 
-        this.temperature = this.trainModel.getTemperature();
+        this.temperature = this.trainController.trainModel.getTemperature();
         
         if(this.temperature>72){
             this.airConditioningOn = true;
@@ -90,7 +88,7 @@ public class PowerSystems implements Updateable{
      */
     public void setLightsOn(boolean lightsOn) {
         this.lightsOn = lightsOn;
-        this.trainModel.setLightsOn(lightsOn);
+        this.trainController.trainModel.setLightsOn(lightsOn);
     }
     
     /**
@@ -99,7 +97,7 @@ public class PowerSystems implements Updateable{
      */
     public void setLeftDoorOpen(boolean leftDoorOpen) {
         this.leftDoorOpen = leftDoorOpen;
-        this.trainModel.setLeftDoorOpen(leftDoorOpen);
+        this.trainController.trainModel.setLeftDoorOpen(leftDoorOpen);
     }
     
     /**
@@ -108,7 +106,7 @@ public class PowerSystems implements Updateable{
      */
     public void setRightDoorOpen(boolean rightDoorOpen) {
         this.rightDoorOpen = rightDoorOpen;
-        this.trainModel.setRightDoorOpen(rightDoorOpen);
+        this.trainController.trainModel.setRightDoorOpen(rightDoorOpen);
     }
 
     /**

@@ -22,16 +22,12 @@ public class GPS implements Updateable{
     public final double SECONDS_IN_AN_HOUR = 3600;      //3600 seconds in an hour
     
     //Train System reference
-    private TrainSystem trainSystem;
     public String trainID;
     
     //Speed and Authority
     private double currSpeed;       //Vf in m/s
-    private double currSpeedMPH;    //Vf in mph for printing to the screen
     private double lastSpeed;       //Vi in m/s
-    private int speedLimit;
-    private int driverSetPoint;
-    private int ctcSetPoint;
+
     private double authority;       //feet remaining
     private double distanceIntoBlock;//The distance we have traveled into the block
     private double distanceTraveled;//meters traveled this cycle
@@ -54,14 +50,11 @@ public class GPS implements Updateable{
         
         //Speed and Authority
         this.currSpeed = 0;
-        this.currSpeedMPH = 0;
         this.lastSpeed = 0;
-        this.speedLimit = 0;
-        this.authority = (double)authority*this.FEET_IN_A_METER;
+        this.authority = (double)authority*this.FEET_IN_A_METER;//Update how values are brought in
         this.distanceIntoBlock = 0;
         this.distanceTraveled = 0;
         this.trainID = trainID;
-        this.trainSystem = trainSystem;
         
         //Block setting
         this.prevBlock = trainSystem.getTrackModel().getYard();
@@ -81,10 +74,7 @@ public class GPS implements Updateable{
         
         //Assign the last speed to the current speed for the next cycle
         this.lastSpeed = this.currSpeed;                                                                
-                
-        //Current speed is in m/s, convert to mph to print out
-        this.currSpeedMPH = this.currSpeed * SECONDS_IN_AN_HOUR / METERS_IN_A_MILE;
-        
+   
         //Calculate distance into block and ask for new block if we've gone the length of the block
         this.distanceIntoBlock += this.distanceTraveled;
         

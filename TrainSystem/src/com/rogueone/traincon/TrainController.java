@@ -38,11 +38,11 @@ public class TrainController {
     private String announcement;
     
     //Train Information
-    private TrainModel trainModel;
-    public GPS gps;
+    public TrainModel trainModel;
+    //public GPS gps;
     public PowerSystems powerSystem;
-    public SpeedControl speedControl;
-    public Vitals vitals;
+    //public SpeedControl speedControl;
+    public TMR vitals;
     public TrainControllerGUI gui;
     public TrainSystem trainSystem;
     private String trainID;
@@ -75,13 +75,11 @@ public class TrainController {
         
         this.trainSystem = ts;
         this.trainModel = tm; //Should come from passed (this) reference
+        this.powerSystem = new PowerSystems(this);
+        this.vitals = new TMR(ts, tm, this, maxPow, setPointSpeed, authority, trainID);
         this.gui = gui;
         
-        this.gps = new GPS(authority, this.trainSystem, this.trainID);
-        this.powerSystem = new PowerSystems(this.trainModel);
-        this.vitals = new Vitals(this, this.trainModel, this.gps, maxPow);
-        this.speedControl = new SpeedControl(setPointSpeed, setPointSpeed, tm, this, this.gps, this.vitals);
-        this.vitals.setSpeedControl(this.speedControl);
+        
         
         
         //Initialize Train Controller Object
@@ -105,7 +103,6 @@ public class TrainController {
         
     }    
     
-    
     /**
      * This method makes the train controller gui and initializes it's view for
      * the user. It also sets the gui object for the train controller.
@@ -123,8 +120,7 @@ public class TrainController {
         
         this.gui = trainControllerGUI;  //Return the GUI object
         return trainControllerGUI;  //Return the GUI object
-    }
-    
+    } 
     
     public void showGUIObject() {
         //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
@@ -148,16 +144,16 @@ public class TrainController {
         "\nPassengers: " + this.passengers + "\nTemp: " + this.powerSystem.getTemperature());
         gui.TrainInfoText.setEditable(false);
         
-        gui.ActualSpeedLabel.setText(String.valueOf(this.gps.getCurrSpeed()));
-        gui.SetSpeedLabel.setText(String.valueOf(this.gps.getSpeedLimit()));
-        gui.AuthorityLabel.setText(String.valueOf(this.gps.getAuthority()));
-        gui.PowerUsedLabel.setText(String.valueOf(this.vitals.getPowerCommand()));
-        gui.MaxPowerLabel.setText(String.valueOf(this.vitals.getMaxPower()));
+        gui.ActualSpeedLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getCurrSpeed()));
+        gui.SetSpeedLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getSpeedLimit()));
+        gui.AuthorityLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getAuthority()));
+        gui.PowerUsedLabel.setText(String.valueOf(this.vitals.getPrimary().getPowerCommand()));
+        gui.MaxPowerLabel.setText(String.valueOf(this.vitals.getPrimary().getMaxPower()));
         gui.NotificationsDisplay.append(this.announcement);
         gui.NotificationsDisplay.setEditable(false);
-        gui.SpeedInput.setValue(this.speedControl.getDriverSetPoint());
-        gui.KiInput.setValue(this.vitals.getkI());
-        gui.KpInput.setValue(this.vitals.getkP());
+        gui.SpeedInput.setValue(this.vitals.getPrimary().getSpeedControl().getDriverSetPoint());
+        gui.KiInput.setValue(this.vitals.getPrimary().getKI());
+        gui.KpInput.setValue(this.vitals.getPrimary().getKP());
         gui.ClockText.append(this.trainSystem.getClock().printClock());//Get value from global clock value (EST)
         
         for(int i = 0; i < getNumberOfTrains(); i++){
@@ -166,11 +162,7 @@ public class TrainController {
         }        
         //Add more functionality in future    
     }
-        
-    
-    
-    
-        
+ 
     /**
      * This method pulls the number of passengers from the train model and sets
      * the train controllers passengers variable to the most updated value.
@@ -189,26 +181,23 @@ public class TrainController {
     private ArrayList getTrainArray(){
         return null;
     }
-              
-                                           
-    
+
     /**
      * The update function for the full controller
      * 
      * @author Tyler Protivnak
      */
     public void updateController(){
-        
+       
+        this.vitals.update(this.manualMode);     
         if(!this.manualMode){
             this.powerSystem.update();
         }
         this.updatePassengers();
-        this.speedControl.update();
-        this.vitals.update();
     }
         
     public void updateGUI(TrainControllerGUI gui){
-        this.updateController();
+        //this.updateController();
         
         for(int i = 0; i < getNumberOfTrains(); i++){
             //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
@@ -257,16 +246,16 @@ public class TrainController {
         }
                
         gui.TrainInfoText.setText(null);
-        gui.TrainInfoText.append("Train ID: " + this.gps.trainID + "\nLine: " + 
-        this.gps.getCurrBlock().getLine() + "\nSection: " + this.gps.getCurrBlock().getSection() + "\nBlock: " + this.gps.getCurrBlock() + 
+        gui.TrainInfoText.append("Train ID: " + this.vitals.getPrimary().getGPS().trainID + "\nLine: " + 
+        this.vitals.getPrimary().getGPS().getCurrBlock().getLine() + "\nSection: " + this.vitals.getPrimary().getGPS().getCurrBlock().getSection() + "\nBlock: " + this.vitals.getPrimary().getGPS().getCurrBlock() + 
         "\nPassengers: " + this.passengers + "\nTemp: " + this.powerSystem.getTemperature() + " F");
         
-        if(this.vitals.isEmergencyBrakeOverride() || this.vitals.isEmergencyBrakeActivated()){      //Default to always print emergency brake if both emergency and service are activated
+        if(this.vitals.getPrimary().isEmergencyBrakeOverride() || this.vitals.getPrimary().isEmergencyBrakeActivated()){      //Default to always print emergency brake if both emergency and service are activated
             
             gui.EmergencyBrakeToggleButton.setSelected(true);
 
             //System.out.println(getFailureType());
-            switch(this.vitals.getFailureType()){
+            switch(this.vitals.getPrimary().getFailureType()){
                 
                 case 1://Power Failure
                     //Update status panel
@@ -399,7 +388,7 @@ public class TrainController {
             gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
         }
         
-        if(this.vitals.isServiceBrakeActivated()) {
+        if(this.vitals.getPrimary().isServiceBrakeActivated()) {
             gui.ServiceBrakeToggleButton.setSelected(true);
         }
         else{
@@ -407,24 +396,24 @@ public class TrainController {
         }        
         
         //Speed and Authority
-        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.gps.getCurrSpeed()));
-        gui.SetSpeedLabel.setText(decimalFormatter.format(this.gps.getSpeedLimit()));
+        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getGPS().getCurrSpeed()));
+        gui.SetSpeedLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getGPS().getSpeedLimit()));
         
         if(this.manualMode){
             gui.ManualModeSelect.setSelected(true);
             gui.AutoModeSelect.setSelected(false);
-            gui.SetSpeedLabel.setText(Integer.toString(this.speedControl.getDriverSetPoint()));
+            gui.SetSpeedLabel.setText(Integer.toString(this.vitals.getPrimary().getSpeedControl().getDriverSetPoint()));
         }
         else{
             gui.ManualModeSelect.setSelected(false);
             gui.AutoModeSelect.setSelected(true);
-            gui.SetSpeedLabel.setText(Integer.toString(this.speedControl.getRecommendedSetPoint()));
+            gui.SetSpeedLabel.setText(Integer.toString(this.vitals.getPrimary().getSpeedControl().getRecommendedSetPoint()));
         }
         
-        gui.AuthorityLabel.setText(this.decimalFormatter.format(this.gps.getAuthority()));
-        gui.SpeedLimitLabel.setText(decimalFormatter.format(this.gps.getSpeedLimit()));
-        gui.MaxPowerLabel.setText(decimalFormatter.format(this.vitals.getMaxPower()));
-        gui.PowerUsedLabel.setText(decimalFormatter.format(this.vitals.getPowerCommand()));
+        gui.AuthorityLabel.setText(this.decimalFormatter.format(this.vitals.getPrimary().getGPS().getAuthority()));
+        gui.SpeedLimitLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getGPS().getSpeedLimit()));
+        gui.MaxPowerLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getMaxPower()));
+        gui.PowerUsedLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getPowerCommand()));
         
         gui.ClockText.setText(this.trainSystem.getClock().printClock());
         
@@ -432,23 +421,7 @@ public class TrainController {
     }     
     
     public double calculatePower(double actualSpeed, double samplePeriod){
-        return this.vitals.calculatePower(actualSpeed, samplePeriod);
-    }
-    
-    /**
-     * 
-     * @param airConditioningOn Boolean to set the status of the A/C. True = on.
-     */
-    public void setAirConditioningOn(boolean airConditioningOn) {
-        this.powerSystem.setAirConditioningOn(airConditioningOn);
-    }
-
-    /**
-     * 
-     * @param heaterOn Boolean to set the status of the heater. True = on.
-     */
-    public void setHeaterOn(boolean heaterOn) {
-        this.powerSystem.setHeaterOn(heaterOn);
+        return this.vitals.calculatePower(actualSpeed, samplePeriod, this.manualMode);
     }
     
     /**
@@ -461,73 +434,10 @@ public class TrainController {
     
     /**
      * 
-     * @param lightsOn Boolean to set the status of the lights. True = on. Also updates train model.
-     */
-    public void setLightsOn(boolean lightsOn) {
-        this.powerSystem.setLightsOn(lightsOn);
-        this.trainModel.setLightsOn(lightsOn);
-    }
-    
-    
-    /**
-     * 
-     * @param leftDoorOpen Boolean to set the status of the left door. True = open. Also updates train model.
-     */
-    public void setLeftDoorOpen(boolean leftDoorOpen) {
-        this.powerSystem.setLeftDoorOpen(leftDoorOpen);
-        this.trainModel.setLeftDoorOpen(leftDoorOpen);
-    }
-
-    /**
-     * 
-     * @param rightDoorOpen Boolean to set the status of the right door. True = open. Also updates train model.
-     */
-    public void setRightDoorOpen(boolean rightDoorOpen) {
-        this.powerSystem.setRightDoorOpen(rightDoorOpen);
-        this.trainModel.setRightDoorOpen(rightDoorOpen);
-    }
-
-    /**
-     * 
-     * @param serviceBrakeActivated Boolean to set the status of the service brake. True = on. Also updates train model.
-     */
-    public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
-        this.vitals.setServiceBrakeActivated(serviceBrakeActivated);
-        this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
-    }
-
-    /**
-     * 
-     * @param emergencyBrakeActivated Boolean to set the status of the e brake. True = on. Also updates train model.
-     */
-    public void setEmergencyBrakeActivated(boolean emergencyBrakeActivated) {
-        this.vitals.setEmergencyBrakeActivated(emergencyBrakeActivated);
-        this.trainModel.setEmergencyBrakeActivated(emergencyBrakeActivated);
-    }
-
-    /**
-     * 
-     * @param driverSetPoint Sets the set point of the driver
-     */
-    public void setDriverSetPoint(byte driverSetPoint) {
-        this.speedControl.setDriverSetPoint(driverSetPoint);
-        this.trainModel.setDriverSetPoint(driverSetPoint);
-    }
-    
-    /**
-     * 
      * @return Reference to the controllers train model
      */
     public TrainModel getTrainModel() {
         return this.trainModel;
-    }
-
-    /**
-     * 
-     * @param recommendedSetPoint Set point sent by ctc or mbo
-     */
-    public void setRecommendedSetPoint(byte recommendedSetPoint) {
-        this.speedControl.setRecommendedSetPoint(recommendedSetPoint);
     }
    
     public boolean isManualMode() {
@@ -535,7 +445,6 @@ public class TrainController {
     }
     
     public void setAuthority(short authority){
-        this.gps.setAuthority(authority);
+        this.vitals.getPrimary().getGPS().setAuthority(authority);
     }
-   
 }

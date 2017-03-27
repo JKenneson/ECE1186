@@ -978,25 +978,25 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void ServiceBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeToggleButtonActionPerformed
         if(this.ServiceBrakeToggleButton.isSelected()){
-            this.trainController.setServiceBrakeActivated(true);
+            this.trainController.vitals.getPrimary().setServiceBrakeActivated(true);
             this.trainController.getTrainModel().setServiceBrakeActivated(true); //Is this cool with Jon?
             this.NotificationsDisplay.append("\nService Brake Activated");
         }
         else{
-            this.trainController.setServiceBrakeActivated(false);
+            this.trainController.vitals.getPrimary().setServiceBrakeActivated(false);
             this.trainController.getTrainModel().setServiceBrakeActivated(false); //Is this cool with Jon?
             this.NotificationsDisplay.append("\nService Brake Deactivated");
         }
     }//GEN-LAST:event_ServiceBrakeToggleButtonActionPerformed
 
     private void SetKpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKpActionPerformed
-        this.trainController.vitals.setKP(Integer.valueOf(this.KpInput.getValue().toString()));
-        this.NotificationsDisplay.append("\nKp Updated to " + this.trainController.vitals.getkP());
+        this.trainController.vitals.getPrimary().setKP(Integer.valueOf(this.KpInput.getValue().toString()));
+        this.NotificationsDisplay.append("\nKp Updated to " + this.trainController.vitals.getPrimary().getKP());
     }//GEN-LAST:event_SetKpActionPerformed
 
     private void SetKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKiActionPerformed
-        this.trainController.vitals.setKI(Integer.valueOf(this.KiInput.getValue().toString()));
-        this.NotificationsDisplay.append("\nKi Updated to " + this.trainController.vitals.getkI());
+        this.trainController.vitals.getPrimary().setKI(Integer.valueOf(this.KiInput.getValue().toString()));
+        this.NotificationsDisplay.append("\nKi Updated to " + this.trainController.vitals.getPrimary().getKI());
     }//GEN-LAST:event_SetKiActionPerformed
 
     private void TrainSelectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainSelectorButtonActionPerformed
@@ -1011,12 +1011,12 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void EmergencyBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyBrakeToggleButtonActionPerformed
         if(this.EmergencyBrakeToggleButton.isSelected()){
-            this.trainController.setEmergencyBrakeActivated(true);
+            this.trainController.vitals.getPrimary().setEmergencyBrakeActivated(true);
             this.trainController.getTrainModel().setEmergencyBrakeActivated(true);
             this.NotificationsDisplay.append("\nEmergency Brake Activated");
         }
         else{
-            this.trainController.setEmergencyBrakeActivated(false);
+            this.trainController.vitals.getPrimary().setEmergencyBrakeActivated(false);
             this.trainController.getTrainModel().setEmergencyBrakeActivated(false);
             this.NotificationsDisplay.append("\nEmergency Brake Deactivated");
         }
@@ -1024,13 +1024,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void PowerFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerFailureCheckActionPerformed
         if(this.PowerFailureCheck.isSelected()){
-            this.trainController.vitals.causeFailure(TrainFailures.Power);
+            this.trainController.vitals.getPrimary().causeFailure(TrainFailures.Power);
             this.StatusPowerLabel.setText("FAILURE");
             this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulated");
         }
         else{
-            this.trainController.vitals.fixFailure(TrainFailures.Power);
+            this.trainController.vitals.getPrimary().fixFailure(TrainFailures.Power);
             this.StatusPowerLabel.setText("ACTIVE");
             this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulation Ended");
@@ -1039,13 +1039,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void AntennaFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntennaFailureCheckActionPerformed
         if(this.AntennaFailureCheck.isSelected()){
-            this.trainController.vitals.causeFailure(TrainFailures.Antenna);
+            this.trainController.vitals.getPrimary().causeFailure(TrainFailures.Antenna);
             this.StatusAntennaLabel.setText("FAILURE");
             this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulated");
         }
         else{
-            this.trainController.vitals.fixFailure(TrainFailures.Antenna);
+            this.trainController.vitals.getPrimary().fixFailure(TrainFailures.Antenna);
             this.StatusAntennaLabel.setText("ACTIVE");
             this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulation Ended");
@@ -1054,13 +1054,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void ServiceBrakeFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeFailureCheckActionPerformed
         if(this.ServiceBrakeFailureCheck.isSelected()){
-            this.trainController.vitals.causeFailure(TrainFailures.Brake);
+            this.trainController.vitals.getPrimary().causeFailure(TrainFailures.Brake);
             this.StatusBrakeLabel.setText("FAILURE");
             this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulated");
         }
         else{
-            this.trainController.vitals.fixFailure(TrainFailures.Brake);
+            this.trainController.vitals.getPrimary().fixFailure(TrainFailures.Brake);
             this.StatusBrakeLabel.setText("ACTIVE");
             this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulation Ended");
@@ -1069,10 +1069,10 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void ACOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACOnActionPerformed
         if(this.ACOn.isSelected()){
-            this.trainController.setAirConditioningOn(true);
+            this.trainController.powerSystem.setAirConditioningOn(true);
             this.NotificationsDisplay.append("\nA/C Activated");
             if(this.HeatOn.isSelected()){
-                this.trainController.setHeaterOn(false);
+                this.trainController.powerSystem.setHeaterOn(false);
                 this.NotificationsDisplay.append("\nHeater Deactivated");
                 this.HeatOff.setSelected(true);
             }
@@ -1081,10 +1081,10 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void HeatOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeatOnActionPerformed
         if(this.HeatOn.isSelected()){
-            this.trainController.setHeaterOn(true);
+            this.trainController.powerSystem.setHeaterOn(true);
             this.NotificationsDisplay.append("\nHeater Activated");
             if(this.ACOn.isSelected()){
-                this.trainController.setAirConditioningOn(false);
+                this.trainController.powerSystem.setAirConditioningOn(false);
                 this.NotificationsDisplay.append("\nA/C Deactivated");
                 this.ACOff.setSelected(true);
             }
@@ -1092,22 +1092,22 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_HeatOnActionPerformed
 
     private void ACOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACOffActionPerformed
-        this.trainController.setAirConditioningOn(false);
+        this.trainController.powerSystem.setAirConditioningOn(false);
         this.NotificationsDisplay.append("\nA/C Deactivated");
     }//GEN-LAST:event_ACOffActionPerformed
 
     private void HeatOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeatOffActionPerformed
-        this.trainController.setHeaterOn(false);
+        this.trainController.powerSystem.setHeaterOn(false);
         this.NotificationsDisplay.append("\nHeater Deactivated");
     }//GEN-LAST:event_HeatOffActionPerformed
 
     private void LightsOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LightsOnActionPerformed
-        this.trainController.setLightsOn(true);
+        this.trainController.powerSystem.setLightsOn(true);
         this.NotificationsDisplay.append("\nLights Activated");
     }//GEN-LAST:event_LightsOnActionPerformed
 
     private void LightsOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LightsOffActionPerformed
-        this.trainController.setLightsOn(false);
+        this.trainController.powerSystem.setLightsOn(false);
         this.NotificationsDisplay.append("\nLights Deactivated");
     }//GEN-LAST:event_LightsOffActionPerformed
 
@@ -1122,40 +1122,40 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_AutoModeSelectActionPerformed
 
     private void LeftDoorOpenedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LeftDoorOpenedActionPerformed
-        if(this.trainController.gps.getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
-            this.trainController.setLeftDoorOpen(true);
+        if(this.trainController.vitals.getPrimary().getGPS().getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
+            this.trainController.powerSystem.setLeftDoorOpen(true);
             this.NotificationsDisplay.append("\nLeft Door Opened");
         }
         else{
-            this.trainController.setLeftDoorOpen(false);
+            this.trainController.powerSystem.setLeftDoorOpen(false);
             this.NotificationsDisplay.append("\nTrain still moving. Please wait until completely stopped.");
         }
     }//GEN-LAST:event_LeftDoorOpenedActionPerformed
 
     private void RightDoorOpenedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RightDoorOpenedActionPerformed
-        if(this.trainController.gps.getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
-            this.trainController.setRightDoorOpen(true);
+        if(this.trainController.vitals.getPrimary().getGPS().getCurrSpeed() == 0){ //NEED TO CHECK IF AT A STATION OR NOT AND PROPER SIDE
+            this.trainController.powerSystem.setRightDoorOpen(true);
             this.NotificationsDisplay.append("\nRight Door Opened");
         }
         else{
-            this.trainController.setRightDoorOpen(false);
+            this.trainController.powerSystem.setRightDoorOpen(false);
             this.NotificationsDisplay.append("\nTrain still moving. Please wait until completely stopped.");
         }
     }//GEN-LAST:event_RightDoorOpenedActionPerformed
 
     private void LeftDoorClosedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LeftDoorClosedActionPerformed
-        this.trainController.setLeftDoorOpen(false);
+        this.trainController.powerSystem.setLeftDoorOpen(false);
         this.NotificationsDisplay.append("\nLeft Door Closed");
     }//GEN-LAST:event_LeftDoorClosedActionPerformed
 
     private void RightDoorClosedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RightDoorClosedActionPerformed
-        this.trainController.setRightDoorOpen(false);
+        this.trainController.powerSystem.setRightDoorOpen(false);
         this.NotificationsDisplay.append("\nRight Door Closed");
     }//GEN-LAST:event_RightDoorClosedActionPerformed
 
     private void SetSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetSpeedActionPerformed
-        this.trainController.setDriverSetPoint(Byte.valueOf(this.SpeedInput.getValue().toString()));
-        this.NotificationsDisplay.append("\nDriver set point updated to " + this.trainController.speedControl.getDriverSetPoint());
+        this.trainController.vitals.getPrimary().getSpeedControl().setDriverSetPoint(Byte.valueOf(this.SpeedInput.getValue().toString()));
+        this.NotificationsDisplay.append("\nDriver set point updated to " + this.trainController.vitals.getPrimary().getSpeedControl().getDriverSetPoint());
     }//GEN-LAST:event_SetSpeedActionPerformed
 
 

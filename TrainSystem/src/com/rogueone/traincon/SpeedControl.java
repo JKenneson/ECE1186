@@ -14,7 +14,7 @@ import java.util.Locale;
  *
  * @author Tyler
  */
-public class SpeedControl implements Updateable{
+public class SpeedControl{
     
     NumberFormat commaFormatter = NumberFormat.getInstance(Locale.US);
     DecimalFormat decimalFormatter = new DecimalFormat("#,###.00");
@@ -23,30 +23,29 @@ public class SpeedControl implements Updateable{
     public final double FEET_IN_A_METER = 3.28;         //3.28 feet = 1 meter
     public final double SECONDS_IN_AN_HOUR = 3600;      //3600 seconds in an hour
     
-    private TrainController trainController;
     private TrainModel trainModel;
     private GPS gps;
-    private Vitals vitals;
-    
     private byte driverSetPoint;
     private byte recommendedSetPoint;
     
-    public SpeedControl(byte driverSetPoint, byte recommendedSetPoint, TrainModel tm, TrainController tc, GPS gps, Vitals vitals){
+    public SpeedControl(byte driverSetPoint, byte recommendedSetPoint, TrainModel tm, GPS gps){
         this.driverSetPoint = driverSetPoint;
         this.recommendedSetPoint = recommendedSetPoint;
         this.trainModel = tm;
-        this.trainController = tc;
         this.gps = gps;
-        this.vitals = vitals;
     }
 
-    public void update(){
+    /**
+     * 
+     * @return boolean as to weather or not to activate the service brake
+     */
+    public boolean update(boolean manualMode, boolean serviceBrakeActivated){
         double currSpeed = this.gps.getCurrSpeed();
-        if((currSpeed>this.findSetPoint() && !this.trainController.isManualMode()) || this.vitals.isServiceBrakeActivated()){
-            this.trainController.setServiceBrakeActivated(true);
+        if((currSpeed>this.findSetPoint(manualMode) && !manualMode) || serviceBrakeActivated){
+            return true;
         }
         else{
-            this.trainController.setServiceBrakeActivated(false);
+            return false;
         }
     }
        
@@ -54,8 +53,8 @@ public class SpeedControl implements Updateable{
      * 
      * @return the set point based on the mode (man or auto) of the train
      */
-    private double findSetPoint(){
-        if(this.trainController.isManualMode()){
+    private double findSetPoint(boolean manualMode){
+        if(manualMode){
             if(this.trainModel.getDriverSetPoint() > this.gps.getSpeedLimit()){
                 this.driverSetPoint = (byte) this.gps.getSpeedLimit();
             }
@@ -75,8 +74,8 @@ public class SpeedControl implements Updateable{
         }
     }
     
-    public double getSetPoint(){
-        return this.findSetPoint();
+    public double getSetPoint(boolean manualMode){
+        return this.findSetPoint(manualMode);
     }
     
     /**
