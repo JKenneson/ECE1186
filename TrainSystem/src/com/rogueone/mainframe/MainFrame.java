@@ -44,8 +44,8 @@ public class MainFrame extends javax.swing.JFrame {
         speedMenu = new javax.swing.JMenu();
         normalTimeRadioButton = new javax.swing.JRadioButtonMenuItem();
         x10SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
-        x100SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
-        x1000SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
+        x20SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
+        x40SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
         moduleMenu = new javax.swing.JMenu();
         ctcMenuItem = new javax.swing.JMenuItem();
         trackControllerHandlerMenuItem = new javax.swing.JMenuItem();
@@ -89,25 +89,25 @@ public class MainFrame extends javax.swing.JFrame {
         });
         speedMenu.add(x10SpeedRadioButton);
 
-        timeButtonGroup.add(x100SpeedRadioButton);
-        x100SpeedRadioButton.setSelected(false);
-        x100SpeedRadioButton.setText("100x Normal Time");
-        x100SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+        timeButtonGroup.add(x20SpeedRadioButton);
+        x20SpeedRadioButton.setSelected(false);
+        x20SpeedRadioButton.setText("20x Normal Time");
+        x20SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                x100SpeedRadioButtonActionPerformed(evt);
+                x20SpeedRadioButtonActionPerformed(evt);
             }
         });
-        speedMenu.add(x100SpeedRadioButton);
+        speedMenu.add(x20SpeedRadioButton);
 
-        timeButtonGroup.add(x1000SpeedRadioButton);
-        x1000SpeedRadioButton.setSelected(false);
-        x1000SpeedRadioButton.setText("1000x Normal Time");
-        x1000SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+        timeButtonGroup.add(x40SpeedRadioButton);
+        x40SpeedRadioButton.setSelected(false);
+        x40SpeedRadioButton.setText("40x Normal Time");
+        x40SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                x1000SpeedRadioButtonActionPerformed(evt);
+                x40SpeedRadioButtonActionPerformed(evt);
             }
         });
-        speedMenu.add(x1000SpeedRadioButton);
+        speedMenu.add(x40SpeedRadioButton);
 
         mainMenuBar.add(speedMenu);
 
@@ -244,16 +244,16 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Set x100 time
      */
-    private void x100SpeedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x100SpeedRadioButtonActionPerformed
-        this.trainSystem.updateTimer(TrainSystem.x100_TIME);
-    }//GEN-LAST:event_x100SpeedRadioButtonActionPerformed
+    private void x20SpeedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x20SpeedRadioButtonActionPerformed
+        this.trainSystem.updateTimer(TrainSystem.x20_TIME);
+    }//GEN-LAST:event_x20SpeedRadioButtonActionPerformed
 
     /**
      * Set x1000 time
      */
-    private void x1000SpeedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x1000SpeedRadioButtonActionPerformed
-        this.trainSystem.updateTimer(TrainSystem.x1000_TIME);
-    }//GEN-LAST:event_x1000SpeedRadioButtonActionPerformed
+    private void x40SpeedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x40SpeedRadioButtonActionPerformed
+        this.trainSystem.updateTimer(TrainSystem.x40_TIME);
+    }//GEN-LAST:event_x40SpeedRadioButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ctcMenuItem;
@@ -270,8 +270,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem trackControllerHandlerMenuItem;
     private javax.swing.JMenuItem trackModelMenuItem;
     private javax.swing.JMenuItem trainHandlerMenuItem;
-    private javax.swing.JRadioButtonMenuItem x1000SpeedRadioButton;
-    private javax.swing.JRadioButtonMenuItem x100SpeedRadioButton;
     private javax.swing.JRadioButtonMenuItem x10SpeedRadioButton;
+    private javax.swing.JRadioButtonMenuItem x20SpeedRadioButton;
+    private javax.swing.JRadioButtonMenuItem x40SpeedRadioButton;
     // End of variables declaration//GEN-END:variables
 }

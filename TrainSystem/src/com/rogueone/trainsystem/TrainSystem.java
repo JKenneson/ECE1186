@@ -35,8 +35,8 @@ public class TrainSystem {
     private Clock clock;
     public static final int NORMAL_TIME = 1000;
     public static final int x10_TIME = 100;
-    public static final int x100_TIME = 10;
-    public static final int x1000_TIME = 1;
+    public static final int x20_TIME = 50;
+    public static final int x40_TIME = 25;
     
     // Modules
     private CommandTrackControlGUI ctc;
