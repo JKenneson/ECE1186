@@ -340,9 +340,6 @@ public class TrackModel {
             //Parse enums
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(2).getStringCellValue());
             Global.Section tempSectionAID = Global.Section.valueOf(rowTemp.getCell(4).getStringCellValue());
-            //Parse booleans
-            boolean tempRightSide = rowTemp.getCell(7) != null && rowTemp.getCell(7).getStringCellValue().equals("Y");
-            boolean tempLeftSide = rowTemp.getCell(8) != null && rowTemp.getCell(8).getStringCellValue().equals("Y");
             //Associate IDs with objects
             Line tempLine = getLine(tempLineID);
             Block tempBlockA = getBlock(tempLineID,tempSectionAID,tempBlockAID);
@@ -365,9 +362,7 @@ public class TrackModel {
                 tempBlockA,
                 tempSectionA,
                 tempBlockB,
-                tempSectionB,
-                tempRightSide,
-                tempLeftSide );
+                tempSectionB);
             addStation(newStation);
         }
     }

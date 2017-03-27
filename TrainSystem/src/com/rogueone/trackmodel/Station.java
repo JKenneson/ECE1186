@@ -34,7 +34,7 @@ public class Station {
     
     //Contructor
     public Station(int newStationID, String newStationName, Line newLine, Block newBlockA, Section newSectionA, 
-            Block newBlockB, Section newSectionB, boolean newRightSide, boolean newLeftSide) {
+            Block newBlockB, Section newSectionB) {
         stationID = newStationID;
         name = newStationName;
         line = newLine;
@@ -42,8 +42,6 @@ public class Station {
         sectionA = newSectionA;
         blockB = newBlockB;
         sectionB = newSectionB;
-        rightSide = newRightSide;
-        leftSide = newLeftSide;
         waitingPassengers = 0;
         temperature = 70;
         heaterOn = false;
