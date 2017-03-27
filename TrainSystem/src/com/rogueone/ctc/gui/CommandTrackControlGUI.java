@@ -11,12 +11,14 @@ import com.rogueone.trainsystem.TrainSystem;
 import com.rogueone.trackmodel.Section;
 import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackModel;
+import com.rogueone.trainmodel.TrainHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Calendar;
+import java.lang.*;
 
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
@@ -25,6 +27,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
     private TrackModel trackModel;
+    //private TrainHandler trainHandler;
 
 
     /**
@@ -40,6 +43,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         this.trainSystem = ts;
         this.trackModel = ts.getTrackModel();
+        //this.trainHandler = ts.getTrainHandler();
         updateGUI();
     }
      
@@ -942,6 +946,17 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     public void updateTrainTable(){
         
         
+//       ArrayList<String> trainPositionsList = new ArrayList<>();
+//       
+       for (int i = 0; i < TrainTable.getRowCount(); i++) {
+            int tempID = (Integer)TrainTable.getValueAt(i, 1);
+            String tempLocation = trainSystem.getTrainHandler().getBlockForTrain(tempID);
+            TrainTable.setValueAt(tempLocation, i, 2);
+            TrainTable.repaint();
+       }
+//
+//       calculateNewTrainPositions(trainPositionsList);
+       
     }
     
     /**
@@ -969,6 +984,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      
         throughputValue = trainsDispatched/hoursPassed;
         ThroughputField.setText(String.format("%.2f", throughputValue));
+        updateTrainTable();
     }
 
     

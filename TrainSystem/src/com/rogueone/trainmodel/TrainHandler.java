@@ -116,7 +116,7 @@ public class TrainHandler {
             }
         }
         
-        return "";
+        return "null";
     }
     
     
