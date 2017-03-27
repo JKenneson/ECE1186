@@ -943,6 +943,12 @@ public class TrackController {
         updateSummaryTab();
     }
 
+    void updateSpeedAuthority(int blockID, byte speed, short authority) {
+        Block b = this.trackModel.getBlock(controllerLine, blockID);
+        b.getTrackCircuit().speed = speed;
+        b.getTrackCircuit().authority = authority;
+    }
+
     class SwitchTableModel extends AbstractTableModel {
 
         @Override
