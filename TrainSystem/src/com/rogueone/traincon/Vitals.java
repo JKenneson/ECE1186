@@ -74,7 +74,7 @@ public class Vitals {
     }
  
     public void update(boolean manualMode){
-        this.gps.update();
+        this.gps.update(this.trainModel.getDistanceTraveled(), this.trainModel.getCurrBlock());
         if(this.gps.getAuthority()<0 || this.emergencyBrakeOverride)
             this.setEmergencyBrakeActivated(true);
         else if(!this.emergencyBrakeOverride){

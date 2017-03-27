@@ -23,8 +23,8 @@ public class SpeedControl{
     public final double FEET_IN_A_METER = 3.28;         //3.28 feet = 1 meter
     public final double SECONDS_IN_AN_HOUR = 3600;      //3600 seconds in an hour
     
-    private TrainModel trainModel;
-    private GPS gps;
+    private final TrainModel trainModel;
+    private final GPS gps;
     private byte driverSetPoint;
     private byte recommendedSetPoint;
     
@@ -37,6 +37,8 @@ public class SpeedControl{
 
     /**
      * 
+     * @param manualMode
+     * @param serviceBrakeActivated
      * @return boolean as to weather or not to activate the service brake
      */
     public boolean update(boolean manualMode, boolean serviceBrakeActivated){

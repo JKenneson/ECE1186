@@ -14,7 +14,7 @@ import com.rogueone.trainsystem.TrainSystem;
  *
  * @author Tyler
  */
-public class GPS implements Updateable{
+public class GPS{
     
     
     public final double METERS_IN_A_MILE = 1609.34;     //1609.34 meters in a mile
@@ -26,7 +26,6 @@ public class GPS implements Updateable{
     
     //Speed and Authority
     private double currSpeed;       //Vf in m/s
-    private double lastSpeed;       //Vi in m/s
 
     private double authority;       //feet remaining
     private double distanceIntoBlock;//The distance we have traveled into the block
@@ -50,7 +49,6 @@ public class GPS implements Updateable{
         
         //Speed and Authority
         this.currSpeed = 0;
-        this.lastSpeed = 0;
         this.authority = (double)authority*this.FEET_IN_A_METER;//Update how values are brought in
         this.distanceIntoBlock = 0;
         this.distanceTraveled = 0;
@@ -64,30 +62,11 @@ public class GPS implements Updateable{
     }
         
         
-    public void update(){
-        
-        this.distanceTraveled = ((this.lastSpeed + this.currSpeed)/2) * 1;    //In meters
-        this.distanceTraveled = this.distanceTraveled * FEET_IN_A_METER;      //Convert to feet
-        
+    public void update(double distanceTraveled, Block currBlock){
+                
         //Subtract the distance traveled from remaining authority
-        this.authority -= this.distanceTraveled;
-        
-        //Assign the last speed to the current speed for the next cycle
-        this.lastSpeed = this.currSpeed;                                                                
-   
-        //Calculate distance into block and ask for new block if we've gone the length of the block
-        this.distanceIntoBlock += this.distanceTraveled;
-        
-        //If we've passsed into the next block, get the next block
-        if(this.distanceIntoBlock > currBlock.getLength()) {
-            this.distanceIntoBlock -= currBlock.getLength();
-            
-            this.nextBlock = this.currBlock.exitBlock(this.prevBlock);
-            this.currTempBlock = this.currBlock;
-            this.currBlock = this.nextBlock;
-            this.prevBlock = this.currTempBlock;
-        }
-        
+        this.authority -= distanceTraveled;
+        this.currBlock = currBlock;        
     }
 
     /**
@@ -141,7 +120,4 @@ public class GPS implements Updateable{
     public void setCurrSpeed(double currSpeed) {
         this.currSpeed = currSpeed;
     }
-
-    
-    
 }

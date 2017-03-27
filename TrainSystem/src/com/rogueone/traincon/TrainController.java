@@ -69,6 +69,7 @@ public class TrainController {
      * @param line line ID from CTC
      * @param section initial section, should be from yard
      * @param block initial block, should be from yard
+     * @param ts
      */
     public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID,
            String line, String section, String block, TrainSystem ts){
