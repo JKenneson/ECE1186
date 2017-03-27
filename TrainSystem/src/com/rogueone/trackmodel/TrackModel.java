@@ -171,17 +171,6 @@ public class TrackModel {
             parseSwitches(testWorkbook.getSheetAt(4));
             connectBlocks();
             
-            //System.out.println("\nLINES:");
-            //printLines();
-            //System.out.println("\nSECTIONS:");
-            //printSections();
-            //System.out.println("\nBLOCKS:");
-            //printBlocks();
-            //System.out.println("\nSTATIONS:");
-            //printStations();
-            //System.out.println("\nSWITCHES:");
-            //printSwitches();
-            
             System.out.println("Track loaded successfully.");
         } catch (IOException ex) {
             System.err.println("Error reading data file.");
@@ -258,6 +247,8 @@ public class TrackModel {
             //Parse Enums
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
             Global.Section tempSectionID = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
+            //Parse String
+            String tempBeaconMessage = (rowTemp.getCell(17) == null) ? "n/a" : rowTemp.getCell(17).getStringCellValue();
             //Parse ints
             int tempBlockID = (int) rowTemp.getCell(4).getNumericCellValue();
             int tempPortAID = (int) rowTemp.getCell(5).getNumericCellValue();
@@ -298,7 +289,10 @@ public class TrackModel {
                 tempIsHead, 
                 tempIsTail, 
                 tempContainsCrossing, 
-                tempIsUnderground );
+                tempIsUnderground,
+                tempBeaconMessage,
+                true //beacon side, not used yet
+                );
             addBlock(newBlock);
         }
     }

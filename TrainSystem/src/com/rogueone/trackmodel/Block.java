@@ -39,7 +39,7 @@ public class Block implements TrackPiece {
     private boolean failureTrackCircuit;
     private boolean occupied;
     private Crossing crossing;
-    private String beaconMessage;
+    private Beacon beacon;
     private Station station;
     private TrackCircuit trackCircuit;
     
@@ -69,7 +69,7 @@ public class Block implements TrackPiece {
             int newStationID, double newLength, double newGrade, double newSpeedLimit,
             double newElevation, double newCumulativeElevation, 
             boolean newIsHead, boolean newIsTail, boolean containsCrossing, 
-            boolean newIsUnderground) {
+            boolean newIsUnderground, String newBeaconMessage, boolean newBeaconRightSide) {
         line = newLine;
         section = newSection;
         blockID = newBlockID;
@@ -93,7 +93,7 @@ public class Block implements TrackPiece {
         failurePowerOutage = false;
         failureTrackCircuit = false;
         occupied = false;
-        beaconMessage = "";
+        beacon = new Beacon(newBeaconMessage, newBeaconRightSide);
         station = null;
         trackCircuit = new TrackCircuit();
         if(containsCrossing) {
@@ -534,21 +534,12 @@ public class Block implements TrackPiece {
     }
     
     /**
-    * Get block beacon message.
+    * Get block beacon
     * @author Dan Bednarczyk
-    * @return String containing beacon message, empty by default
+    * @return Beacon on Block, null otherwise
     */
-    public String getBeaconMessage() {
-        return beaconMessage;
-    }
-    
-    /**
-    * Set block beacon message.
-    * @author Dan Bednarczyk
-    * @param newBeaconMessage String specifying beacon message
-    */
-    public void setBeaconMessage(String newBeaconMessage) {
-        beaconMessage = newBeaconMessage;
+    public Beacon getBeacon() {
+        return beacon;
     }
     
     /**
@@ -678,9 +669,11 @@ public class Block implements TrackPiece {
             sb.append(station.getName());
         }
         sb.append(", Speed Limit: ");
-        sb.append(speedLimit);
-        sb.append(", Beacon: ");
-        sb.append(beaconMessage);
+        sb.append(speedLimit);  
+        if (beacon != null) {
+            sb.append(", Beacon: ");
+            sb.append(beacon.getMessage());
+        }
         return sb.toString();
     }
 }
