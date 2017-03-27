@@ -4,7 +4,7 @@
  *
  * @author Jonathan Kenneson
  * @Creation 2/13/17
- * @Modification 2/13/17
+ * @Modification 3/27/17
  */
 package com.rogueone.trainmodel;
 
@@ -109,7 +109,7 @@ public class TrainHandler {
         for (TrainModel train : TrainHandler.trains) {
             if(train.trainID == trainID) {  //If we find the trainID, display the GUIs
                 StringBuilder sb = new StringBuilder();
-                sb.append(train.getCurrBlock().getSection());
+                sb.append(train.getCurrBlock().getSection().getSectionID());
                 sb.append(" : ");
                 sb.append(train.getCurrBlock().getID());
                 return sb.toString();

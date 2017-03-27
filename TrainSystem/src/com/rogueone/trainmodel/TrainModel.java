@@ -5,7 +5,7 @@
  *
  * @author Jonathan Kenneson
  * @Creation 2/3/17
- * @Modification 3/25/17
+ * @Modification 3/27/17
  */
 package com.rogueone.trainmodel;
 
@@ -422,6 +422,8 @@ public class TrainModel {
         this.trainWeight += (PASS_WEIGHT * (this.passengersOnBaord + this.crewOnBoard));
         this.passengerMaxCapacity = CAR_CAPACITY * this.numCars;    //Passenger max capacity
         
+        //Check the current block if there is an updated S&A to send to the controller
+        
         
         //2)   Its velocity based on the power sent in from the TrainController
         //First, ask the TrainController for a new power
@@ -530,6 +532,36 @@ public class TrainModel {
         }
         
     }
+    
+    
+    /**
+     * This method checks the track circuit if there is a new S&A to pass to the Train Controller
+     * @author Jonathan Kenneson
+     */
+    private void checkTrackCircuit() {
+        byte setSpeed = this.currBlock.getTrackCircuit().speed;
+        short authority = this.currBlock.getTrackCircuit().authority;
+        
+        //Safe to proceed, do nothing
+        if(setSpeed == 0 && authority == 0) {
+            return;
+        }
+        //Tell Train Controller to full stop
+        else if(setSpeed == -1 && authority == -1) {
+            
+        }
+        //Give Train Controller updated speed and authority
+        else {
+            
+            
+            //Reset the speed and authority of the track circuit
+            this.currBlock.getTrackCircuit().speed = 0;
+            this.currBlock.getTrackCircuit().authority = 0;
+        }
+        
+        
+    }
+    
             
     /**
      * Returns the StringID
