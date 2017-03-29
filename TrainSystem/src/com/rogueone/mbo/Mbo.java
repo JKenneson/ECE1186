@@ -1,5 +1,5 @@
 /**
- * The Moving Block Overlay (MBO) serves as an autonomous dispatcher for the train.
+ * The MovingF Block Overlay (MBO) serves as an autonomous dispatcher for the train.
  * The MBO also contains the scheduler, which generated weekly schedules for employees, as well as
  * daily schedules for trains.
  *
@@ -44,7 +44,7 @@ public class Mbo{
         Scheduler.readPersonnelSchedule(file);
    }
     
-   public MovingBlockGUI newGui() throws IOException, InvalidFormatException{
+   public MovingBlockGUI getGUI() throws IOException, InvalidFormatException{
        //JFrame frame = new JFrame();
        // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //frame.getContentPane().add(mboGui);
@@ -57,10 +57,6 @@ public class Mbo{
         Scheduler.readPersonnelSchedule(file);
         //frame.setVisible(true);
         return mboGui;
-   }
-   
-   public MovingBlockGUI getGUI() {
-       return mboGui;
    }
   
 

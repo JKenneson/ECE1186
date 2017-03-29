@@ -32,6 +32,7 @@ import javax.swing.table.*;;
 public class MovingBlockGUI extends javax.swing.JPanel {
 
 private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+Mbo mbo = TrainSystem.getMBO();
 
     /**
      * Creates new form MovingBlockGUI
@@ -573,26 +574,14 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
     private void MboOkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton1ActionPerformed
         Mbo mbo = null;
-    try {
-        mbo = new Mbo(new TrainSystem());
-    } catch (IOException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InvalidFormatException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        mbo = TrainSystem.getMBO();
         mbo.updateSpeed();
     }//GEN-LAST:event_MboOkButton1ActionPerformed
 
     private void TrainDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainDropdownActionPerformed
         //MovingBlockGUI gui = new MovingBlockGUI();
         Mbo mbo = null;
-    try {
-        mbo = new Mbo(new TrainSystem());
-    } catch (IOException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InvalidFormatException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        mbo = TrainSystem.getMBO();
       //int trainIdIndex = gui.TrainDropdown.getSelectedIndex();
       //String trainID = String.valueOf(gui.TrainDropdown.getSelectedItem());
        //System.out.println(trainIdIndex);
@@ -612,13 +601,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
         JFileChooser scheduleChooser = new JFileChooser("src/com/rogueone/assets");
         int returnVal = scheduleChooser.showOpenDialog(this);
         TrainScheduleGUI trainGUI = new TrainScheduleGUI();
-    try {
-        Mbo mbo = new Mbo(new TrainSystem());
-    } catch (IOException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InvalidFormatException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        Mbo mbo = TrainSystem.getMBO();
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File newFile = scheduleChooser.getSelectedFile();
             try {
@@ -655,13 +638,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
     private void MboOkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton2ActionPerformed
         Mbo mbo = null;
-    try {
-        mbo = new Mbo(new TrainSystem());
-    } catch (IOException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InvalidFormatException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        mbo = TrainSystem.getMBO();
             //File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
             if(NumTrainsRadio.isSelected()){
                 String numTrainStr = NumTrainsInput.getText();
@@ -688,13 +665,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
          TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
-    try {
-     Mbo mbo = new Mbo(new TrainSystem());
-    } catch (IOException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InvalidFormatException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
+         Mbo mbo = TrainSystem.getMBO();
          
          try{
          Scheduler.readRedSchedule(file);
@@ -708,13 +679,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
     private void trainDeployButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainDeployButtonActionPerformed
         Mbo mbo = null;
-    try {
-        mbo = new Mbo(new TrainSystem());
-    } catch (IOException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InvalidFormatException ex) {
-        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        mbo = TrainSystem.getMBO();
         DefaultTableModel model = (DefaultTableModel)trainTable.getModel();
         MovingBlockGUI gui = new MovingBlockGUI();
         try{

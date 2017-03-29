@@ -14,6 +14,7 @@ import com.rogueone.global.Clock;
 import com.rogueone.global.Global;
 import com.rogueone.mainframe.*;
 import com.rogueone.mbo.Mbo;
+import com.rogueone.mbo.Scheduler;
 import com.rogueone.trackcon.TrackControllerHandler;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trackview.TrackView;
@@ -32,6 +33,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
  */
 public class TrainSystem {
 
+
     // Time utilities
     private Timer timer;
     private SystemTimer task;
@@ -46,7 +48,8 @@ public class TrainSystem {
     private TrackControllerHandler trackControllerHandler;
     private TrackModel trackModel;
     private TrainHandler trainHandler;
-    private Mbo mbo;
+    private static Mbo mbo;
+    private Scheduler scheduler;
     private TrackView trackView;
     //private Schedule schedule;
     
@@ -67,7 +70,7 @@ public class TrainSystem {
     /**
      * Initialize an instance of a TrainSystem.
      */
-    public void initializeTrainSystem() throws IOException, InvalidFormatException {
+    public void initializeTrainSystem() throws IOException, InvalidFormatException  {
         
         //Initialize the clock
         this.clock = new Clock();
@@ -157,8 +160,16 @@ public class TrainSystem {
      * Get shared MBO object.
      * @return Mbo The global MBO object
      */
-    public Mbo getMBO() {
+    public static Mbo getMBO() {
         return mbo;
+    }
+    
+    /**
+     * Get shared MBO object.
+     * @return Scheduler The global scheduler object
+     */
+    public Scheduler getScheduler() {
+        return scheduler;
     }
 
     /**

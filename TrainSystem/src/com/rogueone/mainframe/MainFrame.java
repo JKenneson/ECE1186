@@ -7,8 +7,12 @@ package com.rogueone.mainframe;
 
 import com.rogueone.trainsystem.TrainSystem;
 import java.awt.BorderLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.JLabel;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
  *
@@ -235,7 +239,13 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void mboMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mboMenuItemActionPerformed
         this.getContentPane().removeAll();
-        this.getContentPane().add(this.trainSystem.getMBO().getGUI(), BorderLayout.CENTER);
+        try {
+            this.getContentPane().add(this.trainSystem.getMBO().getGUI(), BorderLayout.CENTER);
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidFormatException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
         this.setVisible(true);
