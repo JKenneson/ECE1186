@@ -71,8 +71,7 @@ public class TrainController {
      * @param block initial block, should be from yard
      * @param ts
      */
-    public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID,
-           String line, String section, String block, TrainSystem ts){
+    public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, TrainSystem ts){
         
         this.trainSystem = ts;
         this.trainModel = tm; //Should come from passed (this) reference
@@ -146,7 +145,7 @@ public class TrainController {
         gui.TrainInfoText.setEditable(false);
         
         gui.ActualSpeedLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getCurrSpeed()));
-        gui.SetSpeedLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getSpeedLimit()));
+        gui.SetSpeedLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getSpeedLimit()*1.60934));
         gui.AuthorityLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getAuthority()));
         gui.PowerUsedLabel.setText(String.valueOf(this.vitals.getPrimary().getPowerCommand()));
         gui.MaxPowerLabel.setText(String.valueOf(this.vitals.getPrimary().getMaxPower()));
@@ -397,18 +396,18 @@ public class TrainController {
         }        
         
         //Speed and Authority
-        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.trainModel.getCurrSpeed()));
+        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.trainModel.getCurrSpeedMPH()));
         gui.SetSpeedLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getGPS().getSpeedLimit()));
         
         if(this.manualMode){
             gui.ManualModeSelect.setSelected(true);
             gui.AutoModeSelect.setSelected(false);
-            gui.SetSpeedLabel.setText(Integer.toString(this.vitals.getPrimary().getSpeedControl().getDriverSetPoint()));
+            gui.SetSpeedLabel.setText(Integer.toString((int) (this.vitals.getPrimary().getSpeedControl().getDriverSetPoint())));
         }
         else{
             gui.ManualModeSelect.setSelected(false);
             gui.AutoModeSelect.setSelected(true);
-            gui.SetSpeedLabel.setText(Integer.toString(this.vitals.getPrimary().getSpeedControl().getRecommendedSetPoint()));
+            gui.SetSpeedLabel.setText(Integer.toString((int) (this.vitals.getPrimary().getSpeedControl().getRecommendedSetPoint())));
         }
         
         gui.AuthorityLabel.setText(this.decimalFormatter.format(this.vitals.getPrimary().getGPS().getAuthority()));

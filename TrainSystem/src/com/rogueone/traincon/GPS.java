@@ -49,7 +49,7 @@ public class GPS{
         
         //Speed and Authority
         this.currSpeed = 0;
-        this.authority = (double)authority*this.FEET_IN_A_METER;//Update how values are brought in
+        this.authority = (double)authority;//Update how values are brought in
         this.distanceIntoBlock = 0;
         this.distanceTraveled = 0;
         this.trainID = trainID;
