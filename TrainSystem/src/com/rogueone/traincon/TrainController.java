@@ -458,7 +458,7 @@ public class TrainController {
     }
     
     public void safeToProceed(boolean safe){
-        this.setServiceBrake(safe);
+        this.setServiceBrake(!safe);
     }
     
 }
