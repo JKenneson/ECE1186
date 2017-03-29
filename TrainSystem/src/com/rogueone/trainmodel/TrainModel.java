@@ -186,7 +186,7 @@ public class TrainModel {
      */
     public void createTrainController() {
         //Create a new TrainController object
-        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, approachingStation, approachingStation, approachingStation, approachingStation, this.trainSystem);
+        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, this.trainSystem);
     }
     
     /**
@@ -556,13 +556,13 @@ public class TrainModel {
         }
         //Give Train Controller updated speed and authority
         else {
-            this.trainController.setAuthority(newAuthority);
+            this.trainController.setAuthority((short)(newAuthority/this.FEET_IN_A_METER));
             this.trainController.setSpeed(newSetSpeed);
+            
+            //Reset the speed and authority of the track circuit
+            this.currBlock.getTrackCircuit().speed = 0;
+            this.currBlock.getTrackCircuit().authority = 0;
         }
-        //Reset the speed and authority of the track circuit
-        this.currBlock.getTrackCircuit().speed = 0;
-        this.currBlock.getTrackCircuit().authority = 0;
-        
     }
     
             

@@ -709,12 +709,17 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         jPanel3.add(jLabel11, gridBagConstraints);
 
-        DispatchSpeedField.setText("400");
+        DispatchSpeedField.setText("40");
         DispatchSpeedField.setToolTipText("");
         DispatchSpeedField.setPreferredSize(new java.awt.Dimension(100, 26));
         DispatchSpeedField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DispatchSpeedFieldMouseClicked(evt);
+            }
+        });
+        DispatchSpeedField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DispatchSpeedFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -724,7 +729,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel3.add(DispatchSpeedField, gridBagConstraints);
 
-        DispatchAuthorityField.setText("40000");
+        DispatchAuthorityField.setText("90000");
         DispatchAuthorityField.setPreferredSize(new java.awt.Dimension(100, 26));
         DispatchAuthorityField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1489,6 +1494,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private void DispatchAuthorityFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DispatchAuthorityFieldMouseClicked
         DispatchAuthorityField.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_DispatchAuthorityFieldMouseClicked
+
+    private void DispatchSpeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchSpeedFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DispatchSpeedFieldActionPerformed
 
     private void InitializeGUIObject() {
         TrainNameField.setText("");
