@@ -68,12 +68,12 @@ public class Switch implements TrackPiece {
         }
         //entering from dependent block C, no block available until switch is activated
         else if (!isActivated && previous.getType() == portC.getType() && previous.getID() == portC.getID()) {
-            System.err.println("Train derailed at switch " + switchID + ". Port A = " + portA + ", Port B = " + portB + ". Port C = " + portC + ", Activated = " + isActivated);
+            System.err.println("Incorrect state at switch " + switchID + ". Port A = " + portA + ", Port B = " + portB + ". Port C = " + portC + ", Activated = " + isActivated);
             return null;
         }
         //entering from dependent block B, no switch available until switch is deactivated
         else if (isActivated && previous.getType() == portB.getType() && previous.getID() == portB.getID()) {
-            System.err.println("Train derailed at switch " + switchID + ". Port A = " + portA + ", Port B = " + portB + ". Port C = " + portC + ", Activated = " + isActivated);
+            System.err.println("Incorrect state at switch " + switchID + ". Port A = " + portA + ", Port B = " + portB + ". Port C = " + portC + ", Activated = " + isActivated);
             return null;
         }
         //entering from dependent block C, exiting the static port

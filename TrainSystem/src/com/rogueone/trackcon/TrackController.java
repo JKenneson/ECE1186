@@ -749,15 +749,6 @@ public class TrackController {
                 if (!occupiedBlocks.isEmpty()) {
                     for (PresenceBlock pb : occupiedBlocks) {
                         //if the current block being looked at is occupied and the next block ID of the current block
-                        //the occupied list is the same as the occupied block move that block forward
-//                        System.out.println("Occupied = " + b.isOccupied() + " and " + pb.getNextBlock().getID() +" : " + b.getID());
-                        if (b.isOccupied() && pb.getNextBlock().getID() == b.getID()) {
-                            Block tempBlock = pb.getCurrBlock();
-                            pb.setCurrBlock((Block) pb.getNextBlock());
-                            pb.setPrevBlock(tempBlock);
-                            pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
-                            System.out.println("TC:(moving) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
-                        }
                         //need a check to look ahead by a specific amount of blocks or by sections
                         //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
                         int lookahead = 5;
@@ -771,7 +762,10 @@ public class TrackController {
                                 pb.getCurrBlock().getTrackCircuit().speed = -1;
                                 pb.getCurrBlock().getTrackCircuit().authority = -1;
                                 safe = false;
-                            } 
+                            } else {
+                                pb.getCurrBlock().getTrackCircuit().speed = 0;
+                                pb.getCurrBlock().getTrackCircuit().authority = 0;
+                            }
 //                            if (this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied()) {
 //                                System.out.print(" Occupied\n");
 //                                //this is where logic for telling the train to stop comes into play
@@ -781,7 +775,7 @@ public class TrackController {
                             //move ahead by one block
                             if (safe) {
                                 Block tempBlock = lookaheadBlock.getCurrBlock();
-                                if(lookaheadBlock.getNextBlock().getType() != Global.PieceType.YARD){
+                                if (lookaheadBlock.getNextBlock().getType() != Global.PieceType.YARD) {
                                     lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
                                     lookaheadBlock.setPrevBlock(tempBlock);
                                     lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
@@ -790,6 +784,19 @@ public class TrackController {
 
                         }
                         //END OF TELLING TRAIN TO STOP
+                        //the occupied list is the same as the occupied block move that block forward
+//                        System.out.println("Occupied = " + b.isOccupied() + " and " + pb.getNextBlock().getID() +" : " + b.getID());
+                        if (b.isOccupied() && pb.getNextBlock().getID() == b.getID()) {
+                            Block tempBlock = pb.getCurrBlock();
+                            pb.setCurrBlock((Block) pb.getNextBlock());
+                            pb.setPrevBlock(tempBlock);
+                            if (pb.getCurrBlock().getNext(pb.getPrevBlock()) == null) {
+                                System.out.println("Incorrect Switch");
+                            } else {
+                                pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
+                            }
+                            System.out.println("TC:(moving) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
+                        }
                     }
                 }
             }
