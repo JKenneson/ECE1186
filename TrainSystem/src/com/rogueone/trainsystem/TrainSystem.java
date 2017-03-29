@@ -20,8 +20,10 @@ import com.rogueone.trackview.TrackView;
 import com.rogueone.trainmodel.TrainHandler;
 import java.awt.BorderLayout;
 import java.io.File;
+import java.io.IOException;
 import java.util.TimerTask;
 import java.util.Timer;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
  *
@@ -57,7 +59,7 @@ public class TrainSystem {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InvalidFormatException {
         TrainSystem ts = new TrainSystem();
         ts.initializeTrainSystem();
     }
@@ -65,7 +67,7 @@ public class TrainSystem {
     /**
      * Initialize an instance of a TrainSystem.
      */
-    public void initializeTrainSystem() {
+    public void initializeTrainSystem() throws IOException, InvalidFormatException {
         
         //Initialize the clock
         this.clock = new Clock();
