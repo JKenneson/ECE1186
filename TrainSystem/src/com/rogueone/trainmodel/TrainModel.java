@@ -76,7 +76,8 @@ public class TrainModel {
     private int ctcSetPoint;
     private double authority;       //feet remaining
     private double distanceIntoBlock;//The distance we have traveled into the block
-    private double distanceTraveled;//meters traveled this cycle
+    private double distanceTraveledMeters;//meters traveled this cycle
+    private double distanceTraveledFeet;//feet traveled this cycle
     private double powerReceived;   //kW
     private double grade;
     private double angleOfSlope;
@@ -140,7 +141,8 @@ public class TrainModel {
         this.ctcSetPoint = setPointSpeed;
         this.authority = authority;
         this.distanceIntoBlock = 0;
-        this.distanceTraveled = 0;
+        this.distanceTraveledMeters = 0;
+        this.distanceTraveledFeet = 0;
         this.powerReceived = 0;
         this.grade = 0;
         this.angleOfSlope = 0;
@@ -478,12 +480,12 @@ public class TrainModel {
         }
         
         //6)   Calculate distance traveled since last cycle and subtract that from remaining authority  -> s = vi*t + 1/2*a*t^2
-        this.distanceTraveled = this.lastSpeed * 1 + (1/2 * this.acceleration * Math.pow(1, 2));    //In meters
-        this.distanceTraveled = this.distanceTraveled * FEET_IN_A_METER;        //Convert to feet
+        this.distanceTraveledMeters = this.lastSpeed * 1 + (1/2 * this.acceleration * Math.pow(1, 2));    //In meters
+        this.distanceTraveledFeet = this.distanceTraveledMeters * FEET_IN_A_METER;        //Convert to feet
         //System.out.println("Distance: " + this.distanceTraveled + "\n");
         
         //Subtract the distance traveled from remaining authority
-        this.authority -= this.distanceTraveled;
+        this.authority -= this.distanceTraveledFeet;
         
         //Assign the last speed to the current speed for the next cycle
         this.lastSpeed = this.currSpeed;                                                                
@@ -492,7 +494,7 @@ public class TrainModel {
         this.currSpeedMPH = this.currSpeed * SECONDS_IN_AN_HOUR / METERS_IN_A_MILE;
         
         //7)   Calculate distance into block and ask for new block if we've gone the length of the block
-        this.distanceIntoBlock += this.distanceTraveled;
+        this.distanceIntoBlock += this.distanceTraveledFeet;
         
         //Set the occupancy to true each update
         this.currBlock.setOccupancy(true);                                
@@ -701,14 +703,22 @@ public class TrainModel {
         this.trainController.setAuthority((short)(authority/FEET_IN_A_METER));
     }
     
-    public double getDistanceTraveled() {
-        return this.distanceTraveled;
+    public double getDistanceTraveledMeters() {
+        return this.distanceTraveledMeters;
     }
     
-    public void setDistanceTraveled(double distanceTravled) {
-        this.distanceTraveled = distanceTravled;
+    public void setDistanceTraveledMeters(double distanceTravled) {
+        this.distanceTraveledMeters = distanceTravled;
     }
 
+    public double getDistanceTraveledFeet() {
+        return this.distanceTraveledFeet;
+    }
+    
+    public void setDistanceTraveledFeet(double distanceTravled) {
+        this.distanceTraveledFeet = distanceTravled;
+    }
+    
     public double getPowerReceived() {
         return powerReceived;
     }
