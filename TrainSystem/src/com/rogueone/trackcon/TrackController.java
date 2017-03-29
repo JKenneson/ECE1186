@@ -768,8 +768,8 @@ public class TrackController {
                             boolean safe = true;
                             if (lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()) == null) {
                                 System.out.println("Switch wrong");
-                                lookaheadBlock.getCurrBlock().getTrackCircuit().speed = -1;
-                                lookaheadBlock.getCurrBlock().getTrackCircuit().authority = -1;
+                                pb.getCurrBlock().getTrackCircuit().speed = -1;
+                                pb.getCurrBlock().getTrackCircuit().authority = -1;
                                 safe = false;
                             } 
 //                            if (this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied()) {
@@ -781,9 +781,11 @@ public class TrackController {
                             //move ahead by one block
                             if (safe) {
                                 Block tempBlock = lookaheadBlock.getCurrBlock();
-                                lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
-                                lookaheadBlock.setPrevBlock(tempBlock);
-                                lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+                                if(lookaheadBlock.getNextBlock().getType() != Global.PieceType.YARD){
+                                    lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
+                                    lookaheadBlock.setPrevBlock(tempBlock);
+                                    lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+                                }
                             }
 
                         }
