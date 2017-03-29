@@ -542,6 +542,8 @@ public class TrainModel {
         byte newSetSpeed = this.currBlock.getTrackCircuit().speed;
         short newAuthority = this.currBlock.getTrackCircuit().authority;
         
+        System.out.println("Track Circuit for Train " + this.trainID + " -> Speed: " + newSetSpeed + " Authority: " + newAuthority);
+        
         //Safe to proceed, tell Train Controller we can proceed safely
         if(newSetSpeed == 0 && newAuthority == 0) {
             this.trainController.safeToProceed(true);
@@ -660,6 +662,10 @@ public class TrainModel {
 
     public void setCurrSpeed(int currSpeed) {
         this.currSpeed = currSpeed;
+    }
+
+    public double getCurrSpeedMPH() {
+        return currSpeedMPH;
     }
 
     public int getSpeedLimit() {
