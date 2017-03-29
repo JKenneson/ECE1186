@@ -110,7 +110,7 @@ public class GPS{
      * @param authority Sets a new authority for the train control to follow 
      */
     public void setAuthority(short authority) {
-        this.authority = (double)authority*this.FEET_IN_A_METER;
+        this.authority = (double)authority;
     }
 
     public double getCurrSpeed() {
