@@ -49,7 +49,7 @@ public class GPS{
         
         //Speed and Authority
         this.currSpeed = 0;
-        this.authority = (double)authority;//Update how values are brought in
+        this.authority = (double)authority*this.FEET_IN_A_METER;//Update how values are brought in
         this.distanceIntoBlock = 0;
         this.distanceTraveled = 0;
         this.trainID = trainID;
@@ -93,13 +93,17 @@ public class GPS{
         return currBlock;
     }
     
+    /**
+     * 
+     * @return speed limit of block in MPH
+     */
     public double getSpeedLimit(){
-        return this.currBlock.getSpeedLimit();
+        return this.currBlock.getSpeedLimit()*0.621371;
     }
 
     /**
      * 
-     * @return the remaining authority of the train
+     * @return the remaining authority of the train in FEET
      */
     public double getAuthority() {
         return authority;
@@ -110,7 +114,7 @@ public class GPS{
      * @param authority Sets a new authority for the train control to follow 
      */
     public void setAuthority(short authority) {
-        this.authority = (double)authority;
+        this.authority = (double)authority*this.FEET_IN_A_METER;
     }
 
     public double getCurrSpeed() {

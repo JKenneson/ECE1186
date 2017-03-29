@@ -79,6 +79,10 @@ public class SpeedControl{
      * @author Tyler Protivnak
      */
 
+    /**
+     * 
+     * @return driver set point in mph
+     */
     public byte getDriverSetPoint() {
         return this.driverSetPoint;
     }
@@ -87,6 +91,10 @@ public class SpeedControl{
         this.driverSetPoint = driverSetPoint;
     }
 
+    /**
+     * 
+     * @return rec set point in mph
+     */
     public byte getRecommendedSetPoint() {
         return this.recommendedSetPoint;
     }
