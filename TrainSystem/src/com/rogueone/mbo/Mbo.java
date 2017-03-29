@@ -31,7 +31,7 @@ public class Mbo{
     
      private static ArrayList<MboTrain> trainList = new ArrayList<MboTrain>();
     public static MovingBlockGUI mboGui = new MovingBlockGUI();
-   private static File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+   private static File file = new File("src/com/rogueone/assets/schedule.xlsx");
    private static int trainIndex;
   private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
    private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};

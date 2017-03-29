@@ -686,7 +686,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         jPanel3.add(jLabel9, gridBagConstraints);
 
-        DispatchLineBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Green", "Red" }));
+        DispatchLineBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GREEN", "RED" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
