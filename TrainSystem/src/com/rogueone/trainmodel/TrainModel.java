@@ -423,7 +423,7 @@ public class TrainModel {
         this.passengerMaxCapacity = CAR_CAPACITY * this.numCars;    //Passenger max capacity
         
         //Check the current block if there is an updated S&A to send to the controller
-        
+        checkTrackCircuit();
         
         //2)   Its velocity based on the power sent in from the TrainController
         //First, ask the TrainController for a new power
@@ -539,26 +539,25 @@ public class TrainModel {
      * @author Jonathan Kenneson
      */
     private void checkTrackCircuit() {
-        byte setSpeed = this.currBlock.getTrackCircuit().speed;
-        short authority = this.currBlock.getTrackCircuit().authority;
+        byte newSetSpeed = this.currBlock.getTrackCircuit().speed;
+        short newAuthority = this.currBlock.getTrackCircuit().authority;
         
-        //Safe to proceed, do nothing
-        if(setSpeed == 0 && authority == 0) {
-            return;
+        //Safe to proceed, tell Train Controller we can proceed safely
+        if(newSetSpeed == 0 && newAuthority == 0) {
+            this.trainController.safeToProceed(true);
         }
         //Tell Train Controller to full stop
-        else if(setSpeed == -1 && authority == -1) {
-            
+        else if(newSetSpeed == -1 && newAuthority == -1) {
+            this.trainController.safeToProceed(false);
         }
         //Give Train Controller updated speed and authority
         else {
-            
-            
-            //Reset the speed and authority of the track circuit
-            this.currBlock.getTrackCircuit().speed = 0;
-            this.currBlock.getTrackCircuit().authority = 0;
+            this.trainController.setAuthority(newAuthority);
+            this.trainController.setSpeed(newSetSpeed);
         }
-        
+        //Reset the speed and authority of the track circuit
+        this.currBlock.getTrackCircuit().speed = 0;
+        this.currBlock.getTrackCircuit().authority = 0;
         
     }
     
