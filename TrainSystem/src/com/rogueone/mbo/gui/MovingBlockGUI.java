@@ -21,6 +21,8 @@ import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.mbo.gui.TrainScheduleGUI;
 import com.rogueone.global.Global;
 import com.rogueone.trainsystem.TrainSystem;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.*;;
 /**
@@ -30,6 +32,7 @@ import javax.swing.table.*;;
 public class MovingBlockGUI extends javax.swing.JPanel {
 
 private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+
     /**
      * Creates new form MovingBlockGUI
      */
@@ -108,14 +111,6 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
         trainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0010", "Red Line", "B", "6", "SHADYSIDE", "4:15 PM", "1340", "30mph", "35 mph", "12"},
-                {"3452", "Red Line", "H", "24", "PENN STATION", "4:12 PM", "1400", "68 mph", "70 mph", "32"},
-                {"4209", "Green Line", "F", "21", "WHITED", "4:16 PM", "1235", "66mph", "70 mph", "20"},
-                {"1112", "Green Line", "P", "91", "CASTLE SHANNON", "4:20 PM", "1305", "55 mph", "55 mph", "3"},
-                {"3453", "Red Line", "G", "21", "SWISSVILLE", "4:12 PM", "1850", "55 mph", "55mph", "40"},
-                {"1215", "Red Line", "A", "1", "SHADYSIDE", "4:21 PM", "2120", "40 mph", "40 mph", "32"},
-                {"2222", "Red Line", "U", "77", "N/A", "N/A ", "1720", "10 mph", "35 mph", "0"},
-                {"0934", "Green Line", "K", "63", "GLENBURY", "4:17 PM", "1230", "70 mph", "70 mph", "42"}
             },
             new String [] {
                 "Train ID", "Line", "Track Section", "Block", "Next Station", "Time of Arrival", "Authority", "Current Speed", "Suggested ", "Passengers"
@@ -141,15 +136,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
         pScheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Andy Jones", "-", "-", "9 am - 5:30 pm", "2pm - 10:30pm", "2pm - 10:30pm", "9am - 5:30pm", " 8am - 4:30pm"},
-                {"William Smith", "12pm - 8:30pm", "-", "12pm - 8:30pm", "12pm - 8:30pm", "-", "12pm - 8:30pm", "12pm - 8:30pm"},
-                {"Colin Rich", "-", "8am - 4:30pm", "-", "8am - 4:30pm", "8am - 4:30pm", "8am - 4:30pm", "2pm - 10:30pm"},
-                {"Daniel Todd", "2pm - 10:30pm", "2pm - 10:30pm", "2pm - 10:30pm", "-", "2pm - 10:30pm", "-", "8am - 4:30pm"},
-                {"Eli White", "6am - 2:30pm", "6am - 2:30pm", "6am - 2:30pm", "6am - 2:30pm", "-", "6am - 2:30pm", "6am - 2:30pm"},
-                {"Francis Finch", "2pm - 10:30pm", "10am - 6:30pm", "2pm - 10:30pm", "-", "-", "10am - 6:30pm", "2pm - 10:30pm"},
-                {"Gary Johnson", "12pm - 8:30pm", "12pm - 8:30pm", "-", "12pm - 8:30pm", "12pm - 8:30pm", "12pm - 8:30pm", "-"},
-                {"Harold Brown", "7am - 5:30pm", "7am - 5:30pm", "7am - 5:30pm", "7am - 5:30pm", "7am - 5:30pm", "-", "-"},
-                {"Ian Davis", "10am - 6:30pm", "-", "10am - 6:30pm", "2pm - 10:30pm", "10am - 6:30pm", "-", "10am - 6:30pm"}
+
             },
             new String [] {
                 "Name", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"
@@ -192,7 +179,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
         MboUnitLabel2.setText("feet");
 
-        trainDeployButton.setText("Deploy Next Train");
+        trainDeployButton.setText("Dispatch Next Train");
         trainDeployButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trainDeployButtonActionPerformed(evt);
@@ -356,7 +343,7 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
         SelectedTrainLabel.setText("Selected train ID:");
 
-        TrainIdValue.setText("0010");
+        TrainIdValue.setText("-");
 
         CurrentSpeedValue.setText("- mph");
 
@@ -585,13 +572,27 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
     }// </editor-fold>//GEN-END:initComponents
 
     private void MboOkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton1ActionPerformed
-        Mbo mbo = new Mbo(new TrainSystem());
+        Mbo mbo = null;
+    try {
+        mbo = new Mbo(new TrainSystem());
+    } catch (IOException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InvalidFormatException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
         mbo.updateSpeed();
     }//GEN-LAST:event_MboOkButton1ActionPerformed
 
     private void TrainDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainDropdownActionPerformed
         //MovingBlockGUI gui = new MovingBlockGUI();
-        Mbo mbo = new Mbo(new TrainSystem());
+        Mbo mbo = null;
+    try {
+        mbo = new Mbo(new TrainSystem());
+    } catch (IOException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InvalidFormatException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
       //int trainIdIndex = gui.TrainDropdown.getSelectedIndex();
       //String trainID = String.valueOf(gui.TrainDropdown.getSelectedItem());
        //System.out.println(trainIdIndex);
@@ -611,13 +612,19 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
         JFileChooser scheduleChooser = new JFileChooser("src/com/rogueone/assets");
         int returnVal = scheduleChooser.showOpenDialog(this);
         TrainScheduleGUI trainGUI = new TrainScheduleGUI();
+    try {
         Mbo mbo = new Mbo(new TrainSystem());
+    } catch (IOException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InvalidFormatException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File newFile = scheduleChooser.getSelectedFile();
             try {
                 file = newFile;
-                Mbo.readRedSchedule(newFile);
-                Mbo.readPersonnelSchedule(newFile);
+                Scheduler.readRedSchedule(newFile);
+                Scheduler.readPersonnelSchedule(newFile);
             }
             catch (IOException ex) {
                 System.out.println("problem accessing file"+file.getAbsolutePath());
@@ -647,13 +654,20 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
     }//GEN-LAST:event_ThroughputInputActionPerformed
 
     private void MboOkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton2ActionPerformed
-        Mbo mbo = new Mbo(new TrainSystem());
+        Mbo mbo = null;
+    try {
+        mbo = new Mbo(new TrainSystem());
+    } catch (IOException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InvalidFormatException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
             //File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
             if(NumTrainsRadio.isSelected()){
                 String numTrainStr = NumTrainsInput.getText();
                 int numTrains = Integer.parseInt(numTrainStr);
                 try{
-                mbo.generateSchedule(numTrains);
+                Scheduler.generateSchedule(numTrains);
                 }
                 catch(IOException | InvalidFormatException e){
 
@@ -674,11 +688,17 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
          TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
-         Mbo mbo = new Mbo(new TrainSystem());
+    try {
+     Mbo mbo = new Mbo(new TrainSystem());
+    } catch (IOException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InvalidFormatException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
          
          try{
-         mbo.readRedSchedule(file);
-         mbo.setScheduleVisible();
+         Scheduler.readRedSchedule(file);
+         Scheduler.setScheduleVisible();
          }
          catch(IOException | InvalidFormatException e){
              
@@ -687,11 +707,18 @@ private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
     }//GEN-LAST:event_DetailedScheduleButtonActionPerformed
 
     private void trainDeployButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainDeployButtonActionPerformed
-        Mbo mbo = new Mbo(new TrainSystem());
+        Mbo mbo = null;
+    try {
+        mbo = new Mbo(new TrainSystem());
+    } catch (IOException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InvalidFormatException ex) {
+        Logger.getLogger(MovingBlockGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
         DefaultTableModel model = (DefaultTableModel)trainTable.getModel();
         MovingBlockGUI gui = new MovingBlockGUI();
         try{
-           mbo.deploy(); 
+           mbo.dispatch(); 
         }
         catch(IOException | InvalidFormatException e){
             

@@ -133,109 +133,8 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="trainTable">
                       <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="10" rowCount="8">
-                            <Column editable="true" title="Train ID" type="java.lang.Object">
-                              <Data value="0010"/>
-                              <Data value="3452"/>
-                              <Data value="4209"/>
-                              <Data value="1112"/>
-                              <Data value="3453"/>
-                              <Data value="1215"/>
-                              <Data value="2222"/>
-                              <Data value="0934"/>
-                            </Column>
-                            <Column editable="true" title="Line" type="java.lang.Object">
-                              <Data value="Red Line"/>
-                              <Data value="Red Line"/>
-                              <Data value="Green Line"/>
-                              <Data value="Green Line"/>
-                              <Data value="Red Line"/>
-                              <Data value="Red Line"/>
-                              <Data value="Red Line"/>
-                              <Data value="Green Line"/>
-                            </Column>
-                            <Column editable="true" title="Track Section" type="java.lang.Object">
-                              <Data value="B"/>
-                              <Data value="H"/>
-                              <Data value="F"/>
-                              <Data value="P"/>
-                              <Data value="G"/>
-                              <Data value="A"/>
-                              <Data value="U"/>
-                              <Data value="K"/>
-                            </Column>
-                            <Column editable="true" title="Block" type="java.lang.Object">
-                              <Data value="6"/>
-                              <Data value="24"/>
-                              <Data value="21"/>
-                              <Data value="91"/>
-                              <Data value="21"/>
-                              <Data value="1"/>
-                              <Data value="77"/>
-                              <Data value="63"/>
-                            </Column>
-                            <Column editable="true" title="Next Station" type="java.lang.Object">
-                              <Data value="SHADYSIDE"/>
-                              <Data value="PENN STATION"/>
-                              <Data value="WHITED"/>
-                              <Data value="CASTLE SHANNON"/>
-                              <Data value="SWISSVILLE"/>
-                              <Data value="SHADYSIDE"/>
-                              <Data value="N/A"/>
-                              <Data value="GLENBURY"/>
-                            </Column>
-                            <Column editable="true" title="Time of Arrival" type="java.lang.Object">
-                              <Data value="4:15 PM"/>
-                              <Data value="4:12 PM"/>
-                              <Data value="4:16 PM"/>
-                              <Data value="4:20 PM"/>
-                              <Data value="4:12 PM"/>
-                              <Data value="4:21 PM"/>
-                              <Data value="N/A "/>
-                              <Data value="4:17 PM"/>
-                            </Column>
-                            <Column editable="true" title="Authority" type="java.lang.Object">
-                              <Data value="1340"/>
-                              <Data value="1400"/>
-                              <Data value="1235"/>
-                              <Data value="1305"/>
-                              <Data value="1850"/>
-                              <Data value="2120"/>
-                              <Data value="1720"/>
-                              <Data value="1230"/>
-                            </Column>
-                            <Column editable="true" title="Current Speed" type="java.lang.Object">
-                              <Data value="30mph"/>
-                              <Data value="68 mph"/>
-                              <Data value="66mph"/>
-                              <Data value="55 mph"/>
-                              <Data value="55 mph"/>
-                              <Data value="40 mph"/>
-                              <Data value="10 mph"/>
-                              <Data value="70 mph"/>
-                            </Column>
-                            <Column editable="true" title="Suggested " type="java.lang.Object">
-                              <Data value="35 mph"/>
-                              <Data value="70 mph"/>
-                              <Data value="70 mph"/>
-                              <Data value="55 mph"/>
-                              <Data value="55mph"/>
-                              <Data value="40 mph"/>
-                              <Data value="35 mph"/>
-                              <Data value="70 mph"/>
-                            </Column>
-                            <Column editable="true" title="Passengers" type="java.lang.Object">
-                              <Data value="12"/>
-                              <Data value="32"/>
-                              <Data value="20"/>
-                              <Data value="3"/>
-                              <Data value="40"/>
-                              <Data value="32"/>
-                              <Data value="0"/>
-                              <Data value="42"/>
-                            </Column>
-                          </Table>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Train ID&quot;, &quot;Line&quot;, &quot;Track Section&quot;, &quot;Block&quot;, &quot;Next Station&quot;, &quot;Time of Arrival&quot;, &quot;Authority&quot;, &quot;Current Speed&quot;, &quot;Suggested &quot;, &quot;Passengers&quot;&#xa;    }&#xa;)" type="code"/>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
@@ -338,97 +237,8 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="pScheduleTable">
                       <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="8" rowCount="9">
-                            <Column editable="true" title="Name" type="java.lang.Object">
-                              <Data value="Andy Jones"/>
-                              <Data value="William Smith"/>
-                              <Data value="Colin Rich"/>
-                              <Data value="Daniel Todd"/>
-                              <Data value="Eli White"/>
-                              <Data value="Francis Finch"/>
-                              <Data value="Gary Johnson"/>
-                              <Data value="Harold Brown"/>
-                              <Data value="Ian Davis"/>
-                            </Column>
-                            <Column editable="true" title="Mon" type="java.lang.Object">
-                              <Data value="-"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="-"/>
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="6am - 2:30pm"/>
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="7am - 5:30pm"/>
-                              <Data value="10am - 6:30pm"/>
-                            </Column>
-                            <Column editable="true" title="Tues" type="java.lang.Object">
-                              <Data value="-"/>
-                              <Data value="-"/>
-                              <Data value="8am - 4:30pm"/>
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="6am - 2:30pm"/>
-                              <Data value="10am - 6:30pm"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="7am - 5:30pm"/>
-                              <Data value="-"/>
-                            </Column>
-                            <Column editable="true" title="Wed" type="java.lang.Object">
-                              <Data value="9 am - 5:30 pm"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="-"/>
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="6am - 2:30pm"/>
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="-"/>
-                              <Data value="7am - 5:30pm"/>
-                              <Data value="10am - 6:30pm"/>
-                            </Column>
-                            <Column editable="true" title="Thurs" type="java.lang.Object">
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="8am - 4:30pm"/>
-                              <Data value="-"/>
-                              <Data value="6am - 2:30pm"/>
-                              <Data value="-"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="7am - 5:30pm"/>
-                              <Data value="2pm - 10:30pm"/>
-                            </Column>
-                            <Column editable="true" title="Fri" type="java.lang.Object">
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="-"/>
-                              <Data value="8am - 4:30pm"/>
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="-"/>
-                              <Data value="-"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="7am - 5:30pm"/>
-                              <Data value="10am - 6:30pm"/>
-                            </Column>
-                            <Column editable="true" title="Sat" type="java.lang.Object">
-                              <Data value="9am - 5:30pm"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="8am - 4:30pm"/>
-                              <Data value="-"/>
-                              <Data value="6am - 2:30pm"/>
-                              <Data value="10am - 6:30pm"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="-"/>
-                              <Data value="-"/>
-                            </Column>
-                            <Column editable="true" title="Sun" type="java.lang.Object">
-                              <Data value=" 8am - 4:30pm"/>
-                              <Data value="12pm - 8:30pm"/>
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="8am - 4:30pm"/>
-                              <Data value="6am - 2:30pm"/>
-                              <Data value="2pm - 10:30pm"/>
-                              <Data value="-"/>
-                              <Data value="-"/>
-                              <Data value="10am - 6:30pm"/>
-                            </Column>
-                          </Table>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        &#xa;    },&#xa;    new String [] {&#xa;        &quot;Name&quot;, &quot;Mon&quot;, &quot;Tues&quot;, &quot;Wed&quot;, &quot;Thurs&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;&#xa;    }&#xa;)" type="code"/>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
@@ -620,7 +430,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="trainDeployButton">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Deploy Next Train"/>
+                    <Property name="text" type="java.lang.String" value="Dispatch Next Train"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trainDeployButtonActionPerformed"/>
@@ -873,7 +683,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="TrainIdValue">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="0010"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

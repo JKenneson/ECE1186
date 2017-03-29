@@ -37,21 +37,7 @@ public class TrainScheduleGUI extends javax.swing.JFrame {
 
         redTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0010", "Bill", "3:50 PM", "3:57 PM", "4:02 PM", "4:12 PM", "4:22 PM", "4:29 PM", "4:35 PM", "4:40 PM"},
-                {"0134", "Matt", "4:15 PM", "4:23 PM", "4:27 PM", "4:37 PM", "4:47 PM", "4:53 PM", "4:59 PM", "5:05 PM"},
-                {"0135", "Jean", "4:50 PM", "4:57 PM", "5:02 PM", "5:12 PM", "5:22 PM", "5:29 PM", "5:35 PM", "5:40 PM"},
-                {"0420", "Mike", "5:50 PM", "5:57 PM", "6:02 PM", "6:12 PM", "6:22 PM", "6:29 PM", "6:35 PM", "6:40 PM"},
-                {"0367", "Kelly", "6:15 PM", "6:23 PM", "6:27 PM", "6:37 PM", "6:47 PM", "6:53 PM", "6:59 PM", "7:05 PM"},
-                {"0876", "Niko", "6:50 PM", "6:57 PM", "7:02 PM", "7:12 PM", "7:22 PM", "7:29 PM", "7:35 PM", "7:40 PM"},
-                {"0667", "Walter", "7:15 PM", "7:23 PM", "7:27 PM", "7:37 PM", "7:47 PM", "7:53 PM", "7:59 PM", "8:05 PM"},
-                {"1002", "Peter", "7:50 PM", "7:57 PM", "8:02 PM", "8:12 PM", "8:22 PM", "8:29 PM", "8:35 PM", "8:40 PM"},
-                {"0999", "Carlos", "8:15 PM", "8:23 PM", "8:27 PM", "8:37 PM", "8:47 PM", "8:53 PM", "8:59 PM", "9:05 PM"},
-                {"1139", "Tyler", "8:50 PM", "8:57 PM", "9:02 PM", "9:12 PM", "9:22 PM", "9:29 PM", "9:35 PM", "9:40 PM"},
-                {"1134", "Chris", "9:15 PM", "9:23 PM", "9:27 PM", "9:37 PM", "9:47 PM", "9:53 PM", "9:59 PM", "10:05 PM"},
-                {"1242", "John", "9:50 PM", "9:57 PM", "10:02 PM", "10:12 PM", "10:22 PM", "10:29 PM", "10:35 PM", "10:40 PM"},
-                {"1255", "Nick", "10:15 PM", "10:23 PM", "10:27 PM", "10:37 PM", "10:47 PM", "10:53 PM", "10:59 PM", "11:05 PM"},
-                {"1300", "Clark", "10:50 PM", "10:57 PM", "11:02 PM", "11:12 PM", "11:12 PM", "11:29 PM", "11:35 PM", "11:40 PM"},
-                {"1290", "David", "11:15 PM", "11:23 PM", "11:27 PM", "11:37 PM", "11:47 PM", "11:53 PM", "11:59 PM", "12:05 AM"},
+
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
