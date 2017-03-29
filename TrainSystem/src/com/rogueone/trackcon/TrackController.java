@@ -85,6 +85,8 @@ public class TrackController {
     public TrackController() {
         this.trackModel = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
     }
+    
+    
 
     public TrackController(Global.Line line, TrainSystem trainSystem) {
         this.controllerLine = line;
@@ -733,7 +735,7 @@ public class TrackController {
                 //if the first block of the green line is occupied add a new PresenceBlock to list
                 if (controllerLine == Global.Line.GREEN) {
                     PresenceBlock pb = new PresenceBlock(this.trainSystem, this.controllerLine);
-                    if (b.isOccupied() && b.getID() == 152 && !occupiedBlocks.contains(pb)) {
+                    if (b.isOccupied() && b.getID() == 62 && !occupiedBlocks.contains(pb)) {
                         pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
                         System.out.println("TC:(new) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
                         occupiedBlocks.add(pb);
@@ -760,23 +762,25 @@ public class TrackController {
                             System.out.println("TC:(moving) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
                         }
                         //need a check to look ahead by a specific amount of blocks or by sections
-                        int lookahead = 5;
-                        PresenceBlock lookaheadBlock = new PresenceBlock(pb);
-                        for (int i = 0; i < lookahead; i++) {
-                            System.out.print("TC:(check) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
-                            //check to see if that block ahead is occupied or not
-                            if (this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied()) {
-                                System.out.print(" Occupied\n");
-                                //this is where logic for telling the train to stop comes into play
-                            } else {
-                                System.out.print(" Unoccupied\n");
-                            }
-                            //move ahead by one block
-                            Block tempBlock = lookaheadBlock.getCurrBlock();
-                            lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
-                            lookaheadBlock.setPrevBlock(tempBlock);
-                            lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
-                        }
+                        //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
+//                        int lookahead = 5;
+//                        PresenceBlock lookaheadBlock = new PresenceBlock(pb);
+//                        for (int i = 0; i < lookahead; i++) {
+//                            System.out.print("TC:(check) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
+//                            //check to see if that block ahead is occupied or not
+//                            if (this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied()) {
+//                                System.out.print(" Occupied\n");
+//                                //this is where logic for telling the train to stop comes into play
+//                            } else {
+//                                System.out.print(" Unoccupied\n");
+//                            }
+//                            //move ahead by one block
+//                            Block tempBlock = lookaheadBlock.getCurrBlock();
+//                            lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
+//                            lookaheadBlock.setPrevBlock(tempBlock);
+//                            lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+//                        }
+                        //END OF TELLING TRAIN TO STOP
                     }
                 }
             }
@@ -966,30 +970,20 @@ public class TrackController {
         return null;
     }
 
-    public String getCrossing() {
-        if(crossing != null){
-            StringBuilder b = new StringBuilder();
-        }
-        return null;
+    public Crossing getCrossing(){
+        return this.crossing;
     }
-
-    class SwitchTableModel extends AbstractTableModel {
-
-        @Override
-        public int getRowCount() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public int getColumnCount() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
+    
+    public LinkedList<UserSwitchState> getSwitchStates(){
+        return this.currentSwitchStates;
+    }
+    
+    public HashMap<Integer, Switch> getSwitchArray(){
+        return this.switchArray;
+    }
+    
+    public LinkedList<PresenceBlock> getOccupiedBlocks(){
+        return this.occupiedBlocks;
     }
 
 }

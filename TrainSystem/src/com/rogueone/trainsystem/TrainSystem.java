@@ -16,6 +16,7 @@ import com.rogueone.mainframe.*;
 import com.rogueone.mbo.Mbo;
 import com.rogueone.trackcon.TrackControllerHandler;
 import com.rogueone.trackmodel.TrackModel;
+import com.rogueone.trackview.TrackView;
 import com.rogueone.trainmodel.TrainHandler;
 import java.awt.BorderLayout;
 import java.io.File;
@@ -44,6 +45,7 @@ public class TrainSystem {
     private TrackModel trackModel;
     private TrainHandler trainHandler;
     private Mbo mbo;
+    private TrackView trackView;
     //private Schedule schedule;
     
     // GUI
@@ -75,6 +77,7 @@ public class TrainSystem {
         this.trackControllerHandler = new TrackControllerHandler(this);
         this.trainHandler = new TrainHandler(this);
         this.mbo = new Mbo(this);
+        this.trackView = new TrackView(this, Global.Line.GREEN);
         
         // Initialize GUI
         mainFrame = new MainFrame(this);
@@ -155,6 +158,16 @@ public class TrainSystem {
     public Mbo getMBO() {
         return mbo;
     }
+
+    /**
+     * Get Shared TrackView object
+     * @return  TrackView global object
+     */
+    public TrackView getTrackView() {
+        return trackView;
+    }
+    
+    
     
     /**
      * Getter for ref to global clock

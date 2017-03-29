@@ -154,9 +154,10 @@ public class TrackControllerHandler {
     }
     
     public String getCrossingInformation(Global.Line line){
+        //NOT YET IMPLEMENTED
         String returnString = null;
         if(line == Global.Line.GREEN){
-            returnString = trackControllers.get(0).getCrossing();
+//            returnString = trackControllers.get(0).getCrossing();
         } else {
 //            returnValue = trackControllers.get(1).canOpen(blockID);            
         }
@@ -170,9 +171,10 @@ public class TrackControllerHandler {
      */
     public void updateTrack() {
         TrackController trackController = trackControllers.get(0);
-//        trackController.evaluateProceed();
+        trackController.evaluateProceed();
         trackController.evaluateSwitches();
         trackController.updateSummaryTab();
+        trainSystem.getTrackView().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
 //        trackController.evaluateCrossing();
     }
     
