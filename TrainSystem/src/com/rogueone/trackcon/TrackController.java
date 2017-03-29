@@ -85,8 +85,6 @@ public class TrackController {
     public TrackController() {
         this.trackModel = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
     }
-    
-    
 
     public TrackController(Global.Line line, TrainSystem trainSystem) {
         this.controllerLine = line;
@@ -144,7 +142,6 @@ public class TrackController {
                     Switch trackSwitch = new Switch((int) tempRow.getCell(0).getNumericCellValue(), tempRow.getCell(1).getStringCellValue(), switchState);
                     this.switchArray.put(trackSwitch.getSwitchID(), trackSwitch);
                 }
-                
 
                 //initialize the green logical groups array and import the logical
                 //groups from the remaining sheets from the excel document
@@ -763,23 +760,33 @@ public class TrackController {
                         }
                         //need a check to look ahead by a specific amount of blocks or by sections
                         //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
-//                        int lookahead = 5;
-//                        PresenceBlock lookaheadBlock = new PresenceBlock(pb);
-//                        for (int i = 0; i < lookahead; i++) {
+                        int lookahead = 5;
+                        PresenceBlock lookaheadBlock = new PresenceBlock(pb);
+                        for (int i = 0; i < lookahead; i++) {
 //                            System.out.print("TC:(check) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
-//                            //check to see if that block ahead is occupied or not
+                            //check to see if that block ahead is occupied or not
+                            boolean safe = true;
+                            if (lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()) == null) {
+                                System.out.println("Switch wrong");
+                                lookaheadBlock.getCurrBlock().getTrackCircuit().speed = -1;
+                                lookaheadBlock.getCurrBlock().getTrackCircuit().authority = -1;
+                                safe = false;
+                            } 
 //                            if (this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied()) {
 //                                System.out.print(" Occupied\n");
 //                                //this is where logic for telling the train to stop comes into play
 //                            } else {
 //                                System.out.print(" Unoccupied\n");
 //                            }
-//                            //move ahead by one block
-//                            Block tempBlock = lookaheadBlock.getCurrBlock();
-//                            lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
-//                            lookaheadBlock.setPrevBlock(tempBlock);
-//                            lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
-//                        }
+                            //move ahead by one block
+                            if (safe) {
+                                Block tempBlock = lookaheadBlock.getCurrBlock();
+                                lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
+                                lookaheadBlock.setPrevBlock(tempBlock);
+                                lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+                            }
+
+                        }
                         //END OF TELLING TRAIN TO STOP
                     }
                 }
@@ -924,17 +931,17 @@ public class TrackController {
             }
         }
     }
-    
-    public void toggleSwitch(Integer switchID){
+
+    public void toggleSwitch(Integer switchID) {
         Iterator listIterator = this.currentSwitchStates.iterator();
-        while(listIterator.hasNext()){
+        while (listIterator.hasNext()) {
             UserSwitchState uss = (UserSwitchState) listIterator.next();
             Iterator switchIterator = uss.getUserSwitchStates().iterator();
-            while(switchIterator.hasNext()){
+            while (switchIterator.hasNext()) {
                 SimpleEntry<Integer, Global.SwitchState> switchEntry = (SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
-                if(switchID == switchEntry.getKey()){
+                if (switchID == switchEntry.getKey()) {
                     Global.SwitchState currentState = switchEntry.getValue();
-                    if(currentState == Global.SwitchState.DEFAULT){
+                    if (currentState == Global.SwitchState.DEFAULT) {
                         switchEntry.setValue(Global.SwitchState.ALTERNATE);
                     } else {
                         switchEntry.setValue(Global.SwitchState.DEFAULT);
@@ -970,19 +977,19 @@ public class TrackController {
         return null;
     }
 
-    public Crossing getCrossing(){
+    public Crossing getCrossing() {
         return this.crossing;
     }
-    
-    public LinkedList<UserSwitchState> getSwitchStates(){
+
+    public LinkedList<UserSwitchState> getSwitchStates() {
         return this.currentSwitchStates;
     }
-    
-    public HashMap<Integer, Switch> getSwitchArray(){
+
+    public HashMap<Integer, Switch> getSwitchArray() {
         return this.switchArray;
     }
-    
-    public LinkedList<PresenceBlock> getOccupiedBlocks(){
+
+    public LinkedList<PresenceBlock> getOccupiedBlocks() {
         return this.occupiedBlocks;
     }
 
