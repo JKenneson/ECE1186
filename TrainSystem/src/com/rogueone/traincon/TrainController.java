@@ -397,7 +397,7 @@ public class TrainController {
         }        
         
         //Speed and Authority
-        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getGPS().getCurrSpeed()));
+        gui.ActualSpeedLabel.setText(decimalFormatter.format(this.trainModel.getCurrSpeed()));
         gui.SetSpeedLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getGPS().getSpeedLimit()));
         
         if(this.manualMode){

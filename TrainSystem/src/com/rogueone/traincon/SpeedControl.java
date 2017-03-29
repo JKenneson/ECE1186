@@ -57,20 +57,14 @@ public class SpeedControl{
      */
     private double findSetPoint(boolean manualMode){
         if(manualMode){
-            if(this.trainModel.getDriverSetPoint() > this.gps.getSpeedLimit()){
-                this.driverSetPoint = (byte) this.gps.getSpeedLimit();
-            }
-            else{
-                this.driverSetPoint = (byte) this.trainModel.getDriverSetPoint();
+            if(this.driverSetPoint > this.gps.getSpeedLimit()){
+                return this.gps.getSpeedLimit();
             }
             return this.driverSetPoint;
         }
         else{
-            if(this.trainModel.getCtcSetPoint() > this.gps.getSpeedLimit()){
-                this.recommendedSetPoint = (byte) this.gps.getSpeedLimit();
-            }
-            else{
-                this.recommendedSetPoint = (byte) this.trainModel.getCtcSetPoint();//Is this legal?
+            if(this.recommendedSetPoint > this.gps.getSpeedLimit()){
+                return this.gps.getSpeedLimit();
             }
             return this.recommendedSetPoint; //////////////////////////////////////////////////////////////NEED TO GET CTC OR MBO!!!
         }

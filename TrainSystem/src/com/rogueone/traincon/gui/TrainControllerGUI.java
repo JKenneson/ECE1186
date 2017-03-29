@@ -979,12 +979,12 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void ServiceBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeToggleButtonActionPerformed
         if(this.ServiceBrakeToggleButton.isSelected()){
             this.trainController.vitals.getPrimary().setServiceBrakeActivated(true);
-            this.trainController.getTrainModel().setServiceBrakeActivated(true); //Is this cool with Jon?
+            //this.trainController.getTrainModel().setServiceBrakeActivated(true); //Is this cool with Jon?
             this.NotificationsDisplay.append("\nService Brake Activated");
         }
         else{
             this.trainController.vitals.getPrimary().setServiceBrakeActivated(false);
-            this.trainController.getTrainModel().setServiceBrakeActivated(false); //Is this cool with Jon?
+            //this.trainController.getTrainModel().setServiceBrakeActivated(false); //Is this cool with Jon?
             this.NotificationsDisplay.append("\nService Brake Deactivated");
         }
     }//GEN-LAST:event_ServiceBrakeToggleButtonActionPerformed
