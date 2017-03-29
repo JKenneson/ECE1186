@@ -265,7 +265,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         String updateParamsLine = (String)ctcGUI.TrainTable.getValueAt(ctcGUI.TrainTable.getSelectedRow(),0);
         String updateParamsPosition = (String)ctcGUI.TrainTable.getValueAt(ctcGUI.TrainTable.getSelectedRow(),2);
        
-            String[] parts = updateParamsPosition.split(" : ");
+            String[] parts = updateParamsPosition.split(":");
             int partBlock = Integer.parseInt(parts[1]);
             
         trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(updateParamsLine), partBlock, (byte) trainSpeed, (short) trainAuthority);

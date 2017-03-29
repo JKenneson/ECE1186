@@ -110,7 +110,7 @@ public class TrainHandler {
             if(train.trainID == trainID) {  //If we find the trainID, display the GUIs
                 StringBuilder sb = new StringBuilder();
                 sb.append(train.getCurrBlock().getSection().getSectionID());
-                sb.append(" : ");
+                sb.append(":");
                 sb.append(train.getCurrBlock().getID());
                 return sb.toString();
             }
