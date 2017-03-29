@@ -1018,6 +1018,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
 //    private void dispatchFromMBO(){
 //        while(SelectOperationMode2.getSelectedIndex() == 1){
+            //trainSystem.getMBO().
 //                int autoDispatchHour = trainSystem.getClock().getHour();
 //                int autoDispatchMinute = trainSystem.getClock().getMinute();
 //                int autoDispatchSecond = trainSystem.getClock().getSecond();
@@ -1079,7 +1080,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
         //get trainID from selected row first column
-        ChangeParametersGUI params = new ChangeParametersGUI(trainID);
+        ChangeParametersGUI params = new ChangeParametersGUI(this, trainSystem);
         params.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
@@ -1536,7 +1537,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JTextField TrainNameField;
     private javax.swing.JButton TrainShutdownButton;
     private javax.swing.JLabel TrainSpeedLabel2;
-    private javax.swing.JTable TrainTable;
+    public javax.swing.JTable TrainTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
