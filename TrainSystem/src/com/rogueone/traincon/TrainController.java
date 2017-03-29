@@ -448,4 +448,17 @@ public class TrainController {
     public void setAuthority(short authority){
         this.vitals.getPrimary().getGPS().setAuthority(authority);
     }
+    
+    public void setSpeed(byte speed){
+        this.vitals.getPrimary().getSpeedControl().setRecommendedSetPoint(speed);
+    }
+    
+    private void setServiceBrake(boolean brake){
+        this.vitals.getPrimary().setServiceBrakeActivated(brake);
+    }
+    
+    public void safeToProceed(boolean safe){
+        this.setServiceBrake(safe);
+    }
+    
 }
