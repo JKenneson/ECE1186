@@ -28,6 +28,7 @@ public class Crossing implements MyShape {
     private Arc2D redLight2;
 
     private boolean isActive;
+    private int toggleLights;
 
     private float X, Y;
     private float W, H;
@@ -73,11 +74,27 @@ public class Crossing implements MyShape {
         g.draw(redLight1);
         g.draw(redLight2);
         if (isActive) {
-            g.fill(redLight1);
-            g.fill(redLight2);
+            if(toggleLights == 0){
+                g.fill(redLight1);
+            } else {
+                g.fill(redLight2);
+            }
         }
     }
 
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public void setToggleLights(int toggleLights) {
+        if(toggleLights < 0 || toggleLights > 1){
+            this.toggleLights = 0;
+        } else {
+            this.toggleLights = toggleLights;
+        }   
+    }
+    
+    
     @Override
     public void move(int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

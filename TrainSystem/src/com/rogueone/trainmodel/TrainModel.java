@@ -178,6 +178,7 @@ public class TrainModel {
         this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
         this.nextBlock = null;
         this.currTempBlock = null;
+        this.trainSystem.getTrackControllerHandler().updateTrack();
     }
     
     /**

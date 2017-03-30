@@ -172,7 +172,7 @@ public class Section implements MyShape {
             this.currentBlocks.remove(blockID);
         } else {
             //do nothing
-            System.out.println("nothing to be done");
+//            System.out.println("nothing to be done");
         }
     }
 

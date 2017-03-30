@@ -9,7 +9,7 @@ package com.rogueone.trackview;
  * @author Bill Day <bill.day@javaworld.com>
  * @version 1.0
  * @see java.awt.Graphics2D
-*
+ *
  */
 import com.rogueone.global.Global;
 import com.rogueone.trackcon.entities.Light;
@@ -36,7 +36,7 @@ public class TrackView extends Frame {
 
     /**
      * Instantiates an Example01 object.
-   *
+     *
      */
     public static void main(String args[]) {
 //        new TrackView(Global.Line.GREEN);
@@ -47,15 +47,16 @@ public class TrackView extends Frame {
     HashMap<Integer, Switch> switchList;
     HashMap<String, TrackLight> trackLightList;
     HashMap<String, Section> sectionList;
+    Crossing crossing;
     double scale = 5;
-    
+
     private TrainSystem trainSystem;
 
     /**
      * Our Example01 constructor sets the frame's size, adds the visual
      * components, and then makes them visible to the user. It uses an adapter
      * class to deal with the user closing the frame.
-   *
+     *
      * @param trainSystem
      * @param line
      */
@@ -80,9 +81,8 @@ public class TrackView extends Frame {
             theWindow.setVisible(true);
         }
     }
-    
-        
-    public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing){
+
+    public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing) {
         if (switchStates != null) {
             Iterator listIterator = switchStates.iterator();
             while (listIterator.hasNext()) {
@@ -108,18 +108,24 @@ public class TrackView extends Frame {
                 }
             }
         }
-        if(occupiedBlocks != null){
+        if (occupiedBlocks != null) {
             Iterator blockIterator = occupiedBlocks.iterator();
-            while(blockIterator.hasNext()){
+            while (blockIterator.hasNext()) {
                 PresenceBlock pb = (PresenceBlock) blockIterator.next();
-                Block prevBlock = (Block) pb.getPrevBlock();
-                updateSection(prevBlock.getSection().getSectionID(), prevBlock.getID(), false);
-                updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true);
-                
+                if (pb.getPrevBlock().getType() == Global.PieceType.YARD) {
+                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true);
+                } else {
+                    Block prevBlock = (Block) pb.getPrevBlock();
+                    updateSection(prevBlock.getSection().getSectionID(), prevBlock.getID(), false);
+                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true);
+                }
+
             }
         }
+        if(crossing != null){
+            updateCrossing(crossing);
+        }
         sp.repaint();
-        System.out.println("Updated Track View");
     }
 
     private void initializeGreenLine() {
@@ -149,73 +155,73 @@ public class TrackView extends Frame {
         sp.addShape(N);
         sectionList.put("N", N);
         //first loop
-        Section O = new Section(175 + shiftAmount, 135 + 2, 50, 5, -60, "O", -15, 4, this.trainSystem); 
+        Section O = new Section(175 + shiftAmount, 135 + 2, 50, 5, -60, "O", -15, 4, this.trainSystem);
         sp.addShape(O);
         sectionList.put("O", O);
-        Section P = new Section(190 + shiftAmount + 2, 160 + 2, 50, 5, 0, "P", -5, -5, this.trainSystem);  
+        Section P = new Section(190 + shiftAmount + 2, 160 + 2, 50, 5, 0, "P", -5, -5, this.trainSystem);
         sp.addShape(P);
         sectionList.put("P", P);
-        Section Q = new Section(210 + shiftAmount - 2, 135 + 2, 50, 5, 60, "Q", 5, 5, this.trainSystem);  
+        Section Q = new Section(210 + shiftAmount - 2, 135 + 2, 50, 5, 60, "Q", 5, 5, this.trainSystem);
         sp.addShape(Q);
         sectionList.put("Q", Q);
-        
+
         Section R = new Section(220 + shiftAmount, 55, 50, 5, 0, "R", -3, 15, this.trainSystem);
         sp.addShape(R);
         sectionList.put("R", R);
-        
+
         Switch switch4 = new Switch(190 + shiftAmount + 15, 57, 190 + shiftAmount + 23, 57, 12, 5, 45, -45, 4);
         sp.addShape(switch4);
         switch4.setIsDefault(true);
         Switch switch5 = new Switch(190 + shiftAmount + 17, 115, 190 + shiftAmount + 23, 115, 12, 5, -55, 55, 5);
         sp.addShape(switch5);
         switch5.setIsDefault(true);
-        
-        Section S = new Section(270 + shiftAmount + 5 , 55, 50, 5, 0, "S", -5, 15, this.trainSystem);
+
+        Section S = new Section(270 + shiftAmount + 5, 55, 50, 5, 0, "S", -5, 15, this.trainSystem);
         sp.addShape(S);
         sectionList.put("S", S);
-        Section T = new Section(325 + shiftAmount + 5 , 55, 50, 5, 0, "T", -5, 15, this.trainSystem);
+        Section T = new Section(325 + shiftAmount + 5, 55, 50, 5, 0, "T", -5, 15, this.trainSystem);
         sp.addShape(T);
         sectionList.put("T", T);
-        Section U = new Section(380 + shiftAmount + 5 , 55, 50, 5, 0, "U", -5, 15, this.trainSystem);
+        Section U = new Section(380 + shiftAmount + 5, 55, 50, 5, 0, "U", -5, 15, this.trainSystem);
         sp.addShape(U);
         sectionList.put("U", U);
-        Section V = new Section(435 + shiftAmount + 5 , 55, 50, 5, 0, "V", -5, 15, this.trainSystem);
+        Section V = new Section(435 + shiftAmount + 5, 55, 50, 5, 0, "V", -5, 15, this.trainSystem);
         sp.addShape(V);
         sectionList.put("V", V);
-        Section W = new Section(490 + shiftAmount + 5 , 55, 50, 5, 0, "W", -5, 15, this.trainSystem);
+        Section W = new Section(490 + shiftAmount + 5, 55, 50, 5, 0, "W", -5, 15, this.trainSystem);
         sp.addShape(W);
         sectionList.put("W", W);
-        Section X = new Section(545 + shiftAmount + 5 , 55, 50, 5, 0, "X", -5, 15, this.trainSystem);
+        Section X = new Section(545 + shiftAmount + 5, 55, 50, 5, 0, "X", -5, 15, this.trainSystem);
         sp.addShape(X);
         sectionList.put("X", X);
-        Section Y = new Section(600 + shiftAmount + 5 , 55, 50, 5, 0, "Y", -5, 15, this.trainSystem);
+        Section Y = new Section(600 + shiftAmount + 5, 55, 50, 5, 0, "Y", -5, 15, this.trainSystem);
         sp.addShape(Y);
         sectionList.put("Y", Y);
-        Section Z = new Section(655 + shiftAmount + 5 , 55, 50, 5, 0, "Z", -5, 15, this.trainSystem);
+        Section Z = new Section(655 + shiftAmount + 5, 55, 50, 5, 0, "Z", -5, 15, this.trainSystem);
         sp.addShape(Z);
         sectionList.put("Z", Z);
         //second vertical section
-        Section F = new Section(685 + shiftAmount + 5 , 85, 50, 5, 90, "F", -13, 0, this.trainSystem);
+        Section F = new Section(685 + shiftAmount + 5, 85, 50, 5, 90, "F", -13, 0, this.trainSystem);
         sp.addShape(F);
         sectionList.put("F", F);
-        Section E = new Section(685 + shiftAmount + 5 , 140, 50, 5, 90, "E", -13, 0, this.trainSystem);
+        Section E = new Section(685 + shiftAmount + 5, 140, 50, 5, 90, "E", -13, 0, this.trainSystem);
         sp.addShape(E);
         sectionList.put("E", E);
-        Section D = new Section(685 + shiftAmount + 5 , 195, 50, 5, 90, "D", -13, 0, this.trainSystem);
+        Section D = new Section(685 + shiftAmount + 5, 195, 50, 5, 90, "D", -13, 0, this.trainSystem);
         sp.addShape(D);
         sectionList.put("D", D);
         //second loop
-        Section C = new Section(665 + shiftAmount + 9, 245, 50, 5, -60, "C", -15, 4, this.trainSystem);  
+        Section C = new Section(665 + shiftAmount + 9, 245, 50, 5, -60, "C", -15, 4, this.trainSystem);
         sp.addShape(C);
         sectionList.put("C", C);
-        Section B = new Section(685 + shiftAmount + 5  , 270, 50, 5, 0, "B", -5, -5, this.trainSystem);  
+        Section B = new Section(685 + shiftAmount + 5, 270, 50, 5, 0, "B", -5, -5, this.trainSystem);
         sp.addShape(B);
         sectionList.put("B", B);
-        Section A = new Section(705 + shiftAmount + 2 , 245, 50, 5, 60, "A", 7, 5, this.trainSystem);  
+        Section A = new Section(705 + shiftAmount + 2, 245, 50, 5, 60, "A", 7, 5, this.trainSystem);
         sp.addShape(A);
         sectionList.put("A", A);
-        
-        Section G = new Section(710 + shiftAmount + 10 , 55, 50, 5, 0, "G", -3, 15, this.trainSystem);
+
+        Section G = new Section(710 + shiftAmount + 10, 55, 50, 5, 0, "G", -3, 15, this.trainSystem);
         sp.addShape(G);
         sectionList.put("G", G);
         Switch switch1 = new Switch(705 + shiftAmount, 225, 705 + shiftAmount + 8, 225, 14, 5, -55, 55, 1);
@@ -224,31 +230,31 @@ public class TrackView extends Frame {
         Switch switch2 = new Switch(705 + shiftAmount, 57, 705 + shiftAmount + 8, 57, 12, 5, 45, -45, 2);
         sp.addShape(switch2);
         switch2.setIsDefault(true);
-        
-        Section H = new Section(765 + shiftAmount + 10 , 55, 50, 5, 0, "H", -5, 15, this.trainSystem);
+
+        Section H = new Section(765 + shiftAmount + 10, 55, 50, 5, 0, "H", -5, 15, this.trainSystem);
         sp.addShape(H);
         sectionList.put("H", H);
-        Section I = new Section(820 + shiftAmount + 10 , 55, 50, 5, 0, "I",-5, 15, this.trainSystem);
+        Section I = new Section(820 + shiftAmount + 10, 55, 50, 5, 0, "I", -5, 15, this.trainSystem);
         sp.addShape(I);
         sectionList.put("I", I);
-        
-        Section ZZ = new Section(870 + shiftAmount + 10 , 30, 50, 5, -45, "ZZ", 3, 15, this.trainSystem);
+
+        Section ZZ = new Section(870 + shiftAmount + 10, 30, 50, 5, -45, "ZZ", 3, 15, this.trainSystem);
         sp.addShape(ZZ);
         sectionList.put("ZZ", ZZ);
-        Section J2 = new Section(870 + shiftAmount + 10 , 80, 50, 5, 45, "J", -4, 13, this.trainSystem);
+        Section J2 = new Section(870 + shiftAmount + 10, 80, 50, 5, 45, "J", -4, 13, this.trainSystem);
         sp.addShape(J2);
         sectionList.put("J2", J2);
         Switch switch0 = new Switch(870 + shiftAmount + 6, 51, 870 + shiftAmount + 6, 59, 15, 5, -45, 45, 0);
         sp.addShape(switch0);
         switch0.setIsDefault(true);
-        
+
         switchList.put(0, switch0);
         switchList.put(1, switch1);
         switchList.put(2, switch2);
         switchList.put(3, switch3);
         switchList.put(4, switch4);
         switchList.put(5, switch5);
-        
+
         TrackLight lightYY = new TrackLight(85, 35, 225, false);
         sp.addShape(lightYY);
         trackLightList.put("YY", lightYY);
@@ -288,7 +294,7 @@ public class TrackView extends Frame {
         TrackLight lightZZ = new TrackLight(860 + shiftAmount + 38, 2, 135, false);
         sp.addShape(lightZZ);
         trackLightList.put("ZZ", lightZZ);
-        
+
         Station stationGlenbury = new Station(108, 48, 13);
         sp.addShape(stationGlenbury);
         Station stationDormont = new Station(178, 48, 13);
@@ -318,15 +324,14 @@ public class TrackView extends Frame {
         Station stationInglewood2 = new Station(910, 70, 13);
         sp.addShape(stationInglewood2);
 
-        Crossing crossing = new Crossing(750, 140);
+        crossing = new Crossing(750, 140);
         sp.addShape(crossing);
-        
+
         Yard yardStart = new Yard(0, 0);
         sp.addShape(yardStart);
         Yard yardEnd = new Yard(950, 0);
         sp.addShape(yardEnd);
-        
-        
+
     }
 
     private void updateSwitch(Integer switchID, boolean defaultOrAlternate) {
@@ -335,9 +340,9 @@ public class TrackView extends Frame {
     }
 
     private void updateTrackLight(Global.Section section, int blockID, Global.LightState lightState) {
-        if(section.toString() == "N" ){
+        if (section.toString() == "N") {
             TrackLight tl = trackLightList.get(section.toString() + String.valueOf(blockID));
-            if(lightState == Global.LightState.GO){
+            if (lightState == Global.LightState.GO) {
                 tl.setIsGo(true);
                 tl.setIsStop(false);
             } else {
@@ -347,7 +352,7 @@ public class TrackView extends Frame {
         } else if (section.toString() == "J") {
             TrackLight tl1 = trackLightList.get(section.toString() + "1");
             TrackLight tl2 = trackLightList.get(section.toString() + "2");
-            if(lightState == Global.LightState.GO){
+            if (lightState == Global.LightState.GO) {
                 tl1.setIsGo(true);
                 tl1.setIsStop(false);
                 tl2.setIsGo(true);
@@ -360,7 +365,7 @@ public class TrackView extends Frame {
             }
         } else {
             TrackLight tl = trackLightList.get(section.toString());
-            if(lightState == Global.LightState.GO){
+            if (lightState == Global.LightState.GO) {
                 tl.setIsGo(true);
                 tl.setIsStop(false);
             } else {
@@ -372,19 +377,28 @@ public class TrackView extends Frame {
     }
 
     private void updateSection(Global.Section sectionID, int id, boolean occupied) {
-        if(sectionID.toString().equals("J") && id == 62){
+        if (sectionID.toString().equals("J") && id == 62) {
             //light up K
             Section s = sectionList.get("K");
             s.setIsOccupied(occupied);
         } else {
             Section s = sectionList.get(sectionID.toString());
             s.setIsOccupied(occupied);
-            if(occupied){
+            if (occupied) {
                 s.addBlockToCurrentBlocks(id);
             } else {
                 s.removeBlockFromCurrentBlocks(id);
             }
-            
+
+        }
+    }
+
+    private void updateCrossing(com.rogueone.trackcon.entities.Crossing crossing) {
+        if(crossing.getCurrentCrossingState() == Global.CrossingState.ACTIVE){
+            this.crossing.setIsActive(true);
+            this.crossing.setToggleLights(this.trainSystem.getClock().getSecond() % 2);
+        } else {
+            this.crossing.setIsActive(false);
         }
     }
 
@@ -392,7 +406,7 @@ public class TrackView extends Frame {
      * The paint method provides the real magic. Here we cast the Graphics
      * object to Graphics2D to illustrate that we may use the same old graphics
      * capabilities with Graphics2D that we are used to using with Graphics.
-   *
+     *
      */
 //  public void paint(Graphics g) {
 //    //Here is how we used to draw a square with width
@@ -423,8 +437,6 @@ public class TrackView extends Frame {
 ////    g2d.fill(greenLight);
 ////    g2d.draw(greenLight);
 //  }
-    
-    
     class ShapePanel extends JPanel {
 
         // These instance variables are used to store the desired size
@@ -441,10 +453,8 @@ public class TrackView extends Frame {
 
         private boolean popped; // has popup menu been activated?
 
-        
-
         public ShapePanel(int pwid, int pht) {
-            
+
             selindex = -1;
 
             prefwid = pwid;	// values used by getPreferredSize method below
@@ -463,18 +473,18 @@ public class TrackView extends Frame {
 
         }  // end of constructor
 
-    void addShape(MyShape s) {
-        shapeList.add(s);
-        repaint();	// repaint so we can see new shape
-    }
-    
-    public void paintComponent(Graphics g) {
-        ShapePanel.super.paintComponent(g);         // don't forget this line!
-        Graphics2D g2d = (Graphics2D) g;
-        for (int i = 0; i < shapeList.size(); i++) {
-            shapeList.get(i).draw(g2d);
+        void addShape(MyShape s) {
+            shapeList.add(s);
+            repaint();	// repaint so we can see new shape
         }
-    }
+
+        public void paintComponent(Graphics g) {
+            ShapePanel.super.paintComponent(g);         // don't forget this line!
+            Graphics2D g2d = (Graphics2D) g;
+            for (int i = 0; i < shapeList.size(); i++) {
+                shapeList.get(i).draw(g2d);
+            }
+        }
 
         // This class is extending MouseAdapter.  MouseAdapter is a predefined
         // class that implements MouseListener in a trivial way (i.e. none of
