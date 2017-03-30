@@ -74,10 +74,11 @@
     <Component class="javax.swing.JComboBox" name="trainSelectBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel(((Line)(lineSelectBox.getSelectedItem())).getSections().toArray())&#xa;    " type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel(trainList)&#xa;    " type="code"/>
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;String&gt; trainStrings = new ArrayList&lt;String&gt;();&#xa;&#xa;for ( int i = 0; i &lt; trainSystem.getCTC().TrainTable.getRowCount(); i++){&#xa;    String newTrain = String.valueOf(trainSystem.getCTC().TrainTable.getValueAt(i, 1));&#xa;    trainStrings.add(newTrain);&#xa;}&#xa;&#xa;String[] trainList = new String[trainStrings.size()];&#xa;trainList = trainStrings.toArray(trainList);"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
       <Constraints>

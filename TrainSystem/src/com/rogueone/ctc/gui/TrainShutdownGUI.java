@@ -8,6 +8,7 @@ package com.rogueone.ctc.gui;
 import com.rogueone.trackmodel.Line;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainsystem.TrainSystem;
+import java.util.ArrayList;
 
 /**
  *
@@ -92,7 +93,16 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(lineSelectBox, gridBagConstraints);
 
-        trainSelectBox.setModel(new javax.swing.DefaultComboBoxModel(((Line)(lineSelectBox.getSelectedItem())).getSections().toArray())
+        ArrayList<String> trainStrings = new ArrayList<String>();
+
+        for ( int i = 0; i < trainSystem.getCTC().TrainTable.getRowCount(); i++){
+            String newTrain = String.valueOf(trainSystem.getCTC().TrainTable.getValueAt(i, 1));
+            trainStrings.add(newTrain);
+        }
+
+        String[] trainList = new String[trainStrings.size()];
+        trainList = trainStrings.toArray(trainList);
+        trainSelectBox.setModel(new javax.swing.DefaultComboBoxModel(trainList)
         );
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;

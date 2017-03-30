@@ -23,14 +23,13 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
     public TrainSystem trainSystem;
     private CommandTrackControlGUI ctcGUI;
 
-
-    
     public ChangeParametersGUI(CommandTrackControlGUI ctcGUI, TrainSystem ts){
 
         initComponents();
         this.trainSystem = ts;
         this.ctcGUI = ctcGUI;
-     
+        //getSpeedAndAuthority();
+   
     }
 
     private ChangeParametersGUI() {
@@ -251,6 +250,15 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        
+    private void getSpeedAndAuthority(){
+//        String currentSpeed = trainSystem.TrainModel().getCurrSpeed();
+//        String currentAuthority = trainSystem.TrainModel().getAuthority();
+//        
+//        CurrentSpeedField.setText(currentSpeed);
+//        CurrentAuthorityField.setText(currentAuthority);
+//        
+    }
     private void CurrentSpeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentSpeedFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CurrentSpeedFieldActionPerformed

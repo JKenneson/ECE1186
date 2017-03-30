@@ -949,19 +949,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      * calculates offsets in presence to determine train position
      */
     public void updateTrainTable(){
-        
-        
-//       ArrayList<String> trainPositionsList = new ArrayList<>();
-//       
+            
        for (int i = 0; i < TrainTable.getRowCount(); i++) {
             int tempID = (Integer)TrainTable.getValueAt(i, 1);
             String tempLocation = trainSystem.getTrainHandler().getBlockForTrain(tempID);
             TrainTable.setValueAt(tempLocation, i, 2);
             TrainTable.repaint();
        }
-//
-//       calculateNewTrainPositions(trainPositionsList);
-       
+    
     }
     
     /**
@@ -990,6 +985,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         throughputValue = trainsDispatched/hoursPassed;
         ThroughputField.setText(String.format("%.2f", throughputValue));
         updateTrainTable();
+        
+        if(SelectOperationMode2.getSelectedIndex() == 1){
+            getDispatchTimes();
+        }
+
     }
 
     
@@ -1021,24 +1021,29 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
-//    private void dispatchFromMBO(){
-//        while(SelectOperationMode2.getSelectedIndex() == 1){
-            //trainSystem.getMBO().
-//                int autoDispatchHour = trainSystem.getClock().getHour();
-//                int autoDispatchMinute = trainSystem.getClock().getMinute();
-//                int autoDispatchSecond = trainSystem.getClock().getSecond();
-//            autoDispatch(autoDispatchHour, autoDispatchMinute, autoDispatchSecond); 
-//        }
-//    }
-//    
-//    private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
-//        trainSystem.getMBO().getDispatch(autoDispatchHour, autoDispatchMinute, autoDispatchSecond);
-//        //int autoDispatchNumberCars = getNumberCars();
-//        //String autoDispatchLine = 
-//        trainSystem.dispatchTrain(autoDispatchSpeed, autoDispatchAuthority, autoDispatchNumberCars, autoDispatchLine, autoDispatchID);
-//
-//    }
-//    
+private void getDispatchTimes(){
+    
+        int autoDispatchHour = trainSystem.getClock().getHour();
+        int autoDispatchMinute = trainSystem.getClock().getMinute();
+        int autoDispatchSecond = trainSystem.getClock().getSecond();
+        autoDispatch(autoDispatchHour, autoDispatchMinute, autoDispatchSecond); 
+    
+}
+
+
+private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
+    ArrayList<String> dispatchTimes = trainSystem.getScheduler().getDispatchTimes();
+        for (String times : dispatchTimes){
+            String tempTime = autoDispatchHour + ":" + autoDispatchMinute + ":" + "am";
+            if( tempTime.equals(times)){
+                trainSystem.dispatchTrain(50, 100000, getNumberCars(), "GREEN", iterativeID++);
+                addRow("GREEN", "A", 1, iterativeID);
+
+            } 
+        }
+        
+}
+    
     
     private void ThroughputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputFieldActionPerformed
         // TODO add your handling code here:
@@ -1248,7 +1253,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     public void updateFailureTable(String passTrainLine, String trainPosition, String failureType) {
 
-        //check if value already exists
         String[] positionParts = trainPosition.split(":");
         String failureSection = positionParts[0];
         String failureBlock = positionParts[1];
@@ -1354,6 +1358,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
 
         if (evt.getClickCount() == 2) {
+            trainSystem.getTrackView().toFront();
+            //figure out how to propoerly do this
         }
 
 // TODO add your handling code here:
