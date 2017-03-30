@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -16,9 +17,8 @@ import java.awt.geom.Line2D;
  */
 public class Station implements MyShape {
 
-    private Polygon roof;
-    private Polygon building, platform;
-//    private Polygon door;
+    private Rectangle2D background;
+    private Polygon roof, building, extension, platform;
 
     // X, Y and size instance variables
     private int X, Y;
@@ -37,28 +37,31 @@ public class Station implements MyShape {
 
     //method that does most of the work creating the object
     private void setUp() {
+        this.background = new Rectangle2D.Float(X - ((3*size)/2), Y- (size/16), (2*size) - (size/4), 2*size + (size/16));
+        
         roof = new Polygon();
-        roof.addPoint(X - (size / 2), Y - (size / 2));
-//        roof.addPoint(X - ((size / 4) + (size / 2)), Y - ((8 * size / 10) + (size / 2)));
-        roof.addPoint(X - size, Y );
-        roof.addPoint(X, Y );
+        roof.addPoint(X , Y );
+        roof.addPoint(X , Y + (size/2) );
+        roof.addPoint(X - size, Y + (size/2) );
 
         building = new Polygon();
-        building.addPoint(X - (size / 4), Y);
-        building.addPoint(X - (size / 4) - (size / 2), Y);
-        building.addPoint(X - (size / 4) - (size / 2), Y + (size / 4));
-        building.addPoint(X - (size / 4), Y + (size / 4));
+        building.addPoint(X , Y + (size/2));
+        building.addPoint(X , Y + (size/2) + size);
+        building.addPoint(X - (size / 4),  Y + (size/2) + size);
+        building.addPoint(X - (size / 4), Y + (size/2));
+        
 
-//        door = new Polygon();
-//        door.addPoint(X - (4 * size / 10), Y);
-//        door.addPoint(X - (6 * size / 10), Y);
-//        door.addPoint(X - (6 * size / 10), Y - (4 * size / 10));
-//        door.addPoint(X - (4 * size / 10), Y - (4 * size / 10));
+        extension = new Polygon();
+        extension.addPoint(X - ((5*size) / 4) , Y + (size/2) + size);
+        extension.addPoint(X - ((5*size) / 4) , Y + (size/2) + size + (size/8));
+        extension.addPoint(X , Y + (size/2) + size + (size/8));
+        extension.addPoint(X , Y + (size/2) + size);
+        
         platform = new Polygon();
-        platform.addPoint(X + (size / 4), Y + (size / 4));
-        platform.addPoint(X + (size / 4) - size - (size / 2), Y + (size / 4));
-        platform.addPoint(X + (size / 4) - size - (size / 2), Y + (size / 4) + (size / 4));
-        platform.addPoint(X + (size / 4), Y + (size / 4) + (size / 4));
+        platform.addPoint(X , Y + (size/2) + size + (size/8));
+        platform.addPoint(X - size, Y + (size/2) + size + (size/8));
+        platform.addPoint(X - size, Y + (size/2) + size + (size/8) + (size/3));
+        platform.addPoint(X , Y + (size/2) + size + (size/8) + (size/3));
     }
 
     //true or false method for highlighting the shape
@@ -68,24 +71,20 @@ public class Station implements MyShape {
 //	}
     //draw method that determines the the color/fill of the shape
     public void draw(Graphics2D g) {
-        g.setColor(Color.RED);
-//        if (isHighlighted) {
-//            g.draw(roof);
-//        } else {
+        g.setColor(Color.WHITE);
+        g.draw(background);
+        g.setColor(Color.BLUE);
+        g.fill(background);
+        
+        g.setColor(Color.WHITE);
+        g.draw(roof);
         g.fill(roof);
-//        }
-        g.setColor(Color.gray);
-//        if (isHighlighted) {
-//            g.draw(building);
-//        } else {
+        g.draw(building);
         g.fill(building);
-//        }
-        g.setColor(Color.LIGHT_GRAY);
-//        if (isHighlighted) {
-//            g.draw(platform);
-//        } else {
+        g.draw(extension);
+        g.fill(extension);
+        g.draw(platform);
         g.fill(platform);
-//        }
 
     }
 
