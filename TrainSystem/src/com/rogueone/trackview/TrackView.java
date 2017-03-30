@@ -17,6 +17,7 @@ import com.rogueone.trackcon.entities.PresenceBlock;
 import com.rogueone.trackcon.entities.TrackConnection;
 import com.rogueone.trackcon.entities.UserSwitchState;
 import com.rogueone.trackmodel.Block;
+import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
 import java.awt.*;
 import java.awt.event.*;
@@ -112,12 +113,21 @@ public class TrackView extends Frame {
             Iterator blockIterator = occupiedBlocks.iterator();
             while (blockIterator.hasNext()) {
                 PresenceBlock pb = (PresenceBlock) blockIterator.next();
+//                double remainingAuthority = 1;
+//                for(TrainModel tm : this.trainSystem.getTrainHandler().getTrains()){
+//                    Block trainBlock = tm.getCurrBlock();
+//                    if(trainBlock.getID() == pb.getCurrBlock().getID()){
+//                        System.out.println("ID's Match authority = " + tm.getAuthority());
+//                        remainingAuthority = tm.getAuthority();
+//                    }
+//                }
                 if (pb.getPrevBlock().getType() == Global.PieceType.YARD) {
-                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true);
+                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, 1);
+                    
                 } else {
                     Block prevBlock = (Block) pb.getPrevBlock();
-                    updateSection(prevBlock.getSection().getSectionID(), prevBlock.getID(), false);
-                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true);
+                    updateSection(prevBlock.getSection().getSectionID(), prevBlock.getID(), false, (short) 0, 1);
+                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, 1);
                 }
 
             }
@@ -376,7 +386,7 @@ public class TrackView extends Frame {
 
     }
 
-    private void updateSection(Global.Section sectionID, int id, boolean occupied) {
+    private void updateSection(Global.Section sectionID, int id, boolean occupied, short authority, double remainingAuthority) {
         if (sectionID.toString().equals("J") && id == 62) {
             //light up K
             Section s = sectionList.get("K");
@@ -386,6 +396,16 @@ public class TrackView extends Frame {
             s.setIsOccupied(occupied);
             if (occupied) {
                 s.addBlockToCurrentBlocks(id);
+                if(authority < 0){
+                    s.setIsStopped(true);
+                } else {
+                    s.setIsStopped(false);
+                }
+                if(remainingAuthority <= 0){
+                    s.setHasAuthority(false);
+                } else {
+                    s.setHasAuthority(true);
+                }
             } else {
                 s.removeBlockFromCurrentBlocks(id);
             }

@@ -181,8 +181,8 @@ public class TrackControllerHandler {
         TrackController trackController = trackControllers.get(0);
         trackController.evaluateProceed();
         trackController.evaluateSwitches();
-        trackController.updateSummaryTab();
         trackController.evaluateCrossing();
+        trackController.updateSummaryTab();
         trainSystem.getTrackView().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
 
     }

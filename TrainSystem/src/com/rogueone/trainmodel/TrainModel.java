@@ -534,6 +534,9 @@ public class TrainModel {
             
         }
         
+//        if(this.authority <= 0)
+//            this.trainSystem.getTrackControllerHandler().updateTrack();
+        
     }
     
     
