@@ -202,6 +202,7 @@ public class Vitals {
         }
         
         this.eK = this.speedControl.getSetPoint(manualMode)-actualSpeed;   //Calc error difference
+        System.out.println("Set Point: " + this.speedControl.getSetPoint(manualMode));
         this.gps.setCurrSpeed(actualSpeed);
         
         this.uK = this.uK_1 + ((samplePeriod/2)*(this.eK+this.eK_1));
@@ -241,14 +242,12 @@ public class Vitals {
         this.kI = Ki;
     }
     
-   
-    
     /**
      * 
      * @return the set KP value
      */
     public int getKP() {
-        return kP;
+        return this.kP;
     }
 
     /**
@@ -256,7 +255,7 @@ public class Vitals {
      * @return the set KI value
      */
     public int getKI() {
-        return kI;
+        return this.kI;
     }
     
      public boolean isServiceBrakeActivated() {
@@ -270,6 +269,7 @@ public class Vitals {
     public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
         this.serviceBrakeActivated = serviceBrakeActivated;
         this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
+        System.out.println("Service Brake: " + serviceBrakeActivated);
     }
 
     /**

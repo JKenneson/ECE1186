@@ -145,7 +145,7 @@ public class TrainController {
         gui.TrainInfoText.setEditable(false);
         
         gui.ActualSpeedLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getCurrSpeed()));
-        gui.SetSpeedLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getSpeedLimit()*1.60934));
+        gui.SetSpeedLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getSpeedLimit()));
         gui.AuthorityLabel.setText(String.valueOf(this.vitals.getPrimary().getGPS().getAuthority()));
         gui.PowerUsedLabel.setText(String.valueOf(this.vitals.getPrimary().getPowerCommand()));
         gui.MaxPowerLabel.setText(String.valueOf(this.vitals.getPrimary().getMaxPower()));
@@ -180,6 +180,10 @@ public class TrainController {
     
     private ArrayList getTrainArray(){
         return null;
+    }
+    
+    public void approachingStation(){
+        //1. We know we are at least
     }
 
     /**

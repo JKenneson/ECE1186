@@ -34,16 +34,18 @@ public class TMR {
             powers[i] = vitals[i].calculatePower(actualSpeed, samplePeriod, manualMode);
         }
         
-        if(powers[0] == powers[1] || powers[0] == powers[2]){
-            return powers[0];
-        }
-        else if(powers[1] == powers[2]){
-            return powers[1];
-        }
-        else{
-            System.out.println("We should not get here... Probably stop train");
-            return this.calculatePower(actualSpeed, samplePeriod, manualMode);
-        }
+        return powers[0];
+        
+//        if(powers[0] == powers[1] || powers[0] == powers[2]){
+//            return powers[0];
+//        }
+//        else if(powers[1] == powers[2]){
+//            return powers[1];
+//        }
+//        else{
+//            System.out.println("We should not get here... Probably stop train");
+//            return this.calculatePower(actualSpeed, samplePeriod, manualMode);
+//        }
     }
     
     public Vitals getPrimary(){

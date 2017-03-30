@@ -43,7 +43,7 @@ public class SpeedControl{
      */
     public boolean update(boolean manualMode, boolean serviceBrakeActivated){
         double currSpeed = this.gps.getCurrSpeed();
-        if((currSpeed>this.findSetPoint(manualMode) && !manualMode) || serviceBrakeActivated){
+        if((currSpeed>this.findSetPoint(manualMode)) || serviceBrakeActivated){
             return true;
         }
         else{
