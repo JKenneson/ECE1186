@@ -70,13 +70,30 @@ public class Section implements MyShape {
         sectionTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
         sectionPath.transform(sectionTransform);
         com.rogueone.trackmodel.Section section = this.trainSystem.getTrackModel().getSection(Global.Line.GREEN, Global.Section.valueOf(this.sectionID));
-        int numberOfBlocksInSection = section.getBlocks().size();
-        sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size());
+        int numberOfBlocksInSection;
+        if(section.getSectionID() == Global.Section.K){
+            sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size() + 1);
+            numberOfBlocksInSection = section.getBlocks().size() + 1;
+        } else {
+            sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size());
+            numberOfBlocksInSection = section.getBlocks().size();
+        }
+        
 
         float lengthOfBlock = W / (float) numberOfBlocksInSection;
 
         Iterator blockIter = section.getBlocks().iterator();
         int blockCounter = 0;
+        if(section.getSectionID() == Global.Section.K){
+            Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
+            Path2D currentBlockPath = new Path2D.Double();
+            currentBlockPath.append(currentRec, false);
+            AffineTransform currentBlockTransform = new AffineTransform();
+            currentBlockTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
+            currentBlockPath.transform(currentBlockTransform);
+            sectionDivisions.put(62, currentBlockPath);
+            blockCounter++;
+        }
         while (blockIter.hasNext()) {
             Block currentBlock = (Block) blockIter.next();
             Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
@@ -87,7 +104,6 @@ public class Section implements MyShape {
             Path2D currentBlockPath = new Path2D.Double();
             currentBlockPath.append(currentRec, false);
             AffineTransform currentBlockTransform = new AffineTransform();
-//            currentBlockTransform.rotate(Math.toRadians(angle), (X + (blockCounter * lengthOfBlock)) + (lengthOfBlock / 2), Y + (H / 2));
             currentBlockTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
             currentBlockPath.transform(currentBlockTransform);
             sectionDivisions.put(currentBlock.getID(), currentBlockPath);
@@ -110,8 +126,6 @@ public class Section implements MyShape {
                     Entry<Integer, Boolean> blockEntry = (Entry<Integer, Boolean>) blockIter.next();
                     if (blockEntry.getValue() == true) {
                         Path2D blockPath = sectionDivisions.get(blockEntry.getKey());
-                        g.setColor(Color.GREEN);
-                        g.draw(blockPath);
                         if(isStopped){
                             g.setColor(Color.RED);
                         } else if (!isStopped && !hasAuthority){
@@ -119,6 +133,7 @@ public class Section implements MyShape {
                         } else {
                             g.setColor(Color.BLUE);
                         }
+                        g.draw(blockPath);
                         g.fill(blockPath);
                     }
                 }

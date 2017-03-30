@@ -562,6 +562,7 @@ public class TrainModel {
         else {
             this.trainController.setAuthority((short)(newAuthority/this.FEET_IN_A_METER));
             this.trainController.setSpeed(newSetSpeed);
+//            this.authority = newAuthority/this.FEET_IN_A_METER;
             
             //Reset the speed and authority of the track circuit
             this.currBlock.getTrackCircuit().speed = 0;

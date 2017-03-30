@@ -183,8 +183,13 @@ public class TrackControllerHandler {
         trackController.evaluateSwitches();
         trackController.evaluateCrossing();
         trackController.updateSummaryTab();
-        trainSystem.getTrackView().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
+//        trainSystem.getTrackView().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
 
+    }
+    
+    public void updateTrackView(){
+        TrackController trackController = trackControllers.get(0);
+        trainSystem.getTrackView().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
     }
 
 }

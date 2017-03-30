@@ -113,26 +113,26 @@ public class TrackView extends Frame {
             Iterator blockIterator = occupiedBlocks.iterator();
             while (blockIterator.hasNext()) {
                 PresenceBlock pb = (PresenceBlock) blockIterator.next();
-//                double remainingAuthority = 1;
-//                for(TrainModel tm : this.trainSystem.getTrainHandler().getTrains()){
-//                    Block trainBlock = tm.getCurrBlock();
-//                    if(trainBlock.getID() == pb.getCurrBlock().getID()){
-//                        System.out.println("ID's Match authority = " + tm.getAuthority());
-//                        remainingAuthority = tm.getAuthority();
-//                    }
-//                }
+                double remainingAuthority = 1;
+                for (TrainModel tm : this.trainSystem.getTrainHandler().getTrains()) {
+                    Block trainBlock = tm.getCurrBlock();
+                    if (trainBlock.getID() == pb.getCurrBlock().getID()) {
+                        System.out.println("ID's Match authority = " + tm.getAuthority());
+                        remainingAuthority = tm.getAuthority();
+                    }
+                }
                 if (pb.getPrevBlock().getType() == Global.PieceType.YARD) {
-                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, 1);
-                    
+                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, remainingAuthority);
+
                 } else {
                     Block prevBlock = (Block) pb.getPrevBlock();
                     updateSection(prevBlock.getSection().getSectionID(), prevBlock.getID(), false, (short) 0, 1);
-                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, 1);
+                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, remainingAuthority);
                 }
 
             }
         }
-        if(crossing != null){
+        if (crossing != null) {
             updateCrossing(crossing);
         }
         sp.repaint();
@@ -151,9 +151,6 @@ public class TrackView extends Frame {
         Switch switch3 = new Switch(35 + shiftAmount + 3, 51, 35 + shiftAmount + 3, 59, 15, 5, 45, -45, 3);
         sp.addShape(switch3);
         switch3.setIsDefault(true);
-//        Switch switch31 = new Switch(35 + shiftAmount + 3, 55, 35 + shiftAmount, 55, 15, 5, -45, 45);
-//        switch31.setIsDefault(false);
-//        sp.addShape(switch31);
         Section L = new Section(105 + shiftAmount, 55, 50, 5, 0, "L", -5, 15, this.trainSystem);
         sp.addShape(L);
         sectionList.put("L", L);
@@ -342,6 +339,9 @@ public class TrackView extends Frame {
         Yard yardEnd = new Yard(950, 0);
         sp.addShape(yardEnd);
 
+        LegendBox lb = new LegendBox(1, 200);
+        sp.addShape(lb);
+
     }
 
     private void updateSwitch(Integer switchID, boolean defaultOrAlternate) {
@@ -387,34 +387,34 @@ public class TrackView extends Frame {
     }
 
     private void updateSection(Global.Section sectionID, int id, boolean occupied, short authority, double remainingAuthority) {
+        Section s;
         if (sectionID.toString().equals("J") && id == 62) {
             //light up K
-            Section s = sectionList.get("K");
+            s = sectionList.get("K");
             s.setIsOccupied(occupied);
         } else {
-            Section s = sectionList.get(sectionID.toString());
+            s = sectionList.get(sectionID.toString());
             s.setIsOccupied(occupied);
-            if (occupied) {
-                s.addBlockToCurrentBlocks(id);
-                if(authority < 0){
-                    s.setIsStopped(true);
-                } else {
-                    s.setIsStopped(false);
-                }
-                if(remainingAuthority <= 0){
-                    s.setHasAuthority(false);
-                } else {
-                    s.setHasAuthority(true);
-                }
+        }
+        if (occupied) {
+            s.addBlockToCurrentBlocks(id);
+            if (authority < 0) {
+                s.setIsStopped(true);
             } else {
-                s.removeBlockFromCurrentBlocks(id);
+                s.setIsStopped(false);
             }
-
+            if (remainingAuthority <= 0) {
+                s.setHasAuthority(false);
+            } else {
+                s.setHasAuthority(true);
+            }
+        } else {
+            s.removeBlockFromCurrentBlocks(id);
         }
     }
 
     private void updateCrossing(com.rogueone.trackcon.entities.Crossing crossing) {
-        if(crossing.getCurrentCrossingState() == Global.CrossingState.ACTIVE){
+        if (crossing.getCurrentCrossingState() == Global.CrossingState.ACTIVE) {
             this.crossing.setIsActive(true);
             this.crossing.setToggleLights(this.trainSystem.getClock().getSecond() % 2);
         } else {

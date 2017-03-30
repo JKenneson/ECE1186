@@ -109,6 +109,7 @@ public class TrainSystem {
         this.trainHandler.updateTrains();
         this.trackModel.updateStationEnvironments();   
         this.ctc.updateGUI();
+        this.trackControllerHandler.updateTrackView();
     }
 
     public void updateTimer(int timeToRefresh) {
