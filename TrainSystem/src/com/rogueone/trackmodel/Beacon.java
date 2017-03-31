@@ -5,6 +5,8 @@
  */
 package com.rogueone.trackmodel;
 
+import com.rogueone.global.UnitConversion;
+
 /**
  *
  * @author Dan
@@ -38,7 +40,7 @@ public class Beacon {
     }
     
     public double getDistance() {
-        return distance;
+        return UnitConversion.metersToFeet(distance);
     }
     
     public boolean isOnRight() {
