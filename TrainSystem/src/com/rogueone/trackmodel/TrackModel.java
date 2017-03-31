@@ -7,9 +7,6 @@ import com.rogueone.trainsystem.TrainSystem;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -59,11 +56,28 @@ public class TrackModel {
         trackModelGUI = new TrackModelGUI(this);
     }
     
+    /**
+     * updates GUI to reflect any changes
+     * @author Dan Bednarczyk
+     */
     public void updateGUI() {
         trackModelGUI.updateSummaryPanel();
         trackModelGUI.updateDetailsPanel();
     }
     
+    /**
+     * Gets affiliated GUI
+     * @author Dan Bednarczyk
+     * @return the TrackModelGUI object
+     */
+    public TrackModelGUI getGUI() {
+        return trackModelGUI;
+    }
+    
+    /**
+     * Trigger updates for passengers and temperature at stations
+     * @author Dan Bednarczyk
+     */
     public void updateStationEnvironments() {
         for(Station station : stations) {
             station.updatePassengers();
@@ -71,10 +85,12 @@ public class TrackModel {
         }
     }
     
-    public TrackModelGUI getGUI() {
-        return trackModelGUI;
-    }
-    
+    /**
+     * Gets the first block after the yard on the specified line
+     * @author Dan Bednarczyk
+     * @param line the line that the train is entering
+     * @return the first block on the line
+     */
     public Block enterTrack(Global.Line line) {
         Block firstBlock = null;
         if(line == Global.Line.GREEN) { 
@@ -444,12 +460,13 @@ public class TrackModel {
             // Parse booleans
             boolean tempIsRightSide = rowTemp.getCell(5) != null && rowTemp.getCell(5).getStringCellValue().equals("Y");
             //Associate IDs with objects
-            Block tempBlock = TrackModel.this.getBlock(tempLineID, tempBlockID);
+            Block tempBlock = this.getBlock(tempLineID, tempBlockID);
+            Station tempStation = this.getStation(tempStationID);
             
             Beacon newBeacon = new Beacon(
                 tempBeaconID,
                 tempBlock,
-                tempStationID,
+                tempStation,
                 tempDistance,
                 tempIsRightSide);
             
@@ -614,7 +631,7 @@ public class TrackModel {
     /**
      * Gets specified Beacon.
      * @author Dan Bednarczyk
-     * @param beconID the ID of the beacon
+     * @param beaconID the ID of the beacon
      * @return the beacon specified, null otherwise
      */
     public Beacon getBeacon(int beaconID) {
@@ -624,6 +641,25 @@ public class TrackModel {
             }
         }
         System.err.println("Beacon " + beaconID + " not found.");
+        return null;
+    }
+    
+    /**
+     * Gets specified Beacon.
+     * @author Dan Bednarczyk
+     * @param stationID the ID of the beacon
+     * @return the beacon specified, null otherwise
+     */
+    public Station getStation(int stationID) {
+        if(stationID == 0) {
+            return null;
+        }
+        for (Station s : stations) {
+            if(s.getID() == stationID) {
+                return s;
+            }
+        }
+        System.err.println("Station " + stationID + " not found.");
         return null;
     }
     

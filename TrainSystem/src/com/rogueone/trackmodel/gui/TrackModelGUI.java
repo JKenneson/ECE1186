@@ -822,7 +822,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     }
                     String beaconRowData[] = { 
                         beacon.getID() + "", 
-                        beacon.getStationID() + "", 
+                        beacon.getStation().getName(), 
                         Global.decimalFormatter.format(beacon.getDistance()) + " ft",
                         side};
                     DefaultTableModel beaconModel = new DefaultTableModel(beaconColumnNames, 0);
