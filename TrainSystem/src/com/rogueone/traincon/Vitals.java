@@ -92,23 +92,23 @@ public class Vitals {
         
         //Calculate approaching station work
         boolean stopForStation = false;
+        this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         if(this.approachingStation){
             
             System.out.println("Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
-            if(this.distanceToStation < this.trainModel.safeStoppingDistance()){
-               stopForStation = true; 
-            }
-            else{
-                stopForStation = false;
-            }
+            stopForStation = (Math.abs(this.distanceToStation) < this.trainModel.safeStoppingDistance());
+            System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
             if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
+                System.out.println("Boarding...");
                 this.trainModel.boardPassengers(this.doorSide);
                 this.approachingStation = false;
                 stopForStation = false;
                 this.setServiceBrakeActivated(false);
             }
         }
+        
+        System.out.println("Manual: " + manualMode + " Service Brake: " + this.serviceBrakeActivated);
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         System.out.println("Exit");
     }
