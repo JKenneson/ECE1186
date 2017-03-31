@@ -5,6 +5,8 @@
  */
 package com.rogueone.traincon;
 
+import com.rogueone.trackmodel.Beacon;
+import com.rogueone.trackmodel.Station;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.trainsystem.TrainSystem;
@@ -38,6 +40,13 @@ public class Vitals {
     private boolean antennaStatus;
     private boolean powerStatus;
     private boolean serviceBrakeStatus;
+    
+    //Approaching station
+    private boolean approachingStation;
+    private boolean doorSide;
+    private double distanceToStation;
+    private String station;
+    private boolean stationStop;
     
     
     
@@ -80,7 +89,21 @@ public class Vitals {
         else if(!this.emergencyBrakeOverride){
             this.setEmergencyBrakeActivated(false);
         }
-        this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated));
+        
+        //Calculate approaching station work
+        boolean stopForStation = false;
+        if(this.approachingStation){
+            
+            System.out.println("Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
+            if(this.distanceToStation < this.trainModel.safeStoppingDistance()){
+               stopForStation = true; 
+            }
+            else{
+                stopForStation = false;
+            }
+            this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
+        }
+        this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
     }
     
     /**
@@ -192,10 +215,10 @@ public class Vitals {
      * @param samplePeriod The sampling period defined by the Train Model
      * @return power after calculations
      */
-    public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode, boolean approachingStation){ //should pull speed limit information from
+    public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
                         
-        if(approachingStation || this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0){
+        if(this.approachingStation || this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0){
             //Maybe I shouldn't do when grade is less than 0
             this.powerCommand = 0.0;
             return 0.0;
@@ -324,6 +347,18 @@ public class Vitals {
     
     public GPS getGPS() {
         return this.gps;
+    }
+    
+    public void receieveBeacon(Beacon beacon){
+        if(beacon.getStation() != null){
+            this.approachingStation = true;
+            this.doorSide = beacon.isOnRight();
+            this.distanceToStation = beacon.getDistance();
+            this.station = beacon.getStation().getName();
+        }
+        else{ //Do distance calculation work for red line
+            
+        } 
     }
         
 }

@@ -5,6 +5,7 @@
  */
 package com.rogueone.traincon;
 
+import com.rogueone.trackmodel.Beacon;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
 
@@ -28,12 +29,12 @@ public class TMR {
         this.primaryVital = vitals[0];
     }
     
-    public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode, boolean approachingStation){
+    public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){
 //        double [] powers = new double[3];
 //        for(int i = 0; i < 3; i++){
 //            powers[i] = vitals[i].calculatePower(actualSpeed, samplePeriod, manualMode);
 //        }
-        return this.primaryVital.calculatePower(actualSpeed, samplePeriod, manualMode, approachingStation);
+        return this.primaryVital.calculatePower(actualSpeed, samplePeriod, manualMode);
         //return powers[0];
         
 //        if(powers[0] == powers[1] || powers[0] == powers[2]){
@@ -54,6 +55,10 @@ public class TMR {
     
     public void update(boolean manualMode){
         this.primaryVital.update(manualMode);
+    }
+    
+    public void receiveBeacon(Beacon b){ //update for TMR work
+        this.primaryVital.receieveBeacon(b);
     }
     
 }

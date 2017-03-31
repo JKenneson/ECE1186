@@ -53,14 +53,6 @@ public class TrainController {
     private String block;
     private int passengers;
     
-    //Approaching station
-    private boolean approachingStation;
-    private boolean doorSide;
-    private double distanceToStation;
-    private Station station;
-    private boolean stationStop;
-    
-    
         
     /**
      * This method is the constructor that should be used to make a new Train controller.
@@ -434,7 +426,7 @@ public class TrainController {
     }     
     
     public double calculatePower(double actualSpeed, double samplePeriod){
-        return this.vitals.calculatePower(actualSpeed, samplePeriod, this.manualMode, this.approachingStation);
+        return this.vitals.calculatePower(actualSpeed, samplePeriod, this.manualMode);
     }
     
     /**
@@ -465,16 +457,9 @@ public class TrainController {
         this.setServiceBrake(!safe || this.vitals.getPrimary().isServiceBrakeActivated());
     }
     
-    public void receieveBeacon(Beacon beacon){
-        if(beacon.getStation() != null){
-            this.approachingStation = true;
-            this.doorSide = beacon.isOnRight();
-            this.distanceToStation = beacon.getDistance();
-            this.station = beacon.getStation();
-        }
-        else{ //Do distance calculation work for red line
-            
-        } 
+    public void receiveBeacon(Beacon b){
+        this.vitals.receiveBeacon(b);
     }
+    
     
 }
