@@ -522,7 +522,7 @@ public class TrackModel {
     public Block getBlock(Global.Line line, Global.Section section, int block) {
         for (Line l : lines) {
             if (l.getLineID() == line) {
-                for (Section s : sections) {
+                for (Section s : l.getSections()) {
                     if (s.getSectionID() == section) {
                         for (Block b : s.getBlocks()) {
                             if (b.getID() == block) {
@@ -547,7 +547,7 @@ public class TrackModel {
     public Block getBlock(Global.Line line, int block) {
         for (Line l : lines) {
             if (l.getLineID() == line) {
-                for (Section s : sections) {  
+                for (Section s : l.getSections()) {  
                     for (Block b : s.getBlocks()) {
                         if (b.getID() == block) {
                             return b;
@@ -725,6 +725,16 @@ public class TrackModel {
     public void printSwitches() {
         for(Switch s : switches) {
             System.out.println(s.toStringDetail());
+        }
+    }
+    
+    /**
+     * Prints top-level ArrayList of Beacons in detail.
+     * @author Dan Bednarczyk
+     */
+    public void printBeacons() {
+        for(Beacon b : beacons) {
+            System.out.println(b.toString());
         }
     }
 }

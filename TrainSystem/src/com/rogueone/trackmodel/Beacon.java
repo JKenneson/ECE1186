@@ -49,4 +49,9 @@ public class Beacon {
         return !rightSide;
     }
     
+    @Override
+    public String toString() {
+        return beaconID + "";
+    }
+    
 }
