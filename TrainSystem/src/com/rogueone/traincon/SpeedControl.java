@@ -43,7 +43,8 @@ public class SpeedControl{
      */
     public boolean update(boolean manualMode, boolean serviceBrakeActivated){
         double currSpeed = this.gps.getCurrSpeed();
-        if((currSpeed>this.findSetPoint(manualMode)) || serviceBrakeActivated){
+        System.out.println("CurrSpeed: " + currSpeed + " SetSpeed: " + this.findSetPoint(manualMode));
+        if((currSpeed>this.findSetPoint(manualMode))){
             return true;
         }
         else{
@@ -102,5 +103,7 @@ public class SpeedControl{
     public void setRecommendedSetPoint(byte recommendedSetPoint) {
         this.recommendedSetPoint = recommendedSetPoint;
     }
+    
+    
     
 }

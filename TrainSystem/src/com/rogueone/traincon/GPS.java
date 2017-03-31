@@ -66,9 +66,10 @@ public class GPS{
     }
         
         
-    public void update(double distanceTraveled, Block currBlock){
+    public void update(double distanceTraveled, Block currBlock, double currSpeed){
                 
         //Subtract the distance traveled from remaining authority
+        this.currSpeed = currSpeed;
         this.authority -= distanceTraveled;
         this.currBlock = currBlock;        
     }

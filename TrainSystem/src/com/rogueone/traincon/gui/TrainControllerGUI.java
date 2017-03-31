@@ -990,12 +990,12 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_ServiceBrakeToggleButtonActionPerformed
 
     private void SetKpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKpActionPerformed
-        this.trainController.vitals.getPrimary().setKP(Integer.valueOf(this.KpInput.getValue().toString()));
+        this.trainController.vitals.getPrimary().setKP(Double.valueOf(this.KpInput.getValue().toString()));
         this.NotificationsDisplay.append("\nKp Updated to " + this.trainController.vitals.getPrimary().getKP());
     }//GEN-LAST:event_SetKpActionPerformed
 
     private void SetKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetKiActionPerformed
-        this.trainController.vitals.getPrimary().setKI(Integer.valueOf(this.KiInput.getValue().toString()));
+        this.trainController.vitals.getPrimary().setKI(Double.valueOf(this.KiInput.getValue().toString()));
         this.NotificationsDisplay.append("\nKi Updated to " + this.trainController.vitals.getPrimary().getKI());
     }//GEN-LAST:event_SetKiActionPerformed
 

@@ -23,8 +23,8 @@ public class Vitals {
        
     private double powerCommand;
     private double maxPower;
-    private int kP;
-    private int kI;
+    private double kP;
+    private double kI;
     private double eK;
     private double eK_1;
     private double uK;
@@ -61,7 +61,7 @@ public class Vitals {
         this.powerStatus = true;
         this.serviceBrakeStatus = true;
         
-        this.kP = 100; //Seem to +=6 .5; +=12 1; +=17 1.5; +=19 2.0 assuming no passengers
+        this.kP = 100;
         this.kI = 2;
         this.eK = 0;
         this.eK_1 = 0;
@@ -74,7 +74,7 @@ public class Vitals {
     }
  
     public void update(boolean manualMode){
-        this.gps.update(this.trainModel.getDistanceTraveledFeet(), this.trainModel.getCurrBlock());
+        this.gps.update(this.trainModel.getDistanceTraveledFeet(), this.trainModel.getCurrBlock(), this.trainModel.getCurrSpeedMPH());
         if(this.gps.getAuthority()<0 || this.emergencyBrakeOverride)
             this.setEmergencyBrakeActivated(true);
         else if(!this.emergencyBrakeOverride){
@@ -195,21 +195,22 @@ public class Vitals {
     public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
                         
-        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)==0.0){
+        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0){
             //Maybe I shouldn't do when grade is less than 0
             this.powerCommand = 0.0;
             return 0.0;
         }
         
-        this.eK = this.speedControl.getSetPoint(manualMode)-actualSpeed;   //Calc error difference
-        this.gps.setCurrSpeed(actualSpeed);
+        this.eK = (this.speedControl.getSetPoint(manualMode)-actualSpeed);   //Calc error difference
+        //System.out.println("The diff in values is: " + this.eK);
+        //this.gps.setCurrSpeed(actualSpeed);
         
         this.uK = this.uK_1 + ((samplePeriod/2)*(this.eK+this.eK_1));
 
         this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
         if(this.powerCommand > this.maxPower){
             this.uK = this.uK_1;
-            this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
+            //this.powerCommand = (this.kP*this.eK) + (this.kI*this.uK);
             this.powerCommand = this.maxPower;
         }
         
@@ -227,7 +228,7 @@ public class Vitals {
      * @author Tyler Protivnak
      * @param Kp the new kp from the engineer
      */
-    public void setKP(int Kp){
+    public void setKP(double Kp){
         this.kP = Kp;
     }
     
@@ -237,7 +238,7 @@ public class Vitals {
      * @author Tyler Protivnak
      * @param Ki 
      */
-    public void setKI(int Ki){
+    public void setKI(double Ki){
         this.kI = Ki;
     }
     
@@ -245,7 +246,7 @@ public class Vitals {
      * 
      * @return the set KP value
      */
-    public int getKP() {
+    public double getKP() {
         return this.kP;
     }
 
@@ -253,7 +254,7 @@ public class Vitals {
      * 
      * @return the set KI value
      */
-    public int getKI() {
+    public double getKI() {
         return this.kI;
     }
     
@@ -268,7 +269,6 @@ public class Vitals {
     public void setServiceBrakeActivated(boolean serviceBrakeActivated) {
         this.serviceBrakeActivated = serviceBrakeActivated;
         this.trainModel.setServiceBrakeActivated(serviceBrakeActivated);
-        System.out.println("Set Service Brake: " + serviceBrakeActivated);
     }
 
     /**

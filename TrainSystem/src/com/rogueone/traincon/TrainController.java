@@ -435,14 +435,6 @@ public class TrainController {
     public void setManualMode(boolean manualMode) {
         this.manualMode = manualMode;
     }
-    
-    /**
-     * 
-     * @return Reference to the controllers train model
-     */
-    public TrainModel getTrainModel() {
-        return this.trainModel;
-    }
    
     public boolean isManualMode() {
         return manualMode;
@@ -461,7 +453,7 @@ public class TrainController {
     }
     
     public void safeToProceed(boolean safe){
-        this.setServiceBrake(!safe);
+        this.setServiceBrake(!safe || this.vitals.getPrimary().isServiceBrakeActivated());
     }
     
 }

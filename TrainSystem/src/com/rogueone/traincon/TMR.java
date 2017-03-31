@@ -29,12 +29,12 @@ public class TMR {
     }
     
     public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){
-        double [] powers = new double[3];
-        for(int i = 0; i < 3; i++){
-            powers[i] = vitals[i].calculatePower(actualSpeed, samplePeriod, manualMode);
-        }
-        
-        return powers[0];
+//        double [] powers = new double[3];
+//        for(int i = 0; i < 3; i++){
+//            powers[i] = vitals[i].calculatePower(actualSpeed, samplePeriod, manualMode);
+//        }
+        return this.primaryVital.calculatePower(actualSpeed, samplePeriod, manualMode);
+        //return powers[0];
         
 //        if(powers[0] == powers[1] || powers[0] == powers[2]){
 //            return powers[0];
