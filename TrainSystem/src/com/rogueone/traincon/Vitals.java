@@ -102,8 +102,15 @@ public class Vitals {
                 stopForStation = false;
             }
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
+            if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
+                this.trainModel.boardPassengers(this.doorSide);
+                this.approachingStation = false;
+                stopForStation = false;
+                this.setServiceBrakeActivated(false);
+            }
         }
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
+        System.out.println("Exit");
     }
     
     /**
@@ -353,12 +360,11 @@ public class Vitals {
         if(beacon.getStation() != null){
             this.approachingStation = true;
             this.doorSide = beacon.isOnRight();
-            this.distanceToStation = beacon.getDistance();
+            this.distanceToStation = beacon.getDistance() + 50;
             this.station = beacon.getStation().getName();
         }
         else{ //Do distance calculation work for red line
             
         } 
-    }
-        
+    }        
 }
