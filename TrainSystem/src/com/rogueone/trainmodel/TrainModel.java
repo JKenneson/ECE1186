@@ -526,7 +526,9 @@ public class TrainModel {
                     this.trainSystem.getTrackModel().updateGUI();
                     
                     //Check for beacon and send it to the Track Controller
-                    
+                    if(this.currBlock.getBeacon() != null) {
+                        this.trainController.receieveBeacon(this.currBlock.getBeacon());
+                    }
                 }
                 //Train has reached end of track
                 else if (this.nextBlock.getType() == Global.PieceType.YARD) {
