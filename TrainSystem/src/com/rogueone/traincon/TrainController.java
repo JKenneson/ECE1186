@@ -195,7 +195,7 @@ public class TrainController {
        
         this.vitals.update(this.manualMode);     
         if(!this.manualMode){
-            this.powerSystem.update();
+            this.powerSystem.update(this.vitals.getPrimary().getGPS().setLights());
         }
         this.updatePassengers();
     }

@@ -25,7 +25,7 @@ public class Clock {
     /**
      * Holds the AM or PM modifier to the time of the day to recognize if it is in the morning or evening
      */
-    private enum TimeOfDay {
+    public enum TimeOfDay {
         AM, PM;
     }
     

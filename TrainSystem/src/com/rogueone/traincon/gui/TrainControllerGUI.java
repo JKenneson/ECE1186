@@ -1012,12 +1012,12 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void EmergencyBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyBrakeToggleButtonActionPerformed
         if(this.EmergencyBrakeToggleButton.isSelected()){
             this.trainController.vitals.getPrimary().setEmergencyBrakeActivated(true);
-            this.trainController.getTrainModel().setEmergencyBrakeActivated(true);
+            //this.trainController.getTrainModel().setEmergencyBrakeActivated(true);
             this.NotificationsDisplay.append("\nEmergency Brake Activated");
         }
         else{
             this.trainController.vitals.getPrimary().setEmergencyBrakeActivated(false);
-            this.trainController.getTrainModel().setEmergencyBrakeActivated(false);
+            //this.trainController.getTrainModel().setEmergencyBrakeActivated(false);
             this.NotificationsDisplay.append("\nEmergency Brake Deactivated");
         }
     }//GEN-LAST:event_EmergencyBrakeToggleButtonActionPerformed

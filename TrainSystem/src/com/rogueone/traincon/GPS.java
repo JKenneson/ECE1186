@@ -5,6 +5,7 @@
  */
 package com.rogueone.traincon;
 
+import com.rogueone.global.Clock;
 import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.TrackPiece;
@@ -16,10 +17,11 @@ import com.rogueone.trainsystem.TrainSystem;
  */
 public class GPS{
     
-    
     public final double METERS_IN_A_MILE = 1609.34;     //1609.34 meters in a mile
     public final double FEET_IN_A_METER = 3.28;         //3.28 feet = 1 meter
     public final double SECONDS_IN_AN_HOUR = 3600;      //3600 seconds in an hour
+    
+    private TrainSystem trainSystem;
     
     //Train System reference
     public String trainID;
@@ -45,7 +47,9 @@ public class GPS{
      * @param trainSystem reference to the overall train system
      * @param trainID ID number of the train
      */
-    public GPS(int authority, TrainSystem trainSystem, String trainID){
+    public GPS(int authority, TrainSystem ts, String trainID){
+        
+        this.trainSystem = ts;
         
         //Speed and Authority
         this.currSpeed = 0;
@@ -123,5 +127,10 @@ public class GPS{
 
     public void setCurrSpeed(double currSpeed) {
         this.currSpeed = currSpeed;
+    }
+    
+    public boolean setLights(){
+       return (this.currBlock.isUnderground() || (8>this.trainSystem.getClock().getHour() && this.trainSystem.getClock().getTimeOfDay() == Clock.TimeOfDay.AM)
+                || (5<this.trainSystem.getClock().getHour() && this.trainSystem.getClock().getTimeOfDay() == Clock.TimeOfDay.PM));
     }
 }

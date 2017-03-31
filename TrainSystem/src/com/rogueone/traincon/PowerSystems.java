@@ -9,7 +9,7 @@ package com.rogueone.traincon;
  *
  * @author Tyler
  */
-public class PowerSystems implements Updateable{
+public class PowerSystems{
     
     private TrainController trainController;
     
@@ -49,7 +49,7 @@ public class PowerSystems implements Updateable{
      * 
      * @author Tyler Protivnak
      */
-    public void update(){ 
+    public void update(boolean lights){ 
         this.temperature = this.trainController.trainModel.getTemperature();
         
         if(this.temperature>72){
@@ -64,6 +64,9 @@ public class PowerSystems implements Updateable{
             this.airConditioningOn = false;
             this.heaterOn = false;            
         }
+        
+        this.setLightsOn(lights);
+        
     }
     
     /**
