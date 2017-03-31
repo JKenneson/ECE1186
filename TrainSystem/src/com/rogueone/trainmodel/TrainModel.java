@@ -543,9 +543,8 @@ public class TrainModel {
         
 //        if(this.authority <= 0)
 //            this.trainSystem.getTrackControllerHandler().updateTrack();
-        
+        //System.out.println("Safe stopping distance: " + this.safeStoppingDistance());
     }
-    
     
     /**
      * This method checks the track circuit if there is a new S&A to pass to the Train Controller
@@ -579,7 +578,6 @@ public class TrainModel {
             this.currBlock.getTrackCircuit().authority = 0;
         }
     }
-    
     
     /**
      * This method is called from the Track Controller when the train is at a station block with 0 speed
@@ -620,6 +618,33 @@ public class TrainModel {
         }
     }
             
+    /**
+     * This method will return the stopping distance of the train based on the current speed and the service brake activating
+     * @author Jonathan Kenneson
+     * @return The distance (in feet) it will take to fully stop the train with the service brake applied
+     */
+    public double safeStoppingDistance() {
+        /* Some nice equations:
+         * vf = vi + a*t
+         * s = vi*t + 1/2*a*t^2
+        */
+        
+        //Declare variables
+        double vf = 0.0;
+        double vi = this.currSpeed;
+        double a = this.SERVICE_BRAKE_DECEL;
+        double t, s;
+        
+        //Find the time to stop
+        t = (vf - vi) / a;
+        
+        //Find the safe stopping distance in meters
+        s = vi*t + (1/2)*a*(Math.pow(t, 2));
+        
+        double safeStoppingDistanceFeet = s * this.FEET_IN_A_METER;
+        return safeStoppingDistanceFeet;
+    }
+    
     /**
      * Returns the StringID
      * @author Jonathan Kenneson
