@@ -11,23 +11,41 @@ package com.rogueone.trackmodel;
  */
 public class Beacon {
     
-    private String message;
-    private boolean rightSide;
+    final private int beaconID;
+    final private Block block;
+    final private int stationID;
+    final private double distance;
+    final private boolean rightSide;
     
-    public Beacon(String newMessage, boolean newRightSide) {
-        message = newMessage;
+    public Beacon(int newID, Block newBlock, int newStationID, double newDistance, boolean newRightSide) {
+        beaconID = newID;
+        block = newBlock;
+        stationID = newStationID;
+        distance = newDistance;
         rightSide = newRightSide;
     }
     
-    public String getMessage() {
-        return message;
+    public int getID() {
+        return beaconID;
     }
     
-    public boolean onRight() {
+    public Block getBlock() {
+        return block;
+    }
+    
+    public int getStationID() {
+        return stationID;
+    }
+    
+    public double getDistance() {
+        return distance;
+    }
+    
+    public boolean isOnRight() {
         return rightSide;
     }
     
-    public boolean onLeft() {
+    public boolean isOnLeft(){
         return !rightSide;
     }
     

@@ -696,9 +696,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     crossingData = "Rasied";
                 }   
             }
-            String beaconData = "n/a";
+            String beaconData = "No";
             if(b.getBeacon() != null) {
-                beaconData = b.getBeacon().getMessage();
+                beaconData = Integer.toString(b.getBeacon().getID());
             }
             String blockRowData[] = { 
                     b.getID() + "", 

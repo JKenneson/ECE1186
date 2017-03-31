@@ -69,7 +69,7 @@ public class Block implements TrackPiece {
             int newStationID, double newLength, double newGrade, double newSpeedLimit,
             double newElevation, double newCumulativeElevation, 
             boolean newIsHead, boolean newIsTail, boolean containsCrossing, 
-            boolean newIsUnderground, String newBeaconMessage, boolean newBeaconRightSide) {
+            boolean newIsUnderground) {
         line = newLine;
         section = newSection;
         blockID = newBlockID;
@@ -93,7 +93,7 @@ public class Block implements TrackPiece {
         failurePowerOutage = false;
         failureTrackCircuit = false;
         occupied = false;
-        beacon = new Beacon(newBeaconMessage, newBeaconRightSide);
+        beacon = null;
         station = null;
         trackCircuit = new TrackCircuit();
         if(containsCrossing) {
@@ -543,6 +543,15 @@ public class Block implements TrackPiece {
     }
     
     /**
+    * Set beacon on Block.
+    * @author Dan Bednarczyk
+    * @param newBeacon beacon object
+    */
+    public void setBeacon(Beacon newBeacon) {
+        beacon = newBeacon;
+    }
+    
+    /**
     * Get station on Block.
     * @author Dan Bednarczyk
     * @return Station object on block, null otherwise
@@ -672,7 +681,7 @@ public class Block implements TrackPiece {
         sb.append(speedLimit);  
         if (beacon != null) {
             sb.append(", Beacon: ");
-            sb.append(beacon.getMessage());
+            sb.append(beacon.getID());
         }
         return sb.toString();
     }

@@ -27,6 +27,7 @@ public class TrackModel {
     private ArrayList<Block> blocks = new ArrayList<Block>();
     private ArrayList<Station> stations = new ArrayList<Station>();
     private ArrayList<Switch> switches = new ArrayList<Switch>();
+    private ArrayList<Beacon> beacons = new ArrayList<Beacon>();
     private Yard yard = new Yard();
     private TrackModelGUI trackModelGUI = null;
     private TrainSystem trainSystem = null;
@@ -103,6 +104,7 @@ public class TrackModel {
         blocks = new ArrayList<Block>();
         stations = new ArrayList<Station>();
         switches = new ArrayList<Switch>();
+        beacons = new ArrayList<Beacon>();
         yard = new Yard();
     }
     
@@ -169,6 +171,7 @@ public class TrackModel {
             parseBlocks(testWorkbook.getSheetAt(2));
             parseStations(testWorkbook.getSheetAt(3));
             parseSwitches(testWorkbook.getSheetAt(4));
+            parseBeacons(testWorkbook.getSheetAt(5));
             connectBlocks();
             
             System.out.println("Track loaded successfully.");
@@ -247,8 +250,6 @@ public class TrackModel {
             //Parse Enums
             Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(0).getStringCellValue());
             Global.Section tempSectionID = Global.Section.valueOf(rowTemp.getCell(1).getStringCellValue());
-            //Parse String
-            String tempBeaconMessage = (rowTemp.getCell(17) == null) ? "n/a" : rowTemp.getCell(17).getStringCellValue();
             //Parse ints
             int tempBlockID = (int) rowTemp.getCell(4).getNumericCellValue();
             int tempPortAID = (int) rowTemp.getCell(5).getNumericCellValue();
@@ -289,10 +290,7 @@ public class TrackModel {
                 tempIsHead, 
                 tempIsTail, 
                 tempContainsCrossing, 
-                tempIsUnderground,
-                tempBeaconMessage,
-                true //beacon side, not used yet
-                );
+                tempIsUnderground);
             addBlock(newBlock);
         }
     }
@@ -423,6 +421,55 @@ public class TrackModel {
         //Add reference to top-level array
         switches.add(sw);
         //Will be added to blocks in connectBlocks
+    }
+    
+    /**
+     * Parses Excel sheet into Beacon objects.
+     * @author Dan Bednarczyk
+     * @param sheet the sheet containing switch information
+     */
+    private void parseBeacons(XSSFSheet sheet) {
+ 
+        //Iterate over all rows in the first column
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row rowTemp = sheet.getRow(i);
+            // Parse ints
+            int tempBeaconID = (int) rowTemp.getCell(0).getNumericCellValue();
+            int tempBlockID = (int) rowTemp.getCell(2).getNumericCellValue();
+            int tempStationID = (int) rowTemp.getCell(3).getNumericCellValue();
+            // Parse enums
+            Global.Line tempLineID = Global.Line.valueOf(rowTemp.getCell(1).getStringCellValue());
+            // Parse doubles
+            double tempDistance = rowTemp.getCell(4).getNumericCellValue();
+            // Parse booleans
+            boolean tempIsRightSide = rowTemp.getCell(5) != null && rowTemp.getCell(5).getStringCellValue().equals("Y");
+            //Associate IDs with objects
+            Block tempBlock = TrackModel.this.getBlock(tempLineID, tempBlockID);
+            
+            Beacon newBeacon = new Beacon(
+                tempBeaconID,
+                tempBlock,
+                tempStationID,
+                tempDistance,
+                tempIsRightSide);
+            
+            addBeacon(newBeacon);
+        }     
+    }
+    
+    /**
+     * Adds Beacon to top-level array.
+     * @author Dan Bednarczyk
+     * @param beacon the beacon to be added
+     */
+    private void addBeacon(Beacon beacon) {
+        //Add reference to top-level array
+        beacons.add(beacon);
+        //Add reference to blocks
+        Block block = (Block)beacon.getBlock();
+        if(block != null) {
+            block.setBeacon(beacon);
+        }
     }
     
     //GETTER METHODS
@@ -561,6 +608,22 @@ public class TrackModel {
             }
         }
         System.err.println("Switch " + switchID + " not found.");
+        return null;
+    }
+    
+    /**
+     * Gets specified Beacon.
+     * @author Dan Bednarczyk
+     * @param beconID the ID of the beacon
+     * @return the beacon specified, null otherwise
+     */
+    public Beacon getBeacon(int beaconID) {
+        for (Beacon b : beacons) {
+            if(b.getID() == beaconID) {
+                return b;
+            }
+        }
+        System.err.println("Beacon " + beaconID + " not found.");
         return null;
     }
     
