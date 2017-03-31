@@ -192,10 +192,10 @@ public class Vitals {
      * @param samplePeriod The sampling period defined by the Train Model
      * @return power after calculations
      */
-    public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){ //should pull speed limit information from
+    public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode, boolean approachingStation){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
                         
-        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0){
+        if(approachingStation || this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0){
             //Maybe I shouldn't do when grade is less than 0
             this.powerCommand = 0.0;
             return 0.0;

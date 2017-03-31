@@ -58,6 +58,7 @@ public class TrainController {
     private boolean doorSide;
     private double distanceToStation;
     private Station station;
+    private boolean stationStop;
     
     
         
@@ -433,7 +434,7 @@ public class TrainController {
     }     
     
     public double calculatePower(double actualSpeed, double samplePeriod){
-        return this.vitals.calculatePower(actualSpeed, samplePeriod, this.manualMode);
+        return this.vitals.calculatePower(actualSpeed, samplePeriod, this.manualMode, this.approachingStation);
     }
     
     /**
