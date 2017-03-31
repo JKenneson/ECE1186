@@ -87,6 +87,7 @@ public class TrainModel {
     private double frictionForce;   //N -> (uk * m)
     private double acceleration;    //m/s^2
     //Station and Passengers
+    private Station stationObject;
     private String approachingStation;
     private int passengersAtStation;
     private int passengersOnBaord;
@@ -152,6 +153,7 @@ public class TrainModel {
         this.frictionForce = 0;
         this.acceleration = 0;
         //Station and Passengers
+        this.stationObject = null;
         this.approachingStation = "";
         this.passengersAtStation = 0;
         this.passengersOnBaord = 0;
@@ -527,7 +529,9 @@ public class TrainModel {
                     
                     //Check for beacon and send it to the Track Controller
                     if(this.currBlock.getBeacon() != null) {
-                        this.trainController.receieveBeacon(this.currBlock.getBeacon());
+                        //System.out.println("BEACON!");
+                        approachingStationBlock();
+                        this.trainController.receiveBeacon(this.currBlock.getBeacon());
                     }
                 }
                 //Train has reached end of track
@@ -539,6 +543,11 @@ public class TrainModel {
                System.err.println("Train cannot get TrackPiece following Block " + currBlock);    
             }
             
+        }
+        
+        //Updates for the gui
+        if(this.stationObject != null) {
+            this.passengersAtStation = this.stationObject.getWaitingPassengers();
         }
         
 //        if(this.authority <= 0)
@@ -554,7 +563,7 @@ public class TrainModel {
         byte newSetSpeed = this.currBlock.getTrackCircuit().speed;
         short newAuthority = this.currBlock.getTrackCircuit().authority;
         
-        System.out.println("Track Circuit for Train " + this.trainID + " -> Speed: " + newSetSpeed + " Authority: " + newAuthority);
+        //System.out.println("Track Circuit for Train " + this.trainID + " -> Speed: " + newSetSpeed + " Authority: " + newAuthority);
         
         //Safe to proceed, tell Train Controller we can proceed safely
         if(newSetSpeed == 0 && newAuthority == 0) {
@@ -579,6 +588,21 @@ public class TrainModel {
         }
     }
     
+    
+    private void approachingStationBlock() {
+        //Pick a random number of passengers on board to exit
+        Random randDepart = new Random();
+        if(this.passengersOnBaord <= 0 ) {
+            this.passengersDisembarking = 0;
+        }
+        else {
+            this.passengersDisembarking = randDepart.nextInt(this.passengersOnBaord);
+        }
+        this.approachingStation = this.currBlock.getBeacon().getStation().getName();
+        this.passengersAtStation = this.currBlock.getBeacon().getStation().getWaitingPassengers();
+        this.stationObject = this.currBlock.getBeacon().getStation();
+    }
+    
     /**
      * This method is called from the Track Controller when the train is at a station block with 0 speed
      * Will return if there is no station
@@ -600,22 +624,24 @@ public class TrainModel {
             this.setLeftDoorOpen(true);
         }
         
-        //Pick a random number of passengers on board to exit
-        Random randDepart = new Random();
-        int numToDepart = randDepart.nextInt(this.passengersOnBaord);
-        this.passengersOnBaord -= numToDepart;
+        this.passengersOnBaord -= this.passengersDisembarking;
+        this.passengersDisembarking = 0;
         
         //Ask the station for a number of passengers to enter
         int passengersToEnter = currStation.boardPassengers(this.passengersOnBaord);
         this.passengersOnBaord += passengersToEnter;
         
-        //To wrap up, close the doors and return
+        //To wrap up, close the doors and remove info on the gui
         if(doorSide) {
             this.setRightDoorOpen(false);
         }
         else {
             this.setLeftDoorOpen(false);
         }
+        
+        this.approachingStation = "";
+        this.passengersAtStation = 0;
+        this.stationObject = null;
     }
             
     /**

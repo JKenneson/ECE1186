@@ -117,7 +117,7 @@ public class TrackView extends Frame {
                 for (TrainModel tm : this.trainSystem.getTrainHandler().getTrains()) {
                     Block trainBlock = tm.getCurrBlock();
                     if (trainBlock.getID() == pb.getCurrBlock().getID()) {
-                        System.out.println("ID's Match authority = " + tm.getAuthority());
+                        //System.out.println("ID's Match authority = " + tm.getAuthority());
                         remainingAuthority = tm.getAuthority();
                     }
                 }
