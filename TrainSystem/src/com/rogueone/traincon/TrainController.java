@@ -465,17 +465,15 @@ public class TrainController {
     }
     
     public void receieveBeacon(Beacon beacon){
-        if(beacon.getStationID() != null){
+        if(beacon.getStation() != null){
             this.approachingStation = true;
             this.doorSide = beacon.isOnRight();
             this.distanceToStation = beacon.getDistance();
-            this.station = beacon.getStationID();
+            this.station = beacon.getStation();
         }
         else{ //Do distance calculation work for red line
             
-        }
-        
-        
+        } 
     }
     
 }
