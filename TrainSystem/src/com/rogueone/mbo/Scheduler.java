@@ -5,8 +5,8 @@
  */
 package com.rogueone.mbo;
 import static com.rogueone.mbo.Mbo.convertTime;
-import static com.rogueone.mbo.Mbo.displayCurrentTrains;
 import static com.rogueone.mbo.Mbo.incrementTime;
+import static com.rogueone.mbo.Mbo.mboGui;
 import java.io.File;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.mbo.gui.TrainScheduleGUI;
-import com.rogueone.mbo.MboTrain;
 import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.table.*;
 public class Scheduler {
@@ -28,8 +27,13 @@ public class Scheduler {
      private static ArrayList<String> greenDispatchTimes = new ArrayList<String>();
      public static MovingBlockGUI mboGui = Mbo.mboGui;
      public static TrainScheduleGUI scheduleGUI = new TrainScheduleGUI();
+     public TrainSystem trainSystem;
     
-      
+      public Scheduler(TrainSystem ts) throws IOException, InvalidFormatException {
+       trainSystem = ts;
+       readRedSchedule(file);
+       readPersonnelSchedule(file);
+   }
     /**
      * Reads th excel file for the personnel schedule, then outputs it to the GUI
      * @param gui MBO GUI to be updated with personnel schedule information
@@ -83,6 +87,7 @@ public class Scheduler {
      */
     public static void readRedSchedule( File file) throws IOException, InvalidFormatException{
         //scheduleGUI.setVisible(true);
+        redDispatchTimes.clear();
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet redSchedule = workbook.getSheetAt(1);
         int numTrains = redSchedule.getLastRowNum();
@@ -93,8 +98,9 @@ public class Scheduler {
         int i,j;
         String oldInfo = "";
         String info = "";
+        //odds
         for(i = 0; i < numTrains+1; i++){
-            if((i)%2==0){
+            if((i+1)%2==0){
             Row currRow = redSchedule.getRow(i);
             if(currRow != null){
             for(j = 0; j < 11; j++){
@@ -114,7 +120,7 @@ public class Scheduler {
                             oldInfo = info;
                             info = convertTime(info);
                             redDispatchTimes.add(info);
-                            System.out.println(info);
+                            //System.out.println(info);
                         }
                     
                 }
@@ -134,7 +140,7 @@ public class Scheduler {
         
         //evens only
         for(i = 0; i < numTrains+1; i++){
-            if((i+1)%2 == 0){
+            if((i)%2 == 0){
             Row currRow = redSchedule.getRow(i);
             if(currRow != null){
             for(j = 0; j < 11; j++){
@@ -154,7 +160,7 @@ public class Scheduler {
                             oldInfo = info;
                             info = convertTime(info);
                             redDispatchTimes.add(info);
-                            System.out.println(info);
+                            //System.out.println(info);
                         }
                     
                 }

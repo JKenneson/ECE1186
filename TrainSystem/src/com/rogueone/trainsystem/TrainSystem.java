@@ -82,6 +82,7 @@ public class TrainSystem {
         this.trackControllerHandler = new TrackControllerHandler(this);
         this.trainHandler = new TrainHandler(this);
         this.mbo = new Mbo(this);
+        this.scheduler = new Scheduler(this);
         this.trackView = new TrackView(this, Global.Line.GREEN);
         
         // Initialize GUI

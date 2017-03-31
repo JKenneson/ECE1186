@@ -6,23 +6,10 @@
 package com.rogueone.mbo.gui;
 import com.rogueone.mbo.*;
 import java.io.File;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.*;
-import java.io.*;
-import org.apache.poi.ss.usermodel.Row;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.IOException;
-import com.rogueone.mbo.gui.MovingBlockGUI;
-import com.rogueone.mbo.gui.TrainScheduleGUI;
-import com.rogueone.global.Global;
 import com.rogueone.trainsystem.TrainSystem;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.*;;
 /**
@@ -31,13 +18,15 @@ import javax.swing.table.*;;
  */
 public class MovingBlockGUI extends javax.swing.JPanel {
 
+    private TrainSystem trainSystem;
 private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
-Mbo mbo = TrainSystem.getMBO();
+Mbo mbo = trainSystem.getMBO();
 
     /**
      * Creates new form MovingBlockGUI
      */
-    public MovingBlockGUI() {
+    public MovingBlockGUI(TrainSystem trainSystem) {
+        this.trainSystem = trainSystem;
         initComponents();
     }
 
@@ -574,14 +563,14 @@ Mbo mbo = TrainSystem.getMBO();
 
     private void MboOkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton1ActionPerformed
         Mbo mbo = null;
-        mbo = TrainSystem.getMBO();
+        mbo = trainSystem.getMBO();
         mbo.updateSpeed();
     }//GEN-LAST:event_MboOkButton1ActionPerformed
 
     private void TrainDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainDropdownActionPerformed
         //MovingBlockGUI gui = new MovingBlockGUI();
         Mbo mbo = null;
-        mbo = TrainSystem.getMBO();
+        mbo = trainSystem.getMBO();
       //int trainIdIndex = gui.TrainDropdown.getSelectedIndex();
       //String trainID = String.valueOf(gui.TrainDropdown.getSelectedItem());
        //System.out.println(trainIdIndex);
@@ -601,7 +590,7 @@ Mbo mbo = TrainSystem.getMBO();
         JFileChooser scheduleChooser = new JFileChooser("src/com/rogueone/assets");
         int returnVal = scheduleChooser.showOpenDialog(this);
         TrainScheduleGUI trainGUI = new TrainScheduleGUI();
-        Mbo mbo = TrainSystem.getMBO();
+        Mbo mbo = trainSystem.getMBO();
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File newFile = scheduleChooser.getSelectedFile();
             try {
@@ -638,7 +627,7 @@ Mbo mbo = TrainSystem.getMBO();
 
     private void MboOkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton2ActionPerformed
         Mbo mbo = null;
-        mbo = TrainSystem.getMBO();
+        mbo = trainSystem.getMBO();
             //File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
             if(NumTrainsRadio.isSelected()){
                 String numTrainStr = NumTrainsInput.getText();
@@ -665,7 +654,7 @@ Mbo mbo = TrainSystem.getMBO();
 
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
          TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
-         Mbo mbo = TrainSystem.getMBO();
+         Mbo mbo = trainSystem.getMBO();
          
          try{
          Scheduler.readRedSchedule(file);
@@ -675,13 +664,16 @@ Mbo mbo = TrainSystem.getMBO();
              
          }
         //trainSchedule.setVisible(true);
+       ArrayList<String> a = new ArrayList<String>();
+       a = trainSystem.getScheduler().getDispatchTimes();
+       System.out.println(a.get(0));
     }//GEN-LAST:event_DetailedScheduleButtonActionPerformed
 
     private void trainDeployButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainDeployButtonActionPerformed
         Mbo mbo = null;
-        mbo = TrainSystem.getMBO();
+        mbo = trainSystem.getMBO();
         DefaultTableModel model = (DefaultTableModel)trainTable.getModel();
-        MovingBlockGUI gui = new MovingBlockGUI();
+        MovingBlockGUI gui = new MovingBlockGUI(trainSystem);
         try{
            mbo.dispatch(); 
         }

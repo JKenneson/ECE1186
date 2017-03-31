@@ -5,21 +5,17 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 2/16/17
+ * @modification date 2/31/17
  */
 package com.rogueone.mbo;
 import java.io.File;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.*;
-import java.io.*;
 import org.apache.poi.ss.usermodel.Row;
 import java.util.ArrayList;
 import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
-import com.rogueone.mbo.gui.TrainScheduleGUI;
 import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.table.*;
 
@@ -30,7 +26,7 @@ import javax.swing.table.*;
 public class Mbo{
     
      private static ArrayList<MboTrain> trainList = new ArrayList<MboTrain>();
-    public static MovingBlockGUI mboGui = new MovingBlockGUI();
+    public static MovingBlockGUI mboGui;
    private static File file = new File("src/com/rogueone/assets/schedule.xlsx");
    private static int trainIndex;
   private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
@@ -40,8 +36,9 @@ public class Mbo{
    
    public Mbo(TrainSystem ts) throws IOException, InvalidFormatException {
        trainSystem = ts;
-       System.out.println("Reading Schedules");
-        Scheduler.readPersonnelSchedule(file);
+       //System.out.println("Reading Schedules");
+        //Scheduler.readPersonnelSchedule(file);
+        mboGui = new MovingBlockGUI(trainSystem);
    }
     
    public MovingBlockGUI getGUI() throws IOException, InvalidFormatException{
