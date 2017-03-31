@@ -13,6 +13,7 @@ import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
+import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackPiece;
 import com.rogueone.traincon.TrainController;
 import com.rogueone.traincon.gui.TrainControllerGUI;
@@ -21,6 +22,7 @@ import com.sun.javafx.image.impl.IntArgb;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Random;
 import javax.swing.*;
 
 /**
@@ -522,6 +524,9 @@ public class TrainModel {
                     this.currBlock.setOccupancy(true);
                     this.trainSystem.getTrackControllerHandler().updateTrack();
                     this.trainSystem.getTrackModel().updateGUI();
+                    
+                    //Check for beacon and send it to the Track Controller
+                    
                 }
                 //Train has reached end of track
                 else if (this.nextBlock.getType() == Global.PieceType.YARD) {
@@ -573,6 +578,45 @@ public class TrainModel {
         }
     }
     
+    
+    /**
+     * This method is called from the Track Controller when the train is at a station block with 0 speed
+     * Will return if there is no station
+     * @author Jonathan Kenneson
+     * @param doorSide false - left side, true - right side
+     */
+    public void boardPassengers(boolean doorSide) {
+        //Return if we are not on a station block
+        Station currStation = this.currBlock.getStation();
+        if(currStation == null) {
+            return;
+        }
+        
+        //First, open the doors
+        if(doorSide) {
+            this.setRightDoorOpen(true);
+        }
+        else {
+            this.setLeftDoorOpen(true);
+        }
+        
+        //Pick a random number of passengers on board to exit
+        Random randDepart = new Random();
+        int numToDepart = randDepart.nextInt(this.passengersOnBaord);
+        this.passengersOnBaord -= numToDepart;
+        
+        //Ask the station for a number of passengers to enter
+        int passengersToEnter = currStation.boardPassengers(this.passengersOnBaord);
+        this.passengersOnBaord += passengersToEnter;
+        
+        //To wrap up, close the doors and return
+        if(doorSide) {
+            this.setRightDoorOpen(false);
+        }
+        else {
+            this.setLeftDoorOpen(false);
+        }
+    }
             
     /**
      * Returns the StringID
