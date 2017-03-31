@@ -5,6 +5,8 @@
  */
 package com.rogueone.traincon;
 
+import com.rogueone.trackmodel.Beacon;
+import com.rogueone.trackmodel.Station;
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.TrainModel; //Should I it this way or how???
 import com.rogueone.trainsystem.TrainSystem;
@@ -50,6 +52,12 @@ public class TrainController {
     private String section;
     private String block;
     private int passengers;
+    
+    //Approaching station
+    private boolean approachingStation;
+    private boolean doorSide;
+    private double distanceToStation;
+    private Station station;
     
     
         
@@ -454,6 +462,20 @@ public class TrainController {
     
     public void safeToProceed(boolean safe){
         this.setServiceBrake(!safe || this.vitals.getPrimary().isServiceBrakeActivated());
+    }
+    
+    public void receieveBeacon(Beacon beacon){
+        if(beacon.getStationID() != null){
+            this.approachingStation = true;
+            this.doorSide = beacon.isOnRight();
+            this.distanceToStation = beacon.getDistance();
+            this.station = beacon.getStationID();
+        }
+        else{ //Do distance calculation work for red line
+            
+        }
+        
+        
     }
     
 }
