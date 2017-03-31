@@ -624,12 +624,12 @@ public class TrainModel {
             this.setLeftDoorOpen(true);
         }
         
-        this.passengersOnBaord -= this.passengersDisembarking;
+        this.passengersOnBaord = this.passengersOnBaord - this.passengersDisembarking;
         this.passengersDisembarking = 0;
         
         //Ask the station for a number of passengers to enter
-        int passengersToEnter = currStation.boardPassengers(this.passengersOnBaord);
-        this.passengersOnBaord += passengersToEnter;
+        int passengersToEnter = (this.passengerMaxCapacity - this.passengersOnBaord) - currStation.boardPassengers(this.passengerMaxCapacity - this.passengersOnBaord);
+        this.passengersOnBaord = this.passengersOnBaord + passengersToEnter;
         
         //To wrap up, close the doors and remove info on the gui
         if(doorSide) {
