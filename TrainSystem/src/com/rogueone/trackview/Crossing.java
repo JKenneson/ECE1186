@@ -65,12 +65,14 @@ public class Crossing implements MyShape {
     @Override
     public void draw(Graphics2D g) {
 
-        g.setColor(Color.BLACK);
-        g.draw(firstCrossPath);
-        g.draw(secondCrossPath);
         g.setColor(Color.WHITE);
         g.fill(firstCrossPath);
+        g.setColor(Color.BLACK);
+        g.draw(firstCrossPath);
+        g.setColor(Color.WHITE);
         g.fill(secondCrossPath);
+        g.setColor(Color.BLACK);
+        g.draw(secondCrossPath);
         g.setColor(Color.red);
         g.draw(redLight1);
         g.draw(redLight2);
