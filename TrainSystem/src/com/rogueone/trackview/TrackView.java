@@ -424,11 +424,9 @@ public class TrackView extends Frame {
         Section O = new Section(380 + shiftAmount, 80, 50, 5, -45, "O", 5, 16, this.trainSystem);
         sp.addShape(O);
         sectionList.put("O", O);
-        
         Section P = new Section(350 + shiftAmount, 100, 30, 5, 0, "P", -5, 16, this.trainSystem);
         sp.addShape(P);
         sectionList.put("P", P);
-        
         Section Q = new Section(300 + shiftAmount, 80, 50, 5, 45, "Q", -15, 16, this.trainSystem);
         sp.addShape(Q);
         sectionList.put("Q", Q);
@@ -436,20 +434,51 @@ public class TrackView extends Frame {
         // Second wayside
         Section R = new Section(580 + shiftAmount, 80, 50, 5, -45, "R", 5, 16, this.trainSystem);
         sp.addShape(R);
-        sectionList.put("R", R);
-        
+        sectionList.put("R", R);   
         Section S = new Section(550 + shiftAmount, 100, 30, 5, 0, "S", -5, 16, this.trainSystem);
         sp.addShape(S);
-        sectionList.put("S", S);
-        
+        sectionList.put("S", S);  
         Section T = new Section(500 + shiftAmount, 80, 50, 5, 45, "T", -15, 16, this.trainSystem);
         sp.addShape(T);
         sectionList.put("T", T);  
         
+        // Switches
+        Switch switch1 = new Switch(25 + shiftAmount + 15, 50, 30 + shiftAmount + 23, 57, 12, 5, 45, 0, 12);
+        sp.addShape(switch1);
+        switch1.setIsDefault(true);
+        Switch switch2 = new Switch(150 + shiftAmount + 15, 57, 150 + shiftAmount + 23, 57, 12, 5, -45, 0, 6);
+        sp.addShape(switch2);
+        switch2.setIsDefault(true);
+        Switch switch3 = new Switch(285 + shiftAmount + 15, 57, 290 + shiftAmount + 23, 57, 12, 5, 45, 0, 7);
+        sp.addShape(switch3);
+        switch3.setIsDefault(true);
+        Switch switch4 = new Switch(405 + shiftAmount + 15, 57, 405 + shiftAmount + 23, 57, 12, 5, -45, 0, 8);
+        sp.addShape(switch4);
+        switch4.setIsDefault(true);
+        Switch switch5 = new Switch(485 + shiftAmount + 15, 57, 490 + shiftAmount + 23, 57, 12, 5, 45, 0, 9);
+        sp.addShape(switch5);
+        switch5.setIsDefault(true);
+        Switch switch6 = new Switch(605 + shiftAmount + 15, 57, 605 + shiftAmount + 23, 57, 12, 5, -45, 0, 10);
+        sp.addShape(switch6);
+        switch6.setIsDefault(true);
+        Switch switch7 = new Switch(690 + shiftAmount + 15, 57, 690 + shiftAmount + 23, 57, 12, 5, 45, 0, 11);
+        sp.addShape(switch7);
+        switch7.setIsDefault(true);
+        
+        //TrackLights
+        TrackLight lightZZ = new TrackLight(860 + shiftAmount + 38, 2, 135, false);
+        sp.addShape(lightZZ);
+        trackLightList.put("ZZ", lightZZ);
 
+        //Stations
+        Station stationGlenbury = new Station(108, 36, 8);
+        sp.addShape(stationGlenbury);
+        
+        //Crossings
         crossing = new Crossing(670, 30);
         sp.addShape(crossing);
 
+        //Yards
         Yard yardStart = new Yard(0, 0);
         sp.addShape(yardStart);
 
