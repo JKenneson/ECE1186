@@ -471,8 +471,22 @@ public class TrackView extends Frame {
         trackLightList.put("ZZ", lightZZ);
 
         //Stations
-        Station stationGlenbury = new Station(108, 36, 8);
-        sp.addShape(stationGlenbury);
+        Station stationShadyside = new Station(70, 100, 8);
+        sp.addShape(stationShadyside);
+        Station stationHerron = new Station(210, 36, 8);
+        sp.addShape(stationHerron);
+        Station stationSwissvale = new Station(265, 36, 8);
+        sp.addShape(stationSwissvale);
+        Station stationPenn = new Station(320, 36, 8);
+        sp.addShape(stationPenn);
+        Station stationSteelPlaza = new Station(450, 36, 8);
+        sp.addShape(stationSteelPlaza);
+        Station stationFirstAve = new Station(650, 36, 8);
+        sp.addShape(stationFirstAve);
+        Station stationStationSquare = new Station(715, 36, 8);
+        sp.addShape(stationStationSquare);
+        Station stationSouthHills = new Station(860, 100, 8);
+        sp.addShape(stationSouthHills);
         
         //Crossings
         crossing = new Crossing(670, 30);
