@@ -101,7 +101,7 @@ public class TrackView extends Frame {
     }
 
     public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing) {
-/*
+
         if (switchStates != null) {
             Iterator listIterator = switchStates.iterator();
             while (listIterator.hasNext()) {
@@ -154,7 +154,7 @@ public class TrackView extends Frame {
             updateCrossing(crossing);
         }
         sp.repaint();
-        */
+        
     }
 
     private void initializeGreenLine() {
@@ -365,82 +365,80 @@ public class TrackView extends Frame {
     
     private void initializeRedLine() {
         
-        //startX, startY, width, height, angle, sectionID, xShift, yShift, ts
-        
         // Branch to Yard
         Section U = new Section(0 + shiftAmount, 30, 50, 5, 45, "U", -15, 16, this.trainSystem);
         sp.addShape(U);
-        sectionList.put("U", U);
+        //sectionList.put("U", U);
         
         // First loop
         Section A = new Section(120 + shiftAmount, 80, 50, 5, -45, "A", 5, 16, this.trainSystem);
         sp.addShape(A);
-        sectionList.put("A", A);
+        //sectionList.put("A", A);
         Section B = new Section(90 + shiftAmount, 100, 30, 5, 0, "B", -5, 16, this.trainSystem);
         sp.addShape(B);
-        sectionList.put("B", B);
+        //sectionList.put("B", B);
         Section C = new Section(40 + shiftAmount, 80, 50, 5, 45, "C", -15, 16, this.trainSystem);
         sp.addShape(C);
-        sectionList.put("C", C);
+        //sectionList.put("C", C);
         Section D = new Section(50 + shiftAmount, 55, 50, 5, 0, "D", -5, 15, this.trainSystem);
         sp.addShape(D);
-        sectionList.put("D", D);
+        //sectionList.put("D", D);
         Section E = new Section(105 + shiftAmount, 55, 50, 5, 0, "E", -5, 15, this.trainSystem);
         sp.addShape(E);
-        sectionList.put("E", E);
+        //sectionList.put("E", E);
         
         // Main strech
         Section F = new Section(160 + shiftAmount, 55, 50, 5, 0, "F", -5, 15, this.trainSystem);
         sp.addShape(F);
-        sectionList.put("F", F);
+        //sectionList.put("F", F);
         Section G = new Section(215 + shiftAmount, 55, 50, 5, 0, "G", -5, 15, this.trainSystem);
         sp.addShape(G);
-        sectionList.put("G", G);
+        //sectionList.put("G", G);
         Section H = new Section(270 + shiftAmount, 55, 350, 5, 0, "H", -5, -15, this.trainSystem);
         sp.addShape(H);
-        sectionList.put("H", H);
+        //sectionList.put("H", H);
         Section I = new Section(625 + shiftAmount, 55, 50, 5, 0, "I", -5, 15, this.trainSystem);
         sp.addShape(I);
-        sectionList.put("I", I);
+        //sectionList.put("I", I);
         
         // Second loop
         Section J = new Section(680 + shiftAmount, 55, 50, 5, 0, "J", -5, 15, this.trainSystem);
         sp.addShape(J);
-        sectionList.put("J", J);
+        //sectionList.put("J", J);
         Section K = new Section(735 + shiftAmount, 55, 50, 5, 0, "K", -5, 15, this.trainSystem);
         sp.addShape(K);
-        sectionList.put("K", K);
+        //sectionList.put("K", K);
         Section L = new Section(785 + shiftAmount, 75, 50, 5, 45, "L", -5, 15, this.trainSystem);
         sp.addShape(L);
-        sectionList.put("L", L);
+        //sectionList.put("L", L);
         Section M = new Section(755 + shiftAmount, 100, 50, 5, 0, "M", -5, 15, this.trainSystem);
         sp.addShape(M);
-        sectionList.put("M", M);
+        //sectionList.put("M", M);
         Section N = new Section(705 + shiftAmount, 80, 50, 5, 45, "N", -5, 15, this.trainSystem);
         sp.addShape(N);
-        sectionList.put("N", N);
+        //sectionList.put("N", N);
         
         // First wayside
         Section O = new Section(380 + shiftAmount, 80, 50, 5, -45, "O", 5, 16, this.trainSystem);
         sp.addShape(O);
-        sectionList.put("O", O);
+        //sectionList.put("O", O);
         Section P = new Section(350 + shiftAmount, 100, 30, 5, 0, "P", -5, 16, this.trainSystem);
         sp.addShape(P);
-        sectionList.put("P", P);
+        //sectionList.put("P", P);
         Section Q = new Section(300 + shiftAmount, 80, 50, 5, 45, "Q", -15, 16, this.trainSystem);
         sp.addShape(Q);
-        sectionList.put("Q", Q);
+        //sectionList.put("Q", Q);
         
         // Second wayside
         Section R = new Section(580 + shiftAmount, 80, 50, 5, -45, "R", 5, 16, this.trainSystem);
         sp.addShape(R);
-        sectionList.put("R", R);   
+        //sectionList.put("R", R);   
         Section S = new Section(550 + shiftAmount, 100, 30, 5, 0, "S", -5, 16, this.trainSystem);
         sp.addShape(S);
-        sectionList.put("S", S);  
+        //sectionList.put("S", S);  
         Section T = new Section(500 + shiftAmount, 80, 50, 5, 45, "T", -15, 16, this.trainSystem);
         sp.addShape(T);
-        sectionList.put("T", T);  
+        //sectionList.put("T", T);  
         
         // Switches
         Switch switch1 = new Switch(25 + shiftAmount + 15, 50, 30 + shiftAmount + 23, 57, 12, 5, 45, 0, 12);
@@ -468,46 +466,46 @@ public class TrackView extends Frame {
         //TrackLights
         TrackLight light1 = new TrackLight(25 + shiftAmount, 45, 0, false);
         sp.addShape(light1);
-        trackLightList.put("?", light1);
+        //trackLightList.put("?", light1);
         TrackLight light2 = new TrackLight(25 + shiftAmount, 65, 0, true);
         sp.addShape(light2);
-        trackLightList.put("?", light2);
+        //trackLightList.put("?", light2);
         TrackLight light3 = new TrackLight(150 + shiftAmount, 45, 0, false);
         sp.addShape(light3);
-        trackLightList.put("?", light3);
+        //trackLightList.put("?", light3);
         TrackLight light4 = new TrackLight(150 + shiftAmount, 65, 0, true);
         sp.addShape(light4);
-        trackLightList.put("?", light4);
+        //trackLightList.put("?", light4);
         TrackLight light5 = new TrackLight(285 + shiftAmount, 45, 0, false);
         sp.addShape(light5);
-        trackLightList.put("?", light5);
+        //trackLightList.put("?", light5);
         TrackLight light6 = new TrackLight(285 + shiftAmount, 65, 0, true);
         sp.addShape(light6);
-        trackLightList.put("?", light6);
+        //trackLightList.put("?", light6);
         TrackLight light7 = new TrackLight(405 + shiftAmount, 45, 0, false);
         sp.addShape(light7);
-        trackLightList.put("?", light7);
+        //trackLightList.put("?", light7);
         TrackLight light8 = new TrackLight(405 + shiftAmount, 65, 0, true);
         sp.addShape(light8);
-        trackLightList.put("?", light8);
+        //trackLightList.put("?", light8);
         TrackLight light9 = new TrackLight(485 + shiftAmount, 45, 0, false);
         sp.addShape(light9);
-        trackLightList.put("?", light9);
+        //trackLightList.put("?", light9);
         TrackLight light10 = new TrackLight(485 + shiftAmount, 65, 0, true);
         sp.addShape(light10);
-        trackLightList.put("?", light10);
+        //trackLightList.put("?", light10);
         TrackLight light11 = new TrackLight(605 + shiftAmount, 45, 0, false);
         sp.addShape(light11);
-        trackLightList.put("?", light11);
+        //trackLightList.put("?", light11);
         TrackLight light12 = new TrackLight(605 + shiftAmount, 65, 0, true);
         sp.addShape(light12);
-        trackLightList.put("?", light12);
+        //trackLightList.put("?", light12);
         TrackLight light13 = new TrackLight(690 + shiftAmount, 45, 0, false);
         sp.addShape(light13);
-        trackLightList.put("?", light13);
+        //trackLightList.put("?", light13);
         TrackLight light14 = new TrackLight(690 + shiftAmount, 65, 0, true);
         sp.addShape(light14);
-        trackLightList.put("?", light14);
+        //trackLightList.put("?", light14);
 
         //Stations
         Station stationShadyside = new Station(70, 100, 8);
@@ -542,41 +540,49 @@ public class TrackView extends Frame {
 
     private void updateSwitch(Integer switchID, boolean defaultOrAlternate) {
         Switch s = switchList.get(switchID);
-        s.setIsDefault(defaultOrAlternate);
+        if(s != null) {
+           s.setIsDefault(defaultOrAlternate); 
+        }
     }
 
     private void updateTrackLight(Global.Section section, int blockID, Global.LightState lightState) {
         if (section.toString() == "N") {
             TrackLight tl = trackLightList.get(section.toString() + String.valueOf(blockID));
-            if (lightState == Global.LightState.GO) {
-                tl.setIsGo(true);
-                tl.setIsStop(false);
-            } else {
-                tl.setIsGo(false);
-                tl.setIsStop(true);
+            if (tl != null) {
+                if (lightState == Global.LightState.GO) {
+                    tl.setIsGo(true);
+                    tl.setIsStop(false);
+                } else {
+                    tl.setIsGo(false);
+                    tl.setIsStop(true);
+                }
             }
         } else if (section.toString() == "J") {
             TrackLight tl1 = trackLightList.get(section.toString() + "1");
             TrackLight tl2 = trackLightList.get(section.toString() + "2");
-            if (lightState == Global.LightState.GO) {
-                tl1.setIsGo(true);
-                tl1.setIsStop(false);
-                tl2.setIsGo(true);
-                tl2.setIsStop(false);
-            } else {
-                tl1.setIsGo(false);
-                tl1.setIsStop(true);
-                tl2.setIsGo(false);
-                tl2.setIsStop(true);
-            }
+            if(tl1 != null && tl2 != null) {
+                if (lightState == Global.LightState.GO) {
+                    tl1.setIsGo(true);
+                    tl1.setIsStop(false);
+                    tl2.setIsGo(true);
+                    tl2.setIsStop(false);
+                } else {
+                    tl1.setIsGo(false);
+                    tl1.setIsStop(true);
+                    tl2.setIsGo(false);
+                    tl2.setIsStop(true);
+                }
+            }          
         } else {
             TrackLight tl = trackLightList.get(section.toString());
-            if (lightState == Global.LightState.GO) {
-                tl.setIsGo(true);
-                tl.setIsStop(false);
-            } else {
-                tl.setIsGo(false);
-                tl.setIsStop(true);
+            if (tl != null) {
+                if (lightState == Global.LightState.GO) {
+                    tl.setIsGo(true);
+                    tl.setIsStop(false);
+                } else {
+                    tl.setIsGo(false);
+                    tl.setIsStop(true);
+                }
             }
         }
 
