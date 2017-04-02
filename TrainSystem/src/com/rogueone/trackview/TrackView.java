@@ -466,9 +466,48 @@ public class TrackView extends Frame {
         switch7.setIsDefault(true);
         
         //TrackLights
-        TrackLight lightZZ = new TrackLight(860 + shiftAmount + 38, 2, 135, false);
-        sp.addShape(lightZZ);
-        trackLightList.put("ZZ", lightZZ);
+        TrackLight light1 = new TrackLight(25 + shiftAmount, 45, 0, false);
+        sp.addShape(light1);
+        trackLightList.put("?", light1);
+        TrackLight light2 = new TrackLight(25 + shiftAmount, 65, 0, true);
+        sp.addShape(light2);
+        trackLightList.put("?", light2);
+        TrackLight light3 = new TrackLight(150 + shiftAmount, 45, 0, false);
+        sp.addShape(light3);
+        trackLightList.put("?", light3);
+        TrackLight light4 = new TrackLight(150 + shiftAmount, 65, 0, true);
+        sp.addShape(light4);
+        trackLightList.put("?", light4);
+        TrackLight light5 = new TrackLight(285 + shiftAmount, 45, 0, false);
+        sp.addShape(light5);
+        trackLightList.put("?", light5);
+        TrackLight light6 = new TrackLight(285 + shiftAmount, 65, 0, true);
+        sp.addShape(light6);
+        trackLightList.put("?", light6);
+        TrackLight light7 = new TrackLight(405 + shiftAmount, 45, 0, false);
+        sp.addShape(light7);
+        trackLightList.put("?", light7);
+        TrackLight light8 = new TrackLight(405 + shiftAmount, 65, 0, true);
+        sp.addShape(light8);
+        trackLightList.put("?", light8);
+        TrackLight light9 = new TrackLight(485 + shiftAmount, 45, 0, false);
+        sp.addShape(light9);
+        trackLightList.put("?", light9);
+        TrackLight light10 = new TrackLight(485 + shiftAmount, 65, 0, true);
+        sp.addShape(light10);
+        trackLightList.put("?", light10);
+        TrackLight light11 = new TrackLight(605 + shiftAmount, 45, 0, false);
+        sp.addShape(light11);
+        trackLightList.put("?", light11);
+        TrackLight light12 = new TrackLight(605 + shiftAmount, 65, 0, true);
+        sp.addShape(light12);
+        trackLightList.put("?", light12);
+        TrackLight light13 = new TrackLight(690 + shiftAmount, 45, 0, false);
+        sp.addShape(light13);
+        trackLightList.put("?", light13);
+        TrackLight light14 = new TrackLight(690 + shiftAmount, 65, 0, true);
+        sp.addShape(light14);
+        trackLightList.put("?", light14);
 
         //Stations
         Station stationShadyside = new Station(70, 100, 8);
