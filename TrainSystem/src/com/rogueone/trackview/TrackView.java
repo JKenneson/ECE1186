@@ -81,9 +81,27 @@ public class TrackView extends Frame {
             theWindow.setResizable(false);
             theWindow.setVisible(true);
         }
+        else if (line == Global.Line.RED) {
+            shapeList = new ArrayList<MyShape>(); // create empty ArrayList
+            switchList = new HashMap<Integer, Switch>();
+            trackLightList = new HashMap<String, TrackLight>();
+            sectionList = new HashMap<String, Section>();
+            sp = new ShapePanel(1000, 300);
+            JFrame theWindow = new JFrame("Track View - " + line);
+            theWindow.setSize(1000, 300);
+            Container c = theWindow.getContentPane();
+            sp.setBackground(Color.BLACK);
+            c.add(sp);
+            initializeRedLine();
+            sp.repaint();
+            theWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            theWindow.setResizable(false);
+            theWindow.setVisible(true);
+        }
     }
 
     public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing) {
+/*
         if (switchStates != null) {
             Iterator listIterator = switchStates.iterator();
             while (listIterator.hasNext()) {
@@ -136,6 +154,7 @@ public class TrackView extends Frame {
             updateCrossing(crossing);
         }
         sp.repaint();
+        */
     }
 
     private void initializeGreenLine() {
@@ -338,6 +357,90 @@ public class TrackView extends Frame {
         sp.addShape(yardStart);
         Yard yardEnd = new Yard(950, 0);
         sp.addShape(yardEnd);
+
+        LegendBox lb = new LegendBox(1, 200);
+        sp.addShape(lb);
+
+    }
+    
+    private void initializeRedLine() {
+        
+        // Branch to Yard
+        Section U = new Section(0 + shiftAmount, 30, 50, 5, 45, "U", -15, 16, this.trainSystem);
+        sp.addShape(U);
+        sectionList.put("U", U);
+        
+        // First loop
+        Section A = new Section(0 + shiftAmount, 30, 50, 5, 45, "A", -15, 16, this.trainSystem);
+        sp.addShape(A);
+        sectionList.put("A", A);
+        Section B = new Section(0 + shiftAmount, 30, 50, 5, 45, "B", -15, 16, this.trainSystem);
+        sp.addShape(B);
+        sectionList.put("B", B);
+        Section C = new Section(0 + shiftAmount, 30, 50, 5, 45, "C", -15, 16, this.trainSystem);
+        sp.addShape(C);
+        sectionList.put("C", C);
+        Section D = new Section(50 + shiftAmount, 55, 50, 5, 0, "D", -5, 15, this.trainSystem);
+        sp.addShape(D);
+        sectionList.put("D", D);
+        Section E = new Section(105 + shiftAmount, 55, 50, 5, 0, "E", -5, 15, this.trainSystem);
+        sp.addShape(E);
+        sectionList.put("E", E);
+        
+        // Main strech
+        Section F = new Section(160 + shiftAmount, 55, 50, 5, 0, "F", -5, 15, this.trainSystem);
+        sp.addShape(F);
+        sectionList.put("F", F);
+        Section G = new Section(215 + shiftAmount, 55, 50, 5, 0, "G", -5, 15, this.trainSystem);
+        sp.addShape(G);
+        sectionList.put("G", G);
+        Section H = new Section(270 + shiftAmount, 55, 350, 5, 0, "H", -5, 15, this.trainSystem);
+        sp.addShape(H);
+        sectionList.put("H", H);
+        Section I = new Section(625 + shiftAmount, 55, 50, 5, 0, "I", -5, 15, this.trainSystem);
+        sp.addShape(I);
+        sectionList.put("I", I);
+        
+        // Second loop
+        Section J = new Section(680 + shiftAmount, 55, 50, 5, 0, "J", -5, 15, this.trainSystem);
+        sp.addShape(J);
+        sectionList.put("J", J);
+        Section K = new Section(735 + shiftAmount, 55, 50, 5, 0, "K", -5, 15, this.trainSystem);
+        sp.addShape(K);
+        sectionList.put("K", K);
+        Section L = new Section(785 + shiftAmount, 75, 50, 5, 45, "L", -5, 15, this.trainSystem);
+        sp.addShape(L);
+        sectionList.put("L", L);
+        Section M = new Section(755 + shiftAmount, 100, 50, 5, 0, "M", -5, 15, this.trainSystem);
+        sp.addShape(M);
+        sectionList.put("M", M);
+        Section N = new Section(705 + shiftAmount, 80, 50, 5, 45, "N", -5, 15, this.trainSystem);
+        sp.addShape(N);
+        sectionList.put("N", N);
+        
+        // First wayside
+        Section O = new Section(0 + shiftAmount, 30, 50, 5, 45, "O", -15, 16, this.trainSystem);
+        sp.addShape(O);
+        sectionList.put("O", O);
+        Section P = new Section(0 + shiftAmount, 30, 50, 5, 45, "P", -15, 16, this.trainSystem);
+        sp.addShape(P);
+        sectionList.put("P", P);
+        Section Q = new Section(0 + shiftAmount, 30, 50, 5, 45, "Q", -15, 16, this.trainSystem);
+        sp.addShape(Q);
+        sectionList.put("Q", Q);
+        
+        // Second wayside
+        Section R = new Section(0 + shiftAmount, 30, 50, 5, 45, "R", -15, 16, this.trainSystem);
+        sp.addShape(R);
+        sectionList.put("R", R);
+        Section T = new Section(0 + shiftAmount, 30, 50, 5, 45, "T", -15, 16, this.trainSystem);
+        sp.addShape(T);
+        sectionList.put("T", T);
+        Section S = new Section(0 + shiftAmount, 30, 50, 5, 45, "S", -15, 16, this.trainSystem);
+        sp.addShape(S);
+        sectionList.put("S", S);
+
+        
 
         LegendBox lb = new LegendBox(1, 200);
         sp.addShape(lb);

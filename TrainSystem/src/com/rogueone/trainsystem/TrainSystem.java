@@ -84,6 +84,7 @@ public class TrainSystem {
         this.mbo = new Mbo(this);
         this.scheduler = new Scheduler(this);
         this.trackView = new TrackView(this, Global.Line.GREEN);
+        this.trackView = new TrackView(this, Global.Line.RED);
         
         // Initialize GUI
         mainFrame = new MainFrame(this);
