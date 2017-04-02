@@ -420,10 +420,6 @@ public class TrackView extends Frame {
         sp.addShape(N);
         sectionList.put("N", N);
         
-        //Section A = new Section(120 + shiftAmount, 80, 50, 5, -45, "A", 5, 16, this.trainSystem);
-        //Section B = new Section(90 + shiftAmount, 100, 30, 5, 0, "B", -5, 16, this.trainSystem);
-        //Section C = new Section(40 + shiftAmount, 80, 50, 5, 45, "C", -15, 16, this.trainSystem);
-        
         // First wayside
         Section O = new Section(380 + shiftAmount, 80, 50, 5, -45, "O", 5, 16, this.trainSystem);
         sp.addShape(O);
@@ -448,11 +444,14 @@ public class TrackView extends Frame {
         
         Section T = new Section(500 + shiftAmount, 80, 50, 5, 45, "T", -15, 16, this.trainSystem);
         sp.addShape(T);
-        sectionList.put("T", T);
-        
+        sectionList.put("T", T);  
         
 
-        
+        crossing = new Crossing(670, 30);
+        sp.addShape(crossing);
+
+        Yard yardStart = new Yard(0, 0);
+        sp.addShape(yardStart);
 
         LegendBox lb = new LegendBox(1, 200);
         sp.addShape(lb);
