@@ -365,19 +365,21 @@ public class TrackView extends Frame {
     
     private void initializeRedLine() {
         
+        //startX, startY, width, height, angle, sectionID, xShift, yShift, ts
+        
         // Branch to Yard
         Section U = new Section(0 + shiftAmount, 30, 50, 5, 45, "U", -15, 16, this.trainSystem);
         sp.addShape(U);
         sectionList.put("U", U);
         
         // First loop
-        Section A = new Section(0 + shiftAmount, 30, 50, 5, 45, "A", -15, 16, this.trainSystem);
+        Section A = new Section(120 + shiftAmount, 80, 50, 5, -45, "A", 5, 16, this.trainSystem);
         sp.addShape(A);
         sectionList.put("A", A);
-        Section B = new Section(0 + shiftAmount, 30, 50, 5, 45, "B", -15, 16, this.trainSystem);
+        Section B = new Section(90 + shiftAmount, 100, 30, 5, 0, "B", -5, 16, this.trainSystem);
         sp.addShape(B);
         sectionList.put("B", B);
-        Section C = new Section(0 + shiftAmount, 30, 50, 5, 45, "C", -15, 16, this.trainSystem);
+        Section C = new Section(40 + shiftAmount, 80, 50, 5, 45, "C", -15, 16, this.trainSystem);
         sp.addShape(C);
         sectionList.put("C", C);
         Section D = new Section(50 + shiftAmount, 55, 50, 5, 0, "D", -5, 15, this.trainSystem);
@@ -394,7 +396,7 @@ public class TrackView extends Frame {
         Section G = new Section(215 + shiftAmount, 55, 50, 5, 0, "G", -5, 15, this.trainSystem);
         sp.addShape(G);
         sectionList.put("G", G);
-        Section H = new Section(270 + shiftAmount, 55, 350, 5, 0, "H", -5, 15, this.trainSystem);
+        Section H = new Section(270 + shiftAmount, 55, 350, 5, 0, "H", -5, -15, this.trainSystem);
         sp.addShape(H);
         sectionList.put("H", H);
         Section I = new Section(625 + shiftAmount, 55, 50, 5, 0, "I", -5, 15, this.trainSystem);
@@ -418,27 +420,37 @@ public class TrackView extends Frame {
         sp.addShape(N);
         sectionList.put("N", N);
         
+        //Section A = new Section(120 + shiftAmount, 80, 50, 5, -45, "A", 5, 16, this.trainSystem);
+        //Section B = new Section(90 + shiftAmount, 100, 30, 5, 0, "B", -5, 16, this.trainSystem);
+        //Section C = new Section(40 + shiftAmount, 80, 50, 5, 45, "C", -15, 16, this.trainSystem);
+        
         // First wayside
-        Section O = new Section(0 + shiftAmount, 30, 50, 5, 45, "O", -15, 16, this.trainSystem);
+        Section O = new Section(380 + shiftAmount, 80, 50, 5, -45, "O", 5, 16, this.trainSystem);
         sp.addShape(O);
         sectionList.put("O", O);
-        Section P = new Section(0 + shiftAmount, 30, 50, 5, 45, "P", -15, 16, this.trainSystem);
+        
+        Section P = new Section(350 + shiftAmount, 100, 30, 5, 0, "P", -5, 16, this.trainSystem);
         sp.addShape(P);
         sectionList.put("P", P);
-        Section Q = new Section(0 + shiftAmount, 30, 50, 5, 45, "Q", -15, 16, this.trainSystem);
+        
+        Section Q = new Section(300 + shiftAmount, 80, 50, 5, 45, "Q", -15, 16, this.trainSystem);
         sp.addShape(Q);
         sectionList.put("Q", Q);
         
         // Second wayside
-        Section R = new Section(0 + shiftAmount, 30, 50, 5, 45, "R", -15, 16, this.trainSystem);
+        Section R = new Section(580 + shiftAmount, 80, 50, 5, -45, "R", 5, 16, this.trainSystem);
         sp.addShape(R);
         sectionList.put("R", R);
-        Section T = new Section(0 + shiftAmount, 30, 50, 5, 45, "T", -15, 16, this.trainSystem);
-        sp.addShape(T);
-        sectionList.put("T", T);
-        Section S = new Section(0 + shiftAmount, 30, 50, 5, 45, "S", -15, 16, this.trainSystem);
+        
+        Section S = new Section(550 + shiftAmount, 100, 30, 5, 0, "S", -5, 16, this.trainSystem);
         sp.addShape(S);
         sectionList.put("S", S);
+        
+        Section T = new Section(500 + shiftAmount, 80, 50, 5, 45, "T", -15, 16, this.trainSystem);
+        sp.addShape(T);
+        sectionList.put("T", T);
+        
+        
 
         
 
