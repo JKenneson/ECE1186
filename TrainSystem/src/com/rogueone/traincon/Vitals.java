@@ -96,7 +96,7 @@ public class Vitals {
         if(this.approachingStation){
             
             System.out.println("Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
-            stopForStation = (Math.abs(this.distanceToStation) < this.trainModel.safeStoppingDistance());
+            stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
             System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
             if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
@@ -224,8 +224,8 @@ public class Vitals {
      */
     public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
-                        
-        if(this.approachingStation || this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0){
+        //this.approachingStation ||                 
+        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0){
             //Maybe I shouldn't do when grade is less than 0
             this.powerCommand = 0.0;
             return 0.0;
