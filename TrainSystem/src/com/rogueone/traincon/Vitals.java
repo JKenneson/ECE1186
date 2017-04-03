@@ -228,9 +228,11 @@ public class Vitals {
      */
     public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
-        //this.approachingStation ||                 
-        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0){
+        //this.approachingStation ||
+        //this.gps.getCurrBlock().getGrade()<0 ||
+        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.speedControl.getSetPoint(manualMode)<=0.0){
             //Maybe I shouldn't do when grade is less than 0
+            //System.out.println("S brake = " + this.serviceBrakeActivated + " E brake" this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0);
             this.powerCommand = 0.0;
             return 0.0;
         }
