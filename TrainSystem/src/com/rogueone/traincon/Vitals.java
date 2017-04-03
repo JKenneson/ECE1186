@@ -97,9 +97,9 @@ public class Vitals {
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         if(this.approachingStation){
             
-            System.out.println("Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
+            //System.out.println("Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
-            System.out.println("Apply brake: " + stopForStation);
+            //System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
             if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
                 System.out.println("Boarding...");
@@ -108,13 +108,13 @@ public class Vitals {
                 stopForStation = false;
                 this.setServiceBrakeActivated(false);
                 this.previousStation = this.station;
-                System.out.println("Leaving station");
+                System.out.println("Leaving station...");
             }
         }
         
-        System.out.println("Manual: " + manualMode + " Service Brake: " + this.serviceBrakeActivated);
+        //System.out.println("Manual: " + manualMode + " Service Brake: " + this.serviceBrakeActivated);
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
-        System.out.println("Exit");
+        //System.out.println("Exit");
     }
     
     /**
