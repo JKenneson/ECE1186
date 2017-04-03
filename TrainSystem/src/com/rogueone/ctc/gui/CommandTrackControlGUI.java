@@ -23,12 +23,10 @@ import java.lang.*;
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     int trainID;
-    int iterativeID = 0;
+    public int iterativeID;
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
     private TrackModel trackModel;
-    //private TrainHandler trainHandler;
-
 
     /**
      * Creates new form CommandTrackControlGUI
@@ -43,7 +41,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         this.trainSystem = ts;
         this.trackModel = ts.getTrackModel();
-        //this.trainHandler = ts.getTrainHandler();
         updateGUI();
     }
      
@@ -1029,7 +1026,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             TrainShutdownButton.setEnabled(false);
             TrackShutdownButton.setEnabled(false);
             
-            //dispatchFromMBO();
         }
 
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
@@ -1043,22 +1039,35 @@ private void getDispatchTimes(){
     
 }
 
+private void dispatchNewTrain(int speed, int authority, int cars, String line, int ID){
+    trainSystem.dispatchTrain(speed, authority, cars, line, ID);
+    iterateID();
+}
 
 private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
+    int greenID = iterativeID;
+    int redID = greenID++;
     ArrayList<String> dispatchTimes = trainSystem.getScheduler().getDispatchTimes();
         for (String times : dispatchTimes){
             String tempTime = autoDispatchHour + ":" + autoDispatchMinute + "am";
             if(autoDispatchSecond == 0){
                 if (tempTime.equals(times)) {
-                    trainSystem.dispatchTrain(50, 100000, getNumberCars(), "GREEN", iterativeID);
-                    addRow("GREEN", "A", 1, iterativeID);
-                    iterativeID++;
+                    dispatchNewTrain(40, 90000, getNumberCars(), "GREEN", greenID);
+                    dispatchNewTrain(40, 90000, getNumberCars(), "RED", redID);
+                    addRow("GREEN", "A", 1, greenID);
+                    addRow("RED", "A", 1, redID);
+
                 }
             } 
         }
         
 }
-    
+
+public int iterateID(){
+    iterativeID++;
+    System.out.println("New ID is: " + iterativeID );
+    return iterativeID;
+}
     
     private void ThroughputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputFieldActionPerformed
         // TODO add your handling code here:
@@ -1455,7 +1464,6 @@ private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int auto
         int dispatchSpeed = Integer.valueOf(DispatchSpeedField.getText());
         int dispatchAuthority = Integer.valueOf(DispatchAuthorityField.getText());
         int dispatchNumberCars = getNumberCars();
-        iterativeID++;
         int dispatchID = iterativeID;
 
         Object[] newTrain = new Object[4];
@@ -1469,11 +1477,9 @@ private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int auto
             addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
         }
         
-        trainSystem.dispatchTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
+        dispatchNewTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
         
         trainsDispatched++;
-        
-        
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 
