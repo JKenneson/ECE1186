@@ -49,6 +49,7 @@ public class Vitals {
     private boolean stationStop;
     private String previousStation = "value";
     private boolean specialCase = true;
+    private int i = 0;
     
     
     
@@ -85,18 +86,19 @@ public class Vitals {
     }
  
     public void update(boolean manualMode){
+        
         this.gps.update(this.trainModel.getDistanceTraveledFeet(), this.trainModel.getCurrBlock(), this.trainModel.getCurrSpeedMPH());
         if(this.gps.getAuthority()<0 || this.emergencyBrakeOverride)
             this.setEmergencyBrakeActivated(true);
         else if(!this.emergencyBrakeOverride){
             this.setEmergencyBrakeActivated(false);
         }
-        
+
         //Calculate approaching station work
         boolean stopForStation = false;
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         if(this.approachingStation){
-            
+
             //System.out.println("Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
             //System.out.println("Apply brake: " + stopForStation);
@@ -110,11 +112,14 @@ public class Vitals {
                 this.previousStation = this.station;
                 System.out.println("Leaving station...");
             }
+            i = 60;
         }
-        
+
         //System.out.println("Manual: " + manualMode + " Service Brake: " + this.serviceBrakeActivated);
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         //System.out.println("Exit");
+            
+        
     }
     
     /**
@@ -230,7 +235,7 @@ public class Vitals {
                         //loaded track xlx after calculating location.
         //this.approachingStation ||
         //this.gps.getCurrBlock().getGrade()<0 ||
-        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.speedControl.getSetPoint(manualMode)<=0.0){
+        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.speedControl.getSetPoint(manualMode)<=0.0 || (i-- > 0)){
             //Maybe I shouldn't do when grade is less than 0
             //System.out.println("S brake = " + this.serviceBrakeActivated + " E brake" this.emergencyBrakeActivated || this.gps.getCurrBlock().getGrade()<0 || this.speedControl.getSetPoint(manualMode)<=0.0);
             this.powerCommand = 0.0;
