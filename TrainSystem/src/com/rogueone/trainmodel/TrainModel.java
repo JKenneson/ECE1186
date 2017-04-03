@@ -543,6 +543,8 @@ public class TrainModel {
                     System.out.println("Train has reached the yard");
                     //Remove the train from the handler and let the ctc know
                     this.reachedYard = true;
+                    this.currBlock.setOccupancy(false);
+                    this.trainSystem.getTrackControllerHandler().updateTrack();
                 }
             }
             else {
