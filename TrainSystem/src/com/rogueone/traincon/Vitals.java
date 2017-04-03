@@ -48,6 +48,7 @@ public class Vitals {
     private String station = "start";
     private boolean stationStop;
     private String previousStation = "value";
+    private boolean specialCase = true;
     
     
     
@@ -362,10 +363,14 @@ public class Vitals {
         
         if(beacon.getStation() != null){
             this.station = beacon.getStation().getName();
-            if(!this.previousStation.equals(this.station)){
+            if(beacon.getID() == 33 && this.specialCase){
+                specialCase = !this.specialCase;
+            }
+            if(!this.previousStation.equals(this.station) && this.specialCase){
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
                 this.distanceToStation = beacon.getDistance() + 25;
+                this.specialCase = !this.specialCase;
             }
         }
         
