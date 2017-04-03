@@ -50,9 +50,13 @@ public class TrackControllerHandler {
         }
 
         TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem);
+        TrackController greenTrackControllerDup = new TrackController(Global.Line.GREEN, this.trainSystem);
         TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem);
-        trackControllers.add(greenTrackController);
-        trackControllers.add(redTrackController);
+        TrackController redTrackControllerDup = new TrackController(Global.Line.RED, this.trainSystem);
+        trackControllers.add(greenTrackController);     //0
+        trackControllers.add(greenTrackControllerDup);  //1
+        trackControllers.add(redTrackController);       //2
+        trackControllers.add(redTrackControllerDup);    //3
 
         trackHandlerGUI = new TrackHandlerGUI(this);
     }
@@ -183,8 +187,6 @@ public class TrackControllerHandler {
         trackController.evaluateSwitches();
         trackController.evaluateCrossing();
         trackController.updateSummaryTab();
-//        trainSystem.getTrackView().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
-
     }
     
     public void updateTrackView(){

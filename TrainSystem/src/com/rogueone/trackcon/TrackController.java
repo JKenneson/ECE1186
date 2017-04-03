@@ -836,18 +836,23 @@ public class TrackController {
         //number of blocks to lookahead
         //if presence block is between values given in the wayside sheet
         //activate the crossing
+        boolean crossingActive = false;
         if (!occupiedBlocks.isEmpty()) {
             for (PresenceBlock pb : occupiedBlocks) {
                 //if the ID of the current block is contained in the list of blocks in the crossing
                 //object, then activate the crossing
                 if (crossing.getActiveBlocks().contains(pb.getCurrBlock().getID())) {
-                    System.out.println("Crossing Active");
-                    crossing.setCurrentCrossingState(Global.CrossingState.ACTIVE);
-                } else {
-                    crossing.setCurrentCrossingState(Global.CrossingState.INACTIVE);
+                    crossingActive = true;
+                    break;
                 }
                 
             }
+        }
+        if(crossingActive){
+            crossing.setCurrentCrossingState(Global.CrossingState.ACTIVE);
+            System.out.println("Crossing Active");
+        } else {
+            crossing.setCurrentCrossingState(Global.CrossingState.INACTIVE);
         }
     }
 

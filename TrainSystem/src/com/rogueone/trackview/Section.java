@@ -35,7 +35,7 @@ public class Section implements MyShape {
     private boolean isBroken;
     private boolean textDrawn;
     private boolean isStopped;
-    private boolean hasAuthority;
+    private boolean isHalted;
 
     private HashMap<Integer, Boolean> currentBlocks;
 
@@ -126,9 +126,9 @@ public class Section implements MyShape {
                     Entry<Integer, Boolean> blockEntry = (Entry<Integer, Boolean>) blockIter.next();
                     if (blockEntry.getValue() == true) {
                         Path2D blockPath = sectionDivisions.get(blockEntry.getKey());
-                        if(isStopped){
+                        if(isHalted){
                             g.setColor(Color.RED);
-                        } else if (!isStopped && !hasAuthority){
+                        } else if (isStopped && !isHalted){
                             g.setColor(Color.ORANGE);
                         } else {
                             g.setColor(Color.BLUE);
@@ -148,8 +148,8 @@ public class Section implements MyShape {
         this.isStopped = isStopped;
     }
 
-    public void setHasAuthority(boolean hasAuthority) {
-        this.hasAuthority = hasAuthority;
+    public void setIsHalted(boolean isHalted) {
+        this.isHalted = isHalted;
     }
     
 

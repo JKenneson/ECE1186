@@ -69,9 +69,9 @@ public class TrackView extends Frame {
             switchList = new HashMap<Integer, Switch>();
             trackLightList = new HashMap<String, TrackLight>();
             sectionList = new HashMap<String, Section>();
-            sp = new ShapePanel(1000, 300);
+            sp = new ShapePanel(1000, 305);
             JFrame theWindow = new JFrame("Track View - " + line);
-            theWindow.setSize(1000, 300);
+            theWindow.setSize(1000, 305);
             Container c = theWindow.getContentPane();
             sp.setBackground(Color.BLACK);
             c.add(sp);
@@ -99,7 +99,7 @@ public class TrackView extends Frame {
             theWindow.setVisible(true);
         }
     }
-
+    
     public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing) {
 
         if (switchStates != null) {
@@ -132,20 +132,22 @@ public class TrackView extends Frame {
             while (blockIterator.hasNext()) {
                 PresenceBlock pb = (PresenceBlock) blockIterator.next();
                 double remainingAuthority = 1;
+                double speed = 1;
                 for (TrainModel tm : this.trainSystem.getTrainHandler().getTrains()) {
                     Block trainBlock = tm.getCurrBlock();
                     if (trainBlock.getID() == pb.getCurrBlock().getID()) {
                         //System.out.println("ID's Match authority = " + tm.getAuthority());
                         remainingAuthority = tm.getAuthority();
+                        speed = tm.getCurrSpeedMPH();
                     }
                 }
                 if (pb.getPrevBlock().getType() == Global.PieceType.YARD) {
-                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, remainingAuthority);
+                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, remainingAuthority, speed);
 
                 } else {
                     Block prevBlock = (Block) pb.getPrevBlock();
-                    updateSection(prevBlock.getSection().getSectionID(), prevBlock.getID(), false, (short) 0, 1);
-                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, remainingAuthority);
+                    updateSection(prevBlock.getSection().getSectionID(), prevBlock.getID(), false, (short) 0, 1, 1);
+                    updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, remainingAuthority, speed);
                 }
 
             }
@@ -323,8 +325,12 @@ public class TrackView extends Frame {
 
         Station stationGlenbury = new Station(108, 36, 8);
         sp.addShape(stationGlenbury);
+        Station stationGlenbury2 = new Station(375, 36, 8);
+        sp.addShape(stationGlenbury2);
         Station stationDormont = new Station(178, 36, 8);
         sp.addShape(stationDormont);
+        Station stationDormont2 = new Station(460, 36, 8);
+        sp.addShape(stationDormont2);
         Station stationMtLebanon = new Station(235, 63, 7);
         sp.addShape(stationMtLebanon);
         Station stationPoplar = new Station(210, 155, 8);
@@ -588,7 +594,7 @@ public class TrackView extends Frame {
 
     }
 
-    private void updateSection(Global.Section sectionID, int id, boolean occupied, short authority, double remainingAuthority) {
+    private void updateSection(Global.Section sectionID, int id, boolean occupied, short authority, double remainingAuthority, double speed) {
         Section s;
         if (sectionID.toString().equals("J") && id == 62) {
             //light up K
@@ -601,14 +607,14 @@ public class TrackView extends Frame {
         if (occupied) {
             s.addBlockToCurrentBlocks(id);
             if (authority < 0) {
+                s.setIsHalted(true);
+            } else {
+                s.setIsHalted(false);
+            }
+            if (remainingAuthority <= 0 || speed <= 0) {
                 s.setIsStopped(true);
             } else {
                 s.setIsStopped(false);
-            }
-            if (remainingAuthority <= 0) {
-                s.setHasAuthority(false);
-            } else {
-                s.setHasAuthority(true);
             }
         } else {
             s.removeBlockFromCurrentBlocks(id);
