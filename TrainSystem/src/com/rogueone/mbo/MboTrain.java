@@ -9,8 +9,8 @@ package com.rogueone.mbo;
  * @author Brian
  */
 public class MboTrain {
-    private String id;
-    private int block;
+    private int id;
+    private String block;
     private char section;
     private double currentSpeed;
     private double prevSpeed;
@@ -23,6 +23,7 @@ public class MboTrain {
     private double dist2;
     private String time1;
     private String time2;
+    private int location;
     
     public double calculateSpeed(String time1, String time2, double dist1, double dist2){
         double delta = dist2-dist1;
@@ -40,7 +41,7 @@ public class MboTrain {
     public String getPosition(){
         return "position";
     }
-    public String getTrainId(){
+    public int getTrainId(){
         return this.id;
     }
     public double getCurrSpeed(){
@@ -58,10 +59,10 @@ public class MboTrain {
     public String getNextArrivalTime(){
         return this.timeOfArrival;
     }
-    public void setTrainId(String id){
+    public void setTrainId(int id){
         this.id = id;
     }
-    public void setBlock(int block){
+    public void setBlock(String block){
         this.block = block;
     }
     public void setSection(char section){

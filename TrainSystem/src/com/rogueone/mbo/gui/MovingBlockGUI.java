@@ -583,6 +583,7 @@ Mbo mbo = trainSystem.getMBO();
         if(FixedBlockRadio.isSelected())
         {
             CurrentModeLabel.setText("Fixed Block Mode");
+            mbo.changeToMovingBlock();
         }
     }//GEN-LAST:event_FixedBlockRadioActionPerformed
 
@@ -648,6 +649,7 @@ Mbo mbo = trainSystem.getMBO();
             MboUnits4.setEnabled(true);
             ThroughputInput.setEnabled(false);
             MboUnits3.setEnabled(false);
+            Mbo mbo = trainSystem.getMBO();
             
         }
     }//GEN-LAST:event_NumTrainsRadioActionPerformed
@@ -689,6 +691,7 @@ Mbo mbo = trainSystem.getMBO();
         if(MovingBlockRadio.isSelected())
         {
             CurrentModeLabel.setText("Moving Block Mode");
+            mbo.changeToMovingBlock();
         }
     }//GEN-LAST:event_MovingBlockRadioActionPerformed
 

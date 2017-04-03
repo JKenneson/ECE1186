@@ -5,7 +5,7 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 2/31/17
+ * @modification date 4/3/17
  */
 package com.rogueone.mbo;
 import java.io.File;
@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.Row;
 import java.util.ArrayList;
 import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
+import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.table.*;
 
@@ -29,10 +30,11 @@ public class Mbo{
     public static MovingBlockGUI mboGui;
    private static File file = new File("src/com/rogueone/assets/schedule.xlsx");
    private static int trainIndex;
-  private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
-   private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
-   private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
+  //private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
+   //private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
+   //private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
    private TrainSystem trainSystem;
+   private String mode = "Fixed Block";
    
    public Mbo(TrainSystem ts) throws IOException, InvalidFormatException {
        trainSystem = ts;
@@ -144,17 +146,20 @@ public class Mbo{
     /**
      * Updates table of active trains
      */
-    public static void displayCurrentTrains(){
+    public void displayCurrentTrains(){
         
-        int length = trainList.size();
+        //int length = trainList.size();
+        int length = trainSystem.getTrainHandler().getTrains().size();
         Object[][] data = new Object[6][10];
         Object[] columnNames={"TRAIN ID", "TRAIN LINE", "TRACK SECTION", "BLOCK", "NEXT STATION", "TIME OF ARRIVAL", "AUTHORITY", "CURRENT SPEED", "SUGGESTED SPEED", "PASSENGERS"};
         int i=0,j=0;
         mboGui.TrainDropdown.removeAllItems();
         
         for(i=0;i<length;i++){
-           
-           mboGui.TrainDropdown.addItem(trainList.get(i).getTrainId());
+            /*
+           int tid = trainList.get(i).getTrainId();
+           String temp = String.valueOf(tid);
+           mboGui.TrainDropdown.addItem(temp);
            for(j=0;j<10;j++){
                 if(j==0){
                   data[i][0]= trainList.get(i).getTrainId(); 
@@ -164,6 +169,7 @@ public class Mbo{
                     data[i][j]=dummyData[i][j];
                 }
            }
+           */
         }
        
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
@@ -207,7 +213,8 @@ public class Mbo{
         String trainID = currRow.getCell(0).toString();
         String[] IDs = trainID.split("\\.");
         MboTrain newTrain = new MboTrain();
-        newTrain.setTrainId(IDs[0]);
+        /////FIX THIS ///////
+        //newTrain.setTrainId(IDs[0]);
         trainList.add(newTrain);
         trainIndex=trainIndex+1;
          
@@ -224,23 +231,46 @@ public class Mbo{
         String tempSpeed = mboGui.MboSuggestedSpeedField.getText();
         String tempAuthority = mboGui.MboSuggestedAuthorityField.getText();
         String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
-        if(newID.compareTo("100")==0){
-            dummyData[0][8] = tempSpeed+" mph";
-            dummyData[0][6] = tempAuthority+" ft";
-        }
-        else{
-            dummyData[1][8] = tempSpeed+" mph";
-            dummyData[1][6] = tempAuthority+" ft";
-        }
+        //if(newID.compareTo("100")==0){
+            //dummyData[0][8] = tempSpeed+" mph";
+            //dummyData[0][6] = tempAuthority+" ft";
+        //}
+        //else{
+            //dummyData[1][8] = tempSpeed+" mph";
+            //dummyData[1][6] = tempAuthority+" ft";
+        //}
         displayCurrentTrains();
     }
     
     public void changeToMovingBlock(){
-        
+        mode = "Moving Block";
     }
     public void changeToFixedBlock(){
         for(int i = 0; i < trainList.size(); i++){
             
+        }
+        mode = "Fixed Block";
+    }
+    
+    public void update(){
+        
+        updateTrains();
+            //trainList = trainSystem.getTrainHandler().getTrains();
+        if(mode.equals("Fixed Block")){
+            
+        }
+        else if(mode.equals("Moving Block")){
+        }
+    }
+    
+    public void updateTrains(){
+        int numTrains = trainSystem.getTrainHandler().getTrains().size();
+        trainList.clear();
+        for(int i =0;i<numTrains;i++){
+            MboTrain tempTrain = new MboTrain();
+            tempTrain.setTrainId(trainSystem.getTrainHandler().getTrains().get(i).trainID);
+            tempTrain.setBlock(trainSystem.getTrainHandler().getBlockForTrain(trainSystem.getTrainHandler().getTrains().get(i).trainID));
+            trainList.add(tempTrain);
         }
     }
     
@@ -250,4 +280,5 @@ public class Mbo{
         
         
     }
+    
 }
