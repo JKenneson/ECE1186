@@ -56,11 +56,24 @@ public class TrainHandler {
      * @author Jonathan Kenneson
      */
     public void updateTrains() {
+        //Check to see if we need to delete any trains
+        ArrayList<TrainModel> trainsToDelete = new ArrayList<TrainModel>();
+        
         for (TrainModel train : TrainHandler.trains) {
             train.updateTrain();
             train.UpdateGUI(train.getTrainModelGUI());
             train.trainController.updateController();
             train.updateTrainControllerGUI();
+            
+            if(train.getReachedYard()) {
+                trainsToDelete.add(train);
+            }
+        }
+        
+        //Remove the selected trains and tell the CTC
+        for (TrainModel trainToRemove : trainsToDelete) {
+            this.trains.remove(trainToRemove);
+            this.trainSystem.getCTC().removeTrainFromTable(trainToRemove.trainID);
         }
     }
     

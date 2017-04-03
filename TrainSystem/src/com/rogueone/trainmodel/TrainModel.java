@@ -104,6 +104,8 @@ public class TrainModel {
     private boolean mboAntennaActivated;
     private String line;
     public int trainID;
+    //Train is done with the track; i.e. reached the yard
+    private boolean reachedYard;
     
     //Blocks
     private Block currBlock;
@@ -170,6 +172,8 @@ public class TrainModel {
         this.mboAntennaActivated = true;
         this.line = line;
         this.trainID = trainID;
+        
+        this.reachedYard = false;
         
         this.trainController = null;
         this.trainControllerGUI = null;
@@ -537,6 +541,8 @@ public class TrainModel {
                 //Train has reached end of track
                 else if (this.nextBlock.getType() == Global.PieceType.YARD) {
                     System.out.println("Train has reached the yard");
+                    //Remove the train from the handler and let the ctc know
+                    this.reachedYard = true;
                 }
             }
             else {
@@ -919,4 +925,12 @@ public class TrainModel {
     public Block getCurrBlock() {
         return this.currBlock;
     }
+    
+    public boolean getReachedYard() {
+        return this.reachedYard;
+    }
+
+    public int getTrainID() {
+        return trainID;
+    }    
 }
