@@ -360,7 +360,7 @@ public class Vitals {
         if(beacon.getStation() != null){
             this.approachingStation = true;
             this.doorSide = beacon.isOnRight();
-            this.distanceToStation = beacon.getDistance() + 50;
+            this.distanceToStation = beacon.getDistance() + 25;
             this.station = beacon.getStation().getName();
         }
         else{ //Do distance calculation work for red line
