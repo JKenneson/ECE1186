@@ -59,14 +59,16 @@ public class TrainHandler {
         //Check to see if we need to delete any trains
         ArrayList<TrainModel> trainsToDelete = new ArrayList<TrainModel>();
         
-        for (TrainModel train : TrainHandler.trains) {
-            train.updateTrain();
-            train.UpdateGUI(train.getTrainModelGUI());
-            train.trainController.updateController();
-            train.updateTrainControllerGUI();
+        int arraySize = trains.size();
+        
+        for(int i = 0 ; i < arraySize ; i++) {
+            trains.get(i).updateTrain();
+            trains.get(i).UpdateGUI(trains.get(i).getTrainModelGUI());
+            trains.get(i).trainController.updateController();
+            trains.get(i).updateTrainControllerGUI();
             
-            if(train.getReachedYard()) {
-                trainsToDelete.add(train);
+            if(trains.get(i).getReachedYard()) {
+                trainsToDelete.add(trains.get(i));
             }
         }
         
@@ -74,8 +76,6 @@ public class TrainHandler {
         for (TrainModel trainToRemove : trainsToDelete) {
             this.trains.remove(trainToRemove);
             this.trainSystem.getCTC().removeTrainFromTable(trainToRemove.trainID);
-            trainToRemove.trainModelGUIFrame.dispose();
-            trainToRemove.trainController.trainControllerGUIFrame.dispose();
         }
     }
     
