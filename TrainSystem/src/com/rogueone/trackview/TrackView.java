@@ -80,8 +80,7 @@ public class TrackView extends Frame {
             theWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             theWindow.setResizable(false);
             theWindow.setVisible(true);
-        }
-        else if (line == Global.Line.RED) {
+        } else if (line == Global.Line.RED) {
             shapeList = new ArrayList<MyShape>(); // create empty ArrayList
             switchList = new HashMap<Integer, Switch>();
             trackLightList = new HashMap<String, TrackLight>();
@@ -99,7 +98,7 @@ public class TrackView extends Frame {
             theWindow.setVisible(true);
         }
     }
-    
+
     public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing) {
 
         if (switchStates != null) {
@@ -128,6 +127,7 @@ public class TrackView extends Frame {
             }
         }
         if (occupiedBlocks != null) {
+            updateSection(Global.Section.ZZ, 151, false, (short) 0, 1, 1);
             Iterator blockIterator = occupiedBlocks.iterator();
             while (blockIterator.hasNext()) {
                 PresenceBlock pb = (PresenceBlock) blockIterator.next();
@@ -156,7 +156,7 @@ public class TrackView extends Frame {
             updateCrossing(crossing);
         }
         sp.repaint();
-        
+
     }
 
     private void initializeGreenLine() {
@@ -169,9 +169,9 @@ public class TrackView extends Frame {
         Section K = new Section(50 + shiftAmount, 55, 50, 5, 0, "K", -5, 15, this.trainSystem);
         sp.addShape(K);
         sectionList.put("K", K);
-        Switch switch3 = new Switch(35 + shiftAmount + 3, 51, 35 + shiftAmount + 3, 59, 15, 5, 45, -45, 3);
-        sp.addShape(switch3);
-        switch3.setIsDefault(true);
+        Switch switch0 = new Switch(35 + shiftAmount + 3, 51, 35 + shiftAmount + 3, 59, 15, 5, 45, -45, 3);
+        sp.addShape(switch0);
+        switch0.setIsDefault(true);
         Section L = new Section(105 + shiftAmount, 55, 50, 5, 0, "L", -5, 15, this.trainSystem);
         sp.addShape(L);
         sectionList.put("L", L);
@@ -272,9 +272,9 @@ public class TrackView extends Frame {
         Section J2 = new Section(870 + shiftAmount + 10, 80, 50, 5, 45, "J", -4, 13, this.trainSystem);
         sp.addShape(J2);
         sectionList.put("J2", J2);
-        Switch switch0 = new Switch(870 + shiftAmount + 6, 51, 870 + shiftAmount + 6, 59, 15, 5, -45, 45, 0);
-        sp.addShape(switch0);
-        switch0.setIsDefault(true);
+        Switch switch3 = new Switch(870 + shiftAmount + 6, 51, 870 + shiftAmount + 6, 59, 15, 5, -45, 45, 0);
+        sp.addShape(switch3);
+        switch3.setIsDefault(true);
 
         switchList.put(0, switch0);
         switchList.put(1, switch1);
@@ -368,14 +368,14 @@ public class TrackView extends Frame {
         sp.addShape(lb);
 
     }
-    
+
     private void initializeRedLine() {
-        
+
         // Branch to Yard
         Section U = new Section(0 + shiftAmount, 30, 50, 5, 45, "U", -15, 16, this.trainSystem);
         sp.addShape(U);
         //sectionList.put("U", U);
-        
+
         // First loop
         Section A = new Section(120 + shiftAmount, 80, 50, 5, -45, "A", 5, 16, this.trainSystem);
         sp.addShape(A);
@@ -392,7 +392,7 @@ public class TrackView extends Frame {
         Section E = new Section(105 + shiftAmount, 55, 50, 5, 0, "E", -5, 15, this.trainSystem);
         sp.addShape(E);
         //sectionList.put("E", E);
-        
+
         // Main strech
         Section F = new Section(160 + shiftAmount, 55, 50, 5, 0, "F", -5, 15, this.trainSystem);
         sp.addShape(F);
@@ -406,7 +406,7 @@ public class TrackView extends Frame {
         Section I = new Section(625 + shiftAmount, 55, 50, 5, 0, "I", -5, 15, this.trainSystem);
         sp.addShape(I);
         //sectionList.put("I", I);
-        
+
         // Second loop
         Section J = new Section(680 + shiftAmount, 55, 50, 5, 0, "J", -5, 15, this.trainSystem);
         sp.addShape(J);
@@ -423,7 +423,7 @@ public class TrackView extends Frame {
         Section N = new Section(705 + shiftAmount, 80, 50, 5, 45, "N", -5, 15, this.trainSystem);
         sp.addShape(N);
         //sectionList.put("N", N);
-        
+
         // First wayside
         Section O = new Section(380 + shiftAmount, 80, 50, 5, -45, "O", 5, 16, this.trainSystem);
         sp.addShape(O);
@@ -434,7 +434,7 @@ public class TrackView extends Frame {
         Section Q = new Section(300 + shiftAmount, 80, 50, 5, 45, "Q", -15, 16, this.trainSystem);
         sp.addShape(Q);
         //sectionList.put("Q", Q);
-        
+
         // Second wayside
         Section R = new Section(580 + shiftAmount, 80, 50, 5, -45, "R", 5, 16, this.trainSystem);
         sp.addShape(R);
@@ -445,7 +445,7 @@ public class TrackView extends Frame {
         Section T = new Section(500 + shiftAmount, 80, 50, 5, 45, "T", -15, 16, this.trainSystem);
         sp.addShape(T);
         //sectionList.put("T", T);  
-        
+
         // Switches
         Switch switch1 = new Switch(25 + shiftAmount + 15, 50, 30 + shiftAmount + 23, 57, 12, 5, 45, 0, 12);
         sp.addShape(switch1);
@@ -468,7 +468,7 @@ public class TrackView extends Frame {
         Switch switch7 = new Switch(690 + shiftAmount + 15, 57, 690 + shiftAmount + 23, 57, 12, 5, 45, 0, 11);
         sp.addShape(switch7);
         switch7.setIsDefault(true);
-        
+
         //TrackLights
         TrackLight light1 = new TrackLight(25 + shiftAmount, 45, 0, false);
         sp.addShape(light1);
@@ -530,7 +530,7 @@ public class TrackView extends Frame {
         sp.addShape(stationStationSquare);
         Station stationSouthHills = new Station(860, 100, 8);
         sp.addShape(stationSouthHills);
-        
+
         //Crossings
         crossing = new Crossing(670, 30);
         sp.addShape(crossing);
@@ -546,8 +546,8 @@ public class TrackView extends Frame {
 
     private void updateSwitch(Integer switchID, boolean defaultOrAlternate) {
         Switch s = switchList.get(switchID);
-        if(s != null) {
-           s.setIsDefault(defaultOrAlternate); 
+        if (s != null) {
+            s.setIsDefault(defaultOrAlternate);
         }
     }
 
@@ -566,7 +566,7 @@ public class TrackView extends Frame {
         } else if (section.toString() == "J") {
             TrackLight tl1 = trackLightList.get(section.toString() + "1");
             TrackLight tl2 = trackLightList.get(section.toString() + "2");
-            if(tl1 != null && tl2 != null) {
+            if (tl1 != null && tl2 != null) {
                 if (lightState == Global.LightState.GO) {
                     tl1.setIsGo(true);
                     tl1.setIsStop(false);
@@ -578,7 +578,7 @@ public class TrackView extends Frame {
                     tl2.setIsGo(false);
                     tl2.setIsStop(true);
                 }
-            }          
+            }
         } else {
             TrackLight tl = trackLightList.get(section.toString());
             if (tl != null) {
@@ -595,29 +595,47 @@ public class TrackView extends Frame {
     }
 
     private void updateSection(Global.Section sectionID, int id, boolean occupied, short authority, double remainingAuthority, double speed) {
-        Section s;
+        Section s1, s2 = null;
         if (sectionID.toString().equals("J") && id == 62) {
             //light up K
-            s = sectionList.get("K");
-            s.setIsOccupied(occupied);
+            s1 = sectionList.get("K");
+            s1.setIsOccupied(occupied);
+        } else if (sectionID.toString().equals("J") && id != 62) {
+            s1 = sectionList.get("J1");
+            s1.setIsOccupied(occupied);
+            s2 = sectionList.get("J2");
+            s2.setIsOccupied(occupied);
         } else {
-            s = sectionList.get(sectionID.toString());
-            s.setIsOccupied(occupied);
+            s1 = sectionList.get(sectionID.toString());
+            s1.setIsOccupied(occupied);
         }
         if (occupied) {
-            s.addBlockToCurrentBlocks(id);
+            s1.addBlockToCurrentBlocks(id);
             if (authority < 0) {
-                s.setIsHalted(true);
+                s1.setIsHalted(true);
             } else {
-                s.setIsHalted(false);
+                s1.setIsHalted(false);
             }
             if (remainingAuthority <= 0 || speed <= 0) {
-                s.setIsStopped(true);
+                s1.setIsStopped(true);
             } else {
-                s.setIsStopped(false);
+                s1.setIsStopped(false);
+            }
+            if (s2 != null) {
+                s2.addBlockToCurrentBlocks(id);
+                if (authority < 0) {
+                    s2.setIsHalted(true);
+                } else {
+                    s2.setIsHalted(false);
+                }
+                if (remainingAuthority <= 0 || speed <= 0) {
+                    s2.setIsStopped(true);
+                } else {
+                    s2.setIsStopped(false);
+                }
             }
         } else {
-            s.removeBlockFromCurrentBlocks(id);
+            s1.removeBlockFromCurrentBlocks(id);
         }
     }
 

@@ -30,9 +30,11 @@ import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -69,6 +71,8 @@ public class TrackController {
     private LinkedList<UserSwitchState> currentSwitchStates;
     private Crossing crossing;
     private LinkedList<PresenceBlock> occupiedBlocks;
+    private LinkedList<String> tempIgnoreSwitch;
+    private LinkedList<String> permIgnoreSwitch;
 
     private TrackControllerGUI trackControllerGUI = null;
 
@@ -96,6 +100,8 @@ public class TrackController {
         this.trackControllerGUI = this.createGUIObject(this);
         //set the default PLC file
         File defaultPLC = new File("src/com/rogueone/assets/wayside_fun.xlsx");
+        //initialize the permant ignore switches
+        this.permIgnoreSwitch = new LinkedList<String>();
         //load the plc file into track controller
         this.loadPLC(defaultPLC, line);
         //set the plc program field on the gui
@@ -104,6 +110,10 @@ public class TrackController {
 //        this.updateSummaryTab();
         this.occupiedBlocks = new LinkedList<PresenceBlock>();
         this.currentSwitchStates = new LinkedList<UserSwitchState>();
+        this.tempIgnoreSwitch = new LinkedList<String>();
+        if(!permIgnoreSwitch.isEmpty()){
+            configurePermenantSwitch();
+        }
     }
 
     /**
@@ -218,6 +228,15 @@ public class TrackController {
                 crossingStates.put(Global.CrossingState.INACTIVE, Global.LightState.valueOf(greenRow.getCell(4).getStringCellValue()));
                 String blocksActive = greenRow.getCell(5).getStringCellValue();
                 this.crossing = new Crossing(sheetLine, section, block, crossingStates, Global.CrossingState.INACTIVE, blocksActive);
+
+                //load the manual switches into the trackController
+                sheet = plcWorkbook.getSheet("TRACK_DETAILS");
+                Row detailsRow = sheet.getRow(1);
+                String manualSwitches = detailsRow.getCell(2).getStringCellValue();
+                List<String> blockList = Arrays.asList(manualSwitches.split(","));
+                for (String s : blockList) {
+                    this.permIgnoreSwitch.add(s);
+                }
 
             } else if (line == Global.Line.RED) {
                 //Start of Red line import
@@ -614,6 +633,7 @@ public class TrackController {
         HashMap<Global.Section, Global.Presence> sectionPresence = new HashMap<Global.Section, Global.Presence>();
         //get the sections for the current line
         ArrayList<Section> sectionsArray = this.trackModel.getLine(controllerLine).getSections();
+        tempIgnoreSwitch.clear();
         for (Section s : sectionsArray) {
             //get the blocks for the current line
             ArrayList<Block> blockArray = s.getBlocks();
@@ -622,7 +642,10 @@ public class TrackController {
             for (Block b : blockArray) {
                 if (b.isOccupied() && b.getSwitchID() != -1) {
                     //if on switch block do not complete switch calculation, leave track in current state
-                    return;
+                    if (!tempIgnoreSwitch.contains(String.valueOf(b.getSwitchID()))) {
+                        tempIgnoreSwitch.add(String.valueOf(b.getSwitchID()));
+                    }
+//                    return;
                 } else if (b.isOccupied() && b.getSwitchID() == -1) {
                     // else set section as occupied
                     occupied = true;
@@ -677,13 +700,43 @@ public class TrackController {
             }
         }
         if (currentSwitchStates != null) {
-            this.currentSwitchStates.clear();
+            if (!permIgnoreSwitch.isEmpty()) {
+                LinkedList<UserSwitchState> keepStates = new LinkedList<UserSwitchState>();
+                for (UserSwitchState uss : this.currentSwitchStates) {
+                    for (SimpleEntry se : uss.getUserSwitchStates()) {
+                        for(String pis : permIgnoreSwitch){
+                            if ((Integer) se.getKey() == Integer.parseInt(pis)) {
+                                keepStates.add(uss);
+                            }
+                        }
+                    }
+                }
+                this.currentSwitchStates.clear();
+                for(UserSwitchState uss : keepStates){
+                    this.currentSwitchStates.add(uss);
+                }
+            } else {
+                this.currentSwitchStates.clear();
+            }
         }
 
         for (Entry<Global.LogicGroups, StateSet> logicSet : logicSets.entrySet()) {
-            UserSwitchState userSwitchState = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
-            updateSwitches(userSwitchState);
-            this.currentSwitchStates.add(userSwitchState);
+            boolean evaluateSwitch = true;
+            for (String s : tempIgnoreSwitch) {
+                if (logicSet.getKey().toString().contains(s)) {
+                    evaluateSwitch = false;
+                }
+            }
+            for (String s : permIgnoreSwitch) {
+                if (logicSet.getKey().toString().contains(s)) {
+                    evaluateSwitch = false;
+                }
+            }
+            if (evaluateSwitch) {
+                UserSwitchState userSwitchState = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
+                updateSwitches(userSwitchState);
+                this.currentSwitchStates.add(userSwitchState);
+            }
 //            System.out.print(printSwitchState(userSwitchState));
         }
 
@@ -767,6 +820,15 @@ public class TrackController {
             }
         }
         //END OF UPDATE PRESENCE
+        ArrayList<PresenceBlock> removeBlocks = new ArrayList<PresenceBlock>();
+        for (PresenceBlock pb : occupiedBlocks) {
+            if (pb.getCurrBlock().getID() == 151 && !this.trackModel.getBlock(controllerLine, 151).isOccupied()) {
+                removeBlocks.add(pb);
+            }
+        }
+        for (PresenceBlock pb : removeBlocks) {
+            occupiedBlocks.remove(pb);
+        }
 
         //START OF SAFETY CHECKS
         if (!occupiedBlocks.isEmpty()) {
@@ -776,7 +838,7 @@ public class TrackController {
                 //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
                 //NEED TO DETERMINE LOOKAHEAD DISTANCES
                 //FOR BOTH SERVICE BRAKE AND EMERGENCY BRAKE
-                int lookahead = 5;
+                int lookahead = 3;
                 PresenceBlock lookaheadBlock = new PresenceBlock(pb);
                 for (int i = 0; i < lookahead; i++) {
 //                            System.out.print("TC:(check) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
@@ -795,18 +857,16 @@ public class TrackController {
                         System.out.println("Train Ahead");
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
-                    }
-                    //check to see if that block ahead is closed or failed
-                    else if (lookaheadBlock.getNextBlock().getID() != 0 && (!this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureBrokenRail() ||
-                            this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureTrackCircuit())){
-                        System.out.println("Track Open = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen() + 
-                                "Failure BR = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() + 
-                                "Failure PO = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() + 
-                                "Failure TC = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() );
+                    } //check to see if that block ahead is closed or failed
+                    else if (lookaheadBlock.getNextBlock().getID() != 0 && (!this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureBrokenRail()
+                            || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureTrackCircuit())) {
+                        System.out.println("Track Open = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen()
+                                + "Failure BR = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage()
+                                + "Failure PO = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage()
+                                + "Failure TC = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage());
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
-                    }
-                    //otherwise set speed and authority to zero, represents no change
+                    } //otherwise set speed and authority to zero, represents no change
                     else {
                         pb.getCurrBlock().getTrackCircuit().speed = 0;
                         pb.getCurrBlock().getTrackCircuit().authority = 0;
@@ -845,10 +905,10 @@ public class TrackController {
                     crossingActive = true;
                     break;
                 }
-                
+
             }
         }
-        if(crossingActive){
+        if (crossingActive) {
             crossing.setCurrentCrossingState(Global.CrossingState.ACTIVE);
             System.out.println("Crossing Active");
         } else {
@@ -963,6 +1023,11 @@ public class TrackController {
         }
     }
 
+    /**
+     * Function that will toggle the position of a switch that has been designated as manual
+     * Requires the switch ID that is going to be toggled as an input parameter 
+     * @param switchID - Switch to be toggled as Integer
+     */
     public void toggleSwitch(Integer switchID) {
         Iterator listIterator = this.currentSwitchStates.iterator();
         while (listIterator.hasNext()) {
@@ -1024,4 +1089,21 @@ public class TrackController {
         return this.occupiedBlocks;
     }
 
+    private void configurePermenantSwitch() {
+        for(String s : permIgnoreSwitch){
+            UserSwitchState uss = new UserSwitchState();
+            AbstractMap.SimpleEntry<Integer, Global.SwitchState> permState = new AbstractMap.SimpleEntry<Integer, Global.SwitchState>(Integer.parseInt(s), Global.SwitchState.DEFAULT);
+            uss.addUserSwitchState(permState);
+            currentSwitchStates.add(uss);
+        }
+    }
+    
+    /**
+     * Returns the a list of switches that are manually controlled
+     * Use in CTC for changing a switches position
+     * @return  - LinkedList of switches as Strings
+     */
+    public LinkedList<String> getManualSwitches(){
+        return this.permIgnoreSwitch;
+    }
 }
