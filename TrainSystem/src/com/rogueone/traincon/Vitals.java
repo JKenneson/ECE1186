@@ -108,6 +108,7 @@ public class Vitals {
                 stopForStation = false;
                 this.setServiceBrakeActivated(false);
                 this.previousStation = this.station;
+                System.out.println("Leaving station");
             }
         }
         
@@ -370,7 +371,9 @@ public class Vitals {
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
                 this.distanceToStation = beacon.getDistance() + 25;
-                this.specialCase = !this.specialCase;
+                if(this.specialCase == false){
+                    this.specialCase = !this.specialCase;
+                }
             }
         }
         
