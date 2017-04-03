@@ -74,6 +74,8 @@ public class TrainHandler {
         for (TrainModel trainToRemove : trainsToDelete) {
             this.trains.remove(trainToRemove);
             this.trainSystem.getCTC().removeTrainFromTable(trainToRemove.trainID);
+            trainToRemove.trainModelGUIFrame.dispose();
+            trainToRemove.trainController.trainControllerGUIFrame.dispose();
         }
     }
     

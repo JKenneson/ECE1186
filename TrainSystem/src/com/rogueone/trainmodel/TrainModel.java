@@ -54,9 +54,10 @@ public class TrainModel {
     private TrainSystem trainSystem;
     //Reference to TrainController
     public TrainController trainController;
-    private TrainControllerGUI trainControllerGUI;
+    public TrainControllerGUI trainControllerGUI;
     //Reference to GUI
-    private TrainModelGUI trainModelGUI;
+    public TrainModelGUI trainModelGUI;
+    public JFrame trainModelGUIFrame;
     //Failures
     private boolean powerFailure;
     private boolean brakeFailure;
@@ -240,11 +241,11 @@ public class TrainModel {
      */
     public void showGUIObject() {
         //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(this.trainModelGUI);
-        frame.pack();
-        frame.setVisible(true);     //Make sure to set it visible
+        trainModelGUIFrame = new JFrame();
+        trainModelGUIFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        trainModelGUIFrame.getContentPane().add(this.trainModelGUI);
+        trainModelGUIFrame.pack();
+        trainModelGUIFrame.setVisible(true);     //Make sure to set it visible
     }
     
     /**

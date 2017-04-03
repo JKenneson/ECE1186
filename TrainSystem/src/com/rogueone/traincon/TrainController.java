@@ -41,6 +41,7 @@ public class TrainController {
     
     //Train Information
     public TrainModel trainModel;
+    public JFrame trainControllerGUIFrame;
     //public GPS gps;
     public PowerSystems powerSystem;
     //public SpeedControl speedControl;
@@ -125,11 +126,11 @@ public class TrainController {
     
     public void showGUIObject() {
         //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(this.gui);
-        frame.pack();
-        frame.setVisible(true);     //Make sure to set it visible
+        trainControllerGUIFrame = new JFrame();
+        trainControllerGUIFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        trainControllerGUIFrame.getContentPane().add(this.gui);
+        trainControllerGUIFrame.pack();
+        trainControllerGUIFrame.setVisible(true);     //Make sure to set it visible
     }
     
     /**
