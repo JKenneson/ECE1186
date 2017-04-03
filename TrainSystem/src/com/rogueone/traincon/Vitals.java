@@ -368,20 +368,22 @@ public class Vitals {
     }
     
     public void receieveBeacon(Beacon beacon){
-        
+        boolean skipped = true;
         if(beacon.getStation() != null){
             this.station = beacon.getStation().getName();
             if(beacon.getID() == 33 && this.specialCase){
                 specialCase = !this.specialCase;
+                skipped = false;
             }
-            if(!this.previousStation.equals(this.station) && this.specialCase){
+            if(!this.previousStation.equals(this.station) && skipped){
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
                 this.distanceToStation = beacon.getDistance() + 25;
-                if(this.specialCase == false){
-                    this.specialCase = !this.specialCase;
-                }
+//                if(this.specialCase == false){
+//                    this.specialCase = !this.specialCase;
+//                }
             }
+            
         }
         
         
