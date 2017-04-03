@@ -945,6 +945,20 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
     }
     
+    public void removeTrainFromTable(int trainID){
+        int trainIDRow = 0;
+        DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
+        for(int i = 0; i < model.getRowCount(); i++){
+            for(int j = 0; j < model.getColumnCount(); j++){
+                if(model.getValueAt(i, j).equals(trainID)){
+                    trainIDRow = i;
+                }
+            }
+        }
+        model.removeRow(trainIDRow);
+    }
+    
+    
     /**
      * calculates offsets in presence to determine train position
      */
@@ -956,7 +970,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             TrainTable.setValueAt(tempLocation, i, 2);
             TrainTable.repaint();
        }
-    
     }
     
     /**
