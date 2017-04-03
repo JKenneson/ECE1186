@@ -38,6 +38,8 @@ public class TrainSystem {
     private Timer timer;
     private SystemTimer task;
     private Clock clock;
+    private int stationBufferCount = 0;
+    private static final int STATION_BUFFER_CONSTANT = 10;
     public static final int NORMAL_TIME = 1000;
     public static final int x10_TIME = 100;
     public static final int x25_TIME = 45;
@@ -110,7 +112,13 @@ public class TrainSystem {
         this.mainFrame.timeLabel.setText(this.clock.printClock() + "     ");
         
         this.trainHandler.updateTrains();
-        this.trackModel.updateStationEnvironments();   
+        if(stationBufferCount == STATION_BUFFER_CONSTANT) {
+            this.trackModel.updateStationEnvironments();
+            stationBufferCount = 0;
+        }
+        else {
+            stationBufferCount++;
+        }
         this.ctc.updateGUI();
         this.trackControllerHandler.updateTrackView();
     }
