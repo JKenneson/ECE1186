@@ -1034,11 +1034,13 @@ private void getDispatchTimes(){
 private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
     ArrayList<String> dispatchTimes = trainSystem.getScheduler().getDispatchTimes();
         for (String times : dispatchTimes){
-            String tempTime = autoDispatchHour + ":" + autoDispatchMinute + ":" + "am";
-            if( tempTime.equals(times)){
-                trainSystem.dispatchTrain(50, 100000, getNumberCars(), "GREEN", iterativeID++);
-                addRow("GREEN", "A", 1, iterativeID);
-
+            String tempTime = autoDispatchHour + ":" + autoDispatchMinute + "am";
+            if(autoDispatchSecond == 0){
+                if (tempTime.equals(times)) {
+                    trainSystem.dispatchTrain(50, 100000, getNumberCars(), "GREEN", iterativeID);
+                    addRow("GREEN", "A", 1, iterativeID);
+                    iterativeID++;
+                }
             } 
         }
         

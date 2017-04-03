@@ -22,7 +22,7 @@ import com.rogueone.mbo.gui.TrainScheduleGUI;
 import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.table.*;
 public class Scheduler {
-     private static File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+     private static File file = new File("src/com/rogueone/assets/schedule.xlsx");
      private static ArrayList<String> redDispatchTimes = new ArrayList<String>();
      private static ArrayList<String> greenDispatchTimes = new ArrayList<String>();
      public static MovingBlockGUI mboGui = Mbo.mboGui;
