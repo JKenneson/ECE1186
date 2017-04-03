@@ -359,12 +359,17 @@ public class Vitals {
     }
     
     public void receieveBeacon(Beacon beacon){
-        if(beacon.getStation() != null && !this.previousStation.equals(this.station)){
-            this.approachingStation = true;
-            this.doorSide = beacon.isOnRight();
-            this.distanceToStation = beacon.getDistance() + 25;
+        
+        if(beacon.getStation() != null){
             this.station = beacon.getStation().getName();
+            if(!this.previousStation.equals(this.station)){
+                this.approachingStation = true;
+                this.doorSide = beacon.isOnRight();
+                this.distanceToStation = beacon.getDistance() + 25;
+            }
         }
+        
+        
         else{ //Do distance calculation work for red line
             
         } 
