@@ -111,7 +111,7 @@ public class TrackController {
         this.occupiedBlocks = new LinkedList<PresenceBlock>();
         this.currentSwitchStates = new LinkedList<UserSwitchState>();
         this.tempIgnoreSwitch = new LinkedList<String>();
-        if(!permIgnoreSwitch.isEmpty()){
+        if (!permIgnoreSwitch.isEmpty()) {
             configurePermenantSwitch();
         }
     }
@@ -704,7 +704,7 @@ public class TrackController {
                 LinkedList<UserSwitchState> keepStates = new LinkedList<UserSwitchState>();
                 for (UserSwitchState uss : this.currentSwitchStates) {
                     for (SimpleEntry se : uss.getUserSwitchStates()) {
-                        for(String pis : permIgnoreSwitch){
+                        for (String pis : permIgnoreSwitch) {
                             if ((Integer) se.getKey() == Integer.parseInt(pis)) {
                                 keepStates.add(uss);
                             }
@@ -712,7 +712,7 @@ public class TrackController {
                     }
                 }
                 this.currentSwitchStates.clear();
-                for(UserSwitchState uss : keepStates){
+                for (UserSwitchState uss : keepStates) {
                     this.currentSwitchStates.add(uss);
                 }
             } else {
@@ -813,7 +813,7 @@ public class TrackController {
                             } else {
                                 pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
                             }
-                            System.out.println("TC:(moving) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
+//                            System.out.println("TC:(moving) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
                         }
                     }
                 }
@@ -838,7 +838,10 @@ public class TrackController {
                 //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
                 //NEED TO DETERMINE LOOKAHEAD DISTANCES
                 //FOR BOTH SERVICE BRAKE AND EMERGENCY BRAKE
-                int lookahead = 3;
+                int lookahead = 2;
+                if (pb.getCurrBlock().getID() >= 57 && pb.getCurrBlock().getID() <= 61) {
+                    lookahead = 2;
+                }
                 PresenceBlock lookaheadBlock = new PresenceBlock(pb);
                 for (int i = 0; i < lookahead; i++) {
 //                            System.out.print("TC:(check) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
@@ -1024,8 +1027,10 @@ public class TrackController {
     }
 
     /**
-     * Function that will toggle the position of a switch that has been designated as manual
-     * Requires the switch ID that is going to be toggled as an input parameter 
+     * Function that will toggle the position of a switch that has been
+     * designated as manual Requires the switch ID that is going to be toggled
+     * as an input parameter
+     *
      * @param switchID - Switch to be toggled as Integer
      */
     public void toggleSwitch(Integer switchID) {
@@ -1090,20 +1095,21 @@ public class TrackController {
     }
 
     private void configurePermenantSwitch() {
-        for(String s : permIgnoreSwitch){
+        for (String s : permIgnoreSwitch) {
             UserSwitchState uss = new UserSwitchState();
             AbstractMap.SimpleEntry<Integer, Global.SwitchState> permState = new AbstractMap.SimpleEntry<Integer, Global.SwitchState>(Integer.parseInt(s), Global.SwitchState.DEFAULT);
             uss.addUserSwitchState(permState);
             currentSwitchStates.add(uss);
         }
     }
-    
+
     /**
-     * Returns the a list of switches that are manually controlled
-     * Use in CTC for changing a switches position
-     * @return  - LinkedList of switches as Strings
+     * Returns the a list of switches that are manually controlled Use in CTC
+     * for changing a switches position
+     *
+     * @return - LinkedList of switches as Strings
      */
-    public LinkedList<String> getManualSwitches(){
+    public LinkedList<String> getManualSwitches() {
         return this.permIgnoreSwitch;
     }
 }

@@ -636,6 +636,9 @@ public class TrackView extends Frame {
             }
         } else {
             s1.removeBlockFromCurrentBlocks(id);
+            if (s2 != null) {
+                s2.removeBlockFromCurrentBlocks(id);
+            }
         }
     }
 
@@ -648,41 +651,6 @@ public class TrackView extends Frame {
         }
     }
 
-    /**
-     * The paint method provides the real magic. Here we cast the Graphics
-     * object to Graphics2D to illustrate that we may use the same old graphics
-     * capabilities with Graphics2D that we are used to using with Graphics.
-     *
-     */
-//  public void paint(Graphics g) {
-//    //Here is how we used to draw a square with width
-//    //of 200, height of 200, and starting at x=50, y=50.
-//    g.setColor(Color.red);
-////    g.drawRect(50,50,200,200);
-//    Cabin c = new Cabin(500, 150, 50);
-////    Rectangle2D mainPost = new Rectangle2D.Double(0, 0, 5 * scale, 25 * scale);
-//    Arc2D redLight = new Arc2D.Double((5 * scale)/(double)2, 0 , 5 * scale, 5 * scale, 90, -180, Arc2D.PIE);
-//    Arc2D greenLight = new Arc2D.Double(5 * scale, 2* ((5 * scale) /(double)2), 5 * scale, 5 * scale,  90, -180, Arc2D.PIE);
-//    
-// 
-//    //Let's set the Color to blue and then use the Graphics2D
-//    //object to draw a rectangle, offset from the square.
-//    //So far, we've not done anything using Graphics2D that
-//    //we could not also do using Graphics.  (We are actually
-//    //using Graphics2D methods inherited from Graphics.)
-//    Graphics2D g2d = (Graphics2D)g;
-//    g2d.draw((Shape) c);
-////    g2d.setColor(Color.BLACK);
-////    g2d.fill(mainPost);
-//////    g2d.drawRect(75,75,300,200);
-////    g2d.draw(mainPost);
-////    g2d.setColor(Color.RED);
-////    g2d.fill(redLight);
-////    g2d.draw(redLight);
-////    g2d.setColor(Color.GREEN);
-////    g2d.fill(greenLight);
-////    g2d.draw(greenLight);
-//  }
     class ShapePanel extends JPanel {
 
         // These instance variables are used to store the desired size
