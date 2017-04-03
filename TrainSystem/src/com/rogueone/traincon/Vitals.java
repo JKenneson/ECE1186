@@ -45,8 +45,9 @@ public class Vitals {
     private boolean approachingStation;
     private boolean doorSide;
     private double distanceToStation;
-    private String station;
+    private String station = "start";
     private boolean stationStop;
+    private String previousStation = "value";
     
     
     
@@ -105,6 +106,7 @@ public class Vitals {
                 this.approachingStation = false;
                 stopForStation = false;
                 this.setServiceBrakeActivated(false);
+                this.previousStation = this.station;
             }
         }
         
@@ -357,7 +359,7 @@ public class Vitals {
     }
     
     public void receieveBeacon(Beacon beacon){
-        if(beacon.getStation() != null){
+        if(beacon.getStation() != null && !this.previousStation.equals(this.station)){
             this.approachingStation = true;
             this.doorSide = beacon.isOnRight();
             this.distanceToStation = beacon.getDistance() + 25;
