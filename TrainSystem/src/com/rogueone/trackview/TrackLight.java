@@ -142,6 +142,16 @@ public class TrackLight implements MyShape {
     public void setIsStop(boolean isStop) {
         this.isStop = isStop;
     }
+
+    @Override
+    public int getBlockID(double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getBlockIDUpdate(double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

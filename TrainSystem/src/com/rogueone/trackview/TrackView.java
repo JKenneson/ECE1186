@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import javax.jws.WebParam;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -48,10 +49,12 @@ public class TrackView extends Frame {
     HashMap<Integer, Switch> switchList;
     HashMap<String, TrackLight> trackLightList;
     HashMap<String, Section> sectionList;
+    Yard yardStart;
     Crossing crossing;
     double scale = 5;
+    public int trainID = 0;
 
-    private TrainSystem trainSystem;
+    public TrainSystem trainSystem;
 
     /**
      * Our Example01 constructor sets the frame's size, adds the visual
@@ -69,7 +72,7 @@ public class TrackView extends Frame {
             switchList = new HashMap<Integer, Switch>();
             trackLightList = new HashMap<String, TrackLight>();
             sectionList = new HashMap<String, Section>();
-            sp = new ShapePanel(1000, 305);
+            sp = new ShapePanel(1000, 305, this.trainSystem);
             JFrame theWindow = new JFrame("Track View - " + line);
             theWindow.setSize(1000, 305);
             Container c = theWindow.getContentPane();
@@ -85,7 +88,7 @@ public class TrackView extends Frame {
             switchList = new HashMap<Integer, Switch>();
             trackLightList = new HashMap<String, TrackLight>();
             sectionList = new HashMap<String, Section>();
-            sp = new ShapePanel(1000, 300);
+            sp = new ShapePanel(1000, 300, this.trainSystem);
             JFrame theWindow = new JFrame("Track View - " + line);
             theWindow.setSize(1000, 300);
             Container c = theWindow.getContentPane();
@@ -160,7 +163,7 @@ public class TrackView extends Frame {
     }
 
     private void initializeGreenLine() {
-        Switch switch0 = new Switch(35 + shiftAmount + 3, 51, 35 + shiftAmount + 3, 59, 15, 5, 45, -45, 3);
+        Switch switch0 = new Switch(35 + shiftAmount + 3, 51, 35 + shiftAmount + 3, 59, 15, 5, 45, -45, 0);
         sp.addShape(switch0);
         switch0.setIsDefault(true);
         Switch switch4 = new Switch(190 + shiftAmount + 15, 57, 190 + shiftAmount + 23, 57, 12, 5, 45, -45, 4);
@@ -175,7 +178,7 @@ public class TrackView extends Frame {
         Switch switch2 = new Switch(705 + shiftAmount, 57, 705 + shiftAmount + 8, 57, 12, 5, 45, -45, 2);
         sp.addShape(switch2);
         switch2.setIsDefault(true);
-        Switch switch3 = new Switch(870 + shiftAmount + 9, 51, 870 + shiftAmount + 6, 59, 15, 5, -45, 45, 0);
+        Switch switch3 = new Switch(870 + shiftAmount + 9, 51, 870 + shiftAmount + 6, 59, 15, 5, -45, 45, 3);
         sp.addShape(switch3);
         switch3.setIsDefault(true);
 
@@ -330,7 +333,7 @@ public class TrackView extends Frame {
         sp.addShape(stationDormont2);
         Station stationDormont = new Station(186, 36, 8);
         sp.addShape(stationDormont);
-        Station stationGlenbury2 = new Station(450, 36, 8);
+        Station stationGlenbury2 = new Station(453, 36, 8);
         sp.addShape(stationGlenbury2);
         Station stationMtLebanon = new Station(235, 63, 7);
         sp.addShape(stationMtLebanon);
@@ -351,7 +354,7 @@ public class TrackView extends Frame {
         Station stationUniOfPitt = new Station(763, 170, 8);
         sp.addShape(stationUniOfPitt);
 
-        Station stationEdgebrook = new Station(722, 236, 8);
+        Station stationEdgebrook = new Station(720, 236, 8);
         sp.addShape(stationEdgebrook);
         Station stationPioneer = new Station(781, 236, 8);
         sp.addShape(stationPioneer);
@@ -366,7 +369,7 @@ public class TrackView extends Frame {
         crossing = new Crossing(750, 140);
         sp.addShape(crossing);
 
-        Yard yardStart = new Yard(0, 0);
+        yardStart = new Yard(0, 0);
         sp.addShape(yardStart);
         Yard yardEnd = new Yard(950, 0);
         sp.addShape(yardEnd);
@@ -674,8 +677,7 @@ public class TrackView extends Frame {
 
         private boolean popped; // has popup menu been activated?
 
-        public ShapePanel(int pwid, int pht) {
-
+        public ShapePanel(int pwid, int pht, TrainSystem trainSystem) {
             selindex = -1;
 
             prefwid = pwid;	// values used by getPreferredSize method below
@@ -688,7 +690,7 @@ public class TrackView extends Frame {
 
             setBackground(Color.lightGray);
 
-            addMouseListener(new MyMouseListener());
+            addMouseListener(new MyMouseListener(trainSystem));
 //        addMouseMotionListener(new MyMover());
             popped = false;
 
@@ -726,45 +728,106 @@ public class TrackView extends Frame {
         // for the JPanel.
         public class MyMouseListener extends MouseAdapter {
 
+            private TrainSystem trainSystem;
+
+            private MyMouseListener(TrainSystem trainSystem) {
+                this.trainSystem = trainSystem;
+            }
+
             public void mousePressed(MouseEvent e) {
                 x1 = e.getX();  // store where mouse is when clicked
                 y1 = e.getY();
-
-//            if (!e.isPopupTrigger() && (mode == Mode.NONE
-//                    || mode == Mode.SELECTED)) // left click and
-//            {												    // either NONE or
-//                if (selindex >= 0) // SELECTED mode
-//                {
-//                    unSelect();			// unselect previous shape
-//                    mode = Mode.NONE;
-//                    cutOption.setEnabled(false);	//addition of disabled cut/copy buttons
-//                    copyOption.setEnabled(false);
-//                }
-//                selindex = getSelected(x1, y1);  // find shape mouse is
-//                // clicked on
-//                if (selindex >= 0) {
-//                    mode = Mode.SELECTED;  	// Now in SELECTED mode for shape
-//                    cutOption.setEnabled(true); 	//selected item enabled the copy/paste
-//                    copyOption.setEnabled(true);
-//                    // Check for double-click.  If so, show dialog to update text of
-//                    // the current text shape (will do nothing if shape is not a MyText)
-//                    MyShape curr = shapeList.get(selindex);
-//                    if (curr instanceof MyText && e.getClickCount() == 2) {
-//                        String newText = JOptionPane.showInputDialog(theWindow,
-//                                "Enter new text [Cancel for no change]");
-//                        if (newText != null) {
-//                            ((MyText) curr).setText(newText);
-//                        }
-//                    }
-//                }
-//                repaint();	//  Make sure updates are redrawn
-//            } else if (e.isPopupTrigger() && selindex >= 0) // if button is
-//            {								               // the popup menu
-//                popper.show(ShapePanel.this, x1, y1);      // trigger, show
-//                popped = true;							   // popup menu
-//                cutOption.setEnabled(false);
-//                copyOption.setEnabled(false);
-//            }
+                //check if one of the switches was clicked
+                for (Switch s : switchList.values()) {
+                    if (s.contains(x1, y1)) {
+                        boolean result = this.trainSystem.getTrackControllerHandler().toggleSwitch(Global.Line.GREEN, s.getSwitchID());
+                        if (result) {
+                            if (s.isIsDefault() == true) {
+                                s.setIsDefault(false);
+                            } else {
+                                s.setIsDefault(true);
+                            }
+                            sp.repaint();
+                        }
+                    }
+                }
+                if (yardStart.contains(x1, y1)) {
+                    //check if you can dispatch the train
+                    if (this.trainSystem.getTrackControllerHandler().requestDispatch(Global.Line.GREEN)) {
+                        JFrame f = new JFrame();
+                        DispatchPanel dp = new DispatchPanel(this.trainSystem, Global.Line.GREEN);
+                        f.add(dp);
+                        f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                        f.pack();
+                        f.setVisible(true);
+                    }
+                }
+                for (Section s : sectionList.values()) {
+                    boolean containsSection = s.contains(x1, y1);
+                    if (containsSection && s.isIsOccupied()) {
+                        System.out.println("Section : " + s.getSectionID() + " selected");
+                        int blockID = s.getBlockIDUpdate(x1, y1);
+                        if (blockID != -1) {
+                            System.out.println("Block : " + blockID + " selected");
+                            JFrame f = new JFrame();
+                            UpdatePanel up = new UpdatePanel(this.trainSystem, Global.Line.GREEN, blockID);
+                            f.add(up);
+                            f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                            f.pack();
+                            f.setVisible(true);
+                        }
+                    } else if (containsSection && !s.isIsOccupied()) {
+                        System.out.println("Section : " + s.getSectionID() + " selected");
+                        int blockID = s.getBlockID(x1, y1);
+                        if (blockID != -1) {
+                            System.out.println("Block : " + blockID + " selected");
+                            //check to see if block is opened or closed
+                            if (!s.isBlockClosed(blockID)) {
+                                //check to see if you can close that block
+                                int response = JOptionPane.showOptionDialog(null,
+                                        "Would you like to close block " + blockID + " in section " + s.getSectionID() + "?",
+                                        "Close Block " + blockID + "",
+                                        JOptionPane.YES_NO_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE, null, null, null
+                                );
+                                if (response == JOptionPane.YES_OPTION) {
+                                    if (this.trainSystem.getTrackControllerHandler().requestMaintenance(Global.Line.GREEN, blockID)) {
+                                        //if true result from call to close track, then update block to close
+                                        s.addBlockToClosedBlocks(blockID);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null,
+                                                "Block " + blockID + " in section " + s.getSectionID() + " was not closed",
+                                                "Block " + blockID + " not closed",
+                                                JOptionPane.WARNING_MESSAGE);
+                                    }
+                                }
+                                this.trainSystem.getTrackControllerHandler().updateTrack();
+                                break;
+                            } else {
+                                //check to see if you can open that block
+                                int response = JOptionPane.showOptionDialog(null,
+                                        "Would you like to open block " + blockID + " in section " + s.getSectionID() + "?",
+                                        "Open Block " + blockID + "",
+                                        JOptionPane.YES_NO_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE, null, null, null
+                                );
+                                if (response == JOptionPane.YES_OPTION) {
+                                    if (this.trainSystem.getTrackControllerHandler().requestOpen(Global.Line.GREEN, blockID)) {
+                                        //if true result from open track call, the update the block to open
+                                        s.removeBlockFromClosedBlocks(blockID);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null,
+                                                "Block " + blockID + " in section " + s.getSectionID() + " was not opened",
+                                                "Block " + blockID + " not opened",
+                                                JOptionPane.WARNING_MESSAGE);
+                                    }
+                                }
+                                this.trainSystem.getTrackControllerHandler().updateTrack();
+                                break;
+                            }
+                        }
+                    }
+                }
             }
 
             public void mouseReleased(MouseEvent e) {

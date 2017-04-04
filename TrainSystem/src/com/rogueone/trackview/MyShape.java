@@ -35,6 +35,13 @@ public interface MyShape
 	// be implemented by testing to see if (x,y) is within the underlying
 	// components of the shape.
 	public boolean contains(double x, double y);
+        
+        // gets the block ID of the section that was just clicked
+	public int getBlockID(double x, double y);
+        
+        // gets the block ID of the section that was just clicked
+        // also concerned with whether the train is stopped
+	public int getBlockIDUpdate(double x, double y);
 
 	// Resize the object to newsize.  Keep it in the same location.
 	public void resize(int newsize);

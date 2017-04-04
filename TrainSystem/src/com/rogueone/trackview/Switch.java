@@ -99,7 +99,13 @@ public class Switch implements MyShape {
 
     @Override
     public boolean contains(double x, double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(switchPath.contains(x,y)){
+            return true;
+        } 
+        if(switchRec.contains(x, y)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -115,5 +121,20 @@ public class Switch implements MyShape {
     public void setIsDefault(boolean isDefault) {
         this.isDefault = isDefault;
     }
+
+    public boolean isIsDefault() {
+        return isDefault;
+    }
+
+    @Override
+    public int getBlockID(double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getBlockIDUpdate(double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 
 }

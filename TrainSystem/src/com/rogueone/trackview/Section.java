@@ -38,6 +38,7 @@ public class Section implements MyShape {
     private boolean isHalted;
 
     private HashMap<Integer, Boolean> currentBlocks;
+    private HashMap<Integer, Boolean> closedBlocks;
 
     private float X, Y;
     private float shiftX, shiftY;
@@ -53,12 +54,14 @@ public class Section implements MyShape {
         this.W = width;
         this.H = height;
         this.angle = angle;
+        this.isOccupied = false;
         this.sectionID = sectionID;
         this.shiftX = xShift;
         this.shiftY = yShift;
         this.textDrawn = false;
         this.trainSystem = ts;
         this.currentBlocks = new HashMap<Integer, Boolean>();
+        this.closedBlocks = new HashMap<Integer, Boolean>();
         setUp();
     }
 
@@ -98,7 +101,7 @@ public class Section implements MyShape {
         }
         while (blockIter.hasNext()) {
             Block currentBlock = (Block) blockIter.next();
-            if(currentBlock.getID() == 62){
+            if (currentBlock.getID() == 62) {
                 break;
             }
             Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
@@ -144,6 +147,18 @@ public class Section implements MyShape {
                 }
             }
         }
+        if (!this.closedBlocks.isEmpty()) {
+            Set<Entry<Integer, Boolean>> closedSet = this.closedBlocks.entrySet();
+            Iterator closedIter = closedSet.iterator();
+            while (closedIter.hasNext()) {
+                Entry<Integer, Boolean> closedEntry = (Entry<Integer, Boolean>) closedIter.next();
+                if (closedEntry.getValue() == true) {
+                    Path2D blockPath = sectionDivisions.get(closedEntry.getKey());
+                    g.setColor(Color.RED);
+                    g.draw(blockPath);
+                }
+            }
+        }
         g.setColor(Color.GREEN);
         g.drawString(this.sectionID, (X + (W / 2)) + shiftX, (Y + (H / 2)) + shiftY);
         textDrawn = true;
@@ -169,7 +184,10 @@ public class Section implements MyShape {
 
     @Override
     public boolean contains(double x, double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (sectionPath.contains(x, y)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -200,7 +218,14 @@ public class Section implements MyShape {
         } else {
             this.currentBlocks.put(blockID, true);
         }
+    }
 
+    public void addBlockToClosedBlocks(int blockID) {
+        if (this.closedBlocks.containsKey(blockID)) {
+            this.closedBlocks.replace(blockID, true);
+        } else {
+            this.closedBlocks.put(blockID, true);
+        }
     }
 
     public void removeBlockFromCurrentBlocks(int blockID) {
@@ -208,8 +233,56 @@ public class Section implements MyShape {
             this.currentBlocks.remove(blockID);
         } else {
             //do nothing
-//            System.out.println("nothing to be done");
         }
+    }
+
+    public void removeBlockFromClosedBlocks(int blockID) {
+        if (this.closedBlocks.containsKey(blockID)) {
+            this.closedBlocks.remove(blockID);
+        } else {
+            //do nothing
+        }
+    }
+
+    @Override
+    public int getBlockID(double x, double y) {
+        for (Entry<Integer, Path2D> block : sectionDivisions.entrySet()) {
+            if (block.getValue().contains(x, y)) {
+                return block.getKey();
+            }
+        }
+        return -1;
+    }
+
+    public String getSectionID() {
+        return sectionID;
+    }
+
+    public boolean isIsOccupied() {
+        return isOccupied;
+    }
+
+    public boolean isBlockClosed(int blockID) {
+        if (closedBlocks.containsKey(blockID)) {
+            if (closedBlocks.get(blockID) == true) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int getBlockIDUpdate(double x, double y) {
+        for (Entry<Integer, Path2D> block : sectionDivisions.entrySet()) {
+            if (currentBlocks.containsKey(block.getKey())) {
+                if (block.getValue().contains(x, y)
+                        && currentBlocks.get(block.getKey())
+                        && isStopped) {
+                    return block.getKey();
+                }
+            }
+        }
+        return -1;
     }
 
 }

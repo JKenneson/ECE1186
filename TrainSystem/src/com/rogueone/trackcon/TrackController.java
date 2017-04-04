@@ -233,9 +233,11 @@ public class TrackController {
                 sheet = plcWorkbook.getSheet("TRACK_DETAILS");
                 Row detailsRow = sheet.getRow(1);
                 String manualSwitches = detailsRow.getCell(2).getStringCellValue();
-                List<String> blockList = Arrays.asList(manualSwitches.split(","));
-                for (String s : blockList) {
-                    this.permIgnoreSwitch.add(s);
+                if (!manualSwitches.equals("")) {
+                    List<String> blockList = Arrays.asList(manualSwitches.split(","));
+                    for (String s : blockList) {
+                        this.permIgnoreSwitch.add(s);
+                    }
                 }
 
             } else if (line == Global.Line.RED) {
@@ -747,28 +749,23 @@ public class TrackController {
         //check if track is not broken or closed at start
         //check if track is not occupied at start 
         //check if switch is connecting the correct next block
-        int lookahead = 5;      //need to define lookahead distance
-        boolean val = false;
         PresenceBlock lookaheadBlock = new PresenceBlock(this.trainSystem, controllerLine);
         lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+        int[] dispatchBlocksCheck = {152, 62, 63, 64, 65};
+        int lookahead = 5;
         for (int i = 0; i < lookahead; i++) {
-            System.out.print("TC:(dispatch) starting block: 152 , lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
-            //check to see if that block ahead is occupied or not
-            Block checkBlock = this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID());
+            //check to see if first 5 blocks from leaving yard are emtpy
+            Block checkBlock = this.trackModel.getBlock(controllerLine, dispatchBlocksCheck[i]);
             if (checkBlock.isOccupied() || !checkBlock.isOpen() || checkBlock.getFailureBrokenRail() || checkBlock.getFailurePowerOutage() || checkBlock.getFailureTrackCircuit()) {
-                System.out.print(" Occupied\n");
                 return false;
-            } else {
-                System.out.print(" Unoccupied\n");
-                val = true;
             }
-            //move ahead by one block
-            Block tempBlock = lookaheadBlock.getCurrBlock();
-            lookaheadBlock.setCurrBlock((Block) lookaheadBlock.getNextBlock());
-            lookaheadBlock.setPrevBlock(tempBlock);
-            lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
+            if (checkBlock.getID() == 152) {
+                if (checkBlock.getNext(this.trackModel.getYard()) == null) {
+                    return false;
+                }
+            }
         }
-        return val;
+        return true;
     }
 
     //evaluate whether train can proceed
@@ -926,7 +923,7 @@ public class TrackController {
      * @return
      */
     public boolean canClose(int blockID) {
-        boolean returnValue = false;
+        boolean returnValue = true;
         //get the section that the block is currently in
         //check to ensure that there are no trains within range, before (or after [red]) the section
         //after checks are complete continue and close that section of track
@@ -937,8 +934,7 @@ public class TrackController {
         }
         //need to be able to determine which section is before and after this section
         //in order to traverse
-        Global.Section closeSection = closeBlock.getSection().getSectionID();
-//        closeBlock.close();
+        closeBlock.close();
         return returnValue;
     }
 
@@ -949,16 +945,15 @@ public class TrackController {
      * @return
      */
     public boolean canOpen(int blockID) {
-        boolean returnValue = false;
+        boolean returnValue = true;
         Block openBlock = this.trackModel.getBlock(controllerLine, blockID);
         //if not occupied, not open, not broken (3 ways) then open the track
         if (!openBlock.isOccupied() && !openBlock.isOpen() && !openBlock.getFailureBrokenRail() && !openBlock.getFailurePowerOutage() && !openBlock.getFailureTrackCircuit()) {
             openBlock.open();
-            returnValue = true;
+            return true;
         } else {
-            returnValue = false;
+            return false;
         }
-        return returnValue;
     }
 
     /**
@@ -1033,26 +1028,30 @@ public class TrackController {
      *
      * @param switchID - Switch to be toggled as Integer
      */
-    public void toggleSwitch(Integer switchID) {
-        Iterator listIterator = this.currentSwitchStates.iterator();
-        while (listIterator.hasNext()) {
-            UserSwitchState uss = (UserSwitchState) listIterator.next();
-            Iterator switchIterator = uss.getUserSwitchStates().iterator();
-            while (switchIterator.hasNext()) {
-                SimpleEntry<Integer, Global.SwitchState> switchEntry = (SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
-                if (switchID == switchEntry.getKey()) {
-                    Global.SwitchState currentState = switchEntry.getValue();
-                    if (currentState == Global.SwitchState.DEFAULT) {
-                        switchEntry.setValue(Global.SwitchState.ALTERNATE);
-                    } else {
-                        switchEntry.setValue(Global.SwitchState.DEFAULT);
+    public boolean toggleSwitch(Integer switchID) {
+        if (permIgnoreSwitch.contains(String.valueOf(switchID))) {
+            Iterator listIterator = this.currentSwitchStates.iterator();
+            while (listIterator.hasNext()) {
+                UserSwitchState uss = (UserSwitchState) listIterator.next();
+                Iterator switchIterator = uss.getUserSwitchStates().iterator();
+                while (switchIterator.hasNext()) {
+                    SimpleEntry<Integer, Global.SwitchState> switchEntry = (SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
+                    if (switchID == switchEntry.getKey()) {
+                        Global.SwitchState currentState = switchEntry.getValue();
+                        if (currentState == Global.SwitchState.DEFAULT) {
+                            switchEntry.setValue(Global.SwitchState.ALTERNATE);
+                        } else {
+                            switchEntry.setValue(Global.SwitchState.DEFAULT);
+                        }
+                        updateSwitches(uss);
+                        break;
                     }
-                    updateSwitches(uss);
-                    break;
                 }
             }
-        }
-        updateSummaryTab();
+            updateSummaryTab();
+            return true;
+        } 
+        return false;
     }
 
     public void updateSpeedAuthority(int blockID, byte speed, short authority) {

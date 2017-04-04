@@ -58,7 +58,10 @@ public class Yard implements MyShape {
 
     @Override
     public boolean contains(double x, double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(yard.contains(x,y)){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -68,6 +71,16 @@ public class Yard implements MyShape {
 
     @Override
     public String saveData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getBlockID(double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getBlockIDUpdate(double x, double y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

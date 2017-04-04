@@ -9,6 +9,7 @@ import com.rogueone.global.Global;
 import com.rogueone.trainsystem.TrainSystem;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * TrackControllerHandler will manage the track controllers across the system
@@ -50,13 +51,13 @@ public class TrackControllerHandler {
         }
 
         TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem);
-        TrackController greenTrackControllerDup = new TrackController(Global.Line.GREEN, this.trainSystem);
-        TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem);
-        TrackController redTrackControllerDup = new TrackController(Global.Line.RED, this.trainSystem);
+//        TrackController greenTrackControllerDup = new TrackController(Global.Line.GREEN, this.trainSystem);
+//        TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem);
+//        TrackController redTrackControllerDup = new TrackController(Global.Line.RED, this.trainSystem);
         trackControllers.add(greenTrackController);     //0
-        trackControllers.add(greenTrackControllerDup);  //1
-        trackControllers.add(redTrackController);       //2
-        trackControllers.add(redTrackControllerDup);    //3
+//        trackControllers.add(greenTrackControllerDup);  //1
+//        trackControllers.add(redTrackController);       //2
+//        trackControllers.add(redTrackControllerDup);    //3
 
         trackHandlerGUI = new TrackHandlerGUI(this);
     }
@@ -176,6 +177,27 @@ public class TrackControllerHandler {
         return returnString;
     }
 
+    public LinkedList<String> getManualSwitches(Global.Line line) {
+        if (line == Global.Line.GREEN) {
+            LinkedList<String> manualSwitches = trackControllers.get(0).getManualSwitches();
+            if (manualSwitches != null) {
+                return manualSwitches;
+            } 
+        } else {
+
+        }
+        return null;
+    }
+    
+    public boolean toggleSwitch(Global.Line line, Integer switchID){
+        if (line == Global.Line.GREEN) {
+            return trackControllers.get(0).toggleSwitch(switchID); 
+        } else {
+
+        }
+        return false;
+    }
+
     /**
      * Function that will update the track controllers when called as of now,
      * this function is called whenever a train moves from 1 track block to
@@ -188,8 +210,8 @@ public class TrackControllerHandler {
         trackController.evaluateCrossing();
         trackController.updateSummaryTab();
     }
-    
-    public void updateTrackView(){
+
+    public void updateTrackView() {
         TrackController trackController = trackControllers.get(0);
         trainSystem.getTrackView().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
     }
