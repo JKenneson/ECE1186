@@ -79,7 +79,7 @@ public class LegendBox implements MyShape {
         g.drawString(" = Occupied Section", X + xOffset + 60, Y + (2 * yOffset) + 6);
         g.drawString(" = Train Moving on Block", X + xOffset + 60, Y + (3 * yOffset) + 7);
         g.drawString(" = Train Halted by Wayside", X + xOffset + 60, Y + (4 * yOffset) + 8);
-        g.drawString(" = Train Stopped (No Authority)", X + xOffset + 60, Y + (5 * yOffset) + 9);
+        g.drawString(" = Train Stopped", X + xOffset + 60, Y + (5 * yOffset) + 9);
         g.drawString(" = Switch", X + xOffset + 60, Y + (6 * yOffset) + 10);
         
     }

@@ -160,6 +160,32 @@ public class TrackView extends Frame {
     }
 
     private void initializeGreenLine() {
+        Switch switch0 = new Switch(35 + shiftAmount + 3, 51, 35 + shiftAmount + 3, 59, 15, 5, 45, -45, 3);
+        sp.addShape(switch0);
+        switch0.setIsDefault(true);
+        Switch switch4 = new Switch(190 + shiftAmount + 15, 57, 190 + shiftAmount + 23, 57, 12, 5, 45, -45, 4);
+        sp.addShape(switch4);
+        switch4.setIsDefault(true);
+        Switch switch5 = new Switch(190 + shiftAmount + 17, 115, 190 + shiftAmount + 23, 115, 12, 5, -55, 55, 5);
+        sp.addShape(switch5);
+        switch5.setIsDefault(true);
+        Switch switch1 = new Switch(705 + shiftAmount, 225, 705 + shiftAmount + 8, 225, 14, 5, -55, 55, 1);
+        sp.addShape(switch1);
+        switch1.setIsDefault(true);
+        Switch switch2 = new Switch(705 + shiftAmount, 57, 705 + shiftAmount + 8, 57, 12, 5, 45, -45, 2);
+        sp.addShape(switch2);
+        switch2.setIsDefault(true);
+        Switch switch3 = new Switch(870 + shiftAmount + 9, 51, 870 + shiftAmount + 6, 59, 15, 5, -45, 45, 0);
+        sp.addShape(switch3);
+        switch3.setIsDefault(true);
+
+        switchList.put(0, switch0);
+        switchList.put(1, switch1);
+        switchList.put(2, switch2);
+        switchList.put(3, switch3);
+        switchList.put(4, switch4);
+        switchList.put(5, switch5);
+
         Section YY = new Section(0 + shiftAmount, 30, 50, 5, 45, "YY", -15, 16, this.trainSystem);
         sp.addShape(YY);
         sectionList.put("YY", YY);
@@ -169,9 +195,7 @@ public class TrackView extends Frame {
         Section K = new Section(50 + shiftAmount, 55, 50, 5, 0, "K", -5, 15, this.trainSystem);
         sp.addShape(K);
         sectionList.put("K", K);
-        Switch switch0 = new Switch(35 + shiftAmount + 3, 51, 35 + shiftAmount + 3, 59, 15, 5, 45, -45, 3);
-        sp.addShape(switch0);
-        switch0.setIsDefault(true);
+
         Section L = new Section(105 + shiftAmount, 55, 50, 5, 0, "L", -5, 15, this.trainSystem);
         sp.addShape(L);
         sectionList.put("L", L);
@@ -196,13 +220,6 @@ public class TrackView extends Frame {
         Section R = new Section(220 + shiftAmount, 55, 50, 5, 0, "R", -3, 15, this.trainSystem);
         sp.addShape(R);
         sectionList.put("R", R);
-
-        Switch switch4 = new Switch(190 + shiftAmount + 15, 57, 190 + shiftAmount + 23, 57, 12, 5, 45, -45, 4);
-        sp.addShape(switch4);
-        switch4.setIsDefault(true);
-        Switch switch5 = new Switch(190 + shiftAmount + 17, 115, 190 + shiftAmount + 23, 115, 12, 5, -55, 55, 5);
-        sp.addShape(switch5);
-        switch5.setIsDefault(true);
 
         Section S = new Section(270 + shiftAmount + 5, 55, 50, 5, 0, "S", -5, 15, this.trainSystem);
         sp.addShape(S);
@@ -239,25 +256,19 @@ public class TrackView extends Frame {
         sp.addShape(D);
         sectionList.put("D", D);
         //second loop
-        Section C = new Section(665 + shiftAmount + 9, 245, 50, 5, -60, "C", -15, 4, this.trainSystem);
+        Section C = new Section(665 + shiftAmount + 9, 245, 50, 5, -60, "C", -22, 15, this.trainSystem);
         sp.addShape(C);
         sectionList.put("C", C);
         Section B = new Section(685 + shiftAmount + 5, 270, 50, 5, 0, "B", -5, -5, this.trainSystem);
         sp.addShape(B);
         sectionList.put("B", B);
-        Section A = new Section(705 + shiftAmount + 2, 245, 50, 5, 60, "A", 7, 5, this.trainSystem);
+        Section A = new Section(705 + shiftAmount + 2, 245, 50, 5, 60, "A", 14, 16, this.trainSystem);
         sp.addShape(A);
         sectionList.put("A", A);
 
         Section G = new Section(710 + shiftAmount + 10, 55, 50, 5, 0, "G", -3, 15, this.trainSystem);
         sp.addShape(G);
         sectionList.put("G", G);
-        Switch switch1 = new Switch(705 + shiftAmount, 225, 705 + shiftAmount + 8, 225, 14, 5, -55, 55, 1);
-        sp.addShape(switch1);
-        switch1.setIsDefault(true);
-        Switch switch2 = new Switch(705 + shiftAmount, 57, 705 + shiftAmount + 8, 57, 12, 5, 45, -45, 2);
-        sp.addShape(switch2);
-        switch2.setIsDefault(true);
 
         Section H = new Section(765 + shiftAmount + 10, 55, 50, 5, 0, "H", -5, 15, this.trainSystem);
         sp.addShape(H);
@@ -266,22 +277,12 @@ public class TrackView extends Frame {
         sp.addShape(I);
         sectionList.put("I", I);
 
-        Section ZZ = new Section(870 + shiftAmount + 10, 30, 50, 5, -45, "ZZ", 3, 15, this.trainSystem);
+        Section ZZ = new Section(870 + shiftAmount + 12, 30, 50, 5, -45, "ZZ", 3, 15, this.trainSystem);
         sp.addShape(ZZ);
         sectionList.put("ZZ", ZZ);
         Section J2 = new Section(870 + shiftAmount + 10, 80, 50, 5, 45, "J", -4, 13, this.trainSystem);
         sp.addShape(J2);
         sectionList.put("J2", J2);
-        Switch switch3 = new Switch(870 + shiftAmount + 6, 51, 870 + shiftAmount + 6, 59, 15, 5, -45, 45, 0);
-        sp.addShape(switch3);
-        switch3.setIsDefault(true);
-
-        switchList.put(0, switch0);
-        switchList.put(1, switch1);
-        switchList.put(2, switch2);
-        switchList.put(3, switch3);
-        switchList.put(4, switch4);
-        switchList.put(5, switch5);
 
         TrackLight lightYY = new TrackLight(85, 35, 225, false);
         sp.addShape(lightYY);
@@ -323,38 +324,44 @@ public class TrackView extends Frame {
         sp.addShape(lightZZ);
         trackLightList.put("ZZ", lightZZ);
 
-        Station stationGlenbury = new Station(108, 36, 8);
+        Station stationGlenbury = new Station(110, 36, 8);
         sp.addShape(stationGlenbury);
-        Station stationGlenbury2 = new Station(375, 36, 8);
-        sp.addShape(stationGlenbury2);
-        Station stationDormont = new Station(178, 36, 8);
-        sp.addShape(stationDormont);
-        Station stationDormont2 = new Station(460, 36, 8);
+        Station stationDormont2 = new Station(369, 36, 8);
         sp.addShape(stationDormont2);
+        Station stationDormont = new Station(186, 36, 8);
+        sp.addShape(stationDormont);
+        Station stationGlenbury2 = new Station(450, 36, 8);
+        sp.addShape(stationGlenbury2);
         Station stationMtLebanon = new Station(235, 63, 7);
         sp.addShape(stationMtLebanon);
-        Station stationPoplar = new Station(210, 155, 8);
+        Station stationPoplar = new Station(212, 150, 8);
         sp.addShape(stationPoplar);
-        Station stationOverbrook1 = new Station(530, 36, 8);
+        Station stationOverbrook1 = new Station(534, 36, 8);
         sp.addShape(stationOverbrook1);
-        Station stationInglewood1 = new Station(580, 36, 8);
+        Station stationInglewood1 = new Station(555, 36, 8);
         sp.addShape(stationInglewood1);
-        Station stationCastleShannon = new Station(252, 170, 8);
+        Station stationCentral1 = new Station(573, 36, 8);
+        sp.addShape(stationCentral1);
+        Station stationCastleShannon = new Station(267, 170, 8);
         sp.addShape(stationCastleShannon);
-        Station stationSouthBank = new Station(765, 36, 8);
+        Station stationSouthBank = new Station(785, 36, 8);
         sp.addShape(stationSouthBank);
-        Station stationWhited = new Station(762, 100, 8);
+        Station stationWhited = new Station(763, 95, 8);
         sp.addShape(stationWhited);
-        Station stationUniOfPitt = new Station(762, 175, 8);
+        Station stationUniOfPitt = new Station(763, 170, 8);
         sp.addShape(stationUniOfPitt);
-        Station stationEdgebrook = new Station(710, 245, 8);
+
+        Station stationEdgebrook = new Station(722, 236, 8);
         sp.addShape(stationEdgebrook);
-        Station stationPioneer = new Station(792, 245, 8);
+        Station stationPioneer = new Station(781, 236, 8);
         sp.addShape(stationPioneer);
-        Station stationOverbrook2 = new Station(865, 36, 8);
-        sp.addShape(stationOverbrook2);
-        Station stationInglewood2 = new Station(910, 62, 8);
+
+        Station stationCentral2 = new Station(875, 36, 8);
+        sp.addShape(stationCentral2);
+        Station stationInglewood2 = new Station(895, 36, 8);
         sp.addShape(stationInglewood2);
+        Station stationOverbrook2 = new Station(913, 64, 8);
+        sp.addShape(stationOverbrook2);
 
         crossing = new Crossing(750, 140);
         sp.addShape(crossing);

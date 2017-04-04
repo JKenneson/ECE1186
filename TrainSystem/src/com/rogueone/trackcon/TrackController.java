@@ -838,7 +838,7 @@ public class TrackController {
                 //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
                 //NEED TO DETERMINE LOOKAHEAD DISTANCES
                 //FOR BOTH SERVICE BRAKE AND EMERGENCY BRAKE
-                int lookahead = 2;
+                int lookahead = 5;
                 if (pb.getCurrBlock().getID() >= 57 && pb.getCurrBlock().getID() <= 61) {
                     lookahead = 2;
                 }

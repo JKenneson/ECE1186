@@ -71,9 +71,8 @@ public class Station implements MyShape {
 //	}
     //draw method that determines the the color/fill of the shape
     public void draw(Graphics2D g) {
-        g.setColor(Color.WHITE);
-        g.draw(background);
         g.setColor(Color.BLUE);
+        g.draw(background);
         g.fill(background);
         
         g.setColor(Color.WHITE);
