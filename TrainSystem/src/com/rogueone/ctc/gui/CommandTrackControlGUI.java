@@ -23,6 +23,7 @@ import java.lang.*;
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     int trainID;
+    int operationMode;
     public int iterativeID;
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
@@ -919,7 +920,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     public void updateBlockTable(){
         BlockTable.removeAll();
         
-        getBlockStatusFromGUI();
         
         ArrayList<Block> blocks = this.trackModel.getBlockArray();
         ArrayList<Line> lines = this.trackModel.getLineArray();
@@ -947,12 +947,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         
     }
     
-    private void getBlockStatusFromGUI(){
-        //for (s : trainSystem.trackView.sectionList.values()) {
-            
-        //}
-
-    }
     public void removeTrainFromTable(int trainID){
         int trainIDRow = 0;
         DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
@@ -1043,7 +1037,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
     public int getOperationMode(){
-        int operationMode = SelectOperationMode2.getSelectedIndex();
+        operationMode = SelectOperationMode2.getSelectedIndex();
         return operationMode;
     }
     

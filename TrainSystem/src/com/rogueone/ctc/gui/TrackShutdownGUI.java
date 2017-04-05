@@ -180,6 +180,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
   
     private void disableTrackSegment(String lineName, String segmentName, int blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, blockName);
+        //this.trainSystem.getTrackView().setBlockStatus(segmentName, blockName, false);
     }
                                  
     
