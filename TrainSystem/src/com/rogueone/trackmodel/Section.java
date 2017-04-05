@@ -22,43 +22,83 @@ public class Section {
         line = newLine;
     }
     
+    /**
+    * Get ID of section
+    * @author Dan Bednarczyk
+    * @return section ID
+    */
     public Global.Section getSectionID() {
         return sectionID;
     }
     
+    /**
+    * Get Line
+    * @author Dan Bednarczyk
+    * @return Line object that Block is on
+    */
     public Line getLine() {
         return line;
     }
     
+    /**
+    * Get array of Blocks in Section
+    * @author Dan Bednarczyk
+    * @return ArrayList of Blocks
+    */
     public ArrayList<Block> getBlocks() {
         return blocks;
     }
     
+    /**
+    * Add Block to Section
+    * @author Dan Bednarczyk
+    * @param b Block to add
+    */
     public void addBlock(Block b) {
         blocks.add(b);
     }
     
+    /**
+    * Get block in section
+    * @author Dan Bednarczyk
+    * @param block int specifying block to find
+    * @return Block requested, null otherwise
+    */
     public Block getBlock(int block) {
-        System.out.println("SEARCHING");
         for (Block b : blocks) {
-            System.out.println("\t" + b.getID() + "-" + block);
             if (b.getID() == block) {
                 return b;
             }
         }
-        
         System.err.println("Block " + line + ":" + sectionID + ":" + block + " not found in section " + sectionID);
         return null;
     }
     
+    /**
+    * Get String representation of Section
+    * @author Dan Bednarczyk
+    * @return String representation of Section ID
+    */
+    @Override
     public String toString() {
         return sectionID.toString();
     }
     
+    /**
+    * Get detailed String representation of Section
+    * @author Dan Bednarczyk
+    * @return String representation of Section ID and Line ID
+    */
     public String toStringDetail() {
         return sectionID.toString() + " (" + line.toString() + ")";
     }
     
+    /**
+    * Compare equality with another section
+    * @author Dan Bednarczyk
+    * @param otherSection section to compare
+    * @return boolean indicating equality
+    */
     public boolean equals(Section otherSection) {
         return this.line.getLineID() == otherSection.getLine().getLineID() && this.sectionID == otherSection.getSectionID();
     }

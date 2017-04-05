@@ -49,7 +49,7 @@ public class Line {
     }
     
     /**
-    * Get block in section
+    * Get block in line
     * @author Dan Bednarczyk
     * @param block int specifying block to find
     * @return Block requested, null otherwise
@@ -67,7 +67,7 @@ public class Line {
     }
     
     /**
-    * Get block in section
+    * Get block in line
     * @author Dan Bednarczyk
     * @param section Section containing block
     * @param block int specifying block to find
