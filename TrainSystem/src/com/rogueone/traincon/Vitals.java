@@ -32,6 +32,7 @@ public class Vitals {
     private double uK_1;
     
     private boolean serviceBrakeActivated;
+    private boolean serviceBrakeOverride;
     private boolean emergencyBrakeActivated;
     private boolean emergencyBrakeOverride;
     
@@ -102,10 +103,10 @@ public class Vitals {
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
             //System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
-//            if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null){
-//                System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
-//                
-//            }
+           if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null){
+                System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
+                
+            }
             if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
                 System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
                 this.trainModel.boardPassengers(this.doorSide);
@@ -121,7 +122,7 @@ public class Vitals {
 
         //System.out.println("Manual: " + manualMode + " Service Brake: " + this.serviceBrakeActivated);
         //System.out.println("Train "+ this.gps.trainID + ": " + "Stop for station: " + stopForStation);
-        this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
+        this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation || this.serviceBrakeOverride);
         //System.out.println("Exit");
             
         
@@ -362,6 +363,14 @@ public class Vitals {
      */
     public boolean isEmergencyBrakeOverride() {
         return emergencyBrakeOverride;
+    }
+    
+    public void setServiceBrakeOverride(boolean set){
+        this.serviceBrakeOverride = set;
+    }
+    
+    public void setEmergencyBrakeOverride(boolean set){
+        this.emergencyBrakeOverride = set;
     }
     
     public SpeedControl getSpeedControl(){

@@ -979,11 +979,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void ServiceBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeToggleButtonActionPerformed
         if(this.ServiceBrakeToggleButton.isSelected()){
             this.trainController.vitals.getPrimary().setServiceBrakeActivated(true);
+            this.trainController.vitals.getPrimary().setServiceBrakeOverride(true);
             //this.trainController.getTrainModel().setServiceBrakeActivated(true); //Is this cool with Jon?
             this.NotificationsDisplay.append("\nService Brake Activated");
         }
         else{
             this.trainController.vitals.getPrimary().setServiceBrakeActivated(false);
+            this.trainController.vitals.getPrimary().setServiceBrakeOverride(false);
             //this.trainController.getTrainModel().setServiceBrakeActivated(false); //Is this cool with Jon?
             this.NotificationsDisplay.append("\nService Brake Deactivated");
         }
@@ -1012,11 +1014,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private void EmergencyBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyBrakeToggleButtonActionPerformed
         if(this.EmergencyBrakeToggleButton.isSelected()){
             this.trainController.vitals.getPrimary().setEmergencyBrakeActivated(true);
+            this.trainController.vitals.getPrimary().setEmergencyBrakeOverride(true);
             //this.trainController.getTrainModel().setEmergencyBrakeActivated(true);
             this.NotificationsDisplay.append("\nEmergency Brake Activated");
         }
         else{
             this.trainController.vitals.getPrimary().setEmergencyBrakeActivated(false);
+            this.trainController.vitals.getPrimary().setEmergencyBrakeOverride(false);
             //this.trainController.getTrainModel().setEmergencyBrakeActivated(false);
             this.NotificationsDisplay.append("\nEmergency Brake Deactivated");
         }

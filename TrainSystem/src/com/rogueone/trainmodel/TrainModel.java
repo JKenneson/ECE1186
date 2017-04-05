@@ -521,7 +521,7 @@ public class TrainModel {
             //Get next TrackPiece. Should be Block or Yard
             this.nextBlock = this.currBlock.getNext(this.prevBlock);
             
-            System.out.println("Train " + this.trainID + ": Line " + currBlock.getLine() + ", Section " + currBlock.getSection() + ", Block: " + this.currBlock + " (prev: " + this.prevBlock + ", next: " + this.nextBlock + ")");
+            //System.out.println("Train " + this.trainID + ": Line " + currBlock.getLine() + ", Section " + currBlock.getSection() + ", Block: " + this.currBlock + " (prev: " + this.prevBlock + ", next: " + this.nextBlock + ")");
             
             if(this.nextBlock != null) {
 
