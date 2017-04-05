@@ -272,6 +272,7 @@ public class Mbo{
     public void update(){
         
         updateTrains();
+        mboGui.update();
             //trainList = trainSystem.getTrainHandler().getTrains();
         if(mode.equals("Fixed Block")){
             

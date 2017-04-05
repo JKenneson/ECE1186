@@ -21,7 +21,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     private TrainSystem trainSystem;
 private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 private Mbo mbo = trainSystem.getMBO();
-private int mode  = trainSystem.getCTC().getOperationMode();
+private boolean mode  = false;
 
     /**
      * Creates new form MovingBlockGUI
@@ -700,7 +700,8 @@ private int mode  = trainSystem.getCTC().getOperationMode();
     }//GEN-LAST:event_MovingBlockRadioActionPerformed
 
     public void update(){
-        if(mode != 1){
+        mode = trainSystem.getCTC().isAutomatic();
+        if(mode != true){
             SystemStatusLabel.setText("MANUAL");
             MboStatusLabel.setText("DISABLED");
         }

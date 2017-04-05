@@ -121,6 +121,7 @@ public class TrainSystem {
         }
         this.ctc.updateGUI();
         this.trackControllerHandler.updateTrackView();
+        this.mbo.update();
     }
 
     public void updateTimer(int timeToRefresh) {
