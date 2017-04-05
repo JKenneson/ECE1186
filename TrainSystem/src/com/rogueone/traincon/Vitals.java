@@ -102,11 +102,11 @@ public class Vitals {
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
             //System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
-            if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null){
-                System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
-                
-            }
-            else if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
+//            if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null){
+//                System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
+//                
+//            }
+            if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
                 System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
                 this.trainModel.boardPassengers(this.doorSide);
                 this.approachingStation = false;
