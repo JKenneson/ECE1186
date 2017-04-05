@@ -9,16 +9,17 @@ package com.rogueone.mbo;
  * @author Brian
  */
 public class MboTrain {
-    private int id;
-    private String block;
-    private char section;
-    private double currentSpeed;
-    private double prevSpeed;
-    private double brakeDistance;
-    private double authority;
-    private String nextStation;
-    private String timeOfArrival;
-    private int passengers;
+    private int id =-1;
+    private String block = "-1";
+    private char section = 'a';
+    private double currentSpeed = 0;
+    private double suggestedSpeed = 0;
+    private double prevSpeed = 0;
+    private double brakeDistance = 0;
+    private double authority = 0;
+    private String nextStation = "null";
+    private String timeOfArrival = "never";
+    private int passengers = 0;
     private double dist1;
     private double dist2;
     private String time1;
@@ -59,6 +60,13 @@ public class MboTrain {
     public String getNextArrivalTime(){
         return this.timeOfArrival;
     }
+    public double getSuggestedSpeed(){
+        return suggestedSpeed;
+    }
+    public int getPassengers(){
+        return passengers;
+    }
+    
     public void setTrainId(int id){
         this.id = id;
     }
@@ -88,6 +96,12 @@ public class MboTrain {
     }
     public void setNextArrivalTime(String nextArrival){
         this.timeOfArrival = nextArrival;
+    }
+    public void setSpeed(double speed){
+        this.currentSpeed = speed;
+    }
+    public void setSuggSpeed(double speed){
+        this.suggestedSpeed = speed;
     }
     
 }
