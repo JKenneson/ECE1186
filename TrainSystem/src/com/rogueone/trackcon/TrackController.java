@@ -857,6 +857,7 @@ public class TrackController {
                         System.out.println("Train Ahead");
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
+                        break;
                     } //check to see if that block ahead is closed or failed
                     else if (lookaheadBlock.getNextBlock().getID() != 0 && (!this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureBrokenRail()
                             || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureTrackCircuit())) {
@@ -866,6 +867,7 @@ public class TrackController {
                                 + "Failure TC = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage());
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
+                        break;
                     } //otherwise set speed and authority to zero, represents no change
                     else {
                         pb.getCurrBlock().getTrackCircuit().speed = 0;
