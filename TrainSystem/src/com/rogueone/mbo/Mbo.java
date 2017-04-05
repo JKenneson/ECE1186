@@ -35,6 +35,7 @@ public class Mbo{
    //private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
    private TrainSystem trainSystem;
    private String mode = "Fixed Block";
+   private String opMode = "Manual";
    
    public Mbo(TrainSystem ts) throws IOException, InvalidFormatException {
        trainSystem = ts;
@@ -156,20 +157,21 @@ public class Mbo{
         mboGui.TrainDropdown.removeAllItems();
         
         for(i=0;i<length;i++){
-            /*
+            
            int tid = trainList.get(i).getTrainId();
            String temp = String.valueOf(tid);
            mboGui.TrainDropdown.addItem(temp);
-           for(j=0;j<10;j++){
-                if(j==0){
                   data[i][0]= trainList.get(i).getTrainId(); 
-                  
-                }
-                else{
-                    data[i][j]=dummyData[i][j];
-                }
-           }
-           */
+                  data[i][1]= trainList.get(i).getPosition();
+                  data[i][2]= trainList.get(i).getPosition();
+                  data[i][3] = trainList.get(i).getPosition();
+                  //data[i][4] = trainList.get(i).NEXTSTATOIN
+                  //data[i][5] = TIMEOFARRIVAL
+                  data[i][6] = trainList.get(i).getAuthority();
+                  data[i][7] = trainList.get(i).getCurrSpeed();
+                  data[i][8] = trainList.get(i).getSuggestedSpeed();
+                  data[i][9] = trainList.get(i).getPassengers();
+           
         }
        
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
@@ -228,9 +230,24 @@ public class Mbo{
      * Updates speed and authority in present trains display
      */
     public void updateSpeed(){
+        trainSystem.getTrainHandler().getTrains().get(1).getCurrBlock().getSpeedLimit();
         String tempSpeed = mboGui.MboSuggestedSpeedField.getText();
         String tempAuthority = mboGui.MboSuggestedAuthorityField.getText();
         String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
+        if(mode.equals("Moving Block")){
+            for(int i=0;i<trainList.size();i++){
+            
+            }
+        }
+        else if(mode.equals("Fixed Block")){
+           for(int i=0;i<trainList.size();i++){
+               double speedLimit = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
+               trainList.get(i).setSpeed(speedLimit);
+               trainList.get(i).setAuthority(90000);
+               //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock());
+            } 
+        }
+        
         //if(newID.compareTo("100")==0){
             //dummyData[0][8] = tempSpeed+" mph";
             //dummyData[0][6] = tempAuthority+" ft";
@@ -270,6 +287,8 @@ public class Mbo{
             MboTrain tempTrain = new MboTrain();
             tempTrain.setTrainId(trainSystem.getTrainHandler().getTrains().get(i).trainID);
             tempTrain.setBlock(trainSystem.getTrainHandler().getBlockForTrain(trainSystem.getTrainHandler().getTrains().get(i).trainID));
+            tempTrain.setPassengers(trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord());
+            tempTrain.setCurrentSpeed(trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeedMPH());
             trainList.add(tempTrain);
         }
     }

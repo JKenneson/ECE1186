@@ -48,7 +48,7 @@ public class TrackView extends Frame {
     ArrayList<MyShape> shapeList;
     HashMap<Integer, Switch> switchList;
     HashMap<String, TrackLight> trackLightList;
-    HashMap<String, Section> sectionList;
+    public HashMap<String, Section> sectionList;
     Yard yardStart;
     Crossing crossing;
     double scale = 5;
@@ -74,7 +74,7 @@ public class TrackView extends Frame {
             sectionList = new HashMap<String, Section>();
             sp = new ShapePanel(1000, 305, this.trainSystem);
             JFrame theWindow = new JFrame("Track View - " + line);
-            theWindow.setSize(1000, 305);
+            theWindow.setSize(1000, 325);
             Container c = theWindow.getContentPane();
             sp.setBackground(Color.BLACK);
             c.add(sp);

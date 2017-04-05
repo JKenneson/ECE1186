@@ -20,7 +20,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
     private TrainSystem trainSystem;
 private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
-Mbo mbo = trainSystem.getMBO();
+private Mbo mbo = trainSystem.getMBO();
 
     /**
      * Creates new form MovingBlockGUI
@@ -28,6 +28,7 @@ Mbo mbo = trainSystem.getMBO();
     public MovingBlockGUI(TrainSystem trainSystem) {
         this.trainSystem = trainSystem;
         initComponents();
+        
     }
 
     /**

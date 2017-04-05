@@ -72,7 +72,7 @@ public class TrainController {
      * @param block initial block, should be from yard
      * @param ts
      */
-    public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, TrainSystem ts){
+    public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID, TrainSystem ts){
         
         this.trainSystem = ts;
         this.trainModel = tm; //Should come from passed (this) reference
@@ -459,6 +459,10 @@ public class TrainController {
     
     public void receiveBeacon(Beacon b){
         this.vitals.receiveBeacon(b);
+    }
+    
+    public GPSMessage getGPSMessage(){
+        return this.vitals.primaryVital.getGPS().getGPSMessage();
     }
     
     

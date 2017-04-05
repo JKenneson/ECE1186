@@ -196,7 +196,7 @@ public class TrainModel {
      */
     public void createTrainController() {
         //Create a new TrainController object
-        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, this.trainSystem);
+        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, Integer.toString(this.trainID),this.trainSystem);
     }
     
     /**
@@ -570,7 +570,12 @@ public class TrainModel {
      */
     private void checkTrackCircuit() {
         byte newSetSpeed = this.currBlock.getTrackCircuit().speed;
-        short newAuthority = this.currBlock.getTrackCircuit().authority;
+        short newAuthorityShort = this.currBlock.getTrackCircuit().authority;
+        double newAuthority = (double)newAuthorityShort * this.FEET_IN_A_METER;
+        
+        if(newAuthority < 0) {
+            newAuthority = newAuthority + 65536;
+        }
         
         //System.out.println("Track Circuit for Train " + this.trainID + " -> Speed: " + newSetSpeed + " Authority: " + newAuthority);
         
