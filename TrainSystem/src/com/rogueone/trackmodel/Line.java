@@ -21,23 +21,42 @@ public class Line {
         lineID = newLine;
     }
     
+    /**
+    * Get ID of line
+    * @author Dan Bednarczyk
+    * @return line ID
+    */
     public Global.Line getLineID() {
         return lineID;
     }
     
+    /**
+    * Get array of sections in line
+    * @author Dan Bednarczyk
+    * @return ArrayList of Sections
+    */
     public ArrayList<Section> getSections() {
         return sections;
     }
     
+    /**
+    * Add section to Line
+    * @author Dan Bednarczyk
+    * @param s Section to add
+    */
     public void addSection(Section s) {
         sections.add(s);
     }
     
+    /**
+    * Get block in section
+    * @author Dan Bednarczyk
+    * @param block int specifying block to find
+    * @return Block requested, null otherwise
+    */
     public Block getBlock(int block) {
-        //System.out.println("SEARCHING FOR " + block);
         for (Section s : sections) {
             for(Block b : s.getBlocks()) {
-                //System.out.println(s.getSectionID() + " " + b.getID());
                 if(b.getID() == block) {
                     return b;
                 }
@@ -47,6 +66,13 @@ public class Line {
         return null;
     }
     
+    /**
+    * Get block in section
+    * @author Dan Bednarczyk
+    * @param section Section containing block
+    * @param block int specifying block to find
+    * @return Block requested, null otherwise
+    */
     public Block getBlock(Section section, int block) {
         for (Section s : sections) {
             if (s.equals(section)) {
@@ -57,10 +83,22 @@ public class Line {
         return null;
     }
     
+    /**
+    * Get String representation of Line
+    * @author Dan Bednarczyk
+    * @return String representation of Line ID
+    */
+    @Override
     public String toString() {
         return lineID.toString();
     }
     
+    /**
+    * Compare equality with another line
+    * @author Dan Bednarczyk
+    * @param otherLine line to compare
+    * @return boolean indicating equality
+    */
     public boolean equals(Line otherLine) {
         return this.lineID == otherLine.getLineID();
     }
