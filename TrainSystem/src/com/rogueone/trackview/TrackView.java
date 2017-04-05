@@ -661,6 +661,28 @@ public class TrackView extends Frame {
         }
     }
 
+    /**
+     * Update the track view for displaying the block status
+     *
+     * @param line - current line
+     * @param section - current section
+     * @param blockID - block to close or open
+     * @param openOrClose - true for open block, close for open block
+     */
+    public void setBlockStatus(Global.Line line, String section, int blockID, boolean openOrClose) {
+        //open block
+        for (Section s : sectionList.values()) {
+            if (s.getSectionID().equals(section)) {
+                if (openOrClose) {
+                    s.removeBlockFromClosedBlocks(blockID);
+                } else {
+                    s.addBlockToClosedBlocks(blockID);
+                }
+            }
+        }
+        this.trainSystem.getTrackControllerHandler().updateTrack();
+    }
+
     class ShapePanel extends JPanel {
 
         // These instance variables are used to store the desired size
