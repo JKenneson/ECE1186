@@ -918,6 +918,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     public void updateBlockTable(){
         BlockTable.removeAll();
         
+        getBlockStatusFromGUI();
+        
         ArrayList<Block> blocks = this.trackModel.getBlockArray();
         ArrayList<Line> lines = this.trackModel.getLineArray();
         ArrayList<Section> sections = this.trackModel.getSectionArray();
@@ -940,8 +942,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 }
            }  
         }
+        
+        
     }
     
+    private void getBlockStatusFromGUI(){
+        //for (s : trainSystem.trackView.sectionList.values()) {
+            
+        //}
+
+    }
     public void removeTrainFromTable(int trainID){
         int trainIDRow = 0;
         DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
@@ -954,6 +964,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
         model.removeRow(trainIDRow);
     }
+    
     
     
     /**
@@ -1040,8 +1051,16 @@ private void getDispatchTimes(){
 }
 
 private void dispatchNewTrain(int speed, int authority, int cars, String line, int ID){
-    trainSystem.dispatchTrain(speed, authority, cars, line, ID);
-    iterateID();
+            //TRack ccontroller handler requestdispatch (Line)
+    if (trainSystem.getTrackControllerHandler().requestDispatch((Global.Line.GREEN))){
+        trainSystem.dispatchTrain(speed, authority, cars, line, ID);
+        addRow(line, "A", 1, ID);
+        iterateID();
+    }
+    else{
+        JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Train in Proximity.", "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+    }
 }
 
 private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
@@ -1054,9 +1073,7 @@ private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int auto
                 if (tempTime.equals(times)) {
                     dispatchNewTrain(40, 90000, getNumberCars(), "GREEN", greenID);
                     dispatchNewTrain(40, 90000, getNumberCars(), "RED", redID);
-                    addRow("GREEN", "A", 1, greenID);
-                    addRow("RED", "A", 1, redID);
-
+                    
                 }
             } 
         }
@@ -1473,9 +1490,9 @@ public int iterateID(){
         newTrain[3] = true;
         
 
-        if (!(existsInTable(TrainTable, newTrain))) {
-            addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
-        }
+//        if (!(existsInTable(TrainTable, newTrain))) {
+//            addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
+//        }
         
         dispatchNewTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
         
