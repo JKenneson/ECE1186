@@ -383,7 +383,7 @@ public class Vitals {
             if(!this.previousStation.equals(this.station) && skipped){
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
-                this.distanceToStation = beacon.getDistance() + 40;
+                this.distanceToStation = beacon.getDistance() + 50;
 //                if(this.specialCase == false){
 //                    this.specialCase = !this.specialCase;
 //                }
