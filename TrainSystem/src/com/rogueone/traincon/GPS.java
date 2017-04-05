@@ -103,7 +103,7 @@ public class GPS{
      * @return speed limit of block in MPH
      */
     public double getSpeedLimit(){
-        return this.currBlock.getSpeedLimit()*0.621371;
+        return this.currBlock.getSpeedLimit();
     }
 
     /**

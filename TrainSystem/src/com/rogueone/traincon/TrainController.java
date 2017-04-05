@@ -6,7 +6,6 @@
 package com.rogueone.traincon;
 
 import com.rogueone.trackmodel.Beacon;
-import com.rogueone.trackmodel.Station;
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainmodel.TrainModel; //Should I it this way or how???
 import com.rogueone.trainsystem.TrainSystem;

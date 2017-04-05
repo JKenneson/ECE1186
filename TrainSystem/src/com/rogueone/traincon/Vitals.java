@@ -6,7 +6,6 @@
 package com.rogueone.traincon;
 
 import com.rogueone.trackmodel.Beacon;
-import com.rogueone.trackmodel.Station;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.trainsystem.TrainSystem;
@@ -103,6 +102,9 @@ public class Vitals {
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
             //System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
+            if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null){
+                System.out.println("Didn't make it to station!!!");
+            }
             if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
                 System.out.println("Boarding...");
                 this.trainModel.boardPassengers(this.doorSide);
@@ -378,7 +380,7 @@ public class Vitals {
             if(!this.previousStation.equals(this.station) && skipped){
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
-                this.distanceToStation = beacon.getDistance() + 25;
+                this.distanceToStation = beacon.getDistance() + 40;
 //                if(this.specialCase == false){
 //                    this.specialCase = !this.specialCase;
 //                }
