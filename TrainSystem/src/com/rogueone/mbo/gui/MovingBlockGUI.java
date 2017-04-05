@@ -21,6 +21,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
     private TrainSystem trainSystem;
 private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
 private Mbo mbo = trainSystem.getMBO();
+private int mode  = trainSystem.getCTC().getOperationMode();
 
     /**
      * Creates new form MovingBlockGUI
@@ -581,11 +582,13 @@ private Mbo mbo = trainSystem.getMBO();
     }//GEN-LAST:event_TrainDropdownActionPerformed
 
     private void FixedBlockRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FixedBlockRadioActionPerformed
+
         if(FixedBlockRadio.isSelected())
         {
             CurrentModeLabel.setText("Fixed Block Mode");
             mbo.changeToMovingBlock();
         }
+       
     }//GEN-LAST:event_FixedBlockRadioActionPerformed
 
     private void UploadScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadScheduleButtonActionPerformed
@@ -696,6 +699,18 @@ private Mbo mbo = trainSystem.getMBO();
         }
     }//GEN-LAST:event_MovingBlockRadioActionPerformed
 
+    public void update(){
+        if(mode != 1){
+            SystemStatusLabel.setText("MANUAL");
+            MboStatusLabel.setText("DISABLED");
+        }
+        else{
+            SystemStatusLabel.setText("AUTOMATIC");
+            if(MovingBlockRadio.isSelected()==true){
+                MboStatusLabel.setText("ENABLED");
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel ControlModeLabel;
