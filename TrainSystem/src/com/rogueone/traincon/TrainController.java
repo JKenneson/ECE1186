@@ -461,5 +461,9 @@ public class TrainController {
         this.vitals.receiveBeacon(b);
     }
     
+    public GPSMessage getGPSMessage(){
+        return this.vitals.primaryVital.getGPS().getGPSMessage();
+    }
+    
     
 }

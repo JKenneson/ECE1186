@@ -134,4 +134,8 @@ public class GPS{
        return (this.currBlock.isUnderground() || (8>this.trainSystem.getClock().getHour() && this.trainSystem.getClock().getTimeOfDay() == Clock.TimeOfDay.AM)
                 || (5<this.trainSystem.getClock().getHour() && this.trainSystem.getClock().getTimeOfDay() == Clock.TimeOfDay.PM));
     }
+    
+    public GPSMessage getGPSMessage(){
+        return new GPSMessage(currSpeed, currBlock, currBlock.getLine().toString(), trainID);
+    }
 }
