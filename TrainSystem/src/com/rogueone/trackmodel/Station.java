@@ -13,15 +13,13 @@ import java.util.Random;
  */
 public class Station {
     
-    private int stationID;
-    private String name;
-    private Line line;
-    private Block blockA;
-    private Section sectionA;
-    private Block blockB;
-    private Section sectionB;
-    private boolean rightSide;
-    private boolean leftSide;
+    private final int stationID;
+    private final String name;
+    private final Line line;
+    private final Block blockA;
+    private final Section sectionA;
+    private final Block blockB;
+    private final Section sectionB;
     private int waitingPassengers = 0;
     private int temperature = -1;
     private boolean heaterOn = false;
@@ -229,10 +227,6 @@ public class Station {
             sb.append(", Block B Section: ");
             sb.append(sectionB);
         }
-        sb.append(", Right Side: ");
-        sb.append(rightSide);
-        sb.append(", Left Side: ");
-        sb.append(leftSide);
         return sb.toString();
     }
     
