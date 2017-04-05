@@ -1076,7 +1076,7 @@ private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int auto
             if(autoDispatchSecond == 0){
                 if (tempTime.equals(times)) {
                     dispatchNewTrain(40, 90000, getNumberCars(), "GREEN", greenID);
-                    dispatchNewTrain(40, 90000, getNumberCars(), "RED", redID);
+                    //dispatchNewTrain(40, 90000, getNumberCars(), "RED", redID);
                     
                 }
             } 
