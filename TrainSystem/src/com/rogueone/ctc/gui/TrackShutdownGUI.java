@@ -163,12 +163,17 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CloseTrackDisableButtonActionPerformed
 
     private void TrackDisableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackDisableButtonActionPerformed
-        String lineName = (String)(LineComboBox.getSelectedItem());
+        Line lineName = (Line)(LineComboBox.getSelectedItem());
 //        Global.Line lineVal = Global.Line.valueOf(lineName);
-        String segmentName = (String)SegmentComboBox.getSelectedItem();
-        int blockName = Integer.valueOf((String)BlockComboBox.getSelectedItem());
+        Section segmentName = (Section)SegmentComboBox.getSelectedItem();
+        Block blockName = (Block)BlockComboBox.getSelectedItem();
         
-        disableTrackSegment(lineName, segmentName, blockName);
+        int block = Integer.valueOf((String)(Object)blockName);
+        String segment = String.valueOf((Object)segmentName);
+        String line = String.valueOf((Object)lineName);
+
+        
+        disableTrackSegment(line, segment, block);
         
         jLabel5.setText("Track Segment " + lineName + ":" + blockName + ":" + segmentName + " Disabled");
         
@@ -183,8 +188,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
   
     private void disableTrackSegment(String lineName, String segmentName, int blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, blockName);
-        Global.Line lineVal = Global.Line.valueOf(lineName);
-
+        Global.Line lineVal = Global.Line.valueOf(lineName); 
         this.trainSystem.getTrackView().setBlockStatus(lineVal, segmentName, blockName, false);
     }
                                  

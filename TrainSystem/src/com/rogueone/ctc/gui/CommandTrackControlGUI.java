@@ -22,7 +22,7 @@ import java.lang.*;
 
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
-    int trainID;
+    //int trainID;
     int hoursPassed;
     public int iterativeID;
     int trainsDispatched = 1;
@@ -1172,6 +1172,7 @@ public int iterateID(){
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
 
         InitializeGUIObject();
+        int trainID;
 
         InformationHeader2.setText("Selected Train Information");
 
@@ -1232,6 +1233,9 @@ public int iterateID(){
             } else {
                 ChangeParametersButton3.setEnabled(true);
             }
+            
+            MaxCapacityField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getNumCars() * 222));
+            SpeedField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getDriverSetPoint()));
         }
 
         if (evt.getClickCount() == 2) {
@@ -1240,7 +1244,6 @@ public int iterateID(){
             int row = table.getSelectedRow();
             String trainString = table.getValueAt(row, 1).toString();
             trainID = Integer.parseInt(trainString);
-
             trainSystem.getTrainHandler().showObjectsFromCTC(trainID);
             
         }
