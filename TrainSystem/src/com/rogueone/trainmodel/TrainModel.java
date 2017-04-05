@@ -15,6 +15,7 @@ import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackPiece;
+import com.rogueone.traincon.GPSMessage;
 import com.rogueone.traincon.TrainController;
 import com.rogueone.traincon.gui.TrainControllerGUI;
 import com.rogueone.trainsystem.TrainSystem;
@@ -602,7 +603,6 @@ public class TrainModel {
         }
     }
     
-    
     private void approachingStationBlock() {
         //Pick a random number of passengers on board to exit
         Random randDepart = new Random();
@@ -684,6 +684,18 @@ public class TrainModel {
         double safeStoppingDistanceFeet = s * this.FEET_IN_A_METER;
         return safeStoppingDistanceFeet;
     }
+    
+    /**
+     * Returns a GPS message to the MBO module
+     * @author Jonathan Kenneson
+     * @return a GPS message with all necessary data
+     */
+    public GPSMessage requestGPSMessage() {
+        GPSMessage tempGPSMessage = this.trainController.getGPSMessage();
+        tempGPSMessage.setStoppingDistance(this.safeStoppingDistance());
+        return tempGPSMessage;
+    }
+    
     
     /**
      * Returns the StringID

@@ -215,7 +215,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = -4;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 0);
         jPanel19.add(ChangeParametersButton3, gridBagConstraints);
