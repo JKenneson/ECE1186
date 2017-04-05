@@ -582,11 +582,11 @@ public class TrainModel {
         //System.out.println("Track Circuit for Train " + this.trainID + " -> Speed: " + newSetSpeed + " Authority: " + newAuthority);
         
         //Safe to proceed, tell Train Controller we can proceed safely
-        if(newSetSpeed == 0 && newAuthority == 0) {
+        if(newSetSpeed == 0 || newAuthority == 0) {
             this.trainController.safeToProceed(true);
         }
         //Tell Train Controller to full stop
-        else if(newSetSpeed == -1 && newAuthority == -1) {
+        else if(newSetSpeed == -1 || newAuthority == -1) {
             this.trainController.safeToProceed(false);
         }
         //Give Train Controller updated speed and authority
