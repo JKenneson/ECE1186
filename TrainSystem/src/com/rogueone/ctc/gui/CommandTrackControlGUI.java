@@ -1041,6 +1041,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
+    public int getOperationMode(){
+        int operationMode = SelectOperationMode2.getSelectedIndex();
+        return operationMode;
+    }
+    
 private void getDispatchTimes(){
     
         int autoDispatchHour = trainSystem.getClock().getHour();
@@ -1383,12 +1388,13 @@ public int iterateID(){
                     double blockLength = b.getLength();
                     double blockSpeedLimit = b.getSpeedLimit();
                     Station blockStation = b.getStation();
+                    String newStation;
                     int blockSwitchID = b.getSwitchID();
                     boolean blockCrossing = b.containsCrossing();
                     
                     CurrentBlockField.setText(Double.toString(blockLength));
                     SpeedField.setText(Double.toString(blockSpeedLimit));
-                    //AuthorityField.setText(blockStation);
+                    //AuthorityField.setText(blockStation.toString(newStation));
                     CurrentCapacityField.setText(Boolean.toString(blockCrossing));
                     MaxCapacityField.setText(Integer.toString(blockSwitchID));
                     
