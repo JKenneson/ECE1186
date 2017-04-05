@@ -47,6 +47,11 @@ public class Station {
         heaterOn = false;
         random = new Random();
     }
+    
+    /**
+     * Update temperature at station randomly
+     * @return the new temperature
+     */
     public int updateTemperature() {
         //Adjust temperature
         int difference = MAX_TEMPURATURE_CHANGE - random.nextInt(2 * MAX_TEMPURATURE_CHANGE + 1);
@@ -67,48 +72,99 @@ public class Station {
         }
         return temperature;
     }
+    
+    /**
+     * Update the number of passengers at station randomly
+     * @return the new number of passengers
+     */
     public int updatePassengers() {
         int difference = (MAX_PASSENGER_CHANGE - 1) - random.nextInt(MAX_PASSENGER_CHANGE + 1);
         waitingPassengers += difference;
         return waitingPassengers;
     }
+    
     //Getters and Setters
+    
+    /**
+     * Get ID of the Station
+     * @return the Station ID
+     */
     public int getID() {
         return stationID;
     }
+    
+    /**
+     * Get name of the Station
+     * @return the Station name
+     */
     public String getName() {
         return name;
     }
+    
+    /**
+     * Get line of the Station
+     * @return the Station line
+     */
     public Line getLine() {
         return line;
     }
+    
+    /**
+     * Get primary block of the Station
+     * @return the primary Station block
+     */
     public Block getBlockA() {
         return blockA;
     }
+    
+    /**
+     * Get primary section of the station
+     * @return the primary station section
+     */
     public Section getSectionA() {
         return sectionA;
     }
+    
+    /**
+     * Get secondary block of the Station
+     * @return the secondary Station block
+     */
     public Block getBlockB() {
         return blockB;
     }
+    
+    /**
+     * Get secondary section of the station
+     * @return the secondary station section
+     */
     public Section getSectionB() {
         return sectionB;
     }
-    public boolean isRightSide() {
-        return rightSide;
-    }
-    public boolean isLeftSide() {
-        return leftSide;
-    }
+    
+    /**
+     * Get state of the heater
+     * @return boolean true if on, false if off
+     */
     public boolean isHeaterOn() {
         return heaterOn;
     }
+    
+    /**
+     * Get temperature at the station
+     * @return int temperature of the station
+     */
     public int getTemperature() {
         return temperature;
     }
+    
+    /**
+     * Add passengers to waiting queue
+     * @param int newPassengers number of passengers to add
+     */
     public void queuePassengers(int newPassengers) {
         waitingPassengers =+ newPassengers;
     }
+    
     /**
      * Request passengers from the station to board the train
      * @param boardingPassengers the number of passengers requested
@@ -127,16 +183,32 @@ public class Station {
             return -surplusPassengers;
         }
     }
+    
+    /**
+     * Get number of passengers waiting at the station
+     * @return the int specifying number of passengers waiting at the station
+     */
     public int getWaitingPassengers() {
         return waitingPassengers;
     }
+    
     public boolean equals(Station otherStation) {
         return this.stationID == otherStation.getID();
     }
+    
+    /**
+     * Get string of the station name and ID
+     * @return string containing station name and ID
+     */
     @Override
     public String toString() {
         return name + " (" + stationID + ")";
     }
+    
+    /**
+     * Get string of the detailed station info
+     * @return formatted string containing all station info
+     */
     public String toStringDetail() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ");
