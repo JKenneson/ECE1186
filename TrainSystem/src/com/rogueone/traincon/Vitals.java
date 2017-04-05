@@ -98,7 +98,7 @@ public class Vitals {
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         if(this.approachingStation){
 
-            System.out.println("Train "+ this.gps.trainID + ": " + "Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
+            //System.out.println("Train "+ this.gps.trainID + ": " + "Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
             //System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
@@ -120,7 +120,7 @@ public class Vitals {
         }
 
         //System.out.println("Manual: " + manualMode + " Service Brake: " + this.serviceBrakeActivated);
-        System.out.println("Train "+ this.gps.trainID + ": " + "Stop for station: " + stopForStation);
+        //System.out.println("Train "+ this.gps.trainID + ": " + "Stop for station: " + stopForStation);
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         //System.out.println("Exit");
             
@@ -242,7 +242,7 @@ public class Vitals {
         //this.gps.getCurrBlock().getGrade()<0 ||
         if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.speedControl.getSetPoint(manualMode)<=0.0 || (i-- > 0)){
             //Maybe I shouldn't do when grade is less than 0
-            System.out.println("Train "+ this.gps.trainID + ": " + "S brake = " + this.serviceBrakeActivated + " E brake:" + this.emergencyBrakeActivated + " Set Point: " + (this.speedControl.getSetPoint(manualMode)) + " i: " + i);
+            //System.out.println("Train "+ this.gps.trainID + ": " + "S brake = " + this.serviceBrakeActivated + " E brake:" + this.emergencyBrakeActivated + " Set Point: " + (this.speedControl.getSetPoint(manualMode)) + " i: " + i);
             this.powerCommand = 0.0;
             return 0.0;
         }
