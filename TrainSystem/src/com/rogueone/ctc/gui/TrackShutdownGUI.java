@@ -8,6 +8,7 @@ package com.rogueone.ctc.gui;
 import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Line;
 import com.rogueone.trackmodel.Section;
+import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainsystem.TrainSystem;
 
@@ -162,7 +163,8 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CloseTrackDisableButtonActionPerformed
 
     private void TrackDisableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackDisableButtonActionPerformed
-        String lineName = (String)LineComboBox.getSelectedItem();
+        String lineName = (String)(LineComboBox.getSelectedItem());
+//        Global.Line lineVal = Global.Line.valueOf(lineName);
         String segmentName = (String)SegmentComboBox.getSelectedItem();
         int blockName = Integer.valueOf((String)BlockComboBox.getSelectedItem());
         
@@ -181,7 +183,9 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
   
     private void disableTrackSegment(String lineName, String segmentName, int blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, blockName);
-        this.trainSystem.getTrackView().setBlockStatus(Global.Line.valueOf(lineName), segmentName, blockName, false);
+        Global.Line lineVal = Global.Line.valueOf(lineName);
+
+        this.trainSystem.getTrackView().setBlockStatus(lineVal, segmentName, blockName, false);
     }
                                  
     
