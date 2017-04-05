@@ -23,7 +23,6 @@ import java.lang.*;
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     int trainID;
-    int operationMode;
     public int iterativeID;
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
@@ -1036,9 +1035,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
-    public int getOperationMode(){
-        operationMode = SelectOperationMode2.getSelectedIndex();
-        return operationMode;
+    public boolean isAutomatic(){
+        if (SelectOperationMode2.getSelectedIndex() == 1){
+            return true;
+        }
+        return false;
     }
     
 private void getDispatchTimes(){
