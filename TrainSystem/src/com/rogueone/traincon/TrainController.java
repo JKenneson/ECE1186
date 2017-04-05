@@ -126,6 +126,7 @@ public class TrainController {
     public void showGUIObject() {
         //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
         trainControllerGUIFrame = new JFrame();
+        trainControllerGUIFrame.setTitle("Train ID: " + this.trainID);
         trainControllerGUIFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         trainControllerGUIFrame.getContentPane().add(this.gui);
         trainControllerGUIFrame.pack();
