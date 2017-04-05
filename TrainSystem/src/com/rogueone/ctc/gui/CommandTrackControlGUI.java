@@ -23,7 +23,7 @@ import java.lang.*;
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     int trainID;
-    int hoursPassed = 0;
+    int hoursPassed;
     public int iterativeID;
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
@@ -854,7 +854,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         SystemInformationPanel.add(jLabel1, gridBagConstraints);
 
-        jLabel7.setText("PM");
+        jLabel7.setText("AM");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
