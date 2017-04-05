@@ -783,14 +783,14 @@ public class TrackController {
                     PresenceBlock pb = new PresenceBlock(this.trainSystem, this.controllerLine);
                     if (b.isOccupied() && b.getID() == 152 && !occupiedBlocks.contains(pb)) {
                         pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
-                        System.out.println("TC:(new) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
+//                        System.out.println("TC:(new) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
                         occupiedBlocks.add(pb);
                     }
                 } else if (controllerLine == Global.Line.RED) {
                     PresenceBlock pb = new PresenceBlock(this.trainSystem, this.controllerLine);
                     if (b.isOccupied() && b.getID() == 77 && !occupiedBlocks.contains(pb)) {
                         pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
-                        System.out.println("TC: currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
+//                        System.out.println("TC: currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
                         occupiedBlocks.add(pb);
                     }
                 }
@@ -806,7 +806,7 @@ public class TrackController {
                             pb.setCurrBlock((Block) pb.getNextBlock());
                             pb.setPrevBlock(tempBlock);
                             if (pb.getCurrBlock().getNext(pb.getPrevBlock()) == null) {
-                                System.out.println("Incorrect Switch");
+//                                System.out.println("Incorrect Switch");
                             } else {
                                 pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
                             }
@@ -845,7 +845,7 @@ public class TrackController {
                     //check to see if switch is in the wrong position
                     boolean safeToLookAhead = true;
                     if (lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()) == null) {
-                        System.out.println("Switch wrong");
+//                        System.out.println("Switch wrong");
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
                         safeToLookAhead = false;
@@ -854,17 +854,17 @@ public class TrackController {
                     //needs to look ahead by 2 blocks, because the block directly in front will
                     //always be occupied because that is how the train model sets the track
                     else if (i > 0 && lookaheadBlock.getNextBlock().getID() != 0 && this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied() && this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen()) {
-                        System.out.println("Train Ahead");
+//                        System.out.println("Train Ahead");
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
                         break;
                     } //check to see if that block ahead is closed or failed
                     else if (lookaheadBlock.getNextBlock().getID() != 0 && (!this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureBrokenRail()
                             || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureTrackCircuit())) {
-                        System.out.println("Track Open = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen()
-                                + "Failure BR = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage()
-                                + "Failure PO = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage()
-                                + "Failure TC = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage());
+//                        System.out.println("Track Open = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen()
+//                                + "Failure BR = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage()
+//                                + "Failure PO = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage()
+//                                + "Failure TC = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage());
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
                         break;
@@ -881,7 +881,7 @@ public class TrackController {
                             lookaheadBlock.setPrevBlock(tempBlock);
                             lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
                         } else {
-                            System.out.println("skipped lookahead");
+//                            System.out.println("skipped lookahead");
                         }
                     }
 
@@ -912,7 +912,7 @@ public class TrackController {
         }
         if (crossingActive) {
             crossing.setCurrentCrossingState(Global.CrossingState.ACTIVE);
-            System.out.println("Crossing Active");
+//            System.out.println("Crossing Active");
         } else {
             crossing.setCurrentCrossingState(Global.CrossingState.INACTIVE);
         }

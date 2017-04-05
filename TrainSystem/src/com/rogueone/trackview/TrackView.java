@@ -667,7 +667,7 @@ public class TrackView extends Frame {
      * @param line - current line
      * @param section - current section
      * @param blockID - block to close or open
-     * @param openOrClose - true for open block, close for open block
+     * @param openOrClose - true for open block, false for close block
      */
     public void setBlockStatus(Global.Line line, String section, int blockID, boolean openOrClose) {
         //open block
