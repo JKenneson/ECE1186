@@ -1054,10 +1054,10 @@ public class TrackController {
         return false;
     }
 
-    public void updateSpeedAuthority(int blockID, byte speed, short authority) {
+    public void updateSpeedAuthority(int blockID, double speed, double authority) {
         Block b = this.trackModel.getBlock(controllerLine, blockID);
-        b.getTrackCircuit().speed = speed;
-        b.getTrackCircuit().authority = authority;
+        b.getTrackCircuit().speed = (byte) speed;
+        b.getTrackCircuit().authority = (short) (authority/3.28);
     }
 
     public String getSwitches() {

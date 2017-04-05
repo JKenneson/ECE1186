@@ -78,7 +78,7 @@ public class UpdatePanel extends javax.swing.JPanel {
         add(authorityLabel, gridBagConstraints);
 
         speedSpinner.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        speedSpinner.setModel(new javax.swing.SpinnerNumberModel(Byte.valueOf((byte)40), Byte.valueOf((byte)0), Byte.valueOf((byte)45), Byte.valueOf((byte)5)));
+        speedSpinner.setModel(new javax.swing.SpinnerNumberModel(40.0d, 0.0d, 45.0d, 5.0d));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -89,7 +89,7 @@ public class UpdatePanel extends javax.swing.JPanel {
         add(speedSpinner, gridBagConstraints);
 
         authoritySpinner.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        authoritySpinner.setModel(new javax.swing.SpinnerNumberModel(Short.valueOf((short)30000), Short.valueOf((short)0), Short.valueOf((short)31721), Short.valueOf((short)1000)));
+        authoritySpinner.setModel(new javax.swing.SpinnerNumberModel(30000.0d, 0.0d, 31721.0d, 1000.0d));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -134,10 +134,10 @@ public class UpdatePanel extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        byte speed = (byte) speedSpinner.getValue();
-        short authority = (short) authoritySpinner.getValue();
+        double speed =  (double) speedSpinner.getValue();
+        double authority =  (double) authoritySpinner.getValue();
         System.out.println("Speed " + speed + " authority " + authority);
-        this.trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(this.line, updateBlock, (byte) speed, (short) authority);
+        this.trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(this.line, updateBlock, speed, authority);
         Window w = SwingUtilities.getWindowAncestor(this);
         w.dispose();
     }//GEN-LAST:event_updateButtonActionPerformed

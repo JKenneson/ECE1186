@@ -276,7 +276,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
             String[] parts = updateParamsPosition.split(":");
             int partBlock = Integer.parseInt(parts[1]);
             
-        trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(updateParamsLine), partBlock, (byte) trainSpeed, (short) trainAuthority);
+        trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(updateParamsLine), partBlock, trainSpeed, trainAuthority);
         
     }//GEN-LAST:event_UpdateButtonActionPerformed
 

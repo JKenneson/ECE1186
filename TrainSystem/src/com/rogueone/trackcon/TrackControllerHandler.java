@@ -148,7 +148,7 @@ public class TrackControllerHandler {
         return returnValue;
     }
 
-    public void requestUpdateSpeedAuthority(Global.Line line, int blockID, byte speed, short authority) {
+    public void requestUpdateSpeedAuthority(Global.Line line, int blockID, double speed, double authority) {
         if (line == Global.Line.GREEN) {
             trackControllers.get(0).updateSpeedAuthority(blockID, speed, authority);
         } else {

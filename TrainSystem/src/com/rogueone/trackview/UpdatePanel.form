@@ -61,7 +61,7 @@
           <Font name="Lucida Grande" size="18" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-          <SpinnerModel initial="40" maximum="45" minimum="0" numberType="java.lang.Byte" stepSize="5" type="number"/>
+          <SpinnerModel initial="40.0" maximum="45.0" minimum="0.0" numberType="java.lang.Double" stepSize="5.0" type="number"/>
         </Property>
       </Properties>
       <Constraints>
@@ -76,7 +76,7 @@
           <Font name="Lucida Grande" size="18" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-          <SpinnerModel initial="30000" maximum="31721" minimum="0" numberType="java.lang.Short" stepSize="1000" type="number"/>
+          <SpinnerModel initial="30000.0" maximum="31721.0" minimum="0.0" numberType="java.lang.Double" stepSize="1000.0" type="number"/>
         </Property>
       </Properties>
       <Constraints>
