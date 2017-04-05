@@ -1258,7 +1258,6 @@ public int iterateID(){
                 if (((String) BlockTable.getValueAt(i, 1)).equals(segmentName)) {
                     if ((Integer) BlockTable.getValueAt(i, 2) == blockName) {
                         BlockTable.setValueAt(trackBool, i, 3);
-                        //String trainPosition = (segmentName+":"+blockName);
                     }
                 }
             }

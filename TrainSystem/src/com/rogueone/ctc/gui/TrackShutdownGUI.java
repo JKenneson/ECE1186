@@ -5,6 +5,7 @@
  */
 package com.rogueone.ctc.gui;
 
+import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Line;
 import com.rogueone.trackmodel.Section;
 import com.rogueone.trackmodel.TrackModel;
@@ -180,7 +181,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
   
     private void disableTrackSegment(String lineName, String segmentName, int blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, blockName);
-        //this.trainSystem.getTrackView().setBlockStatus(segmentName, blockName, false);
+        this.trainSystem.getTrackView().setBlockStatus(Global.Line.valueOf(lineName), segmentName, blockName, false);
     }
                                  
     
