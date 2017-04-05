@@ -81,13 +81,14 @@ public class TrainSystem {
         // Initialize modules
         this.trackModel = new TrackModel(this, new File(trackDataFilePath));
         this.trackModel.updateGUI();
-        this.ctc = new CommandTrackControlGUI(this);
         this.trackControllerHandler = new TrackControllerHandler(this);
         this.trainHandler = new TrainHandler(this);
         this.mbo = new Mbo(this);
         this.scheduler = new Scheduler(this);
         this.trackView = new TrackView(this, Global.Line.GREEN);
         //this.trackView = new TrackView(this, Global.Line.RED);
+        this.ctc = new CommandTrackControlGUI(this);
+
         
         // Initialize GUI
         mainFrame = new MainFrame(this);

@@ -23,7 +23,7 @@ import java.lang.*;
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     int trainID;
-    int hoursPassed = 1;
+    int hoursPassed = 0;
     public int iterativeID;
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
@@ -949,7 +949,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     
     public void removeTrainFromTable(int trainID){
        int trainIDRow = 0;
-       double throughputValue = 0;
+       
        
         DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
         for(int i = 0; i < model.getRowCount(); i++){
@@ -960,8 +960,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         }
         model.removeRow(trainIDRow);
-        throughputValue = trainsDispatched/hoursPassed;
-        ThroughputField.setText(String.format("%.2f", throughputValue));
         
     }
     
@@ -984,7 +982,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      * Updates time and rush hour fields in GUI
      */
     public void updateTime(){
-      
+       
+       double throughputValue;
        int updateMinute = trainSystem.getClock().getMinute();
        int updateSecond = trainSystem.getClock().getSecond();
         
@@ -1007,6 +1006,21 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         if(SelectOperationMode2.getSelectedIndex() == 1){
             getDispatchTimes();
         }
+        
+        //throws null pointer because of intiialiaztion
+        if ( (this.trainSystem.getTrainHandler().getTrains() == null) || (hoursPassed == 0) || (this.trainSystem.getTrainHandler().getTrains().isEmpty()) ){
+            ThroughputField.setText("0");
+        }
+        
+        if ( (!this.trainSystem.getTrainHandler().getTrains().isEmpty() ) && (hoursPassed != 0)  ){
+            throughputValue = this.trainSystem.getTrainHandler().getTrains().size()/hoursPassed;       
+        }
+        else{
+            throughputValue = 0;
+        }
+       
+        ThroughputField.setText(String.format("%.2f", throughputValue));
+        
 
     }
 
