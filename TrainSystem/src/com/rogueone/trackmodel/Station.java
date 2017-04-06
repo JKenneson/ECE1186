@@ -78,6 +78,9 @@ public class Station {
     public int updatePassengers() {
         int difference = (MAX_PASSENGER_CHANGE - 1) - random.nextInt(MAX_PASSENGER_CHANGE + 1);
         waitingPassengers += difference;
+        if (waitingPassengers < 0) {
+            waitingPassengers = 0;
+        }
         return waitingPassengers;
     }
     
