@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.rogueone.ctc.gui;
+import com.rogueone.global.Clock;
 import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.Line;
@@ -119,7 +120,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         RushHourField = new javax.swing.JTextField();
         ThroughputField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        AMPM = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         SelectOperationMode2 = new javax.swing.JComboBox<>();
 
@@ -854,12 +855,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         SystemInformationPanel.add(jLabel1, gridBagConstraints);
 
-        jLabel7.setText("AM");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        SystemInformationPanel.add(jLabel7, gridBagConstraints);
+        SystemInformationPanel.add(AMPM, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -1000,7 +1000,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             hoursPassed++;
         }
      
-
+        if (this.trainSystem.getClock().getTimeOfDay() == Clock.TimeOfDay.AM){
+            AMPM.setText("AM");
+        }
+        else{
+            AMPM.setText("PM");
+        }
+        
         updateTrainTable();
         
         if(SelectOperationMode2.getSelectedIndex() == 1){
@@ -1227,11 +1233,11 @@ public int iterateID(){
             CurrentSectionField.setText(partSection);
             CurrentBlockField.setText(partBlock);
             TrainNameField.setText(Integer.toString(trainID));
-            MaxCapacityField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getNumCars() * 222));
+            //MaxCapacityField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getNumCars() * 222));
             CurrentCapacityField.setText("-");
-            SpeedField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getCtcSetPoint())); //speed only
-            int auth = (int)this.trainSystem.getTrainHandler().getTrains().get(trainID).getAuthority();
-            AuthorityField.setText(String.valueOf(auth));
+            //SpeedField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getCtcSetPoint())); //speed only
+            //int auth = (int)this.trainSystem.getTrainHandler().getTrains().get(trainID).getAuthority();
+            //AuthorityField.setText(String.valueOf(auth));
                     
             if (SelectOperationMode2.getSelectedIndex() == 1) {
                 ChangeParametersButton3.setEnabled(false);
@@ -1591,6 +1597,7 @@ public int iterateID(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AMPM;
     private javax.swing.JPanel AdditionalInfoPanel2;
     private javax.swing.JTextField AuthorityField;
     private javax.swing.JTable BlockTable;
@@ -1636,7 +1643,6 @@ public int iterateID(){
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
