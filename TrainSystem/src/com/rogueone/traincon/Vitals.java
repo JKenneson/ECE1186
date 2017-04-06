@@ -88,7 +88,7 @@ public class Vitals {
     public void update(boolean manualMode){
         
         this.gps.update(this.trainModel.getDistanceTraveledFeet(), this.trainModel.getCurrBlock(), this.trainModel.getCurrSpeedMPH());
-        if(this.gps.getAuthority()<0 || this.emergencyBrakeOverride)
+        if(this.gps.getAuthority()<(this.trainModel.safeStoppingDistance()+3) || this.emergencyBrakeOverride)
             this.setEmergencyBrakeActivated(true);
         else if(!this.emergencyBrakeOverride){
             this.setEmergencyBrakeActivated(false);
@@ -103,18 +103,17 @@ public class Vitals {
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
             //System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
-           if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null){
-                System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
-                
+            if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null){
+                 //System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
             }
             if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
-                System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
+                //System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
                 this.trainModel.boardPassengers(this.doorSide);
                 this.approachingStation = false;
                 stopForStation = false;
                 this.setServiceBrakeActivated(false);
                 this.previousStation = this.station;
-                System.out.println("Train "+ this.gps.trainID + ": " + "Leaving station...");
+                //System.out.println("Train "+ this.gps.trainID + ": " + "Leaving station...");
                 i = 60;
             }
             
@@ -385,11 +384,11 @@ public class Vitals {
         boolean skipped = true;
         if(beacon.getStation() != null){
             this.station = beacon.getStation().getName();
-            if(beacon.getID() == 33 && this.specialCase){
+            if(beacon.getID() == 33){ //Try to fix logic here
                 specialCase = !this.specialCase;
                 skipped = false;
             }
-            if(!this.previousStation.equals(this.station) && skipped){
+            if(!this.previousStation.equals(this.station) && (this.specialCase || skipped)){
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
                 this.distanceToStation = beacon.getDistance() + 50;
