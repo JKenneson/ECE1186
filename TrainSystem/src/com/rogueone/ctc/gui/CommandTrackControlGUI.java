@@ -1227,16 +1227,19 @@ public int iterateID(){
             CurrentSectionField.setText(partSection);
             CurrentBlockField.setText(partBlock);
             TrainNameField.setText(Integer.toString(trainID));
-
+            MaxCapacityField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getNumCars() * 222));
+            CurrentCapacityField.setText("-");
+            SpeedField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getCtcSetPoint())); //speed only
+            int auth = (int)this.trainSystem.getTrainHandler().getTrains().get(trainID).getAuthority();
+            AuthorityField.setText(String.valueOf(auth));
+                    
             if (SelectOperationMode2.getSelectedIndex() == 1) {
                 ChangeParametersButton3.setEnabled(false);
             } else {
                 ChangeParametersButton3.setEnabled(true);
             }
             
-            MaxCapacityField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getNumCars() * 222));
-            SpeedField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getDriverSetPoint()));
-        }
+       }
 
         if (evt.getClickCount() == 2) {
             //double mouse click calls Train Model CreateGUIObject to dispalay IDed train model
