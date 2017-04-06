@@ -5,6 +5,7 @@
  */
 package com.rogueone.trackview;
 
+import com.rogueone.trainsystem.TrainSystem;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -26,10 +27,12 @@ public class LegendBox implements MyShape {
     private Rectangle2D trainLegendHalt;
     private Rectangle2D trainLegendStop;
     private Rectangle2D switchLegend;
+    private TrainSystem trainSystem;
 
-    public LegendBox(float xStart, float yStart) {
+    public LegendBox(float xStart, float yStart, TrainSystem trainSystem) {
         X = xStart;
         Y = yStart;
+        this.trainSystem = trainSystem;
         setUp();
     }
 
@@ -81,6 +84,9 @@ public class LegendBox implements MyShape {
         g.drawString(" = Train Halted by Wayside", X + xOffset + 60, Y + (4 * yOffset) + 8);
         g.drawString(" = Train Stopped", X + xOffset + 60, Y + (5 * yOffset) + 9);
         g.drawString(" = Switch", X + xOffset + 60, Y + (6 * yOffset) + 10);
+        
+        g.setColor(Color.GREEN);
+        g.drawString(this.trainSystem.getClock().printClock(), 435, 15);
         
     }
 

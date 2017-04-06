@@ -374,7 +374,7 @@ public class TrackView extends Frame {
         Yard yardEnd = new Yard(950, 0);
         sp.addShape(yardEnd);
 
-        LegendBox lb = new LegendBox(1, 200);
+        LegendBox lb = new LegendBox(1, 200, trainSystem);
         sp.addShape(lb);
 
     }
@@ -549,7 +549,7 @@ public class TrackView extends Frame {
         Yard yardStart = new Yard(0, 0);
         sp.addShape(yardStart);
 
-        LegendBox lb = new LegendBox(1, 200);
+        LegendBox lb = new LegendBox(1, 200, trainSystem);
         sp.addShape(lb);
 
     }
