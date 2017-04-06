@@ -711,7 +711,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
     
     public void updateBlock(Block b) {
             String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Occupied" };
-            String crossingData = "n/a";
+            String crossingData = "No";
             if(b.getCrossing() != null) {
                 if(b.getCrossing().getState()) {
                     crossingData = "Lowered";
@@ -732,7 +732,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     b.isUnderground() + "", 
                     crossingData,
                     b.isOccupied() + "" };
-                DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
+                NonEditableTableModel blockModel = new NonEditableTableModel(blockColumnNames);
                 blockModel.addRow(blockRowData);
                 blockTable.setModel(blockModel);
         }
@@ -742,7 +742,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 String trackCircuitRowData[] = { 
                     b.getTrackCircuit().speed + " mph", 
                     b.getTrackCircuit().authority + " ft" };
-                DefaultTableModel trackCircuitModel = new DefaultTableModel(trackCircuitColumnNames, 0);
+                NonEditableTableModel trackCircuitModel = new NonEditableTableModel(trackCircuitColumnNames);
                 trackCircuitModel.addRow(trackCircuitRowData);
                 trackCircuitTable.setModel(trackCircuitModel);
         }
@@ -753,13 +753,13 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     
                     String switchColumnNames[] = { "ID", "Static Block", "Default Dependent Block", "Alternate Dependent Block", "Activated" };
                     String switchRowData[] = { switchBlock.getID() + "", switchBlock.getPortA().getID() + "", switchBlock.getPortB().getID() + "", switchBlock.getPortC().getID() + "", switchBlock.isActivated() + "" };
-                    DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
+                    NonEditableTableModel switchModel = new NonEditableTableModel(switchColumnNames);
                     switchModel.addRow(switchRowData);
                     switchTable.setModel(switchModel);
                 }
                 else {
                     String switchColumnNames[] = { "No switches to display" };
-                    DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
+                    NonEditableTableModel switchModel = new NonEditableTableModel(switchColumnNames);
                     switchTable.setModel(switchModel);
                 }
         }
@@ -783,13 +783,13 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         station.getTemperature() + "",
                         heaterOn,
                         station.getWaitingPassengers() + ""};
-                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
+                    NonEditableTableModel stationModel = new NonEditableTableModel(stationColumnNames);
                     stationModel.addRow(stationRowData);
                     stationTable.setModel(stationModel);
                 }
                 else {
                     String stationColumnNames[] = { "No stations to display" };
-                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
+                    NonEditableTableModel stationModel = new NonEditableTableModel(stationColumnNames);
                     stationTable.setModel(stationModel);
                 }
         }
@@ -808,13 +808,13 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         beacon.getStation().getName(), 
                         Global.decimalFormatter.format(beacon.getDistance()) + " ft",
                         side};
-                    DefaultTableModel beaconModel = new DefaultTableModel(beaconColumnNames, 0);
+                    NonEditableTableModel beaconModel = new NonEditableTableModel(beaconColumnNames);
                     beaconModel.addRow(beaconRowData);
                     beaconTable.setModel(beaconModel);
                 }
                 else {
                     String beaconColumnNames[] = { "No beacons to display" };
-                    DefaultTableModel beaconModel = new DefaultTableModel(beaconColumnNames, 0);
+                    NonEditableTableModel beaconModel = new NonEditableTableModel(beaconColumnNames);
                     beaconTable.setModel(beaconModel);
                 }
         }
