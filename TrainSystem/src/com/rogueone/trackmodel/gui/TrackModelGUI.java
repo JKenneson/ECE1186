@@ -16,9 +16,12 @@ import com.rogueone.trackmodel.Switch;
 import java.io.File;
 import javax.swing.JFileChooser;
 import com.rogueone.trackmodel.TrackModel;
+import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -397,6 +400,27 @@ public class TrackModelGUI extends javax.swing.JPanel {
             switchTable.getColumnModel().getColumn(2).setResizable(false);
             switchTable.getColumnModel().getColumn(3).setResizable(false);
         }
+        Action action = new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Block b = (Block) blockSelectionComboBox.getSelectedItem();
+                if(b != null) {
+                    TableCellListener tcl = (TableCellListener)e.getSource();
+                    if (b.getSwitchID() != -1 && b.getPortB() != null) {
+                        Switch sw = (Switch) b.getPortB();
+                        if(((String)tcl.getNewValue()).equalsIgnoreCase("TRUE")) {
+                            sw.setSwitch(true);
+                        }
+                        else if(((String)tcl.getNewValue()).equalsIgnoreCase("FALSE")) {
+                            sw.setSwitch(false);
+                        }
+                    }
+                }
+            }
+        };
+        TableCellListener tcl = new TableCellListener(switchTable, action);
 
         javax.swing.GroupLayout switchPanelLayout = new javax.swing.GroupLayout(switchPanel);
         switchPanel.setLayout(switchPanelLayout);
@@ -709,7 +733,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         }
     }
     
-    public void updateBlock(Block b) {
+    public void updateBlock(Block b) { 
             String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Occupied" };
             String crossingData = "No";
             if(b.getCrossing() != null) {

@@ -664,7 +664,7 @@
                                 <Column editable="false" title="Port C" type="java.lang.Integer"/>
                               </Table>
                             </Property>
-                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="Action action = new AbstractAction()&#xa;{&#xa;    @Override&#xa;    public void actionPerformed(ActionEvent e)&#xa;    {&#xa;        Block b = (Block) blockSelectionComboBox.getSelectedItem();&#xa;        if(b != null) {&#xa;            TableCellListener tcl = (TableCellListener)e.getSource();&#xa;            if (b.getSwitchID() != -1 &amp;&amp; b.getPortB() != null) {&#xa;                Switch sw = (Switch) b.getPortB();&#xa;                if(((String)tcl.getNewValue()).equalsIgnoreCase(&quot;TRUE&quot;)) {&#xa;                    sw.setSwitch(true);&#xa;                }&#xa;                else if(((String)tcl.getNewValue()).equalsIgnoreCase(&quot;FALSE&quot;)) {&#xa;                    sw.setSwitch(false);&#xa;                }&#xa;            }&#xa;        }&#xa;    }&#xa;};&#xa;TableCellListener tcl = new TableCellListener(switchTable, action);">
                               <TableColumnModel selectionModel="0">
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                                   <Title/>
