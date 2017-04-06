@@ -273,7 +273,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="trackFailureModesPanel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -281,10 +281,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="trackCircuitPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="trackDetailsDetailsPanel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="trackDetailsSelectionPanel" alignment="0" min="-2" pref="1010" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="trackDetailsDetailsPanel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="trackDetailsSelectionPanel" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="80" max="32767" attributes="0"/>
                   </Group>
@@ -295,15 +293,15 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="trackDetailsSelectionPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="trackDetailsDetailsPanel" min="-2" pref="367" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="trackCircuitPanel" max="32767" attributes="0"/>
                           <Component id="trackFailureModesPanel" alignment="0" pref="110" max="32767" attributes="0"/>
                           <Component id="beaconPanel" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="108" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -341,7 +339,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lineSelectionComboBox" pref="287" max="32767" attributes="0"/>
+                              <Component id="lineSelectionComboBox" pref="205" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -385,7 +383,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="sectionSelectionComboBox" pref="287" max="32767" attributes="0"/>
+                              <Component id="sectionSelectionComboBox" pref="205" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -420,7 +418,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Block">
+                        <TitledBorder justification="2" title="Block">
                           <Font PropertyName="font" name="Dialog" size="14" style="1"/>
                         </TitledBorder>
                       </Border>
@@ -432,7 +430,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="blockSelectionComboBox" pref="287" max="32767" attributes="0"/>
+                              <Component id="blockSelectionComboBox" pref="205" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -463,6 +461,17 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="refreshButton">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="sansserif" size="18" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Refresh"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshButtonActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="trackDetailsDetailsPanel">
@@ -799,7 +808,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Failures">
+                    <TitledBorder justification="2" title="Failures">
                       <Font PropertyName="font" name="Dialog" size="24" style="1"/>
                     </TitledBorder>
                   </Border>
@@ -852,7 +861,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Track Circuit">
+                    <TitledBorder justification="2" title="Track Circuit">
                       <Font PropertyName="font" name="Dialog" size="24" style="1"/>
                     </TitledBorder>
                   </Border>
@@ -915,7 +924,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Beacon">
+                    <TitledBorder justification="2" title="Beacon">
                       <Font PropertyName="font" name="Dialog" size="24" style="1"/>
                     </TitledBorder>
                   </Border>
