@@ -14,24 +14,12 @@ import com.rogueone.trackmodel.Section;
 import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.Switch;
 import java.io.File;
-import java.io.IOException;
 import javax.swing.JFileChooser;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import com.rogueone.trackmodel.TrackModel;
-import com.rogueone.trainsystem.TrainSystem;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -39,10 +27,10 @@ import javax.swing.table.TableCellRenderer;
  */
 public class TrackModelGUI extends javax.swing.JPanel {
     
-    private TrackModel trackModel;
-    private FailureRenderer failureRenderer;
-    private PresenceRenderer presenceRenderer;
-    private LineRenderer lineRenderer;
+    private final TrackModel trackModel;
+    private final FailureRenderer failureRenderer;
+    private final PresenceRenderer presenceRenderer;
+    private final LineRenderer lineRenderer;
 
     /** Creates new form TrackModelGUI */
     public TrackModelGUI(TrackModel tm) {
@@ -722,7 +710,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
     }
     
     public void updateBlock(Block b) {
-            String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Beacon", "Occupied" };
+            String blockColumnNames[] = { "ID", "Port A", "Port B", "Length", "Grade", "Speed Limit", "Elevation", "Cum. Elevation", "Underground", "Crossing", "Occupied" };
             String crossingData = "n/a";
             if(b.getCrossing() != null) {
                 if(b.getCrossing().getState()) {
@@ -731,10 +719,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 else {
                     crossingData = "Rasied";
                 }   
-            }
-            String beaconData = "No";
-            if(b.getBeacon() != null) {
-                beaconData = Integer.toString(b.getBeacon().getID());
             }
             String blockRowData[] = { 
                     b.getID() + "", 
@@ -746,8 +730,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     Global.decimalFormatter.format(b.getElevation()) + " ft",
                     Global.decimalFormatter.format(b.getCumulativeElevation()) + " ft",
                     b.isUnderground() + "", 
-                    crossingData, 
-                    beaconData, 
+                    crossingData,
                     b.isOccupied() + "" };
                 DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
                 blockModel.addRow(blockRowData);
@@ -768,8 +751,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
             if (b.getSwitchID() != -1 && b.getPortB() != null) {
                     Switch switchBlock = (Switch) b.getPortB();
                     
-                    String switchColumnNames[] = { "ID", "Static Block", "Default Dependent Block", "Alternate Dependent Block" };
-                    String switchRowData[] = { switchBlock.getID() + "", switchBlock.getPortA().getID() + "", switchBlock.getPortB().getID() + "", switchBlock.getPortC().getID() + "" };
+                    String switchColumnNames[] = { "ID", "Static Block", "Default Dependent Block", "Alternate Dependent Block", "Activated" };
+                    String switchRowData[] = { switchBlock.getID() + "", switchBlock.getPortA().getID() + "", switchBlock.getPortB().getID() + "", switchBlock.getPortC().getID() + "", switchBlock.isActivated() + "" };
                     DefaultTableModel switchModel = new DefaultTableModel(switchColumnNames, 0);
                     switchModel.addRow(switchRowData);
                     switchTable.setModel(switchModel);

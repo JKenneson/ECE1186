@@ -70,6 +70,15 @@ public class Switch implements TrackPiece {
     }
     
     /**
+    * Check if Switch is activated
+    * @return boolean indicating state
+    * @author Dan Bednarczyk
+    */
+    public boolean isActivated() {
+        return isActivated;
+    }
+    
+    /**
     * Toggle current switch state
     * @author Dan Bednarczyk
     */
