@@ -476,6 +476,23 @@ public class TrackModelGUI extends javax.swing.JPanel {
             stationTable.getColumnModel().getColumn(4).setResizable(false);
             stationTable.getColumnModel().getColumn(5).setResizable(false);
         }
+        Action stationAction = new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Block b = (Block) blockSelectionComboBox.getSelectedItem();
+                if(b != null) {
+                    TableCellListener tcl = (TableCellListener)e.getSource();
+                    if (b.getStationID() != -1 && b.getStation() != null) {
+                        Station st = b.getStation();
+                        st.setTemperature(Integer.parseInt(((String)tcl.getNewValue())));
+                        updateDetailsPanel();
+                    }
+                }
+            }
+        };
+        TableCellListener stationTcl = new TableCellListener(stationTable, stationAction);
 
         javax.swing.GroupLayout stationPanelLayout = new javax.swing.GroupLayout(stationPanel);
         stationPanel.setLayout(stationPanelLayout);

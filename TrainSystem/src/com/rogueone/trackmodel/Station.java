@@ -159,8 +159,22 @@ public class Station {
     }
     
     /**
+     * Set temperature at the station
+     * @param newTemp new temperature of the station
+     */
+    public void setTemperature(int newTemp) {
+        temperature = newTemp;
+        if(temperature < HEATER_THRESHOLD) {
+            heaterOn = true;
+        }
+        else {
+            heaterOn = false;
+        }
+    }
+    
+    /**
      * Add passengers to waiting queue
-     * @param int newPassengers number of passengers to add
+     * @param newPassengers number of passengers to add
      */
     public void queuePassengers(int newPassengers) {
         waitingPassengers =+ newPassengers;
