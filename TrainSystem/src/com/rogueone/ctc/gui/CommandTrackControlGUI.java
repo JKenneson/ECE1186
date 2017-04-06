@@ -1403,19 +1403,29 @@ public int iterateID(){
                     double blockLength = b.getLength();
                     double blockSpeedLimit = b.getSpeedLimit();
                     Station blockStation = b.getStation();
-                    String newStation;
                     int blockSwitchID = b.getSwitchID();
                     boolean blockCrossing = b.containsCrossing();
                     
                     CurrentBlockField.setText(Double.toString(blockLength));
                     SpeedField.setText(Double.toString(blockSpeedLimit));
-                    //AuthorityField.setText(blockStation.toString(newStation));
+                    AuthorityField.setText(String.valueOf(blockStation));
+                    if (blockStation == null){
+                        AuthorityField.setText("NONE");
+                    }
                     CurrentCapacityField.setText(Boolean.toString(blockCrossing));
+                    if (blockCrossing == false){
+                        CurrentCapacityField.setText("NONE");
+                    }
                     MaxCapacityField.setText(Integer.toString(blockSwitchID));
+                    if (blockSwitchID == -1){
+                        MaxCapacityField.setText("NONE");
+                    }
                     
                 }
                 
             }
+            
+            StatusField.setText(String.valueOf((BlockTable.getValueAt(BlockTable.getSelectedRow(), 3))));
             
         }
 
