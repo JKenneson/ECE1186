@@ -631,7 +631,7 @@ public class TrainModel {
      * @author Jonathan Kenneson
      * @param doorSide false - left side, true - right side
      */
-    public void boardPassengers(boolean doorSide) {
+    public void boardPassengers() {
         //Return if we are not on a station block
         Station currStation = this.currBlock.getStation();
         if(currStation == null) {
@@ -639,12 +639,12 @@ public class TrainModel {
         }
         
         //First, open the doors
-        if(doorSide) {
-            this.setRightDoorOpen(true);
-        }
-        else {
-            this.setLeftDoorOpen(true);
-        }
+//        if(doorSide) {
+//            this.setRightDoorOpen(true);
+//        }
+//        else {
+//            this.setLeftDoorOpen(true);
+//        }
         
         this.passengersOnBaord = this.passengersOnBaord - this.passengersDisembarking;
         this.passengersDisembarking = 0;
@@ -654,12 +654,12 @@ public class TrainModel {
         this.passengersOnBaord = this.passengersOnBaord + passengersToEnter;
         
         //To wrap up, close the doors and remove info on the gui
-        if(doorSide) {
-            this.setRightDoorOpen(false);
-        }
-        else {
-            this.setLeftDoorOpen(false);
-        }
+//        if(doorSide) {
+//            this.setRightDoorOpen(false);
+//        }
+//        else {
+//            this.setLeftDoorOpen(false);
+//        }
         
         this.approachingStation = "";
         this.passengersAtStation = 0;

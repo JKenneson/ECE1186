@@ -22,9 +22,9 @@ public class TMR {
     //Need to implement fail over from primary
     public Vitals primaryVital;
     
-    public TMR(TrainSystem ts, TrainModel tm, TrainController tc, double maxPow, byte setPointSpeed, short authority, String trainID){
+    public TMR(TrainSystem ts, TrainModel tm, TrainController tc, double maxPow, byte setPointSpeed, short authority, String trainID, PowerSystems ps){
         for(int i = 0; i < 3; i++){
-            vitals[i] = new Vitals(ts, tm, tc, maxPow, setPointSpeed, authority, trainID);
+            vitals[i] = new Vitals(ts, tm, tc, maxPow, setPointSpeed, authority, trainID, ps);
         }
         this.primaryVital = vitals[0];
     }

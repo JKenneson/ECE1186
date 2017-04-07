@@ -77,7 +77,7 @@ public class TrainController {
         this.trainSystem = ts;
         this.trainModel = tm; //Should come from passed (this) reference
         this.powerSystem = new PowerSystems(this);
-        this.vitals = new TMR(ts, tm, this, maxPow, setPointSpeed, authority, trainID);
+        this.vitals = new TMR(ts, tm, this, maxPow, setPointSpeed, authority, trainID, this.powerSystem);
         this.gui = gui;
         
         

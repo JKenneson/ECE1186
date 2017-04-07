@@ -24,7 +24,6 @@ public class TemperatureModel{
     public void update(){
         if(this.updateCount == 5){
             this.updateCount = 0;
-            System.out.println("AC: " + this.ACOn + " Heater: " + this.HeaterOn);
             if(this.ACOn){
                 this.temperature -= this.tempDelta;
             }
