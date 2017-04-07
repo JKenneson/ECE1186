@@ -115,6 +115,9 @@ public class TrainModel {
     private TrackPiece prevBlock;
     private TrackPiece nextBlock;
     
+    //Temperature Model
+    private TemperatureModel temperatureModel;
+    
     
     /**
      * Initializer for the TrainModel class, sets all variables to a default state
@@ -183,6 +186,8 @@ public class TrainModel {
         this.trainModelGUI = null;
         
         this.trainSystem = trainSystem;
+        
+        this.temperatureModel = new TemperatureModel(false, false);
         //Block setting
         this.prevBlock = trainSystem.getTrackModel().getYard();
         this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
@@ -258,7 +263,7 @@ public class TrainModel {
      */
     public void InitializeInputPanel(TrainModelGUI gui) {
         //All spinner values initialized just once
-        gui.temperatureInputSpinner.setValue(this.temperature);
+        gui.temperatureInputSpinner.setValue(this.temperatureModel.getTemperature());
         gui.gradeInputSpinner.setValue(this.grade);
         gui.speedLimitSpinner.setValue(this.speedLimit);
         
@@ -298,7 +303,7 @@ public class TrainModel {
         else {
             gui.lightsState.setText("Off");
         }
-        gui.temperatureState.setText(Integer.toString(this.temperature));
+        gui.temperatureState.setText(Double.toString(this.temperatureModel.getTemperature()));
         if(this.emergencyBrakeOverride) {           //Check first if the override has been enabled -> a failure has occured
             gui.brakesState.setText("Emergency");
         }
@@ -556,6 +561,8 @@ public class TrainModel {
             
         }
         
+        this.temperatureModel.update();
+        
         //Updates for the gui
         if(this.stationObject != null) {
             this.passengersAtStation = this.stationObject.getWaitingPassengers();
@@ -763,8 +770,8 @@ public class TrainModel {
         }
     }
 
-    public int getTemperature() {
-        return temperature;
+    public double getTemperature() {
+        return this.temperatureModel.getTemperature();
     }
 
     public void setTemperature(int temperature) {
@@ -954,4 +961,12 @@ public class TrainModel {
     public int getTrainID() {
         return trainID;
     }    
+    
+    public void setACOn(boolean value){
+        this.temperatureModel.setACOn(value);
+    }
+    
+    public void setHeaterOn(boolean value){
+        this.temperatureModel.setHeaterOn(value);
+    }
 }

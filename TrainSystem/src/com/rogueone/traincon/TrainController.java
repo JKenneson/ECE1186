@@ -196,9 +196,9 @@ public class TrainController {
     public void updateController(){
        
         this.vitals.update(this.manualMode);     
-        if(!this.manualMode){
-            this.powerSystem.update(this.vitals.getPrimary().getGPS().setLights());
-        }
+        
+        this.powerSystem.update(this.vitals.getPrimary().getGPS().setLights(), this.manualMode);
+        
         this.updatePassengers();
     }
         
@@ -460,6 +460,9 @@ public class TrainController {
     
     public void receiveBeacon(Beacon b){
         this.vitals.receiveBeacon(b);
+        if(this.gui != null){
+            this.gui.appendNotificationsDisplay("\nApproaching " + b.getStation().toString());
+        }
     }
     
     public GPSMessage getGPSMessage(){

@@ -18,7 +18,7 @@ public class PowerSystems{
     private boolean lightsOn;
     private boolean airConditioningOn;
     private boolean heaterOn;
-    private int temperature;
+    private double temperature;
     
     public PowerSystems(TrainController tc){
         
@@ -49,23 +49,25 @@ public class PowerSystems{
      * 
      * @author Tyler Protivnak
      */
-    public void update(boolean lights){ 
+    public void update(boolean lights, boolean manualMode){ 
         this.temperature = this.trainController.trainModel.getTemperature();
         
-        if(this.temperature>72){
-            this.airConditioningOn = true;
-            this.heaterOn = false;
+        if(!manualMode){
+            if(this.temperature>72){
+                this.setAirConditioningOn(true);
+                this.setHeaterOn(false);
+            }
+            else if(this.temperature<39){
+                this.setAirConditioningOn(false);
+                this.setHeaterOn(true);
+            }
+            else{
+                this.setAirConditioningOn(false);
+                this.setHeaterOn(false);         
+            }
+
+            this.setLightsOn(lights);
         }
-        else if(this.temperature<39){
-            this.airConditioningOn = false;
-            this.heaterOn = true;
-        }
-        else{
-            this.airConditioningOn = false;
-            this.heaterOn = false;            
-        }
-        
-        this.setLightsOn(lights);
         
     }
     
@@ -75,6 +77,7 @@ public class PowerSystems{
      */
     public void setAirConditioningOn(boolean airConditioningOn) {
         this.airConditioningOn = airConditioningOn;
+        this.trainController.trainModel.setACOn(airConditioningOn);
     }
 
     /**
@@ -83,6 +86,7 @@ public class PowerSystems{
      */
     public void setHeaterOn(boolean heaterOn) {
         this.heaterOn = heaterOn;
+        this.trainController.trainModel.setHeaterOn(heaterOn);
     }
     
     /**
@@ -156,7 +160,7 @@ public class PowerSystems{
      * 
      * @return 
      */
-    public int getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
     

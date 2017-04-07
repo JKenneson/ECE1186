@@ -1095,6 +1095,10 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_HeatOnActionPerformed
 
+    public void appendNotificationsDisplay(String s){
+        this.NotificationsDisplay.append(s);
+    }
+    
     private void ACOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACOffActionPerformed
         this.trainController.powerSystem.setAirConditioningOn(false);
         this.NotificationsDisplay.append("\nA/C Deactivated");
