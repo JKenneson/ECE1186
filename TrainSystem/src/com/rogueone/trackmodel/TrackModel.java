@@ -189,7 +189,9 @@ public class TrackModel {
             parseSwitches(testWorkbook.getSheetAt(4));
             parseBeacons(testWorkbook.getSheetAt(5));
             connectBlocks();
-            
+            for (Line l : lines) {
+                l.updateTotalLength();
+            }
             System.out.println("Track loaded successfully.");
         } catch (IOException ex) {
             System.err.println("Error reading data file.");
@@ -720,7 +722,7 @@ public class TrackModel {
      */
     public void printLines() {
         for(Line l : lines) {
-            System.out.println(l.getLineID());
+            System.out.println(l.toStringDetail());
         }
     }
     

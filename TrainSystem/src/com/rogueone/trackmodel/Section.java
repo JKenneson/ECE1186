@@ -16,6 +16,7 @@ public class Section {
     Global.Section sectionID;
     Line line;
     ArrayList<Block> blocks = new ArrayList<Block>();
+    double totalLength = 0;
     
     public Section (Global.Section newSection, Line newLine) {
         sectionID = newSection;
@@ -56,6 +57,8 @@ public class Section {
     */
     public void addBlock(Block b) {
         blocks.add(b);
+        totalLength += b.getLength();
+        //System.out.println(this.sectionID + " " + totalLength);
     }
     
     /**
@@ -75,6 +78,15 @@ public class Section {
     }
     
     /**
+    * Get total length of section
+    * @author Dan Bednarczyk
+    * @return double total length of section
+    */
+    public double getTotalLength() {
+        return totalLength;
+    }
+    
+    /**
     * Get String representation of Section
     * @author Dan Bednarczyk
     * @return String representation of Section ID
@@ -90,7 +102,7 @@ public class Section {
     * @return String representation of Section ID and Line ID
     */
     public String toStringDetail() {
-        return sectionID.toString() + " (" + line.toString() + ")";
+        return "Section: " + sectionID.toString() + ", Line: " + line.toString() + ", Length: " + totalLength + " m";
     }
     
     /**

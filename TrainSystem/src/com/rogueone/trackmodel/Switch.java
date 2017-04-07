@@ -120,6 +120,7 @@ public class Switch implements TrackPiece {
     /**
     * Get next TrackPiece
     * @author Dan Bednarczyk
+    * @param previous The previous TrackPiece
     * @return TrackPiece on the other side of the Switch
     */
     @Override

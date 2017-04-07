@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Line {
     
     Global.Line lineID;
+    double totalLength = 0;
     ArrayList<Section> sections = new ArrayList<Section>();
     
     public Line (Global.Line newLine) {
@@ -84,6 +85,27 @@ public class Line {
     }
     
     /**
+    * Get total length of track
+    * @author Dan Bednarczyk
+    * @return double total length of track
+    */
+    public double getTotalLength() {
+        return totalLength;
+    }
+    
+    /**
+    * Recalculate total length. Must be called after adding new sections.
+    * @author Dan Bednarczyk
+    */
+    public void updateTotalLength() {
+        totalLength = 0;
+        for (Section s : sections) {
+            totalLength += s.getTotalLength();
+            //System.out.println(s + " " + s.getTotalLength());
+        }
+    }
+    
+    /**
     * Get String representation of Line
     * @author Dan Bednarczyk
     * @return String representation of Line ID
@@ -91,6 +113,15 @@ public class Line {
     @Override
     public String toString() {
         return lineID.toString();
+    }
+    
+    /**
+    * Get detailed String representation of Line
+    * @author Dan Bednarczyk
+    * @return detailed String representation of Line
+    */
+    public String toStringDetail() {
+        return "Line: " + lineID.toString() + ", Length: " + totalLength + " m";
     }
     
     /**
