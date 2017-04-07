@@ -53,6 +53,7 @@ public class TrackView extends Frame {
     Crossing crossing;
     double scale = 5;
     public int trainID = 0;
+    public Global.Line line;
 
     public TrainSystem trainSystem;
 
@@ -68,11 +69,12 @@ public class TrackView extends Frame {
         //Title our frame.
         this.trainSystem = trainSystem;
         if (line == Global.Line.GREEN) {
+            this.line = line;
             shapeList = new ArrayList<MyShape>(); // create empty ArrayList
             switchList = new HashMap<Integer, Switch>();
             trackLightList = new HashMap<String, TrackLight>();
             sectionList = new HashMap<String, Section>();
-            sp = new ShapePanel(1000, 305, this.trainSystem);
+            sp = new ShapePanel(1000, 305, this.trainSystem, this.line);
             JFrame theWindow = new JFrame("Track View - " + line);
             theWindow.setSize(1000, 325);
             Container c = theWindow.getContentPane();
@@ -84,11 +86,12 @@ public class TrackView extends Frame {
             theWindow.setResizable(false);
             theWindow.setVisible(true);
         } else if (line == Global.Line.RED) {
+            this.line = line;
             shapeList = new ArrayList<MyShape>(); // create empty ArrayList
             switchList = new HashMap<Integer, Switch>();
             trackLightList = new HashMap<String, TrackLight>();
             sectionList = new HashMap<String, Section>();
-            sp = new ShapePanel(1000, 300, this.trainSystem);
+            sp = new ShapePanel(1000, 300, this.trainSystem, this.line);
             JFrame theWindow = new JFrame("Track View - " + line);
             theWindow.setSize(1000, 300);
             Container c = theWindow.getContentPane();
@@ -680,7 +683,7 @@ public class TrackView extends Frame {
                 }
             }
         }
-        this.trainSystem.getTrackControllerHandler().updateTrack();
+        this.trainSystem.getTrackControllerHandler().updateTrack(line);
     }
 
     class ShapePanel extends JPanel {
@@ -699,7 +702,7 @@ public class TrackView extends Frame {
 
         private boolean popped; // has popup menu been activated?
 
-        public ShapePanel(int pwid, int pht, TrainSystem trainSystem) {
+        public ShapePanel(int pwid, int pht, TrainSystem trainSystem, Global.Line line) {
             selindex = -1;
 
             prefwid = pwid;	// values used by getPreferredSize method below
@@ -712,7 +715,7 @@ public class TrackView extends Frame {
 
             setBackground(Color.lightGray);
 
-            addMouseListener(new MyMouseListener(trainSystem));
+            addMouseListener(new MyMouseListener(trainSystem, line));
 //        addMouseMotionListener(new MyMover());
             popped = false;
 
@@ -751,9 +754,11 @@ public class TrackView extends Frame {
         public class MyMouseListener extends MouseAdapter {
 
             private TrainSystem trainSystem;
+            private Global.Line line;
 
-            private MyMouseListener(TrainSystem trainSystem) {
+            private MyMouseListener(TrainSystem trainSystem, Global.Line line) {
                 this.trainSystem = trainSystem;
+                this.line = line;
             }
 
             public void mousePressed(MouseEvent e) {
@@ -823,7 +828,7 @@ public class TrackView extends Frame {
                                                 JOptionPane.WARNING_MESSAGE);
                                     }
                                 }
-                                this.trainSystem.getTrackControllerHandler().updateTrack();
+                                this.trainSystem.getTrackControllerHandler().updateTrack(this.line);
                                 break;
                             } else {
                                 //check to see if you can open that block
@@ -844,7 +849,7 @@ public class TrackView extends Frame {
                                                 JOptionPane.WARNING_MESSAGE);
                                     }
                                 }
-                                this.trainSystem.getTrackControllerHandler().updateTrack();
+                                this.trainSystem.getTrackControllerHandler().updateTrack(this.line);
                                 break;
                             }
                         }

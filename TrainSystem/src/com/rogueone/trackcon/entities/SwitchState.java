@@ -16,21 +16,35 @@ import java.util.ArrayList;
 public class SwitchState {
     
     private Global.SwitchState switchState;
-    private TrackConnection defaultConnection;
-    private ArrayList<Light> lightsDefault;
+    private TrackConnection defaultConnection1;
+    private TrackConnection defaultConnection2;
+    private ArrayList<Light> lightsDefault1;
+    private ArrayList<Light> lightsDefault2;
     private ArrayList<Light> lightsAlternate;
     private TrackConnection alternateConnection;
 
     public SwitchState(TrackConnection trackConnectionDefault,  TrackConnection trackConnectionAlternate) {
-        this.defaultConnection = trackConnectionDefault;
+        this.defaultConnection1 = trackConnectionDefault;
         this.alternateConnection = trackConnectionAlternate;
     }
 
 
     public SwitchState(Global.SwitchState switchState, TrackConnection trackConnectionDefault, ArrayList<Light> lightsDefault, TrackConnection trackConnectionAlternate, ArrayList<Light> lightsAlternate) {
         this.switchState = switchState;
-        this.defaultConnection = trackConnectionDefault;
-        this.lightsDefault = lightsDefault;
+        this.defaultConnection1 = trackConnectionDefault;
+        this.defaultConnection2 = null;
+        this.lightsDefault1 = lightsDefault;
+        this.lightsDefault2 = null;
+        this.alternateConnection = trackConnectionAlternate;
+        this.lightsAlternate = lightsAlternate;
+    }
+    
+    public SwitchState(Global.SwitchState switchState, TrackConnection trackConnectionDefault1, ArrayList<Light> lightsDefault1, TrackConnection trackConnectionDefault2, ArrayList<Light> lightsDefault2, TrackConnection trackConnectionAlternate, ArrayList<Light> lightsAlternate) {
+        this.switchState = switchState;
+        this.defaultConnection1 = trackConnectionDefault1;
+        this.defaultConnection2 = trackConnectionDefault2;
+        this.lightsDefault1 = lightsDefault1;
+        this.lightsDefault2 = lightsDefault2;
         this.alternateConnection = trackConnectionAlternate;
         this.lightsAlternate = lightsAlternate;
     }
@@ -44,11 +58,11 @@ public class SwitchState {
     }
 
     public TrackConnection getDefaultConnection() {
-        return defaultConnection;
+        return defaultConnection1;
     }
 
     public void setDefaultConnection(TrackConnection defaultConnection) {
-        this.defaultConnection = defaultConnection;
+        this.defaultConnection1 = defaultConnection;
     }
 
 
@@ -61,7 +75,7 @@ public class SwitchState {
     }
 
     public ArrayList<Light> getLightsDefault() {
-        return lightsDefault;
+        return lightsDefault1;
     }
 
     public ArrayList<Light> getLightsAlternate() {

@@ -52,11 +52,11 @@ public class TrackControllerHandler {
 
         TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem);
 //        TrackController greenTrackControllerDup = new TrackController(Global.Line.GREEN, this.trainSystem);
-//        TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem);
+        TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem);
 //        TrackController redTrackControllerDup = new TrackController(Global.Line.RED, this.trainSystem);
         trackControllers.add(greenTrackController);     //0
 //        trackControllers.add(greenTrackControllerDup);  //1
-//        trackControllers.add(redTrackController);       //2
+        trackControllers.add(redTrackController);       //2
 //        trackControllers.add(redTrackControllerDup);    //3
 
         trackHandlerGUI = new TrackHandlerGUI(this);
@@ -182,20 +182,22 @@ public class TrackControllerHandler {
             LinkedList<String> manualSwitches = trackControllers.get(0).getManualSwitches();
             if (manualSwitches != null) {
                 return manualSwitches;
-            } 
+            }
         } else {
-
+            LinkedList<String> manualSwitches = trackControllers.get(1).getManualSwitches();
+            if (manualSwitches != null) {
+                return manualSwitches;
+            }
         }
         return null;
     }
-    
-    public boolean toggleSwitch(Global.Line line, Integer switchID){
-        if (line == Global.Line.GREEN) {
-            return trackControllers.get(0).toggleSwitch(switchID); 
-        } else {
 
+    public boolean toggleSwitch(Global.Line line, Integer switchID) {
+        if (line == Global.Line.GREEN) {
+            return trackControllers.get(0).toggleSwitch(switchID);
+        } else {
+            return trackControllers.get(1).toggleSwitch(switchID);
         }
-        return false;
     }
 
     /**
@@ -203,12 +205,20 @@ public class TrackControllerHandler {
      * this function is called whenever a train moves from 1 track block to
      * another
      */
-    public void updateTrack() {
-        TrackController trackController = trackControllers.get(0);
-        trackController.evaluateProceed();
-        trackController.evaluateSwitches();
-        trackController.evaluateCrossing();
-        trackController.updateSummaryTab();
+    public void updateTrack(Global.Line line) {
+        if (line == Global.Line.GREEN) {
+            TrackController trackController = trackControllers.get(0);
+            trackController.evaluateProceed();
+            trackController.evaluateSwitches();
+            trackController.evaluateCrossing();
+            trackController.updateSummaryTab();
+        } else {
+            TrackController trackController = trackControllers.get(1);
+            trackController.evaluateProceed();
+            trackController.evaluateSwitches();
+            trackController.evaluateCrossing();
+            trackController.updateSummaryTab();
+        }
     }
 
     public void updateTrackView() {

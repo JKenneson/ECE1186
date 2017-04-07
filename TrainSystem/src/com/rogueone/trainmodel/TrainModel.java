@@ -190,10 +190,15 @@ public class TrainModel {
         this.temperatureModel = new TemperatureModel(false, false);
         //Block setting
         this.prevBlock = trainSystem.getTrackModel().getYard();
-        this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
+        if(this.line.equals("GREEN")){
+            this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
+        } else {
+            this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.RED);
+        }
+            
         this.nextBlock = null;
         this.currTempBlock = null;
-        this.trainSystem.getTrackControllerHandler().updateTrack();
+        this.trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf(this.line));
     }
     
     /**
@@ -536,7 +541,7 @@ public class TrainModel {
                     this.currBlock = (Block) this.nextBlock;
                     this.prevBlock = this.currTempBlock;
                     this.currBlock.setOccupancy(true);
-                    this.trainSystem.getTrackControllerHandler().updateTrack();
+                    this.trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf(this.line));
                     this.trainSystem.getTrackModel().updateGUI();
                     
                     //Check for beacon and send it to the Track Controller
@@ -552,7 +557,7 @@ public class TrainModel {
                     //Remove the train from the handler and let the ctc know
                     this.reachedYard = true;
                     this.currBlock.setOccupancy(false);
-                    this.trainSystem.getTrackControllerHandler().updateTrack();
+                    this.trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf(this.line));
                 }
             }
             else {

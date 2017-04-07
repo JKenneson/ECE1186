@@ -244,25 +244,37 @@ public class TrackController {
                 //Start of Red line import
                 sheet = plcWorkbook.getSheet("RED_SWITCHES");
                 this.switchArray = new HashMap<Integer, Switch>();
-                for (int i = 1; i <= 3; i++) {
+                for (int i = 1; i <= 7; i++) {
                     Row tempRow = sheet.getRow(i);
-                    Light light1Default = new Light(tempRow.getCell(3).getStringCellValue());
-                    Light light2Default = new Light(tempRow.getCell(4).getStringCellValue());
-                    Light light3Default = new Light(tempRow.getCell(5).getStringCellValue());
-                    ArrayList<Light> lightsDefault = new ArrayList<Light>();
-                    lightsDefault.add(light1Default);
-                    lightsDefault.add(light2Default);
-                    lightsDefault.add(light3Default);
-                    TrackConnection trackConnectionDefault = new TrackConnection(tempRow.getCell(2).getStringCellValue());
-                    Light light1Alternate = new Light(tempRow.getCell(7).getStringCellValue());
-                    Light light2Alternate = new Light(tempRow.getCell(8).getStringCellValue());
-                    Light light3Alternate = new Light(tempRow.getCell(9).getStringCellValue());
+                    //import default1
+                    Light light1Default1 = new Light(tempRow.getCell(3).getStringCellValue());
+                    Light light2Default1 = new Light(tempRow.getCell(4).getStringCellValue());
+                    Light light3Default1 = new Light(tempRow.getCell(5).getStringCellValue());
+                    ArrayList<Light> lightsDefault1 = new ArrayList<Light>();
+                    lightsDefault1.add(light1Default1);
+                    lightsDefault1.add(light2Default1);
+                    lightsDefault1.add(light3Default1);
+                    TrackConnection trackConnectionDefault1 = new TrackConnection(tempRow.getCell(2).getStringCellValue());
+                    //import default2
+                    Light light1Default2 = new Light(tempRow.getCell(7).getStringCellValue());
+                    Light light2Default2 = new Light(tempRow.getCell(8).getStringCellValue());
+                    Light light3Default2 = new Light(tempRow.getCell(9).getStringCellValue());
+                    ArrayList<Light> lightsDefault2 = new ArrayList<Light>();
+                    lightsDefault2.add(light1Default2);
+                    lightsDefault2.add(light2Default2);
+                    lightsDefault2.add(light3Default2);
+                    TrackConnection trackConnectionDefault2 = new TrackConnection(tempRow.getCell(6).getStringCellValue());
+                    //import alternate
+                    Light light1Alternate = new Light(tempRow.getCell(11).getStringCellValue());
+                    Light light2Alternate = new Light(tempRow.getCell(12).getStringCellValue());
+                    Light light3Alternate = new Light(tempRow.getCell(13).getStringCellValue());
                     ArrayList<Light> lightsAlternate = new ArrayList<Light>();
                     lightsAlternate.add(light1Alternate);
                     lightsAlternate.add(light2Alternate);
                     lightsAlternate.add(light3Alternate);
-                    TrackConnection trackConnectionAlternate = new TrackConnection(tempRow.getCell(6).getStringCellValue());
-                    SwitchState switchState = new SwitchState(Global.SwitchState.DEFAULT, trackConnectionDefault, lightsDefault, trackConnectionAlternate, lightsAlternate);
+                    TrackConnection trackConnectionAlternate = new TrackConnection(tempRow.getCell(10).getStringCellValue());
+                    
+                    SwitchState switchState = new SwitchState(Global.SwitchState.DEFAULT, trackConnectionDefault1, lightsDefault1, trackConnectionDefault2, lightsDefault2, trackConnectionAlternate, lightsAlternate);
                     Switch trackSwitch = new Switch((int) tempRow.getCell(0).getNumericCellValue(), tempRow.getCell(1).getStringCellValue(), switchState);
                     this.switchArray.put(trackSwitch.getSwitchID(), trackSwitch);
                 }
@@ -338,6 +350,17 @@ public class TrackController {
                 crossingStates.put(Global.CrossingState.INACTIVE, Global.LightState.valueOf(greenRow.getCell(4).getStringCellValue()));
                 String blocksActive = greenRow.getCell(5).getStringCellValue();
                 this.crossing = new Crossing(sheetLine, section, block, crossingStates, Global.CrossingState.INACTIVE, blocksActive);
+                
+                //load the manual switches into the trackController
+                sheet = plcWorkbook.getSheet("TRACK_DETAILS");
+                Row detailsRow = sheet.getRow(1);
+                String manualSwitches = detailsRow.getCell(3).getStringCellValue();
+                if (!manualSwitches.equals("")) {
+                    List<String> blockList = Arrays.asList(manualSwitches.split(","));
+                    for (String s : blockList) {
+                        this.permIgnoreSwitch.add(s);
+                    }
+                }
             }
             System.out.println("Successful import of " + plcFile);
         } catch (FileNotFoundException ex) {
@@ -835,7 +858,7 @@ public class TrackController {
                 //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
                 //NEED TO DETERMINE LOOKAHEAD DISTANCES
                 //FOR BOTH SERVICE BRAKE AND EMERGENCY BRAKE
-                int lookahead = 5;
+                int lookahead = 4;
                 if (pb.getCurrBlock().getID() >= 57 && pb.getCurrBlock().getID() <= 61) {
                     lookahead = 2;
                 }

@@ -97,7 +97,8 @@ public class TrainSystem {
         mainFrame.setVisible(true);
         
         //initial run for track Controller tables
-        this.trackControllerHandler.updateTrack();
+        this.trackControllerHandler.updateTrack(Global.Line.GREEN);
+//        this.trackControllerHandler.updateTrack(Global.Line.RED);
           
         // Initialize timer and scheduler
         this.timer = new Timer();
