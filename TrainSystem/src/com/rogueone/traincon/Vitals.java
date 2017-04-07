@@ -46,10 +46,9 @@ public class Vitals {
     private boolean doorSide;
     private double distanceToStation;
     private String station = "start";
-    private boolean stationStop;
     private String previousStation = "value";
     private boolean specialCase = true;
-    private int i = 0;
+    private int stationStopTimer = 0;
     
     
     
@@ -88,8 +87,9 @@ public class Vitals {
     public void update(boolean manualMode){
         
         this.gps.update(this.trainModel.getDistanceTraveledFeet(), this.trainModel.getCurrBlock(), this.trainModel.getCurrSpeedMPH());
-        if(this.gps.getAuthority()<(this.trainModel.safeStoppingDistance()+3) || this.emergencyBrakeOverride)
+        if(this.gps.getAuthority()<(this.trainModel.safeStoppingDistance()+3) || this.emergencyBrakeOverride){
             this.setEmergencyBrakeActivated(true);
+        }
         else if(!this.emergencyBrakeOverride){
             this.setEmergencyBrakeActivated(false);
         }
@@ -108,13 +108,14 @@ public class Vitals {
             }
             if(this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null){
                 //System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
+                this.resetPower();
                 this.trainModel.boardPassengers(this.doorSide);
                 this.approachingStation = false;
                 stopForStation = false;
                 this.setServiceBrakeActivated(false);
                 this.previousStation = this.station;
                 //System.out.println("Train "+ this.gps.trainID + ": " + "Leaving station...");
-                i = 60;
+                this.stationStopTimer = 60;
             }
             
         }
@@ -238,14 +239,7 @@ public class Vitals {
      */
     public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){ //should pull speed limit information from
                         //loaded track xlx after calculating location.
-        //this.approachingStation ||
-        //this.gps.getCurrBlock().getGrade()<0 ||
-        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.speedControl.getSetPoint(manualMode)<=0.0 || (i-- > 0)){
-            //Maybe I shouldn't do when grade is less than 0
-            //System.out.println("Train "+ this.gps.trainID + ": " + "S brake = " + this.serviceBrakeActivated + " E brake:" + this.emergencyBrakeActivated + " Set Point: " + (this.speedControl.getSetPoint(manualMode)) + " i: " + i);
-            this.powerCommand = 0.0;
-            return 0.0;
-        }
+        
         
         this.eK = (this.speedControl.getSetPoint(manualMode)-actualSpeed);   //Calc error difference
         //System.out.println("The diff in values is: " + this.eK);
@@ -265,7 +259,23 @@ public class Vitals {
         if(this.powerCommand<0){
             this.powerCommand = 0;
         }
+        
+        //this.approachingStation ||
+        //this.gps.getCurrBlock().getGrade()<0 ||
+        if(this.serviceBrakeActivated || this.emergencyBrakeActivated || this.speedControl.getSetPoint(manualMode)<=0.0 || (this.stationStopTimer-- > 0)){
+            //Maybe I shouldn't do when grade is less than 0
+            //System.out.println("Train "+ this.gps.trainID + ": " + "S brake = " + this.serviceBrakeActivated + " E brake:" + this.emergencyBrakeActivated + " Set Point: " + (this.speedControl.getSetPoint(manualMode)) + " i: " + i);
+            this.powerCommand = 0.0;
+            
+        }
         return this.powerCommand;
+    }
+    
+    private void resetPower(){
+        this.eK = 0;
+        this.eK_1 = 0;
+        this.uK = 0;
+        this.uK_1 = 0;
     }
     
     /**
