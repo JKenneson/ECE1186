@@ -11,6 +11,8 @@ import com.rogueone.trackmodel.Section;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainsystem.TrainSystem;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  *
@@ -34,6 +36,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         this.trainSystem = ts;
         this.trackModel = ts.getTrackModel();
         initComponents();
+        update();
     }
 
     /**
@@ -78,7 +81,11 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(jLabel2, gridBagConstraints);
 
-        LineComboBox.setModel(new javax.swing.DefaultComboBoxModel(trackModel.getLineArray().toArray()));
+        LineComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LineComboBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -93,7 +100,6 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(jLabel3, gridBagConstraints);
 
-        SegmentComboBox.setModel(new javax.swing.DefaultComboBoxModel(((Line)(LineComboBox.getSelectedItem())).getSections().toArray()));
         SegmentComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SegmentComboBoxActionPerformed(evt);
@@ -132,8 +138,6 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(CloseTrackDisableButton, gridBagConstraints);
-
-        BlockComboBox.setModel(new javax.swing.DefaultComboBoxModel(((Section)(SegmentComboBox.getSelectedItem())).getBlocks().toArray()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
@@ -183,16 +187,40 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_TrackDisableButtonActionPerformed
 
     private void SegmentComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SegmentComboBoxActionPerformed
-        // TODO add your handling code here:
+        updateBlockComboBox();
+// TODO add your handling code here:
     }//GEN-LAST:event_SegmentComboBoxActionPerformed
+
+    private void LineComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineComboBoxActionPerformed
+        updateSectionComboBox();   // TODO add your handling code here:
+    }//GEN-LAST:event_LineComboBoxActionPerformed
   
+    private void update(){
+        updateLineComboBox();
+        updateSectionComboBox();
+        updateBlockComboBox();
+    }
     private void disableTrackSegment(String lineName, String segmentName, String blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, Integer.parseInt(blockName));
         Global.Line lineVal = Global.Line.valueOf(lineName); 
         this.trainSystem.getTrackView().setBlockStatus(lineVal, segmentName, Integer.parseInt(blockName), false);
         this.trainSystem.getTrackControllerHandler().requestMaintenance(lineVal, Integer.parseInt(blockName));
     }
-                                 
+    
+    @SuppressWarnings("unchecked")
+    private void updateLineComboBox() {
+        LineComboBox.setModel(new javax.swing.DefaultComboBoxModel(trackModel.getLineArray().toArray()));
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void updateSectionComboBox() {
+        SegmentComboBox.setModel(new javax.swing.DefaultComboBoxModel(((Line)(LineComboBox.getSelectedItem())).getSections().toArray()));
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void updateBlockComboBox() {
+        BlockComboBox.setModel(new javax.swing.DefaultComboBoxModel(((Section)(SegmentComboBox.getSelectedItem())).getBlocks().toArray()));
+    }                          
     
     /**
      * @param args the command line arguments
@@ -241,4 +269,33 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
+
+   class LineChangeListener implements ItemListener{
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+           if (event.getStateChange() == ItemEvent.SELECTED) {
+              updateSectionComboBox();
+              updateBlockComboBox();
+           }
+        }       
+    }
+    
+    class SectionChangeListener implements ItemListener{   
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+           if (event.getStateChange() == ItemEvent.SELECTED) {
+              updateBlockComboBox();
+           }
+        }       
+    }
+    
+    class BlockChangeListener implements ItemListener{
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+            }
+        }
+    }
+
+
 }
