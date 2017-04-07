@@ -164,8 +164,13 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     
     public void disableSignal(int passTrainName, String passTrainLine){
         this.ctcGUI.DisableTrain(passTrainName, passTrainLine);
-        this.trainSystem.getTrainHandler().getTrains().get(passTrainName).setEmergencyBrakeActivated(true);
-        this.trainSystem.getTrainHandler().getTrains().get(passTrainName).causeFailure(TrainFailures.Power);
+        //this.trainSystem.getTrainHandler().getTrains().get(passTrainName).setEmergencyBrakeActivated(true);
+        for ( int i = 0; i < this.trainSystem.getTrainHandler().getTrains().size(); i ++){
+            if (this.trainSystem.getTrainHandler().getTrains().get(i).getTrainID() == passTrainName){
+                this.trainSystem.getTrainHandler().getTrains().get(i).causeFailure(TrainFailures.Power);
+            }
+
+        } 
     }
     
     private void lineSelectBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineSelectBoxActionPerformed
