@@ -13,6 +13,7 @@ import com.rogueone.trackmodel.Section;
 import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainmodel.TrainHandler;
+import com.rogueone.trainmodel.entities.TrainFailures;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -1493,23 +1494,24 @@ public int iterateID(){
         if (evt.getClickCount() == 2) {
             JTable failureTable = (JTable) evt.getSource();
             int failureRow = failureTable.getSelectedRow();
-            //resolveFailure(failureTable.getValueAt(failureRow,0), failureTable.getValueAt(failureRow,1), failureTable.getValueAt(failureRow,2));
+            resolveFailure(failureTable.getValueAt(failureRow,0), failureTable.getValueAt(failureRow,1), failureTable.getValueAt(failureRow,2));
         }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_FailureTableMouseClicked
     
-//    public void resolveFailure(Object line, Object section, Object block){
-//      
-//        Object[] failureCompare = {line, section, block};
-//        
-//        if (existsInTable(TrainTable, failureCompare)){
-//            
-//        } 
-//        if (existsInTable(BlockTable, failureCompare)){
-//            
-//        }
-//    }
+    public void resolveFailure(Object line, Object section, Object block){
+      
+        Object[] failureCompare = {line, section, block};
+        
+        if (existsInTable(TrainTable, failureCompare)){
+           //TrainTable.setValueAt(true, ERROR, WIDTH);
+           trainSystem.getTrainHandler().getTrains().get(WIDTH).fixFailure(TrainFailures.Power);
+        } 
+        if (existsInTable(BlockTable, failureCompare)){
+           trainSystem.getTrackControllerHandler().requestOpen(Global.Line.RED, ALLBITS);
+        }
+    }
     
     
     private void SystemInformationPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SystemInformationPanelMouseEntered

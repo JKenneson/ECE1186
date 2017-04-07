@@ -168,7 +168,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         Section segmentName = (Section)SegmentComboBox.getSelectedItem();
         Block blockName = (Block)BlockComboBox.getSelectedItem();
         
-        int block = Integer.valueOf((String)(Object)blockName);
+        String block = String.valueOf((Object)blockName);
         String segment = String.valueOf((Object)segmentName);
         String line = String.valueOf((Object)lineName);
 
@@ -186,10 +186,11 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SegmentComboBoxActionPerformed
   
-    private void disableTrackSegment(String lineName, String segmentName, int blockName){
-        this.ctcGUI.DisableTrack(lineName, segmentName, blockName);
+    private void disableTrackSegment(String lineName, String segmentName, String blockName){
+        this.ctcGUI.DisableTrack(lineName, segmentName, Integer.parseInt(blockName));
         Global.Line lineVal = Global.Line.valueOf(lineName); 
-        this.trainSystem.getTrackView().setBlockStatus(lineVal, segmentName, blockName, false);
+        this.trainSystem.getTrackView().setBlockStatus(lineVal, segmentName, Integer.parseInt(blockName), false);
+        this.trainSystem.getTrackControllerHandler().requestMaintenance(lineVal, Integer.parseInt(blockName));
     }
                                  
     
