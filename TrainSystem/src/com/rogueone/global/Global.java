@@ -45,6 +45,10 @@ public class Global {
         A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, ZZ, YY, INVALID
     }
     
+    public enum SectionRed {
+        A, B, C, D, E, F, G, H24_27, H28_32, H33_38, H39_43, H44_45, I, J49_52, J53_54, K, L, M, N, O, P, Q, R, S, T, U
+    }
+    
     public enum SwitchState {
         DEFAULT, ALTERNATE
     }
@@ -54,9 +58,14 @@ public class Global {
     }
     
     //need to alter in order to account for red line
-    public enum TrackGroups {
-        ABC, DEF, GHI, J, KLM, N, OPQ, RSTUVWXYZ, ZZ, YY, U, DE15, F16_J52, J53_N66
+    public enum TrackGroupsGreen {
+        ABC, DEF, GHI, J, KLM, N, OPQ, RSTUVWXYZ, ZZ, YY,
     }
+    
+    public enum TrackGroupsRed {
+        ABC, DE, F16_J52, J53_N66, U
+    }
+    //H28_32, H33_38, H39_43, H44_45IJ49_52, OPQ, RST
     
     public enum TrackCrossing {
         E_19, I_47
@@ -67,7 +76,7 @@ public class Global {
     }
     
     public enum LogicGroups {
-        GREEN_0, GREEN_1_2, GREEN_3, GREEN_4_5, RED_12, RED_6_11
+        GREEN_0, GREEN_1_2, GREEN_3, GREEN_4_5, RED_12, RED_6_11, RED_7, RED_8, RED_9, RED_10
     }
     
     public enum CrossingState{

@@ -144,7 +144,12 @@ public class DispatchPanel extends javax.swing.JPanel {
         if(this.trainSystem.getClock().getHour() >= 6 && this.trainSystem.getClock().getHour() <= 7){
             numberCars = 2;
         }
-        this.trainSystem.dispatchTrain(speed, authority, numberCars, this.line.toString(), this.trainSystem.getTrackView().trainID++);
+        if(this.line == Global.Line.GREEN){
+            this.trainSystem.dispatchTrain(speed, authority, numberCars, this.line.toString(), this.trainSystem.getTrackViewGreen().trainID++);
+        } else {
+            this.trainSystem.dispatchTrain(speed, authority, numberCars, this.line.toString(), this.trainSystem.getTrackViewRed().trainID++);
+        }
+        
         Window w = SwingUtilities.getWindowAncestor(this);
         w.dispose();
     }//GEN-LAST:event_dispatchButtonActionPerformed

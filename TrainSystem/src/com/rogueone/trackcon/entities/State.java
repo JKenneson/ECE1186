@@ -15,21 +15,36 @@ import java.util.Objects;
  */
 public class State {
     
-    private Global.TrackGroups group;
+    private Global.TrackGroupsGreen group;
+    private Global.TrackGroupsRed groupRed;
     private Global.Presence presence;
     
-    public State(Global.TrackGroups group, Global.Presence presence) {
+    public State(Global.TrackGroupsGreen group, Global.Presence presence) {
         this.group = group;
         this.presence = presence;
     }
+    
+    public State(Global.TrackGroupsRed groupRed, Global.Presence presence){
+        this.groupRed = groupRed;
+        this.presence = presence;
+    }
 
-    public Global.TrackGroups getGroup() {
+    public Global.TrackGroupsGreen getGroup() {
         return group;
     }
 
-    public void setGroup(Global.TrackGroups group) {
+    public void setGroup(Global.TrackGroupsGreen group) {
         this.group = group;
     }
+
+    public Global.TrackGroupsRed getGroupRed() {
+        return groupRed;
+    }
+
+    public void setGroupRed(Global.TrackGroupsRed groupRed) {
+        this.groupRed = groupRed;
+    }
+    
 
     public Global.Presence getPresence() {
         return presence;

@@ -1653,7 +1653,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         StateSet guiStateSet = new StateSet();
         State pos1 = null;
         if (position1Panel.isVisible()) {
-            Global.TrackGroups pos1TrackGroup = Global.TrackGroups.valueOf(trainPosition1Label.getText());
+            Global.TrackGroupsGreen pos1TrackGroup = Global.TrackGroupsGreen.valueOf(trainPosition1Label.getText());
             Global.Presence position1Presence = null;
             if (occupiedPosition1RadioButton.isSelected()) {
                 position1Presence = Global.Presence.OCCUPIED;
@@ -1666,7 +1666,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         }
         State pos2 = null;
         if (position2Panel.isVisible()) {
-            Global.TrackGroups pos2TrackGroup = Global.TrackGroups.valueOf(trainPosition2Label.getText());
+            Global.TrackGroupsGreen pos2TrackGroup = Global.TrackGroupsGreen.valueOf(trainPosition2Label.getText());
             Global.Presence position2Presence = null;
             if (occupiedPosition2RadioButton.isSelected()) {
                 position2Presence = Global.Presence.OCCUPIED;
@@ -1679,7 +1679,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         }
         State pos3 = null;
         if (position3Panel.isVisible()) {
-            Global.TrackGroups pos3TrackGroup = Global.TrackGroups.valueOf(trainPosition3Label.getText());
+            Global.TrackGroupsGreen pos3TrackGroup = Global.TrackGroupsGreen.valueOf(trainPosition3Label.getText());
             Global.Presence position3Presence = null;
             if (occupiedPosition3RadioButton.isSelected()) {
                 position3Presence = Global.Presence.OCCUPIED;
@@ -1692,7 +1692,7 @@ public class TrackControllerGUI extends javax.swing.JPanel {
         }
         State pos4 = null;
         if (position4Panel.isVisible()) {
-            Global.TrackGroups pos4TrackGroup = Global.TrackGroups.valueOf(trainPosition4Label.getText());
+            Global.TrackGroupsGreen pos4TrackGroup = Global.TrackGroupsGreen.valueOf(trainPosition4Label.getText());
             Global.Presence position4Presence = null;
             if (occupiedPosition4RadioButton.isSelected()) {
                 position4Presence = Global.Presence.OCCUPIED;

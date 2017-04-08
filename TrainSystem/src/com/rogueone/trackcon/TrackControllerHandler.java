@@ -21,15 +21,15 @@ public class TrackControllerHandler {
     private TrainSystem trainSystem = null;
     private TrackHandlerGUI trackHandlerGUI = null;
     private ArrayList<TrackController> trackControllers = new ArrayList<TrackController>();
-    private HashMap<Global.Section, Global.TrackGroups> sectionToGroupMapping;
-    private HashMap<Global.TrackGroups, Global.LogicGroups> groupToLogicMapping;
+    private HashMap<Global.Section, Global.TrackGroupsGreen> sectionToGroupMapping;
+    private HashMap<Global.TrackGroupsGreen, Global.LogicGroups> groupToLogicMapping;
 
     public TrackControllerHandler(TrainSystem ts) {
         trainSystem = ts;
 
-        sectionToGroupMapping = new HashMap<Global.Section, Global.TrackGroups>();
+        sectionToGroupMapping = new HashMap<Global.Section, Global.TrackGroupsGreen>();
         for (Global.Section s : Global.Section.values()) {
-            for (Global.TrackGroups tg : Global.TrackGroups.values()) {
+            for (Global.TrackGroupsGreen tg : Global.TrackGroupsGreen.values()) {
                 if (tg.toString().contains(s.toString())) {
                     sectionToGroupMapping.put(s, tg);
                     break;
@@ -37,15 +37,15 @@ public class TrackControllerHandler {
             }
         }
 
-        groupToLogicMapping = new HashMap<Global.TrackGroups, Global.LogicGroups>();
-        for (Global.TrackGroups tg : Global.TrackGroups.values()) {
-            if (tg.equals(Global.TrackGroups.ABC) || tg.equals(Global.TrackGroups.DEF) || tg.equals(Global.TrackGroups.RSTUVWXYZ)) {
+        groupToLogicMapping = new HashMap<Global.TrackGroupsGreen, Global.LogicGroups>();
+        for (Global.TrackGroupsGreen tg : Global.TrackGroupsGreen.values()) {
+            if (tg.equals(Global.TrackGroupsGreen.ABC) || tg.equals(Global.TrackGroupsGreen.DEF) || tg.equals(Global.TrackGroupsGreen.RSTUVWXYZ)) {
                 groupToLogicMapping.put(tg, Global.LogicGroups.GREEN_1_2);
-            } else if (tg.equals(Global.TrackGroups.KLM) || tg.equals(Global.TrackGroups.N) || tg.equals(Global.TrackGroups.OPQ)) {
+            } else if (tg.equals(Global.TrackGroupsGreen.KLM) || tg.equals(Global.TrackGroupsGreen.N) || tg.equals(Global.TrackGroupsGreen.OPQ)) {
                 groupToLogicMapping.put(tg, Global.LogicGroups.GREEN_4_5);
-            } else if (tg.equals(Global.TrackGroups.GHI) || tg.equals(Global.TrackGroups.ZZ)) {
+            } else if (tg.equals(Global.TrackGroupsGreen.GHI) || tg.equals(Global.TrackGroupsGreen.ZZ)) {
                 groupToLogicMapping.put(tg, Global.LogicGroups.GREEN_3);
-            } else if (tg.equals(Global.TrackGroups.YY) || tg.equals(Global.TrackGroups.J)) {
+            } else if (tg.equals(Global.TrackGroupsGreen.YY) || tg.equals(Global.TrackGroupsGreen.J)) {
                 groupToLogicMapping.put(tg, Global.LogicGroups.GREEN_0);
             }
         }
@@ -85,7 +85,7 @@ public class TrackControllerHandler {
      *
      * @return HashMap of Track Sections to TrackGroups
      */
-    public HashMap<Global.Section, Global.TrackGroups> getSectionToGroupMapping() {
+    public HashMap<Global.Section, Global.TrackGroupsGreen> getSectionToGroupMapping() {
         return sectionToGroupMapping;
     }
 
@@ -94,7 +94,7 @@ public class TrackControllerHandler {
      *
      * @return HashMap of TrackGroups to LogicGroups
      */
-    public HashMap<Global.TrackGroups, Global.LogicGroups> getGroupToLogicMapping() {
+    public HashMap<Global.TrackGroupsGreen, Global.LogicGroups> getGroupToLogicMapping() {
         return groupToLogicMapping;
     }
 
@@ -109,7 +109,7 @@ public class TrackControllerHandler {
         if (line == Global.Line.GREEN) {
             returnValue = trackControllers.get(0).canDispatchProceed();
         } else {
-//            returnValue = trackControllers.get(1).canDispatchProceed();
+            returnValue = trackControllers.get(1).canDispatchProceed();
         }
         return returnValue;
     }
@@ -221,9 +221,15 @@ public class TrackControllerHandler {
         }
     }
 
-    public void updateTrackView() {
-        TrackController trackController = trackControllers.get(0);
-        trainSystem.getTrackView().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
+    public void updateTrackView(Global.Line line) {
+        if(line == Global.Line.GREEN){
+            TrackController trackController = trackControllers.get(0);
+            trainSystem.getTrackViewGreen().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
+        } else {
+            TrackController trackController = trackControllers.get(1);
+            trainSystem.getTrackViewRed().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
+        }
+        
     }
 
 }

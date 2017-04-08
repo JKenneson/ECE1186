@@ -162,9 +162,9 @@ public class TrackController {
                     sheet = plcWorkbook.getSheetAt(s);
 
                     int numRows = 0;
-                    Global.TrackGroups trackGroup1 = null;
-                    Global.TrackGroups trackGroup2 = null;
-                    Global.TrackGroups trackGroup3 = null;
+                    Global.TrackGroupsGreen trackGroup1 = null;
+                    Global.TrackGroupsGreen trackGroup2 = null;
+                    Global.TrackGroupsGreen trackGroup3 = null;
 
                     LogicTrackGroup logicTrackGroup = new LogicTrackGroup(Global.LogicGroups.valueOf(sheet.getSheetName()));
                     Row trackGroupRow = sheet.getRow(1);
@@ -182,14 +182,14 @@ public class TrackController {
                     }
 
                     StateSet currentState = new StateSet();
-                    trackGroup1 = Global.TrackGroups.valueOf(trackGroupRow.getCell(3).getStringCellValue());
+                    trackGroup1 = Global.TrackGroupsGreen.valueOf(trackGroupRow.getCell(3).getStringCellValue());
                     State current1 = new State(trackGroup1, Global.Presence.UNOCCUPIED);
                     currentState.addState(current1);
-                    trackGroup2 = Global.TrackGroups.valueOf(trackGroupRow.getCell(4).getStringCellValue());
+                    trackGroup2 = Global.TrackGroupsGreen.valueOf(trackGroupRow.getCell(4).getStringCellValue());
                     State current2 = new State(trackGroup2, Global.Presence.UNOCCUPIED);
                     currentState.addState(current2);
                     if (s == 3 || s == 4) {
-                        trackGroup3 = Global.TrackGroups.valueOf(trackGroupRow.getCell(5).getStringCellValue());
+                        trackGroup3 = Global.TrackGroupsGreen.valueOf(trackGroupRow.getCell(5).getStringCellValue());
                         State current3 = new State(trackGroup3, Global.Presence.UNOCCUPIED);
                         currentState.addState(current3);
                     }
@@ -273,7 +273,7 @@ public class TrackController {
                     lightsAlternate.add(light2Alternate);
                     lightsAlternate.add(light3Alternate);
                     TrackConnection trackConnectionAlternate = new TrackConnection(tempRow.getCell(10).getStringCellValue());
-                    
+
                     SwitchState switchState = new SwitchState(Global.SwitchState.DEFAULT, trackConnectionDefault1, lightsDefault1, trackConnectionDefault2, lightsDefault2, trackConnectionAlternate, lightsAlternate);
                     Switch trackSwitch = new Switch((int) tempRow.getCell(0).getNumericCellValue(), tempRow.getCell(1).getStringCellValue(), switchState);
                     this.switchArray.put(trackSwitch.getSwitchID(), trackSwitch);
@@ -285,9 +285,9 @@ public class TrackController {
                     sheet = plcWorkbook.getSheetAt(s);
 
                     int numRows = 0;
-                    Global.TrackGroups trackGroup1 = null;
-                    Global.TrackGroups trackGroup2 = null;
-                    Global.TrackGroups trackGroup3 = null;
+                    Global.TrackGroupsRed trackGroup1 = null;
+                    Global.TrackGroupsRed trackGroup2 = null;
+                    Global.TrackGroupsRed trackGroup3 = null;
 
                     LogicTrackGroup logicTrackGroup = new LogicTrackGroup(Global.LogicGroups.valueOf(sheet.getSheetName()));
                     Row trackGroupRow = sheet.getRow(1);
@@ -305,14 +305,14 @@ public class TrackController {
                     }
 
                     StateSet currentState = new StateSet();
-                    trackGroup1 = Global.TrackGroups.valueOf(trackGroupRow.getCell(3).getStringCellValue());
+                    trackGroup1 = Global.TrackGroupsRed.valueOf(trackGroupRow.getCell(3).getStringCellValue());
                     State current1 = new State(trackGroup1, Global.Presence.UNOCCUPIED);
                     currentState.addState(current1);
-                    trackGroup2 = Global.TrackGroups.valueOf(trackGroupRow.getCell(4).getStringCellValue());
+                    trackGroup2 = Global.TrackGroupsRed.valueOf(trackGroupRow.getCell(4).getStringCellValue());
                     State current2 = new State(trackGroup2, Global.Presence.UNOCCUPIED);
                     currentState.addState(current2);
                     if (s == 7) {
-                        trackGroup3 = Global.TrackGroups.valueOf(trackGroupRow.getCell(5).getStringCellValue());
+                        trackGroup3 = Global.TrackGroupsRed.valueOf(trackGroupRow.getCell(5).getStringCellValue());
                         State current3 = new State(trackGroup3, Global.Presence.UNOCCUPIED);
                         currentState.addState(current3);
                     }
@@ -350,7 +350,7 @@ public class TrackController {
                 crossingStates.put(Global.CrossingState.INACTIVE, Global.LightState.valueOf(greenRow.getCell(4).getStringCellValue()));
                 String blocksActive = greenRow.getCell(5).getStringCellValue();
                 this.crossing = new Crossing(sheetLine, section, block, crossingStates, Global.CrossingState.INACTIVE, blocksActive);
-                
+
                 //load the manual switches into the trackController
                 sheet = plcWorkbook.getSheet("TRACK_DETAILS");
                 Row detailsRow = sheet.getRow(1);
@@ -438,34 +438,6 @@ public class TrackController {
 
             }
 
-//        Set<Entry<Integer, Switch>> switchSet = displaySwitchArray.entrySet();
-//        Iterator switchIterator = switchSet.iterator();
-//        while (switchIterator.hasNext()) {
-//            Entry<Integer, Switch> switchIteration = (Entry<Integer, Switch>) switchIterator.next();
-//            Integer switchID = switchIteration.getKey();
-//            Switch switchObject = switchIteration.getValue();
-//            SwitchState switchState = switchObject.getSwitchState();
-//            TrackConnection currentTrackConnection = null;
-//            ArrayList<Light> currentLights = null;
-//            if (switchState.getSwitchState() == Global.SwitchState.DEFAULT) {
-//                currentTrackConnection = switchState.getDefaultConnection();
-//                currentLights = switchState.getLightsDefault();
-//            } else {
-//                currentTrackConnection = switchState.getAlternateConnection();
-//                currentLights = switchState.getLightsAlternate();
-//            }
-//            //add switch to table model
-//            String switchRowData[] = {switchObject.getSection() + "", switchObject.getBlockID() + "", switchObject.getSwitchID() + "", switchState.getSwitchState() + "", currentTrackConnection + ""};
-//            switchModel.addRow(switchRowData);
-//            //add lights to table model
-//            Iterator lightsIterator = currentLights.iterator();
-//            while (lightsIterator.hasNext()) {
-//                Light lightIteration = (Light) lightsIterator.next();
-//                String lightRowData[] = {lightIteration.getSection() + "", lightIteration.getBlockID() + "", lightIteration.getLightState() + ""};
-//                lightModel.addRow(lightRowData);
-//            }
-//        }
-            //add crossings to table model - with associated lights
             String crossingRowData[] = {displayCrossing.getSection() + "", displayCrossing.getBlockID() + "", displayCrossing.getCurrentCrossingState() + ""};
             crossingModel.addRow(crossingRowData);
             Set<Entry<Global.CrossingState, Global.LightState>> lights = displayCrossing.getCrossingState().entrySet();
@@ -478,27 +450,7 @@ public class TrackController {
                 }
             }
 
-//        ArrayList<Block> loadBlocks = new ArrayList<Block>();
-//        loadBlocks.addAll(this.trackModel.getBlockArray());
-//        ArrayList<Block> currentBlocks = new ArrayList<Block>();
-//        for (int i = 0; i < loadBlocks.size(); i++) {
-//            if (loadBlocks.get(i).getLine().getLineID() == displayLine) {
-//                currentBlocks.add(loadBlocks.get(i));
-//            }
-//        }
-//
-//        String blockColumnNames[] = {"Section", "BlockID", "Occupied", "Status"};
-//        DefaultTableModel blockModel = new DefaultTableModel(blockColumnNames, 0);
-//        for (int i = 0; i < currentBlocks.size(); i++) {
-//            String status = "Active";
-//            if (currentBlocks.get(i).getFailureBrokenRail() || currentBlocks.get(i).getFailureBrokenRail() || currentBlocks.get(i).getFailureBrokenRail()) {
-//                status = "Inactive";
-//            }
-//            String blockRowData[] = {currentBlocks.get(i).getSection() + "", currentBlocks.get(i).getID() + "", currentBlocks.get(i).isOccupied() + "", status + ""};
-//            blockModel.addRow(blockRowData);
-//        }
             this.trackControllerGUI.currentSwitchTable.setModel(switchModel);
-//        this.trackControllerGUI.currentBlockTable.setModel(blockModel);
             this.trackControllerGUI.currentTrackSignalsTable.setModel(lightModel);
             this.trackControllerGUI.currentCrossingTable.setModel(crossingModel);
         }
@@ -651,8 +603,8 @@ public class TrackController {
      */
     public void evaluateSwitches() {
         //get mappings from handler
-        HashMap<Global.Section, Global.TrackGroups> sectionMappings = this.trainSystem.getTrackControllerHandler().getSectionToGroupMapping();
-        HashMap<Global.TrackGroups, Global.LogicGroups> groupMappings = this.trainSystem.getTrackControllerHandler().getGroupToLogicMapping();
+        HashMap<Global.Section, Global.TrackGroupsGreen> sectionMappings = this.trainSystem.getTrackControllerHandler().getSectionToGroupMapping();
+        HashMap<Global.TrackGroupsGreen, Global.LogicGroups> groupMappings = this.trainSystem.getTrackControllerHandler().getGroupToLogicMapping();
 
         //create hashmap for sections
         HashMap<Global.Section, Global.Presence> sectionPresence = new HashMap<Global.Section, Global.Presence>();
@@ -682,7 +634,7 @@ public class TrackController {
         }
 
         //translate the section presence into track group presence
-        HashMap<Global.TrackGroups, Global.Presence> groupPresence = new HashMap<Global.TrackGroups, Global.Presence>();
+        HashMap<Global.TrackGroupsGreen, Global.Presence> groupPresence = new HashMap<Global.TrackGroupsGreen, Global.Presence>();
         for (Entry<Global.Section, Global.Presence> sectionEntry : sectionPresence.entrySet()) {
             //condition for potential overwrite of presence
             if (groupPresence.containsKey(sectionMappings.get(sectionEntry.getKey()))) {
@@ -698,16 +650,11 @@ public class TrackController {
                     groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
                 }
             }
-//            groupPresence.get(sectionMappings.get(sectionEntry.getKey()));
-//            if (sectionEntry.getValue() == Global.Presence.OCCUPIED) {
-//                groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.OCCUPIED);
-//            } else {
-//                groupPresence.put(sectionMappings.get(sectionEntry.getKey()), Global.Presence.UNOCCUPIED);
-//            }
+
         }
 
         HashMap<Global.LogicGroups, StateSet> logicSets = new HashMap<Global.LogicGroups, StateSet>();
-        for (Entry<Global.TrackGroups, Global.Presence> groupEntry : groupPresence.entrySet()) {
+        for (Entry<Global.TrackGroupsGreen, Global.Presence> groupEntry : groupPresence.entrySet()) {
             //make new state given the current track group and its presence
             State state = new State(groupEntry.getKey(), groupEntry.getValue());
             //if the logic set hashmap does not yet contain the logic group key yet, create it and a state set,
@@ -744,6 +691,15 @@ public class TrackController {
                 this.currentSwitchStates.clear();
             }
         }
+        if (this.controllerLine == Global.Line.RED) {
+            logicSets.clear();
+            logicSets.put(Global.LogicGroups.RED_12, null);
+            logicSets.put(Global.LogicGroups.RED_10, null);
+            logicSets.put(Global.LogicGroups.RED_6_11, null);
+            logicSets.put(Global.LogicGroups.RED_7, null);
+            logicSets.put(Global.LogicGroups.RED_8, null);
+            logicSets.put(Global.LogicGroups.RED_9, null);
+        }
 
         for (Entry<Global.LogicGroups, StateSet> logicSet : logicSets.entrySet()) {
             boolean evaluateSwitch = true;
@@ -774,17 +730,34 @@ public class TrackController {
         //check if switch is connecting the correct next block
         PresenceBlock lookaheadBlock = new PresenceBlock(this.trainSystem, controllerLine);
         lookaheadBlock.setNextBlock(lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()));
-        int[] dispatchBlocksCheck = {152, 62, 63, 64, 65};
-        int lookahead = 5;
-        for (int i = 0; i < lookahead; i++) {
-            //check to see if first 5 blocks from leaving yard are emtpy
-            Block checkBlock = this.trackModel.getBlock(controllerLine, dispatchBlocksCheck[i]);
-            if (checkBlock.isOccupied() || !checkBlock.isOpen() || checkBlock.getFailureBrokenRail() || checkBlock.getFailurePowerOutage() || checkBlock.getFailureTrackCircuit()) {
-                return false;
-            }
-            if (checkBlock.getID() == 152) {
-                if (checkBlock.getNext(this.trackModel.getYard()) == null) {
+        if (controllerLine == Global.Line.GREEN) {
+            int[] dispatchBlocksCheck = {152, 62, 63, 64, 65};
+            int lookahead = 5;
+            for (int i = 0; i < lookahead; i++) {
+                //check to see if first 5 blocks from leaving yard are emtpy
+                Block checkBlock = this.trackModel.getBlock(controllerLine, dispatchBlocksCheck[i]);
+                if (checkBlock.isOccupied() || !checkBlock.isOpen() || checkBlock.getFailureBrokenRail() || checkBlock.getFailurePowerOutage() || checkBlock.getFailureTrackCircuit()) {
                     return false;
+                }
+                if (checkBlock.getID() == 152) {
+                    if (checkBlock.getNext(this.trackModel.getYard()) == null) {
+                        return false;
+                    }
+                }
+            }
+        } else {
+            int[] dispatchBlocksCheck = {77, 10, 11, 12, 13, 14, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+            int lookahead = 15;
+            for (int i = 0; i < lookahead; i++) {
+                //check to see if first 5 blocks from leaving yard are emtpy
+                Block checkBlock = this.trackModel.getBlock(controllerLine, dispatchBlocksCheck[i]);
+                if (checkBlock.isOccupied() || !checkBlock.isOpen() || checkBlock.getFailureBrokenRail() || checkBlock.getFailurePowerOutage() || checkBlock.getFailureTrackCircuit()) {
+                    return false;
+                }
+                if (checkBlock.getID() == 77) {
+                    if (checkBlock.getNext(this.trackModel.getYard()) == null) {
+                        return false;
+                    }
                 }
             }
         }
@@ -840,9 +813,12 @@ public class TrackController {
             }
         }
         //END OF UPDATE PRESENCE
+        //Logic for removing trains from the track
         ArrayList<PresenceBlock> removeBlocks = new ArrayList<PresenceBlock>();
         for (PresenceBlock pb : occupiedBlocks) {
-            if (pb.getCurrBlock().getID() == 151 && !this.trackModel.getBlock(controllerLine, 151).isOccupied()) {
+            if (controllerLine == Global.Line.GREEN && pb.getCurrBlock().getID() == 151 && !this.trackModel.getBlock(controllerLine, 151).isOccupied()) {
+                removeBlocks.add(pb);
+            } else if (controllerLine == Global.Line.RED && pb.getCurrBlock().getID() == 77 && !this.trackModel.getBlock(controllerLine, 77).isOccupied()) {
                 removeBlocks.add(pb);
             }
         }
@@ -858,10 +834,10 @@ public class TrackController {
                 //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
                 //NEED TO DETERMINE LOOKAHEAD DISTANCES
                 //FOR BOTH SERVICE BRAKE AND EMERGENCY BRAKE
-                int lookahead = 4;
-                if (pb.getCurrBlock().getID() >= 57 && pb.getCurrBlock().getID() <= 61) {
-                    lookahead = 2;
-                }
+                int lookahead = 5;
+//                if (controllerLine == Global.Line.GREEN && pb.getCurrBlock().getID() >= 57 && pb.getCurrBlock().getID() <= 61) {
+//                    lookahead = 2;
+//                }
                 PresenceBlock lookaheadBlock = new PresenceBlock(pb);
                 for (int i = 0; i < lookahead; i++) {
 //                            System.out.print("TC:(check) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
@@ -1075,14 +1051,14 @@ public class TrackController {
             }
             updateSummaryTab();
             return true;
-        } 
+        }
         return false;
     }
 
     public void updateSpeedAuthority(int blockID, double speed, double authority) {
         Block b = this.trackModel.getBlock(controllerLine, blockID);
         b.getTrackCircuit().speed = (byte) speed;
-        b.getTrackCircuit().authority = (short) (authority/3.28);
+        b.getTrackCircuit().authority = (short) (authority / 3.28);
     }
 
     public String getSwitches() {

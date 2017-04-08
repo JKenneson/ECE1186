@@ -53,7 +53,8 @@ public class TrainSystem {
     private TrainHandler trainHandler;
     private static Mbo mbo;
     private Scheduler scheduler;
-    private TrackView trackView;
+    private TrackView trackViewGreen;
+    private TrackView trackViewRed;
     //private Schedule schedule;
     
     // GUI
@@ -85,8 +86,8 @@ public class TrainSystem {
         this.trainHandler = new TrainHandler(this);
         this.mbo = new Mbo(this);
         this.scheduler = new Scheduler(this);
-        this.trackView = new TrackView(this, Global.Line.GREEN);
-        //this.trackView = new TrackView(this, Global.Line.RED);
+        this.trackViewGreen = new TrackView(this, Global.Line.GREEN);
+        this.trackViewRed = new TrackView(this, Global.Line.RED);
         this.ctc = new CommandTrackControlGUI(this);
 
         
@@ -98,7 +99,7 @@ public class TrainSystem {
         
         //initial run for track Controller tables
         this.trackControllerHandler.updateTrack(Global.Line.GREEN);
-//        this.trackControllerHandler.updateTrack(Global.Line.RED);
+        this.trackControllerHandler.updateTrack(Global.Line.RED);
           
         // Initialize timer and scheduler
         this.timer = new Timer();
@@ -122,7 +123,8 @@ public class TrainSystem {
             stationBufferCount++;
         }
         this.ctc.updateGUI();
-        this.trackControllerHandler.updateTrackView();
+        this.trackControllerHandler.updateTrackView(Global.Line.GREEN);
+        this.trackControllerHandler.updateTrackView(Global.Line.RED);
         this.mbo.update();
     }
 
@@ -188,11 +190,19 @@ public class TrainSystem {
     }
 
     /**
-     * Get Shared TrackView object
+     * Get Shared TrackViewGreen object
      * @return  TrackView global object
      */
-    public TrackView getTrackView() {
-        return trackView;
+    public TrackView getTrackViewGreen() {
+        return trackViewGreen;
+    }
+    
+    /**
+     * Get Shared TrackViewRed object
+     * @return  TrackView global object
+     */
+    public TrackView getTrackViewRed() {
+        return trackViewRed;
     }
     
     

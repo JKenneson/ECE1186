@@ -47,8 +47,9 @@ public class Section implements MyShape {
     private float angle;
     private float size;
     private String sectionID;
+    private Global.Line line;
 
-    public Section(float startX, float startY, float width, float height, float angle, String sectionID, float xShift, float yShift, TrainSystem ts) {
+    public Section(float startX, float startY, float width, float height, float angle, String sectionID, float xShift, float yShift, TrainSystem ts, Global.Line line) {
         this.X = startX;
         this.Y = startY;
         this.W = width;
@@ -60,6 +61,7 @@ public class Section implements MyShape {
         this.shiftY = yShift;
         this.textDrawn = false;
         this.trainSystem = ts;
+        this.line = line;
         this.currentBlocks = new HashMap<Integer, Boolean>();
         this.closedBlocks = new HashMap<Integer, Boolean>();
         setUp();
@@ -72,50 +74,127 @@ public class Section implements MyShape {
         sectionTransform = new AffineTransform();
         sectionTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
         sectionPath.transform(sectionTransform);
-        com.rogueone.trackmodel.Section section = this.trainSystem.getTrackModel().getSection(Global.Line.GREEN, Global.Section.valueOf(this.sectionID));
-        int numberOfBlocksInSection;
-        if (section.getSectionID() == Global.Section.K) {
-            sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size() + 1);
-            numberOfBlocksInSection = section.getBlocks().size() + 1;
-        } else if (section.getSectionID() == Global.Section.J) {
-            sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size() - 1);
-            numberOfBlocksInSection = section.getBlocks().size() - 1;
+        if (this.line == Global.Line.GREEN) {
+            com.rogueone.trackmodel.Section section = this.trainSystem.getTrackModel().getSection(Global.Line.GREEN, Global.Section.valueOf(this.sectionID));
+            int numberOfBlocksInSection;
+            if (section.getSectionID() == Global.Section.K) {
+                sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size() + 1);
+                numberOfBlocksInSection = section.getBlocks().size() + 1;
+            } else if (section.getSectionID() == Global.Section.J) {
+                sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size() - 1);
+                numberOfBlocksInSection = section.getBlocks().size() - 1;
+            } else {
+                sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size());
+                numberOfBlocksInSection = section.getBlocks().size();
+            }
+
+            float lengthOfBlock = W / (float) numberOfBlocksInSection;
+
+            Iterator blockIter = section.getBlocks().iterator();
+            int blockCounter = 0;
+            if (section.getSectionID() == Global.Section.K) {
+                Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
+                Path2D currentBlockPath = new Path2D.Double();
+                currentBlockPath.append(currentRec, false);
+                AffineTransform currentBlockTransform = new AffineTransform();
+                currentBlockTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
+                currentBlockPath.transform(currentBlockTransform);
+                sectionDivisions.put(62, currentBlockPath);
+                blockCounter++;
+            }
+            while (blockIter.hasNext()) {
+                Block currentBlock = (Block) blockIter.next();
+                if (currentBlock.getID() == 62) {
+                    break;
+                }
+                Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
+                if (sectionID.equals("O") || sectionID.equals("Q") || sectionID.equals("F") || sectionID.equals("E")
+                        || sectionID.equals("D") || sectionID.equals("B")) {
+                    currentRec = new Rectangle2D.Float(X + W - (blockCounter * lengthOfBlock) - lengthOfBlock, Y, lengthOfBlock, H);
+                }
+                Path2D currentBlockPath = new Path2D.Double();
+                currentBlockPath.append(currentRec, false);
+                AffineTransform currentBlockTransform = new AffineTransform();
+                currentBlockTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
+                currentBlockPath.transform(currentBlockTransform);
+                sectionDivisions.put(currentBlock.getID(), currentBlockPath);
+                blockCounter++;
+            }
         } else {
-            sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size());
-            numberOfBlocksInSection = section.getBlocks().size();
-        }
-
-        float lengthOfBlock = W / (float) numberOfBlocksInSection;
-
-        Iterator blockIter = section.getBlocks().iterator();
-        int blockCounter = 0;
-        if (section.getSectionID() == Global.Section.K) {
-            Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
-            Path2D currentBlockPath = new Path2D.Double();
-            currentBlockPath.append(currentRec, false);
-            AffineTransform currentBlockTransform = new AffineTransform();
-            currentBlockTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
-            currentBlockPath.transform(currentBlockTransform);
-            sectionDivisions.put(62, currentBlockPath);
-            blockCounter++;
-        }
-        while (blockIter.hasNext()) {
-            Block currentBlock = (Block) blockIter.next();
-            if (currentBlock.getID() == 62) {
-                break;
+            String sectionIDString = this.sectionID.substring(0, 1);
+            String sectionIDs = "";
+            int sectionStart = 0;
+            int sectionEnd = 0;
+            if (this.sectionID.length() > 1) {
+                sectionIDs = this.sectionID.substring(1, 6);
+                sectionStart = Integer.parseInt(this.sectionID.substring(1, 3));
+                sectionEnd = Integer.parseInt(this.sectionID.substring(4, 6));
             }
-            Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
-            if (sectionID.equals("O") || sectionID.equals("Q") || sectionID.equals("F") || sectionID.equals("E")
-                    || sectionID.equals("D") || sectionID.equals("B")) {
-                currentRec = new Rectangle2D.Float(X + W - (blockCounter * lengthOfBlock) - lengthOfBlock, Y, lengthOfBlock, H);
+
+            com.rogueone.trackmodel.Section section = this.trainSystem.getTrackModel().getSection(Global.Line.RED, Global.Section.valueOf(sectionIDString));
+            int numberOfBlocksInSection;
+            if (section.getSectionID() == Global.Section.H && sectionIDs.equals("24_27")) {
+                numberOfBlocksInSection = 4;
+                sectionDivisions = new HashMap<Integer, Path2D>(numberOfBlocksInSection);
+            } else if (section.getSectionID() == Global.Section.H && sectionIDs.equals("28_32")) {
+                numberOfBlocksInSection = 5;
+                sectionDivisions = new HashMap<Integer, Path2D>(numberOfBlocksInSection);
+            } else if (section.getSectionID() == Global.Section.H && sectionIDs.equals("33_38")) {
+                numberOfBlocksInSection = 6;
+                sectionDivisions = new HashMap<Integer, Path2D>(numberOfBlocksInSection);
+            } else if (section.getSectionID() == Global.Section.H && sectionIDs.equals("39_43")) {
+                numberOfBlocksInSection = 5;
+                sectionDivisions = new HashMap<Integer, Path2D>(numberOfBlocksInSection);
+            } else if (section.getSectionID() == Global.Section.H && sectionIDs.equals("44_45")) {
+                numberOfBlocksInSection = 2;
+                sectionDivisions = new HashMap<Integer, Path2D>(numberOfBlocksInSection);
+            } else if (section.getSectionID() == Global.Section.J && sectionIDs.equals("49_52")) {
+                numberOfBlocksInSection = 4;
+                sectionDivisions = new HashMap<Integer, Path2D>(numberOfBlocksInSection);
+            } else if (section.getSectionID() == Global.Section.J && sectionIDs.equals("53_54")) {
+                numberOfBlocksInSection = 2;
+                sectionDivisions = new HashMap<Integer, Path2D>(numberOfBlocksInSection);
+            } else {
+                sectionDivisions = new HashMap<Integer, Path2D>(section.getBlocks().size());
+                numberOfBlocksInSection = section.getBlocks().size();
             }
-            Path2D currentBlockPath = new Path2D.Double();
-            currentBlockPath.append(currentRec, false);
-            AffineTransform currentBlockTransform = new AffineTransform();
-            currentBlockTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
-            currentBlockPath.transform(currentBlockTransform);
-            sectionDivisions.put(currentBlock.getID(), currentBlockPath);
-            blockCounter++;
+
+            float lengthOfBlock = W / (float) numberOfBlocksInSection;
+
+            Iterator blockIter = section.getBlocks().iterator();
+            int blockCounter = 0;
+            while (blockIter.hasNext()) {
+                Block currentBlock = (Block) blockIter.next();
+                if ((section.getSectionID() == Global.Section.H && currentBlock.getID() >= sectionStart && currentBlock.getID() <= sectionEnd)
+                        || (section.getSectionID() == Global.Section.J && currentBlock.getID() >= sectionStart && currentBlock.getID() <= sectionEnd)) {
+                    Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
+//                    if (sectionID.equals("O") || sectionID.equals("Q") || sectionID.equals("F") || sectionID.equals("E")
+//                            || sectionID.equals("D") || sectionID.equals("B")) {
+//                        currentRec = new Rectangle2D.Float(X + W - (blockCounter * lengthOfBlock) - lengthOfBlock, Y, lengthOfBlock, H);
+//                    }
+                    Path2D currentBlockPath = new Path2D.Double();
+                    currentBlockPath.append(currentRec, false);
+                    AffineTransform currentBlockTransform = new AffineTransform();
+                    currentBlockTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
+                    currentBlockPath.transform(currentBlockTransform);
+                    sectionDivisions.put(currentBlock.getID(), currentBlockPath);
+                    blockCounter++;
+                } 
+                if (section.getSectionID() != Global.Section.H && section.getSectionID() != Global.Section.J){
+                    Rectangle2D currentRec = new Rectangle2D.Float(X + (blockCounter * lengthOfBlock), Y, lengthOfBlock, H);
+                    if (sectionID.equals("A") || sectionID.equals("B") || sectionID.equals("C") || sectionID.equals("M") ||
+                            sectionID.equals("N") || sectionID.equals("S") || sectionID.equals("P") ) {
+                        currentRec = new Rectangle2D.Float(X + W - (blockCounter * lengthOfBlock) - lengthOfBlock, Y, lengthOfBlock, H);
+                    }
+                    Path2D currentBlockPath = new Path2D.Double();
+                    currentBlockPath.append(currentRec, false);
+                    AffineTransform currentBlockTransform = new AffineTransform();
+                    currentBlockTransform.rotate(Math.toRadians(angle), X + (W / 2), Y + (H / 2));
+                    currentBlockPath.transform(currentBlockTransform);
+                    sectionDivisions.put(currentBlock.getID(), currentBlockPath);
+                    blockCounter++;
+                }
+            }
         }
 
     }

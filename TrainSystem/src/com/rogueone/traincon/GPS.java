@@ -60,6 +60,7 @@ public class GPS{
         
         //Block setting
         this.prevBlock = trainSystem.getTrackModel().getYard();
+        //Need to account below for which line the train is on
         this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
         this.nextBlock = null;
         this.currTempBlock = null;

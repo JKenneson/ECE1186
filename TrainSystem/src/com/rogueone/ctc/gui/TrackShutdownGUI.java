@@ -203,7 +203,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     private void disableTrackSegment(String lineName, String segmentName, String blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, Integer.parseInt(blockName));
         Global.Line lineVal = Global.Line.valueOf(lineName); 
-        this.trainSystem.getTrackView().setBlockStatus(lineVal, segmentName, Integer.parseInt(blockName), false);
+        this.trainSystem.getTrackViewGreen().setBlockStatus(lineVal, segmentName, Integer.parseInt(blockName), false);
         this.trainSystem.getTrackControllerHandler().requestMaintenance(lineVal, Integer.parseInt(blockName));
     }
     

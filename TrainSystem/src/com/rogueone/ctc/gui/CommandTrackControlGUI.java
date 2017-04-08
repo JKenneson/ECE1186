@@ -1453,7 +1453,7 @@ public int iterateID(){
         }
 
         if (evt.getClickCount() == 2) {
-            trainSystem.getTrackView().toFront();
+            trainSystem.getTrackViewGreen().toFront();
             //figure out how to propoerly do this
         }
 
