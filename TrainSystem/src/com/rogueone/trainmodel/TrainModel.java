@@ -82,7 +82,7 @@ public class TrainModel {
     private double distanceIntoBlock;//The distance we have traveled into the block
     private double distanceTraveledMeters;//meters traveled this cycle
     private double distanceTraveledFeet;//feet traveled this cycle
-    public double totalDistanceTraveledFeet;    //The total distance traveled since dispatched
+    private double totalDistanceTraveledFeet;    //The total distance traveled since dispatched
     private double powerReceived;   //kW
     private double grade;
     private double angleOfSlope;
@@ -1005,4 +1005,10 @@ public class TrainModel {
     public void setHeaterOn(boolean value){
         this.temperatureModel.setHeaterOn(value);
     }
+
+    public double getTotalDistanceTraveledFeet() {
+        return totalDistanceTraveledFeet;
+    }
+    
+    
 }
