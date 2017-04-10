@@ -13,13 +13,13 @@ import com.rogueone.trackmodel.Section;
 import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainmodel.TrainHandler;
+import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainmodel.entities.TrainFailures;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.Calendar;
 import java.lang.*;
 
 public class CommandTrackControlGUI extends javax.swing.JPanel {
@@ -1039,13 +1039,19 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }
 
     private void calculateThroughput(){
-        double throughputValue = 0;
+        double throughputValue;
+        double tempValue;
         
-        for ( int i = 0; i < TrainTable.getRowCount(); i++){
-//            TrainTable.getValueAt(i, 1)
+        ArrayList<TrainModel> trainList = trainSystem.getTrainHandler().getTrains();
+        
+        int arraySize = trainList.size();
+        for(int i = 0 ; i < arraySize ; i++) {
+            tempValue = (trainList.get(i).getDistanceTraveledFeet())/80000;
+            tempValue+=tempValue;
+            throughputValue = tempValue;
+                    ThroughputField.setText(String.format("%.3f", throughputValue));
         }
-        ThroughputField.setText(String.format("%.2f", throughputValue));
-  
+
     }
     
             
@@ -1551,10 +1557,18 @@ public int iterateID(){
 //        if (!(existsInTable(TrainTable, newTrain))) {
 //            addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
 //        }
-        
-        dispatchNewTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
-        
-        trainsDispatched++;
+        if ((dispatchAuthority < 107000) & (dispatchSpeed < 44)){
+            dispatchNewTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
+            trainsDispatched++;
+        }
+        if (dispatchAuthority >= 107000){
+            JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Authoity Too High.", "Error",
+                                    JOptionPane.ERROR_MESSAGE);   
+        }
+        if (dispatchSpeed >= 44){
+            JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Speed Too High.", "Error",
+                                    JOptionPane.ERROR_MESSAGE);   
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 
