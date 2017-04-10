@@ -27,6 +27,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     //int trainID;
     //int hoursPassed;
     public int iterativeID;
+    double throughputValue = 0;
+
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
     private TrackModel trackModel;
@@ -1039,18 +1041,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }
 
     private void calculateThroughput(){
-        double throughputValue;
+        throughputValue = 0;
         double tempValue;
         
         ArrayList<TrainModel> trainList = trainSystem.getTrainHandler().getTrains();
         
         int arraySize = trainList.size();
         for(int i = 0 ; i < arraySize ; i++) {
-            tempValue = (trainList.get(i).getDistanceTraveledFeet())/80000;
-            tempValue+=tempValue;
-            throughputValue = tempValue;
-                    ThroughputField.setText(String.format("%.3f", throughputValue));
+            tempValue = (trainList.get(i).getTotalDistanceTraveledFeet())/80000;
+            throughputValue += tempValue;
         }
+        
+        ThroughputField.setText(String.format("%.2f", throughputValue));
 
     }
     
