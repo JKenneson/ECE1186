@@ -22,6 +22,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -58,6 +59,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private void initComponents() {
 
         trackDataFileChooser = new javax.swing.JFileChooser();
+        scheduleFrame = new javax.swing.JFrame();
+        scheduleScrollPane = new javax.swing.JScrollPane();
+        scheduleTextPanel = new javax.swing.JTextPane();
         trackModelTabbedPane = new javax.swing.JTabbedPane();
         trackOverviewPanel = new javax.swing.JPanel();
         trackLayoutPanel = new javax.swing.JPanel();
@@ -97,6 +101,29 @@ public class TrackModelGUI extends javax.swing.JPanel {
         beaconPanel = new javax.swing.JPanel();
         beaconScrollPane = new javax.swing.JScrollPane();
         beaconTable = new javax.swing.JTable();
+
+        scheduleScrollPane.setViewportView(scheduleTextPanel);
+
+        javax.swing.GroupLayout scheduleFrameLayout = new javax.swing.GroupLayout(scheduleFrame.getContentPane());
+        scheduleFrame.getContentPane().setLayout(scheduleFrameLayout);
+        scheduleFrameLayout.setHorizontalGroup(
+            scheduleFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(scheduleFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(scheduleFrameLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(scheduleScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        scheduleFrameLayout.setVerticalGroup(
+            scheduleFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(scheduleFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(scheduleFrameLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(scheduleScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         setMaximumSize(new java.awt.Dimension(1070, 720));
         setMinimumSize(new java.awt.Dimension(1070, 720));
@@ -504,6 +531,17 @@ public class TrackModelGUI extends javax.swing.JPanel {
         };
         TableCellListener stationTcl = new TableCellListener(stationTable, stationAction);
 
+        stationTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int col = stationTable.columnAtPoint(evt.getPoint());
+                if (col == 9) {
+                    scheduleTextPanel.setText("Schedule goes here");
+                    scheduleFrame.setVisible(true);
+                }
+            }
+        });
+
         javax.swing.GroupLayout stationPanelLayout = new javax.swing.GroupLayout(stationPanel);
         stationPanel.setLayout(stationPanelLayout);
         stationPanelLayout.setHorizontalGroup(
@@ -818,7 +856,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
             if (b.getStation() != null) {
                     Station station = (Station) b.getStation();
                     
-                    String stationColumnNames[] = { "ID", "Name", "Block A", "Section A", "Block B", "Section B", "Temperature", "Heater", "Waiting" };
+                    String stationColumnNames[] = { "ID", "Name", "Block A", "Section A", "Block B", "Section B", "Temperature", "Heater", "Waiting", "Schedule"};
                     String heaterOn = "Off";
                     if(station.isHeaterOn()) {
                         heaterOn = "On";
@@ -832,7 +870,8 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         ((station.getBlockB() == null) ? "n/a" : ((Block) station.getBlockB()).getSection().toString() + ""),
                         station.getTemperature() + "",
                         heaterOn,
-                        station.getWaitingPassengers() + ""};
+                        station.getWaitingPassengers() + "",
+                        "Click to view"};
                     NonEditableTableModel stationModel = new NonEditableTableModel(stationColumnNames);
                     stationModel.addRow(stationRowData);
                     stationTable.setModel(stationModel);
@@ -975,6 +1014,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> lineSelectionComboBox;
     private javax.swing.JButton powerOutageFailureButton;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JFrame scheduleFrame;
+    private javax.swing.JScrollPane scheduleScrollPane;
+    private javax.swing.JTextPane scheduleTextPanel;
     private javax.swing.JComboBox<String> sectionSelectionComboBox;
     private javax.swing.JPanel sectionSelectionPanel;
     private javax.swing.JPanel stationPanel;

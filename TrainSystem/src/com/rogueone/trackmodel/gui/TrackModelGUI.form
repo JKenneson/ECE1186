@@ -4,6 +4,48 @@
   <NonVisualComponents>
     <Component class="javax.swing.JFileChooser" name="trackDataFileChooser">
     </Component>
+    <Container class="javax.swing.JFrame" name="scheduleFrame">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="scheduleScrollPane" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="scheduleScrollPane" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="scheduleScrollPane">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextPane" name="scheduleTextPanel">
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -758,7 +800,7 @@
                                 <Column editable="false" title="Left" type="java.lang.Boolean"/>
                               </Table>
                             </Property>
-                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="Action stationAction = new AbstractAction()&#xa;{&#xa;    @Override&#xa;    public void actionPerformed(ActionEvent e)&#xa;    {&#xa;        Block b = (Block) blockSelectionComboBox.getSelectedItem();&#xa;        if(b != null) {&#xa;            TableCellListener tcl = (TableCellListener)e.getSource();&#xa;            if (b.getStationID() != -1 &amp;&amp; b.getStation() != null) {&#xa;                Station st = b.getStation();&#xa;                st.setTemperature(Integer.parseInt(((String)tcl.getNewValue())));&#xa;                updateDetailsPanel();&#xa;            }&#xa;        }&#xa;    }&#xa;};&#xa;TableCellListener stationTcl = new TableCellListener(stationTable, stationAction);">
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="Action stationAction = new AbstractAction()&#xa;{&#xa;    @Override&#xa;    public void actionPerformed(ActionEvent e)&#xa;    {&#xa;        Block b = (Block) blockSelectionComboBox.getSelectedItem();&#xa;        if(b != null) {&#xa;            TableCellListener tcl = (TableCellListener)e.getSource();&#xa;            if (b.getStationID() != -1 &amp;&amp; b.getStation() != null) {&#xa;                Station st = b.getStation();&#xa;                st.setTemperature(Integer.parseInt(((String)tcl.getNewValue())));&#xa;                updateDetailsPanel();&#xa;            }&#xa;        }&#xa;    }&#xa;};&#xa;TableCellListener stationTcl = new TableCellListener(stationTable, stationAction);&#xa;&#xa;stationTable.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        int col = stationTable.columnAtPoint(evt.getPoint());&#xa;        if (col == 9) {&#xa;            scheduleTextPanel.setText(&quot;Schedule goes here&quot;);&#xa;            scheduleFrame.setVisible(true);&#xa;        }&#xa;    }&#xa;});">
                               <TableColumnModel selectionModel="0">
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                                   <Title/>
