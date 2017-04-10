@@ -72,12 +72,12 @@ public class TrainController {
      * @param block initial block, should be from yard
      * @param ts
      */
-    public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID, TrainSystem ts){
+    public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID, TrainSystem ts, String line){
         
         this.trainSystem = ts;
         this.trainModel = tm; //Should come from passed (this) reference
         this.powerSystem = new PowerSystems(this);
-        this.vitals = new TMR(ts, tm, this, maxPow, setPointSpeed, authority, trainID, this.powerSystem);
+        this.vitals = new TMR(ts, tm, this, maxPow, setPointSpeed, authority, trainID, this.powerSystem, line);
         this.gui = gui;
         
         

@@ -207,7 +207,7 @@ public class TrainModel {
      */
     public void createTrainController() {
         //Create a new TrainController object
-        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, Integer.toString(this.trainID),this.trainSystem);
+        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, Integer.toString(this.trainID), this.trainSystem, this.line);
     }
     
     /**
@@ -467,7 +467,6 @@ public class TrainModel {
         //3)    Adjust for friction.  uk = 0.16   Friction = uk * FN = uk * m * g
         this.frictionForce = COEFFICIENT_OF_FRICTION * (this.trainWeight * KG_IN_A_POUND)/NUMBER_OF_WHEELS * GRAVITY;        //Convert lbs to kg
         //4)   Take grade into account and sum the new forces.  (m*g*sin(theta)) + (Ff * cos(theta))
-        this.grade = this.currBlock.getGrade();
         this.angleOfSlope = Math.toDegrees(Math.atan2(this.grade, 100));            //Taking the arctan(%slope/100) will give the angle of the track
         this.frictionForce = (this.trainWeight * KG_IN_A_POUND/NUMBER_OF_WHEELS * GRAVITY * Math.sin(this.angleOfSlope)) + (this.frictionForce * Math.cos(this.angleOfSlope));
         

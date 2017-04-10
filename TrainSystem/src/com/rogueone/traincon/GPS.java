@@ -47,7 +47,7 @@ public class GPS{
      * @param trainSystem reference to the overall train system
      * @param trainID ID number of the train
      */
-    public GPS(int authority, TrainSystem ts, String trainID){
+    public GPS(int authority, TrainSystem ts, String trainID, String line){
         
         this.trainSystem = ts;
         
@@ -61,7 +61,14 @@ public class GPS{
         //Block setting
         this.prevBlock = trainSystem.getTrackModel().getYard();
         //Need to account below for which line the train is on
-        this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
+        System.out.println(line);
+        if(line.equals("GREEN")){
+            this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
+        }
+        else{
+            this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.RED);
+        }
+
         this.nextBlock = null;
         this.currTempBlock = null;
     }
