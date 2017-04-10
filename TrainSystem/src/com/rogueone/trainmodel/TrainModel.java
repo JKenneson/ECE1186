@@ -207,7 +207,7 @@ public class TrainModel {
      */
     public void createTrainController() {
         //Create a new TrainController object
-        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, Integer.toString(this.trainID),this.trainSystem);
+        this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, Integer.toString(this.trainID), this.trainSystem, this.line);
     }
     
     /**

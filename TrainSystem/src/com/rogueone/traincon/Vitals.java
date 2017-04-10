@@ -59,7 +59,7 @@ public class Vitals {
      * @param gps ref to tc gps module
      * @param maxPow max power of the attached train
      */
-    public Vitals(TrainSystem ts, TrainModel tm, TrainController tc, double maxPow, byte setPointSpeed, short authority, String trainID, PowerSystems ps) {
+    public Vitals(TrainSystem ts, TrainModel tm, TrainController tc, double maxPow, byte setPointSpeed, short authority, String trainID, PowerSystems ps, String line) {
         //this.trainSystem = ts;
         this.trainModel = tm;
 
@@ -79,7 +79,7 @@ public class Vitals {
         this.uK_1 = 0;
         this.maxPower = maxPow;
 
-        this.gps = new GPS(authority, ts, trainID);
+        this.gps = new GPS(authority, ts, trainID, line);
         this.speedControl = new SpeedControl(setPointSpeed, setPointSpeed, tm, this.gps);
         this.powerSystem = ps;
     }
