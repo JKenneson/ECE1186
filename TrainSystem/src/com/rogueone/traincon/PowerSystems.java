@@ -57,7 +57,7 @@ public class PowerSystems{
                 this.setAirConditioningOn(true);
                 this.setHeaterOn(false);
             }
-            else if(this.temperature<39){
+            else if(this.temperature<72){
                 this.setAirConditioningOn(false);
                 this.setHeaterOn(true);
             }
