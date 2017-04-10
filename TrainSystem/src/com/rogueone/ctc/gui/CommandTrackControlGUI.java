@@ -1090,7 +1090,7 @@ private void getDispatchTimes(){
 
 private void dispatchNewTrain(int speed, int authority, int cars, String line, int ID){
             //TRack ccontroller handler requestdispatch (Line)
-    if (trainSystem.getTrackControllerHandler().requestDispatch((Global.Line.GREEN))){
+    if (trainSystem.getTrackControllerHandler().requestDispatch((Global.Line.valueOf(line)))){
         trainSystem.dispatchTrain(speed, authority, cars, line, ID);
         addRow(line, "A", 1, ID);
         iterateID();
