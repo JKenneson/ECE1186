@@ -57,6 +57,7 @@ public class TrackView extends Frame {
     double scale = 5;
     public int trainID = 0;
     public Global.Line line;
+    private JFrame theWindow;
 
     public TrainSystem trainSystem;
 
@@ -78,16 +79,15 @@ public class TrackView extends Frame {
             trackLightList = new HashMap<String, TrackLight>();
             sectionList = new HashMap<String, Section>();
             sp = new ShapePanel(1000, 305, this.trainSystem, this.line);
-            JFrame theWindow = new JFrame("Track View - " + line);
+            theWindow = new JFrame("Track View - " + line);
             theWindow.setSize(1000, 325);
             Container c = theWindow.getContentPane();
             sp.setBackground(Color.BLACK);
             c.add(sp);
             initializeGreenLine();
             sp.repaint();
-            theWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            theWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             theWindow.setResizable(false);
-            theWindow.setVisible(true);
         } else if (line == Global.Line.RED) {
             this.line = line;
             shapeList = new ArrayList<MyShape>(); // create empty ArrayList
@@ -95,20 +95,23 @@ public class TrackView extends Frame {
             trackLightList = new HashMap<String, TrackLight>();
             sectionList = new HashMap<String, Section>();
             sp = new ShapePanel(1000, 300, this.trainSystem, this.line);
-            JFrame theWindow = new JFrame("Track View - " + line);
+            theWindow = new JFrame("Track View - " + line);
             theWindow.setSize(1000, 325);
             Container c = theWindow.getContentPane();
             sp.setBackground(Color.BLACK);
             c.add(sp);
             initializeRedLine2();
             sp.repaint();
-            theWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            theWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             theWindow.setResizable(false);
-            theWindow.setVisible(true);
         }
     }
+    
+    public void displayTrackView(boolean show){
+        this.theWindow.setVisible(show);
+    }
 
-    public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing) {
+    public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing, LinkedList<Integer> offSwitches) {
 
         if (this.line == Global.Line.GREEN) {
             if (switchStates != null) {
@@ -121,17 +124,28 @@ public class TrackView extends Frame {
                         Integer switchID = switchEntry.getKey();
                         com.rogueone.trackcon.entities.Switch switchInfo = switchArray.get(switchID);
                         ArrayList<Light> currentLights = null;
-                        if (switchEntry.getValue() == Global.SwitchState.DEFAULT) {
-                            updateSwitch(switchID, true);
-                            currentLights = switchInfo.getSwitchState().getLightsDefault();
+                        boolean lightsOut = false;
+                        if (!offSwitches.contains(switchID)) {
+                            if (switchEntry.getValue() == Global.SwitchState.DEFAULT) {
+                                updateSwitch(switchID, true);
+                                currentLights = switchInfo.getSwitchState().getLightsDefault();
+                            } else {
+                                updateSwitch(switchID, false);
+                                currentLights = switchInfo.getSwitchState().getLightsAlternate();
+                            }
                         } else {
-                            updateSwitch(switchID, false);
-                            currentLights = switchInfo.getSwitchState().getLightsAlternate();
+                            currentLights = switchInfo.getSwitchState().getLightsDefault();
+                            lightsOut = true;
                         }
                         Iterator lightsIterator = currentLights.iterator();
                         while (lightsIterator.hasNext()) {
                             Light lightIteration = (Light) lightsIterator.next();
-                            updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), lightIteration.getLightState());
+                            if(lightsOut){
+                                updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), Global.LightState.OFF);
+                            } else {
+                                updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), lightIteration.getLightState());
+                            }
+                            
                         }
                     }
                 }
@@ -176,17 +190,27 @@ public class TrackView extends Frame {
                         Integer switchID = switchEntry.getKey();
                         com.rogueone.trackcon.entities.Switch switchInfo = switchArray.get(switchID);
                         ArrayList<Light> currentLights = null;
-                        if (switchEntry.getValue() == Global.SwitchState.DEFAULT) {
-                            updateSwitch(switchID, true);
-                            currentLights = switchInfo.getSwitchState().getLightsDefault();
+                        boolean lightsOut = false;
+                        if (!offSwitches.contains(switchID)) {
+                            if (switchEntry.getValue() == Global.SwitchState.DEFAULT) {
+                                updateSwitch(switchID, true);
+                                currentLights = switchInfo.getSwitchState().getLightsDefault();
+                            } else {
+                                updateSwitch(switchID, false);
+                                currentLights = switchInfo.getSwitchState().getLightsAlternate();
+                            }
                         } else {
-                            updateSwitch(switchID, false);
-                            currentLights = switchInfo.getSwitchState().getLightsAlternate();
+                            currentLights = switchInfo.getSwitchState().getLightsDefault();
+                            lightsOut = true;
                         }
                         Iterator lightsIterator = currentLights.iterator();
                         while (lightsIterator.hasNext()) {
                             Light lightIteration = (Light) lightsIterator.next();
-                            updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), lightIteration.getLightState());
+                            if(lightsOut){
+                                updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), Global.LightState.OFF);
+                            } else {
+                                updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), lightIteration.getLightState());
+                            }
                         }
                     }
                 }
@@ -835,9 +859,12 @@ public class TrackView extends Frame {
                     if (lightState == Global.LightState.GO) {
                         tl.setIsGo(true);
                         tl.setIsStop(false);
-                    } else {
+                    } else if (lightState == Global.LightState.STOP) {
                         tl.setIsGo(false);
                         tl.setIsStop(true);
+                    } else if (lightState == Global.LightState.OFF) {
+                        tl.setIsGo(false);
+                        tl.setIsStop(false);
                     }
                 }
             } else if (section.toString() == "J") {
@@ -849,11 +876,16 @@ public class TrackView extends Frame {
                         tl1.setIsStop(false);
                         tl2.setIsGo(true);
                         tl2.setIsStop(false);
-                    } else {
+                    } else if (lightState == Global.LightState.STOP) {
                         tl1.setIsGo(false);
                         tl1.setIsStop(true);
                         tl2.setIsGo(false);
                         tl2.setIsStop(true);
+                    } else if (lightState == Global.LightState.OFF) {
+                        tl1.setIsGo(false);
+                        tl1.setIsStop(false);
+                        tl2.setIsGo(false);
+                        tl2.setIsStop(false);
                     }
                 }
             } else {
@@ -862,9 +894,12 @@ public class TrackView extends Frame {
                     if (lightState == Global.LightState.GO) {
                         tl.setIsGo(true);
                         tl.setIsStop(false);
-                    } else {
+                    } else if (lightState == Global.LightState.STOP) {
                         tl.setIsGo(false);
                         tl.setIsStop(true);
+                    } else if (lightState == Global.LightState.OFF) {
+                        tl.setIsGo(false);
+                        tl.setIsStop(false);
                     }
                 }
             }
@@ -875,9 +910,12 @@ public class TrackView extends Frame {
                     if (lightState == Global.LightState.GO) {
                         tl.setIsGo(true);
                         tl.setIsStop(false);
-                    } else {
+                    } else if (lightState == Global.LightState.STOP) {
                         tl.setIsGo(false);
                         tl.setIsStop(true);
+                    } else if (lightState == Global.LightState.OFF) {
+                        tl.setIsGo(false);
+                        tl.setIsStop(false);
                     }
                 }
             } else {
@@ -886,9 +924,12 @@ public class TrackView extends Frame {
                     if (lightState == Global.LightState.GO) {
                         tl.setIsGo(true);
                         tl.setIsStop(false);
-                    } else {
+                    } else if (lightState == Global.LightState.STOP) {
                         tl.setIsGo(false);
                         tl.setIsStop(true);
+                    } else if (lightState == Global.LightState.OFF) {
+                        tl.setIsGo(false);
+                        tl.setIsStop(false);
                     }
                 }
             }
@@ -1012,7 +1053,7 @@ public class TrackView extends Frame {
         }
         this.trainSystem.getTrackControllerHandler().updateTrack(line);
     }
-
+    
     class ShapePanel extends JPanel {
 
         // These instance variables are used to store the desired size

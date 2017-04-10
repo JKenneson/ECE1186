@@ -126,7 +126,7 @@ public class TrackControllerHandler {
         if (line == Global.Line.GREEN) {
             returnValue = trackControllers.get(0).canClose(blockID);
         } else {
-//            returnValue = trackControllers.get(1).canClose(blockID);
+            returnValue = trackControllers.get(1).canClose(blockID);
         }
         return returnValue;
     }
@@ -143,7 +143,7 @@ public class TrackControllerHandler {
         if (line == Global.Line.GREEN) {
             returnValue = trackControllers.get(0).canOpen(blockID);
         } else {
-//            returnValue = trackControllers.get(1).canOpen(blockID);
+            returnValue = trackControllers.get(1).canOpen(blockID);
         }
         return returnValue;
     }
@@ -152,7 +152,7 @@ public class TrackControllerHandler {
         if (line == Global.Line.GREEN) {
             trackControllers.get(0).updateSpeedAuthority(blockID, speed, authority);
         } else {
-//            returnValue = trackControllers.get(1).canOpen(blockID);
+            trackControllers.get(1).updateSpeedAuthority(blockID, speed, authority);
         }
     }
 
@@ -161,7 +161,7 @@ public class TrackControllerHandler {
         if (line == Global.Line.GREEN) {
             returnString = trackControllers.get(0).getSwitches();
         } else {
-//            returnValue = trackControllers.get(1).canOpen(blockID);
+            returnString = trackControllers.get(1).getSwitches();
         }
         return returnString;
     }
@@ -224,10 +224,10 @@ public class TrackControllerHandler {
     public void updateTrackView(Global.Line line) {
         if(line == Global.Line.GREEN){
             TrackController trackController = trackControllers.get(0);
-            trainSystem.getTrackViewGreen().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
+            trainSystem.getTrackViewGreen().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing(), trackController.getOffSwitches());
         } else {
             TrackController trackController = trackControllers.get(1);
-            trainSystem.getTrackViewRed().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing());
+            trainSystem.getTrackViewRed().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing(), trackController.getOffSwitches());
         }
         
     }

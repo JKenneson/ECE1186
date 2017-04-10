@@ -73,6 +73,7 @@ public class TrackController {
     private LinkedList<PresenceBlock> occupiedBlocks;
     private LinkedList<String> tempIgnoreSwitch;
     private LinkedList<String> permIgnoreSwitch;
+    private LinkedList<Integer> offSwitches;
 
     private TrackControllerGUI trackControllerGUI = null;
 
@@ -80,10 +81,8 @@ public class TrackController {
     private HashMap<Integer, TrainModel> trainArray;
 
     public TrackController(TrainSystem ts) {
-
 //        this.trackModel = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
         this.trackModel = ts.getTrackModel();
-
     }
 
     public TrackController() {
@@ -111,6 +110,7 @@ public class TrackController {
         this.occupiedBlocks = new LinkedList<PresenceBlock>();
         this.currentSwitchStates = new LinkedList<UserSwitchState>();
         this.tempIgnoreSwitch = new LinkedList<String>();
+        this.offSwitches = new LinkedList<Integer>();
         if (!permIgnoreSwitch.isEmpty()) {
             configurePermenantSwitch();
         }
@@ -714,9 +714,16 @@ public class TrackController {
                 }
             }
             if (evaluateSwitch) {
-                UserSwitchState userSwitchState = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
-                updateSwitches(userSwitchState);
-                this.currentSwitchStates.add(userSwitchState);
+                //SAFETY CRITICAL
+                //evaluation of switch state occurs twice, if the value is not the same, then 
+                //the switch is shut down
+                UserSwitchState userSwitchState1 = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
+                UserSwitchState userSwitchState2 = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
+                if(userSwitchState1.equals(userSwitchState2)){
+                    updateSwitches(userSwitchState1);
+                    this.currentSwitchStates.add(userSwitchState1);
+                }
+                
             }
 //            System.out.print(printSwitchState(userSwitchState));
         }
@@ -848,7 +855,7 @@ public class TrackController {
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
                         safeToLookAhead = false;
-                        break;
+
                     } //check to see if that block ahead is occupied or not
                     //needs to look ahead by 2 blocks, because the block directly in front will
                     //always be occupied because that is how the train model sets the track
@@ -872,6 +879,22 @@ public class TrackController {
                         pb.getCurrBlock().getTrackCircuit().speed = 0;
                         pb.getCurrBlock().getTrackCircuit().authority = 0;
                     }
+
+                    //also check if switch is connected to a failed block
+                    int switchID = -1;
+                    if (lookaheadBlock.getNextBlock() != null) {
+                        if (lookaheadBlock.getNextBlock().getType() != Global.PieceType.YARD) {
+                            switchID = ((Block) lookaheadBlock.getNextBlock()).getSwitchID();
+                        }
+                        if (switchID != -1) {
+                            if (!isSwitchAccessible(switchID)) {
+                                pb.getCurrBlock().getTrackCircuit().speed = -1;
+                                pb.getCurrBlock().getTrackCircuit().authority = -1;
+                                break;
+                            }
+                        }
+                    }
+
                     //move ahead by one block
                     if (safeToLookAhead) {
                         Block tempBlock = lookaheadBlock.getCurrBlock();
@@ -911,9 +934,10 @@ public class TrackController {
         }
         if (crossingActive) {
             crossing.setCurrentCrossingState(Global.CrossingState.ACTIVE);
-//            System.out.println("Crossing Active");
+            this.trackModel.getBlock(controllerLine, crossing.getBlockID()).getCrossing().lower();
         } else {
             crossing.setCurrentCrossingState(Global.CrossingState.INACTIVE);
+            this.trackModel.getBlock(controllerLine, crossing.getBlockID()).getCrossing().raise();
         }
     }
 
@@ -957,32 +981,6 @@ public class TrackController {
         }
     }
 
-    /**
-     * Print the switch information based on the user switch state passed in
-     *
-     * @param userSwitchState
-     * @return
-     */
-    private String printSwitchState(UserSwitchState userSwitchState) {
-
-        StringBuilder s = new StringBuilder();
-        LinkedList<AbstractMap.SimpleEntry<Integer, Global.SwitchState>> switches = userSwitchState.getUserSwitchStates();
-        Iterator switchIterator = switches.iterator();
-        while (switchIterator.hasNext()) {
-            AbstractMap.SimpleEntry<Integer, Global.SwitchState> switchState = (AbstractMap.SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
-            s.append("Switch " + switchState.getKey() + " is in " + switchState.getValue() + " state\n");
-            Switch sw = switchArray.get(switchState.getKey());
-            if (switchState.getValue() == Global.SwitchState.DEFAULT) {
-//                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getDefaultConnection().toString());
-//                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsDefault().toString());
-            } else {
-//                s.append("\n" + switchState.getValue() + " : Connection : " + sw.getSwitchState().getAlternateConnection().toString());
-//                s.append("\n" + switchState.getValue() + " : Lights : " + sw.getSwitchState().getLightsAlternate().toString());
-            }
-        }
-
-        return s.toString();
-    }
 
     /**
      * Getter that will return the track controller GUI
@@ -1014,10 +1012,15 @@ public class TrackController {
         while (switchIterator.hasNext()) {
             AbstractMap.SimpleEntry<Integer, Global.SwitchState> switchState = (AbstractMap.SimpleEntry<Integer, Global.SwitchState>) switchIterator.next();
             Switch sw = switchArray.get(switchState.getKey());
-            if (switchState.getValue() == Global.SwitchState.DEFAULT) {
-                this.trackModel.getSwitch(switchState.getKey()).setSwitch(false);
+
+            if (isSwitchAccessible(switchState.getKey())) {
+                if (switchState.getValue() == Global.SwitchState.DEFAULT) {
+                    this.trackModel.getSwitch(switchState.getKey()).setSwitch(false);
+                } else {
+                    this.trackModel.getSwitch(switchState.getKey()).setSwitch(true);
+                }
             } else {
-                this.trackModel.getSwitch(switchState.getKey()).setSwitch(true);
+                System.out.println("Turn off lights at switch " + switchState.getKey());
             }
         }
     }
@@ -1111,5 +1114,31 @@ public class TrackController {
      */
     public LinkedList<String> getManualSwitches() {
         return this.permIgnoreSwitch;
+    }
+
+    private boolean isSwitchAccessible(int switchID) {
+        com.rogueone.trackmodel.Switch switchObj = this.trackModel.getSwitch(switchID);
+        Block switchBlock1 = (Block) switchObj.getPortA();
+        Block switchBlock2 = (Block) switchObj.getPortB();
+        Block switchBlock3 = (Block) switchObj.getPortC();
+        if (!switchBlock1.getFailurePowerOutage() && !switchBlock2.getFailurePowerOutage() && !switchBlock3.getFailurePowerOutage()
+                && !switchBlock1.getFailureBrokenRail() && !switchBlock2.getFailureBrokenRail() && !switchBlock3.getFailureBrokenRail()
+                && !switchBlock1.getFailureTrackCircuit() && !switchBlock2.getFailureTrackCircuit() && !switchBlock3.getFailureTrackCircuit()) {
+            if(this.offSwitches.contains(switchID)){
+                this.offSwitches.remove((Integer) switchID);
+            }
+            return true;
+        } 
+        if (switchBlock1.getFailurePowerOutage() || switchBlock2.getFailurePowerOutage() || switchBlock3.getFailurePowerOutage()){
+            if(!this.offSwitches.contains(switchID)){
+                this.offSwitches.add(switchID);
+            }
+        }
+        return false;
+
+    }
+    
+    public LinkedList<Integer> getOffSwitches(){
+        return this.offSwitches;
     }
 }

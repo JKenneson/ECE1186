@@ -23,6 +23,8 @@ public class MainFrame extends javax.swing.JFrame {
     public JLabel timeLabel;
 
     public TrainSystem trainSystem;
+    private boolean greenView = false;
+    private boolean redView = false;
     /**
      * Creates new form MainFrame
      * @param trainSystem the TrainSystem
@@ -42,6 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         timeButtonGroup = new javax.swing.ButtonGroup();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         editMenu = new javax.swing.JMenu();
@@ -57,8 +60,12 @@ public class MainFrame extends javax.swing.JFrame {
         trackModelMenuItem = new javax.swing.JMenuItem();
         trainHandlerMenuItem = new javax.swing.JMenuItem();
         mboMenuItem = new javax.swing.JMenuItem();
+        greenTrackViewItem = new javax.swing.JMenuItem();
+        redTrackViewItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         helpText = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1040, 720));
@@ -166,6 +173,22 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         moduleMenu.add(mboMenuItem);
+
+        greenTrackViewItem.setText("Green Track View");
+        greenTrackViewItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                greenTrackViewItemActionPerformed(evt);
+            }
+        });
+        moduleMenu.add(greenTrackViewItem);
+
+        redTrackViewItem.setText("Red Track View");
+        redTrackViewItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redTrackViewItemActionPerformed(evt);
+            }
+        });
+        moduleMenu.add(redTrackViewItem);
 
         mainMenuBar.add(moduleMenu);
 
@@ -282,16 +305,40 @@ public class MainFrame extends javax.swing.JFrame {
         this.trainSystem.updateTimer(TrainSystem.x100_TIME);
     }//GEN-LAST:event_x100SpeedRadioButtonActionPerformed
 
+    private void greenTrackViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenTrackViewItemActionPerformed
+        // TODO add your handling code here:
+        if(greenView == false){
+            greenView = true;
+        } else {
+            greenView = false;
+        }
+        this.trainSystem.getTrackViewGreen().displayTrackView(greenView);
+        
+    }//GEN-LAST:event_greenTrackViewItemActionPerformed
+
+    private void redTrackViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redTrackViewItemActionPerformed
+        // TODO add your handling code here:
+        if(redView == false){
+            redView = true;
+        } else {
+            redView = false;
+        }
+        this.trainSystem.getTrackViewRed().displayTrackView(redView);
+    }//GEN-LAST:event_redTrackViewItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ctcMenuItem;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenuItem greenTrackViewItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem helpText;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JMenuItem mboMenuItem;
     private javax.swing.JMenu moduleMenu;
     private javax.swing.JRadioButtonMenuItem normalTimeRadioButton;
+    private javax.swing.JMenuItem redTrackViewItem;
     private javax.swing.JMenu speedMenu;
     private javax.swing.ButtonGroup timeButtonGroup;
     private javax.swing.JMenuItem trackControllerHandlerMenuItem;

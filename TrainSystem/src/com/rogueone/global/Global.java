@@ -54,7 +54,7 @@ public class Global {
     }
     
     public enum LightState {
-        GO, STOP
+        GO, STOP, OFF
     }
     
     //need to alter in order to account for red line
