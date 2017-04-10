@@ -250,11 +250,11 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SetSpeedFieldActionPerformed
 
     private void SetSpeedFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetSpeedFieldMouseClicked
-        SetSpeedField.setText("");         // TODO add your handling code here:
+        SetSpeedField.setText("0");         // TODO add your handling code here:
     }//GEN-LAST:event_SetSpeedFieldMouseClicked
 
     private void SetAuthorityFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetAuthorityFieldMouseClicked
-        SetAuthorityField.setText("");        // TODO add your handling code here:
+        SetAuthorityField.setText("0");        // TODO add your handling code here:
     }//GEN-LAST:event_SetAuthorityFieldMouseClicked
 
     /**

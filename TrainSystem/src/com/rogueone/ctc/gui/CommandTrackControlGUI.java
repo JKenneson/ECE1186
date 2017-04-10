@@ -1041,6 +1041,9 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private void calculateThroughput(){
         double throughputValue = 0;
         
+        for ( int i = 0; i < TrainTable.getRowCount(); i++){
+//            TrainTable.getValueAt(i, 1)
+        }
         ThroughputField.setText(String.format("%.2f", throughputValue));
   
     }
