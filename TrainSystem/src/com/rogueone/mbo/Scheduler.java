@@ -32,6 +32,7 @@ public class Scheduler {
       public Scheduler(TrainSystem ts) throws IOException, InvalidFormatException {
        trainSystem = ts;
        readRedSchedule(file);
+       readGreenSchedule(file);
        readPersonnelSchedule(file);
    }
     /**
@@ -92,6 +93,7 @@ public class Scheduler {
         XSSFSheet redSchedule = workbook.getSheetAt(1);
         int numTrains = redSchedule.getLastRowNum();
         String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
+        String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
          Object[] columnNames = new Object[11];
         
         Object[][] data = new Object[numTrains+1][11];
@@ -181,6 +183,103 @@ public class Scheduler {
         scheduleGUI.redTable.setModel(model);
     }
     
+    
+     public static void readGreenSchedule( File file) throws IOException, InvalidFormatException{
+        //scheduleGUI.setVisible(true);
+        greenDispatchTimes.clear();
+        XSSFWorkbook workbook = new XSSFWorkbook(file);
+        XSSFSheet greenSchedule = workbook.getSheetAt(2);
+        int numTrains = greenSchedule.getLastRowNum();
+        String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
+         Object[] columnNames = new Object[19];
+        
+        Object[][] data = new Object[numTrains+1][19];
+        int i,j;
+        String oldInfo = "";
+        String info = "";
+        //odds
+        for(i = 0; i < numTrains+1; i++){
+            if((i+1)%2==0){
+            Row currRow = greenSchedule.getRow(i);
+            if(currRow != null){
+            for(j = 0; j < 19; j++){
+                if(currRow.getCell(j) != null){
+                    info = currRow.getCell(j).toString();
+                    
+                    //System.out.println(i);
+                    if(i==0){     
+                        //System.out.println("HERE");
+                        columnNames[j] = info;
+                    }
+                    else if(j==0){
+                        String[] infos = info.split("\\.");
+                        info = infos[0];
+                    }
+                    else if(j==2){
+                            oldInfo = info;
+                            info = convertTime(info);
+                            greenDispatchTimes.add(info);
+                            //System.out.println(info);
+                        }
+                    
+                }
+                else if(j>2){
+                    if(oldInfo.compareTo("")!=0){
+                    oldInfo = incrementTime(oldInfo, greenIncrements[j-3]);
+                    info = convertTime(oldInfo);
+                    }
+                }
+                if((i>0)){
+                data[i][j] = info;
+                }
+            }
+            }
+            }
+        }
+        
+        //evens only
+        for(i = 0; i < numTrains+1; i++){
+            if((i)%2 == 0){
+            Row currRow = greenSchedule.getRow(i);
+            if(currRow != null){
+            for(j = 0; j < 19; j++){
+                if(currRow.getCell(j) != null){
+                    info = currRow.getCell(j).toString();
+                    
+                    //System.out.println(i);
+                    if(i==0){     
+                        //System.out.println("HERE");
+                        columnNames[j] = info;
+                    }
+                    else if(j==0){
+                        String[] infos = info.split("\\.");
+                        info = infos[0];
+                    }
+                    else if(j==2){
+                            oldInfo = info;
+                            info = convertTime(info);
+                            greenDispatchTimes.add(info);
+                            //System.out.println(info);
+                        }
+                    
+                }
+                else if(j>2){
+                    if(oldInfo.compareTo("")!=0){
+                    oldInfo = incrementTime(oldInfo, greenIncrements[j-3]);
+                    info = convertTime(oldInfo);
+                    }
+                }
+                if((i>0)){
+                data[i][j] = info;
+                }
+            }
+            }
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        scheduleGUI.jTable3.setModel(model);
+    }
+    
     public ArrayList<String> getDispatchTimes(){
         return this.redDispatchTimes;
     }
@@ -200,6 +299,7 @@ public class Scheduler {
         int i=0,j=0,k=0;
         String[] personnelHeaders = {"Name","SUN","MON","TUES","WED","THURS","FRI","SAT"};
         String[] trainHeaders = {"Train ID","Driver","Departure","SHADYSIDE","HERRON","SWISSVILLE","PENN STATION","STEEL PLAZA","FIRST AVE","ST SQUARE","STH HILLS"};
+        String[] greenHeaders = {"Train ID", "PIONEER", "EDGEBROOK", "PITT", "WHITED", "SOUTH BANK", "CENTRAL", "INGLEWOOD", "OVERBROOK", "GLENBURY", "DORMONT", "MT LEBANON", "POPLAR", "CASTLE SHANON", "DORMONT", "GLEBURY", "OVERBROOK", "INGLEWOOD", "CENTRAL"};
 
         //Sheet redSchedule = workbook.getSheetAt(1);
         Sheet peopleSheet = workbook.createSheet("Personnel");
@@ -319,6 +419,105 @@ public class Scheduler {
             }
             trainID++;
         }// end generate red
+        
+        
+        
+        //generate green
+        for(j=0;j<numTrains+1;j++){
+            isOff = 0;
+            testTrigger = 0;
+            Row personRow = peopleSheet.createRow(j);
+            Row greenRow = greenSheet.createRow(j);
+            if(j==0){
+                for(i=0;i<8;i++){
+                    Cell cell = personRow.createCell(i);
+                    cell.setCellValue(personnelHeaders[i]);
+                }
+                for(i=0;i<11;i++){
+                    Cell greenCell = greenRow.createCell(i);
+                    if(j==0){
+                    greenCell.setCellValue(trainHeaders[i]);
+                    greenCell.setCellValue(trainHeaders[i]);
+                    }
+                    else{
+                        greenCell.setCellValue("");
+                    }
+                }
+            }
+            else{
+                String[] driverNames = new String[numTrains+1];
+                for(i=0;i<8;i++){
+                    Cell cell = personRow.createCell(i);
+                    if(i==0){
+                        driverNames[j]="Employee "+employeeNumber;
+                        cell.setCellValue("Employee "+employeeNumber);
+                    }
+                    else if(i==dayOff1 || i==dayOff2){
+                        if(currentDay == i){
+                            isOff = 1;
+                        }
+                        cell.setCellValue("OFF");
+                    }
+                    else{
+                        
+                        if((j &1)==0){
+                            cell.setCellValue("6am - 2:30pm");
+                        }
+                        else{
+                            cell.setCellValue("2pm - 10:30pm");
+                        }
+                    }
+                    
+                    
+                }
+                   if(isOff == 0){
+                for(i=0;i<3;i++){
+                    Cell cell = greenRow.createCell(i);
+                    if(i==0){
+                        cell.setCellValue(trainID);
+                    }
+                    else if(i==1){
+                        cell.setCellValue(driverNames[j]);
+                    }
+                    else if(i==2){
+                        if((j &1)==0){
+                        cell.setCellValue(startTimeDay);
+                        startTimeDay = incrementTime(startTimeDay,"7.0");
+                       //startTimeDay  = convertTime(startTimeDay);
+                    }
+                        else{
+                           cell.setCellValue(startTimeEvening);
+                            startTimeEvening = incrementTime(startTimeEvening,"7.0"); 
+                           // startTimeEvening  = convertTime(startTimeEvening);
+                        }
+                    }
+                }
+                            
+                   }
+                   else{
+                       Row deleted = greenSheet.getRow(j);
+                       greenSheet.removeRow(deleted);
+                       /*
+                       System.out.println("J+1: "+(j+1)+" Last row: "+numTrains);
+                       if(j+1<numTrains){
+                           System.out.println("SHIFTING");
+                        greenSheet.shiftRows(j, j, 1);
+                       
+                       }
+                       */
+                   }
+            }
+            employeeNumber++;
+            dayOff1=dayOff1+dayOffInterval;
+            dayOff2=dayOff1+1;
+            if(dayOff1>7){
+                dayOff1=0;
+            }
+            if(dayOff2>7){
+                dayOff2=0;
+            }
+            trainID++;
+        }// end generate green
         
         FileOutputStream output = new FileOutputStream("src\\com\\rogueone\\assets\\altSchedule.xlsx");
         workbook.write(output);

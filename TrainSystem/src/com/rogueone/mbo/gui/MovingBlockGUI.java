@@ -601,6 +601,7 @@ private boolean mode  = false;
             try {
                 file = newFile;
                 Scheduler.readRedSchedule(newFile);
+                Scheduler.readGreenSchedule(newFile);
                 Scheduler.readPersonnelSchedule(newFile);
             }
             catch (IOException ex) {

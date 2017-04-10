@@ -8,6 +8,7 @@
  * @modification date 4/3/17
  */
 package com.rogueone.mbo;
+import com.rogueone.global.Global;
 import java.io.File;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,6 +17,7 @@ import org.apache.poi.ss.usermodel.Row;
 import java.util.ArrayList;
 import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
+import com.rogueone.trackcon.entities.PresenceBlock;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.table.*;
@@ -26,10 +28,12 @@ import javax.swing.table.*;
  */
 public class Mbo{
     
+    Global.Line line;
      private static ArrayList<MboTrain> trainList = new ArrayList<MboTrain>();
     public static MovingBlockGUI mboGui;
    private static File file = new File("src/com/rogueone/assets/schedule.xlsx");
    private static int trainIndex;
+   private ArrayList<PresenceBlock> occupied = new ArrayList<>();
   //private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
    //private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
    //private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
@@ -274,10 +278,14 @@ public class Mbo{
         updateTrains();
         mboGui.update();
             //trainList = trainSystem.getTrainHandler().getTrains();
-        if(mode.equals("Fixed Block")){
-            
-        }
-        else if(mode.equals("Moving Block")){
+            int numTrains = trainSystem.getTrainHandler().getTrains().size();
+        trainList.clear();
+        for(int i =0;i<numTrains;i++){
+            if(mode.equals("Moving Block")){
+                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().
+                PresenceBlock lookaheadBlock = new PresenceBlock(trainSystem, line);
+                lookaheadBlock.getNextBlock();
+            }
         }
     }
     

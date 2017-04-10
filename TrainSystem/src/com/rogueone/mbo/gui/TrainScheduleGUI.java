@@ -148,7 +148,7 @@ public class TrainScheduleGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable3;
+    public javax.swing.JTable jTable3;
     public javax.swing.JTable redTable;
     // End of variables declaration//GEN-END:variables
 }
