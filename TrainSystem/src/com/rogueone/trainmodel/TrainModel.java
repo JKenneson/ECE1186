@@ -721,6 +721,25 @@ public class TrainModel {
         return tempGPSMessage;
     }
     
+    /**
+     * MBO updating speed and authority sent through the antenna
+     * 
+     * @author Jonathan Kenneson
+     * @param setPointSpeed the new speed to set
+     * @param authority the new authority to set (must be less than 107,000 feet)
+     */
+    public void MBOUpdateSpeedAndAuthority(int setPointSpeed, int authority) {   
+        //Can't receive a signal if there is a failure
+        if(this.antennaFailure) {
+            return;
+        }
+        this.ctcSetPoint = setPointSpeed;
+        this.authority = authority;
+        
+        this.trainController.setAuthority((short)(this.authority/this.FEET_IN_A_METER));
+        this.trainController.setSpeed((byte) this.ctcSetPoint);
+    }
+    
     
     /**
      * Returns the StringID
