@@ -82,6 +82,7 @@ public class TrainModel {
     private double distanceIntoBlock;//The distance we have traveled into the block
     private double distanceTraveledMeters;//meters traveled this cycle
     private double distanceTraveledFeet;//feet traveled this cycle
+    public double totalDistanceTraveledFeet;    //The total distance traveled since dispatched
     private double powerReceived;   //kW
     private double grade;
     private double angleOfSlope;
@@ -518,6 +519,7 @@ public class TrainModel {
         
         //7)   Calculate distance into block and ask for new block if we've gone the length of the block
         this.distanceIntoBlock += this.distanceTraveledFeet;
+        this.totalDistanceTraveledFeet += this.distanceTraveledFeet;
         
         //Set the occupancy to true each update
         this.currBlock.setOccupancy(true);                                
