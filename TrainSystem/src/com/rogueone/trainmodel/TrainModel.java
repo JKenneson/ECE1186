@@ -586,6 +586,11 @@ public class TrainModel {
      * @author Jonathan Kenneson
      */
     private void checkTrackCircuit() {
+        //If there is an antenna failure, we can't read from the track
+        if (this.antennaFailure) {
+            this.trainController.safeToProceed(false);
+            return;
+        }
         byte newSetSpeed = this.currBlock.getTrackCircuit().speed;
         short newAuthorityShort = this.currBlock.getTrackCircuit().authority;
         double newAuthority = (double)newAuthorityShort * this.FEET_IN_A_METER;
@@ -707,6 +712,10 @@ public class TrainModel {
      * @return a GPS message with all necessary data
      */
     public GPSMessage requestGPSMessage() {
+        //If there is an antenna failure, send null to MBO
+        if(this.antennaFailure) {
+            return null;
+        }
         GPSMessage tempGPSMessage = this.trainController.getGPSMessage();
         tempGPSMessage.setStoppingDistance(this.safeStoppingDistance());
         return tempGPSMessage;
