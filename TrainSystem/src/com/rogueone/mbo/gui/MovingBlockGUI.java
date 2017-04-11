@@ -20,7 +20,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
     private TrainSystem trainSystem;
 private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
-private Mbo mbo = trainSystem.getMBO();
+//private Mbo mbo = trainSystem.getMBO();
 private boolean mode  = false;
 
     /**
@@ -586,7 +586,7 @@ private boolean mode  = false;
         if(FixedBlockRadio.isSelected())
         {
             CurrentModeLabel.setText("Fixed Block Mode");
-            mbo.changeToMovingBlock();
+            trainSystem.getMBO().changeToMovingBlock();
         }
        
     }//GEN-LAST:event_FixedBlockRadioActionPerformed
@@ -696,7 +696,7 @@ private boolean mode  = false;
         if(MovingBlockRadio.isSelected())
         {
             CurrentModeLabel.setText("Moving Block Mode");
-            mbo.changeToMovingBlock();
+            trainSystem.getMBO().changeToMovingBlock();
         }
     }//GEN-LAST:event_MovingBlockRadioActionPerformed
 

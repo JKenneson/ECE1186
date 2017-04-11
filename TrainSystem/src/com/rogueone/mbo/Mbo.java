@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.trackcon.entities.PresenceBlock;
+import com.rogueone.trackmodel.Block;
+import com.rogueone.trackmodel.TrackPiece;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.table.*;
@@ -279,12 +281,29 @@ public class Mbo{
         mboGui.update();
             //trainList = trainSystem.getTrainHandler().getTrains();
             int numTrains = trainSystem.getTrainHandler().getTrains().size();
-        trainList.clear();
+        //trainList.clear();
         for(int i =0;i<numTrains;i++){
+            MboTrain train = trainList.get(i);
             if(mode.equals("Moving Block")){
-                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().
-                PresenceBlock lookaheadBlock = new PresenceBlock(trainSystem, line);
-                lookaheadBlock.getNextBlock();
+                System.out.println("MOVING BLOCK");
+                ///TYPING ISSUES OF PREVBLOCK
+                //Block prevBlk = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getPortA().getType();
+                //Block blk = (Block)trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(prevBlk);
+                
+                
+                
+                
+//                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().
+//                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(previous);
+//                PresenceBlock lookaheadBlock = new PresenceBlock(trainSystem, line);
+//                lookaheadBlock.getNextBlock();
+//                Block a = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock();
+//                TrackPiece b = a.getNext(a);
+//                //if(b.getType()==Global.PieceType.BLOCK)
+//                {
+//                    //Block c = (Block)b;
+//                    
+//                }
             }
         }
     }
