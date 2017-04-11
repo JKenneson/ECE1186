@@ -22,6 +22,7 @@ import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.TrackPiece;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
+import javax.swing.JTable;
 import javax.swing.table.*;
 
 /**
@@ -160,23 +161,23 @@ public class Mbo{
         Object[][] data = new Object[6][10];
         Object[] columnNames={"TRAIN ID", "TRAIN LINE", "TRACK SECTION", "BLOCK", "NEXT STATION", "TIME OF ARRIVAL", "AUTHORITY", "CURRENT SPEED", "SUGGESTED SPEED", "PASSENGERS"};
         int i=0,j=0;
-        mboGui.TrainDropdown.removeAllItems();
+        //mboGui.TrainDropdown.removeAllItems();
         
         for(i=0;i<length;i++){
             
-           int tid = trainList.get(i).getTrainId();
+           int tid = trainSystem.getTrainHandler().getTrains().get(i).trainID;
            String temp = String.valueOf(tid);
-           mboGui.TrainDropdown.addItem(temp);
-                  data[i][0]= trainList.get(i).getTrainId(); 
-                  data[i][1]= trainList.get(i).getPosition();
-                  data[i][2]= trainList.get(i).getPosition();
-                  data[i][3] = trainList.get(i).getPosition();
+           //mboGui.TrainDropdown.addItem(temp);
+                 // data[i][0]= trainList.get(i).getTrainId(); 
+                  //data[i][1]= trainList.get(i).getPosition();
+                  //data[i][2]= trainList.get(i).getPosition();
+                  //data[i][3] = trainList.get(i).getPosition();
                   //data[i][4] = trainList.get(i).NEXTSTATOIN
                   //data[i][5] = TIMEOFARRIVAL
-                  data[i][6] = trainList.get(i).getAuthority();
-                  data[i][7] = trainList.get(i).getCurrSpeed();
-                  data[i][8] = trainList.get(i).getSuggestedSpeed();
-                  data[i][9] = trainList.get(i).getPassengers();
+                  //data[i][6] = trainList.get(i).getAuthority();
+                  //data[i][7] = trainList.get(i).getCurrSpeed();
+                  //data[i][8] = trainList.get(i).getSuggestedSpeed();
+                  //data[i][9] = trainList.get(i).getPassengers();
            
         }
        
@@ -192,19 +193,19 @@ public class Mbo{
     public void updateTrainID(){
         //if(trains.size()>0){
         //String newID = trains.get(newIdIndex);
-        String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
-        if(newID.compareTo("100")==0){
-            mboGui.CurrentSpeedValue.setText("30 mph");
-            mboGui.SuggestedSpeedValue.setText("35 mph");
-            mboGui.DifferenceValue.setText("(+5 mph)");
-        }
-        else{
-            mboGui.CurrentSpeedValue.setText("40 mph");
-            mboGui.SuggestedSpeedValue.setText("30 mph");
-            mboGui.DifferenceValue.setText("(-10 mph)");
-        }
+        //String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
+        //if(newID.compareTo("100")==0){
+            //mboGui.CurrentSpeedValue.setText("30 mph");
+            //mboGui.SuggestedSpeedValue.setText("35 mph");
+           // mboGui.DifferenceValue.setText("(+5 mph)");
+       // }
+        //else{
+           // mboGui.CurrentSpeedValue.setText("40 mph");
+           // mboGui.SuggestedSpeedValue.setText("30 mph");
+            //mboGui.DifferenceValue.setText("(-10 mph)");
+        //}
         //System.out.println(newID);
-        mboGui.TrainIdValue.setText(newID);
+        //mboGui.TrainIdValue.setText(newID);
     //}
     }
     
@@ -237,9 +238,9 @@ public class Mbo{
      */
     public void updateSpeed(){
         trainSystem.getTrainHandler().getTrains().get(1).getCurrBlock().getSpeedLimit();
-        String tempSpeed = mboGui.MboSuggestedSpeedField.getText();
-        String tempAuthority = mboGui.MboSuggestedAuthorityField.getText();
-        String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
+        //String tempSpeed = mboGui.MboSuggestedSpeedField.getText();
+       // String tempAuthority = mboGui.MboSuggestedAuthorityField.getText();
+       // String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
         if(mode.equals("Moving Block")){
             for(int i=0;i<trainList.size();i++){
             
@@ -247,9 +248,9 @@ public class Mbo{
         }
         else if(mode.equals("Fixed Block")){
            for(int i=0;i<trainList.size();i++){
-               double speedLimit = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
-               trainList.get(i).setSpeed(speedLimit);
-               trainList.get(i).setAuthority(90000);
+               //double speedLimit = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
+               //trainList.get(i).setSpeed(speedLimit);
+               //trainList.get(i).setAuthority(90000);
                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock());
             } 
         }
@@ -278,6 +279,7 @@ public class Mbo{
     public void update(){
         
         updateTrains();
+        //updateSpeed();
         mboGui.update();
             //trainList = trainSystem.getTrainHandler().getTrains();
             int numTrains = trainSystem.getTrainHandler().getTrains().size();
@@ -285,13 +287,10 @@ public class Mbo{
         for(int i =0;i<numTrains;i++){
             MboTrain train = trainList.get(i);
             if(mode.equals("Moving Block")){
-                System.out.println("MOVING BLOCK");
+                //System.out.println("MOVING BLOCK");
                 ///TYPING ISSUES OF PREVBLOCK
                 //Block prevBlk = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getPortA().getType();
                 //Block blk = (Block)trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(prevBlk);
-                
-                
-                
                 
 //                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().
 //                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(previous);
@@ -309,7 +308,9 @@ public class Mbo{
     }
     
     public void updateTrains(){
+        String[] columnNames = {"TRAIN ID","TRAIN LINE","SECTION","BLOCK","NEXT STATION","ARRIVAL TIME","AUTHORITY","CURRENT SPEED","SUGGESTED SPEED","VARIANCE","PASSENGERS"};
         int numTrains = trainSystem.getTrainHandler().getTrains().size();
+        Object[][] data = new Object[numTrains][11];
         trainList.clear();
         for(int i =0;i<numTrains;i++){
             MboTrain tempTrain = new MboTrain();
@@ -318,7 +319,21 @@ public class Mbo{
             tempTrain.setPassengers(trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord());
             tempTrain.setCurrentSpeed(trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeedMPH());
             trainList.add(tempTrain);
+            trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getLine().toString();
+            data[i][0]=trainSystem.getTrainHandler().getTrains().get(i).trainID;
+            data[i][1]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getLine().toString();
+            data[i][2]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSection().toString();
+            data[i][3]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().toString();
+            data[i][4]=trainSystem.getTrainHandler().getTrains().get(i).getApproachingStation();
+            data[i][5]=0;
+            data[i][6]=trainSystem.getTrainHandler().getTrains().get(i).getAuthority();
+            data[i][7]=trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
+            data[i][8]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
+            data[i][9] = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
+            data[i][10]=trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord();
         }
+        DefaultTableModel table = new DefaultTableModel(data, columnNames);
+        mboGui.trainTable.setModel(table);
     }
     
     public static void main(String[] args) throws IOException, InvalidFormatException{

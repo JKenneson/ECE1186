@@ -9,6 +9,7 @@ import java.io.File;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import java.io.IOException;
 import com.rogueone.trainsystem.TrainSystem;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.*;;
@@ -20,7 +21,7 @@ public class MovingBlockGUI extends javax.swing.JPanel {
 
     private TrainSystem trainSystem;
 private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
-//private Mbo mbo = trainSystem.getMBO();
+private Mbo mbo = trainSystem.getMBO();
 private boolean mode  = false;
 
     /**
@@ -52,36 +53,13 @@ private boolean mode  = false;
         PersonnelSchedulePanel = new javax.swing.JPanel();
         PersonnelSchedule = new javax.swing.JScrollPane();
         pScheduleTable = new javax.swing.JTable();
-        TestInputsPanel = new javax.swing.JPanel();
-        MboOkButton1 = new javax.swing.JButton();
-        MboSuggestedSpeedLabel = new javax.swing.JLabel();
-        MboSuggestedSpeedField = new javax.swing.JTextField();
-        MboAntennaFailureButton = new javax.swing.JToggleButton();
-        MboEbrakeButton = new javax.swing.JToggleButton();
-        MboSuggestedAuthorityLabel = new javax.swing.JLabel();
-        MboSuggestedAuthorityField = new javax.swing.JTextField();
-        MboUnitLabel = new javax.swing.JLabel();
-        MboUnitLabel2 = new javax.swing.JLabel();
-        trainDeployButton = new javax.swing.JButton();
         MboModePanel = new javax.swing.JPanel();
         FixedBlockRadio = new javax.swing.JRadioButton();
         MovingBlockRadio = new javax.swing.JRadioButton();
-        SelectTrainPrompt = new javax.swing.JLabel();
-        TrainDropdown = new javax.swing.JComboBox<>();
         ControlModeLabel = new javax.swing.JLabel();
         SystemStatusLabel = new javax.swing.JLabel();
         MboLabel = new javax.swing.JLabel();
         MboStatusLabel = new javax.swing.JLabel();
-        VariancePanel = new javax.swing.JPanel();
-        SystemIsInLabel = new javax.swing.JLabel();
-        CurrentModeLabel = new javax.swing.JLabel();
-        CurrentSpeedLabel = new javax.swing.JLabel();
-        SuggestedSpeedLabel = new javax.swing.JLabel();
-        SelectedTrainLabel = new javax.swing.JLabel();
-        TrainIdValue = new javax.swing.JLabel();
-        CurrentSpeedValue = new javax.swing.JLabel();
-        SuggestedSpeedValue = new javax.swing.JLabel();
-        DifferenceValue = new javax.swing.JLabel();
         SchedulerInputsPanel = new javax.swing.JPanel();
         UploadScheduleButton = new javax.swing.JButton();
         UploadScheduleLabel = new javax.swing.JLabel();
@@ -110,20 +88,6 @@ private boolean mode  = false;
         ));
         TrainSchedule.setViewportView(trainTable);
 
-        javax.swing.GroupLayout TrainSchedulePanelLayout = new javax.swing.GroupLayout(TrainSchedulePanel);
-        TrainSchedulePanel.setLayout(TrainSchedulePanelLayout);
-        TrainSchedulePanelLayout.setHorizontalGroup(
-            TrainSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TrainSchedulePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TrainSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        TrainSchedulePanelLayout.setVerticalGroup(
-            TrainSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TrainSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
         PersonnelSchedulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Personnel Schedule"));
 
         pScheduleTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,7 +106,7 @@ private boolean mode  = false;
             PersonnelSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PersonnelSchedulePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PersonnelSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                .addComponent(PersonnelSchedule)
                 .addContainerGap())
         );
         PersonnelSchedulePanelLayout.setVerticalGroup(
@@ -150,96 +114,30 @@ private boolean mode  = false;
             .addComponent(PersonnelSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        TestInputsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Test Inputs"));
-
-        MboOkButton1.setText("OK");
-        MboOkButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MboOkButton1ActionPerformed(evt);
-            }
-        });
-
-        MboSuggestedSpeedLabel.setText("Suggested Speed:");
-
-        MboAntennaFailureButton.setText("Toggle Antenna Failure");
-
-        MboEbrakeButton.setText("Toggle Emergency Brake");
-
-        MboSuggestedAuthorityLabel.setText("Suggested Authority:");
-
-        MboUnitLabel.setText("mph");
-
-        MboUnitLabel2.setText("feet");
-
-        trainDeployButton.setText("Dispatch Next Train");
-        trainDeployButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trainDeployButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout TestInputsPanelLayout = new javax.swing.GroupLayout(TestInputsPanel);
-        TestInputsPanel.setLayout(TestInputsPanelLayout);
-        TestInputsPanelLayout.setHorizontalGroup(
-            TestInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TestInputsPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout TrainSchedulePanelLayout = new javax.swing.GroupLayout(TrainSchedulePanel);
+        TrainSchedulePanel.setLayout(TrainSchedulePanelLayout);
+        TrainSchedulePanelLayout.setHorizontalGroup(
+            TrainSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TrainSchedulePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(TestInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TestInputsPanelLayout.createSequentialGroup()
-                        .addGroup(TestInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(TestInputsPanelLayout.createSequentialGroup()
-                                .addComponent(MboSuggestedSpeedLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(MboSuggestedSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(MboUnitLabel))
-                            .addGroup(TestInputsPanelLayout.createSequentialGroup()
-                                .addComponent(MboSuggestedAuthorityLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(MboSuggestedAuthorityField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(MboUnitLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(MboOkButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TestInputsPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(MboAntennaFailureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TestInputsPanelLayout.createSequentialGroup()
-                        .addComponent(MboEbrakeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(trainDeployButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(TrainSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PersonnelSchedulePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TrainSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE))
+                .addGap(280, 280, 280))
         );
-        TestInputsPanelLayout.setVerticalGroup(
-            TestInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TestInputsPanelLayout.createSequentialGroup()
-                .addGroup(TestInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TestInputsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(TestInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(MboSuggestedSpeedLabel)
-                            .addComponent(MboSuggestedSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MboUnitLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(TestInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(MboSuggestedAuthorityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MboSuggestedAuthorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MboUnitLabel2)))
-                    .addGroup(TestInputsPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(MboOkButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(trainDeployButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        TrainSchedulePanelLayout.setVerticalGroup(
+            TrainSchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TrainSchedulePanelLayout.createSequentialGroup()
+                .addComponent(TrainSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MboEbrakeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(MboAntennaFailureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PersonnelSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         MboModePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Mode"));
 
         buttonGroup1.add(FixedBlockRadio);
+        FixedBlockRadio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         FixedBlockRadio.setText("Fixed Block ");
         FixedBlockRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,6 +146,7 @@ private boolean mode  = false;
         });
 
         buttonGroup1.add(MovingBlockRadio);
+        MovingBlockRadio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         MovingBlockRadio.setSelected(true);
         MovingBlockRadio.setText("Moving Block");
         MovingBlockRadio.addActionListener(new java.awt.event.ActionListener() {
@@ -256,22 +155,17 @@ private boolean mode  = false;
             }
         });
 
-        SelectTrainPrompt.setText("Select train to interact with:");
-
-        TrainDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"","" }));
-        TrainDropdown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TrainDropdownActionPerformed(evt);
-            }
-        });
-
+        ControlModeLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ControlModeLabel.setText("Control Mode: ");
 
+        SystemStatusLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         SystemStatusLabel.setForeground(new java.awt.Color(0, 204, 51));
         SystemStatusLabel.setText("AUTOMATIC");
 
+        MboLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         MboLabel.setText("MBO: ");
 
+        MboStatusLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         MboStatusLabel.setForeground(new java.awt.Color(0, 204, 51));
         MboStatusLabel.setText("ENABLED");
 
@@ -280,117 +174,38 @@ private boolean mode  = false;
         MboModePanelLayout.setHorizontalGroup(
             MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MboModePanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MboModePanelLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SelectTrainPrompt)
-                            .addComponent(TrainDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(MboModePanelLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(FixedBlockRadio)
-                        .addGap(18, 18, 18)
-                        .addComponent(MovingBlockRadio))
-                    .addGroup(MboModePanelLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ControlModeLabel)
                             .addComponent(MboLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(MboStatusLabel)
-                            .addComponent(SystemStatusLabel))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(SystemStatusLabel)))
+                    .addGroup(MboModePanelLayout.createSequentialGroup()
+                        .addComponent(FixedBlockRadio)
+                        .addGap(18, 18, 18)
+                        .addComponent(MovingBlockRadio)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         MboModePanelLayout.setVerticalGroup(
             MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MboModePanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ControlModeLabel)
-                    .addComponent(SystemStatusLabel))
+                    .addComponent(SystemStatusLabel)
+                    .addComponent(ControlModeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MboLabel)
                     .addComponent(MboStatusLabel))
-                .addGap(24, 24, 24)
+                .addGap(47, 47, 47)
                 .addGroup(MboModePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FixedBlockRadio)
-                    .addComponent(MovingBlockRadio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(SelectTrainPrompt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TrainDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-        );
-
-        VariancePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Variance"));
-
-        SystemIsInLabel.setText("System is in:");
-
-        CurrentModeLabel.setText("Moving Block Mode");
-
-        CurrentSpeedLabel.setText("Fixed Block Speed:");
-
-        SuggestedSpeedLabel.setText("Moving Block Speed:");
-
-        SelectedTrainLabel.setText("Selected train ID:");
-
-        TrainIdValue.setText("-");
-
-        CurrentSpeedValue.setText("- mph");
-
-        SuggestedSpeedValue.setText("- mph");
-
-        DifferenceValue.setText("(- mph)");
-
-        javax.swing.GroupLayout VariancePanelLayout = new javax.swing.GroupLayout(VariancePanel);
-        VariancePanel.setLayout(VariancePanelLayout);
-        VariancePanelLayout.setHorizontalGroup(
-            VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VariancePanelLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VariancePanelLayout.createSequentialGroup()
-                        .addComponent(SuggestedSpeedLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(SuggestedSpeedValue)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DifferenceValue))
-                    .addComponent(CurrentSpeedLabel)
-                    .addGroup(VariancePanelLayout.createSequentialGroup()
-                        .addGroup(VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SystemIsInLabel)
-                            .addComponent(SelectedTrainLabel))
-                        .addGap(21, 21, 21)
-                        .addGroup(VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CurrentModeLabel)
-                            .addGroup(VariancePanelLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CurrentSpeedValue)
-                                    .addComponent(TrainIdValue))))))
-                .addContainerGap())
-        );
-        VariancePanelLayout.setVerticalGroup(
-            VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VariancePanelLayout.createSequentialGroup()
-                .addGroup(VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SystemIsInLabel)
-                    .addComponent(CurrentModeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SelectedTrainLabel)
-                    .addComponent(TrainIdValue))
-                .addGap(13, 13, 13)
-                .addGroup(VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CurrentSpeedLabel)
-                    .addComponent(CurrentSpeedValue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(VariancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SuggestedSpeedLabel)
-                    .addComponent(SuggestedSpeedValue)
-                    .addComponent(DifferenceValue))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(MovingBlockRadio)
+                    .addComponent(FixedBlockRadio))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         SchedulerInputsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Scheduler Inputs"));
@@ -402,8 +217,10 @@ private boolean mode  = false;
             }
         });
 
+        UploadScheduleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         UploadScheduleLabel.setText("Upload new schedule (.xlsx)");
 
+        GenerateScheduleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         GenerateScheduleLabel.setText("Generate new train schedule using desired...");
 
         buttonGroup2.add(ThroughputRadio);
@@ -429,11 +246,11 @@ private boolean mode  = false;
             }
         });
 
-        MboUnits3.setText("passengers/hr");
+        MboUnits3.setText("trains/hr");
 
         MboUnits4.setText("trains");
 
-        MboOkButton2.setText("OK");
+        MboOkButton2.setText("Generate");
         MboOkButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MboOkButton2ActionPerformed(evt);
@@ -445,33 +262,33 @@ private boolean mode  = false;
         SchedulerInputsPanelLayout.setHorizontalGroup(
             SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
-                .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(UploadScheduleLabel)
-                    .addComponent(GenerateScheduleLabel))
+                .addComponent(GenerateScheduleLabel)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
-                .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
-                                .addComponent(ThroughputRadio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ThroughputInput, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
-                                .addComponent(NumTrainsRadio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NumTrainsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(UploadScheduleLabel)
+                            .addComponent(MboOkButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UploadScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SchedulerInputsPanelLayout.createSequentialGroup()
                         .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MboUnits3)
-                            .addComponent(MboUnits4)))
-                    .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(UploadScheduleButton))
-                    .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(MboOkButton2)))
+                            .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(NumTrainsRadio))
+                            .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(ThroughputRadio)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ThroughputInput, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NumTrainsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MboUnits3)
+                    .addComponent(MboUnits4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SchedulerInputsPanelLayout.setVerticalGroup(
@@ -479,8 +296,8 @@ private boolean mode  = false;
             .addGroup(SchedulerInputsPanelLayout.createSequentialGroup()
                 .addComponent(UploadScheduleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(UploadScheduleButton)
-                .addGap(24, 24, 24)
+                .addComponent(UploadScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(GenerateScheduleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(SchedulerInputsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -493,10 +310,11 @@ private boolean mode  = false;
                     .addComponent(NumTrainsInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MboUnits4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MboOkButton2)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(MboOkButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
+        DetailedScheduleButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         DetailedScheduleButton.setText("View detailed train schedule");
         DetailedScheduleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -509,44 +327,29 @@ private boolean mode  = false;
         MboPanelLayout.setHorizontalGroup(
             MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MboPanelLayout.createSequentialGroup()
-                .addGroup(MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(MboPanelLayout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(TestInputsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(2, 2, 2)
-                            .addComponent(SchedulerInputsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addGroup(MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(VariancePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(DetailedScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MboPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(MboModePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(PersonnelSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(209, 209, 209)))
-                    .addComponent(TrainSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(MboModePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(SchedulerInputsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DetailedScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(MboPanelLayout.createSequentialGroup()
+                .addComponent(TrainSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         MboPanelLayout.setVerticalGroup(
             MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MboPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MboModePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PersonnelSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(MboModePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SchedulerInputsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DetailedScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TrainSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(MboPanelLayout.createSequentialGroup()
-                        .addComponent(VariancePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DetailedScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(SchedulerInputsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TestInputsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         MboPane.setViewportView(MboPanel);
@@ -563,31 +366,9 @@ private boolean mode  = false;
         add(MboPane, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MboOkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton1ActionPerformed
-        Mbo mbo = null;
-        mbo = trainSystem.getMBO();
-        mbo.updateSpeed();
-    }//GEN-LAST:event_MboOkButton1ActionPerformed
-
-    private void TrainDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainDropdownActionPerformed
-        //MovingBlockGUI gui = new MovingBlockGUI();
-        Mbo mbo = null;
-        mbo = trainSystem.getMBO();
-      //int trainIdIndex = gui.TrainDropdown.getSelectedIndex();
-      //String trainID = String.valueOf(gui.TrainDropdown.getSelectedItem());
-       //System.out.println(trainIdIndex);
-       //mbo.updateTrainID(trainIdIndex);
-       mbo.updateTrainID();
-       //gui.TrainIdValue.setText(trainID);
-    }//GEN-LAST:event_TrainDropdownActionPerformed
-
     private void FixedBlockRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FixedBlockRadioActionPerformed
 
-        if(FixedBlockRadio.isSelected())
-        {
-            CurrentModeLabel.setText("Fixed Block Mode");
-            trainSystem.getMBO().changeToMovingBlock();
-        }
+        
        
     }//GEN-LAST:event_FixedBlockRadioActionPerformed
 
@@ -645,6 +426,19 @@ private boolean mode  = false;
 
                 }
             }
+            else if(ThroughputRadio.isSelected()){
+                String numTrainStr = ThroughputInput.getText();
+                int throughput = Integer.parseInt(numTrainStr);
+                double timearoundGreen = .75;
+                double timearoundRed = .33;
+                int numTrains = (int)Math.ceil(throughput/timearoundGreen);
+                try{
+                Scheduler.generateSchedule(numTrains);
+                }
+                catch(IOException | InvalidFormatException e){
+
+                }
+            }
     }//GEN-LAST:event_MboOkButton2ActionPerformed
 
     private void NumTrainsRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumTrainsRadioActionPerformed
@@ -676,26 +470,10 @@ private boolean mode  = false;
        System.out.println(a.get(0));
     }//GEN-LAST:event_DetailedScheduleButtonActionPerformed
 
-    private void trainDeployButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainDeployButtonActionPerformed
-        Mbo mbo = null;
-        mbo = trainSystem.getMBO();
-        DefaultTableModel model = (DefaultTableModel)trainTable.getModel();
-        MovingBlockGUI gui = new MovingBlockGUI(trainSystem);
-        try{
-           mbo.dispatch(); 
-        }
-        catch(IOException | InvalidFormatException e){
-            
-        }
-        //System.out.println("here");
-       // gui.trainTable.setModel(model);
-        model.fireTableDataChanged();
-    }//GEN-LAST:event_trainDeployButtonActionPerformed
-
     private void MovingBlockRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MovingBlockRadioActionPerformed
         if(MovingBlockRadio.isSelected())
         {
-            CurrentModeLabel.setText("Moving Block Mode");
+            //CurrentModeLabel.setText("Moving Block Mode");
             trainSystem.getMBO().changeToMovingBlock();
         }
     }//GEN-LAST:event_MovingBlockRadioActionPerformed
@@ -703,41 +481,46 @@ private boolean mode  = false;
     public void update(){
         mode = trainSystem.getCTC().isAutomatic();
         if(mode != true){
+            //System.out.println("In manual");
             SystemStatusLabel.setText("MANUAL");
+            SystemStatusLabel.setForeground(Color.red);
             MboStatusLabel.setText("DISABLED");
+            MboStatusLabel.setForeground(Color.red);
+            FixedBlockRadio.setEnabled(false);
+            MovingBlockRadio.setEnabled(false);
+            //TrainDropdown.setEnabled(false);
+            //MboOkButton1.setEnabled(false);
         }
         else{
+            //System.out.println("In automatic");
             SystemStatusLabel.setText("AUTOMATIC");
+             SystemStatusLabel.setForeground(Color.green);
             if(MovingBlockRadio.isSelected()==true){
                 MboStatusLabel.setText("ENABLED");
+                MboStatusLabel.setForeground(Color.green);
             }
+            else if(FixedBlockRadio.isSelected()==true){
+                MboStatusLabel.setText("DISABLED");
+                MboStatusLabel.setForeground(Color.red);
+            }
+             FixedBlockRadio.setEnabled(true);
+                MovingBlockRadio.setEnabled(true);
+             //TrainDropdown.setEnabled(true);
+                //MboOkButton1.setEnabled(true);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel ControlModeLabel;
-    private javax.swing.JLabel CurrentModeLabel;
-    private javax.swing.JLabel CurrentSpeedLabel;
-    public javax.swing.JLabel CurrentSpeedValue;
     private javax.swing.JButton DetailedScheduleButton;
-    public javax.swing.JLabel DifferenceValue;
     private javax.swing.JRadioButton FixedBlockRadio;
     private javax.swing.JLabel GenerateScheduleLabel;
-    private javax.swing.JToggleButton MboAntennaFailureButton;
-    private javax.swing.JToggleButton MboEbrakeButton;
     private javax.swing.JLabel MboLabel;
     private javax.swing.JPanel MboModePanel;
-    private javax.swing.JButton MboOkButton1;
     private javax.swing.JButton MboOkButton2;
     private javax.swing.JScrollPane MboPane;
     public javax.swing.JPanel MboPanel;
     private javax.swing.JLabel MboStatusLabel;
-    public javax.swing.JTextField MboSuggestedAuthorityField;
-    private javax.swing.JLabel MboSuggestedAuthorityLabel;
-    public javax.swing.JTextField MboSuggestedSpeedField;
-    private javax.swing.JLabel MboSuggestedSpeedLabel;
-    private javax.swing.JLabel MboUnitLabel;
-    private javax.swing.JLabel MboUnitLabel2;
     private javax.swing.JLabel MboUnits3;
     private javax.swing.JLabel MboUnits4;
     private javax.swing.JRadioButton MovingBlockRadio;
@@ -746,26 +529,16 @@ private boolean mode  = false;
     private javax.swing.JScrollPane PersonnelSchedule;
     private javax.swing.JPanel PersonnelSchedulePanel;
     private javax.swing.JPanel SchedulerInputsPanel;
-    private javax.swing.JLabel SelectTrainPrompt;
-    private javax.swing.JLabel SelectedTrainLabel;
-    private javax.swing.JLabel SuggestedSpeedLabel;
-    public javax.swing.JLabel SuggestedSpeedValue;
-    private javax.swing.JLabel SystemIsInLabel;
     private javax.swing.JLabel SystemStatusLabel;
-    private javax.swing.JPanel TestInputsPanel;
     private javax.swing.JTextField ThroughputInput;
     private javax.swing.JRadioButton ThroughputRadio;
-    public javax.swing.JComboBox<String> TrainDropdown;
-    public javax.swing.JLabel TrainIdValue;
     private javax.swing.JScrollPane TrainSchedule;
     private javax.swing.JPanel TrainSchedulePanel;
     private javax.swing.JButton UploadScheduleButton;
     private javax.swing.JLabel UploadScheduleLabel;
-    private javax.swing.JPanel VariancePanel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     public javax.swing.JTable pScheduleTable;
-    private javax.swing.JButton trainDeployButton;
     public javax.swing.JTable trainTable;
     // End of variables declaration//GEN-END:variables
 }

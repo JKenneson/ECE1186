@@ -27,7 +27,38 @@ public class Scheduler {
      private static ArrayList<String> greenDispatchTimes = new ArrayList<String>();
      public static MovingBlockGUI mboGui = Mbo.mboGui;
      public static TrainScheduleGUI scheduleGUI = new TrainScheduleGUI();
+     private static int numGreenTrains = 0;
+     private static int numRedTrains = 0;
      public TrainSystem trainSystem;
+     //green stations (start @ row 4)
+     private ArrayList<String> herron = new ArrayList();
+     private ArrayList<String> swissvale = new ArrayList();
+     private ArrayList<String> penn = new ArrayList();
+     private ArrayList<String> plaza = new ArrayList();
+     private ArrayList<String> first = new ArrayList();
+     private ArrayList<String> square = new ArrayList();
+     private ArrayList<String> hills = new ArrayList();
+     //red stations (start @ row 4)
+     private ArrayList<String> pioneer = new ArrayList();
+     private ArrayList<String> edgebrook = new ArrayList();
+     private ArrayList<String> pitt = new ArrayList();
+     private ArrayList<String> whited = new ArrayList();
+     private ArrayList<String> bank = new ArrayList();
+     private ArrayList<String> central = new ArrayList();
+     private ArrayList<String> inglewood = new ArrayList();
+     private ArrayList<String> overbrook = new ArrayList();
+     private ArrayList<String> glenbury = new ArrayList();
+     private ArrayList<String> dormont = new ArrayList();
+     private ArrayList<String> lebo = new ArrayList();
+     private ArrayList<String> poplar = new ArrayList();
+     private ArrayList<String> castle = new ArrayList();
+     private ArrayList<String> dormontInbound = new ArrayList();
+     private ArrayList<String> glenburyInbound = new ArrayList();
+     private ArrayList<String> overbrookInbound = new ArrayList();
+     private static Object[][] greenData = new Object[1000][19];
+     private static Object[][] redData = new Object[100][19];
+     
+     
     
       public Scheduler(TrainSystem ts) throws IOException, InvalidFormatException {
        trainSystem = ts;
@@ -139,7 +170,8 @@ public class Scheduler {
             }
             }
         }
-        
+        redData = data;
+        numRedTrains = numTrains;
         //evens only
         for(i = 0; i < numTrains+1; i++){
             if((i)%2 == 0){
@@ -236,7 +268,8 @@ public class Scheduler {
             }
             }
         }
-        
+        greenData = data;
+        numGreenTrains = numTrains;
         //evens only
         for(i = 0; i < numTrains+1; i++){
             if((i)%2 == 0){
@@ -541,5 +574,197 @@ public class Scheduler {
         //for(int i=0; i<numEmployees; i=i+3){
         //}
         */
+    }
+//    private ArrayList<String> herron = new ArrayList();
+    public ArrayList<String> getShadysideTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numRedTrains; i++){
+            times.add(redData[3][i].toString());
+        }
+        return times;
+    }
+    public ArrayList<String> getHerronTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numRedTrains; i++){
+            times.add(redData[4][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> swissvale = new ArrayList();
+    public ArrayList<String> getSwissvaleTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numRedTrains; i++){
+            times.add(redData[5][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> penn = new ArrayList();
+    public ArrayList<String> getPennStTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numRedTrains; i++){
+            times.add(redData[6][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> plaza = new ArrayList();
+    public ArrayList<String> getSteelPlazaTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numRedTrains; i++){
+            times.add(redData[7][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> first = new ArrayList();
+    public ArrayList<String> getFirstAveTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numRedTrains; i++){
+            times.add(redData[8][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> square = new ArrayList();
+    public ArrayList<String> getStSquareTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numRedTrains; i++){
+            times.add(redData[9][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> hills = new ArrayList();
+    public ArrayList<String> getSthHillsTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numRedTrains; i++){
+            times.add(redData[10][i].toString());
+        }
+        return times;
+    }
+//     //red stations (start @ row 4)
+//     private ArrayList<String> pioneer = new ArrayList();
+     public ArrayList<String> getPioneerTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[3][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> edgebrook = new ArrayList();
+     public ArrayList<String> getEdgebrookTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[4][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> pitt = new ArrayList();
+     public ArrayList<String> getPittTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[5][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> whited = new ArrayList();
+     public ArrayList<String> getWhitedTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[6][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> bank = new ArrayList();
+     public ArrayList<String> getSthBankTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[7][i].toString());
+        }
+        return times;
+    }
+     public ArrayList<String> getCentralTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[8][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> central = new ArrayList();
+//     private ArrayList<String> inglewood = new ArrayList();
+     public ArrayList<String> getInglewoodTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[9][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> overbrook = new ArrayList();
+     public ArrayList<String> getOverbrookTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[10][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> glenbury = new ArrayList();
+     public ArrayList<String> getGlenburyTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[11][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> dormont = new ArrayList();
+     public ArrayList<String> getDormontTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[12][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> lebo = new ArrayList();
+     public ArrayList<String> getMtLebanonTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[13][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> poplar = new ArrayList();
+     public ArrayList<String> getPoplarTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[14][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> castle = new ArrayList();
+     public ArrayList<String> getCastleShanonTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[15][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> dormontInbound = new ArrayList();
+     public ArrayList<String> getDormontInboundTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[16][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> glenburyInbound = new ArrayList();
+     public ArrayList<String> getGlenburyInboundTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[17][i].toString());
+        }
+        return times;
+    }
+//     private ArrayList<String> overbrookInbound = new ArrayList();
+     public ArrayList<String> getOverbrookInboundTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i =0; i<numGreenTrains; i++){
+            times.add(greenData[18][i].toString());
+        }
+        return times;
     }
 }
