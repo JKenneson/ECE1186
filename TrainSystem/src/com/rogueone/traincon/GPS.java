@@ -61,7 +61,7 @@ public class GPS{
         //Block setting
         this.prevBlock = trainSystem.getTrackModel().getYard();
         //Need to account below for which line the train is on
-        System.out.println(line);
+        //System.out.println(line);
         if(line.equals("GREEN")){
             this.currBlock = trainSystem.getTrackModel().enterTrack(Global.Line.GREEN);
         }
@@ -147,3 +147,6 @@ public class GPS{
         return new GPSMessage(currSpeed, currBlock, currBlock.getLine().toString(), trainID);
     }
 }
+
+
+

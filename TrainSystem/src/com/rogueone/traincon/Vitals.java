@@ -22,6 +22,7 @@ public class Vitals {
     private PowerSystems powerSystem;
     private SpeedControl speedControl;
     private GPS gps;
+    private String line;
 
     private double powerCommand;
     private double maxPower;
@@ -78,7 +79,7 @@ public class Vitals {
         this.uK = 0;
         this.uK_1 = 0;
         this.maxPower = maxPow;
-
+        this.line = line;
         this.gps = new GPS(authority, ts, trainID, line);
         this.speedControl = new SpeedControl(setPointSpeed, setPointSpeed, tm, this.gps);
         this.powerSystem = ps;
@@ -100,7 +101,7 @@ public class Vitals {
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         if (this.approachingStation) {
 
-            //System.out.println("Train "+ this.gps.trainID + ": " + "Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
+            System.out.println("Train "+ this.gps.trainID + ": " + "Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
             //System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
@@ -405,13 +406,28 @@ public class Vitals {
 
     public void receieveBeacon(Beacon beacon) {
         boolean skipped = true;
+        System.out.println("Previous station: " + this.previousStation);
+        System.out.println("");
         if (beacon.getStation() != null) {
-            this.station = beacon.getStation().getName();
+            if(!this.approachingStation){
+                this.station = beacon.getStation().getName();
+            }
             if (beacon.getID() == 33) { //Try to fix logic here
                 specialCase = !this.specialCase;
                 skipped = false;
             }
-            if (!this.previousStation.equals(this.station) && (this.specialCase || skipped)) {
+            if (!this.previousStation.equals(this.station) && (this.specialCase || skipped) && this.line.equals("GREEN")) {
+                
+                this.approachingStation = true;
+                this.doorSide = beacon.isOnRight();
+                this.distanceToStation = beacon.getDistance() + 50;
+//                if(this.specialCase == false){
+//                    this.specialCase = !this.specialCase;
+//                }
+            }
+            
+            else if(!this.previousStation.equals(this.station) && (this.specialCase || skipped) && this.line.equals("RED") && !this.approachingStation) {
+                //this.station = beacon.getStation().getName();
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
                 this.distanceToStation = beacon.getDistance() + 50;
@@ -420,8 +436,12 @@ public class Vitals {
 //                }
             }
 
-        } else { //Do distance calculation work for red line
+        }
+        else{ //Do distance calculation work for red line
 
         }
+        System.out.println("Previous station: " + this.previousStation);
+        System.out.println("This station: " + this.station);
+
     }
 }
