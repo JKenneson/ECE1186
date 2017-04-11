@@ -30,33 +30,10 @@ public class Scheduler {
      private static int numGreenTrains = 0;
      private static int numRedTrains = 0;
      public TrainSystem trainSystem;
-     //green stations (start @ row 4)
-     private ArrayList<String> herron = new ArrayList();
-     private ArrayList<String> swissvale = new ArrayList();
-     private ArrayList<String> penn = new ArrayList();
-     private ArrayList<String> plaza = new ArrayList();
-     private ArrayList<String> first = new ArrayList();
-     private ArrayList<String> square = new ArrayList();
-     private ArrayList<String> hills = new ArrayList();
-     //red stations (start @ row 4)
-     private ArrayList<String> pioneer = new ArrayList();
-     private ArrayList<String> edgebrook = new ArrayList();
-     private ArrayList<String> pitt = new ArrayList();
-     private ArrayList<String> whited = new ArrayList();
-     private ArrayList<String> bank = new ArrayList();
-     private ArrayList<String> central = new ArrayList();
-     private ArrayList<String> inglewood = new ArrayList();
-     private ArrayList<String> overbrook = new ArrayList();
-     private ArrayList<String> glenbury = new ArrayList();
-     private ArrayList<String> dormont = new ArrayList();
-     private ArrayList<String> lebo = new ArrayList();
-     private ArrayList<String> poplar = new ArrayList();
-     private ArrayList<String> castle = new ArrayList();
-     private ArrayList<String> dormontInbound = new ArrayList();
-     private ArrayList<String> glenburyInbound = new ArrayList();
-     private ArrayList<String> overbrookInbound = new ArrayList();
+     private static String startTime = "6.00.00";
      private static Object[][] greenData = new Object[1000][19];
      private static Object[][] redData = new Object[100][19];
+     private static int employeeNumber = 0;
      
      
     
@@ -80,12 +57,12 @@ public class Scheduler {
         int numEmployees = personnelSchedule.getLastRowNum();
         
         
-        Object[][] data = new Object[numEmployees+1][8];
+        Object[][] data = new Object[numEmployees+1][5];
         int i,j;
         for(i = 1; i < numEmployees+1; i++){
             Row currRow = personnelSchedule.getRow(i);
             
-            for(j = 0; j < 8; j++){
+            for(j = 0; j < 5; j++){
                 if(currRow.getCell(j) != null){
                     String info = currRow.getCell(j).toString();
                     data[i][j] = info;
@@ -94,15 +71,21 @@ public class Scheduler {
             }
         }
         
-      Object[] columnNames = new Object[8];
-      columnNames[0]="NAME";
-      columnNames[1]="SUN";
-      columnNames[2]="MON";
-      columnNames[3]="TUES";
-      columnNames[4]="WED";
-      columnNames[5]="THURS";
-      columnNames[6]="FRI";
-      columnNames[7]="SAT";
+      Object[] columnNames = new Object[5];
+//      columnNames[0]="NAME";
+//      columnNames[1]="SUN";
+//      columnNames[2]="MON";
+//      columnNames[3]="TUES";
+//      columnNames[4]="WED";
+//      columnNames[5]="THURS";
+//      columnNames[6]="FRI";
+//      columnNames[7]="SAT";
+
+        columnNames[0]="NAME";
+        columnNames[1]="SHIFT START";
+        columnNames[2]="BREAK START";
+        columnNames[3]="BREAK END";
+        columnNames[4]="SHIFT END";
       
       DefaultTableModel model = new DefaultTableModel(data, columnNames);
       mboGui.pScheduleTable.setModel(model);
@@ -330,7 +313,7 @@ public class Scheduler {
         
         numTrains = numTrains * 2;
         int i=0,j=0,k=0;
-        String[] personnelHeaders = {"Name","SUN","MON","TUES","WED","THURS","FRI","SAT"};
+        String[] personnelHeaders = {"Name","SHIFT START","BREAK START","BREAK END","SHIFT END"};
         String[] trainHeaders = {"Train ID","Driver","Departure","SHADYSIDE","HERRON","SWISSVILLE","PENN STATION","STEEL PLAZA","FIRST AVE","ST SQUARE","STH HILLS"};
         String[] greenHeaders = {"Train ID", "PIONEER", "EDGEBROOK", "PITT", "WHITED", "SOUTH BANK", "CENTRAL", "INGLEWOOD", "OVERBROOK", "GLENBURY", "DORMONT", "MT LEBANON", "POPLAR", "CASTLE SHANON", "DORMONT", "GLEBURY", "OVERBROOK", "INGLEWOOD", "CENTRAL"};
 
@@ -338,7 +321,8 @@ public class Scheduler {
         Sheet peopleSheet = workbook.createSheet("Personnel");
         Sheet redSheet = workbook.createSheet("Red");
         Sheet greenSheet = workbook.createSheet("Green");
-        int employeeNumber = 0;
+        employeeNumber = 0;
+        startTime = "6.00.00";
         int trainID = 100;
         int dayOff1 = 0;
         int dayOff2 = dayOff1+1;
@@ -362,7 +346,7 @@ public class Scheduler {
             Row redRow = redSheet.createRow(j);
             Row greenRow = greenSheet.createRow(j);
             if(j==0){
-                for(i=0;i<8;i++){
+                for(i=0;i<5;i++){
                     Cell cell = peopleRow.createCell(i);
                     cell.setCellValue(personnelHeaders[i]);
                 }
@@ -386,25 +370,22 @@ public class Scheduler {
                         driverNames[j]="Employee "+employeeNumber;
                         cell.setCellValue("Employee "+employeeNumber);
                     }
-                    else if(i==dayOff1 || i==dayOff2){
-                        if(currentDay == i){
-                            isOff = 1;
-                        }
-                        cell.setCellValue("OFF");
+                    else if(i==1){
+                        cell.setCellValue(startTime);
                     }
-                    else{
-                        
-                        if((j &1)==0){
-                            cell.setCellValue("6am - 2:30pm");
-                        }
-                        else{
-                            cell.setCellValue("2pm - 10:30pm");
-                        }
+                    else if(i==2){
+                        cell.setCellValue(incrementTime(startTime,"240.0"));
+                    }
+                    else if(i==3){
+                        cell.setCellValue(incrementTime(startTime,"270.0"));
+                    }
+                    else if(i==4){
+                        cell.setCellValue(incrementTime(startTime,"510.0"));
                     }
                     
                     
                 }
-                   if(isOff == 0){
+                   
                 for(i=0;i<3;i++){
                     Cell cell = redRow.createCell(i);
                     if(i==0){
@@ -427,19 +408,8 @@ public class Scheduler {
                     }
                 }
                             
-                   }
-                   else{
-                       Row deleted = redSheet.getRow(j);
-                       redSheet.removeRow(deleted);
-                       /*
-                       System.out.println("J+1: "+(j+1)+" Last row: "+numTrains);
-                       if(j+1<numTrains){
-                           System.out.println("SHIFTING");
-                        redSheet.shiftRows(j, j, 1);
-                       
-                       }
-                       */
-                   }
+                   
+                   
             }
             employeeNumber++;
             dayOff1=dayOff1+dayOffInterval;
@@ -462,7 +432,7 @@ public class Scheduler {
             Row personRow = peopleSheet.createRow(j);
             Row greenRow = greenSheet.createRow(j);
             if(j==0){
-                for(i=0;i<8;i++){
+                for(i=0;i<5;i++){
                     Cell cell = personRow.createCell(i);
                     cell.setCellValue(personnelHeaders[i]);
                 }
@@ -479,26 +449,41 @@ public class Scheduler {
             }
             else{
                 String[] driverNames = new String[numTrains+1];
-                for(i=0;i<8;i++){
+                for(i=0;i<5;i++){
                     Cell cell = personRow.createCell(i);
                     if(i==0){
                         driverNames[j]="Employee "+employeeNumber;
                         cell.setCellValue("Employee "+employeeNumber);
                     }
-                    else if(i==dayOff1 || i==dayOff2){
-                        if(currentDay == i){
-                            isOff = 1;
-                        }
-                        cell.setCellValue("OFF");
+                    else if(i==1){
+                        cell.setCellValue(convertTime(startTime));
                     }
-                    else{
-                        
-                        if((j &1)==0){
-                            cell.setCellValue("6am - 2:30pm");
-                        }
-                        else{
-                            cell.setCellValue("2pm - 10:30pm");
-                        }
+                    else if(i==2){
+                        String temp1 = incrementTime(startTime,"60.0");
+                        String temp2 = incrementTime(temp1,"60.0");
+                        String temp3 = incrementTime(temp2,"60.0");
+                        String temp4 = incrementTime(temp3,"60.0");
+                        cell.setCellValue(convertTime(temp4));
+                    }
+                    else if(i==3){
+                        String temp1 = incrementTime(startTime,"60.0");
+                        String temp2 = incrementTime(temp1,"60.0");
+                        String temp3 = incrementTime(temp2,"60.0");
+                        String temp4 = incrementTime(temp3,"60.0");
+                        String temp5 = incrementTime(temp4,"30.0");
+                        cell.setCellValue(convertTime(temp5));
+                    }
+                    else if(i==4){
+                        String temp1 = incrementTime(startTime,"60.0");
+                        String temp2 = incrementTime(temp1,"60.0");
+                        String temp3 = incrementTime(temp2,"60.0");
+                        String temp4 = incrementTime(temp3,"60.0");
+                        String temp5 = incrementTime(temp4,"60.0");
+                        String temp6 = incrementTime(temp5,"60.0");
+                        String temp7 = incrementTime(temp6,"60.0");
+                        String temp8 = incrementTime(temp7,"60.0");
+                        String temp9 = incrementTime(temp8,"30.0");
+                        cell.setCellValue(convertTime(temp9));
                     }
                     
                     
@@ -540,6 +525,7 @@ public class Scheduler {
                        */
                    }
             }
+            startTime = incrementTime(startTime,"10.0");
             employeeNumber++;
             dayOff1=dayOff1+dayOffInterval;
             dayOff2=dayOff1+1;

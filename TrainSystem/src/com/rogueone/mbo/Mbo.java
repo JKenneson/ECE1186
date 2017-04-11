@@ -5,7 +5,7 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 4/3/17
+ * @modification date 4/11/17
  */
 package com.rogueone.mbo;
 import com.rogueone.global.Global;
@@ -132,7 +132,7 @@ public class Mbo{
         minutes = minutes+tens;
         seconds = seconds+(60*(decimal/10));
         
-        if(seconds>60)
+        if(seconds>=60)
         {
             seconds=seconds-60;
             minutes++;
