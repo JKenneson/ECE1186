@@ -77,10 +77,7 @@ public class Station {
      */
     public int updatePassengers() {
         int difference = (MAX_PASSENGER_CHANGE - 1) - random.nextInt(MAX_PASSENGER_CHANGE + 1);
-        waitingPassengers += difference;
-        if (waitingPassengers < 0) {
-            waitingPassengers = 0;
-        }
+        setWaitingPassengers(waitingPassengers += difference);
         return waitingPassengers;
     }
     
@@ -207,6 +204,22 @@ public class Station {
         return waitingPassengers;
     }
     
+    /**
+     * Determine equality with another station
+     * @param newWaitingPassengers new number of waiting passengers
+     */
+    public void setWaitingPassengers(int newWaitingPassengers) {
+        waitingPassengers = newWaitingPassengers;
+        if (waitingPassengers < 0) {
+            waitingPassengers = 0;
+        }
+    }
+    
+    /**
+     * Determine equality with another station
+     * @param otherStation Station to compare
+     * @return boolean indicating equality
+     */
     public boolean equals(Station otherStation) {
         return this.stationID == otherStation.getID();
     }

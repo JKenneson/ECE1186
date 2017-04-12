@@ -665,7 +665,8 @@ public class TrainModel {
         this.passengersDisembarking = 0;
         
         //Ask the station for a number of passengers to enter
-        int passengersToEnter = (this.passengerMaxCapacity - this.passengersOnBaord) - currStation.boardPassengers(this.passengerMaxCapacity - this.passengersOnBaord);
+        int availableSeats = this.passengerMaxCapacity - this.passengersOnBaord;
+        int passengersToEnter = availableSeats - currStation.boardPassengers(availableSeats);
         this.passengersOnBaord = this.passengersOnBaord + passengersToEnter;
         
         //To wrap up, close the doors and remove info on the gui

@@ -19,7 +19,7 @@ public class NonEditableTableModel extends DefaultTableModel {
     
       @Override
       public boolean isCellEditable(int row, int column){
-          if(this.getColumnName(column).equalsIgnoreCase("ACTIVATED") || this.getColumnName(column).equalsIgnoreCase("TEMPERATURE")) {
+          if(this.getColumnName(column).equalsIgnoreCase("WAITING") || this.getColumnName(column).equalsIgnoreCase("TEMPERATURE")) {
               return true;
           }
           return false;  

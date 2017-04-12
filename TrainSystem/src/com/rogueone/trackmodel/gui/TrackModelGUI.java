@@ -433,27 +433,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
             switchTable.getColumnModel().getColumn(2).setResizable(false);
             switchTable.getColumnModel().getColumn(3).setResizable(false);
         }
-        Action action = new AbstractAction()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                Block b = (Block) blockSelectionComboBox.getSelectedItem();
-                if(b != null) {
-                    TableCellListener tcl = (TableCellListener)e.getSource();
-                    if (b.getSwitchID() != -1 && b.getPortB() != null) {
-                        Switch sw = (Switch) b.getPortB();
-                        if(((String)tcl.getNewValue()).equalsIgnoreCase("TRUE")) {
-                            sw.setSwitch(true);
-                        }
-                        else if(((String)tcl.getNewValue()).equalsIgnoreCase("FALSE")) {
-                            sw.setSwitch(false);
-                        }
-                    }
-                }
-            }
-        };
-        TableCellListener tcl = new TableCellListener(switchTable, action);
 
         javax.swing.GroupLayout switchPanelLayout = new javax.swing.GroupLayout(switchPanel);
         switchPanel.setLayout(switchPanelLayout);
@@ -519,13 +498,18 @@ public class TrackModelGUI extends javax.swing.JPanel {
                     TableCellListener tcl = (TableCellListener)e.getSource();
                     if (b.getStationID() != -1 && b.getStation() != null) {
                         Station st = b.getStation();
-                        st.setTemperature(Integer.parseInt(((String)tcl.getNewValue())));
+                        if(tcl.getColumn() == 6) {
+                            st.setTemperature(Integer.parseInt(((String)tcl.getNewValue())));
+                        }
+                        else if(tcl.getColumn() == 8) {
+                            st.setWaitingPassengers(Integer.parseInt(((String)tcl.getNewValue())));
+                        }
                         updateDetailsPanel();
                     }
                 }
             }
         };
-        TableCellListener stationTcl = new TableCellListener(stationTable, stationAction);
+        TableCellListener stationTCL = new TableCellListener(stationTable, stationAction);
 
         stationTable.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
