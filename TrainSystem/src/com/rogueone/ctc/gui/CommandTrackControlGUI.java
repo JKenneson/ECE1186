@@ -975,19 +975,38 @@ public int iterateID(){
             String failureSection = (String) failureTable.getValueAt(row, 1);
             String failureBlock = (String) failureTable.getValueAt(row, 2);
             String failureType = (String) failureTable.getValueAt(row, 3);
-
-
-
+            
         }
 
         if (evt.getClickCount() == 2) {
             JTable failureTable = (JTable) evt.getSource();
             int failureRow = failureTable.getSelectedRow();
             resolveFailure(failureTable.getValueAt(failureRow,0), failureTable.getValueAt(failureRow,1), failureTable.getValueAt(failureRow,2));
+            removeFailureFromTable(failureTable.getValueAt(failureRow,2));
         }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_FailureTableMouseClicked
+    
+    /**
+     *
+     * @param blockID
+     */
+    public void removeFailureFromTable(Object blockID){
+    
+        int blockIDRow = 0;
+        
+        DefaultTableModel model = (DefaultTableModel)FailureTable.getModel();
+        for(int i = 0; i < model.getRowCount(); i++){
+            for(int j = 0; j < model.getColumnCount(); j++){
+                if(model.getValueAt(i, j).equals(blockID)){
+                    blockIDRow = i;
+                }
+            }
+        }
+        model.removeRow(blockIDRow);
+        
+    }
     
     public void resolveFailure(Object line, Object section, Object block){
       
