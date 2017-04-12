@@ -10,6 +10,16 @@
 <project name="TrainSystem" default="default" basedir=".">
     <description>Builds, tests, and runs the project TrainSystem.</description>
     <import file="nbproject/build-impl.xml"/>
+	
+	<target name="-post-compile">
+		<copy todir="${dist.dir}/src/com/rogueone/images">
+			<fileset dir="src/com/rogueone/images"/>
+		</copy>
+		<copy todir="${dist.dir}/src/com/rogueone/assets">
+			<fileset dir="src/com/rogueone/assets"/>
+		</copy>
+	</target>
+	
     <!--
 
     There exist several targets which are by default empty and which can be 
