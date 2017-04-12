@@ -30,23 +30,22 @@ public class TMR {
     }
     
     public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode){
-//        double [] powers = new double[3];
-//        for(int i = 0; i < 3; i++){
-//            powers[i] = vitals[i].calculatePower(actualSpeed, samplePeriod, manualMode);
-//        }
-        return this.primaryVital.calculatePower(actualSpeed, samplePeriod, manualMode);
-        //return powers[0];
+        double [] powers = new double[3];
+        for(int i = 0; i < 3; i++){
+            powers[i] = vitals[i].calculatePower(actualSpeed, samplePeriod, manualMode);
+        }
         
-//        if(powers[0] == powers[1] || powers[0] == powers[2]){
-//            return powers[0];
-//        }
-//        else if(powers[1] == powers[2]){
-//            return powers[1];
-//        }
-//        else{
-//            System.out.println("We should not get here... Probably stop train");
-//            return this.calculatePower(actualSpeed, samplePeriod, manualMode);
-//        }
+        if(powers[0] == powers[1] || powers[0] == powers[2]){
+            return powers[0];
+        }
+        else if(powers[1] == powers[2]){
+            return powers[1];
+        }
+        else{
+            System.out.println("We should not get here... Probably stop train");
+            return this.calculatePower(actualSpeed, samplePeriod, manualMode);
+        }
+        //return this.primaryVital.calculatePower(actualSpeed, samplePeriod, manualMode);
     }
     
     public Vitals getPrimary(){
@@ -54,7 +53,10 @@ public class TMR {
     }
     
     public void update(boolean manualMode){
-        this.primaryVital.update(manualMode);
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].update(manualMode);
+        }
+        //this.primaryVital.update(manualMode);
     }
     
     public void receiveBeacon(Beacon b){ //update for TMR work
