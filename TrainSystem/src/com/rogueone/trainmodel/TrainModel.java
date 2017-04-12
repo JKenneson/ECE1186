@@ -602,7 +602,7 @@ public class TrainModel {
         //System.out.println("Track Circuit for Train " + this.trainID + " -> Speed: " + newSetSpeed + " Authority: " + newAuthority);
         
         //Safe to proceed, tell Train Controller we can proceed safely
-        if(newSetSpeed == 0 || newAuthority == 0) {
+        if(newSetSpeed == -2 || newAuthority == -2) {
             this.trainController.safeToProceed(true);
         }
         //Tell Train Controller to full stop
@@ -619,8 +619,8 @@ public class TrainModel {
             this.ctcSetPoint = newSetSpeed;
             
             //Reset the speed and authority of the track circuit
-            this.currBlock.getTrackCircuit().speed = 0;
-            this.currBlock.getTrackCircuit().authority = 0;
+            this.currBlock.getTrackCircuit().speed = -2;
+            this.currBlock.getTrackCircuit().authority = -2;
         }
     }
     

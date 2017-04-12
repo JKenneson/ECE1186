@@ -961,7 +961,7 @@ public class TrackView extends Frame {
             }
             if (occupied) {
                 s1.addBlockToCurrentBlocks(id);
-                if (authority < 0) {
+                if (authority == -1) {
                     s1.setIsHalted(true);
                 } else {
                     s1.setIsHalted(false);
@@ -973,7 +973,7 @@ public class TrackView extends Frame {
                 }
                 if (s2 != null) {
                     s2.addBlockToCurrentBlocks(id);
-                    if (authority < 0) {
+                    if (authority == -1) {
                         s2.setIsHalted(true);
                     } else {
                         s2.setIsHalted(false);
@@ -1013,7 +1013,7 @@ public class TrackView extends Frame {
             s.setIsOccupied(occupied);
             if (occupied) {
                 s.addBlockToCurrentBlocks(id);
-                if (authority < 0) {
+                if (authority == -1) {
                     s.setIsHalted(true);
                 } else {
                     s.setIsHalted(false);

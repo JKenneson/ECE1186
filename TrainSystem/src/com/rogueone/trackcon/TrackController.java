@@ -917,8 +917,8 @@ public class TrackController {
                         break;
                     } //otherwise set speed and authority to zero, represents no change
                     else {
-                        pb.getCurrBlock().getTrackCircuit().speed = 0;
-                        pb.getCurrBlock().getTrackCircuit().authority = 0;
+                        pb.getCurrBlock().getTrackCircuit().speed = -2;
+                        pb.getCurrBlock().getTrackCircuit().authority = -2;
                     }
 
                     //also check if switch is connected to a failed block
