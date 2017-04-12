@@ -69,6 +69,28 @@ public class PowerSystems{
             this.setLightsOn(lights);
         }
         
+        else{
+            if(this.temperature>72 && !this.airConditioningOn){
+                this.trainController.gui.appendNotificationsDisplay("Only AC should be on\n");
+            }
+            else if(this.temperature<72 && !this.heaterOn){
+                this.trainController.gui.appendNotificationsDisplay("Only Heater should be on\n");
+            }
+            else{
+                //this.trainController.gui.appendNotificationsDisplay("\nApproaching ");         
+            }
+
+            if(lights != this.lightsOn){
+                if(lights){
+                    this.trainController.gui.appendNotificationsDisplay("Lights should be on\n");
+                }
+                else{
+                    this.trainController.gui.appendNotificationsDisplay("Lights should be off\n");
+                }
+            }
+            //this.setLightsOn(lights);
+        }
+        
     }
     
     /**
