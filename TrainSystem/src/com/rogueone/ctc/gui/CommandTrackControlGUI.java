@@ -631,7 +631,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         
     }
     
-     public void FailureFromTrackModel(Block block){
+     public void failureFromTrackModel(Block block){
          Object[] newFailure = new Object[4];
          DefaultTableModel failureModel = (DefaultTableModel) FailureTable.getModel();
  
