@@ -54,21 +54,21 @@ public class TrackControllerHandler {
         }
         
         File altFile = null;
-        int response = JOptionPane.showConfirmDialog(null, "Do you want to load an alternate PLC file?");
-        if (response == JOptionPane.YES_OPTION) {
-            JFileChooser fc = new JFileChooser("src/com/rogueone/assets");
-            int returnVal = fc.showOpenDialog(null);
-
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                altFile = fc.getSelectedFile();
-                //This is where a real application would open the file.
-                System.out.println("Opening: " + altFile.getName() + ".");
-            } else {
-                System.out.println("No file selected/using default");
-            }
-        } else {
-            System.out.println("Using default file");
-        }
+//        int response = JOptionPane.showConfirmDialog(null, "Do you want to load an alternate PLC file?");
+//        if (response == JOptionPane.YES_OPTION) {
+//            JFileChooser fc = new JFileChooser("src/com/rogueone/assets");
+//            int returnVal = fc.showOpenDialog(null);
+//
+//            if (returnVal == JFileChooser.APPROVE_OPTION) {
+//                altFile = fc.getSelectedFile();
+//                //This is where a real application would open the file.
+//                System.out.println("Opening: " + altFile.getName() + ".");
+//            } else {
+//                System.out.println("No file selected/using default");
+//            }
+//        } else {
+//            System.out.println("Using default file");
+//        }
 
         TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem, altFile);
 //        TrackController greenTrackControllerDup = new TrackController(Global.Line.GREEN, this.trainSystem);
