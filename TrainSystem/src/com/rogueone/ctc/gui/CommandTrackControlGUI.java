@@ -84,6 +84,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         greenLabel = new javax.swing.JLabel();
         redLineThroughput = new javax.swing.JTextField();
         redLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        rushHourProgressBar = new javax.swing.JProgressBar();
         DispatchControlPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         DispatchLineBox = new javax.swing.JComboBox<>();
@@ -364,7 +366,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 30;
@@ -375,7 +377,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         greenLabel.setText("Green");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         AdditionalInfoPanel2.add(greenLabel, gridBagConstraints);
@@ -390,7 +392,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 30;
@@ -401,10 +403,28 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         redLabel.setText("Red");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
         AdditionalInfoPanel2.add(redLabel, gridBagConstraints);
+
+        jLabel1.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        jLabel1.setText("Rush Hour");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        AdditionalInfoPanel2.add(jLabel1, gridBagConstraints);
+
+        rushHourProgressBar.setMaximum(120);
+        rushHourProgressBar.setToolTipText("");
+        rushHourProgressBar.setValue(0);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        AdditionalInfoPanel2.add(rushHourProgressBar, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -631,7 +651,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      */
     public void updateTime(){
        
-
+        if ((this.trainSystem.getClock().getHour() < 6) || (this.trainSystem.getClock().getHour() >= 8)){
+            rushHourProgressBar.setValue(0);
+        }
+        
+        else{
+            if(this.trainSystem.getClock().getHour() == 6){
+                rushHourProgressBar.setValue(this.trainSystem.getClock().getMinute());
+            }
+            if(this.trainSystem.getClock().getHour() == 7){
+              rushHourProgressBar.setValue((this.trainSystem.getClock().getMinute()) + 60); 
+            }
+        }
         
         if(SelectOperationMode2.getSelectedIndex() == 1){
             getDispatchTimes();
@@ -1008,6 +1039,12 @@ public int iterateID(){
         
     }
     
+    /**
+     *
+     * @param line
+     * @param section
+     * @param block
+     */
     public void resolveFailure(Object line, Object section, Object block){
       
         Object[] failureCompare = {line, section, block};
@@ -1114,6 +1151,7 @@ public int iterateID(){
     public javax.swing.JTable TrainTable;
     private javax.swing.JLabel greenLabel;
     private javax.swing.JTextField greenLineThroughput;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1131,6 +1169,7 @@ public int iterateID(){
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel redLabel;
     private javax.swing.JTextField redLineThroughput;
+    private javax.swing.JProgressBar rushHourProgressBar;
     // End of variables declaration//GEN-END:variables
 
     private int getNumberCars() {
