@@ -56,7 +56,6 @@ public class TrainSystem {
     private Scheduler scheduler;
     private TrackView trackViewGreen;
     private TrackView trackViewRed;
-    //private Schedule schedule;
     
     // GUI
     private MainFrame mainFrame;

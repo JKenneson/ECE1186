@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
+import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -61,7 +62,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         trackDataFileChooser = new javax.swing.JFileChooser();
         scheduleFrame = new javax.swing.JFrame();
         scheduleScrollPane = new javax.swing.JScrollPane();
-        scheduleTextPanel = new javax.swing.JTextPane();
+        scheduleTable = new javax.swing.JTable();
         trackModelTabbedPane = new javax.swing.JTabbedPane();
         trackOverviewPanel = new javax.swing.JPanel();
         trackLayoutPanel = new javax.swing.JPanel();
@@ -102,13 +103,24 @@ public class TrackModelGUI extends javax.swing.JPanel {
         beaconScrollPane = new javax.swing.JScrollPane();
         beaconTable = new javax.swing.JTable();
 
-        scheduleScrollPane.setViewportView(scheduleTextPanel);
+        scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scheduleScrollPane.setViewportView(scheduleTable);
 
         javax.swing.GroupLayout scheduleFrameLayout = new javax.swing.GroupLayout(scheduleFrame.getContentPane());
         scheduleFrame.getContentPane().setLayout(scheduleFrameLayout);
         scheduleFrameLayout.setHorizontalGroup(
             scheduleFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(scheduleFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(scheduleFrameLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -117,7 +129,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         );
         scheduleFrameLayout.setVerticalGroup(
             scheduleFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(scheduleFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(scheduleFrameLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -536,7 +548,20 @@ public class TrackModelGUI extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int col = stationTable.columnAtPoint(evt.getPoint());
                 if (col == 9) {
-                    scheduleTextPanel.setText("Schedule goes here");
+                    ArrayList<String> times = trackModel.getTrainSystem().getScheduler().getShadysideTimes();
+                    String stringID = (String) stationTable.getValueAt(0,0);
+                    int stationID = Integer.parseInt(stringID);
+                    System.out.println(stationID);
+                    String stationColumnNames[] = {"Arrival"};
+                    DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
+                    for (String s : times) {
+                        String stationRowData[] = {s};
+                        stationModel.addRow(stationRowData);
+                    }
+                    scheduleTable.setModel(stationModel);
+                    scheduleFrame.setSize(new Dimension(1040, 720));
+                    scheduleFrame.getContentPane().revalidate();
+                    scheduleFrame.getContentPane().repaint();
                     scheduleFrame.setVisible(true);
                 }
             }
@@ -1019,7 +1044,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JButton refreshButton;
     private javax.swing.JFrame scheduleFrame;
     private javax.swing.JScrollPane scheduleScrollPane;
-    private javax.swing.JTextPane scheduleTextPanel;
+    private javax.swing.JTable scheduleTable;
     private javax.swing.JComboBox<String> sectionSelectionComboBox;
     private javax.swing.JPanel sectionSelectionPanel;
     private javax.swing.JPanel stationPanel;

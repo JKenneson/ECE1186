@@ -9,7 +9,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -21,7 +21,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -40,7 +40,17 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextPane" name="scheduleTextPanel">
+            <Component class="javax.swing.JTable" name="scheduleTable">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -800,7 +810,7 @@
                                 <Column editable="false" title="Left" type="java.lang.Boolean"/>
                               </Table>
                             </Property>
-                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="Action stationAction = new AbstractAction()&#xa;{&#xa;    @Override&#xa;    public void actionPerformed(ActionEvent e)&#xa;    {&#xa;        Block b = (Block) blockSelectionComboBox.getSelectedItem();&#xa;        if(b != null) {&#xa;            TableCellListener tcl = (TableCellListener)e.getSource();&#xa;            if (b.getStationID() != -1 &amp;&amp; b.getStation() != null) {&#xa;                Station st = b.getStation();&#xa;                st.setTemperature(Integer.parseInt(((String)tcl.getNewValue())));&#xa;                updateDetailsPanel();&#xa;            }&#xa;        }&#xa;    }&#xa;};&#xa;TableCellListener stationTcl = new TableCellListener(stationTable, stationAction);&#xa;&#xa;stationTable.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        int col = stationTable.columnAtPoint(evt.getPoint());&#xa;        if (col == 9) {&#xa;            scheduleTextPanel.setText(&quot;Schedule goes here&quot;);&#xa;            scheduleFrame.setVisible(true);&#xa;        }&#xa;    }&#xa;});">
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="Action stationAction = new AbstractAction()&#xa;{&#xa;    @Override&#xa;    public void actionPerformed(ActionEvent e)&#xa;    {&#xa;        Block b = (Block) blockSelectionComboBox.getSelectedItem();&#xa;        if(b != null) {&#xa;            TableCellListener tcl = (TableCellListener)e.getSource();&#xa;            if (b.getStationID() != -1 &amp;&amp; b.getStation() != null) {&#xa;                Station st = b.getStation();&#xa;                st.setTemperature(Integer.parseInt(((String)tcl.getNewValue())));&#xa;                updateDetailsPanel();&#xa;            }&#xa;        }&#xa;    }&#xa;};&#xa;TableCellListener stationTcl = new TableCellListener(stationTable, stationAction);&#xa;&#xa;stationTable.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        int col = stationTable.columnAtPoint(evt.getPoint());&#xa;        if (col == 9) {&#xa;            ArrayList&lt;String&gt; times = trackModel.getTrainSystem().getScheduler().getShadysideTimes();&#xa;            String stringID = (String) stationTable.getValueAt(0,0);&#xa;            int stationID = Integer.parseInt(stringID);&#xa;            System.out.println(stationID);&#xa;            String stationColumnNames[] = {&quot;Arrival&quot;};&#xa;            DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);&#xa;            for (String s : times) {&#xa;                String stationRowData[] = {s};&#xa;                stationModel.addRow(stationRowData);&#xa;            }&#xa;            scheduleTable.setModel(stationModel);&#xa;            scheduleFrame.setSize(new Dimension(1040, 720));&#xa;            scheduleFrame.getContentPane().revalidate();&#xa;            scheduleFrame.getContentPane().repaint();&#xa;            scheduleFrame.setVisible(true);&#xa;        }&#xa;    }&#xa;});">
                               <TableColumnModel selectionModel="0">
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                                   <Title/>
