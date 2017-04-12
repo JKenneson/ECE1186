@@ -543,7 +543,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         stationModel.addRow(stationRowData);
                     }
                     scheduleTable.setModel(stationModel);
-                    scheduleFrame.setSize(new Dimension(1040, 720));
+                    scheduleFrame.setSize(new Dimension(300, 64));
                     scheduleFrame.getContentPane().revalidate();
                     scheduleFrame.getContentPane().repaint();
                     scheduleFrame.setVisible(true);
@@ -992,6 +992,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         updateDetailsPanel();
+        updateSummaryPanel();
     }//GEN-LAST:event_refreshButtonActionPerformed
 
 
