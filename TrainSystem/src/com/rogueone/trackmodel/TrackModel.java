@@ -160,45 +160,34 @@ public class TrackModel {
      * @param file the track data file
      */
     public void parseDataFile(File file) {
+        
+        XSSFWorkbook workbook = null;
+        
         try {
-            //Expected column order in data file for blocks:
-            //0     line
-            //1     section
-            //2     isHead
-            //3     isTail
-            //4     blockID
-            //5     portA
-            //6     portB
-            //7     switchID
-            //8     length
-            //9     grade
-            //10    speedLimit
-            //11    containsCrossing
-            //12    isUnderground
-            //13    stationID
-            //14    elevation
-            //15    cumulativeElevation
-            //16    isStaticSwitchBlock
-            
-            XSSFWorkbook testWorkbook = new XSSFWorkbook(file);
-            
-            parseLines(testWorkbook.getSheetAt(0));
-            parseSections(testWorkbook.getSheetAt(1));
-            parseBlocks(testWorkbook.getSheetAt(2));
-            parseStations(testWorkbook.getSheetAt(3));
-            parseSwitches(testWorkbook.getSheetAt(4));
-            parseBeacons(testWorkbook.getSheetAt(5));
-            connectBlocks();
-            for (Line l : lines) {
-                l.updateTotalLength();
-            }
-            System.out.println("Track loaded successfully.");
-        } catch (IOException ex) {
-            System.err.println("Error reading data file.");
-        } catch (InvalidFormatException ex) {
-            System.err.println("Incorrect format for data file.");
+            workbook = new XSSFWorkbook(file);
         }
-         
+        catch (Exception ex) {
+            System.err.println("Error reading data file.");
+        }
+
+        if (workbook != null) {
+            try {
+                parseLines(workbook.getSheetAt(0));
+                parseSections(workbook.getSheetAt(1));
+                parseBlocks(workbook.getSheetAt(2));
+                parseStations(workbook.getSheetAt(3));
+                parseSwitches(workbook.getSheetAt(4));
+                parseBeacons(workbook.getSheetAt(5));
+                connectBlocks();
+                for (Line l : lines) {
+                    l.updateTotalLength();
+                }
+                System.out.println("Track loaded successfully.");
+            }
+            catch (Exception ex) {
+                System.err.println("Data file incorrectly formatted.");
+            }
+        }
     }
     
     /**

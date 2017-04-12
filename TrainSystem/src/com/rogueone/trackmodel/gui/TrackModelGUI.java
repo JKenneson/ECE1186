@@ -720,11 +720,16 @@ public class TrackModelGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_trackConfigurationLoadButtonActionPerformed
     
     public void updateAll() {
-        updateLineComboBox();
-        updateSectionComboBox();
-        updateBlockComboBox();
-        updateSummaryPanel();
-        updateDetailsPanel();
+        try {
+            updateLineComboBox();
+            updateSectionComboBox();
+            updateBlockComboBox();
+            updateSummaryPanel();
+            updateDetailsPanel();
+        }
+        catch (Exception ex) {
+            System.err.println("Error updating Track Model.");
+        }
     }
     
     public void updateSummaryPanel() {
