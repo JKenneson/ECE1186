@@ -845,6 +845,23 @@ public class TrackView extends Frame {
 
         LegendBox legend = new LegendBox(50, 240, trainSystem);
         sp.addShape(legend);
+        
+        Station shadysideStation = new Station((int) (100 + shiftAmountX), (int) 42, (int)(8));
+        sp.addShape(shadysideStation);
+        Station herronAveStation = new Station((int) (216 + shiftAmountX), (int) (31 + shiftAmountY), (int)(8));
+        sp.addShape(herronAveStation);
+        Station swissvilleStation = new Station((int) (269 + shiftAmountX), (int) (31 + shiftAmountY), (int)(8));
+        sp.addShape(swissvilleStation);
+        Station pennStationStation = new Station((int) (333 + shiftAmountX), (int) (54 + shiftAmountY), (int)(8));
+        sp.addShape(pennStationStation);
+        Station steelPlazaStation = new Station((int) (518 + shiftAmountX), (int) (54 + shiftAmountY), (int)(8));
+        sp.addShape(steelPlazaStation);
+        Station firstAveStation = new Station((int) (718 + shiftAmountX), (int) (54 + shiftAmountY), (int)(8));
+        sp.addShape(firstAveStation);
+        Station stationSquareStation = new Station((int) (775 + shiftAmountX), (int) (54 + shiftAmountY), (int)(8));
+        sp.addShape(stationSquareStation);
+        Station southHillsStation = new Station((int) (967 + shiftAmountX), (int) (17 + shiftAmountY), (int)(8));
+        sp.addShape(southHillsStation);
 
         crossing = new Crossing(775, 25 + shiftAmountY);
         sp.addShape(crossing);
