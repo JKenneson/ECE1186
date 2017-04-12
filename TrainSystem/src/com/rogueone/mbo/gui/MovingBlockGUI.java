@@ -454,7 +454,9 @@ private boolean mode  = false;
     }//GEN-LAST:event_NumTrainsRadioActionPerformed
 
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
-         TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
+
+        
+        TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
          Mbo mbo = trainSystem.getMBO();
          
          try{

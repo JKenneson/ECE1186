@@ -68,7 +68,7 @@
                               <Component id="MboModePanel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="SchedulerInputsPanel" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="DetailedScheduleButton" pref="235" max="32767" attributes="0"/>
+                          <Component id="DetailedScheduleButton" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="TrainSchedulePanel" min="-2" max="-2" attributes="0"/>

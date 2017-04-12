@@ -303,6 +303,8 @@ public class Mbo{
 //                    //Block c = (Block)b;
 //                    
 //                }
+                //new speed and authority
+                //trainSystem.getTrainHandler().getTrains().get(1).MBOUpdateSpeedAndAuthority(, );
             }
         }
     }
