@@ -1021,15 +1021,15 @@ public int iterateID(){
 
 
 
-        if (evt.getClickCount() == 1) {
-            JTable failureTable = (JTable) evt.getSource();
-            int row = failureTable.getSelectedRow();
-            String failureLine = (String) failureTable.getValueAt(row, 0);
-            String failureSection = (String) failureTable.getValueAt(row, 1);
-            String failureBlock = (String) failureTable.getValueAt(row, 2);
-            String failureType = (String) failureTable.getValueAt(row, 3);
-            
-        }
+//        if (evt.getClickCount() == 1) {
+//            JTable failureTable = (JTable) evt.getSource();
+//            int row = failureTable.getSelectedRow();
+////            String failureLine = (String) failureTable.getValueAt(row, 0);
+////            String failureSection = (String) failureTable.getValueAt(row, 1);
+////            String failureBlock = (String) failureTable.getValueAt(row, 2);
+////            String failureType = (String) failureTable.getValueAt(row, 3);
+////            
+//        }
 
         if (evt.getClickCount() == 2) {
             JTable failureTable = (JTable) evt.getSource();
