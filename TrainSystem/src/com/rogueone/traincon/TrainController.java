@@ -266,11 +266,11 @@ public class TrainController {
                 case 1://Power Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("FAILURE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     gui.StatusAntennaLabel.setText("ACTIVE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     gui.StatusBrakeLabel.setText("ACTIVE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     
                     //Update simulation boxes
                     gui.PowerFailureCheck.setSelected(true);
@@ -281,11 +281,11 @@ public class TrainController {
                 case 2://Antenna Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("ACTIVE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     gui.StatusAntennaLabel.setText("FAILURE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     gui.StatusBrakeLabel.setText("ACTIVE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(false);
@@ -296,11 +296,11 @@ public class TrainController {
                 case 3://Brake Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("ACTIVE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     gui.StatusAntennaLabel.setText("ACTIVE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     gui.StatusBrakeLabel.setText("FAILURE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(false);
@@ -310,11 +310,11 @@ public class TrainController {
                     
                 case 4://Power and Antenna Failure
                     gui.StatusPowerLabel.setText("FAILURE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     gui.StatusAntennaLabel.setText("FAILURE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     gui.StatusBrakeLabel.setText("ACTIVE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(true);
@@ -325,11 +325,11 @@ public class TrainController {
                 case 5://Power and Brake Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("FAILURE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     gui.StatusAntennaLabel.setText("ACTIVE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     gui.StatusBrakeLabel.setText("FAILURE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(true);
@@ -340,11 +340,11 @@ public class TrainController {
                 case 6://Antenna and Brake Failure
                     //Update status panel
                     gui.StatusPowerLabel.setText("ACTIVE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     gui.StatusAntennaLabel.setText("FAILURE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     gui.StatusBrakeLabel.setText("FAILURE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(false);
@@ -354,11 +354,11 @@ public class TrainController {
                     
                 case 7://Power, Antenna, and Brake Failure
                     gui.StatusPowerLabel.setText("FAILURE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     gui.StatusAntennaLabel.setText("FAILURE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     gui.StatusBrakeLabel.setText("FAILURE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/SQUARE_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/SQUARE_98.png")));
                     
                     //Update simulation boxes
                     gui.AntennaFailureCheck.setSelected(true);
@@ -369,11 +369,11 @@ public class TrainController {
                 default:
                     //Update status panel
                     gui.StatusPowerLabel.setText("ACTIVE");
-                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     gui.StatusAntennaLabel.setText("ACTIVE");
-                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     gui.StatusBrakeLabel.setText("ACTIVE");
-                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+                    gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
                     
                     //Update simulation boxes
                     gui.PowerFailureCheck.setSelected(false);
@@ -387,11 +387,11 @@ public class TrainController {
             gui.EmergencyBrakeToggleButton.setSelected(false);
             //Update status panel
             gui.StatusPowerLabel.setText("ACTIVE");
-            gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+            gui.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
             gui.StatusAntennaLabel.setText("ACTIVE");
-            gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+            gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
             gui.StatusBrakeLabel.setText("ACTIVE");
-            gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../images/CIRC_98.png")));
+            gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("src/com/rogueone/images/CIRC_98.png")));
         }
         
         if(this.vitals.getPrimary().isServiceBrakeActivated()) {
