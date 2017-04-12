@@ -516,10 +516,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int col = stationTable.columnAtPoint(evt.getPoint());
                 if (col == 9) {
-                    ArrayList<String> times = trackModel.getTrainSystem().getScheduler().getShadysideTimes();
                     String stringID = (String) stationTable.getValueAt(0,0);
                     int stationID = Integer.parseInt(stringID);
-                    System.out.println(stationID);
+                    ArrayList<String> times = trackModel.getTrainSystem().getScheduler().getTimes(stationID);
                     String stationColumnNames[] = {"Arrival"};
                     DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
                     for (String s : times) {
@@ -527,7 +526,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
                         stationModel.addRow(stationRowData);
                     }
                     scheduleTable.setModel(stationModel);
-                    scheduleFrame.setSize(new Dimension(300, 64));
+                    scheduleFrame.setSize(new Dimension(1040, 720));
                     scheduleFrame.getContentPane().revalidate();
                     scheduleFrame.getContentPane().repaint();
                     scheduleFrame.setVisible(true);

@@ -566,17 +566,87 @@ public class Scheduler {
         //}
         */
     }
+    
+    public ArrayList<String> getTimes(int stationID){
+        if (stationID == 1) {
+            return getCastleShannonTimes();
+        }
+        else if (stationID == 2) {
+            return getShadysideTimes();
+        }
+        else if (stationID == 3) {
+            return getDormontTimes();
+        }
+        else if (stationID == 4) {
+            return getEdgebrookTimes();
+        }
+        else if (stationID == 5) {
+            return getFirstAveTimes();
+        }
+        else if (stationID == 6) {
+            return getGlenburyTimes();
+        }
+        else if (stationID == 7) {
+            return getHerronTimes();
+        }
+        else if (stationID == 8) {
+            return getInglewoodTimes();
+        }
+        else if (stationID == 9) {
+            return getMtLebanonTimes();
+        }
+        else if (stationID == 10) {
+            return getOverbrookTimes();
+        }
+        else if (stationID == 11) {
+            return getPennStTimes();
+        }
+        else if (stationID == 12) {
+            return getPioneerTimes();
+        }
+        else if (stationID == 13) {
+            return getPittTimes();
+        }
+        else if (stationID == 14) {
+            return getPoplarTimes();
+        }
+        else if (stationID == 15) {
+            return getShadysideTimes();
+        }
+        else if (stationID == 16) {
+            return getSthBankTimes();
+        }
+        else if (stationID == 17) {
+            return getSthHillsTimes();
+        }
+        else if (stationID == 18) {
+            return getStSquareTimes();
+        }
+        else if (stationID == 19) {
+            return getSteelPlazaTimes();
+        }
+        else if (stationID == 20) {
+            return getSwissvaleTimes();
+        }
+        else if (stationID == 21) {
+            return getWhitedTimes();
+        }
+        else {
+            return new ArrayList<String>();
+        }
+    }
+    
 //    private ArrayList<String> herron = new ArrayList();
     public ArrayList<String> getShadysideTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =1; i<numRedTrains; i++){
+        for(int i=1; i<numRedTrains; i++){
             times.add(redData[i][3].toString());
         }
         return times;
     }
     public ArrayList<String> getHerronTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =1; i<numRedTrains; i++){
+        for(int i=1; i<numRedTrains; i++){
             times.add(redData[i][4].toString());
         }
         return times;
@@ -584,7 +654,7 @@ public class Scheduler {
 //     private ArrayList<String> swissvale = new ArrayList();
     public ArrayList<String> getSwissvaleTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =1; i<numRedTrains; i++){
+        for(int i=1; i<numRedTrains; i++){
             times.add(redData[i][5].toString());
         }
         return times;
@@ -592,7 +662,7 @@ public class Scheduler {
 //     private ArrayList<String> penn = new ArrayList();
     public ArrayList<String> getPennStTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numRedTrains; i++){
+        for(int i=1; i<numRedTrains; i++){
             times.add(redData[i][6].toString());
         }
         return times;
@@ -600,7 +670,7 @@ public class Scheduler {
 //     private ArrayList<String> plaza = new ArrayList();
     public ArrayList<String> getSteelPlazaTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numRedTrains; i++){
+        for(int i=1; i<numRedTrains; i++){
             times.add(redData[i][7].toString());
         }
         return times;
@@ -608,7 +678,7 @@ public class Scheduler {
 //     private ArrayList<String> first = new ArrayList();
     public ArrayList<String> getFirstAveTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numRedTrains; i++){
+        for(int i=1; i<numRedTrains; i++){
             times.add(redData[i][8].toString());
         }
         return times;
@@ -616,7 +686,7 @@ public class Scheduler {
 //     private ArrayList<String> square = new ArrayList();
     public ArrayList<String> getStSquareTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numRedTrains; i++){
+        for(int i=1; i<numRedTrains; i++){
             times.add(redData[i][9].toString());
         }
         return times;
@@ -624,7 +694,7 @@ public class Scheduler {
 //     private ArrayList<String> hills = new ArrayList();
     public ArrayList<String> getSthHillsTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numRedTrains; i++){
+        for(int i=1; i<numRedTrains; i++){
             times.add(redData[i][10].toString());
         }
         return times;
@@ -633,7 +703,7 @@ public class Scheduler {
 //     private ArrayList<String> pioneer = new ArrayList();
      public ArrayList<String> getPioneerTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][3].toString());
         }
         return times;
@@ -641,7 +711,7 @@ public class Scheduler {
 //     private ArrayList<String> edgebrook = new ArrayList();
      public ArrayList<String> getEdgebrookTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][4].toString());
         }
         return times;
@@ -649,7 +719,7 @@ public class Scheduler {
 //     private ArrayList<String> pitt = new ArrayList();
      public ArrayList<String> getPittTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][5].toString());
         }
         return times;
@@ -657,7 +727,7 @@ public class Scheduler {
 //     private ArrayList<String> whited = new ArrayList();
      public ArrayList<String> getWhitedTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][6].toString());
         }
         return times;
@@ -665,14 +735,14 @@ public class Scheduler {
 //     private ArrayList<String> bank = new ArrayList();
      public ArrayList<String> getSthBankTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][7].toString());
         }
         return times;
     }
      public ArrayList<String> getCentralTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][8].toString());
         }
         return times;
@@ -681,7 +751,7 @@ public class Scheduler {
 //     private ArrayList<String> inglewood = new ArrayList();
      public ArrayList<String> getInglewoodTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][9].toString());
         }
         return times;
@@ -689,7 +759,7 @@ public class Scheduler {
 //     private ArrayList<String> overbrook = new ArrayList();
      public ArrayList<String> getOverbrookTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][10].toString());
         }
         return times;
@@ -697,7 +767,7 @@ public class Scheduler {
 //     private ArrayList<String> glenbury = new ArrayList();
      public ArrayList<String> getGlenburyTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][11].toString());
         }
         return times;
@@ -705,7 +775,7 @@ public class Scheduler {
 //     private ArrayList<String> dormont = new ArrayList();
      public ArrayList<String> getDormontTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][12].toString());
         }
         return times;
@@ -713,7 +783,7 @@ public class Scheduler {
 //     private ArrayList<String> lebo = new ArrayList();
      public ArrayList<String> getMtLebanonTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][13].toString());
         }
         return times;
@@ -721,15 +791,15 @@ public class Scheduler {
 //     private ArrayList<String> poplar = new ArrayList();
      public ArrayList<String> getPoplarTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][14].toString());
         }
         return times;
     }
 //     private ArrayList<String> castle = new ArrayList();
-     public ArrayList<String> getCastleShanonTimes(){
+     public ArrayList<String> getCastleShannonTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][15].toString());
         }
         return times;
@@ -737,7 +807,7 @@ public class Scheduler {
 //     private ArrayList<String> dormontInbound = new ArrayList();
      public ArrayList<String> getDormontInboundTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][16].toString());
         }
         return times;
@@ -745,7 +815,7 @@ public class Scheduler {
 //     private ArrayList<String> glenburyInbound = new ArrayList();
      public ArrayList<String> getGlenburyInboundTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][17].toString());
         }
         return times;
@@ -753,7 +823,7 @@ public class Scheduler {
 //     private ArrayList<String> overbrookInbound = new ArrayList();
      public ArrayList<String> getOverbrookInboundTimes(){
         ArrayList<String> times = new ArrayList();
-        for(int i =0; i<numGreenTrains; i++){
+        for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][18].toString());
         }
         return times;
