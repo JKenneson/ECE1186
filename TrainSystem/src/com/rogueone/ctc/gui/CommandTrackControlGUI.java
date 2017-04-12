@@ -631,7 +631,29 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         
     }
     
-    
+    public void updateFailureTable(Block block){
+        Object[] newFailure = new Object[4];
+        DefaultTableModel failureModel = (DefaultTableModel) FailureTable.getModel();
+
+        newFailure[2] = block.getID();
+        newFailure[1] = block.getSection().toString();
+        newFailure[0] = block.getLine().toString();
+        
+                
+        if (block.getFailureBrokenRail() == true){
+            newFailure[3] = "Rail";
+        }
+        if (block.getFailurePowerOutage() == true){
+            newFailure[3] = "Power";
+        }
+        if (block.getFailureTrackCircuit() == true){
+            newFailure[3] = "Circuit";
+        }
+        
+        failureModel.addRow(newFailure);
+        FailureTable.repaint();
+
+    }
     
     /**
      * calculates offsets in presence to determine train position
