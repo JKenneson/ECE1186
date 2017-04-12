@@ -74,6 +74,7 @@ public class TrainHandler {
         
         //Remove the selected trains and tell the CTC
         for (TrainModel trainToRemove : trainsToDelete) {
+            this.trainSystem.getCTC().incrementTrainsToYard(trainToRemove.getTotalDistanceTraveledFeet(), trainToRemove.getLine());
             this.trains.remove(trainToRemove);
             this.trainSystem.getCTC().removeTrainFromTable(trainToRemove.trainID);
         }

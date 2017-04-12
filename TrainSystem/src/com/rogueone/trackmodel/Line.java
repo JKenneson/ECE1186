@@ -100,6 +100,20 @@ public class Line {
     public void updateTotalLength() {
         totalLength = 0;
         for (Section s : sections) {
+            if (lineID == Global.Line.GREEN) {
+                if (s.getSectionID() == Global.Section.N || s.getSectionID() == Global.Section.F || s.getSectionID() == Global.Section.E || s.getSectionID() == Global.Section.D) {
+                    totalLength += s.getTotalLength();
+                }
+            } else {
+                if (s.getSectionID() == Global.Section.U || s.getSectionID() == Global.Section.A || s.getSectionID() == Global.Section.B || s.getSectionID() == Global.Section.C
+                        || s.getSectionID() == Global.Section.F || s.getSectionID() == Global.Section.G || s.getSectionID() == Global.Section.H || s.getSectionID() == Global.Section.I
+                        || s.getSectionID() == Global.Section.J ) {
+                    totalLength += s.getTotalLength();
+                } else if (s.getSectionID() == Global.Section.D || s.getSectionID() == Global.Section.E || s.getSectionID() == Global.Section.S || s.getSectionID() == Global.Section.T
+                        || s.getSectionID() == Global.Section.Q || s.getSectionID() == Global.Section.R || s.getSectionID() == Global.Section.P || s.getSectionID() == Global.Section.O ) {
+                    totalLength -= s.getTotalLength();
+                }
+            }
             totalLength += s.getTotalLength();
             //System.out.println(s + " " + s.getTotalLength());
         }

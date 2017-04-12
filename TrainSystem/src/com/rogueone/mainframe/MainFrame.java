@@ -7,6 +7,7 @@ package com.rogueone.mainframe;
 
 import com.rogueone.trainsystem.TrainSystem;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +24,6 @@ public class MainFrame extends javax.swing.JFrame {
     public JLabel timeLabel;
 
     public TrainSystem trainSystem;
-    private boolean greenView = false;
-    private boolean redView = false;
     /**
      * Creates new form MainFrame
      * @param trainSystem the TrainSystem
@@ -32,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame(TrainSystem trainSystem) {
         initComponents();
         this.trainSystem = trainSystem;
+        timeLabel.setFont(new java.awt.Font("Futura", 0, 14));
     }
 
     /**
@@ -46,8 +46,6 @@ public class MainFrame extends javax.swing.JFrame {
         timeButtonGroup = new javax.swing.ButtonGroup();
         jMenuItem1 = new javax.swing.JMenuItem();
         mainMenuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        editMenu = new javax.swing.JMenu();
         speedMenu = new javax.swing.JMenu();
         normalTimeRadioButton = new javax.swing.JRadioButtonMenuItem();
         x10SpeedRadioButton = new javax.swing.JRadioButtonMenuItem();
@@ -62,27 +60,21 @@ public class MainFrame extends javax.swing.JFrame {
         mboMenuItem = new javax.swing.JMenuItem();
         greenTrackViewItem = new javax.swing.JMenuItem();
         redTrackViewItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        helpText = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1040, 720));
+        setPreferredSize(new java.awt.Dimension(275, 675));
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         mainMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        fileMenu.setText("File");
-        mainMenuBar.add(fileMenu);
-
-        editMenu.setText("Edit");
-        mainMenuBar.add(editMenu);
-
         speedMenu.setText("Speed");
+        speedMenu.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
 
         timeButtonGroup.add(normalTimeRadioButton);
+        normalTimeRadioButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         normalTimeRadioButton.setSelected(true);
         normalTimeRadioButton.setText("Normal Time");
         normalTimeRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
         speedMenu.add(normalTimeRadioButton);
 
         timeButtonGroup.add(x10SpeedRadioButton);
+        x10SpeedRadioButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         x10SpeedRadioButton.setText("10x Normal Time");
         x10SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +95,7 @@ public class MainFrame extends javax.swing.JFrame {
         speedMenu.add(x10SpeedRadioButton);
 
         timeButtonGroup.add(x25SpeedRadioButton);
+        x25SpeedRadioButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         x25SpeedRadioButton.setSelected(false);
         x25SpeedRadioButton.setText("25x Normal Time");
         x25SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +106,7 @@ public class MainFrame extends javax.swing.JFrame {
         speedMenu.add(x25SpeedRadioButton);
 
         timeButtonGroup.add(x50SpeedRadioButton);
+        x50SpeedRadioButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         x50SpeedRadioButton.setSelected(false);
         x50SpeedRadioButton.setText("50x Normal Time");
         x50SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
         speedMenu.add(x50SpeedRadioButton);
 
         timeButtonGroup.add(x100SpeedRadioButton);
+        x100SpeedRadioButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         x100SpeedRadioButton.setText("100x Normal Time");
         x100SpeedRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +129,9 @@ public class MainFrame extends javax.swing.JFrame {
         mainMenuBar.add(speedMenu);
 
         moduleMenu.setText("Module");
+        moduleMenu.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
 
+        ctcMenuItem.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ctcMenuItem.setText("CTC");
         ctcMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +140,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         moduleMenu.add(ctcMenuItem);
 
+        trackControllerHandlerMenuItem.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         trackControllerHandlerMenuItem.setText("Track Controller Handler");
         trackControllerHandlerMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +149,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         moduleMenu.add(trackControllerHandlerMenuItem);
 
+        trackModelMenuItem.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         trackModelMenuItem.setText("Track Model");
         trackModelMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +158,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         moduleMenu.add(trackModelMenuItem);
 
+        trainHandlerMenuItem.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         trainHandlerMenuItem.setText("Train Handler");
         trainHandlerMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         moduleMenu.add(trainHandlerMenuItem);
 
+        mboMenuItem.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         mboMenuItem.setText("MBO");
         mboMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +176,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         moduleMenu.add(mboMenuItem);
 
+        greenTrackViewItem.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         greenTrackViewItem.setText("Green Track View");
         greenTrackViewItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +185,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         moduleMenu.add(greenTrackViewItem);
 
+        redTrackViewItem.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         redTrackViewItem.setText("Red Track View");
         redTrackViewItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,13 +195,6 @@ public class MainFrame extends javax.swing.JFrame {
         moduleMenu.add(redTrackViewItem);
 
         mainMenuBar.add(moduleMenu);
-
-        helpMenu.setText("Help");
-
-        helpText.setText("Display Screen Information");
-        helpMenu.add(helpText);
-
-        mainMenuBar.add(helpMenu);
 
         mainMenuBar.add(Box.createHorizontalGlue());
         timeLabel = new JLabel("Time");
@@ -228,6 +225,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void ctcMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctcMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getCTC(), BorderLayout.CENTER);
+        this.setSize(new Dimension(275, 675));
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
         this.setVisible(true);
@@ -239,6 +237,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void trackControllerHandlerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackControllerHandlerMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getTrackControllerHandler().getTrackHandlerGUI(), BorderLayout.CENTER);
+        this.setSize(new Dimension(1040, 720));
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
         this.setVisible(true);
@@ -250,6 +249,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void trackModelMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackModelMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getTrackModel().getGUI(), BorderLayout.CENTER);
+        this.setSize(new Dimension(1040, 720));
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
         this.setVisible(true);
@@ -262,6 +262,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getTrainHandler().getGUI(), BorderLayout.CENTER);
         this.trainSystem.getTrainHandler().getGUI().updateTrainHandlerGUI();
+        this.setSize(new Dimension(1040, 720));
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
         this.setVisible(true);
@@ -279,6 +280,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (InvalidFormatException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.setSize(new Dimension(1040, 720));
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
         this.setVisible(true);
@@ -307,32 +309,25 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void greenTrackViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenTrackViewItemActionPerformed
         // TODO add your handling code here:
-        if(greenView == false){
-            greenView = true;
+        if(!this.trainSystem.getTrackViewGreen().isVisible()){
+             this.trainSystem.getTrackViewGreen().displayTrackView(true);
         } else {
-            greenView = false;
+            this.trainSystem.getTrackViewGreen().displayTrackView(false);
         }
-        this.trainSystem.getTrackViewGreen().displayTrackView(greenView);
-        
     }//GEN-LAST:event_greenTrackViewItemActionPerformed
 
     private void redTrackViewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redTrackViewItemActionPerformed
         // TODO add your handling code here:
-        if(redView == false){
-            redView = true;
+        if(!this.trainSystem.getTrackViewRed().isVisible()){
+             this.trainSystem.getTrackViewRed().displayTrackView(true);
         } else {
-            redView = false;
+            this.trainSystem.getTrackViewRed().displayTrackView(false);
         }
-        this.trainSystem.getTrackViewRed().displayTrackView(redView);
     }//GEN-LAST:event_redTrackViewItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ctcMenuItem;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem greenTrackViewItem;
-    private javax.swing.JMenu helpMenu;
-    private javax.swing.JMenuItem helpText;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JMenuItem mboMenuItem;

@@ -775,4 +775,8 @@ public class TrackModel {
             System.out.println(b.toString());
         }
     }
+    
+    public TrainSystem getTrainSystem(){
+        return this.trainSystem;
+    }
 }

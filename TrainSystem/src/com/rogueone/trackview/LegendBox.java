@@ -28,6 +28,9 @@ public class LegendBox implements MyShape {
     private Rectangle2D trainLegendStop;
     private Rectangle2D switchLegend;
     private TrainSystem trainSystem;
+    private Rectangle2D closedBlock;
+    private Rectangle2D failedBlock;
+
 
     public LegendBox(float xStart, float yStart, TrainSystem trainSystem) {
         X = xStart;
@@ -37,13 +40,16 @@ public class LegendBox implements MyShape {
     }
 
     private void setUp() {
-        legendBox = new Rectangle2D.Float(X, Y, 300, 75);
+        legendBox = new Rectangle2D.Float(X, Y, 350, 52);
         sectionLegendUnoccupied = new Rectangle2D.Float(X + xOffset, Y + yOffset, 50, 5);
         sectionLegendOccupied = new Rectangle2D.Float(X + xOffset, Y + (2 * yOffset), 50, 5);
-        trainLegendGo = new Rectangle2D.Float(X + xOffset, Y + (3 * yOffset) + 1, 20, 5);
-        trainLegendHalt = new Rectangle2D.Float(X + xOffset, Y + (4 * yOffset) + 2, 20, 5);
-        trainLegendStop = new Rectangle2D.Float(X + xOffset, Y + (5 * yOffset) + 3, 20, 5);
-        switchLegend = new Rectangle2D.Float(X + xOffset, Y + (6 * yOffset) + 4, 20, 5);
+        closedBlock = new Rectangle2D.Float(X + xOffset, Y + (3 * yOffset) + 1, 25, 5);
+        failedBlock = new Rectangle2D.Float(X + xOffset, Y + (4 * yOffset) + 2, 25, 5);
+        trainLegendGo = new Rectangle2D.Float(X + xOffset + 200, Y + (1 * yOffset), 20, 5);
+        trainLegendHalt = new Rectangle2D.Float(X + xOffset + 200, Y + (2 * yOffset), 20, 5);
+        trainLegendStop = new Rectangle2D.Float(X + xOffset + 200, Y + (3 * yOffset) + 1, 20, 5);
+        switchLegend = new Rectangle2D.Float(X + xOffset + 200, Y + (4 * yOffset) + 2, 20, 5);
+        
         
     }
 
@@ -76,14 +82,24 @@ public class LegendBox implements MyShape {
         g.setColor(Color.YELLOW);
         g.fill(switchLegend);
         
+        g.setColor(Color.MAGENTA);
+        g.draw(closedBlock);
+        
+        g.setColor(Color.RED);
+        g.draw(failedBlock);
+        
+        
         g.setColor(Color.WHITE);
-        g.drawString("Legend", (300/2) - 20, Y - 3);
-        g.drawString(" = Unoccupied Section", X + xOffset + 60, Y + (1 * yOffset) + 5);
-        g.drawString(" = Occupied Section", X + xOffset + 60, Y + (2 * yOffset) + 6);
-        g.drawString(" = Train Moving on Block", X + xOffset + 60, Y + (3 * yOffset) + 7);
-        g.drawString(" = Train Halted by Wayside", X + xOffset + 60, Y + (4 * yOffset) + 8);
-        g.drawString(" = Train Stopped", X + xOffset + 60, Y + (5 * yOffset) + 9);
-        g.drawString(" = Switch", X + xOffset + 60, Y + (6 * yOffset) + 10);
+        g.drawString("Legend", X + (350/2) - 20, Y - 3);
+        g.drawString(" = Unoccupied Section", X + xOffset + 50, Y + (1 * yOffset) + 5);
+        g.drawString(" = Occupied Section", X + xOffset + 50, Y + (2 * yOffset) + 6);
+        g.drawString(" = Closed Block", X + xOffset + 50, Y + (3 * yOffset) + 7);
+        g.drawString(" = Failed Block", X + xOffset + 50, Y + (4 * yOffset) + 8);
+        
+        g.drawString(" = Train Moving", X + xOffset + 50 + 180, Y + (1 * yOffset) + 5);
+        g.drawString(" = Train Halted", X + xOffset + 50 + 180, Y + (2 * yOffset) + 6);
+        g.drawString(" = Train Stopped", X + xOffset + 50 + 180, Y + (3 * yOffset) + 7);
+        g.drawString(" = Switch", X + xOffset + 50 + 180, Y + (4 * yOffset) + 8);
         
         g.setColor(Color.GREEN);
         g.drawString(this.trainSystem.getClock().printClock(), 435, 15);

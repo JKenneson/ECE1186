@@ -550,8 +550,8 @@ public class TrainModel {
                     //Check for beacon and send it to the Track Controller
                     if(this.currBlock.getBeacon() != null) {
                         //System.out.println("BEACON!");
-                        approachingStationBlock();
-                        this.trainController.receiveBeacon(this.currBlock.getBeacon());
+//                        approachingStationBlock();
+//                        this.trainController.receiveBeacon(this.currBlock.getBeacon());
                     }
                 }
                 //Train has reached end of track
@@ -1009,6 +1009,11 @@ public class TrainModel {
     public double getTotalDistanceTraveledFeet() {
         return totalDistanceTraveledFeet;
     }
+
+    public String getLine() {
+        return line;
+    }
+    
     
     
 }

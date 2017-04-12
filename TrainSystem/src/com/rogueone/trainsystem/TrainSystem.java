@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.TimerTask;
 import java.util.Timer;
+import javax.swing.JOptionPane;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
@@ -112,7 +113,7 @@ public class TrainSystem {
     // UPDATES
     void updateTrainSystem() {
         this.clock.updateClock();               //Increment the clock
-        this.mainFrame.timeLabel.setText(this.clock.printClock() + "     ");
+        this.mainFrame.timeLabel.setText(this.clock.printClock() + "   ");
         
         this.trainHandler.updateTrains();
         if(stationBufferCount == STATION_BUFFER_CONSTANT) {

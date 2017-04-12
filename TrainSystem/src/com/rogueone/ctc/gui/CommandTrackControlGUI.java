@@ -27,11 +27,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     //int trainID;
     //int hoursPassed;
     public int iterativeID;
-    double throughputValue = 0;
+    double throughputValueGreen = 0;
+    double throughputValueRed = 0;
 
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
     private TrackModel trackModel;
+    double trainsPerHourGreen = 0;
+    double trainsPerHourRed = 0;
 
     /**
      * Creates new form CommandTrackControlGUI
@@ -61,14 +64,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        MapPanel2 = new javax.swing.JPanel();
-        MapImage2 = new javax.swing.JLabel();
+        ChangeParametersButton3 = new javax.swing.JButton();
         BrowserPanel2 = new javax.swing.JTabbedPane();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         TrainTable = new javax.swing.JTable();
-        ChangeParametersButton3 = new javax.swing.JButton();
-        jLabel88 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -76,87 +76,52 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jPanel21 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         FailureTable = new javax.swing.JTable();
-        InformationPanel2 = new javax.swing.JPanel();
-        jLabel67 = new javax.swing.JLabel();
-        jLabel68 = new javax.swing.JLabel();
-        jLabel69 = new javax.swing.JLabel();
-        jLabel70 = new javax.swing.JLabel();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        jLabel74 = new javax.swing.JLabel();
-        InformationHeader2 = new javax.swing.JLabel();
-        jLabel75 = new javax.swing.JLabel();
-        TrainSpeedLabel2 = new javax.swing.JLabel();
-        TrainAuthorityLabel2 = new javax.swing.JLabel();
-        TrainNameField = new javax.swing.JTextField();
-        CurrentLineField = new javax.swing.JTextField();
-        CurrentBlockField = new javax.swing.JTextField();
-        CurrentSectionField = new javax.swing.JTextField();
-        AuthorityField = new javax.swing.JTextField();
-        SpeedField = new javax.swing.JTextField();
-        MaxCapacityField = new javax.swing.JTextField();
-        CurrentCapacityField = new javax.swing.JTextField();
-        jLabel76 = new javax.swing.JLabel();
-        StatusField = new javax.swing.JTextField();
         AdditionalInfoPanel2 = new javax.swing.JPanel();
-        TrainShutdownButton = new javax.swing.JButton();
         TrackShutdownButton = new javax.swing.JButton();
+        SelectOperationMode2 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        greenLineThroughput = new javax.swing.JTextField();
+        greenLabel = new javax.swing.JLabel();
+        redLineThroughput = new javax.swing.JTextField();
+        redLabel = new javax.swing.JLabel();
         DispatchControlPanel = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        DispatchButton1 = new javax.swing.JButton();
-        ResetButton = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         DispatchLineBox = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        DispatchButton1 = new javax.swing.JButton();
         DispatchSpeedField = new javax.swing.JTextField();
         DispatchAuthorityField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        SystemInformationPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        TimeField = new javax.swing.JTextField();
-        RushHourField = new javax.swing.JTextField();
-        ThroughputField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        AMPM = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        SelectOperationMode2 = new javax.swing.JComboBox<>();
 
+        setPreferredSize(new java.awt.Dimension(250, 610));
         setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(900, 651));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 600));
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(250, 600));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        MapPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Map"));
-        MapPanel2.setLayout(new java.awt.GridBagLayout());
-
-        MapImage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        MapImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/layout_small.jpg")));
+        ChangeParametersButton3.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        ChangeParametersButton3.setText("Update Selected Train");
+        ChangeParametersButton3.setEnabled(false);
+        ChangeParametersButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeParametersButton3ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.gridheight = 10;
-        gridBagConstraints.ipadx = 21;
-        gridBagConstraints.ipady = -8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        MapPanel2.add(MapImage2, gridBagConstraints);
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+        jPanel1.add(ChangeParametersButton3, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(MapPanel2, gridBagConstraints);
-
-        BrowserPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Browser"));
+        BrowserPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Browser", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Futura", 0, 13))); // NOI18N
+        BrowserPanel2.setMinimumSize(new java.awt.Dimension(250, 193));
+        BrowserPanel2.setPreferredSize(new java.awt.Dimension(250, 300));
 
         jPanel19.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -165,6 +130,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         });
         jPanel19.setLayout(new java.awt.GridBagLayout());
 
+        TrainTable.setFont(new java.awt.Font("Futura", 0, 12)); // NOI18N
         TrainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -208,32 +174,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
         jPanel19.add(jScrollPane9, gridBagConstraints);
-
-        ChangeParametersButton3.setText("CHANGE ");
-        ChangeParametersButton3.setEnabled(false);
-        ChangeParametersButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChangeParametersButton3ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 8;
-        gridBagConstraints.ipady = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 0);
-        jPanel19.add(ChangeParametersButton3, gridBagConstraints);
-
-        jLabel88.setText("Set Parameters");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 0);
-        jPanel19.add(jLabel88, gridBagConstraints);
 
         BrowserPanel2.addTab("Trains", jPanel19);
 
@@ -359,269 +299,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         BrowserPanel2.addTab("Failures", jPanel21);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
         jPanel1.add(BrowserPanel2, gridBagConstraints);
 
-        InformationPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Information"));
-        InformationPanel2.setPreferredSize(new java.awt.Dimension(320, 324));
-        InformationPanel2.setLayout(new java.awt.GridBagLayout());
-
-        jLabel67.setText("Train Name");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel67, gridBagConstraints);
-
-        jLabel68.setText("Current Line");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel68, gridBagConstraints);
-
-        jLabel69.setText("Current Section");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel69, gridBagConstraints);
-
-        jLabel70.setText("Current Block");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel70, gridBagConstraints);
-
-        jLabel71.setText("Speed");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel71, gridBagConstraints);
-
-        jLabel72.setText("Authority");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel72, gridBagConstraints);
-
-        jLabel74.setText("Current Capacity");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel74, gridBagConstraints);
-
-        InformationHeader2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        InformationHeader2.setText("Selected Train Information");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 30;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(InformationHeader2, gridBagConstraints);
-
-        jLabel75.setText("Max Capacity");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel75, gridBagConstraints);
-
-        TrainSpeedLabel2.setText("mph");
-        TrainSpeedLabel2.setPreferredSize(new java.awt.Dimension(15, 16));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(TrainSpeedLabel2, gridBagConstraints);
-
-        TrainAuthorityLabel2.setText("feet");
-        TrainAuthorityLabel2.setPreferredSize(new java.awt.Dimension(15, 16));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(TrainAuthorityLabel2, gridBagConstraints);
-
-        TrainNameField.setMinimumSize(new java.awt.Dimension(10, 30));
-        TrainNameField.setPreferredSize(new java.awt.Dimension(35, 26));
-        TrainNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TrainNameFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(TrainNameField, gridBagConstraints);
-
-        CurrentLineField.setPreferredSize(new java.awt.Dimension(35, 26));
-        CurrentLineField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CurrentLineFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(CurrentLineField, gridBagConstraints);
-
-        CurrentBlockField.setPreferredSize(new java.awt.Dimension(35, 26));
-        CurrentBlockField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CurrentBlockFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(CurrentBlockField, gridBagConstraints);
-
-        CurrentSectionField.setPreferredSize(new java.awt.Dimension(35, 26));
-        CurrentSectionField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CurrentSectionFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(CurrentSectionField, gridBagConstraints);
-
-        AuthorityField.setPreferredSize(new java.awt.Dimension(35, 26));
-        AuthorityField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AuthorityFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(AuthorityField, gridBagConstraints);
-
-        SpeedField.setPreferredSize(new java.awt.Dimension(35, 26));
-        SpeedField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SpeedFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(SpeedField, gridBagConstraints);
-
-        MaxCapacityField.setPreferredSize(new java.awt.Dimension(35, 26));
-        MaxCapacityField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MaxCapacityFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(MaxCapacityField, gridBagConstraints);
-
-        CurrentCapacityField.setPreferredSize(new java.awt.Dimension(35, 26));
-        CurrentCapacityField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CurrentCapacityFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(CurrentCapacityField, gridBagConstraints);
-
-        jLabel76.setText("Status");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        InformationPanel2.add(jLabel76, gridBagConstraints);
-
-        StatusField.setPreferredSize(new java.awt.Dimension(35, 26));
-        StatusField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StatusFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        InformationPanel2.add(StatusField, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(InformationPanel2, gridBagConstraints);
-
-        AdditionalInfoPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Component Disable"));
+        AdditionalInfoPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "System Changes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Futura", 0, 13))); // NOI18N
+        AdditionalInfoPanel2.setMinimumSize(new java.awt.Dimension(250, 175));
+        AdditionalInfoPanel2.setPreferredSize(new java.awt.Dimension(250, 150));
         AdditionalInfoPanel2.setLayout(new java.awt.GridBagLayout());
 
-        TrainShutdownButton.setText("Train Shutdown");
-        TrainShutdownButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TrainShutdownButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        AdditionalInfoPanel2.add(TrainShutdownButton, gridBagConstraints);
-
+        TrackShutdownButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         TrackShutdownButton.setText("Track Shutdown");
         TrackShutdownButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -629,31 +318,125 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 6;
+        gridBagConstraints.ipady = 6;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         AdditionalInfoPanel2.add(TrackShutdownButton, gridBagConstraints);
 
+        SelectOperationMode2.setFont(new java.awt.Font("Futura", 0, 12)); // NOI18N
+        SelectOperationMode2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manual", "Automatic" }));
+        SelectOperationMode2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectOperationMode2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 9;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        AdditionalInfoPanel2.add(SelectOperationMode2, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        jLabel4.setText("Throughput (in trains/hour)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        AdditionalInfoPanel2.add(jLabel4, gridBagConstraints);
+
+        greenLineThroughput.setEditable(false);
+        greenLineThroughput.setFont(new java.awt.Font("Futura", 1, 12)); // NOI18N
+        greenLineThroughput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        greenLineThroughput.setPreferredSize(new java.awt.Dimension(48, 26));
+        greenLineThroughput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                greenLineThroughputActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        AdditionalInfoPanel2.add(greenLineThroughput, gridBagConstraints);
+
+        greenLabel.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        greenLabel.setText("Green");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        AdditionalInfoPanel2.add(greenLabel, gridBagConstraints);
+
+        redLineThroughput.setEditable(false);
+        redLineThroughput.setFont(new java.awt.Font("Futura", 1, 12)); // NOI18N
+        redLineThroughput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        redLineThroughput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redLineThroughputActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        AdditionalInfoPanel2.add(redLineThroughput, gridBagConstraints);
+
+        redLabel.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        redLabel.setText("Red");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        AdditionalInfoPanel2.add(redLabel, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
         jPanel1.add(AdditionalInfoPanel2, gridBagConstraints);
 
-        DispatchControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Dispatch Control"));
+        DispatchControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dispatch Control", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Futura", 0, 13))); // NOI18N
+        DispatchControlPanel.setMinimumSize(new java.awt.Dimension(250, 150));
+        DispatchControlPanel.setPreferredSize(new java.awt.Dimension(250, 150));
         DispatchControlPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel8.setText("Please select departure details for the newly dispatched train:");
+        jLabel9.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        jLabel9.setText("Line");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipady = 15;
-        DispatchControlPanel.add(jLabel8, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        DispatchControlPanel.add(jLabel9, gridBagConstraints);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        DispatchLineBox.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        DispatchLineBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GREEN", "RED" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 3, 2, 3);
+        DispatchControlPanel.add(DispatchLineBox, gridBagConstraints);
 
+        DispatchButton1.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
         DispatchButton1.setText("Dispatch");
         DispatchButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -662,63 +445,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel2.add(DispatchButton1, gridBagConstraints);
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
+        DispatchControlPanel.add(DispatchButton1, gridBagConstraints);
 
-        ResetButton.setText("Reset");
-        ResetButton.setPreferredSize(new java.awt.Dimension(100, 29));
-        ResetButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel2.add(ResetButton, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        DispatchControlPanel.add(jPanel2, gridBagConstraints);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setLayout(new java.awt.GridBagLayout());
-
-        jLabel9.setText("Line To Dispatch Onto");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel3.add(jLabel9, gridBagConstraints);
-
-        DispatchLineBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GREEN", "RED" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel3.add(DispatchLineBox, gridBagConstraints);
-
-        jLabel10.setText("Set Dispatch Speed");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel3.add(jLabel10, gridBagConstraints);
-
-        jLabel11.setText("Set Dispatch Authority");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel3.add(jLabel11, gridBagConstraints);
-
+        DispatchSpeedField.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        DispatchSpeedField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         DispatchSpeedField.setText("40");
         DispatchSpeedField.setToolTipText("");
         DispatchSpeedField.setPreferredSize(new java.awt.Dimension(100, 26));
@@ -733,12 +467,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel3.add(DispatchSpeedField, gridBagConstraints);
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(3, 1, 3, 1);
+        DispatchControlPanel.add(DispatchSpeedField, gridBagConstraints);
 
+        DispatchAuthorityField.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        DispatchAuthorityField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         DispatchAuthorityField.setText("90000");
         DispatchAuthorityField.setPreferredSize(new java.awt.Dimension(100, 26));
         DispatchAuthorityField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -752,155 +490,57 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel3.add(DispatchAuthorityField, gridBagConstraints);
-
-        jLabel12.setText("mph");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        jPanel3.add(jLabel12, gridBagConstraints);
-
-        jLabel13.setText("feet");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        jPanel3.add(jLabel13, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        DispatchControlPanel.add(jPanel3, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(DispatchControlPanel, gridBagConstraints);
-
-        SystemInformationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("System Information"));
-        SystemInformationPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                SystemInformationPanelMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                SystemInformationPanelMouseEntered(evt);
-            }
-        });
-        SystemInformationPanel.setLayout(new java.awt.GridBagLayout());
-
-        jLabel2.setText("Time");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        SystemInformationPanel.add(jLabel2, gridBagConstraints);
-
-        jLabel3.setText("Rush Hour");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        SystemInformationPanel.add(jLabel3, gridBagConstraints);
-
-        jLabel4.setText("Throughput");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        SystemInformationPanel.add(jLabel4, gridBagConstraints);
-
-        TimeField.setPreferredSize(new java.awt.Dimension(48, 26));
-        TimeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TimeFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 60;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        SystemInformationPanel.add(TimeField, gridBagConstraints);
-
-        RushHourField.setPreferredSize(new java.awt.Dimension(48, 26));
-        RushHourField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RushHourFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 60;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        SystemInformationPanel.add(RushHourField, gridBagConstraints);
-
-        ThroughputField.setPreferredSize(new java.awt.Dimension(48, 26));
-        ThroughputField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThroughputFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 60;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        SystemInformationPanel.add(ThroughputField, gridBagConstraints);
-
-        jLabel1.setText("t/hr");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        SystemInformationPanel.add(jLabel1, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        SystemInformationPanel.add(AMPM, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(SystemInformationPanel, gridBagConstraints);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Operation Mode"));
-        jPanel4.setLayout(new java.awt.GridBagLayout());
-
-        SelectOperationMode2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manual", "Automatic" }));
-        SelectOperationMode2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SelectOperationMode2ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 5;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel4.add(SelectOperationMode2, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.insets = new java.awt.Insets(3, 1, 3, 1);
+        DispatchControlPanel.add(DispatchAuthorityField, gridBagConstraints);
+
+        jLabel11.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Authority");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
+        DispatchControlPanel.add(jLabel11, gridBagConstraints);
+
+        jLabel10.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        jLabel10.setText("Speed");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        DispatchControlPanel.add(jLabel10, gridBagConstraints);
+
+        jLabel12.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        jLabel12.setText("mph");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        DispatchControlPanel.add(jLabel12, gridBagConstraints);
+
+        jLabel13.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        jLabel13.setText("feet");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        DispatchControlPanel.add(jLabel13, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(jPanel4, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+        jPanel1.add(DispatchControlPanel, gridBagConstraints);
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -908,8 +548,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         add(jScrollPane1, gridBagConstraints);
@@ -993,46 +631,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      */
     public void updateTime(){
        
-       int updateMinute = trainSystem.getClock().getMinute();
-       int updateSecond = trainSystem.getClock().getSecond();
-        
-        TimeField.setText(trainSystem.getClock().getHour() + ":" + String.format("%02d",updateMinute) + "." + String.format("%02d",updateSecond));
-        
-        if ( (trainSystem.getClock().getHour() > 5) && (trainSystem.getClock().getHour() < 8)){
-            RushHourField.setText("YES");
-        }
-        else {
-            RushHourField.setText("NO");
-        }
-        
-        if ((trainSystem.getClock().getSecond() >= 59) && (trainSystem.getClock().getMinute() >= 59)){
-            //hoursPassed++;
-        }
-     
-        if (this.trainSystem.getClock().getTimeOfDay() == Clock.TimeOfDay.AM){
-            AMPM.setText("AM");
-        }
-        else{
-            AMPM.setText("PM");
-        }
-        
-        updateTrainTable();
+
         
         if(SelectOperationMode2.getSelectedIndex() == 1){
             getDispatchTimes();
         }
-        
-        //throws null pointer because of intiialiaztion
-//        if ( (this.trainSystem.getTrainHandler().getTrains() == null) || (hoursPassed == 0) || (this.trainSystem.getTrainHandler().getTrains().isEmpty()) ){
-//            ThroughputField.setText("0");
-//        }
-//        
-//        if ( (!this.trainSystem.getTrainHandler().getTrains().isEmpty() ) && (hoursPassed != 0)  ){
-//            throughputValue = this.trainSystem.getTrainHandler().getTrains().size()/hoursPassed;       
-//        }
-//        else{
-//            throughputValue = 0;
-//        }
 
         calculateThroughput();
        
@@ -1041,18 +644,32 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }
 
     private void calculateThroughput(){
-        throughputValue = 0;
+        throughputValueGreen = 0;
+        throughputValueRed = 0;
+        if(this.trainSystem.getClock().getMinute() == 59 && this.trainSystem.getClock().getSecond() == 59){
+            this.trainsPerHourGreen = 0;
+            this.trainsPerHourRed = 0;
+        }
         double tempValue;
         
         ArrayList<TrainModel> trainList = trainSystem.getTrainHandler().getTrains();
         
         int arraySize = trainList.size();
         for(int i = 0 ; i < arraySize ; i++) {
-            tempValue = (trainList.get(i).getTotalDistanceTraveledFeet())/80000;
-            throughputValue += tempValue;
+             tempValue = (trainList.get(i).getTotalDistanceTraveledFeet())/trainSystem.getTrackModel().getLine(Global.Line.valueOf(trainList.get(i).getLine())).getTotalLength();
+            if(Global.Line.valueOf(trainList.get(i).getLine()) == Global.Line.GREEN){
+                throughputValueGreen += tempValue;
+            } else {
+                throughputValueRed += tempValue;
+            }
         }
         
-        ThroughputField.setText(String.format("%.2f", throughputValue));
+//        double difference = throughputValue - tempThroughputValue + trainsPerHour;
+        throughputValueGreen += trainsPerHourGreen;
+        throughputValueRed += trainsPerHourRed;
+        
+        greenLineThroughput.setText(String.format("%.2f", throughputValueGreen));
+        redLineThroughput.setText(String.format("%.2f", throughputValueRed));
 
     }
     
@@ -1070,13 +687,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         if (SelectOperationMode2.getSelectedIndex() == 0) {
             ChangeParametersButton3.setEnabled(true);
             DispatchButton1.setEnabled(true);
-            TrainShutdownButton.setEnabled(true);
             TrackShutdownButton.setEnabled(true);
         } // TODO add your handling code here:
         else {
             ChangeParametersButton3.setEnabled(false);
             DispatchButton1.setEnabled(false);
-            TrainShutdownButton.setEnabled(false);
             TrackShutdownButton.setEnabled(false);
             
         }
@@ -1135,48 +750,10 @@ public int iterateID(){
     return iterativeID;
 }
     
-    private void ThroughputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputFieldActionPerformed
+    private void greenLineThroughputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenLineThroughputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ThroughputFieldActionPerformed
+    }//GEN-LAST:event_greenLineThroughputActionPerformed
 
-    private void TimeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimeFieldActionPerformed
-        //check for rushhour
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TimeFieldActionPerformed
-
-    private void CurrentLineFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentLineFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CurrentLineFieldActionPerformed
-
-    private void CurrentBlockFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentBlockFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CurrentBlockFieldActionPerformed
-
-    private void CurrentSectionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentSectionFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CurrentSectionFieldActionPerformed
-
-    private void AuthorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuthorityFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AuthorityFieldActionPerformed
-
-    private void SpeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpeedFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SpeedFieldActionPerformed
-
-    private void MaxCapacityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaxCapacityFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MaxCapacityFieldActionPerformed
-
-    private void CurrentCapacityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentCapacityFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CurrentCapacityFieldActionPerformed
-
-
-    private void RushHourFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RushHourFieldActionPerformed
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_RushHourFieldActionPerformed
 
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
         //get trainID from selected row first column
@@ -1190,41 +767,10 @@ public int iterateID(){
         trackShutdown.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_TrackShutdownButtonActionPerformed
 
-    private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
-        TrainShutdownGUI trainShutdown = new TrainShutdownGUI(this, trainSystem);
-        trainShutdown.setVisible(true);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TrainShutdownButtonActionPerformed
-
-    private void TrainNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainNameFieldActionPerformed
-
-    }//GEN-LAST:event_TrainNameFieldActionPerformed
-
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
 
         InitializeGUIObject();
         int trainID;
-
-        InformationHeader2.setText("Selected Train Information");
-
-        jLabel67.setText("Train Name");
-        jLabel68.setText("Current Line");
-        jLabel69.setText("Current Section");
-        jLabel70.setText("Current Block");
-        jLabel71.setText("Speed");
-        jLabel72.setText("Authority");
-        jLabel74.setText("Current Capacity");
-        jLabel75.setText("Max Capacity");
-        jLabel76.setText("Status");
-
-        TrainSpeedLabel2.setText("mph");
-        TrainAuthorityLabel2.setText("feet");
-
-        SpeedField.setVisible(true);
-        AuthorityField.setVisible(true);
-        CurrentCapacityField.setVisible(true);
-        MaxCapacityField.setVisible(true);
-        StatusField.setVisible(true);
 
         JTable selectCheck = (JTable) evt.getSource();
 
@@ -1248,22 +794,8 @@ public int iterateID(){
             String partSection = parts[0];
             String partBlock = parts[1];
             Boolean booleanStatus = (Boolean) (table.getValueAt(row, 3));
-            if (booleanStatus == false) {
-                StatusField.setText("Disabled");
-            } else {
-                StatusField.setText("Operational");
-            }
 
-            CurrentLineField.setText(line);
-            CurrentSectionField.setText(partSection);
-            CurrentBlockField.setText(partBlock);
-            TrainNameField.setText(Integer.toString(trainID));
-            //MaxCapacityField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getNumCars() * 222));
-            CurrentCapacityField.setText("-");
-            //SpeedField.setText(String.valueOf(this.trainSystem.getTrainHandler().getTrains().get(trainID).getCtcSetPoint())); //speed only
-            //int auth = (int)this.trainSystem.getTrainHandler().getTrains().get(trainID).getAuthority();
-            //AuthorityField.setText(String.valueOf(auth));
-                    
+
             if (SelectOperationMode2.getSelectedIndex() == 1) {
                 ChangeParametersButton3.setEnabled(false);
             } else {
@@ -1391,34 +923,12 @@ public int iterateID(){
         return false;
     }
 
-    private void StatusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_StatusFieldActionPerformed
-
     private void BlockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BlockTableMouseClicked
         //set up screen for Block Info
 
         InitializeGUIObject();
 
-        InformationHeader2.setText("Selected Block Information");
-        jLabel67.setText("Block Section");
-        jLabel68.setText("Block Line");
-        jLabel69.setText("Block Number");
-        jLabel70.setText("Block Length");
-        jLabel71.setText("Block Speed");
-        jLabel72.setText("Station");
-        jLabel74.setText("Crossing");
-        jLabel75.setText("Switch");
-        jLabel76.setText("Status");
-
-        TrainSpeedLabel2.setText("");
-        TrainAuthorityLabel2.setText("");
-
-        SpeedField.setVisible(true);
-        AuthorityField.setVisible(true);
-        CurrentCapacityField.setVisible(true);
-        MaxCapacityField.setVisible(true);
-        StatusField.setVisible(true);
+       
 
         if (evt.getClickCount() == 1) {
             JTable blockTable = (JTable) evt.getSource();
@@ -1427,9 +937,6 @@ public int iterateID(){
             int blockNumber = (int) blockTable.getValueAt(row, 2);
             String line = (String) blockTable.getValueAt(row, 0);
 
-            TrainNameField.setText(blockSection);
-            CurrentSectionField.setText(Integer.toString(blockNumber));
-            CurrentLineField.setText(line);
 
             for (Block b : this.trackModel.getBlockArray()){
                 if (b.getID() == blockNumber){
@@ -1439,27 +946,12 @@ public int iterateID(){
                     Station blockStation = b.getStation();
                     int blockSwitchID = b.getSwitchID();
                     boolean blockCrossing = b.containsCrossing();
-                    
-                    CurrentBlockField.setText(Double.toString(blockLength));
-                    SpeedField.setText(Double.toString(blockSpeedLimit));
-                    AuthorityField.setText(String.valueOf(blockStation));
-                    if (blockStation == null){
-                        AuthorityField.setText("NONE");
-                    }
-                    CurrentCapacityField.setText(Boolean.toString(blockCrossing));
-                    if (blockCrossing == false){
-                        CurrentCapacityField.setText("NONE");
-                    }
-                    MaxCapacityField.setText(Integer.toString(blockSwitchID));
-                    if (blockSwitchID == -1){
-                        MaxCapacityField.setText("NONE");
-                    }
+
                     
                 }
                 
             }
             
-            StatusField.setText(String.valueOf((BlockTable.getValueAt(BlockTable.getSelectedRow(), 3))));
             
         }
 
@@ -1474,25 +966,7 @@ public int iterateID(){
     private void FailureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FailureTableMouseClicked
         InitializeGUIObject();
 
-        InformationHeader2.setText("Selected Failure Information");
 
-        jLabel67.setText("Failure Type");
-        jLabel68.setText("Failure Line");
-        jLabel69.setText("Failure Block");
-        jLabel70.setText("Failure Section");
-        jLabel71.setText("");
-        jLabel72.setText("");
-        jLabel74.setText("");
-        jLabel75.setText("");
-        jLabel76.setText("");
-        TrainSpeedLabel2.setText("");
-        TrainAuthorityLabel2.setText("");
-
-        SpeedField.setVisible(false);
-        AuthorityField.setVisible(false);
-        CurrentCapacityField.setVisible(false);
-        MaxCapacityField.setVisible(false);
-        StatusField.setVisible(false);
 
         if (evt.getClickCount() == 1) {
             JTable failureTable = (JTable) evt.getSource();
@@ -1502,10 +976,7 @@ public int iterateID(){
             String failureBlock = (String) failureTable.getValueAt(row, 2);
             String failureType = (String) failureTable.getValueAt(row, 3);
 
-            TrainNameField.setText(failureType);
-            CurrentLineField.setText(failureLine);
-            CurrentSectionField.setText(failureSection);
-            CurrentBlockField.setText(failureBlock);
+
 
         }
 
@@ -1532,13 +1003,6 @@ public int iterateID(){
     }
     
     
-    private void SystemInformationPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SystemInformationPanelMouseEntered
-    }//GEN-LAST:event_SystemInformationPanelMouseEntered
-
-    private void SystemInformationPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SystemInformationPanelMouseExited
-// TODO add your handling code here:
-    }//GEN-LAST:event_SystemInformationPanelMouseExited
-
     private void DispatchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchButton1ActionPerformed
 
         String dispatchLine = (String) DispatchLineBox.getSelectedItem();
@@ -1546,7 +1010,10 @@ public int iterateID(){
         int dispatchSection = 1;
         int dispatchSpeed = Integer.valueOf(DispatchSpeedField.getText());
         int dispatchAuthority = Integer.valueOf(DispatchAuthorityField.getText());
-        int dispatchNumberCars = getNumberCars();
+        int dispatchNumberCars = 1;
+        if(this.trainSystem.getClock().getHour() >= 6 && this.trainSystem.getClock().getHour() <= 7){
+            dispatchNumberCars = 2;
+        }
         int dispatchID = iterativeID;
 
         Object[] newTrain = new Object[4];
@@ -1574,15 +1041,7 @@ public int iterateID(){
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 
-    public int getNumberCars(){
-        int numberCars;
-        if (RushHourField.getText().equals("YES")) {
-            numberCars = 2;
-        } else {
-            numberCars = 1;
-        }    
-        return numberCars;
-    }
+
     
     public void addRow(String dispatchLine, String dispatchBlock, int dispatchSection, int dispatchID) {
         String concatination = (dispatchBlock + ":" + Integer.toString(dispatchSection));
@@ -1594,13 +1053,6 @@ public int iterateID(){
         DefaultTableModel model = (DefaultTableModel) TrainTable.getModel();
         model.addRow(newRow);
     }
-    private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
-        DispatchSpeedField.setText("0");
-        DispatchAuthorityField.setText("0");
-        DispatchLineBox.setSelectedIndex(0);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ResetButtonActionPerformed
-
     private void DispatchAuthorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchAuthorityFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchAuthorityFieldActionPerformed
@@ -1617,86 +1069,65 @@ public int iterateID(){
         // TODO add your handling code here:
     }//GEN-LAST:event_DispatchSpeedFieldActionPerformed
 
+    private void redLineThroughputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redLineThroughputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_redLineThroughputActionPerformed
+
     private void InitializeGUIObject() {
-        TrainNameField.setText("");
-        CurrentLineField.setText("");
-        CurrentBlockField.setText("0");
-        CurrentSectionField.setText("");
-        SpeedField.setText("0.00");
-        AuthorityField.setText("0.00");
-        CurrentCapacityField.setText("");
-        MaxCapacityField.setText("");
-        ThroughputField.setText("");
-        StatusField.setText("");
+
+        greenLineThroughput.setText("");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AMPM;
     private javax.swing.JPanel AdditionalInfoPanel2;
-    private javax.swing.JTextField AuthorityField;
     private javax.swing.JTable BlockTable;
     private javax.swing.JTabbedPane BrowserPanel2;
     private javax.swing.JButton ChangeParametersButton3;
-    private javax.swing.JTextField CurrentBlockField;
-    private javax.swing.JTextField CurrentCapacityField;
-    private javax.swing.JTextField CurrentLineField;
-    private javax.swing.JTextField CurrentSectionField;
     private javax.swing.JTextField DispatchAuthorityField;
     private javax.swing.JButton DispatchButton1;
     private javax.swing.JPanel DispatchControlPanel;
     private javax.swing.JComboBox<String> DispatchLineBox;
     private javax.swing.JTextField DispatchSpeedField;
     private javax.swing.JTable FailureTable;
-    private javax.swing.JLabel InformationHeader2;
-    private javax.swing.JPanel InformationPanel2;
-    private javax.swing.JLabel MapImage2;
-    private javax.swing.JPanel MapPanel2;
-    private javax.swing.JTextField MaxCapacityField;
-    private javax.swing.JButton ResetButton;
-    private javax.swing.JTextField RushHourField;
     private javax.swing.JComboBox<String> SelectOperationMode2;
-    private javax.swing.JTextField SpeedField;
-    private javax.swing.JTextField StatusField;
-    private javax.swing.JPanel SystemInformationPanel;
-    private javax.swing.JTextField ThroughputField;
-    private javax.swing.JTextField TimeField;
     private javax.swing.JButton TrackShutdownButton;
-    private javax.swing.JLabel TrainAuthorityLabel2;
-    private javax.swing.JTextField TrainNameField;
-    private javax.swing.JButton TrainShutdownButton;
-    private javax.swing.JLabel TrainSpeedLabel2;
     public javax.swing.JTable TrainTable;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel greenLabel;
+    private javax.swing.JTextField greenLineThroughput;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel88;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel redLabel;
+    private javax.swing.JTextField redLineThroughput;
     // End of variables declaration//GEN-END:variables
+
+    private int getNumberCars() {
+        int dispatchNumberCars = 1;
+        if(this.trainSystem.getClock().getHour() >= 6 && this.trainSystem.getClock().getHour() <= 7){
+            dispatchNumberCars = 2;
+        }
+        return dispatchNumberCars;
+    }
+
+
+    public void incrementTrainsToYard(double totalDistanceTraveledFeet, String line) {
+        if(Global.Line.valueOf(line) == Global.Line.GREEN){
+            this.trainsPerHourGreen += Math.round(totalDistanceTraveledFeet / this.trainSystem.getTrackModel().getLine(Global.Line.valueOf(line)).getTotalLength());
+        } else {
+             this.trainsPerHourRed += Math.round(totalDistanceTraveledFeet / this.trainSystem.getTrackModel().getLine(Global.Line.valueOf(line)).getTotalLength());
+        }
+    }
 }

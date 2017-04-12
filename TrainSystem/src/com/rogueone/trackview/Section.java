@@ -39,6 +39,7 @@ public class Section implements MyShape {
 
     private HashMap<Integer, Boolean> currentBlocks;
     private HashMap<Integer, Boolean> closedBlocks;
+    private HashMap<Integer, Boolean> failedBlocks;
 
     private float X, Y;
     private float shiftX, shiftY;
@@ -64,6 +65,7 @@ public class Section implements MyShape {
         this.line = line;
         this.currentBlocks = new HashMap<Integer, Boolean>();
         this.closedBlocks = new HashMap<Integer, Boolean>();
+        this.failedBlocks = new HashMap<Integer, Boolean>();
         setUp();
     }
 
@@ -226,6 +228,29 @@ public class Section implements MyShape {
                 }
             }
         }
+        if(this.line == Global.Line.GREEN && this.sectionID.equals("K") && (isOccupied || !this.currentBlocks.isEmpty())){
+            g.setColor(Color.GREEN);
+            g.fill(sectionPath);
+            if (!this.currentBlocks.isEmpty()) {
+                Set<Entry<Integer, Boolean>> blockSet = this.currentBlocks.entrySet();
+                Iterator blockIter = blockSet.iterator();
+                while (blockIter.hasNext()) {
+                    Entry<Integer, Boolean> blockEntry = (Entry<Integer, Boolean>) blockIter.next();
+                    if (blockEntry.getValue() == true) {
+                        Path2D blockPath = sectionDivisions.get(blockEntry.getKey());
+                        if (isHalted) {
+                            g.setColor(Color.RED);
+                        } else if (isStopped && !isHalted) {
+                            g.setColor(Color.ORANGE);
+                        } else {
+                            g.setColor(Color.BLUE);
+                        }
+                        g.draw(blockPath);
+                        g.fill(blockPath);
+                    }
+                }
+            }
+        }
         if (!this.closedBlocks.isEmpty()) {
             Set<Entry<Integer, Boolean>> closedSet = this.closedBlocks.entrySet();
             Iterator closedIter = closedSet.iterator();
@@ -233,6 +258,18 @@ public class Section implements MyShape {
                 Entry<Integer, Boolean> closedEntry = (Entry<Integer, Boolean>) closedIter.next();
                 if (closedEntry.getValue() == true) {
                     Path2D blockPath = sectionDivisions.get(closedEntry.getKey());
+                    g.setColor(Color.MAGENTA);
+                    g.draw(blockPath);
+                }
+            }
+        }
+        if (!this.failedBlocks.isEmpty()) {
+            Set<Entry<Integer, Boolean>> failedSet = this.failedBlocks.entrySet();
+            Iterator failedIter = failedSet.iterator();
+            while (failedIter.hasNext()) {
+                Entry<Integer, Boolean> failedEntry = (Entry<Integer, Boolean>) failedIter.next();
+                if (failedEntry.getValue() == true) {
+                    Path2D blockPath = sectionDivisions.get(failedEntry.getKey());
                     g.setColor(Color.RED);
                     g.draw(blockPath);
                 }
@@ -322,6 +359,22 @@ public class Section implements MyShape {
             //do nothing
         }
     }
+    
+    public void addBlockToFailedBlocks(int blockID){
+        if(this.failedBlocks.containsKey(blockID)){
+            this.failedBlocks.replace(blockID, true);
+        } else {
+            this.failedBlocks.put(blockID,true);
+        }
+    }
+    
+    public void clearFailedBlocks() {
+        if (!this.failedBlocks.isEmpty()) {
+            this.failedBlocks.clear();
+        } else {
+            //do nothing
+        }
+    }
 
     @Override
     public int getBlockID(double x, double y) {
@@ -362,6 +415,15 @@ public class Section implements MyShape {
             }
         }
         return -1;
+    }
+
+    public boolean isBlockFailed(int blockID) {
+        if (this.failedBlocks.containsKey(blockID)) {
+            if (this.failedBlocks.get(blockID) == true) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -42,7 +42,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -74,6 +76,7 @@ public class TrackController {
     private LinkedList<String> tempIgnoreSwitch;
     private LinkedList<String> permIgnoreSwitch;
     private LinkedList<Integer> offSwitches;
+    private LinkedList<String> trackFailures;
 
     private TrackControllerGUI trackControllerGUI = null;
 
@@ -89,7 +92,7 @@ public class TrackController {
         this.trackModel = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
     }
 
-    public TrackController(Global.Line line, TrainSystem trainSystem) {
+    public TrackController(Global.Line line, TrainSystem trainSystem, File loadFile) {
         this.controllerLine = line;
         //set the train System
         this.trainSystem = trainSystem;
@@ -98,19 +101,25 @@ public class TrackController {
         //initialize a new track controller GUI
         this.trackControllerGUI = this.createGUIObject(this);
         //set the default PLC file
-        File defaultPLC = new File("src/com/rogueone/assets/wayside_fun.xlsx");
+        File plcFile = null;
+        if (loadFile == null) {
+            plcFile = new File("src/com/rogueone/assets/wayside_fun.xlsx");
+        } else {
+            plcFile = loadFile;
+        }
         //initialize the permant ignore switches
         this.permIgnoreSwitch = new LinkedList<String>();
         //load the plc file into track controller
-        this.loadPLC(defaultPLC, line);
+        this.loadPLC(plcFile, line);
         //set the plc program field on the gui
-        this.trackControllerGUI.plcProgramTextField.setText(defaultPLC.getName());
+        this.trackControllerGUI.plcProgramTextField.setText(plcFile.getName());
         //load the plc and track model data into the summary tab of track controller
 //        this.updateSummaryTab();
         this.occupiedBlocks = new LinkedList<PresenceBlock>();
         this.currentSwitchStates = new LinkedList<UserSwitchState>();
         this.tempIgnoreSwitch = new LinkedList<String>();
         this.offSwitches = new LinkedList<Integer>();
+        this.trackFailures = new LinkedList<String>();
         if (!permIgnoreSwitch.isEmpty()) {
             configurePermenantSwitch();
         }
@@ -719,11 +728,11 @@ public class TrackController {
                 //the switch is shut down
                 UserSwitchState userSwitchState1 = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
                 UserSwitchState userSwitchState2 = evaluateLogicGroup(logicSet.getKey(), logicSet.getValue());
-                if(userSwitchState1.equals(userSwitchState2)){
+                if (userSwitchState1.equals(userSwitchState2)) {
                     updateSwitches(userSwitchState1);
                     this.currentSwitchStates.add(userSwitchState1);
                 }
-                
+
             }
 //            System.out.print(printSwitchState(userSwitchState));
         }
@@ -773,6 +782,7 @@ public class TrackController {
 
     //evaluate whether train can proceed
     public void evaluateProceed() {
+        this.trackFailures.clear();
         //get the sections for the current line
         ArrayList<Section> sectionsArray = this.trackModel.getLine(controllerLine).getSections();
         //BEGIN OF UPDATING PRESENCE
@@ -797,11 +807,42 @@ public class TrackController {
                         occupiedBlocks.add(pb);
                     }
                 }
+
+                //update the track failures list
+                if (b.getFailureBrokenRail() || b.getFailurePowerOutage() || b.getFailureTrackCircuit()) {
+                    if (!this.trackFailures.contains(b.getSection().toString() + "," + String.valueOf(b.getID()))) {
+                        if (controllerLine == Global.Line.RED) {
+                            if (b.getSection().getSectionID() == Global.Section.H && b.getID() >= 24 && b.getID() <= 27) {
+                                this.trackFailures.add(b.getSection().toString() + "24_27" + "," + String.valueOf(b.getID()));
+                            } else if (b.getSection().getSectionID() == Global.Section.H && b.getID() >= 28 && b.getID() <= 32) {
+                                this.trackFailures.add(b.getSection().toString() + "28_32" + "," + String.valueOf(b.getID()));
+                            } else if (b.getSection().getSectionID() == Global.Section.H && b.getID() >= 33 && b.getID() <= 38) {
+                                this.trackFailures.add(b.getSection().toString() + "33_38" + "," + String.valueOf(b.getID()));
+                            } else if (b.getSection().getSectionID() == Global.Section.H && b.getID() >= 39 && b.getID() <= 43) {
+                                this.trackFailures.add(b.getSection().toString() + "39_43" + "," + String.valueOf(b.getID()));
+                            } else if (b.getSection().getSectionID() == Global.Section.H && b.getID() >= 44 && b.getID() <= 45) {
+                                this.trackFailures.add(b.getSection().toString() + "44_45" + "," + String.valueOf(b.getID()));
+                            } else if (b.getSection().getSectionID() == Global.Section.J && b.getID() >= 49 && b.getID() <= 52) {
+                                this.trackFailures.add(b.getSection().toString() + "49_52" + "," + String.valueOf(b.getID()));
+                            } else if (b.getSection().getSectionID() == Global.Section.J && b.getID() >= 53 && b.getID() <= 54) {
+                                this.trackFailures.add(b.getSection().toString() + "53_54" + "," + String.valueOf(b.getID()));
+                            } else {
+                                this.trackFailures.add(b.getSection().toString() + "," + String.valueOf(b.getID()));
+                            }
+                        } else {
+                            this.trackFailures.add(b.getSection().toString() + "," + String.valueOf(b.getID()));
+                        }
+                    }
+                }
+                //update the switch Lights if track has no power
+                if (b.getSwitchID() != -1) {
+                    isSwitchAccessible(b.getSwitchID());
+                }
+
                 //the occupied list is the same as the occupied block move that block forward
                 //move the block ahead if the currently examined block is occupied and the 
                 //presence block's next block is equals to that block
                 //TLDR: move the train forward
-//                        System.out.println("Occupied = " + b.isOccupied() + " and " + pb.getNextBlock().getID() +" : " + b.getID());
                 if (!occupiedBlocks.isEmpty()) {
                     for (PresenceBlock pb : occupiedBlocks) {
                         if (b.isOccupied() && pb.getNextBlock().getID() == b.getID()) {
@@ -855,7 +896,7 @@ public class TrackController {
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
                         safeToLookAhead = false;
-
+                        break;
                     } //check to see if that block ahead is occupied or not
                     //needs to look ahead by 2 blocks, because the block directly in front will
                     //always be occupied because that is how the train model sets the track
@@ -980,7 +1021,6 @@ public class TrackController {
             return false;
         }
     }
-
 
     /**
      * Getter that will return the track controller GUI
@@ -1124,21 +1164,28 @@ public class TrackController {
         if (!switchBlock1.getFailurePowerOutage() && !switchBlock2.getFailurePowerOutage() && !switchBlock3.getFailurePowerOutage()
                 && !switchBlock1.getFailureBrokenRail() && !switchBlock2.getFailureBrokenRail() && !switchBlock3.getFailureBrokenRail()
                 && !switchBlock1.getFailureTrackCircuit() && !switchBlock2.getFailureTrackCircuit() && !switchBlock3.getFailureTrackCircuit()) {
-            if(this.offSwitches.contains(switchID)){
+            if (this.offSwitches.contains(switchID)) {
                 this.offSwitches.remove((Integer) switchID);
             }
             return true;
-        } 
-        if (switchBlock1.getFailurePowerOutage() || switchBlock2.getFailurePowerOutage() || switchBlock3.getFailurePowerOutage()){
-            if(!this.offSwitches.contains(switchID)){
+        }
+        if (switchBlock1.getFailurePowerOutage() || switchBlock2.getFailurePowerOutage() || switchBlock3.getFailurePowerOutage()) {
+            if (!this.offSwitches.contains(switchID)) {
                 this.offSwitches.add(switchID);
             }
+        } else if (switchBlock1.getFailureBrokenRail() || switchBlock2.getFailureBrokenRail() || switchBlock3.getFailureBrokenRail()
+                || switchBlock1.getFailureTrackCircuit() || switchBlock2.getFailureTrackCircuit() || switchBlock3.getFailureTrackCircuit()) {
+
         }
         return false;
 
     }
-    
-    public LinkedList<Integer> getOffSwitches(){
+
+    public LinkedList<Integer> getOffSwitches() {
         return this.offSwitches;
+    }
+
+    public LinkedList<String> getTrackFailures() {
+        return this.trackFailures;
     }
 }

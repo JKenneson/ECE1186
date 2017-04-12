@@ -86,7 +86,7 @@ public class TrackView extends Frame {
             c.add(sp);
             initializeGreenLine();
             sp.repaint();
-            theWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+            theWindow.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             theWindow.setResizable(false);
         } else if (line == Global.Line.RED) {
             this.line = line;
@@ -102,16 +102,16 @@ public class TrackView extends Frame {
             c.add(sp);
             initializeRedLine2();
             sp.repaint();
-            theWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+            theWindow.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             theWindow.setResizable(false);
         }
     }
-    
-    public void displayTrackView(boolean show){
+
+    public void displayTrackView(boolean show) {
         this.theWindow.setVisible(show);
     }
 
-    public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing, LinkedList<Integer> offSwitches) {
+    public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing, LinkedList<Integer> offSwitches, LinkedList<String> trackFailures) {
 
         if (this.line == Global.Line.GREEN) {
             if (switchStates != null) {
@@ -140,12 +140,12 @@ public class TrackView extends Frame {
                         Iterator lightsIterator = currentLights.iterator();
                         while (lightsIterator.hasNext()) {
                             Light lightIteration = (Light) lightsIterator.next();
-                            if(lightsOut){
+                            if (lightsOut) {
                                 updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), Global.LightState.OFF);
                             } else {
                                 updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), lightIteration.getLightState());
                             }
-                            
+
                         }
                     }
                 }
@@ -179,6 +179,9 @@ public class TrackView extends Frame {
             if (crossing != null) {
                 updateCrossing(crossing);
             }
+            if (trackFailures != null) {
+                updateTrackFailures(trackFailures);
+            }
         } else {
             if (switchStates != null) {
                 Iterator listIterator = switchStates.iterator();
@@ -206,7 +209,7 @@ public class TrackView extends Frame {
                         Iterator lightsIterator = currentLights.iterator();
                         while (lightsIterator.hasNext()) {
                             Light lightIteration = (Light) lightsIterator.next();
-                            if(lightsOut){
+                            if (lightsOut) {
                                 updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), Global.LightState.OFF);
                             } else {
                                 updateTrackLight(lightIteration.getSection(), lightIteration.getBlockID(), lightIteration.getLightState());
@@ -243,6 +246,9 @@ public class TrackView extends Frame {
             }
             if (crossing != null) {
                 updateCrossing(crossing);
+            }
+            if (trackFailures != null) {
+                updateTrackFailures(trackFailures);
             }
         }
         sp.repaint();
@@ -461,7 +467,7 @@ public class TrackView extends Frame {
         Yard yardEnd = new Yard(950, 0);
         sp.addShape(yardEnd);
 
-        LegendBox lb = new LegendBox(1, 200, trainSystem);
+        LegendBox lb = new LegendBox(50, 240, trainSystem);
         sp.addShape(lb);
 
     }
@@ -837,7 +843,7 @@ public class TrackView extends Frame {
         yardStart = new Yard(5, 42 + shiftAmountY);
         sp.addShape(yardStart);
 
-        LegendBox legend = new LegendBox(1, 200, trainSystem);
+        LegendBox legend = new LegendBox(50, 240, trainSystem);
         sp.addShape(legend);
 
         crossing = new Crossing(775, 25 + shiftAmountY);
@@ -1053,7 +1059,33 @@ public class TrackView extends Frame {
         }
         this.trainSystem.getTrackControllerHandler().updateTrack(line);
     }
-    
+
+    private void updateTrackFailures(LinkedList<String> trackFailures) {
+        if (!trackFailures.isEmpty()) {
+            for (Section s : sectionList.values()) {
+                s.clearFailedBlocks();
+            }
+            Iterator failureIter = trackFailures.iterator();
+            while (failureIter.hasNext()) {
+                String[] failString = ((String) failureIter.next()).split(",");
+                String section = failString[0];
+                int blockID = Integer.parseInt(failString[1]);
+                if (section.equals("J") && blockID == 62) {
+                    section = "K";
+                }
+                for (Section s : sectionList.values()) {
+                    if (s.getSectionID().equals(section)) {
+                        s.addBlockToFailedBlocks(blockID);
+                    }
+                }
+            }
+        } else {
+            for (Section s : sectionList.values()) {
+                s.clearFailedBlocks();
+            }
+        }
+    }
+
     class ShapePanel extends JPanel {
 
         // These instance variables are used to store the desired size
@@ -1181,48 +1213,50 @@ public class TrackView extends Frame {
                             if (blockID != -1) {
                                 System.out.println("Block : " + blockID + " selected");
                                 //check to see if block is opened or closed
-                                if (!s.isBlockClosed(blockID)) {
-                                    //check to see if you can close that block
-                                    int response = JOptionPane.showOptionDialog(null,
-                                            "Would you like to close block " + blockID + " in section " + s.getSectionID() + "?",
-                                            "Close Block " + blockID + "",
-                                            JOptionPane.YES_NO_OPTION,
-                                            JOptionPane.QUESTION_MESSAGE, null, null, null
-                                    );
-                                    if (response == JOptionPane.YES_OPTION) {
-                                        if (this.trainSystem.getTrackControllerHandler().requestMaintenance(line, blockID)) {
-                                            //if true result from call to close track, then update block to close
-                                            s.addBlockToClosedBlocks(blockID);
-                                        } else {
-                                            JOptionPane.showMessageDialog(null,
-                                                    "Block " + blockID + " in section " + s.getSectionID() + " was not closed",
-                                                    "Block " + blockID + " not closed",
-                                                    JOptionPane.WARNING_MESSAGE);
+                                if (!s.isBlockFailed(blockID)) {
+                                    if (!s.isBlockClosed(blockID)) {
+                                        //check to see if you can close that block
+                                        int response = JOptionPane.showOptionDialog(null,
+                                                "Would you like to close block " + blockID + " in section " + s.getSectionID() + "?",
+                                                "Close Block " + blockID + "",
+                                                JOptionPane.YES_NO_OPTION,
+                                                JOptionPane.QUESTION_MESSAGE, null, null, null
+                                        );
+                                        if (response == JOptionPane.YES_OPTION) {
+                                            if (this.trainSystem.getTrackControllerHandler().requestMaintenance(line, blockID)) {
+                                                //if true result from call to close track, then update block to close
+                                                s.addBlockToClosedBlocks(blockID);
+                                            } else {
+                                                JOptionPane.showMessageDialog(null,
+                                                        "Block " + blockID + " in section " + s.getSectionID() + " was not closed",
+                                                        "Block " + blockID + " not closed",
+                                                        JOptionPane.WARNING_MESSAGE);
+                                            }
                                         }
-                                    }
-                                    this.trainSystem.getTrackControllerHandler().updateTrack(this.line);
-                                    break;
-                                } else {
-                                    //check to see if you can open that block
-                                    int response = JOptionPane.showOptionDialog(null,
-                                            "Would you like to open block " + blockID + " in section " + s.getSectionID() + "?",
-                                            "Open Block " + blockID + "",
-                                            JOptionPane.YES_NO_OPTION,
-                                            JOptionPane.QUESTION_MESSAGE, null, null, null
-                                    );
-                                    if (response == JOptionPane.YES_OPTION) {
-                                        if (this.trainSystem.getTrackControllerHandler().requestOpen(line, blockID)) {
-                                            //if true result from open track call, the update the block to open
-                                            s.removeBlockFromClosedBlocks(blockID);
-                                        } else {
-                                            JOptionPane.showMessageDialog(null,
-                                                    "Block " + blockID + " in section " + s.getSectionID() + " was not opened",
-                                                    "Block " + blockID + " not opened",
-                                                    JOptionPane.WARNING_MESSAGE);
+                                        this.trainSystem.getTrackControllerHandler().updateTrack(this.line);
+                                        break;
+                                    } else {
+                                        //check to see if you can open that block
+                                        int response = JOptionPane.showOptionDialog(null,
+                                                "Would you like to open block " + blockID + " in section " + s.getSectionID() + "?",
+                                                "Open Block " + blockID + "",
+                                                JOptionPane.YES_NO_OPTION,
+                                                JOptionPane.QUESTION_MESSAGE, null, null, null
+                                        );
+                                        if (response == JOptionPane.YES_OPTION) {
+                                            if (this.trainSystem.getTrackControllerHandler().requestOpen(line, blockID)) {
+                                                //if true result from open track call, the update the block to open
+                                                s.removeBlockFromClosedBlocks(blockID);
+                                            } else {
+                                                JOptionPane.showMessageDialog(null,
+                                                        "Block " + blockID + " in section " + s.getSectionID() + " was not opened",
+                                                        "Block " + blockID + " not opened",
+                                                        JOptionPane.WARNING_MESSAGE);
+                                            }
                                         }
+                                        this.trainSystem.getTrackControllerHandler().updateTrack(this.line);
+                                        break;
                                     }
-                                    this.trainSystem.getTrackControllerHandler().updateTrack(this.line);
-                                    break;
                                 }
                             }
                         }

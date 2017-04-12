@@ -954,6 +954,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         b.setFailureBrokenRail(!b.getFailureBrokenRail());
         updateDetailsPanel();
         updateSummaryPanel();
+        this.trackModel.getTrainSystem().getTrackControllerHandler().updateTrack(b.getLine().getLineID());
     }//GEN-LAST:event_brokenRailFailureButtonActionPerformed
 
     private void trackCircuitFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackCircuitFailureButtonActionPerformed
@@ -961,6 +962,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         b.setFailureTrackCircuit(!b.getFailureTrackCircuit());
         updateDetailsPanel();
         updateSummaryPanel();
+        this.trackModel.getTrainSystem().getTrackControllerHandler().updateTrack(b.getLine().getLineID());
     }//GEN-LAST:event_trackCircuitFailureButtonActionPerformed
 
     private void powerOutageFailureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powerOutageFailureButtonActionPerformed
@@ -968,6 +970,7 @@ public class TrackModelGUI extends javax.swing.JPanel {
         b.setFailurePowerOutage(!b.getFailurePowerOutage());
         updateDetailsPanel();
         updateSummaryPanel();
+        this.trackModel.getTrainSystem().getTrackControllerHandler().updateTrack(b.getLine().getLineID());
     }//GEN-LAST:event_powerOutageFailureButtonActionPerformed
 
     private void trackConfigurationResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trackConfigurationResetButtonMouseClicked

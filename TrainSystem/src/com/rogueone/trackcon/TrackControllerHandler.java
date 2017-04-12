@@ -7,9 +7,12 @@ package com.rogueone.trackcon;
 
 import com.rogueone.global.Global;
 import com.rogueone.trainsystem.TrainSystem;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  * TrackControllerHandler will manage the track controllers across the system
@@ -49,10 +52,27 @@ public class TrackControllerHandler {
                 groupToLogicMapping.put(tg, Global.LogicGroups.GREEN_0);
             }
         }
+        
+        File altFile = null;
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to load an alternate PLC file?");
+        if (response == JOptionPane.YES_OPTION) {
+            JFileChooser fc = new JFileChooser("src/com/rogueone/assets");
+            int returnVal = fc.showOpenDialog(null);
 
-        TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                altFile = fc.getSelectedFile();
+                //This is where a real application would open the file.
+                System.out.println("Opening: " + altFile.getName() + ".");
+            } else {
+                System.out.println("No file selected/using default");
+            }
+        } else {
+            System.out.println("Using default file");
+        }
+
+        TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem, altFile);
 //        TrackController greenTrackControllerDup = new TrackController(Global.Line.GREEN, this.trainSystem);
-        TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem);
+        TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem, altFile);
 //        TrackController redTrackControllerDup = new TrackController(Global.Line.RED, this.trainSystem);
         trackControllers.add(greenTrackController);     //0
 //        trackControllers.add(greenTrackControllerDup);  //1
@@ -224,10 +244,10 @@ public class TrackControllerHandler {
     public void updateTrackView(Global.Line line) {
         if(line == Global.Line.GREEN){
             TrackController trackController = trackControllers.get(0);
-            trainSystem.getTrackViewGreen().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing(), trackController.getOffSwitches());
+            trainSystem.getTrackViewGreen().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing(), trackController.getOffSwitches(), trackController.getTrackFailures());
         } else {
             TrackController trackController = trackControllers.get(1);
-            trainSystem.getTrackViewRed().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing(), trackController.getOffSwitches());
+            trainSystem.getTrackViewRed().updateTrackView(trackController.getOccupiedBlocks(), trackController.getSwitchStates(), trackController.getSwitchArray(), trackController.getCrossing(), trackController.getOffSwitches(), trackController.getTrackFailures());
         }
         
     }
