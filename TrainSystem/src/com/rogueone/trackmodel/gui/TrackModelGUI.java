@@ -72,7 +72,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
         summaryTable = new javax.swing.JTable();
         trackConfigurationPanel = new javax.swing.JPanel();
         trackConfigurationLoadButton = new javax.swing.JButton();
-        trackConfigurationResetButton = new javax.swing.JButton();
         trackDetailsPanel = new javax.swing.JPanel();
         trackDetailsSelectionPanel = new javax.swing.JPanel();
         lineSectionPanel = new javax.swing.JPanel();
@@ -223,21 +222,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
             }
         });
         trackConfigurationPanel.add(trackConfigurationLoadButton);
-
-        trackConfigurationResetButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        trackConfigurationResetButton.setText("Reset");
-        trackConfigurationResetButton.setEnabled(false);
-        trackConfigurationResetButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                trackConfigurationResetButtonMouseClicked(evt);
-            }
-        });
-        trackConfigurationResetButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trackConfigurationResetButtonActionPerformed(evt);
-            }
-        });
-        trackConfigurationPanel.add(trackConfigurationResetButton);
 
         javax.swing.GroupLayout trackOverviewPanelLayout = new javax.swing.GroupLayout(trackOverviewPanel);
         trackOverviewPanel.setLayout(trackOverviewPanelLayout);
@@ -1001,31 +985,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
         this.trackModel.getTrainSystem().getCTC().failureFromTrackModel(b);
     }//GEN-LAST:event_powerOutageFailureButtonActionPerformed
 
-    private void trackConfigurationResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trackConfigurationResetButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_trackConfigurationResetButtonMouseClicked
-
-    private void trackConfigurationResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trackConfigurationResetButtonActionPerformed
-        trackModel.reset();
-        //updateAll();
-        summaryTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Please load a track data file"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });  
-    }//GEN-LAST:event_trackConfigurationResetButtonActionPerformed
-
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         updateDetailsPanel();
     }//GEN-LAST:event_refreshButtonActionPerformed
@@ -1065,7 +1024,6 @@ public class TrackModelGUI extends javax.swing.JPanel {
     private javax.swing.JTable trackCircuitTable;
     private javax.swing.JButton trackConfigurationLoadButton;
     private javax.swing.JPanel trackConfigurationPanel;
-    private javax.swing.JButton trackConfigurationResetButton;
     private javax.swing.JFileChooser trackDataFileChooser;
     private javax.swing.JPanel trackDetailsDetailsPanel;
     private javax.swing.JPanel trackDetailsPanel;
