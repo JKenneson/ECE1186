@@ -903,6 +903,8 @@ public int iterateID(){
         }
         BlockTable.repaint();
         checkForFailure();
+        trainSystem.getTrackControllerHandler().requestMaintenance(Global.Line.valueOf(lineName), blockName);
+        trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf(lineName));
     }
 
     public void checkForFailure() {
@@ -1076,7 +1078,7 @@ public int iterateID(){
            trainSystem.getTrainHandler().getTrains().get(WIDTH).fixFailure(TrainFailures.Power);
         } 
         if (existsInTable(BlockTable, failureCompare)){
-           trainSystem.getTrackControllerHandler().requestOpen(Global.Line.RED, ALLBITS);
+           trainSystem.getTrackControllerHandler().requestOpen(Global.Line.valueOf((String)line), (int)block);
         }
     }
     
