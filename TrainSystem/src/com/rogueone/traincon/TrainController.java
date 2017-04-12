@@ -461,7 +461,9 @@ public class TrainController {
     public void receiveBeacon(Beacon b){
         this.vitals.receiveBeacon(b);
         if(this.gui != null){
-            this.gui.appendNotificationsDisplay("\nApproaching " + b.getStation().toString());
+            if(b.getStation() != null) {
+                this.gui.appendNotificationsDisplay("\nApproaching " + b.getStation().toString());
+            }
         }
     }
     

@@ -550,7 +550,9 @@ public class TrainModel {
                     //Check for beacon and send it to the Track Controller
                     if(this.currBlock.getBeacon() != null) {
                         //System.out.println("BEACON!");
-                        approachingStationBlock();
+                        if(this.currBlock.getBeacon().getStation() != null) {
+                            approachingStationBlock();
+                        }
                         this.trainController.receiveBeacon(this.currBlock.getBeacon());
                     }
                 }
