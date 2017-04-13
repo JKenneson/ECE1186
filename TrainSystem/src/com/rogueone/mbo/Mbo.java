@@ -419,6 +419,10 @@ public class Mbo{
         mboGui.trainTable.setModel(table);
     }
     
+    public String getMode(){
+        return mode;
+    }
+    
     public static void main(String[] args) throws IOException, InvalidFormatException{
         //ArrayList<String> trains = new ArrayList<String>();
         //MovingBlockGUI mboGui = new MovingBlockGUI();

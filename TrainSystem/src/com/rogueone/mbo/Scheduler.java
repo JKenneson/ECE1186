@@ -843,4 +843,13 @@ public class Scheduler {
         }
         return times;
     }
+     
+     /**
+      * Returns string corresponding to current MBO mode
+      * "Fixed Block" or "Moving Block"
+      * @return string corresponding to current automatic mode
+      */
+     public String getMode(){
+         return trainSystem.getMBO().getMode();
+     }
 }
