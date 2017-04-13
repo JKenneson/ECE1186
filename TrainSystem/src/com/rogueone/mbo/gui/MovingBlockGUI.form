@@ -551,6 +551,9 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="NumTrainsInput">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NumTrainsInputActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="MboUnits3">
                   <Properties>

@@ -30,6 +30,7 @@ private boolean mode  = false;
     public MovingBlockGUI(TrainSystem trainSystem) {
         this.trainSystem = trainSystem;
         initComponents();
+        NumTrainsInput.setEnabled(false);
         
     }
 
@@ -243,6 +244,12 @@ private boolean mode  = false;
         ThroughputInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThroughputInputActionPerformed(evt);
+            }
+        });
+
+        NumTrainsInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NumTrainsInputActionPerformed(evt);
             }
         });
 
@@ -479,6 +486,10 @@ private boolean mode  = false;
             trainSystem.getMBO().changeToMovingBlock();
         }
     }//GEN-LAST:event_MovingBlockRadioActionPerformed
+
+    private void NumTrainsInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumTrainsInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NumTrainsInputActionPerformed
 
     public void update(){
         mode = trainSystem.getCTC().isAutomatic();

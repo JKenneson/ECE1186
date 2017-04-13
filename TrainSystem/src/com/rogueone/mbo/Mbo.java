@@ -310,6 +310,9 @@ public class Mbo{
                 //prevTrains = trains;
                 for(int i =0; i<numTrains;i++){
                     
+                    //trainSystem.getTrainHandler().getTrains().get(i).MBOUpdateSpeedAndAuthority(20, 3000);
+                    
+                    
                 
                 TrainModel currTrain = trains.get(i);
                 GPSMessage message = currTrain.requestGPSMessage();
@@ -389,7 +392,7 @@ public class Mbo{
     }
     
     public void updateTrains(){
-        String[] columnNames = {"TRAIN ID","TRAIN LINE","SECTION","BLOCK","NEXT STATION","ARRIVAL TIME","AUTHORITY","CURRENT SPEED","SUGGESTED SPEED","VARIANCE","PASSENGERS"};
+        String[] columnNames = {"TRAIN ID","TRAIN LINE","SECTION","BLOCK","NEXT STATION","AUTHORITY","CURRENT SPEED","SUGGESTED SPEED","VARIANCE","PASSENGERS"};
         int numTrains = trainSystem.getTrainHandler().getTrains().size();
         Object[][] data = new Object[numTrains][11];
         trainList.clear();
@@ -406,12 +409,11 @@ public class Mbo{
             data[i][2]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSection().toString();
             data[i][3]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().toString();
             data[i][4]=trainSystem.getTrainHandler().getTrains().get(i).getApproachingStation();
-            data[i][5]=0;
-            data[i][6]=trainSystem.getTrainHandler().getTrains().get(i).getAuthority();
-            data[i][7]=trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
-            data[i][8]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
-            data[i][9] = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
-            data[i][10]=trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord();
+            data[i][5]=trainSystem.getTrainHandler().getTrains().get(i).getAuthority();
+            data[i][6]=trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
+            data[i][7]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
+            data[i][8] = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
+            data[i][9]=trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord();
         }
         DefaultTableModel table = new DefaultTableModel(data, columnNames);
         mboGui.trainTable.setModel(table);
