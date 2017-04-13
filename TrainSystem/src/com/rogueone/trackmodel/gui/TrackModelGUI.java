@@ -518,7 +518,9 @@ public class TrackModelGUI extends javax.swing.JPanel {
                 if (col == 9) {
                     String stringID = (String) stationTable.getValueAt(0,0);
                     int stationID = Integer.parseInt(stringID);
-                    ArrayList<String> times = trackModel.getTrainSystem().getScheduler().getTimes(stationID);
+                    Block b = (Block) blockSelectionComboBox.getSelectedItem();
+                    int blockID = b.getID();
+                    ArrayList<String> times = trackModel.getTrainSystem().getScheduler().getTimes(stationID, blockID);
                     String stationColumnNames[] = {"Arrival"};
                     DefaultTableModel stationModel = new DefaultTableModel(stationColumnNames, 0);
                     for (String s : times) {

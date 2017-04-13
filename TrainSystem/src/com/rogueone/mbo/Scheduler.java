@@ -567,15 +567,21 @@ public class Scheduler {
         */
     }
     
-    public ArrayList<String> getTimes(int stationID){
+    public ArrayList<String> getTimes(int stationID, int blockID){
         if (stationID == 1) {
             return getCastleShannonTimes();
         }
-        else if (stationID == 2) {
-            return getShadysideTimes();
+        else if (stationID == 2 && blockID == 39) {
+            return getCentralTimes();
         }
-        else if (stationID == 3) {
+        else if (stationID == 2 && blockID == 141) {
+            return getCentralTimes();
+        }
+        else if (stationID == 3 && blockID == 73) {
             return getDormontTimes();
+        }
+        else if (stationID == 3 && blockID == 105) {
+            return getDormontInboundTimes();
         }
         else if (stationID == 4) {
             return getEdgebrookTimes();
@@ -583,19 +589,28 @@ public class Scheduler {
         else if (stationID == 5) {
             return getFirstAveTimes();
         }
-        else if (stationID == 6) {
+        else if (stationID == 6 && blockID == 65) {
             return getGlenburyTimes();
+        }
+        else if (stationID == 6 && blockID == 114) {
+            return getGlenburyInboundTimes();
         }
         else if (stationID == 7) {
             return getHerronTimes();
         }
-        else if (stationID == 8) {
+        else if (stationID == 8 && blockID == 48) {
+            return getInglewoodTimes();
+        }
+        else if (stationID == 8 && blockID == 132) {
             return getInglewoodTimes();
         }
         else if (stationID == 9) {
             return getMtLebanonTimes();
         }
-        else if (stationID == 10) {
+        else if (stationID == 10 && blockID == 57) {
+            return getOverbrookTimes();
+        }
+        else if (stationID == 10 && blockID == 123) {
             return getOverbrookTimes();
         }
         else if (stationID == 11) {
