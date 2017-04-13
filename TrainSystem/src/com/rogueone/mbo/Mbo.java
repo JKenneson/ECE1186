@@ -5,10 +5,11 @@
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 4/11/17
+ * @modification date 4/13/17
  */
 package com.rogueone.mbo;
 import com.rogueone.global.Global;
+import com.rogueone.global.Global.PieceType;
 import java.io.File;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -20,6 +21,7 @@ import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.trackcon.entities.PresenceBlock;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.TrackPiece;
+import com.rogueone.traincon.GPSMessage;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.JTable;
@@ -36,7 +38,7 @@ public class Mbo{
     public static MovingBlockGUI mboGui;
    private static File file = new File("src/com/rogueone/assets/schedule.xlsx");
    private static int trainIndex;
-   private ArrayList<PresenceBlock> occupied = new ArrayList<>();
+   private ArrayList<TrainModel> prevTrains = new ArrayList<>();
   //private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
    //private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
    //private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
@@ -277,16 +279,15 @@ public class Mbo{
     }
     
     public void update(){
-        
+        double cumulativeDist = 0;
         updateTrains();
         //updateSpeed();
         mboGui.update();
             //trainList = trainSystem.getTrainHandler().getTrains();
             int numTrains = trainSystem.getTrainHandler().getTrains().size();
         //trainList.clear();
-        for(int i =0;i<numTrains;i++){
-            MboTrain train = trainList.get(i);
             if(mode.equals("Moving Block")){
+                
                 //System.out.println("MOVING BLOCK");
                 ///TYPING ISSUES OF PREVBLOCK
                 //Block prevBlk = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getPortA().getType();
@@ -305,8 +306,86 @@ public class Mbo{
 //                }
                 //new speed and authority
                 //trainSystem.getTrainHandler().getTrains().get(1).MBOUpdateSpeedAndAuthority(, );
+                ArrayList<TrainModel> trains = trainSystem.getTrainHandler().getTrains();
+                //prevTrains = trains;
+                for(int i =0; i<numTrains;i++){
+                    
+                
+                TrainModel currTrain = trains.get(i);
+                GPSMessage message = currTrain.requestGPSMessage();
+                Block currBlock = message.getCurrBlock();
+                //if(prevTrains.size()==numTrains){
+                    
+                //if(prevTrains.get(i)!=null){
+                    //if(prevTrains.get(i).getCurrBlock().toString().equals(currBlock.toString())){
+                        //prevTrains.set(i, currTrain);
+                        cumulativeDist = trains.get(i).getDistanceTraveledFeet();
+                    TrackPiece next = currBlock.getNext(trains.get(i).getCurrBlock().getPortA());
+                    double addDist = 0;
+                    while(next.getType()==PieceType.BLOCK){
+                        //System.out.println("CUMULATIVE DIST: "+cumulativeDist);
+                        Block nextBlock = (Block)next;
+                        Boolean occupied = nextBlock.isOccupied();
+                        if(occupied == true){
+                            System.out.println("occupied");
+                            for(int k = 0; k < numTrains; k++){
+                                if(trains.get(k).getCurrBlock().toString().equals( nextBlock.toString())){
+                                    addDist = trains.get(k).getDistanceTraveledFeet();
+                                    break;
+                                }
+                            }
+                            cumulativeDist = cumulativeDist + addDist;
+                        }
+                        else{
+                            cumulativeDist = cumulativeDist + nextBlock.getLength();
+                            if(cumulativeDist > message.getStoppingDistance()){
+                                break;
+                            }
+                        }
+                        
+                        
+                        next = nextBlock.getNext(nextBlock.getPortA());
+                    }
+                    
+                    if(cumulativeDist<=message.getStoppingDistance()){
+                            //System.out.println("Reccomended: "+ cumulativeDist+" Actual: "+message.getStoppingDistance());
+                            currTrain.MBOUpdateSpeedAndAuthority(0, 0);
+                            break;
+                        }
+                        else{
+                            int speedLimit = (int)currBlock.getSpeedLimit();
+                            int authortiy = (int)currTrain.getAuthority();
+                            //System.out.println("Speedlimit: "+ speedLimit+" Authortiity: "+authortiy);
+                            currTrain.MBOUpdateSpeedAndAuthority(speedLimit, authortiy);
+                        }
+                    //cumulativeDist = 0;
+                    
+                    if(next.getType()==PieceType.BLOCK){
+                        Block nextBlock = (Block)next;
+                        Boolean occupied = nextBlock.isOccupied();
+                        //System.out.println(occupied);
+                    }
+                //}
+                   // }
+                    //else{
+                    //prevTrains.set(i, currTrain);
+                   // }
+                //}
+                //else{
+                    //TrainModel temp = null;
+                    //System.out.println("SETTING TRAIN ARRAY");
+                    //int difference = trains.size() - prevTrains.size();
+                    //for(int j = 0; j<difference; j++){
+                    //    prevTrains.add(temp);
+                    //}
+                    
+                    
+                }
+                //}
+                
+               //prevTrains = trains;
             }
-        }
+        
     }
     
     public void updateTrains(){

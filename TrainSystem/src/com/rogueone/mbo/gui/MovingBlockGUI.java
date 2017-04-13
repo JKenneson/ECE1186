@@ -138,6 +138,7 @@ private boolean mode  = false;
 
         buttonGroup1.add(FixedBlockRadio);
         FixedBlockRadio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        FixedBlockRadio.setSelected(true);
         FixedBlockRadio.setText("Fixed Block ");
         FixedBlockRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +148,6 @@ private boolean mode  = false;
 
         buttonGroup1.add(MovingBlockRadio);
         MovingBlockRadio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        MovingBlockRadio.setSelected(true);
         MovingBlockRadio.setText("Moving Block");
         MovingBlockRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,7 +346,7 @@ private boolean mode  = false;
                     .addGroup(MboPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(MboModePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(SchedulerInputsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(DetailedScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                    .addComponent(DetailedScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TrainSchedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(73, Short.MAX_VALUE))
