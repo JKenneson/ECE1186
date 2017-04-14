@@ -894,9 +894,11 @@ public class TrackController {
                     //always be occupied because that is how the train model sets the track
                     else if (i > 0 && lookaheadBlock.getNextBlock().getID() != 0 && this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied() && this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen()) {
 //                        System.out.println("Train Ahead");
-                        pb.getCurrBlock().getTrackCircuit().speed = -1;
-                        pb.getCurrBlock().getTrackCircuit().authority = -1;
-                        break;
+                        if(this.trainSystem.getScheduler().getMode().equals("Fixed Block")){
+                            pb.getCurrBlock().getTrackCircuit().speed = -1;
+                            pb.getCurrBlock().getTrackCircuit().authority = -1;
+                            break;
+                        }
                     } //check to see if that block ahead is closed or failed
                     else if (lookaheadBlock.getNextBlock().getID() != 0 && (!this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureBrokenRail()
                             || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureTrackCircuit())) {
