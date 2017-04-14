@@ -412,7 +412,7 @@ public class Vitals {
             if(!this.approachingStation){
                 this.station = beacon.getStation().getName();
             }
-            if (beacon.getID() == 33) { //Try to fix logic here
+            if (beacon.getID() == 34) { //Try to fix logic here
                 specialCase = !this.specialCase;
                 skipped = false;
             }
