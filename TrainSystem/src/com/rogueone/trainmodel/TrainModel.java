@@ -729,6 +729,7 @@ public class TrainModel {
         }
         GPSMessage tempGPSMessage = this.trainController.getGPSMessage();
         tempGPSMessage.setStoppingDistance(this.safeStoppingDistance());
+        tempGPSMessage.setDistanceIntoBlock(this.distanceIntoBlock);
         return tempGPSMessage;
     }
     
