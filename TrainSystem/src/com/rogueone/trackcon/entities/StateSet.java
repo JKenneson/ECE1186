@@ -36,7 +36,7 @@ public class StateSet {
         Iterator itr = stateSet.iterator();
         while(itr.hasNext()){
             State s = (State) itr.next();
-            b.append(s.getGroup() + " => " + s.getPresence() + " ");
+            b.append(s.getGroup()).append(" => ").append(s.getPresence()).append(" ");
         }
         return b.toString();
     }

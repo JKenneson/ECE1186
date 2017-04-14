@@ -16,6 +16,7 @@ public class GPSMessage {
     private double currSpeed;
     private Block currBlock;
     private double stoppingDistance;
+    private double distanceIntoBlock;
     private String line;
     private String trainID;
     
@@ -80,4 +81,14 @@ public class GPSMessage {
     public String getTrainID() {
         return trainID;
     }               
+
+    public double getDistanceIntoBlock() {
+        return distanceIntoBlock;
+    }
+
+    public void setDistanceIntoBlock(double distanceIntoBlock) {
+        this.distanceIntoBlock = distanceIntoBlock;
+    }
+    
+    
 }

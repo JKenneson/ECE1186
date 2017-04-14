@@ -70,7 +70,10 @@ public class PowerSystems{
         }
         
         else{
-            if(this.temperature>72 && !this.airConditioningOn){
+            if(this.airConditioningOn && this.heaterOn){
+                this.trainController.gui.appendNotificationsDisplay("Only one climate control system should be active\n");
+            }
+            else if(this.temperature>72 && !this.airConditioningOn){
                 this.trainController.gui.appendNotificationsDisplay("Only AC should be on\n");
             }
             else if(this.temperature<72 && !this.heaterOn){

@@ -209,6 +209,14 @@ public class TrainModel {
     public void createTrainController() {
         //Create a new TrainController object
         this.trainController = new TrainController(this, null, (byte)this.ctcSetPoint, (short)(this.authority/this.FEET_IN_A_METER), 300, Integer.toString(this.trainID), this.trainSystem, this.line);
+        //Check for beacon and send it to the Track Controller
+        if(this.currBlock.getBeacon() != null) {
+            System.out.println("BEACON!");
+            if(this.currBlock.getBeacon().getStation() != null) {
+                approachingStationBlock();
+            }
+            this.trainController.receiveBeacon(this.currBlock.getBeacon());
+        }
     }
     
     /**
@@ -549,7 +557,7 @@ public class TrainModel {
                     
                     //Check for beacon and send it to the Track Controller
                     if(this.currBlock.getBeacon() != null) {
-                        //System.out.println("BEACON!");
+                        System.out.println("BEACON!");
                         if(this.currBlock.getBeacon().getStation() != null) {
                             approachingStationBlock();
                         }
@@ -721,6 +729,7 @@ public class TrainModel {
         }
         GPSMessage tempGPSMessage = this.trainController.getGPSMessage();
         tempGPSMessage.setStoppingDistance(this.safeStoppingDistance());
+        tempGPSMessage.setDistanceIntoBlock(this.distanceIntoBlock);
         return tempGPSMessage;
     }
     

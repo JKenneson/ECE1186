@@ -86,6 +86,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         redLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         rushHourProgressBar = new javax.swing.JProgressBar();
+        TrainShutdownButton = new javax.swing.JButton();
         DispatchControlPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         DispatchLineBox = new javax.swing.JComboBox<>();
@@ -102,7 +103,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 600));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(250, 600));
+        jPanel1.setPreferredSize(new java.awt.Dimension(250, 650));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         ChangeParametersButton3.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
@@ -312,8 +313,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         AdditionalInfoPanel2.setPreferredSize(new java.awt.Dimension(250, 150));
         AdditionalInfoPanel2.setLayout(new java.awt.GridBagLayout());
 
-        TrackShutdownButton.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        TrackShutdownButton.setFont(new java.awt.Font("Futura", 0, 12)); // NOI18N
         TrackShutdownButton.setText("Track Shutdown");
+        TrackShutdownButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        TrackShutdownButton.setMaximumSize(new java.awt.Dimension(120, 29));
+        TrackShutdownButton.setMinimumSize(new java.awt.Dimension(120, 29));
         TrackShutdownButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TrackShutdownButtonActionPerformed(evt);
@@ -322,11 +326,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 6;
-        gridBagConstraints.ipady = 6;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
         AdditionalInfoPanel2.add(TrackShutdownButton, gridBagConstraints);
 
         SelectOperationMode2.setFont(new java.awt.Font("Futura", 0, 12)); // NOI18N
@@ -339,7 +340,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 9;
         gridBagConstraints.ipady = 9;
@@ -351,13 +352,15 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         AdditionalInfoPanel2.add(jLabel4, gridBagConstraints);
 
         greenLineThroughput.setEditable(false);
         greenLineThroughput.setFont(new java.awt.Font("Futura", 1, 12)); // NOI18N
         greenLineThroughput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        greenLineThroughput.setMaximumSize(new java.awt.Dimension(100, 27));
+        greenLineThroughput.setMinimumSize(new java.awt.Dimension(110, 30));
         greenLineThroughput.setPreferredSize(new java.awt.Dimension(48, 26));
         greenLineThroughput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,10 +370,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         AdditionalInfoPanel2.add(greenLineThroughput, gridBagConstraints);
 
         greenLabel.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
@@ -378,13 +379,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         AdditionalInfoPanel2.add(greenLabel, gridBagConstraints);
 
         redLineThroughput.setEditable(false);
         redLineThroughput.setFont(new java.awt.Font("Futura", 1, 12)); // NOI18N
         redLineThroughput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        redLineThroughput.setMaximumSize(new java.awt.Dimension(100, 100));
+        redLineThroughput.setMinimumSize(new java.awt.Dimension(110, 30));
         redLineThroughput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 redLineThroughputActionPerformed(evt);
@@ -393,10 +397,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         AdditionalInfoPanel2.add(redLineThroughput, gridBagConstraints);
 
         redLabel.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
@@ -404,7 +406,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
         AdditionalInfoPanel2.add(redLabel, gridBagConstraints);
 
@@ -413,18 +416,39 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         AdditionalInfoPanel2.add(jLabel1, gridBagConstraints);
 
         rushHourProgressBar.setMaximum(120);
         rushHourProgressBar.setToolTipText("");
-        rushHourProgressBar.setValue(0);
+        rushHourProgressBar.setMaximumSize(new java.awt.Dimension(100, 20));
+        rushHourProgressBar.setMinimumSize(new java.awt.Dimension(110, 30));
+        rushHourProgressBar.setPreferredSize(new java.awt.Dimension(120, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         AdditionalInfoPanel2.add(rushHourProgressBar, gridBagConstraints);
+
+        TrainShutdownButton.setFont(new java.awt.Font("Futura", 0, 12)); // NOI18N
+        TrainShutdownButton.setText("Train Shutdown");
+        TrainShutdownButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        TrainShutdownButton.setMaximumSize(new java.awt.Dimension(120, 29));
+        TrainShutdownButton.setMinimumSize(new java.awt.Dimension(120, 29));
+        TrainShutdownButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TrainShutdownButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        AdditionalInfoPanel2.add(TrainShutdownButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -741,11 +765,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             ChangeParametersButton3.setEnabled(true);
             DispatchButton1.setEnabled(true);
             TrackShutdownButton.setEnabled(true);
+            TrainShutdownButton.setEnabled(true);
         } // TODO add your handling code here:
         else {
             ChangeParametersButton3.setEnabled(false);
             DispatchButton1.setEnabled(false);
             TrackShutdownButton.setEnabled(false);
+            TrainShutdownButton.setEnabled(false);
+
             
         }
 
@@ -1074,8 +1101,10 @@ public int iterateID(){
         Object[] failureCompare = {line, section, block};
         
         if (existsInTable(TrainTable, failureCompare)){
-           //TrainTable.setValueAt(true, ERROR, WIDTH);
-           trainSystem.getTrainHandler().getTrains().get(WIDTH).fixFailure(TrainFailures.Power);
+           for ( int i = 0; i < TrainTable.getRowCount(); i ++){
+               TrainTable.setValueAt(true, i, 3);
+               trainSystem.getTrainHandler().getTrains().get(i).fixFailure(TrainFailures.Power);
+           }
         } 
         if (existsInTable(BlockTable, failureCompare)){
            trainSystem.getTrackControllerHandler().requestOpen(Global.Line.valueOf((String)line), (int)block);
@@ -1153,6 +1182,11 @@ public int iterateID(){
         // TODO add your handling code here:
     }//GEN-LAST:event_redLineThroughputActionPerformed
 
+    private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
+        TrainShutdownGUI trainShutdown = new TrainShutdownGUI(this, trainSystem);
+        trainShutdown.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_TrainShutdownButtonActionPerformed
+
     private void InitializeGUIObject() {
 
         greenLineThroughput.setText("");
@@ -1172,6 +1206,7 @@ public int iterateID(){
     private javax.swing.JTable FailureTable;
     private javax.swing.JComboBox<String> SelectOperationMode2;
     private javax.swing.JButton TrackShutdownButton;
+    private javax.swing.JButton TrainShutdownButton;
     public javax.swing.JTable TrainTable;
     private javax.swing.JLabel greenLabel;
     private javax.swing.JTextField greenLineThroughput;

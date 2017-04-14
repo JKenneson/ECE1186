@@ -504,31 +504,23 @@ public class TrackController {
 
         StateSet currentState = ltg.getCurrentTrackState();
 
-        System.out.println("Current Set = " + currentState.toString());
 
-        System.out.println("GUI Set = " + currentState.toString());
 
         HashMap<StateSet, UserSwitchState> mappings = ltg.getStateMapping();
 
-        System.out.println("Mappings = " + mappings);
         //how to search for current state mapping        
         for (Map.Entry<StateSet, UserSwitchState> entry : mappings.entrySet()) {
             StateSet key = entry.getKey();
             UserSwitchState userSwitchState = entry.getValue();
             if (key.equals(guiStateSet)) {
-                System.out.println("Mapping contains GUI State");
-                System.out.println("Previous State is now Current state");
                 ltg.setPreviousTrackState(currentState);
-                System.out.println("Current State is now GUI state");
                 ltg.setCurrentTrackState(guiStateSet);
                 this.trackControllerGUI.setSelectedLogicTrackGroup(ltg);
                 logicGroupsArray.replace(selectedLogicTrackGroup.getLogicGroup(), ltg);
                 return userSwitchState;
-                //return UserSwitchState
             } else {
-                System.out.println("Mapping does not contain current State");
+//                System.out.println("Mapping does not contain current State");
             }
-            // do stuff
         }
         return null;
     }
@@ -902,9 +894,11 @@ public class TrackController {
                     //always be occupied because that is how the train model sets the track
                     else if (i > 0 && lookaheadBlock.getNextBlock().getID() != 0 && this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied() && this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen()) {
 //                        System.out.println("Train Ahead");
-                        pb.getCurrBlock().getTrackCircuit().speed = -1;
-                        pb.getCurrBlock().getTrackCircuit().authority = -1;
-                        break;
+                        if(this.trainSystem.getScheduler().getMode().equals("Fixed Block")){
+                            pb.getCurrBlock().getTrackCircuit().speed = -1;
+                            pb.getCurrBlock().getTrackCircuit().authority = -1;
+                            break;
+                        }
                     } //check to see if that block ahead is closed or failed
                     else if (lookaheadBlock.getNextBlock().getID() != 0 && (!this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureBrokenRail()
                             || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureTrackCircuit())) {
