@@ -112,9 +112,9 @@ public class Vitals {
                 //System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
                 this.resetPower();
                 if (this.doorSide) {
-                    this.powerSystem.setRightDoorOpen(true);
+                    this.powerSystem.setRightDoorOpen(true && !manualMode);
                 } else {
-                    this.powerSystem.setLeftDoorOpen(true);
+                    this.powerSystem.setLeftDoorOpen(true && !manualMode);
                 }
 
                 if(setTimer){
@@ -124,23 +124,45 @@ public class Vitals {
 
         }
 
-        if (this.stationStopTimer == 30) {
+        if (this.stationStopTimer == 30 && (this.powerSystem.isLeftDoorOpen() || this.powerSystem.isRightDoorOpen())) {
             this.trainModel.boardPassengers();
         }
 
         //System.out.println("count: " + this.stationStopTimer);
         if (this.stationStopTimer == 0) {
-            if (this.doorSide) {
-                this.powerSystem.setRightDoorOpen(false);
-            } else {
-                this.powerSystem.setLeftDoorOpen(false);
+            if(!manualMode){
+                if (this.doorSide) {
+                    this.powerSystem.setRightDoorOpen(false);
+                } else {
+                    this.powerSystem.setLeftDoorOpen(false);
+                }
+                this.approachingStation = false;
+                stopForStation = false;
+                this.setServiceBrakeActivated(false);
+                this.previousStation = this.station;
             }
-            this.approachingStation = false;
-            stopForStation = false;
-            this.setServiceBrakeActivated(false);
-            this.previousStation = this.station;
+            else if(!(this.powerSystem.isLeftDoorOpen() || this.powerSystem.isRightDoorOpen())){
+                this.approachingStation = false;
+                stopForStation = false;
+                this.setServiceBrakeActivated(false);
+                this.previousStation = this.station;
+            }
+            else{
+                this.stationStopTimer++;
+            }
+            
+//            if (this.doorSide) {
+//                this.powerSystem.setRightDoorOpen(false);
+//            } else {
+//                this.powerSystem.setLeftDoorOpen(false);
+//            }
+//            this.approachingStation = false;
+//            stopForStation = false;
+//            this.setServiceBrakeActivated(false);
+//            this.previousStation = this.station;
             //System.out.println("Train "+ this.gps.trainID + ": " + "Leaving station...");
         }
+        
 
         //System.out.println("Manual: " + manualMode + " Service Brake: " + this.serviceBrakeActivated);
         //System.out.println("Train "+ this.gps.trainID + ": " + "Stop for station: " + stopForStation);
