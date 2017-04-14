@@ -393,6 +393,9 @@ public class Vitals {
     }
 
     public void setEmergencyBrakeOverride(boolean set) {
+        if(!set && this.emergencyBrakeOverride && this.gps.getCurrSpeed() != 0.0){
+            return;
+        }
         this.emergencyBrakeOverride = set;
     }
 

@@ -63,4 +63,28 @@ public class TMR {
         this.primaryVital.receieveBeacon(b);
     }
     
+    public void setServiceBrakeOverride(boolean set){
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].setServiceBrakeOverride(set);
+        }
+    }
+    
+    public void setServiceBrakeActivated(boolean set){
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].setServiceBrakeActivated(set);
+        }
+    }
+    
+    public void setEmergencyBrakeOverride(boolean set) {
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].setEmergencyBrakeOverride(set);
+        }
+    }
+
+    public void setEmergencyBrakeActivated(boolean set) {
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].setEmergencyBrakeActivated(set);
+        }
+    }
+    
 }
