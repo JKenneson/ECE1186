@@ -34,6 +34,10 @@ public class Scheduler {
      private static Object[][] greenData;
      private static Object[][] redData;
      private static int employeeNumber = 0;
+     public  String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
+     public  String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
+     private static Object[] redCols = new Object[11];
+     private static Object[] greenCols = new Object[19];
      
      
     
@@ -108,7 +112,8 @@ public class Scheduler {
         int numTrains = redSchedule.getLastRowNum();
         String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
         String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
-         Object[] columnNames = new Object[11];
+        
+         Object[] redColumnNames = new Object[11];
         
         Object[][] data = new Object[numTrains+1][11];
         int i,j;
@@ -126,7 +131,7 @@ public class Scheduler {
                     //System.out.println(i);
                     if(i==0){     
                         //System.out.println("HERE");
-                        columnNames[j] = info;
+                        redColumnNames[j] = info;
                     }
                     else if(j==0){
                         String[] infos = info.split("\\.");
@@ -167,7 +172,7 @@ public class Scheduler {
                     //System.out.println(i);
                     if(i==0){     
                         //System.out.println("HERE");
-                        columnNames[j] = info;
+                        redColumnNames[j] = info;
                     }
                     else if(j==0){
                         String[] infos = info.split("\\.");
@@ -198,18 +203,20 @@ public class Scheduler {
         numRedTrains = numTrains;
         //System.out.println(data[1][3].toString());
         //System.out.println(data[2][3].toString());
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        DefaultTableModel model = new DefaultTableModel(data, redColumnNames);
+        redCols = redColumnNames;
         scheduleGUI.redTable.setModel(model);
     }
     
     
      public static void readGreenSchedule( File file) throws IOException, InvalidFormatException{
         //scheduleGUI.setVisible(true);
+        String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
+        String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
         greenDispatchTimes.clear();
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet greenSchedule = workbook.getSheetAt(2);
         int numTrains = greenSchedule.getLastRowNum();
-        String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
          Object[] columnNames = new Object[19];
         
         Object[][] data = new Object[numTrains+1][19];
@@ -298,6 +305,7 @@ public class Scheduler {
         greenData = data;
         numGreenTrains = numTrains;
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        greenCols = columnNames;
         scheduleGUI.jTable3.setModel(model);
     }
     
@@ -316,7 +324,7 @@ public class Scheduler {
        // System.out.println("There are: "+numTrains+" trains!");
         
         
-        numTrains = numTrains * 2;
+        //numTrains = numTrains * 2;
         int i=0,j=0,k=0;
         String[] personnelHeaders = {"Name","SHIFT START","BREAK START","BREAK END","SHIFT END"};
         String[] trainHeaders = {"Train ID","Driver","Departure","SHADYSIDE","HERRON","SWISSVILLE","PENN STATION","STEEL PLAZA","FIRST AVE","ST SQUARE","STH HILLS"};
@@ -327,12 +335,12 @@ public class Scheduler {
         Sheet redSheet = workbook.createSheet("Red");
         Sheet greenSheet = workbook.createSheet("Green");
         employeeNumber = 0;
-        startTime = "6.00.00";
-        int trainID = 100;
+        startTime = "6.05.00";
+        int trainID = -1;
         int dayOff1 = 0;
         int dayOff2 = dayOff1+1;
         int dayOffInterval = 7/numTrains;
-        String startTimeDay = "06.00.00";
+        String startTimeDay = "06.05.00";
         String startTimeEvening = "14.00.00";
         int currentDay = 1;
         int testTrigger = 0;
@@ -400,16 +408,16 @@ public class Scheduler {
                         cell.setCellValue(driverNames[j]);
                     }
                     else if(i==2){
-                        if((j &1)==0){
+                       // if((j &1)==0){
                         cell.setCellValue(startTimeDay);
-                        startTimeDay = incrementTime(startTimeDay,"7.0");
+                        startTimeDay = incrementTime(startTimeDay,"15.0");
                        //startTimeDay  = convertTime(startTimeDay);
-                    }
-                        else{
-                           cell.setCellValue(startTimeEvening);
-                            startTimeEvening = incrementTime(startTimeEvening,"7.0"); 
+                    //}
+                      //  else{
+                           //cell.setCellValue(startTimeEvening);
+                            //startTimeEvening = incrementTime(startTimeEvening,"7.0"); 
                            // startTimeEvening  = convertTime(startTimeEvening);
-                        }
+                       // }
                     }
                 }
                             
@@ -431,6 +439,7 @@ public class Scheduler {
         
         
         //generate green
+        startTimeDay = "06.05.00";
         for(j=0;j<numTrains+1;j++){
             isOff = 0;
             testTrigger = 0;
@@ -503,16 +512,16 @@ public class Scheduler {
                         cell.setCellValue(driverNames[j]);
                     }
                     else if(i==2){
-                        if((j &1)==0){
+                        //if((j &1)==0){
                         cell.setCellValue(startTimeDay);
-                        startTimeDay = incrementTime(startTimeDay,"7.0");
+                        startTimeDay = incrementTime(startTimeDay,"15.0");
                        //startTimeDay  = convertTime(startTimeDay);
-                    }
-                        else{
-                           cell.setCellValue(startTimeEvening);
-                            startTimeEvening = incrementTime(startTimeEvening,"7.0"); 
+                    //}
+                       // else{
+                          // cell.setCellValue(startTimeEvening);
+                           // startTimeEvening = incrementTime(startTimeEvening,"7.0"); 
                            // startTimeEvening  = convertTime(startTimeEvening);
-                        }
+                       // }
                     }
                 }
                             
@@ -843,6 +852,22 @@ public class Scheduler {
         }
         return times;
     }
+     public Object[][] getGreenData(){
+         return greenData;
+     }
+     public Object[][] getRedData(){
+         return redData;
+     }
+     public void setGreenData(Object[][] gData){
+         greenData = gData;
+         DefaultTableModel model = new DefaultTableModel(gData, greenCols);
+        scheduleGUI.jTable3.setModel(model);
+     }
+     public void setRedData(Object[][] rData){
+         redData = rData;
+         DefaultTableModel model = new DefaultTableModel(rData, redCols);
+        scheduleGUI.redTable.setModel(model);
+     }
      
      /**
       * Returns string corresponding to current MBO mode

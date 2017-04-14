@@ -20,6 +20,7 @@ import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.trackcon.entities.PresenceBlock;
 import com.rogueone.trackmodel.Block;
+import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackPiece;
 import com.rogueone.traincon.GPSMessage;
 import com.rogueone.trainmodel.TrainModel;
@@ -286,6 +287,111 @@ public class Mbo{
             //trainList = trainSystem.getTrainHandler().getTrains();
             int numTrains = trainSystem.getTrainHandler().getTrains().size();
         //trainList.clear();
+            for(int i =0; i<numTrains;i++){  
+                ArrayList<TrainModel> trains = trainSystem.getTrainHandler().getTrains();
+                TrainModel currTrain = trains.get(i);
+                GPSMessage message = currTrain.requestGPSMessage();
+                Block currBlock = message.getCurrBlock();
+                Object[][] newData;
+                String[] useArr;
+                int index = 3;
+                int width;
+                
+                if(currBlock.getStation()!=null && currTrain.getCurrSpeed() == 0){
+                        Station currStation = currBlock.getStation();
+                        String name = currStation.getName();
+                        if(currBlock.getLine().toString().equals("RED")){
+                            newData = trainSystem.getScheduler().getRedData();
+                            width = 11;
+                            useArr = trainSystem.getScheduler().redIncrements;
+                        }
+                        else{
+                             newData = trainSystem.getScheduler().getGreenData();
+                             width = 19;
+                             useArr = trainSystem.getScheduler().greenIncrements;
+                        }
+                        if(name.equals("SHADYSIDE")||name.equals("PIONEER"))
+                        {
+                            index = 3;
+                        }
+                        else if(name.equals("HERRON AVE")||name.equals("EDGEBROOK")){
+                            index = 4;
+                        }
+                        else if(name.equals("PITT")||name.equals("SWISSVALE")){
+                            index = 5;
+                        }
+                        else if(name.equals("PENN STATION")||name.equals("WHITED")){
+                            index = 6;
+                        }
+                        else if(name.equals("STEEL PLAZA")||name.equals("SOUTH BANK")){
+                            index = 7;
+                        }
+                        else if(name.equals("FIRST AVE")||name.equals("CENTRAL")){
+                            index = 8;
+                        }
+                        else if(name.equals("STATION SQUARE")||name.equals("INGLEWOOD")){
+                            index = 9;
+                        }
+                        else if(name.equals("SOUTH HILLS JUNCTION")||name.equals("OVERBROOK")){
+                            index = 10;
+                        }
+                        else if(name.equals("GLENBURY")){
+                            index = 11;
+                        }
+                        else if(name.equals("DORMONT")){
+                            index = 12;
+                        }
+                        else if(name.equals("MT LEBANON")){
+                            index =13;
+                        }
+                        else if(name.equals("POPLAR")){
+                            index = 14;
+                        }
+                        else if(name.equals("CASTLE SHANNON")){
+                            index = 15;
+                        }
+                        //HERE
+                        else if(name.equals("DORMONT")){
+                            index = 16;
+                        }
+                        else if(name.equals("GLENBURY")){
+                            index = 17;
+                        }
+                        else if(name.equals("OVERBROOK")){
+                            index = 18;
+                        }
+                        int hr = trainSystem.getClock().getHour();
+                        int min = trainSystem.getClock().getMinute();
+                        int sec = trainSystem.getClock().getSecond();
+                        
+                            int id = currTrain.trainID/2 +1;
+                       
+                        
+                        for(int m =index;m<width;m++){
+                            
+                            String currTime = hr+"."+min+"."+sec;
+                            if(m-index==0){
+                                newData[id][m] = convertTime(currTime);
+                            }
+                            else{
+                                currTime = incrementTime(currTime, useArr[m-3]);
+                                newData[id][m] = convertTime(currTime);
+                            }
+                            
+                            //System.out.println(currTime);
+                            //newData[index][m] = 
+                                    
+                        }
+                        
+                        if(currBlock.getLine().toString().equals("RED")){
+                            trainSystem.getScheduler().setRedData(newData);
+                        }
+                        else{
+                             trainSystem.getScheduler().setGreenData(newData);
+                        }
+                        
+                    }
+                
             if(mode.equals("Moving Block")){
                 
                 //System.out.println("MOVING BLOCK");
@@ -306,17 +412,16 @@ public class Mbo{
 //                }
                 //new speed and authority
                 //trainSystem.getTrainHandler().getTrains().get(1).MBOUpdateSpeedAndAuthority(, );
-                ArrayList<TrainModel> trains = trainSystem.getTrainHandler().getTrains();
+                
                 //prevTrains = trains;
-                for(int i =0; i<numTrains;i++){
+                
                     
                     //trainSystem.getTrainHandler().getTrains().get(i).MBOUpdateSpeedAndAuthority(20, 3000);
                     
                     
                 
-                TrainModel currTrain = trains.get(i);
-                GPSMessage message = currTrain.requestGPSMessage();
-                Block currBlock = message.getCurrBlock();
+                
+                
                 //if(prevTrains.size()==numTrains){
                     
                 //if(prevTrains.get(i)!=null){
