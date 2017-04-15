@@ -1,18 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+* Contains Station information
+*
+* @author: Dan Bednarczyk
+* @creation date: 02/01/2017
+* @modification date: 04/20/2017
+*/
+
 package com.rogueone.trackmodel;
 
 import java.util.Random;
 
-/**
- *
- * @author Dan
- */
 public class Station {
     
+    private static final int MAX_TEMPURATURE = 100;
+    private static final int MIN_TEMPURATURE = 0;
+    private static final int MAX_TEMPURATURE_CHANGE = 5;
+    private static final int MAX_PASSENGER_CHANGE = 3;
+    private static final int HEATER_THRESHOLD = 32;
     private final int stationID;
     private final String name;
     private final Line line;
@@ -24,11 +28,6 @@ public class Station {
     private int temperature = -1;
     private boolean heaterOn = false;
     private final Random random;
-    private static final int MAX_TEMPURATURE = 100;
-    private static final int MIN_TEMPURATURE = 0;
-    private static final int MAX_TEMPURATURE_CHANGE = 5;
-    private static final int MAX_PASSENGER_CHANGE = 3;
-    private static final int HEATER_THRESHOLD = 32;
     
     //Contructor
     public Station(int newStationID, String newStationName, Line newLine, Block newBlockA, Section newSectionA, 

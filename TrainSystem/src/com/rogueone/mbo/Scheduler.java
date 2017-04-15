@@ -620,7 +620,7 @@ public class Scheduler {
             return getOverbrookTimes();
         }
         else if (stationID == 10 && blockID == 123) {
-            return getOverbrookTimes();
+            return getOverbrookInboundTimes();
         }
         else if (stationID == 11) {
             return getPennStTimes();

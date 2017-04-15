@@ -1,17 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+* Contains Section information
+*
+* @author: Dan Bednarczyk
+* @creation date: 02/01/2017
+* @modification date: 04/20/2017
+*/
+
 package com.rogueone.trackmodel;
 
 import com.rogueone.global.Global;
 import java.util.ArrayList;
 
-/**
- *
- * @author Dan
- */
 public class Section {
     Global.Section sectionID;
     Line line;

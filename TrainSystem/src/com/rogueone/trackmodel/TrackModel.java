@@ -1,3 +1,11 @@
+/**
+* The top-level Track Model class, which owns all Lines, Sections, and Blocks.
+*
+* @author: Dan Bednarczyk
+* @creation date: 02/01/2017
+* @modification date: 04/20/2017
+*/
+
 package com.rogueone.trackmodel;
 
 import com.rogueone.global.Global;
@@ -13,12 +21,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- * The top-level Track Model class, which owns all Lines, Sections, and Blocks.
- * @author Dan Bednarczyk
- */
 public class TrackModel {
     
+    private static final String DEFAULT_PATH = "src/com/rogueone/assets/TrackData.xlsx";
+    private static final int FIRST_BLOCK_GREEN = 152;
+    private static final int FIRST_BLOCK_RED = 77;
     private ArrayList<Line> lines = new ArrayList<Line>();
     private ArrayList<Section> sections = new ArrayList<Section>();
     private ArrayList<Block> blocks = new ArrayList<Block>();
@@ -28,9 +35,6 @@ public class TrackModel {
     private Yard yard = new Yard();
     private TrackModelGUI trackModelGUI = null;
     private TrainSystem trainSystem = null;
-    private static final String DEFAULT_PATH = "src/com/rogueone/assets/TrackData.xlsx";
-    private static final int FIRST_BLOCK_GREEN = 152;
-    private static final int FIRST_BLOCK_RED = 77;
     
     //Used only when running standalone TrackModel
     public static void main(String[] args) throws InterruptedException {

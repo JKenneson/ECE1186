@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+* Contains Crossing information
+*
+* @author: Dan Bednarczyk
+* @creation date: 02/01/2017
+* @modification date: 04/20/2017
+*/
+
 package com.rogueone.trackmodel;
 
-/**
- *
- * @author Dan
- */
 public class Crossing {
     
     //Default state is raised
