@@ -280,7 +280,8 @@ public class Mbo{
     }
     
     public void update(){
-        double cumulativeDist = 400;
+        
+        ArrayList<TrainModel> stoppedTrains = new ArrayList();
         updateTrains();
         //updateSpeed();
         mboGui.update();
@@ -288,7 +289,9 @@ public class Mbo{
             int numTrains = trainSystem.getTrainHandler().getTrains().size();
         //trainList.clear();
             for(int i =0; i<numTrains;i++){  
+                double cumulativeDist = 400;
                 ArrayList<TrainModel> trains = trainSystem.getTrainHandler().getTrains();
+                ArrayList<Block> prevBlock = new ArrayList();
                 TrainModel currTrain = trains.get(i);
                 GPSMessage message = currTrain.requestGPSMessage();
                 Block currBlock = message.getCurrBlock();
@@ -296,7 +299,9 @@ public class Mbo{
                 String[] useArr;
                 int index = 3;
                 int width;
-                
+                if(currTrain.getCurrSpeed()==0){
+                    stoppedTrains.add(currTrain);
+                }
                 if(currBlock.getStation()!=null && currTrain.getCurrSpeed() == 0){
                         Station currStation = currBlock.getStation();
                         String name = currStation.getName();
@@ -391,123 +396,43 @@ public class Mbo{
                         }
                         
                     }
-                
+                TrackPiece next = currBlock.getNext(trains.get(i).getCurrBlock().getPortA());
+                TrackPiece previous = null;
+                TrackPiece tempPrev = null;
+                int count = 0;
             if(mode.equals("Moving Block")){
                 
-                //System.out.println("MOVING BLOCK");
-                ///TYPING ISSUES OF PREVBLOCK
-                //Block prevBlk = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getPortA().getType();
-                //Block blk = (Block)trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(prevBlk);
-                
-//                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().
-//                //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(previous);
-//                PresenceBlock lookaheadBlock = new PresenceBlock(trainSystem, line);
-//                lookaheadBlock.getNextBlock();
-//                Block a = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock();
-//                TrackPiece b = a.getNext(a);
-//                //if(b.getType()==Global.PieceType.BLOCK)
-//                {
-//                    //Block c = (Block)b;
-//                    
-//                }
-                //new speed and authority
-                //trainSystem.getTrainHandler().getTrains().get(1).MBOUpdateSpeedAndAuthority(, );
-                
-                //prevTrains = trains;
-                
+                while(next.getType()==PieceType.BLOCK){
                     
-                    //trainSystem.getTrainHandler().getTrains().get(i).MBOUpdateSpeedAndAuthority(20, 3000);
-                    
-                    
-                
-                
-                
-                //if(prevTrains.size()==numTrains){
-                //if(prevTrains.get(i)!=null){
-                    //if(prevTrains.get(i).getCurrBlock().toString().equals(currBlock.toString())){
-                        //prevTrains.set(i, currTrain);
-                        cumulativeDist = trains.get(i).requestGPSMessage().getDistanceIntoBlock() + cumulativeDist;
-                    TrackPiece next = currBlock.getNext(trains.get(i).getCurrBlock().getPortA());
-                    System.out.println("NEXT ID: "+next.getID());
-                    double addDist = 0;
-                    PieceType typee = next.getType();
-                    while(next.getType()==PieceType.BLOCK){
-                        //System.out.println("CUMULATIVE DIST: "+cumulativeDist);
-                        Block nextBlock = (Block)next;
-                        Boolean occupied = nextBlock.isOccupied();
-                        if(occupied == true){
-                            //System.out.println("occupied");
-                            for(int k = 0; k < numTrains; k++){
-                                if(trains.get(k).getCurrBlock().toString().equals(nextBlock.toString())){
-                                    addDist = trains.get(k).requestGPSMessage().getDistanceIntoBlock();
-                                    break;
-                                }
-                                //break;
-                            }
-                            cumulativeDist = cumulativeDist + addDist;
-                        }
-                        else{
-                            cumulativeDist = cumulativeDist + nextBlock.getLength();
-                            if(cumulativeDist > message.getStoppingDistance()){
-                                break;
-                            }
-                        }
-                        
-                        System.out.println("Before: "+nextBlock.getID()+"Secton: "+nextBlock.getSection());
-                        if(nextBlock.getID()==12){
-                            next = nextBlock.getNext(nextBlock.getPortB());
-                        }
-                        else{
-                           next = nextBlock.getNext(nextBlock.getPortA()); 
-                        }
-                       // next = nextBlock.getNext(nextBlock.getPortA());
-                        System.out.println("After: "+next.getID());
+                    if(count>=1){
+                    tempPrev = next;
+                    next = next.getNext(previous);
+                    previous = tempPrev;
+                    System.out.println("List: "+next.getID());
                     }
-                    
-                    if(cumulativeDist<=message.getStoppingDistance()){
-                            //System.out.println("Reccomended: "+ cumulativeDist+" Actual: "+message.getStoppingDistance());
-                            currTrain.MBOUpdateSpeedAndAuthority(0, 0);
-                            System.out.println("Brake");
-                            break;
-                        }
-                        else{
-                            int speedLimit = (int)currBlock.getSpeedLimit();
-                            int authortiy = (int)currTrain.getAuthority();
-                            //System.out.println("Speedlimit: "+ speedLimit+" Authortiity: "+authortiy);
-                            currTrain.MBOUpdateSpeedAndAuthority(speedLimit, authortiy);
-                        }
-                    //cumulativeDist = 0;
-                    
-                    if(next.getType()==PieceType.BLOCK){
-                        Block nextBlock = (Block)next;
-                        Boolean occupied = nextBlock.isOccupied();
-                        System.out.println(occupied);
+                    else{
+                        previous = next;
+                        next = next.getNext(currBlock.getPortA());
+                        System.out.println("First: "+next.getID());
                     }
-                //}
-                   // }
-                    //else{
-                    //prevTrains.set(i, currTrain);
-                   // }
-                //}
-                //else{
-                    //TrainModel temp = null;
-                    //System.out.println("SETTING TRAIN ARRAY");
-                    //int difference = trains.size() - prevTrains.size();
-                    //for(int j = 0; j<difference; j++){
-                    //    prevTrains.add(temp);
-                    //}
-                    
-                    
+                    count++;
                 }
-                //}
                 
-               //prevTrains = trains;
+                if(next.getType()==PieceType.BLOCK){
+                    Block blk = (Block)next;
+                    System.out.println(blk.getSection()+":"+blk.getID());
+                    if(blk.isOccupied()){
+                        System.out.println("OCCUPADO");
+                        currTrain.MBOUpdateSpeedAndAuthority(0, (int)currTrain.getAuthority());
+                    }
+                }
+            }
             }
         
     }
     
     public void updateTrains(){
-        String[] columnNames = {"TRAIN ID","TRAIN LINE","SECTION","BLOCK","NEXT STATION","AUTHORITY","CURRENT SPEED","SUGGESTED SPEED","VARIANCE","PASSENGERS","DIST INTO BLOCK(ft)"};
+        String[] columnNames = {"TRAIN ID","TRAIN LINE","SECTION:BLOCK","NEXT STATION","AUTHORITY","CURRENT SPEED","SUGGESTED SPEED","VARIANCE","PASSENGERS","DIST INTO BLOCK(ft)"};
         int numTrains = trainSystem.getTrainHandler().getTrains().size();
         Object[][] data = new Object[numTrains][12];
         trainList.clear();
@@ -521,15 +446,14 @@ public class Mbo{
             trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getLine().toString();
             data[i][0]=trainSystem.getTrainHandler().getTrains().get(i).trainID;
             data[i][1]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getLine().toString();
-            data[i][2]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSection().toString();
-            data[i][3]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().toString();
-            data[i][4]=trainSystem.getTrainHandler().getTrains().get(i).getApproachingStation();
-            data[i][5]=trainSystem.getTrainHandler().getTrains().get(i).getAuthority();
-            data[i][6]=trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
-            data[i][7]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
-            data[i][8] = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
-            data[i][9]=trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord();
-            data[i][10]=trainSystem.getTrainHandler().getTrains().get(i).requestGPSMessage().getDistanceIntoBlock();
+            data[i][2]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSection().toString()+":"+trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().toString();
+            data[i][3]=trainSystem.getTrainHandler().getTrains().get(i).getApproachingStation();
+            data[i][4]=trainSystem.getTrainHandler().getTrains().get(i).getAuthority();
+            data[i][5]=trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
+            data[i][6]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
+            data[i][7] = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
+            data[i][8]=trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord();
+            data[i][9]=trainSystem.getTrainHandler().getTrains().get(i).requestGPSMessage().getDistanceIntoBlock();
         }
         DefaultTableModel table = new DefaultTableModel(data, columnNames);
         mboGui.trainTable.setModel(table);

@@ -23,15 +23,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPane1" min="-2" pref="1056" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jTabbedPane1" alignment="0" pref="1424" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jTabbedPane1" min="-2" pref="436" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -40,6 +40,50 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Green Line">
+                <Property name="tabTitle" type="java.lang.String" value="Green Line"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jTable3">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="14" rowCount="25">
+                    <Column editable="true" title="Train ID" type="java.lang.Object"/>
+                    <Column editable="true" title="Driver" type="java.lang.Object"/>
+                    <Column editable="true" title="PIONEER" type="java.lang.Object"/>
+                    <Column editable="true" title="EDGEBROOK" type="java.lang.Object"/>
+                    <Column editable="true" title="WHITED" type="java.lang.Object"/>
+                    <Column editable="true" title="SOUTH BANK" type="java.lang.Object"/>
+                    <Column editable="true" title="CENTRAL" type="java.lang.Object"/>
+                    <Column editable="true" title="INGLEWOOD" type="java.lang.Object"/>
+                    <Column editable="true" title="OVERBROOK" type="java.lang.Object"/>
+                    <Column editable="true" title="GLENBURY OUTBOUND" type="java.lang.Object"/>
+                    <Column editable="true" title="DORMONT OUTBOUND" type="java.lang.Object"/>
+                    <Column editable="true" title="MT. LEBANON" type="java.lang.Object"/>
+                    <Column editable="true" title="POPLAR" type="java.lang.Object"/>
+                    <Column editable="true" title="CASTLE SHANNON" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -112,50 +156,6 @@
                       <Renderer/>
                     </Column>
                   </TableColumnModel>
-                </Property>
-                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Green Line">
-                <Property name="tabTitle" type="java.lang.String" value="Green Line"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable3">
-              <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="14" rowCount="25">
-                    <Column editable="true" title="Train ID" type="java.lang.Object"/>
-                    <Column editable="true" title="Driver" type="java.lang.Object"/>
-                    <Column editable="true" title="PIONEER" type="java.lang.Object"/>
-                    <Column editable="true" title="EDGEBROOK" type="java.lang.Object"/>
-                    <Column editable="true" title="WHITED" type="java.lang.Object"/>
-                    <Column editable="true" title="SOUTH BANK" type="java.lang.Object"/>
-                    <Column editable="true" title="CENTRAL" type="java.lang.Object"/>
-                    <Column editable="true" title="INGLEWOOD" type="java.lang.Object"/>
-                    <Column editable="true" title="OVERBROOK" type="java.lang.Object"/>
-                    <Column editable="true" title="GLENBURY OUTBOUND" type="java.lang.Object"/>
-                    <Column editable="true" title="DORMONT OUTBOUND" type="java.lang.Object"/>
-                    <Column editable="true" title="MT. LEBANON" type="java.lang.Object"/>
-                    <Column editable="true" title="POPLAR" type="java.lang.Object"/>
-                    <Column editable="true" title="CASTLE SHANNON" type="java.lang.Object"/>
-                  </Table>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>

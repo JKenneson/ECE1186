@@ -37,7 +37,7 @@ public class Scheduler {
      public  String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
      public  String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
      private static Object[] redCols = new Object[11];
-     private static Object[] greenCols = new Object[19];
+     private static Object[] greenCols = new Object[21];
      
      
     
@@ -212,14 +212,14 @@ public class Scheduler {
      public static void readGreenSchedule( File file) throws IOException, InvalidFormatException{
         //scheduleGUI.setVisible(true);
         String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
-        String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
+        String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
         greenDispatchTimes.clear();
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet greenSchedule = workbook.getSheetAt(2);
         int numTrains = greenSchedule.getLastRowNum();
-         Object[] columnNames = new Object[19];
+         Object[] columnNames = new Object[21];
         
-        Object[][] data = new Object[numTrains+1][19];
+        Object[][] data = new Object[numTrains+1][21];
         int i,j;
         String oldInfo = "";
         String info = "";
@@ -228,7 +228,7 @@ public class Scheduler {
             if((i+1)%2==0){
             Row currRow = greenSchedule.getRow(i);
             if(currRow != null){
-            for(j = 0; j < 19; j++){
+            for(j = 0; j < 21; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
                     
@@ -257,6 +257,7 @@ public class Scheduler {
                 }
                 if((i>0)){
                 data[i][j] = info;
+                
                 }
             }
             }
@@ -267,7 +268,7 @@ public class Scheduler {
             if((i)%2 == 0){
             Row currRow = greenSchedule.getRow(i);
             if(currRow != null){
-            for(j = 0; j < 19; j++){
+            for(j = 0; j < 21; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
                     
@@ -555,6 +556,7 @@ public class Scheduler {
         FileOutputStream output = new FileOutputStream("src\\com\\rogueone\\assets\\altSchedule.xlsx");
         workbook.write(output);
         output.close();
+        
         /*
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         workbook.createSheet("Personnel");
@@ -849,6 +851,20 @@ public class Scheduler {
         ArrayList<String> times = new ArrayList();
         for(int i=1; i<numGreenTrains; i++){
             times.add(greenData[i][18].toString());
+        }
+        return times;
+    }
+     public ArrayList<String> getInglewoodInboundTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i=1; i<numGreenTrains; i++){
+            times.add(greenData[i][19].toString());
+        }
+        return times;
+    }
+     public ArrayList<String> getCentralInboundTimes(){
+        ArrayList<String> times = new ArrayList();
+        for(int i=1; i<numGreenTrains; i++){
+            times.add(greenData[i][20].toString());
         }
         return times;
     }
