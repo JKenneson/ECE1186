@@ -586,7 +586,7 @@ public class Scheduler {
             return getCentralTimes();
         }
         else if (stationID == 2 && blockID == 141) {
-            return getCentralTimes();
+            return getCentralInboundTimes();
         }
         else if (stationID == 3 && blockID == 73) {
             return getDormontTimes();
@@ -613,7 +613,7 @@ public class Scheduler {
             return getInglewoodTimes();
         }
         else if (stationID == 8 && blockID == 132) {
-            return getInglewoodTimes();
+            return getInglewoodInboundTimes();
         }
         else if (stationID == 9) {
             return getMtLebanonTimes();
