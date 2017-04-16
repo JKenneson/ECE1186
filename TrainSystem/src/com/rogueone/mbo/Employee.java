@@ -31,33 +31,83 @@ public class Employee {
     public int drivingTrain;
     public boolean onBreak;
     
+    /**
+     * Gets employee name
+     * @return employee name
+     * @author Brian Stevenson
+     */
     public String getName(){
         return this.name;
     }
+    /**
+     * Gets shift start time
+     * @return shift start time
+     * @author Brian Stevenson
+     */
     public String getStart(){
         return this.shiftStart;
     }
+    /**
+     * Gets break start time
+     * @return break start time
+     * @author Brian Stevenson
+     */
     public String getBreak(){
         return this.shiftBreak;
     }
+    /**
+     * Gets shift end time
+     * @return shift end time
+     * @author Brian Stevenson
+     */
     public String getEnd(){
         return this.shiftEnd;
     }
+    /**
+     * Gets train employee is driving
+     * @return current train
+     * @author Brian Stevenson
+     */
     public int getTrain(){
         return drivingTrain;
     }
+    /**
+     * Sets employee name
+     * @param name 
+     * @author Brian Stevenson
+     */
     public void setName(String name){
         this.name = name;
     }
+    /**
+     * Sets shift start
+     * @param start 
+     * @author Brian Stevenson
+     */
     public void setStart(String start){
         this.shiftStart = start;
     }
+    /**
+     * Sets break start
+     * @param newBreak 
+     * @author Brian Stevenson
+     */
     public void setBreak(String newBreak){
         this.shiftBreak = newBreak;
     }
+    /**
+     * Sets shift end
+     * @param end
+     * @author Brian Stevenson
+     */
     public void setEnd(String end){
         this.shiftEnd = end;
     }
+    /**
+     * Gets weather employee is on break or not
+     * @return break status
+     * @author Brian Stevenson
+     */
     public boolean isOnBreak(){
         return this.onBreak;
     }

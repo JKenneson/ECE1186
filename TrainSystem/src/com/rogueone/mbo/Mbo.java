@@ -20,11 +20,13 @@ import java.io.IOException;
 import com.rogueone.mbo.gui.MovingBlockGUI;
 import com.rogueone.trackcon.entities.PresenceBlock;
 import com.rogueone.trackmodel.Block;
+import com.rogueone.trackmodel.Section;
 import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackPiece;
 import com.rogueone.traincon.GPSMessage;
 import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
+import java.text.DecimalFormat;
 import javax.swing.JTable;
 import javax.swing.table.*;
 
@@ -37,16 +39,19 @@ public class Mbo{
     Global.Line line;
      private static ArrayList<MboTrain> trainList = new ArrayList<MboTrain>();
     public static MovingBlockGUI mboGui;
-   private static File file = new File("src/com/rogueone/assets/schedule.xlsx");
+   private static File file = new File("src/com/rogueone/assets/altSchedule.xlsx");
    private static int trainIndex;
    private ArrayList<TrainModel> prevTrains = new ArrayList<>();
-  //private static String[] dummyDataRed = {"100","Red","U","77","SHADYSIDE","6:04am","164ft","10mph","35mph","0","0"};
-   //private static String[] dummyDataGreen = {"101","Green","YY","152","PIONEER","6:04am","164ft","12mph","35mph","0","0"};
-   //private static String[][] dummyData = {dummyDataRed, dummyDataGreen};
    private TrainSystem trainSystem;
    private String mode = "Fixed Block";
    private String opMode = "Manual";
+   private ArrayList<TrainModel> sameTrains = new ArrayList();
    
+   /**
+    * Constructor for MBO class
+    * @param ts Global trainSystem
+    * @author Brian Stevenson
+    */
    public Mbo(TrainSystem ts) throws IOException, InvalidFormatException {
        trainSystem = ts;
        //System.out.println("Reading Schedules");
@@ -54,6 +59,11 @@ public class Mbo{
         mboGui = new MovingBlockGUI(trainSystem);
    }
     
+   /**
+    * Accesses the GUI attached to the MBO
+    * @return MovingBlockGUI Gui
+    * @author Brian Stevenson
+    */
    public MovingBlockGUI getGUI() throws IOException, InvalidFormatException{
        //JFrame frame = new JFrame();
        // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -75,6 +85,7 @@ public class Mbo{
      * Converts time from 12.10.55 format to 12:10:55 format
      * @param time Time value to be converted
      * @return returns time in proper format
+     * @author Brian Stevenson
      */
     public static String convertTime(String time){
         String[] times = time.split("\\.");
@@ -119,7 +130,8 @@ public class Mbo{
      * Calculates time intervals for train schedules, then outputs them
      * @param time Starting time of train
      * @param increment Increment of time to be added
-     * @return 
+     * @return incremented time
+     * @author Brian Stevenson
      */
     public static String incrementTime(String time, String increment){
         String[] times = time.split("\\.");
@@ -155,7 +167,8 @@ public class Mbo{
     }
     
     /**
-     * Updates table of active trains
+     * Updates GUI table with active train information
+     * @author Brian Stevenson
      */
     public void displayCurrentTrains(){
         
@@ -164,23 +177,11 @@ public class Mbo{
         Object[][] data = new Object[6][10];
         Object[] columnNames={"TRAIN ID", "TRAIN LINE", "TRACK SECTION", "BLOCK", "NEXT STATION", "TIME OF ARRIVAL", "AUTHORITY", "CURRENT SPEED", "SUGGESTED SPEED", "PASSENGERS","DISTANCE INTO BLOCK(ft)"};
         int i=0,j=0;
-        //mboGui.TrainDropdown.removeAllItems();
         
         for(i=0;i<length;i++){
             
            int tid = trainSystem.getTrainHandler().getTrains().get(i).trainID;
            String temp = String.valueOf(tid);
-           //mboGui.TrainDropdown.addItem(temp);
-                 // data[i][0]= trainList.get(i).getTrainId(); 
-                  //data[i][1]= trainList.get(i).getPosition();
-                  //data[i][2]= trainList.get(i).getPosition();
-                  //data[i][3] = trainList.get(i).getPosition();
-                  //data[i][4] = trainList.get(i).NEXTSTATOIN
-                  //data[i][5] = TIMEOFARRIVAL
-                  //data[i][6] = trainList.get(i).getAuthority();
-                  //data[i][7] = trainList.get(i).getCurrSpeed();
-                  //data[i][8] = trainList.get(i).getSuggestedSpeed();
-                  //data[i][9] = trainList.get(i).getPassengers();
            
         }
        
@@ -191,87 +192,17 @@ public class Mbo{
     }
     
     /**
-     * Updates train ID label and speeds in variance panel
+     * Changes the automatic system to Moving Block Mode
+     * @author Brian Stevenson
      */
-    public void updateTrainID(){
-        //if(trains.size()>0){
-        //String newID = trains.get(newIdIndex);
-        //String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
-        //if(newID.compareTo("100")==0){
-            //mboGui.CurrentSpeedValue.setText("30 mph");
-            //mboGui.SuggestedSpeedValue.setText("35 mph");
-           // mboGui.DifferenceValue.setText("(+5 mph)");
-       // }
-        //else{
-           // mboGui.CurrentSpeedValue.setText("40 mph");
-           // mboGui.SuggestedSpeedValue.setText("30 mph");
-            //mboGui.DifferenceValue.setText("(-10 mph)");
-        //}
-        //System.out.println(newID);
-        //mboGui.TrainIdValue.setText(newID);
-    //}
-    }
-    
-    /**
-     * Deploys next available train
-     * @throws IOException
-     * @throws InvalidFormatException 
-     */
-   public void dispatch() throws IOException, InvalidFormatException{
-       File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
-        XSSFWorkbook workbook = new XSSFWorkbook(file);
-        XSSFSheet redSchedule = workbook.getSheetAt(1);
-        Row currRow = redSchedule.getRow(trainIndex+1);
-        String trainID = currRow.getCell(0).toString();
-        String[] IDs = trainID.split("\\.");
-        MboTrain newTrain = new MboTrain();
-        /////FIX THIS ///////
-        //newTrain.setTrainId(IDs[0]);
-        trainList.add(newTrain);
-        trainIndex=trainIndex+1;
-         
-        displayCurrentTrains();
-        
-   }  
-  
-    
-    
-    /**
-     * Updates speed and authority in present trains display
-     */
-    public void updateSpeed(){
-        trainSystem.getTrainHandler().getTrains().get(1).getCurrBlock().getSpeedLimit();
-        //String tempSpeed = mboGui.MboSuggestedSpeedField.getText();
-       // String tempAuthority = mboGui.MboSuggestedAuthorityField.getText();
-       // String newID = String.valueOf(mboGui.TrainDropdown.getSelectedItem());
-        if(mode.equals("Moving Block")){
-            for(int i=0;i<trainList.size();i++){
-            
-            }
-        }
-        else if(mode.equals("Fixed Block")){
-           for(int i=0;i<trainList.size();i++){
-               //double speedLimit = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
-               //trainList.get(i).setSpeed(speedLimit);
-               //trainList.get(i).setAuthority(90000);
-               //trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getNext(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock());
-            } 
-        }
-        
-        //if(newID.compareTo("100")==0){
-            //dummyData[0][8] = tempSpeed+" mph";
-            //dummyData[0][6] = tempAuthority+" ft";
-        //}
-        //else{
-            //dummyData[1][8] = tempSpeed+" mph";
-            //dummyData[1][6] = tempAuthority+" ft";
-        //}
-        displayCurrentTrains();
-    }
-    
     public void changeToMovingBlock(){
         mode = "Moving Block";
     }
+    
+    /**
+     * Changes the automatic system to Fixed Block mode
+     * @author Brian Stevenson
+     */
     public void changeToFixedBlock(){
         for(int i = 0; i < trainList.size(); i++){
             
@@ -279,19 +210,23 @@ public class Mbo{
         mode = "Fixed Block";
     }
     
+    /**
+     * Updates GUI information on each clock tick
+     * @author Brian Stevenson
+     */
     public void update(){
-        
         ArrayList<TrainModel> stoppedTrains = new ArrayList();
         updateTrains();
-        //updateSpeed();
         mboGui.update();
-            //trainList = trainSystem.getTrainHandler().getTrains();
             int numTrains = trainSystem.getTrainHandler().getTrains().size();
-        //trainList.clear();
             for(int i =0; i<numTrains;i++){  
-                double cumulativeDist = 400;
+                double cumulativeDist = 250;
                 ArrayList<TrainModel> trains = trainSystem.getTrainHandler().getTrains();
-                ArrayList<Block> prevBlock = new ArrayList();
+                ArrayList<TrainModel> visitDormont = new ArrayList();
+                ArrayList<TrainModel> visitOverbrook = new ArrayList();
+                ArrayList<TrainModel> visitGlenbury = new ArrayList();
+                ArrayList<TrainModel> visitInglewood = new ArrayList();
+                ArrayList<TrainModel> visitCentral = new ArrayList();
                 TrainModel currTrain = trains.get(i);
                 GPSMessage message = currTrain.requestGPSMessage();
                 Block currBlock = message.getCurrBlock();
@@ -299,6 +234,7 @@ public class Mbo{
                 String[] useArr;
                 int index = 3;
                 int width;
+                int currId = currTrain.trainID;
                 if(currTrain.getCurrSpeed()==0){
                     stoppedTrains.add(currTrain);
                 }
@@ -312,7 +248,7 @@ public class Mbo{
                         }
                         else{
                              newData = trainSystem.getScheduler().getGreenData();
-                             width = 19;
+                             width = 21;
                              useArr = trainSystem.getScheduler().greenIncrements;
                         }
                         if(name.equals("SHADYSIDE")||name.equals("PIONEER"))
@@ -331,20 +267,105 @@ public class Mbo{
                         else if(name.equals("STEEL PLAZA")||name.equals("SOUTH BANK")){
                             index = 7;
                         }
-                        else if(name.equals("FIRST AVE")||name.equals("CENTRAL")){
+                        else if(name.equals("FIRST AVE")){
                             index = 8;
                         }
-                        else if(name.equals("STATION SQUARE")||name.equals("INGLEWOOD")){
+                        else if(name.equals("CENTRAL")){
+                            int check =0;
+                            for(int j=0;j<visitCentral.size();j++){
+                                if(visitDormont.get(j).trainID==currId)
+                                {
+                                    index = 20;
+                                    visitCentral.remove(currTrain);
+                                    check=1;
+                                    break;
+                                }
+                                else{
+                                    index = 8;
+                                }
+                            }
+                            if(check==0){
+                                visitCentral.add(currTrain);
+                            }
+                        }
+                        else if(name.equals("STATION SQUARE")){
                             index = 9;
                         }
-                        else if(name.equals("SOUTH HILLS JUNCTION")||name.equals("OVERBROOK")){
+                        else if(name.equals("INGLEWOOD")){
+                            int check =0;
+                            for(int j=0;j<visitInglewood.size();j++){
+                                if(visitDormont.get(j).trainID==currId)
+                                {
+                                    index = 19;
+                                    visitInglewood.remove(currTrain);
+                                    check=1;
+                                    break;
+                                }
+                                else{
+                                    index = 9;
+                                }
+                            }
+                            if(check==0){
+                                visitInglewood.add(currTrain);
+                            }
+                        }
+                        else if(name.equals("SOUTH HILLS JUNCTION")){
                             index = 10;
                         }
+                        else if(name.equals("OVERBROOK")){
+                            int check =0;
+                            for(int j=0;j<visitOverbrook.size();j++){
+                                if(visitDormont.get(j).trainID==currId)
+                                {
+                                    index = 18;
+                                    visitOverbrook.remove(currTrain);
+                                    check=1;
+                                    break;
+                                }
+                                else{
+                                    index = 10;
+                                }
+                            }
+                            if(check==0){
+                                visitOverbrook.add(currTrain);
+                            }
+                        }
                         else if(name.equals("GLENBURY")){
-                            index = 11;
+                            int check =0;
+                            for(int j=0;j<visitGlenbury.size();j++){
+                                if(visitDormont.get(j).trainID==currId)
+                                {
+                                    index = 17;
+                                    visitGlenbury.remove(currTrain);
+                                    check=1;
+                                    break;
+                                }
+                                else{
+                                    index = 11;
+                                }
+                            }
+                            if(check==0){
+                                visitGlenbury.add(currTrain);
+                            }
                         }
                         else if(name.equals("DORMONT")){
-                            index = 12;
+                            int check =0;
+                            for(int j=0;j<visitDormont.size();j++){
+                                if(visitDormont.get(j).trainID==currId)
+                                {
+                                    index = 16;
+                                    visitDormont.remove(currTrain);
+                                    check=1;
+                                    break;
+                                }
+                                else{
+                                    index = 12;
+                                }
+                            }
+                            if(check==0){
+                                visitDormont.add(currTrain);
+                            }
+                            
                         }
                         else if(name.equals("MT LEBANON")){
                             index =13;
@@ -356,14 +377,8 @@ public class Mbo{
                             index = 15;
                         }
                         //HERE
-                        else if(name.equals("DORMONT")){
-                            index = 16;
-                        }
-                        else if(name.equals("GLENBURY")){
-                            index = 17;
-                        }
-                        else if(name.equals("OVERBROOK")){
-                            index = 18;
+                        else if(name.equals("CENTRAL")){
+                            index = 20;
                         }
                         int hr = trainSystem.getClock().getHour();
                         int min = trainSystem.getClock().getMinute();
@@ -371,21 +386,19 @@ public class Mbo{
                         
                             int id = currTrain.trainID/2 +1;
                        
-                        
+                        String currTime = "";
                         for(int m =index;m<width;m++){
                             
-                            String currTime = hr+"."+min+"."+sec;
+                            
                             if(m-index==0){
+                                currTime = hr+"."+min+"."+sec;
                                 newData[id][m] = convertTime(currTime);
+                                System.out.println(currTime);
                             }
                             else{
                                 currTime = incrementTime(currTime, useArr[m-3]);
                                 newData[id][m] = convertTime(currTime);
                             }
-                            
-                            //System.out.println(currTime);
-                            //newData[index][m] = 
-                                    
                         }
                         
                         if(currBlock.getLine().toString().equals("RED")){
@@ -397,42 +410,70 @@ public class Mbo{
                         
                     }
                 TrackPiece next = currBlock.getNext(trains.get(i).getCurrBlock().getPortA());
-                TrackPiece previous = null;
+                TrackPiece lookahead = null;
                 TrackPiece tempPrev = null;
                 int count = 0;
             if(mode.equals("Moving Block")){
                 
-                while(next.getType()==PieceType.BLOCK){
+                //currTrain.MBOUpdateSpeedAndAuthority(10, 9000);
+                System.out.println("ID: "+currTrain.trainID);
+                cumulativeDist = cumulativeDist + message.getDistanceIntoBlock();
+                lookahead = currBlock;
+                Block temp = (Block)lookahead;
+                for(int n = 0; n< 6; n++){
+                    cumulativeDist = 9000;
+                    temp = (Block)lookahead;
+                    if(lookahead.getNext(temp.getPortA())!=null){
+                        if(lookahead.getNext(temp.getPortA()).getType()==PieceType.BLOCK){
+                            
+                            lookahead = lookahead.getNext(temp.getPortA());
+                            temp = (Block)lookahead;
+                            //System.out.println(temp.getSection()+":"+temp.getID()+" Occupied: "+temp.isOccupied());
+                            //System.out.println(temp.getLine()+" "+temp.isOccupied());
+                            boolean occupied = temp.isOccupied();
+                            if(occupied && !temp.getSection().toString().equals("YY") && (!temp.getSection().toString().equals("U")&&temp.getID()!=77) && (!temp.getSection().toString().equals("J")&&temp.getID()!=62)){//&& (!temp.getSection().toString().equals("M")&&temp.getID()!=76)&& (!temp.getSection().toString().equals("N")&&temp.getID()!=85)){
+                               cumulativeDist = cumulativeDist + temp.getLength();
+                               //System.out.println(temp.getSection()+":"+temp.getID());
+                                //System.out.println("Distance available: "+cumulativeDist+" Stopping dist: "+message.getStoppingDistance());
+                                if(cumulativeDist <= message.getStoppingDistance()){
+                                    //currTrain.MBOUpdateSpeedAndAuthority(-1, (int)currTrain.getAuthority()); 
+                                    //System.out.println("STOPPING");
+                                    //break; 
+                                }
+                            }
+                            
+                            else{
+                                //currTrain.MBOUpdateSpeedAndAuthority((int)message.getCurrSpeed(), (int)currTrain.getAuthority());
+                                cumulativeDist = cumulativeDist + temp.getLength();
+                                sameTrains.clear();
+                                for(int p = 0; p<numTrains; p++){
+                                    TrainModel testTrain = trainSystem.getTrainHandler().getTrains().get(p);
+                                    if(currTrain.requestGPSMessage().getCurrBlock() == testTrain.requestGPSMessage().getCurrBlock() && currTrain.requestGPSMessage().getLine().equals(testTrain.requestGPSMessage().getLine())){
+                                        sameTrains.add(testTrain);
+                                    }
+                                    
+                                }
+                                for(int q = 0; q< sameTrains.size();q++){
+                                    sameTrains.get(q).MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority());
+                                }
+                            }
+                        }
+                    }
                     
-                    if(count>=1){
-                    tempPrev = next;
-                    next = next.getNext(previous);
-                    previous = tempPrev;
-                    System.out.println("List: "+next.getID());
-                    }
-                    else{
-                        previous = next;
-                        next = next.getNext(currBlock.getPortA());
-                        System.out.println("First: "+next.getID());
-                    }
-                    count++;
-                }
-                
-                if(next.getType()==PieceType.BLOCK){
-                    Block blk = (Block)next;
-                    System.out.println(blk.getSection()+":"+blk.getID());
-                    if(blk.isOccupied()){
-                        System.out.println("OCCUPADO");
-                        currTrain.MBOUpdateSpeedAndAuthority(0, (int)currTrain.getAuthority());
-                    }
                 }
             }
             }
         
     }
     
+    /**
+     * Updates GUI train information table
+     * @author Brian Stevenson
+     */
     public void updateTrains(){
-        String[] columnNames = {"TRAIN ID","TRAIN LINE","SECTION:BLOCK","NEXT STATION","AUTHORITY","CURRENT SPEED","SUGGESTED SPEED","VARIANCE","PASSENGERS","DIST INTO BLOCK(ft)"};
+        double d = 1.234567;
+        DecimalFormat df = new DecimalFormat("#.##");
+        String[] columnNames = {"TRAIN ID","TRAIN LINE","SECTION:BLOCK","NEXT STATION","AUTHORITY(ft)","CURR SPEED(mph)","SPEED LIMIT","VARIANCE","PASSENGERS","DIST INTO BLOCK(ft)"};
         int numTrains = trainSystem.getTrainHandler().getTrains().size();
         Object[][] data = new Object[numTrains][12];
         trainList.clear();
@@ -448,26 +489,27 @@ public class Mbo{
             data[i][1]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getLine().toString();
             data[i][2]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSection().toString()+":"+trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().toString();
             data[i][3]=trainSystem.getTrainHandler().getTrains().get(i).getApproachingStation();
-            data[i][4]=trainSystem.getTrainHandler().getTrains().get(i).getAuthority();
-            data[i][5]=trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
-            data[i][6]=trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit();
-            data[i][7] = trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed();
+            data[i][4]=df.format(trainSystem.getTrainHandler().getTrains().get(i).getAuthority());
+            data[i][5]=df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed());
+            data[i][6]=df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit());
+            data[i][7] =df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed());
             data[i][8]=trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord();
-            data[i][9]=trainSystem.getTrainHandler().getTrains().get(i).requestGPSMessage().getDistanceIntoBlock();
+            data[i][9]=df.format(trainSystem.getTrainHandler().getTrains().get(i).requestGPSMessage().getDistanceIntoBlock());
         }
         DefaultTableModel table = new DefaultTableModel(data, columnNames);
         mboGui.trainTable.setModel(table);
     }
     
+    /**
+     * Returns current mode the system is in(Moving or Fixed)
+     * @return "Moving Block" or "Fixed Block"
+     * @author Brian Stevenson
+     */
     public String getMode(){
         return mode;
     }
     
     public static void main(String[] args) throws IOException, InvalidFormatException{
-        //ArrayList<String> trains = new ArrayList<String>();
-        //MovingBlockGUI mboGui = new MovingBlockGUI();
-        
-        
     }
     
 }

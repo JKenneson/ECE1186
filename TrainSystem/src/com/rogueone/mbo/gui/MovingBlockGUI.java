@@ -10,6 +10,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import java.io.IOException;
 import com.rogueone.trainsystem.TrainSystem;
 import java.awt.Color;
+import static java.lang.Math.floor;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.*;;
@@ -18,20 +19,19 @@ import javax.swing.table.*;;
  * @author Brian Stevenson
  */
 public class MovingBlockGUI extends javax.swing.JPanel {
-
-    private TrainSystem trainSystem;
-private File file = new File("src\\com\\rogueone\\assets\\schedule.xlsx");
+private TrainSystem trainSystem;
+private File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
 private Mbo mbo = trainSystem.getMBO();
 private boolean mode  = false;
 
     /**
-     * Creates new form MovingBlockGUI
+     * Constructor for new  MovingBlockGUI
+     * @author Brian Stevenson
      */
     public MovingBlockGUI(TrainSystem trainSystem) {
         this.trainSystem = trainSystem;
         initComponents();
         NumTrainsInput.setEnabled(false);
-        
     }
 
     /**
@@ -378,7 +378,11 @@ private boolean mode  = false;
         
        
     }//GEN-LAST:event_FixedBlockRadioActionPerformed
-
+    /**
+     * Handles action upon pressing the upload schedule button
+     * @param evt 
+     * @author Brian Stevenson
+     */
     private void UploadScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadScheduleButtonActionPerformed
         JFileChooser scheduleChooser = new JFileChooser("src/com/rogueone/assets");
         int returnVal = scheduleChooser.showOpenDialog(this);
@@ -405,6 +409,11 @@ private boolean mode  = false;
                                        
     }//GEN-LAST:event_UploadScheduleButtonActionPerformed
 
+    /**
+     * Handles action on pressing the "Throughput" radio button
+     * @param evt 
+     * @author Brian Stevenson
+     */
     private void ThroughputRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputRadioActionPerformed
         if(ThroughputRadio.isSelected())
         {
@@ -414,18 +423,27 @@ private boolean mode  = false;
             MboUnits3.setEnabled(true);
         }
     }//GEN-LAST:event_ThroughputRadioActionPerformed
-
+    /**
+     * Handles action on pressing the ok button
+     * @param evt 
+     * @author Brian Stevenson
+     */
     private void ThroughputInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThroughputInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ThroughputInputActionPerformed
-
+    /**
+     * Handles action on pressing the ok button
+     * @param evt 
+     * @author Brian Stevenson
+     */
     private void MboOkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MboOkButton2ActionPerformed
         Mbo mbo = null;
         mbo = trainSystem.getMBO();
             //File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
             if(NumTrainsRadio.isSelected()){
                 String numTrainStr = NumTrainsInput.getText();
-                int numTrains = Integer.parseInt(numTrainStr);
+               double tempTrains = Double.parseDouble(numTrainStr);
+               int numTrains = (int)tempTrains;
                 try{
                 Scheduler.generateSchedule(numTrains);
                 }
@@ -447,7 +465,11 @@ private boolean mode  = false;
                 }
             }
     }//GEN-LAST:event_MboOkButton2ActionPerformed
-
+    /**
+     * Handles action on pressing the "Number of active trains" radio button
+     * @param evt 
+     * @author Brian Stevenson
+     */
     private void NumTrainsRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumTrainsRadioActionPerformed
         if(NumTrainsRadio.isSelected())
         {
@@ -459,7 +481,11 @@ private boolean mode  = false;
             
         }
     }//GEN-LAST:event_NumTrainsRadioActionPerformed
-
+    /**
+     * Handles action on pressing the "See detailed schedule" button
+     * @param evt 
+     * @author Brian Stevenson
+     */
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
 
         
@@ -476,9 +502,13 @@ private boolean mode  = false;
         //trainSchedule.setVisible(true);
        ArrayList<String> a = new ArrayList<String>();
        a = trainSystem.getScheduler().getDispatchTimes();
-       System.out.println(a.get(0));
     }//GEN-LAST:event_DetailedScheduleButtonActionPerformed
 
+    /**
+     * Handles action on pressing the "Moving Block" radio button
+     * @param evt 
+     * @author Brian Stevenson
+     */
     private void MovingBlockRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MovingBlockRadioActionPerformed
         if(MovingBlockRadio.isSelected())
         {
@@ -491,6 +521,10 @@ private boolean mode  = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_NumTrainsInputActionPerformed
 
+    /**
+     * Updates GUI labels
+     * @author Brian Stevenson
+     */
     public void update(){
         mode = trainSystem.getCTC().isAutomatic();
         if(mode != true){
