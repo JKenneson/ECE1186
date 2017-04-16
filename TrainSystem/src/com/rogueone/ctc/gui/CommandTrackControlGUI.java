@@ -1065,7 +1065,7 @@ public int iterateID(){
             int failureRow = failureTable.getSelectedRow();
             //resolveFailure(failureTable.getValueAt(failureRow,0), failureTable.getValueAt(failureRow,1), failureTable.getValueAt(failureRow,2));
             trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority((Global.Line.valueOf((String) failureTable.getValueAt(failureRow,0))), (Integer.valueOf(((String)failureTable.getValueAt(failureRow,2)))), 40, 90000);
-            
+
             if (failureTable.getValueAt(failureRow,0).equals("GREEN")){
                 this.trainSystem.getTrackViewGreen().setBlockStatus((Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0))), (String)failureTable.getValueAt(failureRow,1), Integer.parseInt((String)failureTable.getValueAt(failureRow,2)), true);
             }
