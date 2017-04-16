@@ -5,6 +5,7 @@
  */
 package com.rogueone.ctc.gui;
 
+import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Line;
 import com.rogueone.trackmodel.TrackModel;
 import com.rogueone.trainmodel.entities.TrainFailures;
@@ -153,8 +154,8 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void disableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableButtonActionPerformed
-        //String lineName = (String)lineSelectBox.getSelectedItem();
-        String lineName = "GREEN";
+        String lineName = String.valueOf(lineSelectBox.getSelectedItem());
+        //String lineName = "GREEN";
         String trainName = (String)trainSelectBox.getSelectedItem();
         int passTrainName = Integer.parseInt((String)trainSelectBox.getSelectedItem());
         disableNotification.setText("Train " + trainName + " on the " + lineName + " line is Disabled");
@@ -164,13 +165,15 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     
     public void disableSignal(int passTrainName, String passTrainLine){
         this.ctcGUI.DisableTrain(passTrainName, passTrainLine);
-        //this.trainSystem.getTrainHandler().getTrains().get(passTrainName).setEmergencyBrakeActivated(true);
-        for ( int i = 0; i < this.trainSystem.getTrainHandler().getTrains().size(); i ++){
-            if (this.trainSystem.getTrainHandler().getTrains().get(i).getTrainID() == passTrainName){
-                this.trainSystem.getTrainHandler().getTrains().get(i).causeFailure(TrainFailures.Power);
-            }
+        trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(passTrainLine), (Integer.valueOf((trainSystem.getTrainHandler().getBlockForTrain(passTrainName)))), 0, 0);
 
-        } 
+        //this.trainSystem.getTrainHandler().getTrains().get(passTrainName).setEmergencyBrakeActivated(true);
+//        for ( int i = 0; i < this.trainSystem.getTrainHandler().getTrains().size(); i ++){
+//            if (this.trainSystem.getTrainHandler().getTrains().get(i).getTrainID() == passTrainName){
+//                this.trainSystem.getTrainHandler().getTrains().get(i).causeFailure(TrainFailures.Power);
+//            }
+//
+//        } 
     }
     
     private void lineSelectBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineSelectBoxActionPerformed

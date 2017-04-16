@@ -1063,7 +1063,16 @@ public int iterateID(){
         if (evt.getClickCount() == 2) {
             JTable failureTable = (JTable) evt.getSource();
             int failureRow = failureTable.getSelectedRow();
-            resolveFailure(failureTable.getValueAt(failureRow,0), failureTable.getValueAt(failureRow,1), failureTable.getValueAt(failureRow,2));
+            //resolveFailure(failureTable.getValueAt(failureRow,0), failureTable.getValueAt(failureRow,1), failureTable.getValueAt(failureRow,2));
+            trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority((Global.Line.valueOf((String) failureTable.getValueAt(failureRow,0))), (Integer.valueOf(((String)failureTable.getValueAt(failureRow,2)))), 40, 90000);
+            
+            if (failureTable.getValueAt(failureRow,0).equals("GREEN")){
+                this.trainSystem.getTrackViewGreen().setBlockStatus((Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0))), (String)failureTable.getValueAt(failureRow,1), Integer.parseInt((String)failureTable.getValueAt(failureRow,2)), true);
+            }
+            else{
+                this.trainSystem.getTrackViewRed().setBlockStatus((Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0))), (String)failureTable.getValueAt(failureRow,1), Integer.parseInt((String)failureTable.getValueAt(failureRow,2)), true);
+            }
+            
             removeFailureFromTable(failureTable.getValueAt(failureRow,2));
         }
 
@@ -1087,30 +1096,25 @@ public int iterateID(){
             }
         }
         model.removeRow(blockIDRow);
-        
+        setOperational();
     }
     
-    /**
-     *
-     * @param line
-     * @param section
-     * @param block
-     */
-    public void resolveFailure(Object line, Object section, Object block){
-      
-        Object[] failureCompare = {line, section, block};
+    
+    public void setOperational(){
         
-        if (existsInTable(TrainTable, failureCompare)){
-           for ( int i = 0; i < TrainTable.getRowCount(); i ++){
+        //        Object[] failureCompare = {line, section, block};
+
+        for ( int i = 0; i < TrainTable.getRowCount(); i ++){
+            //if (existsInTable(TrainTable, failureCompare)){
                TrainTable.setValueAt(true, i, 3);
-               trainSystem.getTrainHandler().getTrains().get(i).fixFailure(TrainFailures.Power);
-           }
-        } 
-        if (existsInTable(BlockTable, failureCompare)){
-           trainSystem.getTrackControllerHandler().requestOpen(Global.Line.valueOf((String)line), (int)block);
+            //}
+        }
+        for ( int i = 0; i < BlockTable.getRowCount(); i ++){
+            //if (existsInTable(BlockTable, failureCompare)){
+               BlockTable.setValueAt(true, i, 3);
+            //}
         }
     }
-    
     
     private void DispatchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchButton1ActionPerformed
 

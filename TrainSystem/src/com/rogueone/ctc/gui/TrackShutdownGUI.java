@@ -168,7 +168,6 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
 
     private void TrackDisableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackDisableButtonActionPerformed
         Line lineName = (Line)(LineComboBox.getSelectedItem());
-//        Global.Line lineVal = Global.Line.valueOf(lineName);
         Section segmentName = (Section)SegmentComboBox.getSelectedItem();
         Block blockName = (Block)BlockComboBox.getSelectedItem();
         
@@ -180,19 +179,15 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         disableTrackSegment(line, segment, block);
         
         jLabel5.setText("Track Segment " + lineName + ":" + blockName + ":" + segmentName + " Disabled");
-        
-        //get fields
-        //send disable signal
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_TrackDisableButtonActionPerformed
 
     private void SegmentComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SegmentComboBoxActionPerformed
         updateBlockComboBox();
-// TODO add your handling code here:
     }//GEN-LAST:event_SegmentComboBoxActionPerformed
 
     private void LineComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineComboBoxActionPerformed
-        updateSectionComboBox();   // TODO add your handling code here:
+        updateSectionComboBox();   
     }//GEN-LAST:event_LineComboBoxActionPerformed
   
     private void update(){
@@ -203,8 +198,14 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     private void disableTrackSegment(String lineName, String segmentName, String blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, Integer.parseInt(blockName));
         Global.Line lineVal = Global.Line.valueOf(lineName); 
-        this.trainSystem.getTrackViewGreen().setBlockStatus(lineVal, segmentName, Integer.parseInt(blockName), false);
-        this.trainSystem.getTrackControllerHandler().requestMaintenance(lineVal, Integer.parseInt(blockName));
+        if (lineName.equals("GREEN")){
+            this.trainSystem.getTrackViewGreen().setBlockStatus(lineVal, segmentName, Integer.parseInt(blockName), false);
+        } 
+        else{
+            this.trainSystem.getTrackViewRed().setBlockStatus(lineVal, segmentName, Integer.parseInt(blockName), false);
+        }
+        //this.trainSystem.getTrackControllerHandler().requestMaintenance(lineVal, Integer.parseInt(blockName));
+        
     }
     
     @SuppressWarnings("unchecked")
