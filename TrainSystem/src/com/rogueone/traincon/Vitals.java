@@ -14,7 +14,7 @@ import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.trainsystem.TrainSystem;
 
 /**
- * Class declaration for Vital
+ * Class declaration for Vitals
  *
  * @author Tyler Protivnak
  */
@@ -85,7 +85,7 @@ public class Vitals {
         this.maxPower = maxPow;
         this.line = line;
         this.gps = new GPS(authority, ts, trainID, line);
-        this.speedControl = new SpeedControl(setPointSpeed, setPointSpeed, tm, this.gps);
+        this.speedControl = new SpeedControl(setPointSpeed, setPointSpeed, this.gps);
         this.powerSystem = ps;
     }
 
@@ -113,7 +113,7 @@ public class Vitals {
         boolean stopForStation = false;
         boolean setTimer = this.stationStopTimer < 0;
 //        System.out.println("Set Timer: " + (this.stationStopTimer < 0));
-        this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
+        this.setServiceBrakeActivated(this.speedControl.update(manualMode) || stopForStation);
         if (this.approachingStation) { // initiate the approaching sequence
 
 //            System.out.println("Train "+ this.gps.trainID + ": " + "Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
@@ -165,7 +165,7 @@ public class Vitals {
             }
         }
 
-        this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation || this.serviceBrakeOverride);
+        this.setServiceBrakeActivated(this.speedControl.update(manualMode) || stopForStation || this.serviceBrakeOverride);
         this.stationStopTimer--;
     }
 
