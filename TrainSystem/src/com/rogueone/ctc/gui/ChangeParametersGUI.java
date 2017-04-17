@@ -7,6 +7,7 @@ package com.rogueone.ctc.gui;
  */
 import com.rogueone.global.Global;
 import com.rogueone.trainsystem.TrainSystem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -231,7 +232,18 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
             String[] parts = updateParamsPosition.split(":");
             int partBlock = Integer.parseInt(parts[1]);
             
-        trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(updateParamsLine), partBlock, trainSpeed, trainAuthority);
+        if (trainAuthority >= 107000){
+            JOptionPane.showMessageDialog(null, "Unsafe Update Command. Authoity Too High.", "Error",
+                                    JOptionPane.ERROR_MESSAGE);   
+        }
+        if (trainSpeed >= 44){
+            JOptionPane.showMessageDialog(null, "Unsafe Update Command. Speed Too High.", "Error",
+                                    JOptionPane.ERROR_MESSAGE);   
+        }
+        else{
+            trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(updateParamsLine), partBlock, trainSpeed, trainAuthority);
+        }
+            
         
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
