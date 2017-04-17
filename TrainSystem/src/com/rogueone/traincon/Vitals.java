@@ -103,17 +103,17 @@ public class Vitals {
         //Calculate approaching station work
         boolean stopForStation = false;
         boolean setTimer = this.stationStopTimer < 0;
-        //System.out.println("Set Timer: " + (this.stationStopTimer < 0));
+//        System.out.println("Set Timer: " + (this.stationStopTimer < 0));
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
         if (this.approachingStation) {
 
-            System.out.println("Train "+ this.gps.trainID + ": " + "Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
+//            System.out.println("Train "+ this.gps.trainID + ": " + "Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
-            //System.out.println("Apply brake: " + stopForStation);
+//            System.out.println("Apply brake: " + stopForStation);
             this.distanceToStation -= this.trainModel.getDistanceTraveledFeet();
-            if (this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null) {
-                //System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
-            }
+//            if (this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null) {
+//                //System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
+//            }
             if (this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null) {
                 //System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
                 this.resetPower();
@@ -426,8 +426,8 @@ public class Vitals {
 
     public void receieveBeacon(Beacon beacon) {
         boolean skipped = true;
-        System.out.println("Previous station: " + this.previousStation);
-        System.out.println("");
+//        System.out.println("Previous station: " + this.previousStation);
+//        System.out.println("");
         if (beacon.getStation() != null) {
             if(!this.approachingStation){
                 this.station = beacon.getStation().getName();
@@ -460,8 +460,8 @@ public class Vitals {
         else{ //Do distance calculation work for red line
 
         }
-        System.out.println("Previous station: " + this.previousStation);
-        System.out.println("This station: " + this.station);
+//        System.out.println("Previous station: " + this.previousStation);
+//        System.out.println("This station: " + this.station);
 
     }
 }

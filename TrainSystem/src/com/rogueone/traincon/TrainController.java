@@ -1,13 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The train controller is the interface through which the driver, engineer, and murphy
+ * interact with the train model. It's purpose is to operate the train in a safe manner
+ * while the train travels from station to station.
+ *
+ * @author Tyler Protivnak
+ * @Creation 2/4/17
+ * @Modification 4/17/2017
  */
 package com.rogueone.traincon;
 
 import com.rogueone.trackmodel.Beacon;
 import com.rogueone.traincon.gui.TrainControllerGUI;
-import com.rogueone.trainmodel.TrainModel; //Should I it this way or how???
+import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -86,10 +90,6 @@ public class TrainController {
         //Train Information
         this.trainID = trainID;
         this.line = line;
-        this.section = section;
-        this.block = block;
-        
-//        this.passengers = updatePassengers();
         
         if(gui != null){
             this.updateGUI(gui);
@@ -100,10 +100,10 @@ public class TrainController {
     /**
      * This method makes the train controller gui and initializes it's view for
      * the user. It also sets the gui object for the train controller.
-     *      * 
+     * 
      * @author Tyler Protivnak
-     * @param trainControllerObject 
-     * @return the created train controller object
+     * @param trainControllerObject Train controller which we will pull our data from
+     * @return the created train controller gui object
      */
     public TrainControllerGUI CreateGUIObject(TrainController trainControllerObject){
         //Create GUI object
@@ -116,6 +116,12 @@ public class TrainController {
         return trainControllerGUI;  //Return the GUI object
     } 
     
+    /**
+     * This method allows the gui to be displayed or not while maintaining an 
+     * updateable reference to the object
+     * 
+     * @author Tyler Protivnak
+     */
     public void showGUIObject() {
         //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
         trainControllerGUIFrame = new JFrame();
@@ -149,13 +155,7 @@ public class TrainController {
         gui.SpeedInput.setValue(this.vitals.getPrimary().getSpeedControl().getDriverSetPoint());
         gui.KiInput.setValue(this.vitals.getPrimary().getKI());
         gui.KpInput.setValue(this.vitals.getPrimary().getKP());
-        gui.ClockText.append(this.trainSystem.getClock().printClock());//Get value from global clock value (EST)
-        
-        for(int i = 0; i < getNumberOfTrains(); i++){
-            //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
-            //snag train array and add them to the drop down list
-        }        
-        //Add more functionality in future    
+        gui.ClockText.append(this.trainSystem.getClock().printClock());//Get value from global clock value (EST)  
     }
  
     /**
@@ -163,46 +163,31 @@ public class TrainController {
      * the train controllers passengers variable to the most updated value.
      * 
      * @author Tyler Protivnak
-     * @return the number of passengers on train
      */
     private void updatePassengers(){ //should pull passenger information from train model
         this.passengers = this.trainModel.getPassengersOnBaord();
     }    
-    
-    private int getNumberOfTrains(){
-        return 0; //Get value from ?????
-    }
-    
-    private ArrayList getTrainArray(){
-        return null;
-    }
-    
-    public void approachingStation(){
-        //1. We know we are at least
-    }
 
     /**
-     * The update function for the full controller
+     * The update function for the full controller. Update vital controls 
+     * in a uniform fashion across our TMR system
      * 
      * @author Tyler Protivnak
      */
     public void updateController(){
-       
         this.vitals.update(this.manualMode);     
-        
         this.powerSystem.update(this.vitals.getPrimary().getGPS().setLights(), this.manualMode);
-        
         this.updatePassengers();
     }
         
+    /**
+     * Updates the graphical user interface for the current train controller
+     * 
+     * @author Tyler Protivnak
+     * @param gui GUI object we want to update
+     */
     public void updateGUI(TrainControllerGUI gui){
-        //this.updateController();
-        
-        for(int i = 0; i < getNumberOfTrains(); i++){
-            //gui.TrainSelectorDropDown.addItem(getTrainArray().get(i));
-            //snag train array and add them to the drop down list
-        }
-        
+
         if(this.powerSystem.isLeftDoorOpen()) {
             gui.LeftDoorOpened.setSelected(true);
         }
@@ -415,42 +400,89 @@ public class TrainController {
         gui.PowerUsedLabel.setText(decimalFormatter.format(this.vitals.getPrimary().getPowerCommand()));
         
         gui.ClockText.setText(this.trainSystem.getClock().printClock());
-        
-        //Will add more as we move forward.
     }     
     
+    /**
+     * Called by the train model, we will calculate the power that the engine should
+     * output based on previous calculations used for power. The TMR system decides on
+     * a safe power command by passing the output of at least 2 of 3 agreed values
+     * 
+     * @author Tyler Protivnak
+     * @param actualSpeed current speed of the train
+     * @param samplePeriod sampling period for power calculations
+     * @return Accepted power value based on TMR testing
+     */
     public double calculatePower(double actualSpeed, double samplePeriod){
         return this.vitals.calculatePower(actualSpeed, samplePeriod, this.manualMode);
     }
     
     /**
+     * Update the operation mode of the train controller
      * 
+     * @author Tyler Protivnak
      * @param manualMode Boolean to set mode. Pass "True" for manual and "False" for automatic
      */
     public void setManualMode(boolean manualMode) {
         this.manualMode = manualMode;
     }
    
+    /**
+     * Is the train controller in manual mode?
+     * 
+     * @author Tyler Protivnak
+     * @return true if we are in manual mode, else false
+     */
     public boolean isManualMode() {
         return manualMode;
     }
     
+    /**
+     * Update the authority for the train controller
+     * 
+     * @author Tyler Protivnak
+     * @param authority the new authority value as a short (for the 24 baud liimt)
+     */
     public void setAuthority(short authority){
         this.vitals.updateAuthority(authority);
     }
     
+    /**
+     * Update the speed from the CTC or MBO
+     * 
+     * @author Tyler Protivnak
+     * @param speed the new speed as a byte (for the 24 baud limit)
+     */
     public void setSpeed(byte speed){
         this.vitals.updateRecommendedSetPoint(speed);
     }
     
+    /**
+     * Set the service brake active or not
+     * 
+     * @author Tyler Protivnak
+     * @param brake boolean value for the status of the date we want
+     */
     private void setServiceBrake(boolean brake){
         this.vitals.setServiceBrakeActivated(brake);
     }
     
+    /**
+     * Set by the train model, with info from the track controller/model... are we safe to move
+     * 
+     * @author Tyler Protivnak
+     * @param safe boolean value as to whether or not we should keep going forward or stop to be safe
+     */
     public void safeToProceed(boolean safe){
         this.setServiceBrake(!safe || this.vitals.getPrimary().isServiceBrakeActivated());
     }
     
+    /**
+     * Beacon value passed from the train model, from the track. 
+     * Digest the beacon and decide what to do
+     * 
+     * @author Tyler Protivnak
+     * @param b 
+     */
     public void receiveBeacon(Beacon b){
         this.vitals.receiveBeacon(b);
         if(this.gui != null){
@@ -460,9 +492,13 @@ public class TrainController {
         }
     }
     
+    /**
+     * Get information from gps about the current state of the train
+     * 
+     * @author Tyler Protivnak
+     * @return GPSMessage object for the MBO to use for train seperation
+     */
     public GPSMessage getGPSMessage(){
         return this.vitals.primaryVital.getGPS().getGPSMessage();
     }
-    
-    
 }
