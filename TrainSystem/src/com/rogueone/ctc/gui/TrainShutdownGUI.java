@@ -169,7 +169,7 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
                 String updateParamsPosition = (String)ctcGUI.TrainTable.getValueAt(i,2);
                 String[] parts = updateParamsPosition.split(":");
                 int partBlock = Integer.parseInt(parts[1]);
-                trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(passTrainLine), partBlock, 0, 0);
+                trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(passTrainLine), partBlock, -1, -1);
             }
         }
     }
