@@ -73,6 +73,11 @@ public class PassengerBrakeGUI extends javax.swing.JFrame {
         jPanel22.setLayout(new java.awt.GridBagLayout());
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/rogueone/images/stop_sign.png")));
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -107,6 +112,10 @@ public class PassengerBrakeGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments

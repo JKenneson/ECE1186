@@ -161,6 +161,11 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
         disableSignal(passTrainName, lineName);
     }//GEN-LAST:event_disableButtonActionPerformed
     
+    /**
+     *
+     * @param passTrainName
+     * @param passTrainLine
+     */
     public void disableSignal(int passTrainName, String passTrainLine){
         this.ctcGUI.DisableTrain(passTrainName, passTrainLine);
         

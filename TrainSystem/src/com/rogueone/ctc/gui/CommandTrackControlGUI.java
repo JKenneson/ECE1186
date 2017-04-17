@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.rogueone.ctc.gui;
-import com.rogueone.global.Clock;
 import com.rogueone.global.Global;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.Line;
@@ -12,20 +11,13 @@ import com.rogueone.trainsystem.TrainSystem;
 import com.rogueone.trackmodel.Section;
 import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackModel;
-import com.rogueone.trainmodel.TrainHandler;
 import com.rogueone.trainmodel.TrainModel;
-import com.rogueone.trainmodel.entities.TrainFailures;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.lang.*;
 
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
-    //int trainID;
-    //int hoursPassed;
     public int iterativeID;
     double throughputValueGreen = 0;
     double throughputValueRed = 0;

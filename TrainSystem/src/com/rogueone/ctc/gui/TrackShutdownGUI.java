@@ -31,6 +31,11 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     public TrainSystem trainSystem;
     private TrackModel trackModel;
     
+    /**
+     *
+     * @param ctcGUI
+     * @param ts
+     */
     public TrackShutdownGUI(CommandTrackControlGUI ctcGUI, TrainSystem ts) {
         this.ctcGUI = ctcGUI;
         this.trainSystem = ts;
@@ -61,6 +66,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(475, 90));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Please select a track segment to disable:");
@@ -77,6 +83,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(jLabel2, gridBagConstraints);
@@ -89,13 +96,16 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 2);
         getContentPane().add(LineComboBox, gridBagConstraints);
 
         jLabel3.setText("Segment");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(jLabel3, gridBagConstraints);
@@ -106,9 +116,8 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(SegmentComboBox, gridBagConstraints);
 
         TrackDisableButton.setText("Disable");
@@ -119,7 +128,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -133,21 +142,21 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(CloseTrackDisableButton, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(BlockComboBox, gridBagConstraints);
 
         jLabel4.setText("Block");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(jLabel4, gridBagConstraints);
