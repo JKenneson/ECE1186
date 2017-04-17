@@ -1,7 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The train controller GUI class interacts with the TrainController.java class 
+ * file, as well as the vitals to activate brakes and is able to display important
+ * information about the train being controlled. The user can interact with it 
+ * in a number of ways as well
+ * 
+ * @author Tyler Protivnak
+ * @creation date 2/4/17
+ * @modification date 4/14/17
  */
 package com.rogueone.traincon.gui;
 
@@ -11,11 +16,11 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author kylemonto
+ * @author Tyler Protivnak
  */
 public class TrainControllerGUI extends javax.swing.JPanel {
     
-    //This is to call the main Train Model class's methods while using the GUI
+    //This is to call the main Train Controller class's methods while using the GUI
     TrainController trainController;
 
     /**
@@ -23,9 +28,14 @@ public class TrainControllerGUI extends javax.swing.JPanel {
      */
     public TrainControllerGUI() {
         initComponents();
-        //this.trainController = new TrainController(new TrainModel(40, 500, 1), this, (byte) 50, (short) 200, 500, "123", "G", "AA", "13"); //for testing purposes
     }
 
+    /**
+     * Constructor for the train controller gui
+     * 
+     * @author Tyler Protivnak
+     * @param tc reference to the train controller that we are attached to
+     */
     public TrainControllerGUI(TrainController tc) {
         initComponents();
         this.trainController = tc;
@@ -976,6 +986,11 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * GUI specific methods below are pretty straight forward.
+     * 
+     * @author Tyler Protivnak
+     */
     private void ServiceBrakeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeToggleButtonActionPerformed
         if(this.ServiceBrakeToggleButton.isSelected()){
             this.trainController.vitals.setServiceBrakeActivated(true);
@@ -1015,7 +1030,6 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         if(this.EmergencyBrakeToggleButton.isSelected()){
             this.trainController.vitals.setEmergencyBrakeActivated(true);
             this.trainController.vitals.setEmergencyBrakeOverride(true);
-            //this.trainController.getTrainModel().setEmergencyBrakeActivated(true);
             this.NotificationsDisplay.append("\nEmergency Brake Activated");
         }
         else{
@@ -1162,7 +1176,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_RightDoorClosedActionPerformed
 
     private void SetSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetSpeedActionPerformed
-        this.trainController.vitals.getPrimary().getSpeedControl().setDriverSetPoint(Byte.valueOf(this.SpeedInput.getValue().toString()));
+        this.trainController.vitals.updateDriverSetPoint(Byte.valueOf(this.SpeedInput.getValue().toString()));
         this.NotificationsDisplay.append("\nDriver set point updated to " + this.trainController.vitals.getPrimary().getSpeedControl().getDriverSetPoint());
     }//GEN-LAST:event_SetSpeedActionPerformed
 

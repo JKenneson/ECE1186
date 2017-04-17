@@ -34,16 +34,10 @@ public class TrainController {
     //Variable declaration for the class
     //Train Operations
     private boolean manualMode;       
-        
-    //Announcements
     private String announcement;
-    
-    //Train Information
     public TrainModel trainModel;
     public JFrame trainControllerGUIFrame;
-    //public GPS gps;
     public PowerSystems powerSystem;
-    //public SpeedControl speedControl;
     public TMR vitals;
     public TrainControllerGUI gui;
     public TrainSystem trainSystem;
@@ -57,8 +51,7 @@ public class TrainController {
     /**
      * This method is the constructor that should be used to make a new Train controller.
      * This should only be called when a new train model is created and thus, only called
-     * by the train model. If a gui is not needed for the controller, pass "null" for the 
-     * gui.
+     * by the train model. 
      * 
      * @author Tyler Protivnak 
      * @param tm should be a "this" reference to the Train model using this controller
@@ -67,22 +60,22 @@ public class TrainController {
      * @param authority given authority passed through track
      * @param maxPow maximum power allowed by the train
      * @param trainID train ID from CTC
+     * @param ts reference to the overall train system. Used for obtaining global information
      * @param line line ID from CTC
-     * @param section initial section, should be from yard
-     * @param block initial block, should be from yard
-     * @param ts
      */
     public TrainController(TrainModel tm, TrainControllerGUI gui, byte setPointSpeed, short authority, double maxPow, String trainID, TrainSystem ts, String line){
         
         this.trainSystem = ts;
-        this.trainModel = tm; //Should come from passed (this) reference
+        this.trainModel = tm;
+        
+        //Create the power systems for the train
         this.powerSystem = new PowerSystems(this);
+        
+        //Create the redundent vitals for the train
         this.vitals = new TMR(ts, tm, this, maxPow, setPointSpeed, authority, trainID, this.powerSystem, line);
+        
         this.gui = gui;
-        
-        
-        
-        
+
         //Initialize Train Controller Object
         this.manualMode = false;        
               
@@ -443,15 +436,15 @@ public class TrainController {
     }
     
     public void setAuthority(short authority){
-        this.vitals.getPrimary().getGPS().setAuthority(authority);
+        this.vitals.updateAuthority(authority);
     }
     
     public void setSpeed(byte speed){
-        this.vitals.getPrimary().getSpeedControl().setRecommendedSetPoint(speed);
+        this.vitals.updateRecommendedSetPoint(speed);
     }
     
     private void setServiceBrake(boolean brake){
-        this.vitals.getPrimary().setServiceBrakeActivated(brake);
+        this.vitals.setServiceBrakeActivated(brake);
     }
     
     public void safeToProceed(boolean safe){

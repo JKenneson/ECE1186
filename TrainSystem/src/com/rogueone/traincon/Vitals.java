@@ -51,6 +51,7 @@ public class Vitals {
     private String previousStation = "value";
     private boolean specialCase = true;
     private int stationStopTimer = -1;
+    private double oldSetPoint = -5;
 
     /**
      * Constructor for Vitals module
@@ -86,7 +87,12 @@ public class Vitals {
     }
 
     public void update(boolean manualMode) {
-
+        double newSetPoint = this.speedControl.getSetPoint(manualMode);
+        if(this.oldSetPoint != newSetPoint  || this.trainModel.getCurrSpeed() == 0.0){
+            this.resetPower();
+        }
+        this.oldSetPoint = newSetPoint;
+        
         this.gps.update(this.trainModel.getDistanceTraveledFeet(), this.trainModel.getCurrBlock(), this.trainModel.getCurrSpeedMPH());
         if (this.gps.getAuthority() < (this.trainModel.safeStoppingDistance() + 3) || this.emergencyBrakeOverride) {
             this.setEmergencyBrakeActivated(true);
@@ -150,17 +156,6 @@ public class Vitals {
             else{
                 this.stationStopTimer++;
             }
-            
-//            if (this.doorSide) {
-//                this.powerSystem.setRightDoorOpen(false);
-//            } else {
-//                this.powerSystem.setLeftDoorOpen(false);
-//            }
-//            this.approachingStation = false;
-//            stopForStation = false;
-//            this.setServiceBrakeActivated(false);
-//            this.previousStation = this.station;
-            //System.out.println("Train "+ this.gps.trainID + ": " + "Leaving station...");
         }
         
 

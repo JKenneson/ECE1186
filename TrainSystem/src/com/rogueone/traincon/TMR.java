@@ -18,7 +18,6 @@ public class TMR {
     
     public Vitals [] vitals = new Vitals[3];
     
-    
     //Need to implement fail over from primary
     public Vitals primaryVital;
     
@@ -57,6 +56,24 @@ public class TMR {
             this.vitals[i].update(manualMode);
         }
         //this.primaryVital.update(manualMode);
+    }
+    
+    public void updateRecommendedSetPoint(byte input){
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].getSpeedControl().setRecommendedSetPoint(input);
+        }
+    }
+    
+    public void updateDriverSetPoint(byte input){
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].getSpeedControl().setDriverSetPoint(input);
+        }
+    }
+    
+    public void updateAuthority(short input){
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].getGPS().setAuthority(input);
+        }
     }
     
     public void receiveBeacon(Beacon b){ //update for TMR work
