@@ -822,10 +822,10 @@ public class TrainModel {
         return this.temperatureModel.getTemperature();
     }
 
-    public void setTemperature(int temperature) {
+    public void setTemperature(double temperature) {
         //Check to make sure there is no power failure
         if(!this.powerFailure) {
-            this.temperature = temperature;
+            this.temperature = (int)temperature;
         }
     }
 

@@ -241,7 +241,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
 
         temperatureInputLabel.setText("Temp:");
 
-        temperatureInputSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        temperatureInputSpinner.setModel(new javax.swing.SpinnerNumberModel(72, null, null, 1));
 
         temperatureInputDegreesLabel.setText("degrees");
 
@@ -1137,7 +1137,7 @@ public class TrainModelGUI extends javax.swing.JPanel {
         else {
             trainModel.setLightsOn(false);
         }
-        trainModel.setTemperature(Integer.valueOf(this.temperatureInputSpinner.getValue().toString()));
+        trainModel.setTemperature(Double.valueOf(this.temperatureInputSpinner.getValue().toString()));
         trainModel.setGrade(Double.valueOf(this.gradeInputSpinner.getValue().toString()));
         trainModel.setSpeedLimit(Integer.valueOf(this.speedLimitSpinner.getValue().toString()));
         
