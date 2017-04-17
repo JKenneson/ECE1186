@@ -1094,8 +1094,14 @@ public int iterateID(){
         String dispatchLine = (String) DispatchLineBox.getSelectedItem();
         String dispatchBlock = "A";
         int dispatchSection = 1;
-        int dispatchSpeed = Integer.valueOf(DispatchSpeedField.getText());
-        int dispatchAuthority = Integer.valueOf(DispatchAuthorityField.getText());
+        int dispatchSpeed = 0;
+        int dispatchAuthority = 0;
+        if (trainSystem.isInteger(DispatchSpeedField.getText())){
+            dispatchSpeed = Integer.valueOf(DispatchSpeedField.getText());  
+        }
+        if (trainSystem.isInteger(DispatchAuthorityField.getText())){
+            dispatchAuthority = Integer.valueOf(DispatchAuthorityField.getText());
+        }
         int dispatchNumberCars = 1;
         if(this.trainSystem.getClock().getHour() >= 6 && this.trainSystem.getClock().getHour() <= 7){
             dispatchNumberCars = 2;
@@ -1108,18 +1114,21 @@ public int iterateID(){
         newTrain[2] = (dispatchSection + ":" + dispatchBlock);
         newTrain[3] = true;
 
-        if ((dispatchAuthority < 107000) & (dispatchSpeed < 44)){
+                
+            if ((dispatchAuthority < 107000) & (dispatchSpeed < 44) & (trainSystem.isInteger(DispatchSpeedField.getText())) & (trainSystem.isInteger(DispatchAuthorityField.getText()))){
             dispatchNewTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
             trainsDispatched++;
-        }
-        if (dispatchAuthority >= 107000){
+            }
+            if ((dispatchAuthority >= 107000)){
             JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Authoity Too High.", "Error",
                                     JOptionPane.ERROR_MESSAGE);   
-        }
-        if (dispatchSpeed >= 44){
+            }
+            if (dispatchSpeed >= 44){
             JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Speed Too High.", "Error",
                                     JOptionPane.ERROR_MESSAGE);   
-        }
+            }
+       
+        
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 
     public void addRow(String dispatchLine, String dispatchBlock, int dispatchSection, int dispatchID) {

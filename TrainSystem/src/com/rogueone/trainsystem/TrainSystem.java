@@ -205,7 +205,17 @@ public class TrainSystem {
         return trackViewRed;
     }
     
-    
+    public boolean isInteger(String inputString){
+        try {
+            Integer.parseInt(inputString);
+            return true;
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Input Field is A String And Should Be An Integer.", "Error",
+            JOptionPane.ERROR_MESSAGE);    
+            return false;
+        } 
+    }
     
     /**
      * Getter for ref to global clock

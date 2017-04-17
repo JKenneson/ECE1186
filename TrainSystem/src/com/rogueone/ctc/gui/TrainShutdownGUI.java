@@ -177,6 +177,7 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
                 trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(passTrainLine), partBlock, -1, -1);
             }
         }
+        
     }
     
     private void lineSelectBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineSelectBoxActionPerformed
