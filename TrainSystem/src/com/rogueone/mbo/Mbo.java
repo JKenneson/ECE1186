@@ -420,7 +420,8 @@ public class Mbo{
                 cumulativeDist = cumulativeDist + message.getDistanceIntoBlock();
                 lookahead = currBlock;
                 Block temp = (Block)lookahead;
-                for(int n = 0; n< 2; n++){
+                System.out.println("START");
+                for(int n = 0; n< 3; n++){
                     cumulativeDist = 0;
                     temp = (Block)lookahead;
                     if(lookahead.getNext(temp.getPortA())!=null){
@@ -428,16 +429,16 @@ public class Mbo{
                             
                             lookahead = lookahead.getNext(temp.getPortA());
                             temp = (Block)lookahead;
-                            System.out.print("START");
+                            
                             System.out.println(temp.getSection()+":"+temp.getID()+" Occupied: "+temp.isOccupied());
                             //System.out.println(temp.getLine()+" "+temp.isOccupied());
                             boolean occupied = temp.isOccupied();
                             if(occupied && !temp.getSection().toString().equals("YY") && (!temp.getSection().toString().equals("U")&&temp.getID()!=77) && (!temp.getSection().toString().equals("J")&&temp.getID()!=62)){//&& (!temp.getSection().toString().equals("M")&&temp.getID()!=76)&& (!temp.getSection().toString().equals("N")&&temp.getID()!=85)){
                                //cumulativeDist = cumulativeDist + temp.getLength();
                                //System.out.println(temp.getSection()+":"+temp.getID());
-                                //System.out.println("Distance available: "+cumulativeDist+" Stopping dist: "+message.getStoppingDistance());
-                                if(cumulativeDist <= message.getStoppingDistance()){
-                                    //currTrain.MBOUpdateSpeedAndAuthority(-1, (int)currTrain.getAuthority()); 
+                                System.out.println("Distance available: "+cumulativeDist+" Stopping dist: "+message.getStoppingDistance());
+                                if(cumulativeDist < message.getStoppingDistance()-300){
+                                    currTrain.MBOUpdateSpeedAndAuthority(-1, (int)currTrain.getAuthority()); 
                                     System.out.println("STOPPING");
                                     //break; 
                                 }
@@ -446,6 +447,7 @@ public class Mbo{
                             else{
                                 //currTrain.MBOUpdateSpeedAndAuthority((int)message.getCurrSpeed(), (int)currTrain.getAuthority());
                                 cumulativeDist = cumulativeDist + temp.getLength();
+                                currTrain.MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority()); 
                                 sameTrains.clear();
                                 int found = 0;
                                 for(int p = 0; p<numTrains; p++){
