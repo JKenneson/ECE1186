@@ -58,10 +58,10 @@ public class Vitals {
      *
      * @author Tyler Protivnak
      * @param tm ref to attached train model
-     * @param gps ref to tc gps module
+     * 
      * @param maxPow max power of the attached train
      */
-    public Vitals(TrainSystem ts, TrainModel tm, TrainController tc, double maxPow, byte setPointSpeed, short authority, String trainID, PowerSystems ps, String line) {
+    public Vitals(TrainSystem ts, TrainModel tm, double maxPow, byte setPointSpeed, short authority, String trainID, PowerSystems ps, String line) {
         //this.trainSystem = ts;
         this.trainModel = tm;
 
@@ -115,7 +115,7 @@ public class Vitals {
 //                //System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
 //            }
             if (this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null) {
-                //System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
+//                System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
                 this.resetPower();
                 if (this.doorSide) {
                     this.powerSystem.setRightDoorOpen(true && !manualMode);
@@ -127,14 +127,12 @@ public class Vitals {
                     this.stationStopTimer = 60;
                 }
             }
-
         }
 
         if (this.stationStopTimer == 30 && (this.powerSystem.isLeftDoorOpen() || this.powerSystem.isRightDoorOpen())) {
             this.trainModel.boardPassengers();
         }
 
-        //System.out.println("count: " + this.stationStopTimer);
         if (this.stationStopTimer == 0) {
             if(!manualMode){
                 if (this.doorSide) {
@@ -157,12 +155,8 @@ public class Vitals {
                 this.stationStopTimer++;
             }
         }
-        
 
-        //System.out.println("Manual: " + manualMode + " Service Brake: " + this.serviceBrakeActivated);
-        //System.out.println("Train "+ this.gps.trainID + ": " + "Stop for station: " + stopForStation);
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation || this.serviceBrakeOverride);
-        //System.out.println("Exit");
         this.stationStopTimer--;
     }
 
@@ -267,14 +261,13 @@ public class Vitals {
      * @author Tyler Protivnak
      * @param actualSpeed The current speed from the Train Model
      * @param samplePeriod The sampling period defined by the Train Model
+     * @param manualMode the operation mode of the train controller
      * @return power after calculations
      */
     public double calculatePower(double actualSpeed, double samplePeriod, boolean manualMode) { //should pull speed limit information from
         //loaded track xlx after calculating location.
 
         this.eK = (this.speedControl.getSetPoint(manualMode) - actualSpeed);   //Calc error difference
-        //System.out.println("The diff in values is: " + this.eK);
-        //this.gps.setCurrSpeed(actualSpeed);
 
         this.uK = this.uK_1 + ((samplePeriod / 2) * (this.eK + this.eK_1));
 
@@ -291,13 +284,8 @@ public class Vitals {
             this.powerCommand = 0;
         }
 
-        //this.approachingStation ||
-        //this.gps.getCurrBlock().getGrade()<0 ||
         if (this.serviceBrakeActivated || this.emergencyBrakeActivated || this.speedControl.getSetPoint(manualMode) <= 0.0 || (this.stationStopTimer > 0)) {
-            //Maybe I shouldn't do when grade is less than 0
-            //System.out.println("Train "+ this.gps.trainID + ": " + "S brake = " + this.serviceBrakeActivated + " E brake:" + this.emergencyBrakeActivated + " Set Point: " + (this.speedControl.getSetPoint(manualMode)) + " i: " + i);
             this.powerCommand = 0.0;
-
         }
         return this.powerCommand;
     }
@@ -426,8 +414,6 @@ public class Vitals {
 
     public void receieveBeacon(Beacon beacon) {
         boolean skipped = true;
-//        System.out.println("Previous station: " + this.previousStation);
-//        System.out.println("");
         if (beacon.getStation() != null) {
             if(!this.approachingStation){
                 this.station = beacon.getStation().getName();
@@ -436,32 +422,17 @@ public class Vitals {
                 specialCase = !this.specialCase;
                 skipped = false;
             }
-            if (!this.previousStation.equals(this.station) && (this.specialCase || skipped) && this.line.equals("GREEN")) {
-                
+            if (!this.previousStation.equals(this.station) && (this.specialCase || skipped) && this.line.equals("GREEN")) {      
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
                 this.distanceToStation = beacon.getDistance() + 50;
-//                if(this.specialCase == false){
-//                    this.specialCase = !this.specialCase;
-//                }
             }
             
             else if(!this.previousStation.equals(this.station) && (this.specialCase || skipped) && this.line.equals("RED") && !this.approachingStation) {
-                //this.station = beacon.getStation().getName();
                 this.approachingStation = true;
                 this.doorSide = beacon.isOnRight();
                 this.distanceToStation = beacon.getDistance() + 50;
-//                if(this.specialCase == false){
-//                    this.specialCase = !this.specialCase;
-//                }
             }
-
         }
-        else{ //Do distance calculation work for red line
-
-        }
-//        System.out.println("Previous station: " + this.previousStation);
-//        System.out.println("This station: " + this.station);
-
     }
 }

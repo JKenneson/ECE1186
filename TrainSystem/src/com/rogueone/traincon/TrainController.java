@@ -15,7 +15,6 @@ import com.rogueone.trainmodel.TrainModel;
 import com.rogueone.trainsystem.TrainSystem;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.*;
 
@@ -76,7 +75,7 @@ public class TrainController {
         this.powerSystem = new PowerSystems(this);
         
         //Create the redundent vitals for the train
-        this.vitals = new TMR(ts, tm, this, maxPow, setPointSpeed, authority, trainID, this.powerSystem, line);
+        this.vitals = new TMR(ts, tm, maxPow, setPointSpeed, authority, trainID, this.powerSystem, line);
         
         this.gui = gui;
 
@@ -94,7 +93,6 @@ public class TrainController {
         if(gui != null){
             this.updateGUI(gui);
         }
-        
     }    
     
     /**
