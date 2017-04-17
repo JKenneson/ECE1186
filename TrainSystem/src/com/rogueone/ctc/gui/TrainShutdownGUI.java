@@ -150,17 +150,15 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();       
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void disableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableButtonActionPerformed
         String lineName = String.valueOf(lineSelectBox.getSelectedItem());
-        //String lineName = "GREEN";
         String trainName = (String)trainSelectBox.getSelectedItem();
         int passTrainName = Integer.parseInt((String)trainSelectBox.getSelectedItem());
         disableNotification.setText("Train " + trainName + " on the " + lineName + " line is Disabled");
         disableSignal(passTrainName, lineName);
-        // TODO add your handling code here:
     }//GEN-LAST:event_disableButtonActionPerformed
     
     public void disableSignal(int passTrainName, String passTrainLine){
@@ -174,18 +172,9 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
                 trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority(Global.Line.valueOf(passTrainLine), partBlock, 0, 0);
             }
         }
-        
-        //this.trainSystem.getTrainHandler().getTrains().get(passTrainName).setEmergencyBrakeActivated(true);
-//        for ( int i = 0; i < this.trainSystem.getTrainHandler().getTrains().size(); i ++){
-//            if (this.trainSystem.getTrainHandler().getTrains().get(i).getTrainID() == passTrainName){
-//                this.trainSystem.getTrainHandler().getTrains().get(i).causeFailure(TrainFailures.Power);
-//            }
-//
-//        } 
     }
     
     private void lineSelectBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineSelectBoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_lineSelectBoxActionPerformed
 
     /**

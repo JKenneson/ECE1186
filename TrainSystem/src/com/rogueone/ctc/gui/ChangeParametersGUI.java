@@ -210,15 +210,7 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        
-    private void getSpeedAndAuthority(){
-//        String currentSpeed = trainSystem.TrainModel().getCurrSpeed();
-//        String currentAuthority = trainSystem.TrainModel().getAuthority();
-//        
-//        CurrentSpeedField.setText(currentSpeed);
-//        CurrentAuthorityField.setText(currentAuthority);
-//        
-    }
+
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         String trainSpeedString = SetSpeedField.getText();
         double trainSpeed = Double.parseDouble(trainSpeedString);
@@ -248,25 +240,23 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void ParametersCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParametersCloseButtonActionPerformed
-        this.dispose();         // TODO add your handling code here:
+        this.dispose();    
     }//GEN-LAST:event_ParametersCloseButtonActionPerformed
 
     private void ResetParametersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetParametersButtonActionPerformed
         SetSpeedField.setText("0");
         SetAuthorityField.setText("0");
-                // TODO add your handling code here:
     }//GEN-LAST:event_ResetParametersButtonActionPerformed
 
     private void SetSpeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetSpeedFieldActionPerformed
-               // TODO add your handling code here:
     }//GEN-LAST:event_SetSpeedFieldActionPerformed
 
     private void SetSpeedFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetSpeedFieldMouseClicked
-        SetSpeedField.setText("0");         // TODO add your handling code here:
+        SetSpeedField.setText("0");        
     }//GEN-LAST:event_SetSpeedFieldMouseClicked
 
     private void SetAuthorityFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetAuthorityFieldMouseClicked
-        SetAuthorityField.setText("0");        // TODO add your handling code here:
+        SetAuthorityField.setText("0");     
     }//GEN-LAST:event_SetAuthorityFieldMouseClicked
 
     /**

@@ -163,7 +163,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CloseTrackDisableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseTrackDisableButtonActionPerformed
-        this.dispose();       // TODO add your handling code here:
+        this.dispose();     
     }//GEN-LAST:event_CloseTrackDisableButtonActionPerformed
 
     private void TrackDisableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackDisableButtonActionPerformed
