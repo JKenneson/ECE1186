@@ -1,18 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The power systems control the electrical systems for doors, lights and climate control
+ *
+ * @author Tyler Protivnak
+ * @Creation 3/4/17
+ * @Modification 4/17/2017
  */
 package com.rogueone.traincon;
 
 /**
- *
- * @author Tyler
+ * Class declaration for PowerSystem
+ * 
+ * @author Tyler Protivnak
  */
 public class PowerSystems{
     
-    private TrainController trainController;
-    
+    private final TrainController trainController;
     private boolean leftDoorOpen;
     private boolean rightDoorOpen;
     private boolean lightsOn;
@@ -20,6 +22,12 @@ public class PowerSystems{
     private boolean heaterOn;
     private double temperature;
     
+    /**
+     * Constructor for Power Systems 
+     * 
+     * @author Tyler Protivnak 
+     * @param tc reference to the train controller for a train model reference
+     */
     public PowerSystems(TrainController tc){
         
         this.trainController = tc;
@@ -33,7 +41,7 @@ public class PowerSystems{
             this.airConditioningOn = true;
             this.heaterOn = false;
         }
-        else if(this.temperature<39){
+        else if(this.temperature<72){
             this.airConditioningOn = false;
             this.heaterOn = true;
         }
@@ -48,6 +56,8 @@ public class PowerSystems{
      * how to adjust the climate control systems
      * 
      * @author Tyler Protivnak
+     * @param lights boolean for whether or not the lights should be on
+     * @param manualMode the current operation mode of the train controller
      */
     public void update(boolean lights, boolean manualMode){ 
         this.temperature = this.trainController.trainModel.getTemperature();
@@ -79,9 +89,6 @@ public class PowerSystems{
             else if(this.temperature<72 && !this.heaterOn){
                 this.trainController.gui.appendNotificationsDisplay("Only Heater should be on\n");
             }
-            else{
-                //this.trainController.gui.appendNotificationsDisplay("\nApproaching ");         
-            }
 
             if(lights != this.lightsOn){
                 if(lights){
@@ -91,13 +98,13 @@ public class PowerSystems{
                     this.trainController.gui.appendNotificationsDisplay("Lights should be off\n");
                 }
             }
-            //this.setLightsOn(lights);
         }
-        
     }
     
     /**
+     * Set the air conditioner on or off
      * 
+     * @author Tyler Protivnak
      * @param airConditioningOn Boolean to set the status of the A/C. True = on.
      */
     public void setAirConditioningOn(boolean airConditioningOn) {
@@ -106,7 +113,9 @@ public class PowerSystems{
     }
 
     /**
+     * set the heater on or off
      * 
+     * @author Tyler Protivnak
      * @param heaterOn Boolean to set the status of the heater. True = on.
      */
     public void setHeaterOn(boolean heaterOn) {
@@ -115,7 +124,9 @@ public class PowerSystems{
     }
     
     /**
+     * turn the lights on or off
      * 
+     * @author Tyler Protivnak
      * @param lightsOn Boolean to set the status of the lights. True = on. Also updates train model.
      */
     public void setLightsOn(boolean lightsOn) {
@@ -124,7 +135,9 @@ public class PowerSystems{
     }
     
     /**
+     * open or close the left door
      * 
+     * @author Tyler Protivnak
      * @param leftDoorOpen Boolean to set the status of the left door. True = open. Also updates train model.
      */
     public void setLeftDoorOpen(boolean leftDoorOpen) {
@@ -133,7 +146,9 @@ public class PowerSystems{
     }
     
     /**
+     * open or close the right door
      * 
+     * @author Tyler Protivnak
      * @param rightDoorOpen Boolean to set the status of the right door. True = open. Also updates train model.
      */
     public void setRightDoorOpen(boolean rightDoorOpen) {
@@ -142,52 +157,62 @@ public class PowerSystems{
     }
 
     /**
+     * is the left door open or closed?
      * 
-     * @return 
+     * @author Tyler Protivnak
+     * @return true for open or false for closed
      */
     public boolean isLeftDoorOpen() {
         return leftDoorOpen;
     }
 
     /**
+     * is the right door open or closed?
      * 
-     * @return 
+     * @author Tyler Protivnak
+     * @return true for open or false for closed
      */
     public boolean isRightDoorOpen() {
         return rightDoorOpen;
     }
 
     /**
+     * Are the lights on or off?
      * 
-     * @return 
+     * @author Tyler Protivnak
+     * @return true for on or false for off
      */
     public boolean isLightsOn() {
         return lightsOn;
     }
 
     /**
+     * is the air conditioning on or off?
      * 
-     * @return 
+     * @author Tyler Protivnak
+     * @return true for on or false for off
      */
     public boolean isAirConditioningOn() {
         return airConditioningOn;
     }
 
     /**
+     * is the heater on or off?
      * 
-     * @return 
+     * @author Tyler Protivnak
+     * @return true for on or false for off
      */
     public boolean isHeaterOn() {
         return heaterOn;
     }
 
     /**
+     * what is the cabin temperature?
      * 
-     * @return 
+     * @author Tyler Protivnak
+     * @return temperature of the cabin in degrees F
      */
     public double getTemperature() {
         return temperature;
-    }
-    
-    
+    }   
 }

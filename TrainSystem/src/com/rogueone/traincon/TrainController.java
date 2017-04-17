@@ -1,5 +1,5 @@
 /**
- * The train controller is the interface through which the driver, engineer, and murphy
+ * The train controller is the interface through which the driver, engineer, and Murphy
  * interact with the train model. It's purpose is to operate the train in a safe manner
  * while the train travels from station to station.
  *
