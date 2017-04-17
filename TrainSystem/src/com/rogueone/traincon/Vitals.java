@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The vitals handle the safety critical operations of the train controller to 
+ * ensure that the train operates safely
+ *
+ * @author Tyler Protivnak
+ * @Creation 3/4/17
+ * @Modification 4/17/2017
  */
 package com.rogueone.traincon;
 
@@ -11,13 +14,12 @@ import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.trainsystem.TrainSystem;
 
 /**
+ * Class declaration for Vital
  *
- * @author Tyler
+ * @author Tyler Protivnak
  */
 public class Vitals {
 
-    //private TrainController trainController;
-    //private final TrainSystem trainSystem;
     private final TrainModel trainModel;
     private PowerSystems powerSystem;
     private SpeedControl speedControl;
@@ -57,22 +59,23 @@ public class Vitals {
      * Constructor for Vitals module
      *
      * @author Tyler Protivnak
-     * @param tm ref to attached train model
-     * 
-     * @param maxPow max power of the attached train
+     * @param ts reference to the overall train system that is used for global values
+     * @param tm direct reference to the train model used for access to brakes and other parameters
+     * @param maxPow maximum power of the train
+     * @param setPointSpeed the initial set point we were give to operate at
+     * @param authority the initial authority we were given
+     * @param trainID our simple id number
+     * @param ps reference to the power system for electrical operation handling
+     * @param line the line are we a part of
      */
     public Vitals(TrainSystem ts, TrainModel tm, double maxPow, byte setPointSpeed, short authority, String trainID, PowerSystems ps, String line) {
-        //this.trainSystem = ts;
         this.trainModel = tm;
-
         this.serviceBrakeActivated = false;
         this.emergencyBrakeActivated = false;
         this.emergencyBrakeOverride = false;
-
         this.antennaStatus = true;
         this.powerStatus = true;
         this.serviceBrakeStatus = true;
-
         this.kP = 100;
         this.kI = 2;
         this.eK = 0;
@@ -86,6 +89,12 @@ public class Vitals {
         this.powerSystem = ps;
     }
 
+    /**
+     * Update the service and emergency brakes. Also, handle the approaching of stations
+     * 
+     * @author Tyler Protivnak
+     * @param manualMode the operation mode of the train controller
+     */
     public void update(boolean manualMode) {
         double newSetPoint = this.speedControl.getSetPoint(manualMode);
         if(this.oldSetPoint != newSetPoint  || this.trainModel.getCurrSpeed() == 0.0){
@@ -105,7 +114,7 @@ public class Vitals {
         boolean setTimer = this.stationStopTimer < 0;
 //        System.out.println("Set Timer: " + (this.stationStopTimer < 0));
         this.setServiceBrakeActivated(this.speedControl.update(manualMode, this.serviceBrakeActivated) || stopForStation);
-        if (this.approachingStation) {
+        if (this.approachingStation) { // initiate the approaching sequence
 
 //            System.out.println("Train "+ this.gps.trainID + ": " + "Distance to station: " + this.distanceToStation + " Stopping distance: " + this.trainModel.safeStoppingDistance());
             stopForStation = (this.distanceToStation < this.trainModel.safeStoppingDistance());
@@ -114,7 +123,7 @@ public class Vitals {
 //            if (this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() == null) {
 //                //System.out.println("Train "+ this.gps.trainID + ": " + "Didn't make it to station!!!");
 //            }
-            if (this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null) {
+            if (this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null) { // we are at a station 
 //                System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
                 this.resetPower();
                 if (this.doorSide) {
@@ -290,6 +299,11 @@ public class Vitals {
         return this.powerCommand;
     }
 
+    /**
+     * Reset the power calculation parameters so we don't overshoot set speed
+     * 
+     * @author Tyler Protivnak
+     */
     private void resetPower() {
         this.eK = 0;
         this.eK_1 = 0;
@@ -311,14 +325,16 @@ public class Vitals {
      * Sets the Ki as passed by the train controller gui
      *
      * @author Tyler Protivnak
-     * @param Ki
+     * @param Ki the ki from the engineer
      */
     public void setKI(double Ki) {
         this.kI = Ki;
     }
 
     /**
+     * Return the current kp value
      *
+     * @author Tyler Protivnak
      * @return the set KP value
      */
     public double getKP() {
@@ -326,19 +342,29 @@ public class Vitals {
     }
 
     /**
-     *
+     * Return the current ki value
+     * 
+     * @author Tyler Protivnak
      * @return the set KI value
      */
     public double getKI() {
         return this.kI;
     }
 
+    /**
+     * Is the service brake activated or not
+     * 
+     * @author Tyler Protivnak
+     * @return boolean value true if activated, else false
+     */
     public boolean isServiceBrakeActivated() {
         return serviceBrakeActivated;
     }
 
     /**
+     * Set the service brake on the controller and model
      *
+     * @author Tyler Protivnak
      * @param serviceBrakeActivated Boolean to set the status of the service
      * brake. True = on. Also updates train model.
      */
@@ -348,15 +374,19 @@ public class Vitals {
     }
 
     /**
-     *
-     * @return true if E brake is activated
+     * Is the emergency brake activated
+     * 
+     * @author Tyler Protivnak
+     * @return true if E brake is activated, else false
      */
     public boolean isEmergencyBrakeActivated() {
         return emergencyBrakeActivated;
     }
 
     /**
+     * Set the emergency brake on the controller and model
      *
+     * @author Tyler Protivnak
      * @param emergencyBrakeActivated Boolean to set the status of the e brake.
      * True = on. Also updates train model.
      */
@@ -365,12 +395,10 @@ public class Vitals {
         this.trainModel.setEmergencyBrakeActivated(emergencyBrakeActivated);
     }
 
-    public void setSpeedControl(SpeedControl speedControl) {
-        this.speedControl = speedControl;
-    }
-
     /**
+     * What is the current power command we are outputting?
      *
+     * @author Tyler Protivnak
      * @return power command that was passed to the train model
      */
     public double getPowerCommand() {
@@ -378,7 +406,9 @@ public class Vitals {
     }
 
     /**
+     * What is the maximum power for the train?
      *
+     * @author Tyler Protivnak
      * @return the max power for the given train
      */
     public double getMaxPower() {
@@ -386,17 +416,31 @@ public class Vitals {
     }
 
     /**
+     * Is the emergency brake override activated?
      *
-     * @return true if override is triggered
+     * @author Tyler Protivnak
+     * @return true if override is triggered, else false
      */
     public boolean isEmergencyBrakeOverride() {
         return emergencyBrakeOverride;
     }
 
+    /**
+     * Set the value of the service brake override
+     * 
+     * @author Tyler Protivnak
+     * @param set the boolean value we want to set the service brake override to
+     */
     public void setServiceBrakeOverride(boolean set) {
         this.serviceBrakeOverride = set;
     }
 
+    /**
+     * Set the value of the emergency brake override
+     * 
+     * @author Tyler Protivnak
+     * @param set the boolean value we want to set the emergency brake override to
+     */
     public void setEmergencyBrakeOverride(boolean set) {
         if(!set && this.emergencyBrakeOverride && this.gps.getCurrSpeed() != 0.0){
             return;
@@ -404,21 +448,39 @@ public class Vitals {
         this.emergencyBrakeOverride = set;
     }
 
+    /**
+     * get a reference to the speed controller for this vitals system
+     * 
+     * @author Tyler Protivnak
+     * @return reference to the speed controller for this vital system
+     */
     public SpeedControl getSpeedControl() {
         return this.speedControl;
     }
 
+    /**
+     * get a reference to the gps for this vitals system
+     * 
+     * @author Tyler Protivnak
+     * @return reference to the gps for this vital system
+     */
     public GPS getGPS() {
         return this.gps;
     }
 
+    /**
+     * Use the beacon passed in to figure out the station logic and announcements
+     * 
+     * @author Tyler Protivnak
+     * @param beacon the beacon we will decode and use for station logic
+     */
     public void receieveBeacon(Beacon beacon) {
         boolean skipped = true;
         if (beacon.getStation() != null) {
             if(!this.approachingStation){
                 this.station = beacon.getStation().getName();
             }
-            if (beacon.getID() == 34) { //Try to fix logic here
+            if (beacon.getID() == 34) { //Special case for the green line
                 specialCase = !this.specialCase;
                 skipped = false;
             }

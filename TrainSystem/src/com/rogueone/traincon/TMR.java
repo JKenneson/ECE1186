@@ -21,8 +21,7 @@ public class TMR {
     
     public Vitals [] vitals = new Vitals[3];
     public Vitals primaryVital;
-    
-    
+   
     /**
      * Constructor that creates 3 copies of vitals that are used in a redundant manner
      * 
