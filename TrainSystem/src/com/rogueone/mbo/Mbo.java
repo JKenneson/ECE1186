@@ -446,6 +446,7 @@ public class Mbo{
                                 //currTrain.MBOUpdateSpeedAndAuthority((int)message.getCurrSpeed(), (int)currTrain.getAuthority());
                                 cumulativeDist = cumulativeDist + temp.getLength();
                                 sameTrains.clear();
+                                
                                 for(int p = 0; p<numTrains; p++){
                                     TrainModel testTrain = trainSystem.getTrainHandler().getTrains().get(p);
                                     if(currTrain.requestGPSMessage().getCurrBlock() == testTrain.requestGPSMessage().getCurrBlock() && currTrain.requestGPSMessage().getLine().equals(testTrain.requestGPSMessage().getLine())){
@@ -453,9 +454,12 @@ public class Mbo{
                                     }
                                     
                                 }
+                                
                                 for(int q = 0; q< sameTrains.size();q++){
-                                    sameTrains.get(q).MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority());
+                                    //sameTrains.get(q).MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority());
+                                    //System.out.println()
                                 }
+                                
                             }
                         }
                     }

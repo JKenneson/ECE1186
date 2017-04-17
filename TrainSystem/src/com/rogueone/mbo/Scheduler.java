@@ -536,7 +536,7 @@ public class Scheduler {
         
         //generate personnel
         String pstart = "06.10.00";
-        System.out.println(convertTime(pstart));
+        //System.out.println(convertTime(pstart));
         employeeNumber = 1;
         int otherEnum = 2;
         for(int y = 0; y<numTrains*2;y=y+2){
