@@ -634,9 +634,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                     
                 }
            }  
-        }
-        
-        
+        }  
     }
     
     public void removeTrainFromTable(int trainID){
@@ -715,8 +713,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
 
         calculateThroughput();
-       
-        
 
     }
 
@@ -741,7 +737,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         }
         
-//        double difference = throughputValue - tempThroughputValue + trainsPerHour;
         throughputValueGreen += trainsPerHourGreen;
         throughputValueRed += trainsPerHourRed;
         
@@ -749,15 +744,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         redLineThroughput.setText(String.format("%.2f", throughputValueRed));
 
     }
-    
-            
-
+   
     private void jPanel19ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel19ComponentShown
-        // TODO add your handling code here:
     }//GEN-LAST:event_jPanel19ComponentShown
 
     private void jPanel20ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel20ComponentShown
-        // TODO add your handling code here:
     }//GEN-LAST:event_jPanel20ComponentShown
 
     private void SelectOperationMode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectOperationMode2ActionPerformed
@@ -766,7 +757,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             DispatchButton1.setEnabled(true);
             TrackShutdownButton.setEnabled(true);
             TrainShutdownButton.setEnabled(true);
-        } // TODO add your handling code here:
+        }
         else {
             ChangeParametersButton3.setEnabled(false);
             DispatchButton1.setEnabled(false);
@@ -795,7 +786,6 @@ private void getDispatchTimes(){
 }
 
 private void dispatchNewTrain(int speed, int authority, int cars, String line, int ID){
-            //TRack ccontroller handler requestdispatch (Line)
     if (trainSystem.getTrackControllerHandler().requestDispatch((Global.Line.valueOf(line)))){
         trainSystem.dispatchTrain(speed, authority, cars, line, ID);
         addRow(line, "A", 1, ID);
@@ -820,8 +810,7 @@ private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int auto
                     
                 }
             } 
-        }
-        
+        }    
 }
 
 public int iterateID(){
@@ -831,20 +820,17 @@ public int iterateID(){
 }
     
     private void greenLineThroughputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenLineThroughputActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_greenLineThroughputActionPerformed
 
 
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
-        //get trainID from selected row first column
         ChangeParametersGUI params = new ChangeParametersGUI(this, trainSystem);
         params.setVisible(true);
-        // TODO add your handling code here:
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
 
     private void TrackShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackShutdownButtonActionPerformed
         TrackShutdownGUI trackShutdown = new TrackShutdownGUI(this, trainSystem);
-        trackShutdown.setVisible(true);// TODO add your handling code here:
+        trackShutdown.setVisible(true);
     }//GEN-LAST:event_TrackShutdownButtonActionPerformed
 
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
@@ -865,9 +851,7 @@ public int iterateID(){
             JTable table = (JTable) evt.getSource();
             int row = table.getSelectedRow();
             trainID = (int) table.getValueAt(row, 1);
-            //global to program
-
-            //parse position field
+  
             String line = (String) table.getValueAt(row, 0);
             String position = (String) table.getValueAt(row, 2);
             String[] parts = position.split(":");
@@ -916,6 +900,12 @@ public int iterateID(){
         checkForFailure();
     }
 
+    /**
+     *
+     * @param lineName
+     * @param segmentName
+     * @param blockName
+     */
     public void DisableTrack(String lineName, String segmentName, int blockName) {
         Boolean trackBool = false;
 
@@ -934,6 +924,9 @@ public int iterateID(){
         trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf(lineName));
     }
 
+    /**
+     *
+     */
     public void checkForFailure() {
         Object newFailureRow = new Object[4];
 
@@ -960,6 +953,12 @@ public int iterateID(){
 
     }
 
+    /**
+     *
+     * @param passTrainLine
+     * @param trainPosition
+     * @param failureType
+     */
     public void updateFailureTable(String passTrainLine, String trainPosition, String failureType) {
 
         String[] positionParts = trainPosition.split(":");
@@ -1006,12 +1005,7 @@ public int iterateID(){
     }
 
     private void BlockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BlockTableMouseClicked
-        //set up screen for Block Info
-
         InitializeGUIObject();
-
-       
-
         if (evt.getClickCount() == 1) {
             JTable blockTable = (JTable) evt.getSource();
             int row = blockTable.getSelectedRow();
@@ -1019,51 +1013,39 @@ public int iterateID(){
             int blockNumber = (int) blockTable.getValueAt(row, 2);
             String line = (String) blockTable.getValueAt(row, 0);
 
-
             for (Block b : this.trackModel.getBlockArray()){
                 if (b.getID() == blockNumber){
-                    //double blockGrade = b.getGrade();
                     double blockLength = b.getLength();
                     double blockSpeedLimit = b.getSpeedLimit();
                     Station blockStation = b.getStation();
                     int blockSwitchID = b.getSwitchID();
                     boolean blockCrossing = b.containsCrossing();
-
-                    
-                }
-                
-            }
-            
-            
+   
+                }   
+            }  
         }
 
         if (evt.getClickCount() == 2) {
-            trainSystem.getTrackViewGreen().toFront();
-            //figure out how to propoerly do this
+            JTable blockTable = (JTable) evt.getSource();
+            int row = blockTable.getSelectedRow();
+            String line = (String) blockTable.getValueAt(row, 0);
+            
+            if(line.equals("GREEN")){
+                this.trainSystem.getTrackViewGreen().displayTrackView(true);
+            }
+            else{
+                this.trainSystem.getTrackViewRed().displayTrackView(true);
+            }
         }
 
-// TODO add your handling code here:
     }//GEN-LAST:event_BlockTableMouseClicked
 
     private void FailureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FailureTableMouseClicked
         InitializeGUIObject();
 
-
-
-//        if (evt.getClickCount() == 1) {
-//            JTable failureTable = (JTable) evt.getSource();
-//            int row = failureTable.getSelectedRow();
-////            String failureLine = (String) failureTable.getValueAt(row, 0);
-////            String failureSection = (String) failureTable.getValueAt(row, 1);
-////            String failureBlock = (String) failureTable.getValueAt(row, 2);
-////            String failureType = (String) failureTable.getValueAt(row, 3);
-////            
-//        }
-
         if (evt.getClickCount() == 2) {
             JTable failureTable = (JTable) evt.getSource();
             int failureRow = failureTable.getSelectedRow();
-            //resolveFailure(failureTable.getValueAt(failureRow,0), failureTable.getValueAt(failureRow,1), failureTable.getValueAt(failureRow,2));
             trainSystem.getTrackControllerHandler().requestUpdateSpeedAuthority((Global.Line.valueOf((String) failureTable.getValueAt(failureRow,0))), (Integer.valueOf(((String)failureTable.getValueAt(failureRow,2)))), 40, 90000);
 
             if (failureTable.getValueAt(failureRow,0).equals("GREEN")){
@@ -1076,7 +1058,6 @@ public int iterateID(){
             removeFailureFromTable(failureTable.getValueAt(failureRow,2));
         }
 
-// TODO add your handling code here:
     }//GEN-LAST:event_FailureTableMouseClicked
     
     /**
@@ -1134,11 +1115,7 @@ public int iterateID(){
         newTrain[1] = dispatchID;
         newTrain[2] = (dispatchSection + ":" + dispatchBlock);
         newTrain[3] = true;
-        
 
-//        if (!(existsInTable(TrainTable, newTrain))) {
-//            addRow(dispatchLine, dispatchBlock, dispatchSection, dispatchID);
-//        }
         if ((dispatchAuthority < 107000) & (dispatchSpeed < 44)){
             dispatchNewTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
             trainsDispatched++;
@@ -1151,11 +1128,8 @@ public int iterateID(){
             JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Speed Too High.", "Error",
                                     JOptionPane.ERROR_MESSAGE);   
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 
-
-    
     public void addRow(String dispatchLine, String dispatchBlock, int dispatchSection, int dispatchID) {
         String concatination = (dispatchBlock + ":" + Integer.toString(dispatchSection));
         Object[] newRow = new Object[4];
@@ -1167,34 +1141,29 @@ public int iterateID(){
         model.addRow(newRow);
     }
     private void DispatchAuthorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchAuthorityFieldActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_DispatchAuthorityFieldActionPerformed
 
     private void DispatchSpeedFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DispatchSpeedFieldMouseClicked
-        DispatchSpeedField.setText("");        // TODO add your handling code here:
+        DispatchSpeedField.setText("");      
     }//GEN-LAST:event_DispatchSpeedFieldMouseClicked
 
     private void DispatchAuthorityFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DispatchAuthorityFieldMouseClicked
-        DispatchAuthorityField.setText("");        // TODO add your handling code here:
+        DispatchAuthorityField.setText("");      
     }//GEN-LAST:event_DispatchAuthorityFieldMouseClicked
 
     private void DispatchSpeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchSpeedFieldActionPerformed
-        // TODO add your handling code here:
+ 
     }//GEN-LAST:event_DispatchSpeedFieldActionPerformed
 
     private void redLineThroughputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redLineThroughputActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_redLineThroughputActionPerformed
 
     private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
         TrainShutdownGUI trainShutdown = new TrainShutdownGUI(this, trainSystem);
-        trainShutdown.setVisible(true);        // TODO add your handling code here:
+        trainShutdown.setVisible(true);        
     }//GEN-LAST:event_TrainShutdownButtonActionPerformed
 
     private void InitializeGUIObject() {
-
-        greenLineThroughput.setText("");
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
