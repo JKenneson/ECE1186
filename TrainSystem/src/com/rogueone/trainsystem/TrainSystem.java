@@ -205,6 +205,12 @@ public class TrainSystem {
         return trackViewRed;
     }
     
+    /**
+     * @author Robert Goldshear
+     * Return if an input string is a String and should be an integer
+     * @param inputString
+     * @return boolean
+     */
     public boolean isInteger(String inputString){
         try {
             Integer.parseInt(inputString);
