@@ -1,11 +1,11 @@
 /**
  * The MovingF Block Overlay (MBO) serves as an autonomous dispatcher for the train.
  * The MBO also contains the scheduler, which generated weekly schedules for employees, as well as
- * daily schedules for trains.
+ * daily schedules for trains
  *
  * @author Brian Stevenson
  * @creation date 2/7/17
- * @modification date 4/13/17
+ * @modification date 4/17/17
  */
 package com.rogueone.mbo;
 import com.rogueone.global.Global;
@@ -393,7 +393,7 @@ public class Mbo{
                             if(m-index==0){
                                 currTime = hr+"."+min+"."+sec;
                                 newData[id][m] = convertTime(currTime);
-                                System.out.println(currTime);
+                                //System.out.println(currTime);
                             }
                             else{
                                 currTime = incrementTime(currTime, useArr[m-3]);
@@ -416,28 +416,29 @@ public class Mbo{
             if(mode.equals("Moving Block")){
                 
                 //currTrain.MBOUpdateSpeedAndAuthority(10, 9000);
-                System.out.println("ID: "+currTrain.trainID);
+                //System.out.println("ID: "+currTrain.trainID);
                 cumulativeDist = cumulativeDist + message.getDistanceIntoBlock();
                 lookahead = currBlock;
                 Block temp = (Block)lookahead;
-                for(int n = 0; n< 6; n++){
-                    cumulativeDist = 9000;
+                for(int n = 0; n< 2; n++){
+                    cumulativeDist = 0;
                     temp = (Block)lookahead;
                     if(lookahead.getNext(temp.getPortA())!=null){
                         if(lookahead.getNext(temp.getPortA()).getType()==PieceType.BLOCK){
                             
                             lookahead = lookahead.getNext(temp.getPortA());
                             temp = (Block)lookahead;
-                            //System.out.println(temp.getSection()+":"+temp.getID()+" Occupied: "+temp.isOccupied());
+                            System.out.print("START");
+                            System.out.println(temp.getSection()+":"+temp.getID()+" Occupied: "+temp.isOccupied());
                             //System.out.println(temp.getLine()+" "+temp.isOccupied());
                             boolean occupied = temp.isOccupied();
                             if(occupied && !temp.getSection().toString().equals("YY") && (!temp.getSection().toString().equals("U")&&temp.getID()!=77) && (!temp.getSection().toString().equals("J")&&temp.getID()!=62)){//&& (!temp.getSection().toString().equals("M")&&temp.getID()!=76)&& (!temp.getSection().toString().equals("N")&&temp.getID()!=85)){
-                               cumulativeDist = cumulativeDist + temp.getLength();
+                               //cumulativeDist = cumulativeDist + temp.getLength();
                                //System.out.println(temp.getSection()+":"+temp.getID());
                                 //System.out.println("Distance available: "+cumulativeDist+" Stopping dist: "+message.getStoppingDistance());
                                 if(cumulativeDist <= message.getStoppingDistance()){
                                     //currTrain.MBOUpdateSpeedAndAuthority(-1, (int)currTrain.getAuthority()); 
-                                    //System.out.println("STOPPING");
+                                    System.out.println("STOPPING");
                                     //break; 
                                 }
                             }
@@ -446,21 +447,39 @@ public class Mbo{
                                 //currTrain.MBOUpdateSpeedAndAuthority((int)message.getCurrSpeed(), (int)currTrain.getAuthority());
                                 cumulativeDist = cumulativeDist + temp.getLength();
                                 sameTrains.clear();
-                                
+                                int found = 0;
                                 for(int p = 0; p<numTrains; p++){
                                     TrainModel testTrain = trainSystem.getTrainHandler().getTrains().get(p);
                                     if(currTrain.requestGPSMessage().getCurrBlock() == testTrain.requestGPSMessage().getCurrBlock() && currTrain.requestGPSMessage().getLine().equals(testTrain.requestGPSMessage().getLine())){
-                                        sameTrains.add(testTrain);
+                                        for(int r = 0; r<sameTrains.size();r++){
+                                            if(currTrain.trainID==sameTrains.get(r).trainID){
+                                                found = 1;
+                                                break;
+                                            }
+                                        }
+                                        if(found==0){
+                                            sameTrains.add(testTrain);
+                                        }
+                                        
                                     }
                                     
                                 }
                                 
                                 for(int q = 0; q< sameTrains.size();q++){
                                     //sameTrains.get(q).MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority());
-                                    //System.out.println()
+                                    //System.out.println(sameTrains.get(q).trainID);
+                                    if(q==0){
+                                        //sameTrains.get(q).MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority());
+                                    }
+                                    else{
+                                        //sameTrains.get(q).MBOUpdateSpeedAndAuthority(-1, (int)currTrain.getAuthority());
+                                    }
                                 }
                                 
                             }
+                        }
+                        else if(lookahead.getNext(temp.getPortA()).getType()==PieceType.SWITCH){
+                            //currTrain.MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority()); 
                         }
                     }
                     
