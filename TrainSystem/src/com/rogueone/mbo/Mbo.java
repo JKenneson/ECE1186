@@ -46,6 +46,8 @@ public class Mbo{
    private String mode = "Fixed Block";
    private String opMode = "Manual";
    private ArrayList<TrainModel> sameTrains = new ArrayList();
+   private double movingBlockSpeed = 0;
+   private double fixedBlockSpeed = 0;
    
    /**
     * Constructor for MBO class
@@ -413,7 +415,7 @@ public class Mbo{
                 TrackPiece lookahead = null;
                 TrackPiece tempPrev = null;
                 int count = 0;
-            if(mode.equals("Moving Block")){
+           // if(mode.equals("Moving Block")){
                 
                 //currTrain.MBOUpdateSpeedAndAuthority(10, 9000);
                 //System.out.println("ID: "+currTrain.trainID);
@@ -421,7 +423,7 @@ public class Mbo{
                 lookahead = currBlock;
                 Block temp = (Block)lookahead;
                 System.out.println("START");
-                for(int n = 0; n< 3; n++){
+                for(int n = 0; n< 2; n++){
                     cumulativeDist = 0;
                     temp = (Block)lookahead;
                     if(lookahead.getNext(temp.getPortA())!=null){
@@ -433,21 +435,37 @@ public class Mbo{
                             System.out.println(temp.getSection()+":"+temp.getID()+" Occupied: "+temp.isOccupied());
                             //System.out.println(temp.getLine()+" "+temp.isOccupied());
                             boolean occupied = temp.isOccupied();
+                            if(currBlock.getID()==temp.getID()){
+                                occupied = false;
+                            }
+                            
                             if(occupied && !temp.getSection().toString().equals("YY") && (!temp.getSection().toString().equals("U")&&temp.getID()!=77) && (!temp.getSection().toString().equals("J")&&temp.getID()!=62)){//&& (!temp.getSection().toString().equals("M")&&temp.getID()!=76)&& (!temp.getSection().toString().equals("N")&&temp.getID()!=85)){
                                //cumulativeDist = cumulativeDist + temp.getLength();
                                //System.out.println(temp.getSection()+":"+temp.getID());
                                 System.out.println("Distance available: "+cumulativeDist+" Stopping dist: "+message.getStoppingDistance());
-                                if(cumulativeDist < message.getStoppingDistance()-300){
-                                    currTrain.MBOUpdateSpeedAndAuthority(-1, (int)currTrain.getAuthority()); 
+                                //if(cumulativeDist < message.getStoppingDistance()-100){
+                                if(n<3){
+                                    movingBlockSpeed = 0;
+                                }
+                                fixedBlockSpeed = 0;
+                                    if(mode.equals("Moving Block")){
+                                    currTrain.MBOUpdateSpeedAndAuthority(-1, 0); 
+                                    }
                                     System.out.println("STOPPING");
                                     //break; 
-                                }
+                                //}
                             }
                             
                             else{
                                 //currTrain.MBOUpdateSpeedAndAuthority((int)message.getCurrSpeed(), (int)currTrain.getAuthority());
                                 cumulativeDist = cumulativeDist + temp.getLength();
-                                currTrain.MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority()); 
+                                if(n<3){
+                                movingBlockSpeed = currBlock.getSpeedLimit();
+                                }
+                                fixedBlockSpeed = currBlock.getSpeedLimit();
+                                if(mode.equals("Moving Block")){
+                                currTrain.MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), 90000); 
+                                }
                                 sameTrains.clear();
                                 int found = 0;
                                 for(int p = 0; p<numTrains; p++){
@@ -480,13 +498,11 @@ public class Mbo{
                                 
                             }
                         }
-                        else if(lookahead.getNext(temp.getPortA()).getType()==PieceType.SWITCH){
-                            //currTrain.MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority()); 
-                        }
+                        
                     }
                     
                 }
-            }
+            //}
             }
         
     }
@@ -496,7 +512,6 @@ public class Mbo{
      * @author Brian Stevenson
      */
     public void updateTrains(){
-        double d = 1.234567;
         DecimalFormat df = new DecimalFormat("#.##");
         String[] columnNames = {"TRAIN ID","TRAIN LINE","SECTION:BLOCK","NEXT STATION","AUTHORITY(ft)","CURR SPEED(mph)","SPEED LIMIT","VARIANCE","PASSENGERS","DIST INTO BLOCK(ft)"};
         int numTrains = trainSystem.getTrainHandler().getTrains().size();
@@ -517,7 +532,8 @@ public class Mbo{
             data[i][4]=df.format(trainSystem.getTrainHandler().getTrains().get(i).getAuthority());
             data[i][5]=df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed());
             data[i][6]=df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit());
-            data[i][7] =df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed());
+            //data[i][7] =df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed());
+            data[i][7] = movingBlockSpeed - fixedBlockSpeed;
             data[i][8]=trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord();
             data[i][9]=df.format(trainSystem.getTrainHandler().getTrains().get(i).requestGPSMessage().getDistanceIntoBlock());
         }
