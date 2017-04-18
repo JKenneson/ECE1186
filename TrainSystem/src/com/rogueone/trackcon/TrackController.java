@@ -1,3 +1,4 @@
+//Track Controller class
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -83,15 +84,13 @@ public class TrackController {
     private TrackModel trackModel;
     private HashMap<Integer, TrainModel> trainArray;
 
-    public TrackController(TrainSystem ts) {
-//        this.trackModel = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
-        this.trackModel = ts.getTrackModel();
-    }
-
-    public TrackController() {
-        this.trackModel = new TrackModel(new TrainSystem(), new File("src/com/rogueone/assets/TrackData.xlsx"));//temp
-    }
-
+    /**
+     * Constructor method for track controller
+     *
+     * @param line - determine line that constructor represents
+     * @param trainSystem - reference to trainsystem
+     * @param loadFile - file to load into the system
+     */
     public TrackController(Global.Line line, TrainSystem trainSystem, File loadFile) {
         this.controllerLine = line;
         //set the train System
@@ -504,8 +503,6 @@ public class TrackController {
 
         StateSet currentState = ltg.getCurrentTrackState();
 
-
-
         HashMap<StateSet, UserSwitchState> mappings = ltg.getStateMapping();
 
         //how to search for current state mapping        
@@ -564,7 +561,7 @@ public class TrackController {
      * Initialization of the simulate tab for crossings
      *
      * @param logicGroup - current logic group
-     * @return if null then successful, else signifies an error has occured
+     * @return if null then successful, else signifies an error has occurred
      */
     public String setupSimulateTabCrossing(Global.LogicGroups logicGroup) {
         Crossing crossing = null;
@@ -623,7 +620,6 @@ public class TrackController {
                     if (!tempIgnoreSwitch.contains(String.valueOf(b.getSwitchID()))) {
                         tempIgnoreSwitch.add(String.valueOf(b.getSwitchID()));
                     }
-//                    return;
                 } else if (b.isOccupied() && b.getSwitchID() == -1) {
                     // else set section as occupied
                     occupied = true;
@@ -726,12 +722,15 @@ public class TrackController {
                 }
 
             }
-//            System.out.print(printSwitchState(userSwitchState));
         }
 
     }
 
-    //potential method to check and see if it is safe to dispatch a train
+    /**
+     * Check to determine if a train can leave the yard
+     *
+     * @return
+     */
     public boolean canDispatchProceed() {
         //check if track is not broken or closed at start
         //check if track is not occupied at start 
@@ -788,14 +787,12 @@ public class TrackController {
                     PresenceBlock pb = new PresenceBlock(this.trainSystem, this.controllerLine);
                     if (b.isOccupied() && b.getID() == 152 && !occupiedBlocks.contains(pb)) {
                         pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
-//                        System.out.println("TC:(new) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
                         occupiedBlocks.add(pb);
                     }
                 } else if (controllerLine == Global.Line.RED) {
                     PresenceBlock pb = new PresenceBlock(this.trainSystem, this.controllerLine);
                     if (b.isOccupied() && b.getID() == 77 && !occupiedBlocks.contains(pb)) {
                         pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
-//                        System.out.println("TC: currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
                         occupiedBlocks.add(pb);
                     }
                 }
@@ -842,11 +839,9 @@ public class TrackController {
                             pb.setCurrBlock((Block) pb.getNextBlock());
                             pb.setPrevBlock(tempBlock);
                             if (pb.getCurrBlock().getNext(pb.getPrevBlock()) == null) {
-//                                System.out.println("Incorrect Switch");
                             } else {
                                 pb.setNextBlock(pb.getCurrBlock().getNext(pb.getPrevBlock()));
                             }
-//                            System.out.println("TC:(moving) currBlock: " + pb.getCurrBlock() + ", prevBlock: " + pb.getPrevBlock() + ", nextBlock: " + pb.getNextBlock());
                         }
                     }
                 }
@@ -871,20 +866,13 @@ public class TrackController {
             for (PresenceBlock pb : occupiedBlocks) {
                 //if the current block being looked at is occupied and the next block ID of the current block
                 //need a check to look ahead by a specific amount of blocks or by sections
-                //BELOW IS CALCULATION WORK FOR TELLING THE TRAIN TO STOP
-                //NEED TO DETERMINE LOOKAHEAD DISTANCES
-                //FOR BOTH SERVICE BRAKE AND EMERGENCY BRAKE
+
                 int lookahead = 5;
-//                if (controllerLine == Global.Line.GREEN && pb.getCurrBlock().getID() >= 57 && pb.getCurrBlock().getID() <= 61) {
-//                    lookahead = 2;
-//                }
                 PresenceBlock lookaheadBlock = new PresenceBlock(pb);
                 for (int i = 0; i < lookahead; i++) {
-//                            System.out.print("TC:(check) starting block: " + pb.getCurrBlock() + ", lookahead: " + (i + 1) + " = " + lookaheadBlock.getNextBlock());
                     //check to see if switch is in the wrong position
                     boolean safeToLookAhead = true;
                     if (lookaheadBlock.getCurrBlock().getNext(lookaheadBlock.getPrevBlock()) == null) {
-//                        System.out.println("Switch wrong");
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
                         safeToLookAhead = false;
@@ -894,7 +882,7 @@ public class TrackController {
                     //always be occupied because that is how the train model sets the track
                     else if (i > 0 && lookaheadBlock.getNextBlock().getID() != 0 && this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOccupied() && this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen()) {
 //                        System.out.println("Train Ahead");
-                        if(this.trainSystem.getScheduler().getMode().equals("Fixed Block")){
+                        if (this.trainSystem.getScheduler().getMode().equals("Fixed Block")) {
                             pb.getCurrBlock().getTrackCircuit().speed = -1;
                             pb.getCurrBlock().getTrackCircuit().authority = -1;
                             break;
@@ -902,10 +890,6 @@ public class TrackController {
                     } //check to see if that block ahead is closed or failed
                     else if (lookaheadBlock.getNextBlock().getID() != 0 && (!this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureBrokenRail()
                             || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage() || this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailureTrackCircuit())) {
-//                        System.out.println("Track Open = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).isOpen()
-//                                + "Failure BR = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage()
-//                                + "Failure PO = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage()
-//                                + "Failure TC = " + this.trackModel.getBlock(controllerLine, lookaheadBlock.getNextBlock().getID()).getFailurePowerOutage());
                         pb.getCurrBlock().getTrackCircuit().speed = -1;
                         pb.getCurrBlock().getTrackCircuit().authority = -1;
                         break;
@@ -949,7 +933,7 @@ public class TrackController {
     }
 
     /**
-     * potential method to evaluate the crossing
+     * method to evaluate the crossing
      */
     public void evaluateCrossing() {
         //number of blocks to lookahead
@@ -1005,7 +989,6 @@ public class TrackController {
      * @return
      */
     public boolean canOpen(int blockID) {
-        boolean returnValue = true;
         Block openBlock = this.trackModel.getBlock(controllerLine, blockID);
         //if not occupied, not open, not broken (3 ways) then open the track
         if (!openBlock.isOccupied() && !openBlock.isOpen() && !openBlock.getFailureBrokenRail() && !openBlock.getFailurePowerOutage() && !openBlock.getFailureTrackCircuit()) {
@@ -1092,12 +1075,22 @@ public class TrackController {
         return false;
     }
 
+    /**
+     * Method to update speed and authority on a given block
+     * @param blockID
+     * @param speed
+     * @param authority 
+     */
     public void updateSpeedAuthority(int blockID, double speed, double authority) {
         Block b = this.trackModel.getBlock(controllerLine, blockID);
         b.getTrackCircuit().speed = (byte) speed;
         b.getTrackCircuit().authority = (short) (authority / 3.28);
     }
 
+    /**
+     * Method that will return a string of switches to be used by the CTC
+     * @return 
+     */
     public String getSwitches() {
         StringBuilder b = new StringBuilder();
         if (this.currentSwitchStates != null) {
@@ -1131,6 +1124,9 @@ public class TrackController {
         return this.occupiedBlocks;
     }
 
+    /**
+     * Method to set the permenant switches for the track based on the PLC program
+     */
     private void configurePermenantSwitch() {
         for (String s : permIgnoreSwitch) {
             UserSwitchState uss = new UserSwitchState();
@@ -1150,6 +1146,13 @@ public class TrackController {
         return this.permIgnoreSwitch;
     }
 
+    /**
+     * Method to check whether or not a switch is accessible 
+     * used to determine if a failure to a switch should allow a train
+     * to continue using that switch
+     * @param switchID - switch to check
+     * @return 
+     */
     private boolean isSwitchAccessible(int switchID) {
         com.rogueone.trackmodel.Switch switchObj = this.trackModel.getSwitch(switchID);
         Block switchBlock1 = (Block) switchObj.getPortA();

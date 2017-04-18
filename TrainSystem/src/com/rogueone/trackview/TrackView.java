@@ -1,16 +1,6 @@
 //Comment out the following package statement to compile separately.
 package com.rogueone.trackview;
 
-/**
- * Example01 illustrates some basics of Java 2D. This version is compliant with
- * Java 1.2 Beta 3, Jun 1998. Please refer to: <BR>
- * http://www.javaworld.com/javaworld/jw-07-1998/jw-07-media.html
- * <P>
- * @author Bill Day <bill.day@javaworld.com>
- * @version 1.0
- * @see java.awt.Graphics2D
- *
- */
 import com.rogueone.global.Global;
 import com.rogueone.trackcon.entities.Light;
 import com.rogueone.trackcon.entities.PresenceBlock;
@@ -37,14 +27,6 @@ import javax.swing.WindowConstants;
 
 public class TrackView extends Frame {
 
-    /**
-     * Instantiates an Example01 object.
-     *
-     */
-    public static void main(String args[]) {
-//        new TrackView(Global.Line.GREEN);
-    }
-
     ShapePanel sp;
     float shiftAmountX = 30;
     float shiftAmountY = 50;
@@ -62,9 +44,7 @@ public class TrackView extends Frame {
     public TrainSystem trainSystem;
 
     /**
-     * Our Example01 constructor sets the frame's size, adds the visual
-     * components, and then makes them visible to the user. It uses an adapter
-     * class to deal with the user closing the frame.
+     * Track View constructor
      *
      * @param trainSystem
      * @param line
@@ -107,10 +87,26 @@ public class TrackView extends Frame {
         }
     }
 
+    /**
+     * Method to toggle the display for the track view
+     *
+     * @param show - boolean value to toggle or on and off
+     */
     public void displayTrackView(boolean show) {
         this.theWindow.setVisible(show);
     }
 
+    /**
+     * Method that will update the track view called every clock tick. displays
+     * everything listed below
+     *
+     * @param occupiedBlocks - pseudo trains - from TC
+     * @param switchStates - switch states from the - from TC
+     * @param switchArray - switch information - from TC
+     * @param crossing - crossing status - from TC
+     * @param offSwitches - offSwitches - from TC
+     * @param trackFailures - track failures - from TC
+     */
     public void updateTrackView(LinkedList<PresenceBlock> occupiedBlocks, LinkedList<UserSwitchState> switchStates, HashMap<Integer, com.rogueone.trackcon.entities.Switch> switchArray, com.rogueone.trackcon.entities.Crossing crossing, LinkedList<Integer> offSwitches, LinkedList<String> trackFailures) {
 
         if (this.line == Global.Line.GREEN) {
@@ -160,7 +156,6 @@ public class TrackView extends Frame {
                     for (TrainModel tm : this.trainSystem.getTrainHandler().getTrains()) {
                         Block trainBlock = tm.getCurrBlock();
                         if (trainBlock.getID() == pb.getCurrBlock().getID()) {
-                            //System.out.println("ID's Match authority = " + tm.getAuthority());
                             remainingAuthority = tm.getAuthority();
                             speed = tm.getCurrSpeedMPH();
                         }
@@ -228,7 +223,6 @@ public class TrackView extends Frame {
                     for (TrainModel tm : this.trainSystem.getTrainHandler().getTrains()) {
                         Block trainBlock = tm.getCurrBlock();
                         if (trainBlock.getID() == pb.getCurrBlock().getID()) {
-                            //System.out.println("ID's Match authority = " + tm.getAuthority());
                             remainingAuthority = tm.getAuthority();
                             speed = tm.getCurrSpeedMPH();
                         }
@@ -241,7 +235,6 @@ public class TrackView extends Frame {
                         updateSection(prevBlock.getSection().getSectionID(), prevBlock.getID(), false, (short) 0, 1, 1);
                         updateSection(pb.getCurrBlock().getSection().getSectionID(), pb.getCurrBlock().getID(), true, pb.getCurrBlock().getTrackCircuit().authority, remainingAuthority, speed);
                     }
-
                 }
             }
             if (crossing != null) {
@@ -255,6 +248,9 @@ public class TrackView extends Frame {
 
     }
 
+    /**
+     * Method that places and initializes the green line layout
+     */
     private void initializeGreenLine() {
         Switch switch0 = new Switch(35 + shiftAmountX + 3, 51, 35 + shiftAmountX + 3, 59, 15, 5, 45, -45, 0);
         sp.addShape(switch0);
@@ -472,6 +468,9 @@ public class TrackView extends Frame {
 
     }
 
+    /**
+     * first idea for red line layout
+     */
     private void initializeRedLine() {
 
         // Branch to Yard
@@ -647,6 +646,9 @@ public class TrackView extends Frame {
 
     }
 
+    /**
+     * second idea for red line layout
+     */
     private void initializeRedLine2() {
         Switch switch6 = new Switch(140 + shiftAmountX + 50, 44 + shiftAmountY, 139 + shiftAmountX + 50, 51 + shiftAmountY, 13, 5, 45, -30, 6);
         switch6.setIsDefault(true);
@@ -845,28 +847,33 @@ public class TrackView extends Frame {
 
         LegendBox legend = new LegendBox(50, 240, trainSystem);
         sp.addShape(legend);
-        
-        Station shadysideStation = new Station((int) (100 + shiftAmountX), (int) 42, (int)(8));
+
+        Station shadysideStation = new Station((int) (100 + shiftAmountX), (int) 42, (int) (8));
         sp.addShape(shadysideStation);
-        Station herronAveStation = new Station((int) (216 + shiftAmountX), (int) (31 + shiftAmountY), (int)(8));
+        Station herronAveStation = new Station((int) (216 + shiftAmountX), (int) (31 + shiftAmountY), (int) (8));
         sp.addShape(herronAveStation);
-        Station swissvilleStation = new Station((int) (269 + shiftAmountX), (int) (31 + shiftAmountY), (int)(8));
+        Station swissvilleStation = new Station((int) (269 + shiftAmountX), (int) (31 + shiftAmountY), (int) (8));
         sp.addShape(swissvilleStation);
-        Station pennStationStation = new Station((int) (333 + shiftAmountX), (int) (54 + shiftAmountY), (int)(8));
+        Station pennStationStation = new Station((int) (333 + shiftAmountX), (int) (54 + shiftAmountY), (int) (8));
         sp.addShape(pennStationStation);
-        Station steelPlazaStation = new Station((int) (518 + shiftAmountX), (int) (54 + shiftAmountY), (int)(8));
+        Station steelPlazaStation = new Station((int) (518 + shiftAmountX), (int) (54 + shiftAmountY), (int) (8));
         sp.addShape(steelPlazaStation);
-        Station firstAveStation = new Station((int) (718 + shiftAmountX), (int) (54 + shiftAmountY), (int)(8));
+        Station firstAveStation = new Station((int) (718 + shiftAmountX), (int) (54 + shiftAmountY), (int) (8));
         sp.addShape(firstAveStation);
-        Station stationSquareStation = new Station((int) (775 + shiftAmountX), (int) (54 + shiftAmountY), (int)(8));
+        Station stationSquareStation = new Station((int) (775 + shiftAmountX), (int) (54 + shiftAmountY), (int) (8));
         sp.addShape(stationSquareStation);
-        Station southHillsStation = new Station((int) (967 + shiftAmountX), (int) (17 + shiftAmountY), (int)(8));
+        Station southHillsStation = new Station((int) (967 + shiftAmountX), (int) (17 + shiftAmountY), (int) (8));
         sp.addShape(southHillsStation);
 
         crossing = new Crossing(775, 25 + shiftAmountY);
         sp.addShape(crossing);
     }
 
+    /**
+     * update a switch visually
+     * @param switchID
+     * @param defaultOrAlternate 
+     */
     private void updateSwitch(Integer switchID, boolean defaultOrAlternate) {
         Switch s = switchList.get(switchID);
         if (s != null) {
@@ -874,6 +881,12 @@ public class TrackView extends Frame {
         }
     }
 
+    /**
+     * update track light visually
+     * @param section
+     * @param blockID
+     * @param lightState 
+     */
     private void updateTrackLight(Global.Section section, int blockID, Global.LightState lightState) {
         if (this.line == Global.Line.GREEN) {
             if (section.toString() == "N") {
@@ -960,6 +973,15 @@ public class TrackView extends Frame {
 
     }
 
+    /**
+     * update section with train occupancy or failures visually
+     * @param sectionID
+     * @param id
+     * @param occupied
+     * @param authority
+     * @param remainingAuthority
+     * @param speed 
+     */
     private void updateSection(Global.Section sectionID, int id, boolean occupied, short authority, double remainingAuthority, double speed) {
         if (this.line == Global.Line.GREEN) {
             Section s1, s2 = null;
@@ -1046,6 +1068,10 @@ public class TrackView extends Frame {
         }
     }
 
+    /**
+     * update crossing visually
+     * @param crossing 
+     */
     private void updateCrossing(com.rogueone.trackcon.entities.Crossing crossing) {
         if (crossing.getCurrentCrossingState() == Global.CrossingState.ACTIVE) {
             this.crossing.setIsActive(true);
@@ -1077,6 +1103,10 @@ public class TrackView extends Frame {
         this.trainSystem.getTrackControllerHandler().updateTrack(line);
     }
 
+    /**
+     * update view with track failures visually
+     * @param trackFailures 
+     */
     private void updateTrackFailures(LinkedList<String> trackFailures) {
         if (!trackFailures.isEmpty()) {
             for (Section s : sectionList.values()) {
@@ -1103,6 +1133,9 @@ public class TrackView extends Frame {
         }
     }
 
+    /**
+     * shape panel that track view uses to draw objects and paint
+     */
     class ShapePanel extends JPanel {
 
         // These instance variables are used to store the desired size
@@ -1178,6 +1211,10 @@ public class TrackView extends Frame {
                 this.line = line;
             }
 
+            /**
+             * Main method that determines what type of action should be taken when the track view panel is clicked
+             * @param e 
+             */
             public void mousePressed(MouseEvent e) {
                 x1 = e.getX();  // store where mouse is when clicked
                 y1 = e.getY();

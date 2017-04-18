@@ -30,6 +30,7 @@ public class TrackControllerHandler {
     public TrackControllerHandler(TrainSystem ts) {
         trainSystem = ts;
 
+        //create the section to group mapping object
         sectionToGroupMapping = new HashMap<Global.Section, Global.TrackGroupsGreen>();
         for (Global.Section s : Global.Section.values()) {
             for (Global.TrackGroupsGreen tg : Global.TrackGroupsGreen.values()) {
@@ -40,6 +41,7 @@ public class TrackControllerHandler {
             }
         }
 
+        //create the group to logic group mapping
         groupToLogicMapping = new HashMap<Global.TrackGroupsGreen, Global.LogicGroups>();
         for (Global.TrackGroupsGreen tg : Global.TrackGroupsGreen.values()) {
             if (tg.equals(Global.TrackGroupsGreen.ABC) || tg.equals(Global.TrackGroupsGreen.DEF) || tg.equals(Global.TrackGroupsGreen.RSTUVWXYZ)) {
@@ -71,13 +73,9 @@ public class TrackControllerHandler {
 //        }
 
         TrackController greenTrackController = new TrackController(Global.Line.GREEN, this.trainSystem, altFile);
-//        TrackController greenTrackControllerDup = new TrackController(Global.Line.GREEN, this.trainSystem);
         TrackController redTrackController = new TrackController(Global.Line.RED, this.trainSystem, altFile);
-//        TrackController redTrackControllerDup = new TrackController(Global.Line.RED, this.trainSystem);
         trackControllers.add(greenTrackController);     //0
-//        trackControllers.add(greenTrackControllerDup);  //1
-        trackControllers.add(redTrackController);       //2
-//        trackControllers.add(redTrackControllerDup);    //3
+        trackControllers.add(redTrackController);       //1
 
         trackHandlerGUI = new TrackHandlerGUI(this);
     }
@@ -168,6 +166,13 @@ public class TrackControllerHandler {
         return returnValue;
     }
 
+    /**
+     * Method the CTC will call to update speed and authority to a block
+     * @param line - line to update
+     * @param blockID - block to update
+     * @param speed - speed to send
+     * @param authority - authority to send
+     */
     public void requestUpdateSpeedAuthority(Global.Line line, int blockID, double speed, double authority) {
         if (line == Global.Line.GREEN) {
             trackControllers.get(0).updateSpeedAuthority(blockID, speed, authority);
@@ -176,6 +181,11 @@ public class TrackControllerHandler {
         }
     }
 
+    /**
+     * Method the CTC will call to gather switch information
+     * @param line
+     * @return 
+     */
     public String getSwitchInformation(Global.Line line) {
         String returnString = null;
         if (line == Global.Line.GREEN) {
@@ -186,17 +196,11 @@ public class TrackControllerHandler {
         return returnString;
     }
 
-    public String getCrossingInformation(Global.Line line) {
-        //NOT YET IMPLEMENTED
-        String returnString = null;
-        if (line == Global.Line.GREEN) {
-//            returnString = trackControllers.get(0).getCrossing();
-        } else {
-//            returnValue = trackControllers.get(1).canOpen(blockID);            
-        }
-        return returnString;
-    }
-
+    /**
+     * Getter to return the manual switches
+     * @param line - line to get switches from
+     * @return 
+     */
     public LinkedList<String> getManualSwitches(Global.Line line) {
         if (line == Global.Line.GREEN) {
             LinkedList<String> manualSwitches = trackControllers.get(0).getManualSwitches();
@@ -212,6 +216,12 @@ public class TrackControllerHandler {
         return null;
     }
 
+    /**
+     * method to toggle a switch on a line
+     * @param line - line the switch is on
+     * @param switchID - switch ID to toggle
+     * @return 
+     */
     public boolean toggleSwitch(Global.Line line, Integer switchID) {
         if (line == Global.Line.GREEN) {
             return trackControllers.get(0).toggleSwitch(switchID);
@@ -241,6 +251,10 @@ public class TrackControllerHandler {
         }
     }
 
+    /**
+     * track view to update
+     * @param line - line to update
+     */
     public void updateTrackView(Global.Line line) {
         if(line == Global.Line.GREEN){
             TrackController trackController = trackControllers.get(0);
