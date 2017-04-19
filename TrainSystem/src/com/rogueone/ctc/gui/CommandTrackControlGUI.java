@@ -644,7 +644,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      * @author Robert Goldshear
      * @param trainID
      */
-    private void removeTrainFromTable(int trainID){
+    public void removeTrainFromTable(int trainID){
        int trainIDRow = 0;
          
         DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
