@@ -1042,9 +1042,12 @@ public int iterateID(){
 
             if (failureTable.getValueAt(failureRow,0).equals("GREEN")){
                 this.trainSystem.getTrackViewGreen().setBlockStatus((Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0))), (String)failureTable.getValueAt(failureRow,1), Integer.parseInt((String)failureTable.getValueAt(failureRow,2)), true);
+                this.trainSystem.getTrackControllerHandler().requestOpen(Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0)), Integer.parseInt((String)failureTable.getValueAt(failureRow, 2)));
             }
             else{
                 this.trainSystem.getTrackViewRed().setBlockStatus((Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0))), (String)failureTable.getValueAt(failureRow,1), Integer.parseInt((String)failureTable.getValueAt(failureRow,2)), true);
+                this.trainSystem.getTrackControllerHandler().requestOpen(Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0)), Integer.parseInt((String)failureTable.getValueAt(failureRow, 2)));
+
             }
             
             removeFailureFromTable(failureTable.getValueAt(failureRow,2));
