@@ -423,7 +423,7 @@ public class Mbo{
                 lookahead = currBlock;
                 Block temp = (Block)lookahead;
                 System.out.println("START");
-                for(int n = 0; n< 2; n++){
+                for(int n = 0; n< 3; n++){
                     cumulativeDist = 0;
                     temp = (Block)lookahead;
                     if(lookahead.getNext(temp.getPortA())!=null){
@@ -444,10 +444,8 @@ public class Mbo{
                                //System.out.println(temp.getSection()+":"+temp.getID());
                                 System.out.println("Distance available: "+cumulativeDist+" Stopping dist: "+message.getStoppingDistance());
                                 //if(cumulativeDist < message.getStoppingDistance()-100){
-                                if(n<3){
                                     movingBlockSpeed = 0;
-                                }
-                                fixedBlockSpeed = 0;
+                                //fixedBlockSpeed = 0;
                                     if(mode.equals("Moving Block")){
                                     currTrain.MBOUpdateSpeedAndAuthority(-1, 0); 
                                     }
@@ -459,11 +457,9 @@ public class Mbo{
                             else{
                                 //currTrain.MBOUpdateSpeedAndAuthority((int)message.getCurrSpeed(), (int)currTrain.getAuthority());
                                 cumulativeDist = cumulativeDist + temp.getLength();
-                                if(n<3){
-                                movingBlockSpeed = currBlock.getSpeedLimit();
-                                }
-                                fixedBlockSpeed = currBlock.getSpeedLimit();
-                                if(mode.equals("Moving Block")){
+                                movingBlockSpeed = currTrain.requestGPSMessage().getCurrBlock().getSpeedLimit();
+                                //fixedBlockSpeed = currBlock.getSpeedLimit();
+                                if(mode.equals("Moving Block")&&message.getCurrSpeed()==0){
                                 currTrain.MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), 90000); 
                                 }
                                 sameTrains.clear();
@@ -533,7 +529,12 @@ public class Mbo{
             data[i][5]=df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed());
             data[i][6]=df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit());
             //data[i][7] =df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed());
-            data[i][7] = movingBlockSpeed - fixedBlockSpeed;
+            if(trainSystem.getTrainHandler().getTrains().get(i).requestGPSMessage().getCurrSpeed()==0){
+               data[i][7] = 0; 
+            }
+            else{
+            data[i][7] =df.format(trainSystem.getTrainHandler().getTrains().get(i).getCurrBlock().getSpeedLimit() - trainSystem.getTrainHandler().getTrains().get(i).getCurrSpeed());
+            }
             data[i][8]=trainSystem.getTrainHandler().getTrains().get(i).getPassengersOnBaord();
             data[i][9]=df.format(trainSystem.getTrainHandler().getTrains().get(i).requestGPSMessage().getDistanceIntoBlock());
         }
