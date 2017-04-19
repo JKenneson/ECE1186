@@ -79,7 +79,6 @@ public class Scheduler {
                     String info = currRow.getCell(j).toString();
                     data[i][j] = info;
                 }
-                //System.out.println(tableInfo);
             }
         }
         
@@ -128,10 +127,7 @@ public class Scheduler {
             for(j = 0; j < 11; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
-                    
-                    //System.out.println(i);
                     if(i==0){     
-                        //System.out.println("HERE");
                         redColumnNames[j] = info;
                     }
                     else if(j==0){
@@ -142,7 +138,6 @@ public class Scheduler {
                             oldInfo = info;
                             info = convertTime(info);
                             redDispatchTimes.add(info);
-                            //System.out.println(info);
                         }
                     
                 }
@@ -168,10 +163,7 @@ public class Scheduler {
             for(j = 0; j < 11; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
-                    
-                    //System.out.println(i);
                     if(i==0){     
-                        //System.out.println("HERE");
                         redColumnNames[j] = info;
                     }
                     else if(j==0){
@@ -182,7 +174,6 @@ public class Scheduler {
                             oldInfo = info;
                             info = convertTime(info);
                             redDispatchTimes.add(info);
-                            //System.out.println(info);
                         }
                     
                 }
@@ -201,8 +192,6 @@ public class Scheduler {
         }
         redData = data;
         numRedTrains = numTrains;
-        //System.out.println(data[1][3].toString());
-        //System.out.println(data[2][3].toString());
         DefaultTableModel model = new DefaultTableModel(data, redColumnNames);
         redCols = redColumnNames;
         scheduleGUI.redTable.setModel(model);
@@ -237,10 +226,7 @@ public class Scheduler {
             for(j = 0; j < 21; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
-                    
-                    //System.out.println(i);
                     if(i==0){     
-                        //System.out.println("HERE");
                         columnNames[j] = info;
                     }
                     else if(j==0){
@@ -251,7 +237,6 @@ public class Scheduler {
                             oldInfo = info;
                             info = convertTime(info);
                             greenDispatchTimes.add(info);
-                            //System.out.println(info);
                         }
                     
                 }
@@ -269,7 +254,6 @@ public class Scheduler {
             }
             }
         }
-        //evens only
         for(i = 0; i < numTrains+1; i++){
             if((i)%2 == 0){
             Row currRow = greenSchedule.getRow(i);
@@ -277,10 +261,7 @@ public class Scheduler {
             for(j = 0; j < 21; j++){
                 if(currRow.getCell(j) != null){
                     info = currRow.getCell(j).toString();
-                    
-                    //System.out.println(i);
                     if(i==0){     
-                        //System.out.println("HERE");
                         columnNames[j] = info;
                     }
                     else if(j==0){
@@ -291,7 +272,6 @@ public class Scheduler {
                             oldInfo = info;
                             info = convertTime(info);
                             greenDispatchTimes.add(info);
-                            //System.out.println(info);
                         }
                     
                 }
@@ -536,7 +516,6 @@ public class Scheduler {
         
         //generate personnel
         String pstart = "06.10.00";
-        //System.out.println(convertTime(pstart));
         employeeNumber = 1;
         int otherEnum = 2;
         for(int y = 0; y<numTrains*2;y=y+2){
@@ -554,7 +533,6 @@ public class Scheduler {
                     else if(z==1){
                         cell.setCellValue(convertTime(pstart));
                         otherCell.setCellValue(convertTime(pstart));
-                        System.out.println(convertTime(pstart));
                     }
                     else if(z==2){
                         String temp1 = incrementTime(pstart,"60.0");
@@ -563,7 +541,6 @@ public class Scheduler {
                         String temp4 = incrementTime(temp3,"60.0");
                         cell.setCellValue(convertTime(temp4));
                         otherCell.setCellValue(convertTime(temp4));
-                       // System.out.println(convertTime(temp4));
                     }
                     else if(z==3){
                         String temp1 = incrementTime(pstart,"60.0");
@@ -573,7 +550,6 @@ public class Scheduler {
                         String temp5 = incrementTime(temp4,"30.0");
                         cell.setCellValue(convertTime(temp5));
                         otherCell.setCellValue(convertTime(temp5));
-                        //System.out.println(convertTime(temp5));
                     }
                     else if(z==4){
                         String temp1 = incrementTime(pstart,"60.0");
@@ -587,7 +563,6 @@ public class Scheduler {
                         String temp9 = incrementTime(temp8,"30.0");
                         cell.setCellValue(convertTime(temp9));
                         otherCell.setCellValue(convertTime(temp9));
-                        //System.out.println(convertTime(temp9));
                     }
             }
             pstart = incrementTime(pstart,"15.0");

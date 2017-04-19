@@ -56,7 +56,6 @@ public class Mbo{
     */
    public Mbo(TrainSystem ts) throws IOException, InvalidFormatException {
        trainSystem = ts;
-       //System.out.println("Reading Schedules");
         //Scheduler.readPersonnelSchedule(file);
         mboGui = new MovingBlockGUI(trainSystem);
    }
@@ -67,15 +66,8 @@ public class Mbo{
     * @author Brian Stevenson
     */
    public MovingBlockGUI getGUI() throws IOException, InvalidFormatException{
-       //JFrame frame = new JFrame();
-       // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //frame.getContentPane().add(mboGui);
-        //frame.pack();
         trainIndex = 1;
-        //deploy(mboGui);
-        //deploy(mboGui);
         displayCurrentTrains();
-        //System.out.println("Reading Schedules");
         Scheduler.readPersonnelSchedule(file);
         //frame.setVisible(true);
         return mboGui;
@@ -93,7 +85,6 @@ public class Mbo{
         String[] times = time.split("\\.");
         String AMPM = "am";
         int hours=0, minutes=0, seconds=0;
-        //System.out.println(times[0]+" "+times[1]+" "+times[2]);
         hours=Integer.parseInt(times[0]);
         minutes=Integer.parseInt(times[1]);
         seconds=Integer.parseInt(times[2]);
@@ -123,8 +114,6 @@ public class Mbo{
         {
             time = hours+":0"+minutes+AMPM;
         }
-        
-        //System.out.println(time);
         return time;
     }
     
@@ -395,7 +384,6 @@ public class Mbo{
                             if(m-index==0){
                                 currTime = hr+"."+min+"."+sec;
                                 newData[id][m] = convertTime(currTime);
-                                //System.out.println(currTime);
                             }
                             else{
                                 currTime = incrementTime(currTime, useArr[m-3]);
@@ -415,14 +403,9 @@ public class Mbo{
                 TrackPiece lookahead = null;
                 TrackPiece tempPrev = null;
                 int count = 0;
-           // if(mode.equals("Moving Block")){
-                
-                //currTrain.MBOUpdateSpeedAndAuthority(10, 9000);
-                //System.out.println("ID: "+currTrain.trainID);
                 cumulativeDist = cumulativeDist + message.getDistanceIntoBlock();
                 lookahead = currBlock;
                 Block temp = (Block)lookahead;
-                System.out.println("START");
                 for(int n = 0; n< 3; n++){
                     cumulativeDist = 0;
                     temp = (Block)lookahead;
@@ -431,9 +414,6 @@ public class Mbo{
                             
                             lookahead = lookahead.getNext(temp.getPortA());
                             temp = (Block)lookahead;
-                            
-                            System.out.println(temp.getSection()+":"+temp.getID()+" Occupied: "+temp.isOccupied());
-                            //System.out.println(temp.getLine()+" "+temp.isOccupied());
                             boolean occupied = temp.isOccupied();
                             if(currBlock.getID()==temp.getID()){
                                 occupied = false;
@@ -441,15 +421,11 @@ public class Mbo{
                             
                             if(occupied && !temp.getSection().toString().equals("YY") && (!temp.getSection().toString().equals("U")&&temp.getID()!=77) && (!temp.getSection().toString().equals("J")&&temp.getID()!=62)){//&& (!temp.getSection().toString().equals("M")&&temp.getID()!=76)&& (!temp.getSection().toString().equals("N")&&temp.getID()!=85)){
                                //cumulativeDist = cumulativeDist + temp.getLength();
-                               //System.out.println(temp.getSection()+":"+temp.getID());
-                                System.out.println("Distance available: "+cumulativeDist+" Stopping dist: "+message.getStoppingDistance());
                                 //if(cumulativeDist < message.getStoppingDistance()-100){
                                     movingBlockSpeed = 0;
-                                //fixedBlockSpeed = 0;
                                     if(mode.equals("Moving Block")){
                                     currTrain.MBOUpdateSpeedAndAuthority(-1, 0); 
                                     }
-                                    System.out.println("STOPPING");
                                     //break; 
                                 //}
                             }
@@ -481,26 +457,13 @@ public class Mbo{
                                     
                                 }
                                 
-                                for(int q = 0; q< sameTrains.size();q++){
-                                    //sameTrains.get(q).MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority());
-                                    //System.out.println(sameTrains.get(q).trainID);
-                                    if(q==0){
-                                        //sameTrains.get(q).MBOUpdateSpeedAndAuthority((int)currBlock.getSpeedLimit(), (int)currTrain.getAuthority());
-                                    }
-                                    else{
-                                        //sameTrains.get(q).MBOUpdateSpeedAndAuthority(-1, (int)currTrain.getAuthority());
-                                    }
-                                }
-                                
                             }
                         }
                         
                     }
                     
                 }
-            //}
             }
-        
     }
     
     /**
