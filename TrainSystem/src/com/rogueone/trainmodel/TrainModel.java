@@ -12,6 +12,7 @@ package com.rogueone.trainmodel;
 import com.rogueone.trainmodel.gui.TrainModelGUI;
 import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.global.Global;
+import com.rogueone.mainframe.PassengerBrakeGUI;
 import com.rogueone.trackmodel.Block;
 import com.rogueone.trackmodel.Station;
 import com.rogueone.trackmodel.TrackPiece;
@@ -59,6 +60,9 @@ public class TrainModel {
     //Reference to GUI
     public TrainModelGUI trainModelGUI;
     public JFrame trainModelGUIFrame;
+    //Passenger Brake
+    public PassengerBrakeGUI passBrakeGUI;
+    public JFrame passBrakeGUIFrame;
     //Failures
     private boolean powerFailure;
     private boolean brakeFailure;
@@ -200,6 +204,8 @@ public class TrainModel {
         this.nextBlock = null;
         this.currTempBlock = null;
         this.trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf(this.line));
+        
+        this.passBrakeGUI = new PassengerBrakeGUI(this);
     }
     
     /**
@@ -267,6 +273,13 @@ public class TrainModel {
         trainModelGUIFrame.getContentPane().add(this.trainModelGUI);
         trainModelGUIFrame.pack();
         trainModelGUIFrame.setVisible(true);     //Make sure to set it visible
+        
+        //Initialize a JFrame to hold the GUI in (Since it is only a JPanel)
+        passBrakeGUIFrame = new JFrame();
+        passBrakeGUIFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        passBrakeGUIFrame.getContentPane().add(this.passBrakeGUI.getJPanel1());
+        passBrakeGUIFrame.pack();
+        passBrakeGUIFrame.setVisible(true);     //Make sure to set it visible
     }
     
     /**
