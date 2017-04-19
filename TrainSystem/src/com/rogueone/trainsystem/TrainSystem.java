@@ -22,6 +22,7 @@ import com.rogueone.trainmodel.TrainHandler;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.io.IOException;
+import java.util.ConcurrentModificationException;
 import java.util.TimerTask;
 import java.util.Timer;
 import javax.swing.JOptionPane;
@@ -110,7 +111,7 @@ public class TrainSystem {
     }
     
     // UPDATES
-    void updateTrainSystem() {
+    void updateTrainSystem() throws ConcurrentModificationException {
         this.clock.updateClock();               //Increment the clock
         this.mainFrame.timeLabel.setText(this.clock.printClock() + "   ");
         
