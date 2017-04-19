@@ -1250,10 +1250,10 @@ public class TrackView extends Frame {
                     for (Section s : sectionList.values()) {
                         boolean containsSection = s.contains(x1, y1);
                         if (containsSection && s.isIsOccupied()) {
-                            System.out.println("Section : " + s.getSectionID() + " selected");
+//                            System.out.println("Section : " + s.getSectionID() + " selected");
                             int blockID = s.getBlockIDUpdate(x1, y1);
                             if (blockID != -1) {
-                                System.out.println("Block : " + blockID + " selected");
+//                                System.out.println("Block : " + blockID + " selected");
                                 JFrame f = new JFrame();
                                 UpdatePanel up = new UpdatePanel(this.trainSystem, line, blockID);
                                 f.add(up);
@@ -1262,10 +1262,10 @@ public class TrackView extends Frame {
                                 f.setVisible(true);
                             }
                         } else if (containsSection && !s.isIsOccupied()) {
-                            System.out.println("Section : " + s.getSectionID() + " selected");
+//                            System.out.println("Section : " + s.getSectionID() + " selected");
                             int blockID = s.getBlockID(x1, y1);
                             if (blockID != -1) {
-                                System.out.println("Block : " + blockID + " selected");
+//                                System.out.println("Block : " + blockID + " selected");
                                 //check to see if block is opened or closed
                                 if (!s.isBlockFailed(blockID)) {
                                     if (!s.isBlockClosed(blockID)) {
