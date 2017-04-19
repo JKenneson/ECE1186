@@ -737,9 +737,9 @@ public class TrainModel {
      */
     public GPSMessage requestGPSMessage() {
         //If there is an antenna failure, send null to MBO
-        if(this.antennaFailure) {
-            return null;
-        }
+        //if(this.antennaFailure) {
+        //    return null;
+        //}
         GPSMessage tempGPSMessage = this.trainController.getGPSMessage();
         tempGPSMessage.setStoppingDistance(this.safeStoppingDistance());
         tempGPSMessage.setDistanceIntoBlock(this.distanceIntoBlock);
