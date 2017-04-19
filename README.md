@@ -1,5 +1,6 @@
 # ECE1186
 University of Pittsburgh - Software Engineering Final Project
+
 Rogue One Enterprises - Jonathan Kenneson, Kyle Monto, Dan Bednarczyk, Tyler Protivnak, Brian Stevenson, Rob Goldshear
 
 ### 1. Configuration Overview
