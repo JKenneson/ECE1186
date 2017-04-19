@@ -64,7 +64,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(275, 675));
+        setPreferredSize(new java.awt.Dimension(275, 700));
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
@@ -225,7 +225,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void ctcMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctcMenuItemActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(this.trainSystem.getCTC(), BorderLayout.CENTER);
-        this.setSize(new Dimension(275, 675));
+        this.setSize(new Dimension(275, 700));
         this.getContentPane().revalidate();
         this.getContentPane().repaint();
         this.setVisible(true);

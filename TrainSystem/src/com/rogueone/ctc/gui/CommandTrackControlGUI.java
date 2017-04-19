@@ -100,10 +100,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(250, 610));
+        setPreferredSize(new java.awt.Dimension(250, 650));
         setLayout(new java.awt.GridBagLayout());
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 600));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 650));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 650));
         jPanel1.setLayout(new java.awt.GridBagLayout());

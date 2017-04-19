@@ -199,7 +199,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[275, 675]"/>
+      <Dimension value="[275, 700]"/>
     </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
