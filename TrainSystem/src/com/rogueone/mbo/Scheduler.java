@@ -339,6 +339,7 @@ public class Scheduler {
         ArrayList<Integer> workingEmployees = new ArrayList<Integer>();
         
         //generate red
+        trainID =-2;
         for(j=0;j<numTrains+1;j++){
             isOff = 0;
             testTrigger = 0;
@@ -415,7 +416,7 @@ public class Scheduler {
         
         
         //generate green
-        trainID =1;
+        trainID =-1;
         startTimeDay = "06.10.00";
         for(j=0;j<numTrains+1;j++){
             isOff = 0;
