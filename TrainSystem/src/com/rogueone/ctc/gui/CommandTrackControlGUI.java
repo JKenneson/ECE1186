@@ -1,4 +1,5 @@
 /*
+ * @author Robert Goldshear
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -16,12 +17,16 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * @author Robert
+ * The class to control the CTC in its entirety
+ */
 public class CommandTrackControlGUI extends javax.swing.JPanel {
 
+    //Global variables to this module including all initializations
     public int iterativeID;
     double throughputValueGreen = 0;
     double throughputValueRed = 0;
-
     int trainsDispatched = 1;
     public TrainSystem trainSystem;
     private TrackModel trackModel;
@@ -29,6 +34,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     double trainsPerHourRed = 0;
 
     /**
+     * @author Robert Goldshear
      * Creates new form CommandTrackControlGUI
      */
     public CommandTrackControlGUI() {
@@ -36,7 +42,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         InitializeGUIObject();
     }
     
-      public CommandTrackControlGUI(TrainSystem ts) {
+    /**
+     * @author Robert Goldshear
+     * @param ts
+     */
+    public CommandTrackControlGUI(TrainSystem ts) {
         initComponents();
 
         this.trainSystem = ts;
@@ -590,6 +600,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * @author Robert Goldshear
      * updates all necessary fields in the GUI 
      */
     public void updateGUI(){
@@ -599,11 +610,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }
     
     /**
+     * @author Robert Goldshear
      * initializes block table with information from Track Model
      */
     public void updateBlockTable(){
         BlockTable.removeAll();
-        
         
         ArrayList<Block> blocks = this.trackModel.getBlockArray();
         ArrayList<Line> lines = this.trackModel.getLineArray();
@@ -629,10 +640,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }  
     }
     
-    public void removeTrainFromTable(int trainID){
+    /**
+     * @author Robert Goldshear
+     * @param trainID
+     */
+    private void removeTrainFromTable(int trainID){
        int trainIDRow = 0;
-       
-       
+         
         DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
         for(int i = 0; i < model.getRowCount(); i++){
             for(int j = 0; j < model.getColumnCount(); j++){
@@ -641,18 +655,20 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 }
             }
         }
-        model.removeRow(trainIDRow);
-        
+        model.removeRow(trainIDRow);      
     }
     
-     public void failureFromTrackModel(Block block){
+    /**
+     * @author Robert Goldshear
+     * @param block
+     */
+    public void failureFromTrackModel(Block block){
          Object[] newFailure = new Object[4];
          DefaultTableModel failureModel = (DefaultTableModel) FailureTable.getModel();
  
          newFailure[2] = block.getID();
          newFailure[1] = block.getSection().toString();
          newFailure[0] = block.getLine().toString();
-         
                  
          if (block.getFailureBrokenRail() == true){
              newFailure[3] = "Rail";
@@ -670,6 +686,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      }
     
     /**
+     * @author Robert Goldshear
      * calculates offsets in presence to determine train position
      */
     public void updateTrainTable(){
@@ -683,6 +700,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }
     
     /**
+     * @author Robert Goldshear
      * Updates time and rush hour fields in GUI
      */
     public void updateTime(){
@@ -705,9 +723,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
 
         calculateThroughput();
-
     }
-
+    
+    /**
+     * @author Robert Goldshear
+     * Calculates throughput for both lines 
+     */
     private void calculateThroughput(){
         throughputValueGreen = 0;
         throughputValueRed = 0;
@@ -761,6 +782,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
+    /**
+     * @author Robert Goldshear
+     * @return boolean if the system is in automatic mode
+     */
     public boolean isAutomatic(){
         if (SelectOperationMode2.getSelectedIndex() == 1){
             return true;
@@ -768,48 +793,48 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         return false;
     }
     
-private void getDispatchTimes(){
+    private void getDispatchTimes(){
     
         int autoDispatchHour = trainSystem.getClock().getHour();
         int autoDispatchMinute = trainSystem.getClock().getMinute();
         int autoDispatchSecond = trainSystem.getClock().getSecond();
         autoDispatch(autoDispatchHour, autoDispatchMinute, autoDispatchSecond); 
     
-}
-
-private void dispatchNewTrain(int speed, int authority, int cars, String line, int ID){
-    if (trainSystem.getTrackControllerHandler().requestDispatch((Global.Line.valueOf(line)))){
-        trainSystem.dispatchTrain(speed, authority, cars, line, ID);
-        addRow(line, "A", 1, ID);
-        iterateID();
     }
-    else{
-        JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Train in Proximity.", "Error",
-                                    JOptionPane.ERROR_MESSAGE);
+
+    private void dispatchNewTrain(int speed, int authority, int cars, String line, int ID){
+        if (trainSystem.getTrackControllerHandler().requestDispatch((Global.Line.valueOf(line)))){
+            trainSystem.dispatchTrain(speed, authority, cars, line, ID);
+            addRow(line, "A", 1, ID);
+            iterateID();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Train in Proximity.", "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
 
-private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
-    int greenID = iterativeID;
-    int redID = greenID++;
-    ArrayList<String> dispatchTimes = trainSystem.getScheduler().getDispatchTimes();
-        for (String times : dispatchTimes){
-            String tempTime = autoDispatchHour + ":" + autoDispatchMinute + "am";
-            if(autoDispatchSecond == 0){
-                if (tempTime.equals(times)) {
-                    dispatchNewTrain(40, 90000, getNumberCars(), "GREEN", greenID);
-                    dispatchNewTrain(40, 90000, getNumberCars(), "RED", redID);
-                    
-                }
-            } 
-        }    
-}
+    private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
+        int greenID = iterativeID;
+        int redID = greenID++;
+        ArrayList<String> dispatchTimes = trainSystem.getScheduler().getDispatchTimes();
+            for (String times : dispatchTimes){
+                String tempTime = autoDispatchHour + ":" + autoDispatchMinute + "am";
+                if(autoDispatchSecond == 0){
+                    if (tempTime.equals(times)) {
+                        dispatchNewTrain(40, 90000, getNumberCars(), "GREEN", greenID);
+                        dispatchNewTrain(40, 90000, getNumberCars(), "RED", redID);
 
-public int iterateID(){
-    iterativeID++;
-    System.out.println("New ID is: " + iterativeID );
-    return iterativeID;
-}
+                    }
+                } 
+            }    
+    }
+
+    private int iterateID(){
+        iterativeID++;
+        System.out.println("New ID is: " + iterativeID ); //checking to make sure multi line functionality cooperates
+        return iterativeID;
+    }
     
     private void greenLineThroughputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenLineThroughputActionPerformed
     }//GEN-LAST:event_greenLineThroughputActionPerformed
@@ -817,12 +842,12 @@ public int iterateID(){
 
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
         ChangeParametersGUI params = new ChangeParametersGUI(this, trainSystem);
-        params.setVisible(true);
+        params.setVisible(true); //brings up a change parameters gui in reference to the train
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
 
     private void TrackShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackShutdownButtonActionPerformed
         TrackShutdownGUI trackShutdown = new TrackShutdownGUI(this, trainSystem);
-        trackShutdown.setVisible(true);
+        trackShutdown.setVisible(true); //brings up a track shutdown gui in reference to the system
     }//GEN-LAST:event_TrackShutdownButtonActionPerformed
 
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
@@ -873,18 +898,16 @@ public int iterateID(){
     }//GEN-LAST:event_TrainTableMouseClicked
 
     /**
-     *
+     * @author Robert Goldshear
      * @param trainID
      * @param passTrainLine
      */
     public void DisableTrain(int trainID, String passTrainLine) {
-        //DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
         Boolean bool = false;
         for (int i = 0; i < TrainTable.getRowCount(); i++) {
             if (((String) TrainTable.getValueAt(i, 0)).equals(passTrainLine)) {
                 if ((Integer) TrainTable.getValueAt(i, 1) == trainID) {
                     TrainTable.setValueAt(bool, i, 3);
-                    //String trainPosition = (String)TrainTable.getValueAt(i, 2);
                 }
             }
         }
@@ -893,7 +916,7 @@ public int iterateID(){
     }
 
     /**
-     *
+     * @author Robert Goldshear
      * @param lineName
      * @param segmentName
      * @param blockName
@@ -917,9 +940,9 @@ public int iterateID(){
     }
 
     /**
-     *
+     * @author Robert Goldshear
      */
-    public void checkForFailure() {
+    private void checkForFailure() {
         Object newFailureRow = new Object[4];
 
         DefaultTableModel trainTable = (DefaultTableModel) TrainTable.getModel();
@@ -946,12 +969,12 @@ public int iterateID(){
     }
 
     /**
-     *
+     * 
      * @param passTrainLine
      * @param trainPosition
      * @param failureType
      */
-    public void updateFailureTable(String passTrainLine, String trainPosition, String failureType) {
+    private void updateFailureTable(String passTrainLine, String trainPosition, String failureType) {
 
         String[] positionParts = trainPosition.split(":");
         String failureSection = positionParts[0];
@@ -970,19 +993,22 @@ public int iterateID(){
 
     }
 
+    /**
+     * @author Robert Goldshear
+     * @param table
+     * @param entry
+     * @return boolean if the value exists in the provided table
+     */
     public boolean existsInTable(JTable table, Object[] entry) {
-
         // Get row and column count
         int rowCount = table.getRowCount();
         int colCount = table.getColumnCount();
-
         // Get Current Table Entry
         String curEntry = "";
         for (Object o : entry) {
             String e = o.toString();
             curEntry = curEntry + " " + e;
         }
-
         // Check against all entries
         for (int i = 0; i < rowCount; i++) {
             String rowEntry = "";
@@ -1043,11 +1069,12 @@ public int iterateID(){
             if (failureTable.getValueAt(failureRow,0).equals("GREEN")){
                 this.trainSystem.getTrackViewGreen().setBlockStatus((Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0))), (String)failureTable.getValueAt(failureRow,1), Integer.parseInt((String)failureTable.getValueAt(failureRow,2)), true);
                 this.trainSystem.getTrackControllerHandler().requestOpen(Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0)), Integer.parseInt((String)failureTable.getValueAt(failureRow, 2)));
+                this.trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf((String)failureTable.getValueAt(failureRow, 0)));
             }
             else{
                 this.trainSystem.getTrackViewRed().setBlockStatus((Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0))), (String)failureTable.getValueAt(failureRow,1), Integer.parseInt((String)failureTable.getValueAt(failureRow,2)), true);
                 this.trainSystem.getTrackControllerHandler().requestOpen(Global.Line.valueOf((String)failureTable.getValueAt(failureRow,0)), Integer.parseInt((String)failureTable.getValueAt(failureRow, 2)));
-
+                this.trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf((String)failureTable.getValueAt(failureRow, 0)));
             }
             
             removeFailureFromTable(failureTable.getValueAt(failureRow,2));
@@ -1056,11 +1083,10 @@ public int iterateID(){
     }//GEN-LAST:event_FailureTableMouseClicked
     
     /**
-     *
+     * @author Robert Goldshear
      * @param blockID
      */
-    public void removeFailureFromTable(Object blockID){
-    
+    private void removeFailureFromTable(Object blockID){
         int blockIDRow = 0;
         
         DefaultTableModel model = (DefaultTableModel)FailureTable.getModel();
@@ -1076,19 +1102,13 @@ public int iterateID(){
     }
     
     
-    public void setOperational(){
+    private void setOperational(){
         
-        //        Object[] failureCompare = {line, section, block};
-
         for ( int i = 0; i < TrainTable.getRowCount(); i ++){
-            //if (existsInTable(TrainTable, failureCompare)){
-               TrainTable.setValueAt(true, i, 3);
-            //}
+            TrainTable.setValueAt(true, i, 3);
         }
         for ( int i = 0; i < BlockTable.getRowCount(); i ++){
-            //if (existsInTable(BlockTable, failureCompare)){
-               BlockTable.setValueAt(true, i, 3);
-            //}
+            BlockTable.setValueAt(true, i, 3);
         }
     }
     
@@ -1134,7 +1154,7 @@ public int iterateID(){
         
     }//GEN-LAST:event_DispatchButton1ActionPerformed
 
-    public void addRow(String dispatchLine, String dispatchBlock, int dispatchSection, int dispatchID) {
+    private void addRow(String dispatchLine, String dispatchBlock, int dispatchSection, int dispatchID) {
         String concatination = (dispatchBlock + ":" + Integer.toString(dispatchSection));
         Object[] newRow = new Object[4];
         newRow[0] = dispatchLine;
@@ -1144,6 +1164,7 @@ public int iterateID(){
         DefaultTableModel model = (DefaultTableModel) TrainTable.getModel();
         model.addRow(newRow);
     }
+    
     private void DispatchAuthorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchAuthorityFieldActionPerformed
     }//GEN-LAST:event_DispatchAuthorityFieldActionPerformed
 
@@ -1216,7 +1237,11 @@ public int iterateID(){
         return dispatchNumberCars;
     }
 
-
+    /**
+     * @author Robert Goldshear
+     * @param totalDistanceTraveledFeet
+     * @param line
+     */
     public void incrementTrainsToYard(double totalDistanceTraveledFeet, String line) {
         if(Global.Line.valueOf(line) == Global.Line.GREEN){
             this.trainsPerHourGreen += Math.round(totalDistanceTraveledFeet / this.trainSystem.getTrackModel().getLine(Global.Line.valueOf(line)).getTotalLength());
