@@ -49,11 +49,6 @@
                   <Component id="TrainInformation" alignment="0" max="32767" attributes="0"/>
                   <Component id="EmergencyBrakeToggleButton" alignment="1" max="32767" attributes="0"/>
                   <Component id="FailureSimulationPanel" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="TrainSelectorDropDown" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="TrainSelectorButton" min="-2" pref="71" max="-2" attributes="0"/>
-                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -80,11 +75,7 @@
                       <Component id="Status" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="TrainSelectorDropDown" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TrainSelectorButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="TrainInformation" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ServiceBrakeToggleButton" min="-2" pref="56" max="-2" attributes="0"/>
@@ -922,21 +913,6 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="TrainSelectorDropDown">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Train 1"/>
-            <StringItem index="1" value="Train 2"/>
-            <StringItem index="2" value="Train 3"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
     <Container class="javax.swing.JPanel" name="RealTimeHUD">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1475,7 +1451,7 @@
                       <Component id="PowerFailureCheck" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="AntennaFailureCheck" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1528,13 +1504,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="TrainSelectorButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Show"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TrainSelectorButtonActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

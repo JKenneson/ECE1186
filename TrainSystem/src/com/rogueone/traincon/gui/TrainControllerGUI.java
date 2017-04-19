@@ -100,7 +100,6 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         TrainInformation = new javax.swing.JPanel();
         TrainInfoScrollPane = new javax.swing.JScrollPane();
         TrainInfoText = new javax.swing.JTextArea();
-        TrainSelectorDropDown = new javax.swing.JComboBox<>();
         RealTimeHUD = new javax.swing.JPanel();
         RealTimeSpeedAndAuthority = new javax.swing.JPanel();
         ActualSpeedPanel = new javax.swing.JPanel();
@@ -134,7 +133,6 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         ServiceBrakeFailureCheck = new javax.swing.JCheckBox();
         PowerFailureCheck = new javax.swing.JCheckBox();
         AntennaFailureCheck = new javax.swing.JCheckBox();
-        TrainSelectorButton = new javax.swing.JButton();
 
         TrainControlsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Train Controls"));
 
@@ -612,8 +610,6 @@ public class TrainControllerGUI extends javax.swing.JPanel {
             .addComponent(TrainInfoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
         );
 
-        TrainSelectorDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Train 1", "Train 2", "Train 3" }));
-
         RealTimeHUD.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Real Time HUD"));
 
         RealTimeSpeedAndAuthority.setBorder(javax.swing.BorderFactory.createTitledBorder("Speed and Authority"));
@@ -912,7 +908,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                     .addComponent(ServiceBrakeFailureCheck)
                     .addComponent(PowerFailureCheck)
                     .addComponent(AntennaFailureCheck))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         FailureSimulationPanelLayout.setVerticalGroup(
             FailureSimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -925,13 +921,6 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        TrainSelectorButton.setText("Show");
-        TrainSelectorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TrainSelectorButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -942,11 +931,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                     .addComponent(ServiceBrakeToggleButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TrainInformation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(EmergencyBrakeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(FailureSimulationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(TrainSelectorDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TrainSelectorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(FailureSimulationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(RealTimeHUD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -967,10 +952,7 @@ public class TrainControllerGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TrainSelectorDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TrainSelectorButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(38, 38, 38)
                         .addComponent(TrainInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ServiceBrakeToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1015,11 +997,6 @@ public class TrainControllerGUI extends javax.swing.JPanel {
         this.trainController.vitals.getPrimary().setKI(Double.valueOf(this.KiInput.getValue().toString()));
         this.NotificationsDisplay.append("\nKi Updated to " + this.trainController.vitals.getPrimary().getKI());
     }//GEN-LAST:event_SetKiActionPerformed
-
-    private void TrainSelectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainSelectorButtonActionPerformed
-        this.trainController.updateGUI(this);
-        //Just used as an updater for now.
-    }//GEN-LAST:event_TrainSelectorButtonActionPerformed
 
     private void SendAnnouncementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendAnnouncementActionPerformed
         this.NotificationsDisplay.append("\n" + this.AnnouncementText.getText());
@@ -1265,7 +1242,5 @@ public class TrainControllerGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane TrainInfoScrollPane;
     public javax.swing.JTextArea TrainInfoText;
     private javax.swing.JPanel TrainInformation;
-    private javax.swing.JButton TrainSelectorButton;
-    public javax.swing.JComboBox<String> TrainSelectorDropDown;
     // End of variables declaration//GEN-END:variables
 }
