@@ -6,7 +6,6 @@
 package com.rogueone.mbo;
 import static com.rogueone.mbo.Mbo.convertTime;
 import static com.rogueone.mbo.Mbo.incrementTime;
-import static com.rogueone.mbo.Mbo.mboGui;
 import java.io.File;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -40,7 +39,6 @@ public class Scheduler {
      private static Object[] greenCols = new Object[21];
      private static int employeeCount = 0;
      
-     
     /**
      * Constructor for the schedule class
      * @param ts global trainsystem
@@ -54,6 +52,7 @@ public class Scheduler {
        readGreenSchedule(file);
        readPersonnelSchedule(file);
    }
+      
     /**
      * Reads th excel file for the personnel schedule, then outputs it to the GUI
      * @param gui MBO GUI to be updated with personnel schedule information
@@ -62,18 +61,14 @@ public class Scheduler {
      * @author Brian Stevenson
      */
     public static void readPersonnelSchedule(File file) throws IOException, InvalidFormatException{
-         String tableInfo="";
-        //Openning Excel Sheet
+        String tableInfo="";
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet personnelSchedule = workbook.getSheetAt(0);
         int numEmployees = personnelSchedule.getLastRowNum();
-        
-        
         Object[][] data = new Object[numEmployees+1][5];
         int i,j;
         for(i = 1; i < numEmployees+1; i++){
             Row currRow = personnelSchedule.getRow(i);
-            
             for(j = 0; j < 5; j++){
                 if(currRow.getCell(j) != null){
                     String info = currRow.getCell(j).toString();
@@ -81,9 +76,7 @@ public class Scheduler {
                 }
             }
         }
-        
-      Object[] columnNames = new Object[5];
-
+        Object[] columnNames = new Object[5];
         columnNames[0]="NAME";
         columnNames[1]="SHIFT START";
         columnNames[2]="BREAK START";
@@ -92,11 +85,11 @@ public class Scheduler {
       
       DefaultTableModel model = new DefaultTableModel(data, columnNames);
       mboGui.pScheduleTable.setModel(model);
-     
     }
     public static void setScheduleVisible(){
         scheduleGUI.setVisible(true);
     }
+    
     /**
      * Reads information from excel sheet regarding train schedules, then outputs them to the GUI
      * @param gui GUI to be updated with train schedule information 
@@ -112,9 +105,7 @@ public class Scheduler {
         int numTrains = redSchedule.getLastRowNum();
         String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
         String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
-        
-         Object[] redColumnNames = new Object[11];
-        
+        Object[] redColumnNames = new Object[11];
         Object[][] data = new Object[numTrains+1][11];
         int i,j;
         String oldInfo = "";
@@ -123,71 +114,70 @@ public class Scheduler {
         for(i = 0; i < numTrains+1; i++){
             if((i+1)%2==0){
             Row currRow = redSchedule.getRow(i);
-            if(currRow != null){
-            for(j = 0; j < 11; j++){
-                if(currRow.getCell(j) != null){
-                    info = currRow.getCell(j).toString();
-                    if(i==0){     
-                        redColumnNames[j] = info;
-                    }
-                    else if(j==0){
-                        String[] infos = info.split("\\.");
-                        info = infos[0];
-                    }
-                    else if(j==2){
-                            oldInfo = info;
-                            info = convertTime(info);
-                            redDispatchTimes.add(info);
+                if(currRow != null){
+                    for(j = 0; j < 11; j++){
+                        if(currRow.getCell(j) != null){
+                            info = currRow.getCell(j).toString();
+                            if(i==0){     
+                                redColumnNames[j] = info;
+                            }
+                            else if(j==0){
+                                String[] infos = info.split("\\.");
+                                info = infos[0];
+                            }
+                            else if(j==2){
+                                    oldInfo = info;
+                                    info = convertTime(info);
+                                    redDispatchTimes.add(info);
+                            }
                         }
-                    
-                }
-                else if(j>2){
-                    if(oldInfo.compareTo("")!=0){
-                    oldInfo = incrementTime(oldInfo, redIncrements[j-3]);
-                    info = convertTime(oldInfo);
+                        else if(j>2){
+                            if(oldInfo.compareTo("")!=0){
+                                oldInfo = incrementTime(oldInfo, redIncrements[j-3]);
+                                info = convertTime(oldInfo);
+                            }
+                        }
+                        if((i>0)){
+                            data[i][j] = info;
+                        }
                     }
                 }
-                if((i>0)){
-                data[i][j] = info;
-                }
-            }
-            }
             }
         }
         
-        //evens only
+        //evens
         for(i = 0; i < numTrains+1; i++){
             if((i)%2 == 0){
-            Row currRow = redSchedule.getRow(i);
-            if(currRow != null){
-            for(j = 0; j < 11; j++){
-                if(currRow.getCell(j) != null){
-                    info = currRow.getCell(j).toString();
-                    if(i==0){     
-                        redColumnNames[j] = info;
-                    }
-                    else if(j==0){
-                        String[] infos = info.split("\\.");
-                        info = infos[0];
-                    }
-                    else if(j==2){
-                            oldInfo = info;
-                            info = convertTime(info);
-                            redDispatchTimes.add(info);
+                Row currRow = redSchedule.getRow(i);
+                if(currRow != null){
+                    for(j = 0; j < 11; j++){
+                        if(currRow.getCell(j) != null){
+                            info = currRow.getCell(j).toString();
+                            if(i==0){     
+                                redColumnNames[j] = info;
+                            }
+                            else if(j==0){
+                                String[] infos = info.split("\\.");
+                                info = infos[0];
+                            }
+                            else if(j==2){
+                                    oldInfo = info;
+                                    info = convertTime(info);
+                                    redDispatchTimes.add(info);
+                                }
+
                         }
-                    
-                }
-                else if(j>2){
-                    if(oldInfo.compareTo("")!=0){
-                    oldInfo = incrementTime(oldInfo, redIncrements[j-3]);
-                    info = convertTime(oldInfo);
+                        else if(j>2){
+                            if(oldInfo.compareTo("")!=0){
+                                oldInfo = incrementTime(oldInfo, redIncrements[j-3]);
+                                info = convertTime(oldInfo);
+                            }
+                        }
+                        if((i>0)){
+                            data[i][j] = info;
+                        }
                     }
                 }
-                if((i>0)){
-                data[i][j] = info;
-                }
-            }
-            }
             }
         }
         redData = data;
@@ -205,107 +195,102 @@ public class Scheduler {
      * @author Brian Stevenson
      */
      public static void readGreenSchedule( File file) throws IOException, InvalidFormatException{
-        //scheduleGUI.setVisible(true);
-        String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
-        String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
-        greenDispatchTimes.clear();
-        XSSFWorkbook workbook = new XSSFWorkbook(file);
-        XSSFSheet greenSchedule = workbook.getSheetAt(2);
-        int numTrains = greenSchedule.getLastRowNum();
-         Object[] columnNames = new Object[21];
-        
-        Object[][] data = new Object[numTrains+1][21];
-        int i,j;
-        String oldInfo = "";
-        String info = "";
-        //odds
-        for(i = 0; i < numTrains+1; i++){
-            if((i+1)%2==0){
+    String[] redIncrements = {"3.7", "2.3", "1.5", "1.8" , "2.1" , "2.1" , "1.7" , "2.3"};
+    String[] greenIncrements = {"2.3", "2.3","2.4", "2.7", "2.6", "1.9", "2.0", "2.0", "2.2", "2.5", "2.2", "4.4", "2.2", "2.3", "2.4", "2.1", "2.0", "2.0"};
+    greenDispatchTimes.clear();
+    XSSFWorkbook workbook = new XSSFWorkbook(file);
+    XSSFSheet greenSchedule = workbook.getSheetAt(2);
+    int numTrains = greenSchedule.getLastRowNum();
+    Object[] columnNames = new Object[21];
+    Object[][] data = new Object[numTrains+1][21];
+    int i,j;
+    String oldInfo = "";
+    String info = "";
+    //odds
+    for(i = 0; i < numTrains+1; i++){
+        if((i+1)%2==0){
             Row currRow = greenSchedule.getRow(i);
             if(currRow != null){
-            for(j = 0; j < 21; j++){
-                if(currRow.getCell(j) != null){
-                    info = currRow.getCell(j).toString();
-                    if(i==0){     
-                        columnNames[j] = info;
-                    }
-                    else if(j==0){
-                        String[] infos = info.split("\\.");
-                        info = infos[0];
-                    }
-                    else if(j==2){
-                            oldInfo = info;
-                            info = convertTime(info);
-                            greenDispatchTimes.add(info);
+                for(j = 0; j < 21; j++){
+                    if(currRow.getCell(j) != null){
+                        info = currRow.getCell(j).toString();
+                        if(i==0){     
+                            columnNames[j] = info;
                         }
-                    
-                }
-                else if(j>2){
-                    if(oldInfo.compareTo("")!=0){
-                    oldInfo = incrementTime(oldInfo, greenIncrements[j-3]);
-                    info = convertTime(oldInfo);
+                        else if(j==0){
+                            String[] infos = info.split("\\.");
+                            info = infos[0];
+                        }
+                        else if(j==2){
+                                oldInfo = info;
+                                info = convertTime(info);
+                                greenDispatchTimes.add(info);
+                            }
+
+                    }
+                    else if(j>2){
+                        if(oldInfo.compareTo("")!=0){
+                            oldInfo = incrementTime(oldInfo, greenIncrements[j-3]);
+                            info = convertTime(oldInfo);
+                        }
+                    }
+                    if((i>0)){
+                        data[i][j] = info;
                     }
                 }
-                if((i>0)){
-                data[i][j] = info;
-                
-                }
-            }
-            }
             }
         }
-        for(i = 0; i < numTrains+1; i++){
-            if((i)%2 == 0){
+    }
+    for(i = 0; i < numTrains+1; i++){
+        if((i)%2 == 0){
             Row currRow = greenSchedule.getRow(i);
             if(currRow != null){
-            for(j = 0; j < 21; j++){
-                if(currRow.getCell(j) != null){
-                    info = currRow.getCell(j).toString();
-                    if(i==0){     
-                        columnNames[j] = info;
-                    }
-                    else if(j==0){
-                        String[] infos = info.split("\\.");
-                        info = infos[0];
-                    }
-                    else if(j==2){
-                            oldInfo = info;
-                            info = convertTime(info);
-                            greenDispatchTimes.add(info);
+                for(j = 0; j < 21; j++){
+                    if(currRow.getCell(j) != null){
+                        info = currRow.getCell(j).toString();
+                        if(i==0){     
+                            columnNames[j] = info;
                         }
-                    
-                }
-                else if(j>2){
-                    if(oldInfo.compareTo("")!=0){
-                    oldInfo = incrementTime(oldInfo, greenIncrements[j-3]);
-                    info = convertTime(oldInfo);
+                        else if(j==0){
+                            String[] infos = info.split("\\.");
+                            info = infos[0];
+                        }
+                        else if(j==2){
+                                oldInfo = info;
+                                info = convertTime(info);
+                                greenDispatchTimes.add(info);
+                            }
+
+                    }
+                    else if(j>2){
+                        if(oldInfo.compareTo("")!=0){
+                        oldInfo = incrementTime(oldInfo, greenIncrements[j-3]);
+                        info = convertTime(oldInfo);
+                        }
+                    }
+                    if((i>0)){
+                    data[i][j] = info;
                     }
                 }
-                if((i>0)){
-                data[i][j] = info;
-                }
-            }
-            }
             }
         }
+    }
         
-        greenData = data;
-        numGreenTrains = numTrains;
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        greenCols = columnNames;
-        scheduleGUI.jTable3.setModel(model);
+    greenData = data;
+    numGreenTrains = numTrains;
+    DefaultTableModel model = new DefaultTableModel(data, columnNames);
+    greenCols = columnNames;
+    scheduleGUI.jTable3.setModel(model);
     }
     
-     /**
-      * Returns array of times used for automatically dispatching trains
-      * @return array of times
-      * @author Brian Stevenson
-      */
+    /**
+    * Returns array of times used for automatically dispatching trains
+    * @return array of times
+    * @author Brian Stevenson
+    */
     public ArrayList<String> getDispatchTimes(){
         return this.redDispatchTimes;
     }
-    
-    
     
     /**
      * Function to generate a new employee schedule in excel
@@ -313,267 +298,255 @@ public class Scheduler {
      * @author Brian Stevenson
      */
     public static void generateSchedule(int numTrains) throws IOException, InvalidFormatException{
-        Workbook workbook = new XSSFWorkbook();
-        int i=0,j=0,k=0;
-        String[] personnelHeaders = {"Name","SHIFT START","BREAK START","BREAK END","SHIFT END"};
-        String[] trainHeaders = {"Train ID","Driver","Departure","SHADYSIDE","HERRON","SWISSVILLE","PENN STATION","STEEL PLAZA","FIRST AVE","ST SQUARE","STH HILLS"};
-        String[] greenHeaders = {"Train ID","Driver","Departure", "PIONEER", "EDGEBROOK", "PITT", "WHITED", "SOUTH BANK", "CENTRAL", "INGLEWOOD", "OVERBROOK", "GLENBURY", "DORMONT", "MT LEBANON", "POPLAR", "CASTLE SHANON", "DORMONT", "GLEBURY", "OVERBROOK", "INGLEWOOD", "CENTRAL"};
-
-        //Sheet redSchedule = workbook.getSheetAt(1);
-        Sheet peopleSheet = workbook.createSheet("Personnel");
-        Sheet redSheet = workbook.createSheet("Red");
-        Sheet greenSheet = workbook.createSheet("Green");
-        employeeNumber = 0;
-        startTime = "6.10.00";
-        int trainID = -1;
-        int dayOff1 = 0;
-        int dayOff2 = dayOff1+1;
-        
-        String startTimeDay = "06.10.00";
-        String startTimeEvening = "14.00.00";
-        int currentDay = 1;
-        int testTrigger = 0;
-        int lastUnused = 0;
-        int numberMissed = 0;
-        int isOff = 0;
-        ArrayList<Integer> workingEmployees = new ArrayList<Integer>();
-        
-        //generate red
-        trainID =-2;
-        for(j=0;j<numTrains+1;j++){
-            isOff = 0;
-            testTrigger = 0;
-            Row peopleRow = peopleSheet.createRow(j);
-            Row redRow = redSheet.createRow(j);
-            Row greenRow = greenSheet.createRow(j);
-            if(j==0){
-                for(i=0;i<5;i++){
-                    Cell cell = peopleRow.createCell(i);
-                    cell.setCellValue(personnelHeaders[i]);
-                }
-                for(i=0;i<11;i++){
-                    Cell redCell = redRow.createCell(i);
-                    //Cell greenCell = greenRow.createCell(i);
-                    if(j==0){
+    Workbook workbook = new XSSFWorkbook();
+    int i=0,j=0,k=0;
+    String[] personnelHeaders = {"Name","SHIFT START","BREAK START","BREAK END","SHIFT END"};
+    String[] trainHeaders = {"Train ID","Driver","Departure","SHADYSIDE","HERRON","SWISSVILLE","PENN STATION","STEEL PLAZA","FIRST AVE","ST SQUARE","STH HILLS"};
+    String[] greenHeaders = {"Train ID","Driver","Departure", "PIONEER", "EDGEBROOK", "PITT", "WHITED", "SOUTH BANK", "CENTRAL", "INGLEWOOD", "OVERBROOK", "GLENBURY", "DORMONT", "MT LEBANON", "POPLAR", "CASTLE SHANON", "DORMONT", "GLEBURY", "OVERBROOK", "INGLEWOOD", "CENTRAL"};
+    Sheet peopleSheet = workbook.createSheet("Personnel");
+    Sheet redSheet = workbook.createSheet("Red");
+    Sheet greenSheet = workbook.createSheet("Green");
+    employeeNumber = 0;
+    startTime = "6.10.00";
+    int trainID = -1;
+    int dayOff1 = 0;
+    int dayOff2 = dayOff1+1;
+    String startTimeDay = "06.10.00";
+    String startTimeEvening = "14.00.00";
+    int currentDay = 1;
+    int testTrigger = 0;
+    int lastUnused = 0;
+    int numberMissed = 0;
+    int isOff = 0;
+    ArrayList<Integer> workingEmployees = new ArrayList<Integer>();
+    //generate red
+    trainID =-2;
+    for(j=0;j<numTrains+1;j++){
+        isOff = 0;
+        testTrigger = 0;
+        Row peopleRow = peopleSheet.createRow(j);
+        Row redRow = redSheet.createRow(j);
+        Row greenRow = greenSheet.createRow(j);
+        if(j==0){
+            for(i=0;i<5;i++){
+                Cell cell = peopleRow.createCell(i);
+                cell.setCellValue(personnelHeaders[i]);
+            }
+            for(i=0;i<11;i++){
+                Cell redCell = redRow.createCell(i);
+                if(j==0){
                     redCell.setCellValue(trainHeaders[i]);
-                    //greenCell.setCellValue(greenHeaders[i]);
-                    }
-                    else{
-                        redCell.setCellValue("");
-                    }
+                }
+                else{
+                    redCell.setCellValue("");
                 }
             }
-            else{
-                String[] driverNames = new String[numTrains+1];
-                for(i=0;i<8;i++){
-                    Cell cell = peopleRow.createCell(i);
-                    if(i==0){
-                        driverNames[j]="Employee "+employeeNumber;
-                       // cell.setCellValue("Employee "+employeeNumber);
-                    }
-                    else if(i==1){
-                        //cell.setCellValue(startTime);
-                    }
-                    else if(i==2){
-                        //cell.setCellValue(incrementTime(startTime,"240.0"));
-                    }
-                    else if(i==3){
-                        //cell.setCellValue(incrementTime(startTime,"270.0"));
-                    }
-                    else if(i==4){
-                       // cell.setCellValue(incrementTime(startTime,"510.0"));
-                    }
-                }
-                for(i=0;i<3;i++){
-                    Cell cell = redRow.createCell(i);
-                    if(i==0){
-                        cell.setCellValue(trainID);
-                    }
-                    else if(i==1){
-                        cell.setCellValue(driverNames[j]);
-                    }
-                    else if(i==2){
-                       // if((j &1)==0){
-                        cell.setCellValue(startTimeDay);
-                        startTimeDay = incrementTime(startTimeDay,"15.0");
-                    }
-                }
-                            
-                   
-                   
-            }
-            employeeNumber++;
-            dayOff2=dayOff1+1;
-            if(dayOff1>7){
-                dayOff1=0;
-            }
-            if(dayOff2>7){
-                dayOff2=0;
-            }
-            trainID=trainID+2;
-        }// end generate red
-        
-        
-        
-        //generate green
-        trainID =-1;
-        startTimeDay = "06.10.00";
-        for(j=0;j<numTrains+1;j++){
-            isOff = 0;
-            testTrigger = 0;
-            Row personRow = peopleSheet.createRow(j);
-            Row greenRow = greenSheet.createRow(j);
-            if(j==0){
-                for(i=0;i<5;i++){
-                    Cell cell = personRow.createCell(i);
-                    cell.setCellValue(personnelHeaders[i]);
-                }
-                for(i=0;i<21;i++){
-                    Cell greenCell = greenRow.createCell(i);
-                    if(j==0){
-                    greenCell.setCellValue(greenHeaders[i]);
-                    //greenCell.setCellValue(greenHeaders[i]);
-                    }
-                    else{
-                        greenCell.setCellValue("");
-                    }
-                }
-            }
-            else{
-                String[] driverNames = new String[numTrains+1];
-                for(i=0;i<5;i++){
-                    Cell cell = personRow.createCell(i);
-                    if(i==0){
-                        driverNames[j]="Employee "+employeeNumber;
-                       // cell.setCellValue("Employee "+employeeNumber);
-                    }
-                    else if(i==1){
-                        //cell.setCellValue(convertTime(startTime));
-                    }
-                    else if(i==2){
-                        String temp1 = incrementTime(startTime,"60.0");
-                        String temp2 = incrementTime(temp1,"60.0");
-                        String temp3 = incrementTime(temp2,"60.0");
-                        String temp4 = incrementTime(temp3,"60.0");
-                        //cell.setCellValue(convertTime(temp4));
-                    }
-                    else if(i==3){
-                        String temp1 = incrementTime(startTime,"60.0");
-                        String temp2 = incrementTime(temp1,"60.0");
-                        String temp3 = incrementTime(temp2,"60.0");
-                        String temp4 = incrementTime(temp3,"60.0");
-                        String temp5 = incrementTime(temp4,"30.0");
-                       // cell.setCellValue(convertTime(temp5));
-                    }
-                    else if(i==4){
-                        String temp1 = incrementTime(startTime,"60.0");
-                        String temp2 = incrementTime(temp1,"60.0");
-                        String temp3 = incrementTime(temp2,"60.0");
-                        String temp4 = incrementTime(temp3,"60.0");
-                        String temp5 = incrementTime(temp4,"60.0");
-                        String temp6 = incrementTime(temp5,"60.0");
-                        String temp7 = incrementTime(temp6,"60.0");
-                        String temp8 = incrementTime(temp7,"60.0");
-                        String temp9 = incrementTime(temp8,"30.0");
-                        //cell.setCellValue(convertTime(temp9));
-                    }
-                    
-                    
-                }
-                   if(isOff == 0){
-                for(i=0;i<3;i++){
-                    Cell cell = greenRow.createCell(i);
-                    if(i==0){
-                        cell.setCellValue(trainID);
-                    }
-                    else if(i==1){
-                        cell.setCellValue(driverNames[j]);
-                    }
-                    else if(i==2){
-                        //if((j &1)==0){
-                        cell.setCellValue(startTimeDay);
-                        startTimeDay = incrementTime(startTimeDay,"15.0");
-                    }
-                }
-                            
-                   }
-                   else{
-                       Row deleted = greenSheet.getRow(j);
-                       greenSheet.removeRow(deleted);
-                   }
-            }
-            startTime = incrementTime(startTime,"10.0");
-            employeeNumber++;
-            dayOff2=dayOff1+1;
-            if(dayOff1>7){
-                dayOff1=0;
-            }
-            if(dayOff2>7){
-                dayOff2=0;
-            }
-            trainID=trainID+2;
-        }// end generate green
-        
-        
-        //generate personnel
-        String pstart = "06.10.00";
-        employeeNumber = 1;
-        int otherEnum = 2;
-        for(int y = 0; y<numTrains*2;y=y+2){
-            //int actualRow = y*2;
-            Row personRow = peopleSheet.createRow(y);
-            Row personRowOther = peopleSheet.createRow(y+1);
-            for(int z = 0; z<5; z++)
-            {
-                Cell cell = personRow.createCell(z);
-                Cell otherCell = personRowOther.createCell(z);
-                    if(z==0){
-                        cell.setCellValue("Employee "+employeeNumber);
-                        otherCell.setCellValue("Employee "+otherEnum);
-                    }
-                    else if(z==1){
-                        cell.setCellValue(convertTime(pstart));
-                        otherCell.setCellValue(convertTime(pstart));
-                    }
-                    else if(z==2){
-                        String temp1 = incrementTime(pstart,"60.0");
-                        String temp2 = incrementTime(temp1,"60.0");
-                        String temp3 = incrementTime(temp2,"60.0");
-                        String temp4 = incrementTime(temp3,"60.0");
-                        cell.setCellValue(convertTime(temp4));
-                        otherCell.setCellValue(convertTime(temp4));
-                    }
-                    else if(z==3){
-                        String temp1 = incrementTime(pstart,"60.0");
-                        String temp2 = incrementTime(temp1,"60.0");
-                        String temp3 = incrementTime(temp2,"60.0");
-                        String temp4 = incrementTime(temp3,"60.0");
-                        String temp5 = incrementTime(temp4,"30.0");
-                        cell.setCellValue(convertTime(temp5));
-                        otherCell.setCellValue(convertTime(temp5));
-                    }
-                    else if(z==4){
-                        String temp1 = incrementTime(pstart,"60.0");
-                        String temp2 = incrementTime(temp1,"60.0");
-                        String temp3 = incrementTime(temp2,"60.0");
-                        String temp4 = incrementTime(temp3,"60.0");
-                        String temp5 = incrementTime(temp4,"60.0");
-                        String temp6 = incrementTime(temp5,"60.0");
-                        String temp7 = incrementTime(temp6,"60.0");
-                        String temp8 = incrementTime(temp7,"60.0");
-                        String temp9 = incrementTime(temp8,"30.0");
-                        cell.setCellValue(convertTime(temp9));
-                        otherCell.setCellValue(convertTime(temp9));
-                    }
-            }
-            pstart = incrementTime(pstart,"15.0");
-            employeeNumber = employeeNumber+2;
-            otherEnum = otherEnum+2;
         }
+        else{
+            String[] driverNames = new String[numTrains+1];
+            for(i=0;i<8;i++){
+                Cell cell = peopleRow.createCell(i);
+                if(i==0){
+                    driverNames[j]="Employee "+employeeNumber;
+                }
+                else if(i==1){
+                    //cell.setCellValue(startTime);
+                }
+                else if(i==2){
+                    //cell.setCellValue(incrementTime(startTime,"240.0"));
+                }
+                else if(i==3){
+                    //cell.setCellValue(incrementTime(startTime,"270.0"));
+                }
+                else if(i==4){
+                   // cell.setCellValue(incrementTime(startTime,"510.0"));
+                }
+            }
+            for(i=0;i<3;i++){
+                Cell cell = redRow.createCell(i);
+                if(i==0){
+                    cell.setCellValue(trainID);
+                }
+                else if(i==1){
+                    cell.setCellValue(driverNames[j]);
+                }
+                else if(i==2){
+                    cell.setCellValue(startTimeDay);
+                    startTimeDay = incrementTime(startTimeDay,"15.0");
+                }
+            }
+        }
+        employeeNumber++;
+        dayOff2=dayOff1+1;
+        if(dayOff1>7){
+            dayOff1=0;
+        }
+        if(dayOff2>7){
+            dayOff2=0;
+        }
+        trainID=trainID+2;
+    }// end generate red
         
-        FileOutputStream output = new FileOutputStream("src\\com\\rogueone\\assets\\altSchedule.xlsx");
-        workbook.write(output);
-        output.close();
+        
+        
+    //generate green
+    trainID =-1;
+    startTimeDay = "06.10.00";
+    for(j=0;j<numTrains+1;j++){
+        isOff = 0;
+        testTrigger = 0;
+        Row personRow = peopleSheet.createRow(j);
+        Row greenRow = greenSheet.createRow(j);
+        if(j==0){
+            for(i=0;i<5;i++){
+                Cell cell = personRow.createCell(i);
+                cell.setCellValue(personnelHeaders[i]);
+            }
+            for(i=0;i<21;i++){
+                Cell greenCell = greenRow.createCell(i);
+                if(j==0){
+                greenCell.setCellValue(greenHeaders[i]);
+                //greenCell.setCellValue(greenHeaders[i]);
+                }
+                else{
+                    greenCell.setCellValue("");
+                }
+            }
+        }
+        else{
+            String[] driverNames = new String[numTrains+1];
+            for(i=0;i<5;i++){
+                Cell cell = personRow.createCell(i);
+                if(i==0){
+                    driverNames[j]="Employee "+employeeNumber;
+                   // cell.setCellValue("Employee "+employeeNumber);
+                }
+                else if(i==1){
+                    //cell.setCellValue(convertTime(startTime));
+                }
+                else if(i==2){
+                    String temp1 = incrementTime(startTime,"60.0");
+                    String temp2 = incrementTime(temp1,"60.0");
+                    String temp3 = incrementTime(temp2,"60.0");
+                    String temp4 = incrementTime(temp3,"60.0");
+                    //cell.setCellValue(convertTime(temp4));
+                }
+                else if(i==3){
+                    String temp1 = incrementTime(startTime,"60.0");
+                    String temp2 = incrementTime(temp1,"60.0");
+                    String temp3 = incrementTime(temp2,"60.0");
+                    String temp4 = incrementTime(temp3,"60.0");
+                    String temp5 = incrementTime(temp4,"30.0");
+                   // cell.setCellValue(convertTime(temp5));
+                }
+                else if(i==4){
+                    String temp1 = incrementTime(startTime,"60.0");
+                    String temp2 = incrementTime(temp1,"60.0");
+                    String temp3 = incrementTime(temp2,"60.0");
+                    String temp4 = incrementTime(temp3,"60.0");
+                    String temp5 = incrementTime(temp4,"60.0");
+                    String temp6 = incrementTime(temp5,"60.0");
+                    String temp7 = incrementTime(temp6,"60.0");
+                    String temp8 = incrementTime(temp7,"60.0");
+                    String temp9 = incrementTime(temp8,"30.0");
+                    //cell.setCellValue(convertTime(temp9));
+                }
+
+
+            }
+               if(isOff == 0){
+            for(i=0;i<3;i++){
+                Cell cell = greenRow.createCell(i);
+                if(i==0){
+                    cell.setCellValue(trainID);
+                }
+                else if(i==1){
+                    cell.setCellValue(driverNames[j]);
+                }
+                else if(i==2){
+                    //if((j &1)==0){
+                    cell.setCellValue(startTimeDay);
+                    startTimeDay = incrementTime(startTimeDay,"15.0");
+                }
+            }
+
+               }
+               else{
+                   Row deleted = greenSheet.getRow(j);
+                   greenSheet.removeRow(deleted);
+               }
+        }
+        startTime = incrementTime(startTime,"15.0");
+        employeeNumber++;
+        dayOff2=dayOff1+1;
+        if(dayOff1>7){
+            dayOff1=0;
+        }
+        if(dayOff2>7){
+            dayOff2=0;
+        }
+        trainID=trainID+2;
+    }// end generate green
+    
+    //generate personnel
+    String pstart = "06.10.00";
+    employeeNumber = 1;
+    int otherEnum = 2;
+    for(int y = 0; y<numTrains*2;y=y+2){
+        //int actualRow = y*2;
+        Row personRow = peopleSheet.createRow(y);
+        Row personRowOther = peopleSheet.createRow(y+1);
+        for(int z = 0; z<5; z++)
+        {
+            Cell cell = personRow.createCell(z);
+            Cell otherCell = personRowOther.createCell(z);
+                if(z==0){
+                    cell.setCellValue("Employee "+employeeNumber);
+                    otherCell.setCellValue("Employee "+otherEnum);
+                }
+                else if(z==1){
+                    cell.setCellValue(convertTime(pstart));
+                    otherCell.setCellValue(convertTime(pstart));
+                }
+                else if(z==2){
+                    String temp1 = incrementTime(pstart,"60.0");
+                    String temp2 = incrementTime(temp1,"60.0");
+                    String temp3 = incrementTime(temp2,"60.0");
+                    String temp4 = incrementTime(temp3,"60.0");
+                    cell.setCellValue(convertTime(temp4));
+                    otherCell.setCellValue(convertTime(temp4));
+                }
+                else if(z==3){
+                    String temp1 = incrementTime(pstart,"60.0");
+                    String temp2 = incrementTime(temp1,"60.0");
+                    String temp3 = incrementTime(temp2,"60.0");
+                    String temp4 = incrementTime(temp3,"60.0");
+                    String temp5 = incrementTime(temp4,"30.0");
+                    cell.setCellValue(convertTime(temp5));
+                    otherCell.setCellValue(convertTime(temp5));
+                }
+                else if(z==4){
+                    String temp1 = incrementTime(pstart,"60.0");
+                    String temp2 = incrementTime(temp1,"60.0");
+                    String temp3 = incrementTime(temp2,"60.0");
+                    String temp4 = incrementTime(temp3,"60.0");
+                    String temp5 = incrementTime(temp4,"60.0");
+                    String temp6 = incrementTime(temp5,"60.0");
+                    String temp7 = incrementTime(temp6,"60.0");
+                    String temp8 = incrementTime(temp7,"60.0");
+                    String temp9 = incrementTime(temp8,"30.0");
+                    cell.setCellValue(convertTime(temp9));
+                    otherCell.setCellValue(convertTime(temp9));
+                }
+        }
+        pstart = incrementTime(pstart,"15.0");
+        employeeNumber = employeeNumber+2;
+        otherEnum = otherEnum+2;
+    }
+        
+    FileOutputStream output = new FileOutputStream("src\\com\\rogueone\\assets\\altSchedule.xlsx");
+    workbook.write(output);
+    output.close();
     }
     
     /**

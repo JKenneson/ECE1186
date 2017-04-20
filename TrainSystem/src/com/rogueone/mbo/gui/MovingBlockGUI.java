@@ -19,10 +19,10 @@ import javax.swing.table.*;;
  * @author Brian Stevenson
  */
 public class MovingBlockGUI extends javax.swing.JPanel {
-private TrainSystem trainSystem;
-private File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
-private Mbo mbo = trainSystem.getMBO();
-private boolean mode  = false;
+    private TrainSystem trainSystem;
+    private File file = new File("src\\com\\rogueone\\assets\\altSchedule.xlsx");
+    private Mbo mbo = trainSystem.getMBO();
+    private boolean mode  = false;
 
     /**
      * Constructor for new  MovingBlockGUI
@@ -445,10 +445,9 @@ private boolean mode  = false;
                double tempTrains = Double.parseDouble(numTrainStr);
                int numTrains = (int)tempTrains;
                 try{
-                Scheduler.generateSchedule(numTrains);
+                    Scheduler.generateSchedule(numTrains);
                 }
                 catch(IOException | InvalidFormatException e){
-
                 }
             }
             else if(ThroughputRadio.isSelected()){
@@ -458,10 +457,9 @@ private boolean mode  = false;
                 double timearoundRed = .33;
                 int numTrains = (int)Math.ceil(throughput/timearoundGreen);
                 try{
-                Scheduler.generateSchedule(numTrains);
+                    Scheduler.generateSchedule(numTrains);
                 }
                 catch(IOException | InvalidFormatException e){
-
                 }
             }
     }//GEN-LAST:event_MboOkButton2ActionPerformed
@@ -488,7 +486,6 @@ private boolean mode  = false;
      */
     private void DetailedScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailedScheduleButtonActionPerformed
 
-        
         TrainScheduleGUI trainSchedule = new TrainScheduleGUI();
          Mbo mbo = trainSystem.getMBO();
          
