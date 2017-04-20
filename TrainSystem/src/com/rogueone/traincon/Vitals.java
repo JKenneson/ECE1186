@@ -103,7 +103,7 @@ public class Vitals {
         this.oldSetPoint = newSetPoint;
         
         this.gps.update(this.trainModel.getDistanceTraveledFeet(), this.trainModel.getCurrBlock(), this.trainModel.getCurrSpeedMPH());
-        if (this.gps.getAuthority() < (this.trainModel.safeStoppingDistance() + 3) || this.emergencyBrakeOverride) {
+        if (this.gps.getAuthority() < (this.trainModel.safeStoppingDistance() + 3.2) || this.emergencyBrakeOverride) {
             this.setEmergencyBrakeActivated(true);
         } else if (!this.emergencyBrakeOverride) {
             this.setEmergencyBrakeActivated(false);
