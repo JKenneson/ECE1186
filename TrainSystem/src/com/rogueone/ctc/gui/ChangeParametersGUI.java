@@ -10,31 +10,35 @@ import com.rogueone.trainsystem.TrainSystem;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Robert
+ * @author Robert Goldshear
  */
-
 
 public class ChangeParametersGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form ChangeParametersGUI
      */
-    //private CommandTrackControlGUI ctcGUI;
+
     public TrainSystem trainSystem;
     private CommandTrackControlGUI ctcGUI;
 
+    /**
+     * @author Robert Goldshear
+     * @param ctcGUI
+     * @param ts
+     */
     public ChangeParametersGUI(CommandTrackControlGUI ctcGUI, TrainSystem ts){
 
         initComponents();
         this.trainSystem = ts;
-        this.ctcGUI = ctcGUI;
-        //getSpeedAndAuthority();
-   
+        this.ctcGUI = ctcGUI;   
     }
 
+    /**
+     * @author Robert Goldshear
+     */
     private ChangeParametersGUI() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     /**
@@ -209,8 +213,10 @@ public class ChangeParametersGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
+    
+    /**
+     * @author Robert Goldshear
+     */
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         String trainSpeedString = SetSpeedField.getText();
         double trainSpeed = Double.parseDouble(trainSpeedString);
