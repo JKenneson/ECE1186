@@ -863,7 +863,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 } 
             }    
     }
-
+   
+    /**
+     * @author Robert Goldshear
+     * @return integer 
+     * Returns the current ID for the next available system dispatch
+     */
     private int iterateID(){
         iterativeID++;
         System.out.println("New ID is: " + iterativeID ); //checking to make sure multi line functionality cooperates
@@ -872,23 +877,33 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     
     private void greenLineThroughputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenLineThroughputActionPerformed
     }//GEN-LAST:event_greenLineThroughputActionPerformed
-
-
+    
+    /**
+     * @author Robert Goldshear
+     * Brings up a change parameters GUI in reference to the selected train
+     */
     private void ChangeParametersButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeParametersButton3ActionPerformed
         ChangeParametersGUI params = new ChangeParametersGUI(this, trainSystem);
-        params.setVisible(true); //brings up a change parameters gui in reference to the train
+        params.setVisible(true); 
     }//GEN-LAST:event_ChangeParametersButton3ActionPerformed
-
+    
+    /**
+     * @author Robert Goldshear
+     * Brings up a track shutdown GUI in reference to the system
+     */
     private void TrackShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackShutdownButtonActionPerformed
         TrackShutdownGUI trackShutdown = new TrackShutdownGUI(this, trainSystem);
-        trackShutdown.setVisible(true); //brings up a track shutdown gui in reference to the system
+        trackShutdown.setVisible(true); 
     }//GEN-LAST:event_TrackShutdownButtonActionPerformed
-
+    
+    /**
+     * @author Robert Goldshear
+     * Defines the click characteristics for clicking an ID in the Train Table
+     */
     private void TrainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrainTableMouseClicked
 
         InitializeGUIObject();
         int trainID;
-
         JTable selectCheck = (JTable) evt.getSource();
 
         if (selectCheck != null) {
@@ -918,23 +933,22 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
             
        }
-
+        
+        //Double mouse click calls Train Model CreateGUIObject to dispalay IDed train model
         if (evt.getClickCount() == 2) {
-            //double mouse click calls Train Model CreateGUIObject to dispalay IDed train model
             JTable table = (JTable) evt.getSource();
             int row = table.getSelectedRow();
             String trainString = table.getValueAt(row, 1).toString();
             trainID = Integer.parseInt(trainString);
-            trainSystem.getTrainHandler().showObjectsFromCTC(trainID);
-            
+            trainSystem.getTrainHandler().showObjectsFromCTC(trainID);          
         }
-
     }//GEN-LAST:event_TrainTableMouseClicked
 
     /**
      * @author Robert Goldshear
      * @param trainID
      * @param passTrainLine
+     * Disable a given train on the track for maintenance
      */
     public void DisableTrain(int trainID, String passTrainLine) {
         Boolean bool = false;
@@ -954,6 +968,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      * @param lineName
      * @param segmentName
      * @param blockName
+     * Disable a selected track segment for maintenance 
      */
     public void DisableTrack(String lineName, String segmentName, int blockName) {
         Boolean trackBool = false;
@@ -975,6 +990,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     /**
      * @author Robert Goldshear
+     * Page through the system tables seeking out failures
      */
     private void checkForFailure() {
         Object newFailureRow = new Object[4];
@@ -1003,10 +1019,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }
 
     /**
-     * 
+     * @author Robert Goldshear
      * @param passTrainLine
      * @param trainPosition
      * @param failureType
+     * Adds a new row to the failure table when necessary
      */
     private void updateFailureTable(String passTrainLine, String trainPosition, String failureType) {
 
@@ -1055,7 +1072,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
         return false;
     }
-
+    
+    /**
+     * @author Robert Goldshear
+     * Defines click characteristics for clicking on a block in the Block Table
+     */   
     private void BlockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BlockTableMouseClicked
         InitializeGUIObject();
         if (evt.getClickCount() == 1) {
@@ -1091,7 +1112,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_BlockTableMouseClicked
-
+    
+    /**
+     * @author Robert Goldshear
+     * Defines click characteristics for clicking on a failure in the Failure Table
+     */ 
     private void FailureTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FailureTableMouseClicked
         InitializeGUIObject();
 
@@ -1119,6 +1144,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     /**
      * @author Robert Goldshear
      * @param blockID
+     * Passing in the location of the failure to disable it in the Failure Table
      */
     private void removeFailureFromTable(Object blockID){
         int blockIDRow = 0;
@@ -1135,7 +1161,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         setOperational();
     }
     
-    
+        
+    /**
+     * @author Robert Goldshear
+     * Changes the operational status of Blocks and Trains in their respective tables
+     */ 
     private void setOperational(){
         
         for ( int i = 0; i < TrainTable.getRowCount(); i ++){
@@ -1146,6 +1176,10 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * @author Robert Goldshear
+     * Defines click characteristics for clicking on the Dispatch Button
+     */    
     private void DispatchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchButton1ActionPerformed
 
         String dispatchLine = (String) DispatchLineBox.getSelectedItem();
@@ -1183,11 +1217,17 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             if (dispatchSpeed >= 44){
             JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Speed Too High.", "Error",
                                     JOptionPane.ERROR_MESSAGE);   
-            }
-       
-        
+            }  
     }//GEN-LAST:event_DispatchButton1ActionPerformed
-
+    
+    /**
+     * @author Robert Goldshear
+     * @param dispatchLine
+     * @param dispatchBlock
+     * @param dispatchSection
+     * @param dispatchID
+     * Adds a new row to the Train Table upon a dispatch
+     */ 
     private void addRow(String dispatchLine, String dispatchBlock, int dispatchSection, int dispatchID) {
         String concatination = (dispatchBlock + ":" + Integer.toString(dispatchSection));
         Object[] newRow = new Object[4];
