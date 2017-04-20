@@ -176,7 +176,11 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     private void CloseTrackDisableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseTrackDisableButtonActionPerformed
         this.dispose();     
     }//GEN-LAST:event_CloseTrackDisableButtonActionPerformed
-
+    
+    /**
+     * @author Robert Goldshear
+     * Disables the selected track segment
+     */
     private void TrackDisableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrackDisableButtonActionPerformed
         Line lineName = (Line)(LineComboBox.getSelectedItem());
         Section segmentName = (Section)SegmentComboBox.getSelectedItem();
@@ -200,13 +204,21 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     private void LineComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineComboBoxActionPerformed
         updateSectionComboBox();   
     }//GEN-LAST:event_LineComboBoxActionPerformed
-  
+    
+    /**
+     * @author Robert Goldshear
+     * updates cascading block values based on selected line and section
+     */
     private void update(){
         updateLineComboBox();
         updateSectionComboBox();
         updateBlockComboBox();
     }
     
+    /**
+     * @author Robert Goldshear
+     * sets the block status as inactive based on the block selection
+     */
     private void disableTrackSegment(String lineName, String segmentName, String blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, Integer.parseInt(blockName));
         Global.Line lineVal = Global.Line.valueOf(lineName); 

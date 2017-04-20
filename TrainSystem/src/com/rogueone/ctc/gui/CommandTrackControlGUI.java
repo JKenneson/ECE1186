@@ -1251,12 +1251,16 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_DispatchAuthorityFieldMouseClicked
 
     private void DispatchSpeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DispatchSpeedFieldActionPerformed
- 
+
     }//GEN-LAST:event_DispatchSpeedFieldActionPerformed
 
     private void redLineThroughputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redLineThroughputActionPerformed
     }//GEN-LAST:event_redLineThroughputActionPerformed
 
+    /**
+     * @author Robert Goldshear
+     * Brings up a Train Shutdown GUI for maintenance
+     */
     private void TrainShutdownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainShutdownButtonActionPerformed
         TrainShutdownGUI trainShutdown = new TrainShutdownGUI(this, trainSystem);
         trainShutdown.setVisible(true);        
