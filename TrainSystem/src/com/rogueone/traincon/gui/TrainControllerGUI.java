@@ -1018,13 +1018,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void PowerFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerFailureCheckActionPerformed
         if(this.PowerFailureCheck.isSelected()){
-            this.trainController.vitals.causeFailure(TrainFailures.Power);
+            this.trainController.vitals.causeFailure(TrainFailures.Power, false);
             this.StatusPowerLabel.setText("FAILURE");
             this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulated");
         }
         else{
-            this.trainController.vitals.fixFailure(TrainFailures.Power);
+            this.trainController.vitals.fixFailure(TrainFailures.Power, false);
             this.StatusPowerLabel.setText("ACTIVE");
             this.StatusPowerImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nPower Failure Simulation Ended");
@@ -1033,13 +1033,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void AntennaFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntennaFailureCheckActionPerformed
         if(this.AntennaFailureCheck.isSelected()){
-            this.trainController.vitals.causeFailure(TrainFailures.Antenna);
+            this.trainController.vitals.causeFailure(TrainFailures.Antenna, false);
             this.StatusAntennaLabel.setText("FAILURE");
             this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulated");
         }
         else{
-            this.trainController.vitals.fixFailure(TrainFailures.Antenna);
+            this.trainController.vitals.fixFailure(TrainFailures.Antenna, false);
             this.StatusAntennaLabel.setText("ACTIVE");
             this.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nAntenna Failure Simulation Ended");
@@ -1048,13 +1048,13 @@ public class TrainControllerGUI extends javax.swing.JPanel {
 
     private void ServiceBrakeFailureCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiceBrakeFailureCheckActionPerformed
         if(this.ServiceBrakeFailureCheck.isSelected()){
-            this.trainController.vitals.causeFailure(TrainFailures.Brake);
+            this.trainController.vitals.causeFailure(TrainFailures.Brake, false);
             this.StatusBrakeLabel.setText("FAILURE");
             this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/SQUARE_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulated");
         }
         else{
-            this.trainController.vitals.fixFailure(TrainFailures.Brake);
+            this.trainController.vitals.fixFailure(TrainFailures.Brake, false);
             this.StatusBrakeLabel.setText("ACTIVE");
             this.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("../../images/CIRC_98.png")));
             this.NotificationsDisplay.append("\nService Brake Failure Simulation Ended");

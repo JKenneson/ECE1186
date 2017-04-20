@@ -194,9 +194,9 @@ public class TMR {
      * @author Tyler Protivnak
      * @param failure 
      */
-    public void causeFailure(TrainFailures failure) {
+    public void causeFailure(TrainFailures failure, boolean trainModel) {
         for(int i = 0; i < 3; i++){
-            this.vitals[i].causeFailure(failure);
+            this.vitals[i].causeFailure(failure, trainModel);
         }
     }
     
@@ -206,9 +206,9 @@ public class TMR {
      * @author Tyler Protivnak
      * @param failure 
      */
-    public void fixFailure(TrainFailures failure) {
+    public void fixFailure(TrainFailures failure, boolean trainModel) {
         for(int i = 0; i < 3; i++){
-            this.vitals[i].fixFailure(failure);
+            this.vitals[i].fixFailure(failure, trainModel);
         }
     }
 }

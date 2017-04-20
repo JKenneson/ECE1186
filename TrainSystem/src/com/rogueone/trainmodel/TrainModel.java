@@ -397,11 +397,13 @@ public class TrainModel {
             case Power:
                 this.powerFailure = true;               //In any setter methods below, the value will not be updated if there is a power failure
                 this.emergencyBrakeOverride = true;
+                this.trainController.vitals.causeFailure(failure, true);
                 break;
             //A brake failure will prevent the service brake from being activated. Activate the emergency brake
             case Brake:
                 this.brakeFailure = true;
                 this.emergencyBrakeOverride = true;
+                this.trainController.vitals.causeFailure(failure, true);
                 break;
             //Deactivate the track and mbo antenna.  Activate emergency brake
             case Antenna:
@@ -409,6 +411,7 @@ public class TrainModel {
                 this.trackAntennaActivated = false;
                 this.mboAntennaActivated = false;
                 this.emergencyBrakeOverride = true;
+                this.trainController.vitals.causeFailure(failure, true);
                 break;
         }
     }
@@ -426,16 +429,19 @@ public class TrainModel {
             //Undo the power failure
             case Power:
                 this.powerFailure = false;
+                this.trainController.vitals.fixFailure(failure, true);
                 break;
             //Undo the brake failure
             case Brake:
                 this.brakeFailure = false;
+                this.trainController.vitals.fixFailure(failure, true);
                 break;
             //Undo the antenna failure
             case Antenna:
                 this.antennaFailure = false;
                 this.trackAntennaActivated = true;
                 this.mboAntennaActivated = true;
+                this.trainController.vitals.fixFailure(failure, true);
                 break;
         }
         //If there are no failures, de-activate the emergencyBrakeOverride

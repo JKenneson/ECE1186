@@ -176,27 +176,34 @@ public class Vitals {
      *
      * @author Tyler Protivnak
      * @param failure One of 3 TrainFailures as found in TrainFailures.java
+     * @param trainModel did this command come from the train model?
      */
-    public void causeFailure(TrainFailures failure) {
+    public void causeFailure(TrainFailures failure, boolean trainModel) {
         //Switch on the failure passed in
         switch (failure) {
             //A power failure will prevent the doors, lights, and temp setting from working.  Activate emergency brake
             case Power:
                 this.powerStatus = false;               //In any setter methods below, the value will not be updated if there is a power failure
                 this.emergencyBrakeOverride = true;
-                this.trainModel.causeFailure(TrainFailures.Power);
+                if(!trainModel){
+                    this.trainModel.causeFailure(TrainFailures.Power);
+                }
                 break;
             //A brake failure will prevent the service brake from being activated. Activate the emergency brake
             case Brake:
                 this.serviceBrakeStatus = false;
                 this.emergencyBrakeOverride = true;
-                this.trainModel.causeFailure(TrainFailures.Brake);
+                if(!trainModel){
+                    this.trainModel.causeFailure(TrainFailures.Brake);
+                }
                 break;
             //Deactivate the track and mbo antenna.  Activate emergency brake
             case Antenna:
                 this.antennaStatus = false;
                 this.emergencyBrakeOverride = true;
-                this.trainModel.causeFailure(TrainFailures.Antenna);
+                if(!trainModel){
+                    this.trainModel.causeFailure(TrainFailures.Antenna);
+                }
                 break;
         }
     }
@@ -208,24 +215,31 @@ public class Vitals {
      *
      * @author Tyler Protivnak
      * @param failure One of 3 TrainFailures as found in TrainFailures.java
+     * @param trainModel did this command come from the train model?
      */
-    public void fixFailure(TrainFailures failure) {
+    public void fixFailure(TrainFailures failure, boolean trainModel) {
         //Switch on the failure passed in
         switch (failure) {
             //Undo the power failure
             case Power:
                 this.powerStatus = true;
-                this.trainModel.fixFailure(TrainFailures.Power);
+                if(!trainModel){
+                    this.trainModel.fixFailure(TrainFailures.Power);    
+                }
                 break;
             //Undo the brake failure
             case Brake:
                 this.serviceBrakeStatus = true;
-                this.trainModel.fixFailure(TrainFailures.Brake);
+                if(!trainModel){
+                    this.trainModel.fixFailure(TrainFailures.Brake);
+                }
                 break;
             //Undo the antenna failure
             case Antenna:
                 this.antennaStatus = true;
-                this.trainModel.fixFailure(TrainFailures.Antenna);
+                if(!trainModel){
+                    this.trainModel.fixFailure(TrainFailures.Antenna);
+                }
                 break;
         }
         //If there are no failures, de-activate the emergencyBrakeOverride

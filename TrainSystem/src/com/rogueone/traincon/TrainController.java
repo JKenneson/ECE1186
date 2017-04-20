@@ -264,7 +264,7 @@ public class TrainController {
                     gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png")));
                     
                     //Update simulation boxes
-                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.PowerFailureCheck.setSelected(false);
                     gui.AntennaFailureCheck.setSelected(true);
                     gui.ServiceBrakeFailureCheck.setSelected(false);
                     break;
@@ -279,7 +279,7 @@ public class TrainController {
                     gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("/com/rogueone/images/SQUARE_98.png")));
                     
                     //Update simulation boxes
-                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.PowerFailureCheck.setSelected(false);
                     gui.AntennaFailureCheck.setSelected(false);
                     gui.ServiceBrakeFailureCheck.setSelected(true);
                     break;
@@ -293,7 +293,7 @@ public class TrainController {
                     gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png")));
                     
                     //Update simulation boxes
-                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.PowerFailureCheck.setSelected(true);
                     gui.AntennaFailureCheck.setSelected(true);
                     gui.ServiceBrakeFailureCheck.setSelected(false);
                     break;
@@ -308,7 +308,7 @@ public class TrainController {
                     gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("/com/rogueone/images/SQUARE_98.png")));
                     
                     //Update simulation boxes
-                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.PowerFailureCheck.setSelected(true);
                     gui.AntennaFailureCheck.setSelected(false);
                     gui.ServiceBrakeFailureCheck.setSelected(true);
                     break;
@@ -323,7 +323,7 @@ public class TrainController {
                     gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("/com/rogueone/images/SQUARE_98.png")));
                     
                     //Update simulation boxes
-                    gui.AntennaFailureCheck.setSelected(false);
+                    gui.PowerFailureCheck.setSelected(false);
                     gui.AntennaFailureCheck.setSelected(true);
                     gui.ServiceBrakeFailureCheck.setSelected(true);
                     break;
@@ -337,7 +337,7 @@ public class TrainController {
                     gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("/com/rogueone/images/SQUARE_98.png")));
                     
                     //Update simulation boxes
-                    gui.AntennaFailureCheck.setSelected(true);
+                    gui.PowerFailureCheck.setSelected(true);
                     gui.AntennaFailureCheck.setSelected(true);
                     gui.ServiceBrakeFailureCheck.setSelected(true);
                     break;
@@ -368,6 +368,11 @@ public class TrainController {
             gui.StatusAntennaImage.setIcon(new ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png")));
             gui.StatusBrakeLabel.setText("ACTIVE");
             gui.StatusBrakeImage.setIcon(new ImageIcon(getClass().getResource("/com/rogueone/images/CIRC_98.png")));
+            
+            //Update simulation boxes
+            gui.PowerFailureCheck.setSelected(false);
+            gui.AntennaFailureCheck.setSelected(false);
+            gui.ServiceBrakeFailureCheck.setSelected(false);
         }
         
         if(this.vitals.getPrimary().isServiceBrakeActivated()) {
