@@ -9,6 +9,7 @@ package com.rogueone.traincon;
 
 import com.rogueone.trackmodel.Beacon;
 import com.rogueone.trainmodel.TrainModel;
+import com.rogueone.trainmodel.entities.TrainFailures;
 import com.rogueone.trainsystem.TrainSystem;
 
 /**
@@ -187,4 +188,27 @@ public class TMR {
         }
     }
     
+    /**
+     * Pass failure signal to Vital
+     * 
+     * @author Tyler Protivnak
+     * @param failure 
+     */
+    public void causeFailure(TrainFailures failure) {
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].causeFailure(failure);
+        }
+    }
+    
+    /**
+     * Pass fix signal to Vital
+     * 
+     * @author Tyler Protivnak
+     * @param failure 
+     */
+    public void fixFailure(TrainFailures failure) {
+        for(int i = 0; i < 3; i++){
+            this.vitals[i].fixFailure(failure);
+        }
+    }
 }
