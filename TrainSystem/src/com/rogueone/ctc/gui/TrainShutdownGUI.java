@@ -13,8 +13,8 @@ import com.rogueone.trainsystem.TrainSystem;
 import java.util.ArrayList;
 
 /**
- *
  * @author Robert
+ * Provides an interface to schedule maintenance for blocks 
  */
 public class TrainShutdownGUI extends javax.swing.JFrame {
 
@@ -29,6 +29,11 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     public TrainSystem trainSystem;
     private TrackModel trackModel;
     
+    /**
+     * @author Robert Goldshear
+     * @param ctcGUI
+     * @param ts
+     */
     public TrainShutdownGUI(CommandTrackControlGUI ctcGUI, TrainSystem ts) {
         this.ctcGUI = ctcGUI;
         this.trainSystem = ts;
@@ -162,7 +167,7 @@ public class TrainShutdownGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_disableButtonActionPerformed
     
     /**
-     *
+     * @author Robert Goldshear
      * @param passTrainName
      * @param passTrainLine
      */

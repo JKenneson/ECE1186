@@ -48,7 +48,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      */
     public CommandTrackControlGUI(TrainSystem ts) {
         initComponents();
-
+        //creating instances of the trainSystem so there is seamless data  
         this.trainSystem = ts;
         this.trackModel = ts.getTrackModel();
         updateGUI();
@@ -616,13 +616,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     public void updateBlockTable(){
         BlockTable.removeAll();
         
-        ArrayList<Block> blocks = this.trackModel.getBlockArray();
+        //ArrayList<Block> blocks = this.trackModel.getBlockArray();
         ArrayList<Line> lines = this.trackModel.getLineArray();
-        ArrayList<Section> sections = this.trackModel.getSectionArray();
+        //ArrayList<Section> sections = this.trackModel.getSectionArray();
         
         DefaultTableModel blockModel = (DefaultTableModel) BlockTable.getModel();
         Object[] newBlock = new Object[4];
-
+        
+        //Utilizes the cascading properties of the track to populate the blocks in the CTC
         for (Line l: lines) {
             for (Section s: l.getSections()){
                 for (Block b: s.getBlocks()){
@@ -643,11 +644,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     /**
      * @author Robert Goldshear
      * @param trainID
+     * Once trains reach the yard they are eliminated from the system
      */
     public void removeTrainFromTable(int trainID){
-       int trainIDRow = 0;
-         
+       int trainIDRow = 0;  
         DefaultTableModel model = (DefaultTableModel)TrainTable.getModel();
+        
+        //Iterating through the train table and removing trains from the model in yard cases
         for(int i = 0; i < model.getRowCount(); i++){
             for(int j = 0; j < model.getColumnCount(); j++){
                 if(model.getValueAt(i, j).equals(trainID)){
@@ -661,15 +664,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     /**
      * @author Robert Goldshear
      * @param block
+     * Recognizes an error type received from the Global track and its type
      */
     public void failureFromTrackModel(Block block){
          Object[] newFailure = new Object[4];
          DefaultTableModel failureModel = (DefaultTableModel) FailureTable.getModel();
- 
+         
+        //Begins packing the failure object array with neccessary block data
          newFailure[2] = block.getID();
          newFailure[1] = block.getSection().toString();
          newFailure[0] = block.getLine().toString();
-                 
+         
+         //Finishes building the failure array with the specified failure type
          if (block.getFailureBrokenRail() == true){
              newFailure[3] = "Rail";
          }
@@ -680,6 +686,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
              newFailure[3] = "Circuit";
          }
          
+         //Adds the failure array to the model and thus the table
          failureModel.addRow(newFailure);
          FailureTable.repaint();
  
@@ -690,7 +697,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      * calculates offsets in presence to determine train position
      */
     public void updateTrainTable(){
-            
+       
+       //Utilizes a block overlay from the Train Handler to update location of trains in the Table
        for (int i = 0; i < TrainTable.getRowCount(); i++) {
             int tempID = (Integer)TrainTable.getValueAt(i, 1);
             String tempLocation = trainSystem.getTrainHandler().getBlockForTrain(tempID);
@@ -705,10 +713,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
      */
     public void updateTime(){
        
+        //If the Global Time is not in the limits for rush hour it zeroes out the progress bar
         if ((this.trainSystem.getClock().getHour() < 6) || (this.trainSystem.getClock().getHour() >= 8)){
             rushHourProgressBar.setValue(0);
         }
         
+        //If it is currently rush hour, the rush hour progress bar updates accordingly
         else{
             if(this.trainSystem.getClock().getHour() == 6){
                 rushHourProgressBar.setValue(this.trainSystem.getClock().getMinute());
@@ -718,10 +728,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             }
         }
         
+        //If the system is in Automatic Mode the schedule is fetched for dispatching purposes
         if(SelectOperationMode2.getSelectedIndex() == 1){
             getDispatchTimes();
         }
-
+        
+        //Throughput is calculated on every clock tick
         calculateThroughput();
     }
     
@@ -732,15 +744,18 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private void calculateThroughput(){
         throughputValueGreen = 0;
         throughputValueRed = 0;
+        
+        //After every hour the throughput values drop to zero to recalculate
         if(this.trainSystem.getClock().getMinute() == 59 && this.trainSystem.getClock().getSecond() == 59){
             this.trainsPerHourGreen = 0;
             this.trainsPerHourRed = 0;
         }
-        double tempValue;
         
+        double tempValue;    
         ArrayList<TrainModel> trainList = trainSystem.getTrainHandler().getTrains();
-        
         int arraySize = trainList.size();
+        
+        //Iterating through the current trains on the track and using their distances into the track to calculate a cumulative percentage
         for(int i = 0 ; i < arraySize ; i++) {
              tempValue = (trainList.get(i).getTotalDistanceTraveledFeet())/trainSystem.getTrackModel().getLine(Global.Line.valueOf(trainList.get(i).getLine())).getTotalLength();
             if(Global.Line.valueOf(trainList.get(i).getLine()) == Global.Line.GREEN){
@@ -775,16 +790,14 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             ChangeParametersButton3.setEnabled(false);
             DispatchButton1.setEnabled(false);
             TrackShutdownButton.setEnabled(false);
-            TrainShutdownButton.setEnabled(false);
-
-            
+            TrainShutdownButton.setEnabled(false);   
         }
-
     }//GEN-LAST:event_SelectOperationMode2ActionPerformed
 
     /**
      * @author Robert Goldshear
      * @return boolean if the system is in automatic mode
+     * reports if the system is in Automatic or Manual Mode
      */
     public boolean isAutomatic(){
         if (SelectOperationMode2.getSelectedIndex() == 1){
@@ -793,15 +806,29 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         return false;
     }
     
+    /**
+     * @author Robert Goldshear
+     * Based on the time of the global clock and knowledge of automatic mode dispatches trains accordingly
+     */
     private void getDispatchTimes(){
-    
+        
         int autoDispatchHour = trainSystem.getClock().getHour();
         int autoDispatchMinute = trainSystem.getClock().getMinute();
         int autoDispatchSecond = trainSystem.getClock().getSecond();
         autoDispatch(autoDispatchHour, autoDispatchMinute, autoDispatchSecond); 
     
     }
-
+    
+    /**
+     * @author Robert Goldshear
+     * @param speed
+     * @param authority
+     * @param cars
+     * @param line
+     * @param ID
+     * Dispatches a new trains based on the passed in parameters
+     * Will throw an error if there is an unsafe dispatch command
+     */
     private void dispatchNewTrain(int speed, int authority, int cars, String line, int ID){
         if (trainSystem.getTrackControllerHandler().requestDispatch((Global.Line.valueOf(line)))){
             trainSystem.dispatchTrain(speed, authority, cars, line, ID);
@@ -814,6 +841,13 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * @author Robert Goldshear
+     * @param autoDispatchHour
+     * @param autoDispatchMinute
+     * @param autoDispatchSecond
+     * Dispatches a new train onto both lines according to the schedule with a safe speed and authority
+     */
     private void autoDispatch(int autoDispatchHour, int autoDispatchMinute, int autoDispatchSecond){
         int greenID = iterativeID;
         int redID = greenID++;

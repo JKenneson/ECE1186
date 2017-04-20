@@ -1,4 +1,5 @@
 /*
+ * @Robert Goldshear
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,12 +16,13 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- *
  * @author Robert
+ * Provides an interface to schedule maintenance for blocks 
  */
 public class TrackShutdownGUI extends javax.swing.JFrame {
 
     /**
+     * @author Robert Goldshear
      * Creates new form TrackShutdownGUI
      */
     public TrackShutdownGUI() {
@@ -32,7 +34,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     private TrackModel trackModel;
     
     /**
-     *
+     * @author Robert Goldshear
      * @param ctcGUI
      * @param ts
      */
@@ -204,6 +206,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         updateSectionComboBox();
         updateBlockComboBox();
     }
+    
     private void disableTrackSegment(String lineName, String segmentName, String blockName){
         this.ctcGUI.DisableTrack(lineName, segmentName, Integer.parseInt(blockName));
         Global.Line lineVal = Global.Line.valueOf(lineName); 
@@ -213,7 +216,6 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
         else{
             this.trainSystem.getTrackViewRed().setBlockStatus(lineVal, segmentName, Integer.parseInt(blockName), false);
         }
-        //this.trainSystem.getTrackControllerHandler().requestMaintenance(lineVal, Integer.parseInt(blockName));
         
     }
     
@@ -233,6 +235,7 @@ public class TrackShutdownGUI extends javax.swing.JFrame {
     }                          
     
     /**
+     * @author Robert Goldshear
      * @param args the command line arguments
      */
     public static void main(String args[]) {
