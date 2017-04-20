@@ -778,7 +778,11 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
 
     private void jPanel20ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel20ComponentShown
     }//GEN-LAST:event_jPanel20ComponentShown
-
+    
+    /**
+     * @author Robert Goldshear
+     * Changing from Manual to Automatic enables and disables certain GUI features
+     */   
     private void SelectOperationMode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectOperationMode2ActionPerformed
         if (SelectOperationMode2.getSelectedIndex() == 0) {
             ChangeParametersButton3.setEnabled(true);
@@ -930,8 +934,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
                 ChangeParametersButton3.setEnabled(false);
             } else {
                 ChangeParametersButton3.setEnabled(true);
-            }
-            
+            }   
        }
         
         //Double mouse click calls Train Model CreateGUIObject to dispalay IDed train model
@@ -984,6 +987,7 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         }
         BlockTable.repaint();
         checkForFailure();
+        
         trainSystem.getTrackControllerHandler().requestMaintenance(Global.Line.valueOf(lineName), blockName);
         trainSystem.getTrackControllerHandler().updateTrack(Global.Line.valueOf(lineName));
     }
@@ -1036,7 +1040,8 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         newRow[2] = failureBlock;
         newRow[3] = failureType;
         DefaultTableModel model = (DefaultTableModel) FailureTable.getModel();
-
+        
+        //Making sure the failure doesnt already exist
         if (!(existsInTable(FailureTable, newRow))) {
             model.addRow(newRow);
             FailureTable.repaint();
@@ -1138,7 +1143,6 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
             
             removeFailureFromTable(failureTable.getValueAt(failureRow,2));
         }
-
     }//GEN-LAST:event_FailureTableMouseClicked
     
     /**
@@ -1187,13 +1191,17 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         int dispatchSection = 1;
         int dispatchSpeed = 0;
         int dispatchAuthority = 0;
+        
+        //Does type checking on the input fields
         if (trainSystem.isInteger(DispatchSpeedField.getText())){
             dispatchSpeed = Integer.valueOf(DispatchSpeedField.getText());  
         }
         if (trainSystem.isInteger(DispatchAuthorityField.getText())){
             dispatchAuthority = Integer.valueOf(DispatchAuthorityField.getText());
         }
+        
         int dispatchNumberCars = 1;
+        
         if(this.trainSystem.getClock().getHour() >= 6 && this.trainSystem.getClock().getHour() <= 7){
             dispatchNumberCars = 2;
         }
@@ -1205,19 +1213,19 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
         newTrain[2] = (dispatchSection + ":" + dispatchBlock);
         newTrain[3] = true;
 
-                
-            if ((dispatchAuthority < 107000) & (dispatchSpeed < 44) & (trainSystem.isInteger(DispatchSpeedField.getText())) & (trainSystem.isInteger(DispatchAuthorityField.getText()))){
+       //Checks for safe dispatch parameters and displays errors when needed         
+        if ((dispatchAuthority < 107000) & (dispatchSpeed < 44) & (trainSystem.isInteger(DispatchSpeedField.getText())) & (trainSystem.isInteger(DispatchAuthorityField.getText()))){
             dispatchNewTrain(dispatchSpeed, dispatchAuthority, dispatchNumberCars, dispatchLine, dispatchID);
             trainsDispatched++;
-            }
-            if ((dispatchAuthority >= 107000)){
+        }
+        if ((dispatchAuthority >= 107000)){
             JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Authoity Too High.", "Error",
                                     JOptionPane.ERROR_MESSAGE);   
-            }
-            if (dispatchSpeed >= 44){
+        }
+        if (dispatchSpeed >= 44){
             JOptionPane.showMessageDialog(null, "Unsafe Dispatch Command. Speed Too High.", "Error",
                                     JOptionPane.ERROR_MESSAGE);   
-            }  
+        }  
     }//GEN-LAST:event_DispatchButton1ActionPerformed
     
     /**
@@ -1306,7 +1314,12 @@ public class CommandTrackControlGUI extends javax.swing.JPanel {
     private javax.swing.JTextField redLineThroughput;
     private javax.swing.JProgressBar rushHourProgressBar;
     // End of variables declaration//GEN-END:variables
-
+    
+    /**
+     * @author Robert Goldshear
+     * @return integer
+     * Based on the time, returns the correct number of cars for a newly dispatched train
+     */   
     private int getNumberCars() {
         int dispatchNumberCars = 1;
         if(this.trainSystem.getClock().getHour() >= 6 && this.trainSystem.getClock().getHour() <= 7){
