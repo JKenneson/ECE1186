@@ -126,7 +126,7 @@ public class Vitals {
             if (this.trainModel.getCurrSpeed() == 0.0 && this.trainModel.getCurrBlock().getStation() != null) { // we are at a station 
 //                System.out.println("Train "+ this.gps.trainID + ": " + "Boarding...");
                 this.resetPower();
-                if (this.doorSide) {
+                if (!this.doorSide) {
                     this.powerSystem.setRightDoorOpen(true && !manualMode);
                 } else {
                     this.powerSystem.setLeftDoorOpen(true && !manualMode);
